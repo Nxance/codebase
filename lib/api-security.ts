@@ -1,0 +1,2 @@
+export const json=(value:unknown,status=200)=>Response.json(value,{status,headers:{'Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff'}});
+export function trustedWrite(request:Request,action:string){const origin=request.headers.get('origin'),site=request.headers.get('sec-fetch-site');return (!site||site==='same-origin')&&!!origin&&[new URL(request.url).origin,'https://nxance-basics-bhaskar.bhaskar2708.chatgpt.site'].includes(origin)&&request.headers.get('x-nxance-request')===action&&!!request.headers.get('content-type')?.startsWith('application/json');}

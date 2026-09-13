@@ -1,0 +1,2 @@
+import {chatGPTSignOutPath} from './chatgpt-auth';
+export default function AccessNotice({title,message}:{title:string;message:string}){return <main className="account-shell"><a className="auth-brand" href="/"><span>N</span> nxance.</a><h1 style={{marginTop:60}}>{title}</h1><p>{message}</p><p><a className="back-link" href="/">Return to sign-in</a></p><p><a className="back-link" href={chatGPTSignOutPath('/')} target="_top">Sign out or switch account</a></p></main>;}
