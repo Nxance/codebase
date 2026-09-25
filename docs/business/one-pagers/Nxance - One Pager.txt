@@ -1,0 +1,49 @@
+
+Investment intelligence, engineered for precision.
+OHSHN INTELLIGENCE LLP  ·  LIVE AT NXANCE-MVP.VERCEL.APP
+
+THE PROBLEM
+Retail India invests blind, loses quietly, and has almost nowhere to turn for real advice.
+— 21.6 Cr demat accounts, most with no professional guidance
+— 9 in 10 individual F&O traders lost money in FY25 (₹1.06 lakh Cr)
+— <1,000 SEBI-registered advisers for 20+ Cr investors
+THE SOLUTION
+One app, three engines: Health Check, Construction, and NxanceLM — AI that explains why.
+— Health Check: 26 sub-engines diagnose existing holdings (XIRR, VaR/CVaR, Sharpe/Sortino, Monte Carlo, FinBERT sentiment) into a 0–100 score
+— Construction: builds an optimized portfolio (Black-Litterman + Ledoit-Wolf) from goals & risk profile
+— NxanceLM: AI + live market terminal explaining every output in plain English/Hindi, backed by an evidence trail
+MARKET OPPORTUNITY
+$2.3T TAM
+India wealth mgmt AUM by FY29
+21.6 Cr SAM
+Demat holders w/o a regulated adviser
+4.52 Cr SOM
+Active trading accounts — reachable base
+At just 0.5% conversion of active trading accounts to a ₹499–999/month subscription, reachable revenue already exceeds ₹100 Cr ARR.
+BUSINESS MODEL
+— Free Health Check hook; ₹99 one-time unlock
+— Tiers: Starter ₹399, Growth ₹899, Pro ₹1,499/mo
+— Later: HNI advisory fees + B2B engine licensing
+WHY NXANCE WINS
+— Diagnosis before advice — not just another builder
+— Explainable, evidence-backed — never a black box
+— Flat subscription — no AUM or commission conflicts
+— Broker- and asset-agnostic
+TRACTION
+— 12 investor interviews; 8 would pay
+— 50 users tested the working prototype
+— 500 signed up on the pre-launch waitlist
+— Full clickable frontend across all 3 engines built
+THE ASK
+₹12.49 Cr
+Funding ask, for 20% equity
+₹49.95 Cr
+Pre-money valuation
+18 months
+Runway: MBP → Public V1 → institutional pilots
+8–15x
+Typical wealthtech M&A revenue multiple
+Capital funds the full 18-month build; ₹76.05L projected subscription revenue (75 → 600 → 2,200 subscribers) is modeled as upside, not netted against the ask.
+TEAM — FOUR FOUNDERS, FULL-TIME
+Abhishek (CEO) — investment analyst & product builder, trades equity/derivatives, has managed live portfolios.   Raghav Kripasthya (CTO) — AI engineer/data scientist across healthcare, defense, computer vision.   Deepesh Khemka (CIO) — CFA Level III (pending), capital markets & wealth management.   Bhaskar Pandey (COO) — AI/ML & enterprise automation, 28+ npm packages shipped.
+Every rupee, properly understood.   ·   nxance-mvp.vercel.app   ·   Ohshn Intelligence LLP

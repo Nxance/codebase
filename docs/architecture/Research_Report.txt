@@ -1,0 +1,473 @@
+
+
+COMPREHENSIVE RESEARCH & STRATEGIC INTELLIGENCE REPORT
+AI-Powered Investment Intelligence for Emerging & Developed Economies
+Deep Intelligence · Precision
+Market Research  ·  Technical Architecture  ·  Financial Analysis  ·  Funding Prospectus
+Prepared by Ohshn Intelligence LLP
+Village Channgher, PO Bhawarna, Tehsil Palampur, District Kangra, Himachal Pradesh, India
+September 2026
+STRICTLY PRIVATE & CONFIDENTIAL
+
+Table of Contents
+
+
+
+Executive Summary
+Nxance is an AI-powered investment intelligence platform built by Ohshn Intelligence LLP to answer a question that no existing product answers with full transparency: does an investor's portfolio actually work, and if not, exactly how should it be fixed. The platform is deliberately positioned as an intelligence company, not an advisory company — it produces quantitatively grounded, explainable analysis rather than discretionary recommendations, and every figure it shows a user is traceable to a deterministic calculation rather than a language model's guess.
+The platform is built around three engines that operate together rather than independently: a Portfolio Health Check engine that diagnoses an investor's existing holdings across a 12-layer quantitative analysis framework; a Portfolio Construction engine that builds a new portfolio from a goal-driven questionnaire using mean-variance optimisation; and NxanceLM, Nxance's AI layer, built on top of a licensed third-party large language model rather than a model Nxance trains itself, which performs research and analysis inside both engines, generates every explanation and report, and answers finance and economy questions through a dedicated terminal interface. Nxance's own in-house-built and -trained intellectual property is the Health Check engine, the Construction engine, and the terminal application layer; the underlying language model inside NxanceLM is licensed, not developed by Nxance. A proprietary control layer named Number Guard sits underneath all three, verifying that any number NxanceLM shows a user was actually computed by a deterministic engine — structurally eliminating hallucinated figures rather than merely discouraging them.
+The opportunity sits inside two converging trends. First, retail participation in capital markets is compounding rapidly in India and other emerging economies, while advisory penetration of that base remains structurally low. Second, the global market for AI-driven wealth-management software is itself in a period of rapid build-out, with independent research houses estimating the global WealthTech solutions market at roughly USD 7–24 billion in 2026, expanding toward the tens of billions by the early 2030s as artificial intelligence, cloud infrastructure and open-finance regulation combine to modernise the industry.
+Nxance's business model is a two-tier subscription — a full Health Check + Construction + NxanceLM tier and an NxanceLM-only tier — sold both business-to-consumer in India first and, on a phased basis, business-to-business to boutique advisory firms, registered investment advisers, family offices and institutions as a white-labelled intelligence layer. The company's near-term roadmap (Era 1) is deliberately scoped to proving the retail app end-to-end before any institutional, deep-technology or international expansion (Era 2 and Era 3) is pursued.
+The company's current authoritative financial ask, drawn from its September 2026 financial model, is approximately ₹12.49 crore (₹1,248.70 lakh) to fund eighteen months of fully-staffed operations, inclusive of a 12% contingency and a SEBI Registered Investment Adviser deposit tracked separately. This report consolidates Nxance's market research, competitive positioning, technical architecture, regulatory posture, business model, financial plan and long-term vision into a single reference document, structured in the format of an institutional research report, for use with investors, grant committees, and internal strategic planning.
+
+1. Introduction & Problem Statement
+1.1 The Global Problem
+Across both emerging and developed economies, the number of people who hold investable assets has grown far faster than the number of people who have access to rigorous, ongoing, and transparent analysis of what those assets are actually doing for them. Two failure modes recur globally: investors who assemble a portfolio piecemeal — through employer schemes, social-media prompts, family advice, or self-directed apps — and never learn whether the resulting combination is efficient, overlapping, overexposed, or overpriced; and investors who receive advice from a human or automated adviser that they are structurally unable to independently verify, because the reasoning behind the recommendation is opaque.
+Traditional wealth advisory does not scale to the size of this population because it is built around human relationship-driven service; low-cost robo-advisory scales but has historically done so by trading away explainability, offering a recommended allocation without a defensible, inspectable reason for every component of it. Nxance's founding thesis is that this trade-off is not necessary: a quantitative engine can be both scaled and explainable, if the explanation layer is architecturally prevented from inventing what it says.
+1.2 India as the Initial Proving Ground
+India is the platform's first market because it currently exhibits the clearest version of this gap at scale. Retail participation in Indian capital markets has grown sharply: SEBI's monthly bulletin recorded the country's total demat account base at roughly 25.7 crore by June 2026, and separate NSDL/CDSL/SEBI data placed the account count above 237 million by August 2026, with unique PAN-deduplicated investors estimated at approximately 13–13.6 crore as of late 2025 into 2026.
+	•	New account formation has continued at a rapid clip through 2026, with market commentary citing roughly one lakh new demat accounts opened per day during peak IPO-driven periods.
+	•	A material share of this base remains inactive by transaction activity — independent analysis places dormant accounts as high as 77% of the total — indicating that account-opening has materially outpaced ongoing, informed portfolio management.
+	•	SEBI has simultaneously been active on market-structure reform through 2026 (T+0 settlement, instant payout, simplified nomination, unified direct-versus-regular cost disclosure), lowering the operational friction of investing at the same time that analytical friction remains high.
+The combination — a rapidly growing, increasingly digitally-native investor base, falling operational friction, and persistently low analytical/advisory penetration — is the specific gap Nxance's Portfolio Health Check and Construction engines are built to close first, before the same architecture is extended to other markets.
+1.3 Why Now
+Three developments converge to make this the right moment to build Nxance. First, large language models have matured to the point where a natural-language explanation layer is viable, but only if paired with a control architecture — such as Number Guard — that prevents the well-documented hallucination failure mode from reaching a financial user. Second, cloud infrastructure and managed data platforms (the FastAPI, Supabase and Railway stack Nxance currently builds on, migrating toward a Python/Rust/Go/TypeScript production architecture) make it possible for a small founding team to build institutional-grade quantitative infrastructure without institutional-scale capital. Third, regulatory frameworks in India (SEBI-RIA) and internationally are actively being modernised for digital advisory and open-finance models, including the United States' Executive Order 14405 in May 2026 directing federal regulators to streamline fintech integration with traditional financial institutions — signalling that the regulatory environment for AI-assisted financial platforms is moving toward accommodation rather than restriction across both emerging and developed markets.
+
+2. Global Market & Industry Research
+2.1 Market Sizing
+Independent market-research estimates for the global WealthTech solutions market vary by methodology and scope, which is itself informative: it indicates a market still being defined and measured, not a mature, consolidated category. Across the major research houses surveyed for this report, 2026 estimates for the core WealthTech software/solutions market range from approximately USD 7 billion to USD 24 billion, with several forecasts converging on 12–16% CAGR through the early 2030s and at least one growth-oriented estimate (Next Move Strategy Consulting) placing the broader WealthTech market at USD 22.99 billion in 2025 rising to USD 71.59 billion by 2030 at a 25.5% CAGR, driven by AI-augmented advisory and tokenised-asset infrastructure.
+Source
+2026 Estimate
+Longer-Horizon Estimate
+CAGR
+Research & Markets
+USD 7.08B
+USD 11.4B by 2030
+12.7%
+Fortune Business Insights
+USD 9.28B
+USD 29.98B by 2034
+15.8%
+Next Move Strategy Consulting
+USD 22.99B (2025)
+USD 71.59B by 2030
+25.5%
+Mordor Intelligence
+USD 7.91B
+USD 15.38B by 2031
+15.5%
+Business Research Insights
+USD 23.89B–96.25B*
+USD 178–292B by 2035
+13–25%
+*Range reflects differing scope definitions (core software only vs. software plus services) across two Business Research Insights reports; figures are presented for directional triangulation rather than as a single authoritative number.
+Sitting above all of these software-market estimates is the addressable pool of assets those platforms operate on: Accenture has estimated the global wealth-management industry will hold approximately USD 100 trillion in assets by 2026, underscoring that even a small percentage shift toward AI-native, explainable platforms represents a very large absolute opportunity.
+2.2 India Market Sizing
+Nxance's own strategic analysis sizes the India-specific opportunity using a standard TAM/SAM/SOM framework: a total addressable market of approximately USD 1.7 trillion by 2030 (India wealthtech, broadly defined), a serviceable addressable market of roughly 13.6 crore individuals (aligned with SEBI's own unique-investor count), and a serviceable obtainable market of ₹13–36 crore in annual recurring revenue at Nxance's current subscription pricing and realistic early penetration assumptions. A narrower advisory-services framing sizes the India wealthtech advisory-penetration opportunity at approximately USD 8–12 billion by 2027.
+2.3 Structural Trends Favouring Nxance's Approach
+	•	AI-augmented advisory is the dominant growth vector cited across every market report surveyed — not AI as a chatbot layered on top of existing tools, but AI embedded in the core analytical and construction workflow.
+	•	Open-finance and account-aggregation regulation (India's Account Aggregator framework, the EU's Digital Operational Resilience Act, the US CFPB's Section 1033 rule) is forcing incumbents to expose data through standardised pipelines, which structurally favours new entrants who can build natively against those pipelines rather than around legacy data silos.
+	•	Consolidation among incumbents (for example Charles Schwab's acquisition of Forge Global for private-market trading access, and JPMorgan's WealthOS deal for modular wealth-as-a-service components) signals that large players view modular, technology-native wealth infrastructure as strategically necessary — validating the category rather than closing it.
+	•	Younger, digitally-native investor cohorts are entering capital markets directly through mobile-first channels, with no existing relationship to traditional advisory — a segment structurally predisposed to a self-serve, explainable-AI product rather than a human relationship manager.
+2.4 Emerging vs. Developed Economy Positioning
+Nxance's architecture is deliberately built to generalise across both emerging and developed economies rather than as an India-only tool with export ambitions bolted on later. The core engines — quantitative health-scoring, mean-variance construction, and an explainable AI layer governed by a deterministic Number Guard — are asset-class and jurisdiction agnostic by design; what varies market-to-market is the regulatory feature-gating (which of the platform's modes are legally permitted to operate) and the data-source integrations, not the underlying quantitative or AI architecture. This is intended to let Nxance prove its model in India's high-growth, advisory-underpenetrated retail market first (Era 1), while carrying a technical foundation that is already engineered for extension into other emerging markets and into developed-market institutional use cases (Era 2 and Era 3), rather than requiring a rebuild.
+
+3. Competitive Landscape
+Nxance has mapped its position against nine India-based competitors and relevant global benchmarks. The comparison below focuses on the dimension Nxance considers its core differentiator: whether the platform's output is explainable and independently verifiable, or a black-box recommendation.
+Player
+Core Offering
+Positioning vs. Nxance
+Kalpi.ai
+AI-driven portfolio management
+Recommendation-led; limited visible computation trail
+INDmoney
+Wealth tracking & investing super-app
+Broad aggregation focus; thinner diagnostic depth per holding
+Scripbox
+Goal-based mutual fund investing
+Advisory-led, narrower asset-class scope than Nxance's multi-asset engines
+Wright Research
+AI-based smallcase/model portfolios
+Model-portfolio distribution rather than personalised diagnostic + construction
+Dezerv
+HNI wealth management
+Human-advisor-anchored; higher price point, narrower addressable base
+MyFi
+Digital wealth platform
+Consumer wealth tracking; limited quantitative health-scoring depth
+Ionic Wealth (Angel One-backed)
+HNI/UHNI wealth platform
+AUM-based fee model vs. Nxance's flat subscription; HNI-skewed
+Global robo-advisors (benchmark)
+Automated allocation
+Typically optimise for allocation only, without a fraud/governance/health-diagnostic layer or a Number Guard-style verification architecture
+3.1 Core Differentiation
+Nxance's identified white space is explainable AI portfolio intelligence with a quantitative, auditable underpinning — a position the company assesses as currently unoccupied in the Indian market and only partially addressed globally. The mechanism is architectural rather than marketing-led: NxanceLM is structurally prevented from presenting a number it did not receive from a deterministic engine, via the Number Guard control layer, and every issue the Health Check engine surfaces is quantified in exact rupee (or local-currency) terms and explained in plain language rather than left as an opaque score.
+3.2 Long-Term Competitive Benchmark
+Nxance's long-term positioning target is to function at the sophistication of an institutional multi-asset risk and portfolio-management platform — in the manner of BlackRock's Aladdin — while remaining accessible to individual retail investors and, on a white-labelled basis, to the boutique firms and institutions that currently cannot afford Aladdin-class infrastructure. This is explicitly a multi-year (Era 2/3) ambition built on top of a proven Era 1 retail product, not a near-term claim of parity.
+
+4. Company Overview
+4.1 Corporate Structure
+Nxance is built and owned by Ohshn Intelligence LLP, incorporated on 4 July 2026 (LLPIN ACZ-7676), with its registered office at Village Channgher, PO Bhawarna, Tehsil Palampur, District Kangra, Himachal Pradesh, India. The entity's registered business activities are software development, web portals, and fintech. The company has obtained Udyam (MSME) registration and DPIIT recognition, and plans to convert from an LLP to a Private Limited company during its fundraising process, ahead of any equity round closing, since the current LLP structure does not support equity fundraising directly.
+4.2 Positioning: An Intelligence Company, Not an Advisory Company
+Nxance is an intelligence platform, not an advisory platform.
+This distinction is the single most important framing decision in Nxance's positioning, and it is maintained consistently across product, marketing, and regulatory strategy. Today, ahead of any SEBI Registered Investment Adviser (RIA) licence, Nxance operates in a suggestion-only capacity: it diagnoses, quantifies, and explains, but does not execute trades or issue binding personalised advice. Even after the company eventually secures SEBI-RIA registration, the intelligence framing is intended to remain the company's core public identity — the RIA licence is treated as an expansion of legal standing and fiduciary accountability layered onto the existing product, not a rebrand into a conventional advisory business.
+4.3 Founding Team
+Name
+Role
+Background
+Abhishek
+Founder & Chief Executive Officer
+Investment manager and stock-market practitioner; managed family/friend portfolios and developed swing-trading strategies prior to founding Nxance
+Raghav Kripasthya
+Co-Founder & Chief Technology Officer
+Technical co-founder; led early-stage sole development of the platform
+Deepesh Khemka
+Co-Founder & Chief Investment Officer
+CFA Level III candidate (pending)
+Bhaskar Pandey
+Co-Founder & Chief Operating Officer
+Operations leadership across the founding team
+The team is structured for a post-funding hiring plan adding a Machine Learning Engineer and a Growth Lead as the first external hires, layered onto a technical hiring plan that brings on backend, frontend, QA, DevOps/cybersecurity, and compliance roles across the first nine months of the funded roadmap.
+4.4 Legal Structure & Founder Equity
+Ahead of the planned conversion from LLP to Private Limited, Ohshn Intelligence LLP has formalised founder commitments through three separate, individually negotiated Founder Agreements — one each with Bhaskar Pandey, Deepesh Khemka, and Raghav Kripasthya, signed in August 2026. Each agreement is bilateral and kept confidential between Abhishek and that specific founder, and each promises the relevant founder's equity percentage in the future Private Limited entity, subject to a five-year vesting schedule with a one-year cliff.
+Leaver Provisions
+The Shareholders' Agreement leaver clause is deliberately split into two distinct treatments, so that equity outcomes depend on the manner of a founder's exit rather than being uniform:
+	•	Bad Leaver — resignation without prior discussion, fraud, or misconduct: vested shares are bought back at a nominal value of ₹1.
+	•	Good Leaver — death, permanent disability, medical emergency, or a board-approved no-fault exit: vested shares are bought back at Fair Market Value, determined by an independent valuer.
+A further governing principle applies uniformly across the founding team: every founder, including Abhishek, is diluted equally and proportionally on every future funding round. No founder holds preferential protection from dilution — the same economic exposure to fundraising applies at the top of the cap table as anywhere else in it.
+Capitalisation Table
+Ohshn Intelligence LLP is currently held 95% by Abhishek and 5% by his sister, Poonam Patial, who holds the position of Second Designated Partner in the LLP alongside Abhishek. The planned equity structure on conversion to a Private Limited company is as follows:
+Holder
+Current LLP Equity
+Planned Pvt Ltd Equity
+Abhishek (Founder & CEO)
+95%
+65%
+Deepesh Khemka (CIO)
+—
+10%
+Raghav Kripasthya (CTO)
+—
+10%
+Bhaskar Pandey (COO)
+—
+10%
+Poonam Patial (Designated Partner)
+5%
+5%
+This planned structure pre-dates and is independent of any external investor equity, which is layered on top via the fundraising ask detailed in Section 9.
+Administrative & Compliance Blockers
+One identified administrative blocker in the Pvt Ltd conversion and PAN-verification process is that the company's existing digital signature certificate (DSC, issued via VSign) is registered in the Personal category and cannot be used for Organisation-level PAN verification. Resolving this requires an Organisation Class 3 DSC issued by eMudhra; a DSC Authorisation Letter has been produced to support this application.
+
+5. Product Architecture
+Nxance is built around three engines that function as a single collective-decision system rather than three independent tools. No single engine, and no individual AI-generated parameter inside NxanceLM, is permitted to make a decision alone — every user-facing conclusion is the product of multiple sub-engines cross-checked against each other, a design principle the team calls the Collective Decision Principle.
+5.1 Portfolio Health Check Engine
+The Health Check engine diagnoses a user's existing portfolio — across equities, mutual funds, bonds, fixed deposits, commodities, cryptocurrency, real estate, and other asset classes — through a 12-layer quantitative analysis framework, drawing on a wider architecture of 26 specialised sub-engines:
+	•	Return analysis — XIRR computed via Newton-Raphson iteration, benchmarked against four personalised comparison points
+	•	Risk metrics — Conditional Value at Risk, Value at Risk, Sharpe ratio, Sortino ratio, and maximum drawdown
+	•	Diversification analysis — Jaccard similarity across holdings to detect concealed overlap
+	•	Cost analysis — expense-ratio drag quantified in exact currency terms, not a percentage abstraction
+	•	Goal-alignment probability — Monte Carlo simulation across 10,000 market paths
+	•	Macro sensitivity — Hidden Markov Model regime detection across ten India and global macroeconomic indicators
+	•	News sentiment — FinBERT natural-language processing applied to the preceding 30 days of financial news
+	•	Fraud and governance screening — cross-referenced against the SEBI enforcement database and governance red-flags
+	•	Liquidity assessment, concentration risk (Herfindahl-Hirschman Index), technical entry analysis, and behavioural-profile alignment using Prospect Theory, comparing stated versus revealed risk tolerance from transaction history
+The engine's output is a 0–100 portfolio health score, with every contributing issue explained in plain language and quantified in exact rupee terms. The user retains the decision — the engine identifies and explains, it does not execute.
+5.2 Portfolio Construction Engine
+The Construction engine builds a new portfolio from a goal-driven questionnaire — covering goals, time horizon, monthly investment capacity, and risk comfort — combined with real-time market data and Mean-Variance Optimisation using a Black-Litterman model with Ledoit-Wolf covariance shrinkage. The engine shares a 16-layer Selection Engine with the Health Check engine and, like Health Check, spans 26 finalised sub-engines. At the asset-selection step, the engine presents multiple viable options rather than a single rigid answer, builds two to three complete candidate portfolios for direct comparison, and explains which option is primary, which is secondary, and why — deliberately leading with one clearly recommended choice to avoid decision-paralysis, with alternatives available on request rather than shown flat and undifferentiated.
+5.3 NxanceLM — Nxance's AI Layer, Built on a Third-Party Model
+NxanceLM is the AI layer woven through both other engines as an active participant — performing research and analysis that feeds both Health Check and Construction, generating every report card and explanation the user sees, tracking user behaviour, and answering finance and economy questions directly — rather than sitting on top as a passive explainer layer. Its underlying language model is a licensed, commercially available large language model accessed via API; Nxance does not build, train, or fine-tune a language model of its own. What Nxance builds and trains in-house is the orchestration and control layer around that model — the 18 finalised mini-engines that handle retrieval, number verification, explanation generation, chat, and reporting — together with the two fully proprietary quantitative engines, Health Check and Construction, and the terminal application itself, all of which are built and calibrated entirely by Nxance. NxanceLM's intended domain scope is broad within finance and economics: it is built to work across everything number-driven within finance — investments, accounting, GDP, economy, and taxation — and is designed to be useful to both individual investors and institutions such as startup-investment firms, while remaining strictly finance/economy-domain rather than a general-purpose assistant.
+5.4 NxanceLM Terminal
+NxanceLM's four core layers — a Generative Reasoning Processor, a Terminal Speed Node, a Global Market Radar, and a Deep Corporate Auditor — are each surfaced as their own visible, tappable screen inside the app, rather than existing only as backend processes. The terminal interface presents a left-hand sidebar of category tabs (Market, News, Currency, Commodities, Equities, Macro, Technology, Startups, Trade, Research, Analysis) alongside a set of suggested query prompts, with a persistent header status reading "Number Guard Active | Verified Data Environment." The Market section shows live world market performance by country and by instrument class — stocks, mutual funds, fixed deposits, cryptocurrency, currency, bonds, and commodities — with drill-down into individual securities; the News section shows live news, corporate announcements, and AGM disclosures. A free-text "Ask Nxance" query box sits beneath the live data, allowing the user to ask a specific question at any time rather than only browsing structured panels.
+5.5 Minimum Buildable Product (MBP) Specification
+The MBP is Nxance's first shippable build target, deliberately narrower than the full 26/26/18-engine vision: three engines, five sub-engines each. Health Check ships parse, analysis, risk, fraud, and guidance; Construction ships goal, allocation, selection, fraud (shared with Health Check), and MVO-plus-quantity; NxanceLM ships intent, number-guard, explain, chat, and report. Scope is suggestion-only, limited to stocks, mutual funds, and fixed deposits, unlocked behind a ₹99 one-time Razorpay payment gate active from Day 1.
+The MBP is not considered complete on a feature-built basis alone — it is only "done" once all thirteen hard decision gates, plus six AI-specific gates, pass their tests:
+Gate
+Function
+G1 — Auth
+User authentication verified before any flow starts
+G2 — File validity
+Uploaded portfolio file format and structure validated
+G3 — Fraud veto
+A fraud flag caps the health score at 40, overriding all other inputs
+G4 — Capacity claim
+User's stated investment capacity checked for plausibility
+G4b — Question timing
+Enforces upload-first (Health Check) vs. questions-first (Construction) ordering
+G5 — Profile cap
+Risk profile capped based on declared parameters
+G6 — Feasibility
+Goal feasibility checked against inputs before any recommendation is shown
+G7 — Stock sleeve
+Stock allocation constrained to a validated instrument universe
+G8 — FD-first
+Fixed-deposit allocation prioritised where the risk profile mandates it
+G9 — Projection range
+Output shown only as a range, never as a single-point projection
+G10 — Teaser fields
+Locked fields shown as absent pre-payment, never merely blurred
+G11 — Unlock
+Payment unlock verified via browser signature OR webhook HMAC
+G13 — Guidance priority
+Fixed priority order enforced across all guidance output
+G-A1–G-A6 — AI gates
+NxanceLM-specific checks: number-matching against the ledger, explanation grounding, chat scope enforcement, report generation validity, intent classification accuracy, and hallucination blocking
+Version 3.1 of the MBP specification added a Core Six questionnaire (goal, tenure, expected return or target corpus, risk comfort, amount, and favourable assets); an Expectation Reality Check popup built around an Achievable Return Estimator that returns a percentile range rather than a single point estimate; an Expectation-Match Verdict comparing the user's stated expectation against that range; and a WHY-per-asset explanation attached to every line of every report. The MBP is considered successful, and cleared for Beta, once it reaches 50 or more portfolio uploads with at least 15% conversion to the ₹99 paid unlock; falling short of that bar triggers iteration on positioning, teaser design, or price — not a feature rebuild. The underlying data model is intentionally minimal at this stage: three tables — users, reports (immutable after creation except for the paid flag), and events (an append-only funnel log).
+5.6 Questionnaire & Onboarding Design
+Health Check and Construction deliberately use opposite onboarding sequences. Health Check asks the user to upload their existing portfolio first and only asks profiling questions afterward, because the product's first job is diagnosis. Construction asks its goal-and-risk questionnaire first and only then designs a portfolio, following a "value-first onboarding" principle — the user experiences Nxance demonstrating understanding of their goals before being asked to commit to a specific allocation.
+5.7 Tracking Tiers
+Post-implementation portfolio tracking runs on two distinct data rails, and Nxance documents the difference to the user transparently rather than presenting a uniform experience. Holdings on Nxance's own-broker rail are tracked via realtime postbacks; holdings on an external broker are tracked via Account Aggregator sync or end-of-day batch sync. The team's explicit rule is never to artificially degrade the external-broker tracking experience to make the own-broker rail look comparatively better — the tier difference is disclosed as a factual limitation, not used as a growth lever.
+5.8 Asset-Class Rollout Roadmap
+Build Stage
+Asset Classes Added
+MBP
+Mutual Funds, Stocks, Fixed Deposits
+Beta
++ Bonds
+Phase 1
++ Gold, ETFs
+Phase 2
++ Commodities
+Final Phase
++ Currency, REITs
+5.9 Design System & Prototype Status
+Nxance's visual design system is a liquid-glass, glassmorphism aesthetic built on a deep purple-navy base with cyan (#00D4FF) and vibrant blue (#1A6BFF) accents against black and white, set in Plus Jakarta Sans typography — currently expressed across seven premium wireframe screens. The complete app blueprint spans thirty screens across Onboarding, Home, Health Check, Construction, NxanceLM, and Profile/Settings, of which a fully clickable twenty-four-screen web prototype has been built, alongside standalone quant-finance implementation guides for XIRR, Sharpe ratio, VaR/CVaR, Monte Carlo simulation, MVO, and a composite FIT score.
+As of September 2026, the full application frontend across all three engines is built but has not yet been made live for users; the 500-person early waitlist has not yet used the live product flow. The 50 early users who did receive access were given only the initial, narrower Construction-only build, which used placeholder formulas (simple division-based logic) rather than the final MVO/Black-Litterman quantitative engines — a distinction the company maintains transparently in all investor and grant communication rather than allowing early traction claims to imply the full engines were validated.
+
+6. Technical Research & AI System Architecture
+6.1 Number Guard: The Anti-Hallucination Control Layer
+The single most important architectural decision in Nxance's technical design is the Computed-Values Ledger and its enforcement layer, Number Guard. Every number shown to a user must trace to a specific engine identifier and version, a specific formula or model version, and a specific input-data snapshot; any number NxanceLM attempts to surface that does not match an entry in this ledger is blocked and regenerated rather than shown. This makes hallucinated financial figures structurally impossible rather than merely unlikely — NxanceLM's role is explicitly limited to translating already-computed figures into plain-language explanation, in English and Hindi, never to generating its own figures.
+6.2 Regulatory Feature-Gating Model
+Nxance's technical architecture formally separates functionality into four regulatory modes, each gated behind the technical and legal controls required for that mode:
+Mode
+Function
+Gating Status
+A — Analytics / Education
+Descriptive analysis, scoring, explanation
+Live from MBP
+B — Research Recommendation
+Suggested options, no execution
+Live from MBP, suggestion-only
+C — Personalised Advice
+Binding personalised advice
+Gated behind SEBI-RIA registration
+D — Execution / Broker Integration
+Trade execution on user consent
+Gated behind legal/partner readiness; Era 2+
+6.3 Quantitative & AI Methods Register
+	•	Return computation: XIRR via Newton-Raphson iteration
+	•	Risk: Conditional Value at Risk, Value at Risk, Sharpe ratio, Sortino ratio, maximum drawdown
+	•	Portfolio optimisation: Mean-Variance Optimisation with Black-Litterman priors and Ledoit-Wolf covariance shrinkage
+	•	Simulation: Monte Carlo across 10,000 market paths for goal-alignment probability
+	•	Regime detection: Hidden Markov Models across ten macroeconomic indicators (India and global)
+	•	NLP: FinBERT sentiment analysis over rolling 30-day financial news windows
+	•	Similarity/overlap: Jaccard similarity across holdings; concentration via Herfindahl-Hirschman Index
+	•	Behavioural finance: Prospect Theory-based comparison of stated versus revealed risk tolerance
+6.4 Technology Stack
+The current build runs on FastAPI, Supabase, and Railway. The target production architecture, phased in as the platform scales, standardises on Python for engines, machine learning and retrieval-augmented generation; Rust for Number Guard and other latency-critical calculation; Go for orchestration, execution and payments; TypeScript for the frontend; Postgres/Supabase for core data with TimescaleDB for time-series data; Redis for caching; Qdrant or pgvector for retrieval-augmented generation; Kafka or NATS for eventing; and gRPC/protobuf internally with REST/GraphQL at the edge. The migration path runs from an MVP monolith to a modular monolith, then to targeted service extraction (Rust calculation and Number Guard, Go orchestration, dedicated AI serving), with full distributed/Kubernetes infrastructure deferred until sustained scale justifies it.
+6.5 18-Month Technical Roadmap
+Phase
+Months
+Technical Target
+Foundation
+M1–M3
+Core team onboarding; Number Guard + Retrieval/RAG build first
+Alpha
+M4–M6
+Backend Engineer 1 and Frontend Engineer onboard; MBP hardening
+Closed Beta
+M7–M9
+Backend Engineer 2, QA, DevOps/Cybersecurity onboard; full compliance & audit gate
+Public V1
+M10–M12
+Compliance Officer and Tech Research roles onboard; public launch readiness
+Simulation Alpha
+M13–M15
+Scenario Sandbox capability build-out
+Institutional Scale
+M16–M18
+Peer Intelligence, institutional-readiness groundwork
+Each phase carries a paired technical build target, a compliance/control gate, and a management KPI, formalised in the company's full technical specification document. The engineering team's confirmed first build step is the Number Guard and Retrieval/RAG mini-engine pair, ahead of the remaining sixteen NxanceLM mini-engines.
+6.6 AI Model Approach
+NxanceLM's underlying model is a licensed, commercially available large language model accessed via API and wrapped inside the Number Guard trust layer; Nxance's confirmed strategy is to use this third-party model rather than build, train, or fine-tune a language model of its own, on the basis that doing so is materially more capital- and resource-efficient than a from-scratch build. Nxance's proprietary technical investment is directed instead at the two quantitative engines it builds and calibrates entirely in-house — Health Check and Construction — implemented in Python and Rust with no dependency on any AI model, together with the NxanceLM orchestration layer (retrieval, number verification, explanation generation, chat, and reporting) and the terminal application itself. This is where the company's defensible technical moat sits: proprietary deterministic engines, a proprietary dataset of real portfolios and validated decisions, and the Number Guard verification layer — not the underlying language model, which is treated as a replaceable, licensed component.
+6.7 Technical Risk Register
+The architecture specification maintains a fourteen-item technical risk register, each with a named primary control. Representative risks include large-language-model hallucination (controlled by Number Guard), input-data quality failures, architecture complexity, the risk of quantum-computing marketing claims outrunning actual evidence, regulatory breach, model calibration drift, security incidents, latency targets being missed, data-vendor cost and licensing exposure, dependency risk on the third-party language model vendor, potential harm from behavioural-model misapplication, audit non-reproducibility, herd effects arising from any future peer-intelligence feature, and execution-flow failure modes once any execution capability is eventually built.
+
+7. Regulatory & Compliance Research
+Nxance's regulatory posture is built around operating strictly within what is legally permitted at each stage, rather than seeking a broad licence upfront. The company's most urgent identified regulatory action is SEBI Registered Investment Adviser (RIA) registration, which gates Mode C (personalised advice) in the technical architecture; Account Aggregator FIU status, required for deeper financial-data integration, is reachable only after SEBI-RIA registration is secured, since it requires the applicant to already be a regulated entity.
+Current Compliance Status
+	•	Ohshn Intelligence LLP incorporated 4 July 2026 (LLPIN ACZ-7676)
+	•	Udyam (MSME) registration completed
+	•	DPIIT recognition obtained
+	•	LLP-to-Private-Limited conversion planned during the fundraising process, ahead of equity close
+	•	SEBI-RIA registration — the single most urgent pending regulatory action
+Additional Regulatory Roadmap Items
+	•	Account Aggregator (AA) FIU status, contingent on SEBI-RIA
+	•	Shop & Establishment registration, GST registration
+	•	DPDP Act (India data-protection) compliance
+	•	ISO 27001 / SOC 2 security certification
+	•	Importer-Exporter Code (IEC), relevant for any future cross-border service delivery
+Compliance and audit infrastructure is built into the technical roadmap itself rather than treated as a late-stage add-on: a thin compliance-and-audit layer is required from the MBP build stage, with the full compliance-and-audit architecture required to be complete at Beta, before any execution capability is permitted to ship.
+On the international side, regulatory direction is moving toward accommodation of AI-assisted, open-finance platforms across both emerging and developed markets — for example the United States' Executive Order 14405 (May 2026), directing federal financial regulators to streamline fintech integration with traditional institutions, and the European Union's Digital Operational Resilience Act and the US CFPB's Section 1033 rule, both forcing incumbent data-sharing modernisation. Nxance's regulatory strategy is designed to expand jurisdiction-by-jurisdiction as each market's licensing and data-access framework is confirmed, consistent with its phased Era 1/2/3 roadmap.
+
+8. Business Model & Go-to-Market
+8.1 Two-Tier Subscription Model
+Nxance runs a two-tier subscription structure, offered on the same basic terms to both individual (B2C) and institutional (B2B) customers: a full-platform tier combining Health Check, Construction and NxanceLM together for the deepest analysis and fastest output, and an NxanceLM-only tier for customers who want the AI research and analysis layer without the full portfolio-management engines.
+8.2 B2C Pricing
+Tier
+Price
+Scope
+Health Check unlock
+₹99 one-time
+MBP success-gate funnel qualifier
+Plan 1 — Starter
+₹399/month
+2 portfolios, Health Check + Construction, 7–8 sub-engines, limited NxanceLM
+Plan 2 — Growth
+₹899/month
+2–5 portfolios, 10–15 sub-engines, rebalancing nudges, execution, priority queue
+Plan 3 — Pro
+₹1,499/month
+5–10 portfolios, all 26+ sub-engines, unlimited NxanceLM, fastest queue, priority support, early access
+8.3 B2B Model
+On the institutional side, Nxance is offered as a white-labelled, subscription-based intelligence layer to boutique advisory firms, registered investment advisers, family offices, venture capital and private-equity firms, and other institutions that need to manage, track, and risk-monitor multiple client portfolios simultaneously — positioned as a lower-cost, faster-to-deploy alternative to building equivalent infrastructure in-house.
+8.4 Go-to-Market Sequencing
+Go-to-market is deliberately phase-wise rather than simultaneous across every segment and geography, to avoid presenting Nxance as unfocused. Era 1 is India-first, B2C-first, retail-app-only: Health Check, Construction and NxanceLM delivered through the consumer app, progressing through MBP, Beta, Phase 1, Phase 2 and Final build stages, with no B2B, institutional, or deep-technology expansion until the retail product is proven. Era 2 then adds B2B and institutional offerings, alongside deep-technology tracks (cloud and quantum computing integration, and NxanceLM's evolution toward a broader general-purpose finance AI layered on top of licensed third-party models). Era 3 and beyond extends to proprietary funds, additional licences, government partnerships, and international markets.
+8.5 Unit Economics
+	•	Blended customer acquisition cost: ₹400–800
+	•	Base-case lifetime value: ₹7,000
+	•	Target LTV:CAC ratio: above 8x
+	•	Estimated break-even point: 500–1,000 paying subscribers
+8.6 Early Traction
+A full-app frontend prototype spanning all three engines has been built, alongside a fully clickable 24-screen web prototype and quant-finance implementation guides (XIRR, Sharpe, VaR/CVaR, Monte Carlo, MVO, and a composite FIT score). Backend development has not yet started and is the primary use of proceeds from this funding round. An early waitlist of 500 users has been built for the three engines, and 50 early users were given full frontend access to an early, narrower Construction-only build that used placeholder formulas rather than the final quantitative engines — an important distinction the company maintains transparently in all investor communication.
+
+9. Financial Research & Funding Ask
+9.1 Current Funding Ask
+Nxance's current, authoritative financial ask — drawn from its September 2026 financial model and superseding all earlier figures — is structured as follows:
+Line Item
+Amount
+18-month operating burn (excl. reserve)
+₹1,110.45 lakh
+Contingency (12%)
+₹133.25 lakh
+SEBI-RIA refundable deposit (tracked separately)
+₹5.00 lakh
+Total recommended funding ask
+₹1,248.70 lakh (~₹12.49 crore)
+This ask funds full company operations for eighteen months, building the complete platform and running the company as a fully functional operation for that period — distinct from an earlier, narrower ₹20 lakh ask scoped only to Technology Development, sufficient to start and build the MVP but not to run the company.
+9.2 Planning Assumptions
+	•	Target round dilution: 20% (planning case, not a locked negotiation position)
+	•	Illustrative future dilution after this round: 35%
+	•	Target investor MOIC: 10x
+	•	Exit horizon: 5 years
+	•	Illustrative target exit value: ₹750 crore
+9.3 Cost & Scale Metrics
+	•	40-person headcount capacity reached by month 18
+	•	Exit monthly payroll / team cost: ₹37.85 lakh
+	•	Peak monthly cash use (month 18): ₹76.91 lakh
+	•	Average monthly cash use across the 18-month period: ₹61.97 lakh
+9.4 Revenue Model & Milestones
+Subscriber growth is modelled across three milestone checkpoints: 75 paying subscribers by month 5, 600 by month 12, and 2,200 by month 18, producing an estimated gross 18-month subscription revenue of ₹76.05 lakh — deliberately kept as upside in the model rather than netted against the funding ask, so the ask stands on its own as a fully-funded operating plan.
+9.5 Use of Funds
+Proceeds are allocated across product and engineering, growth, regulatory compliance, operations/cloud infrastructure, and a team buffer, broadly in the range of 40% product/engineering, 25% growth, 15% compliance (including SEBI-RIA), 12% operations/cloud, and 8% team buffer, consistent with the company's investor-facing use-of-funds materials.
+9.6 Financial Model Infrastructure
+The company has built a full investor-facing nine-tab Excel financial model (Cover, Assumptions, Budget Detail, Monthly Burn, Use of Funds, Milestones, Revenue Model, Valuation, and Exit Plan), cross-linked by over 2,000 formulas, sourced from the company's own budget sheets together with researched wealthtech M&A comparables (Groww-Fisdom, CRED-Kuvera, InCred-Stocko, and 360 ONE-ET Money) used to inform the Exit Plan tab.
+
+10. Funding, Grants & Non-Dilutive Capital Roadmap
+10.1 Two-Budget Structure
+Nxance separates its capital needs into two distinct, non-overlapping budgets rather than treating all funding as fungible. A ₹20 lakh budget is scoped narrowly to Technology Development only — sufficient to start and build the MVP, but not to run the company. The ₹12.49 crore primary ask (detailed in Section 9) funds full company operations for eighteen months: building the complete platform and running the company as a fully staffed, fully functional operation across that period. Grant and incubator applications are generally pursued against the narrower ₹20 lakh technology-development framing, while the equity round is pursued against the full ₹12.49 crore operating framing.
+10.2 Non-Dilutive & Grant Programs Pursued
+Alongside its primary equity raise, Nxance is pursuing a parallel stack of non-dilutive and quasi-dilutive capital and in-kind resources, sequenced as part of a master funding and registration action plan:
+	•	SISFS — the Startup India Seed Fund Scheme, pursued via incubator affiliation (see 10.3)
+	•	MeitY programs and IndiaAI facilities, gated behind the Private Limited conversion
+	•	Cloud infrastructure credits from Microsoft, NVIDIA, AWS, and Google
+	•	Himachal Pradesh state government startup scheme, reflecting the company's registered-office location
+	•	DPIIT (Department for Promotion of Industry and Internal Trade) recognition — obtained
+	•	Udyam (MSME) registration — completed
+10.3 SISFS Incubator Applications
+Nxance has built three separate, incubator-specific SISFS pitch decks, each with a tailored "why this incubator" narrative, sharing a common SISFS-scoped ask and use-of-funds structure:
+Incubator
+Tailored Angle
+NSRCEL (IIM Bangalore)
+Business model and unit-economics framing
+FITT (IIT Delhi)
+IP and technical-innovation framing
+IIT Mandi Catalyst
+Home-state (Himachal Pradesh) framing
+The shared SISFS ask is ₹20 lakh, milestone-linked, structured as convertible debentures, with a use-of-funds split of 45% product and engineering, 20% launch and first cohort, 15% compliance, 12% infrastructure, and 8% contingency — kept deliberately distinct from the main ₹12.49 crore, straight-equity investor ask. Each application package includes traction evidence, a warm-introduction checklist, and an explicit rejection-resilience plan. As of the most recent status update, applications to all three incubators had not yet been submitted and the company was not yet part of any accelerator or incubation program.
+10.4 Grant Application Positioning
+Because most currently active government and institutional grant programs are DeepTech-focused, Nxance's grant and pitch materials are deliberately positioned at the intersection of DeepTech, FinTech, and Intelligence, rather than as a conventional consumer fintech app — with an explicit goal of reading as calculated and focused throughout the document, not diversified or unfocused. The company's finalised grant-application answer text, used consistently across programs, frames the company as follows:
+Nxance is a cloud-native SaaS platform built to scale at low cost, targeting India's rapidly growing investment market. It can serve millions of investors and expand into Southeast Asia and other emerging markets.
+(Scalability & Market Opportunity)
+Nxance will launch India-first through digital acquisition, investor communities, financial educators, and strategic partnerships. Freemium health checks drive adoption, while premium analytics and portfolio construction generate recurring SaaS revenue.
+(Go-to-Market)
+Nxance is an AI-powered investment intelligence platform combining 12-layer portfolio health analysis, quantitative optimization, risk/fraud detection, and personalized portfolio construction. Its moat is proprietary data, deterministic quant engines, validation, and purpose-built AI.
+(Solution & Moat)
+Not one model: proprietary deterministic quant engines (risk, construction, forecasting, fraud detection) plus a proprietary dataset (real portfolios, outcomes, expert-validated decisions, multilingual interactions) plus a Number Guard validation layer where AI only explains what engines computed, making hallucinated figures structurally impossible. Every engine improves independently without breaking the framework.
+(Uniqueness & Moat, detailed)
+10.5 Master Funding & Registration Action Plan
+The company has iterated its master funding and registration action plan through four versions as its own positioning matured. Version 1 and version 2 contained an engine-architecture description error, describing NxanceLM only as an explainer layer rather than as an active participant embedded inside Health Check and Construction; version 3 (July 2026) corrected this framing and updated the team composition, market statistics, and fundraising ask to match the then-current pitch deck. Version 4 (July 2026) rescoped all investor- and grant-facing content to describe only what is shipping at Phase 1/MBP — deliberately omitting the future 26-sub-engine and 18-mini-engine roadmap numbers, so that reviewers evaluate the company against what it is actually building now, not against long-range ambition.
+The current plan sequences applications and registrations in a specific order — Udyam, then DPIIT, then the Himachal Pradesh state scheme, then cloud credits, then SISFS, then MeitY, then IndiaAI, then corporate grants, accelerators, and hackathons, then Razorpay merchant onboarding, then angel/VC outreach, then IP filing, then tax registration — with exact form-field guidance and pre-written Nxance explanatory text prepared for each program.
+10.6 Pitch Materials Inventory
+Nxance maintains a structured library of fundraising collateral, developed and revised iteratively through 2026:
+	•	One-pagers in three funding-ask variants (₹30L / ₹75L / ₹2Cr), single-page dark-theme design in Lora and Poppins typefaces, taglines "Investment intelligence, engineered for precision." and "Deep intelligence. Better decisions."
+	•	Pitch deck v1 ("Deep Intelligence · Precision"), establishing the original core positioning
+	•	Pitch deck v2 (July 2026, 18 slides): distinctly cited sources per claim (SEBI demat data, SEBI F&O loss study, McKinsey/360 ONE WAM estimates in the Problem section; PwC AWM, SEBI, and AMFI data in the Market section), a dedicated TAM/SAM/SOM slide, full team bios with LinkedIn profiles, product screenshots, a three-way competitor table, and a dedicated USP slide
+	•	Pitch deck v3: added a Unit Economics slide (CAC, LTV:CAC above 8x, break-even), corrected engine framing, the actual Nxance logo, and a milestone-linked ask breakdown
+	•	A corrected 19-slide deck built specifically for a July 2026 investor meeting, fixing two factual overstatements identified in earlier materials — an overstated early-validation scope and an overclaimed 80%-built status versus the actual ~40% frontend-only status — alongside a comprehensive pitch-prep sheet and rehearsed regulatory Q&A defence
+	•	A master "Nxance Best Deck" maintained for general-purpose investor use, kept separate from the three incubator-specific SISFS decks
+
+11. Risk Analysis
+Nxance maintains a formal fourteen-item technical and operational risk register (R1–R14), each paired with a named primary control. The table below summarises the principal categories relevant to an external reader; the full register with per-risk controls is maintained in the company's internal technical specification.
+Risk Category
+Primary Mitigation
+LLM hallucination
+Number Guard computed-values ledger; AI may only explain, never generate, figures
+Poor-quality input data
+Structured validation gates (G1–G13) before any score or output is generated
+Architecture complexity
+Phased build (MBP → Beta → Phase 1 → Phase 2 → Final), modular monolith migration path
+Regulatory breach
+Mode A–D feature-gating tied to actual licence status; SEBI-RIA prioritised
+Model calibration drift
+Self-Evaluation harness from Beta stage onward
+Security incident
+Dedicated Cybersecurity/DevOps hire at M5; ISO 27001/SOC 2 roadmap
+Latency / performance miss
+Nightly precompute, parallel engine DAG, Rust hot paths, Redis caching, per-stage deadlines
+From-scratch model runway risk
+Treated as a separately funded, separately gated R&D track, not a core-product dependency
+Execution-flow failure (future)
+Execution capability explicitly gated behind full compliance/audit readiness (Mode D)
+Two risk categories are treated with particular care given their potential for user harm rather than only business impact: behavioural-model suitability risk (ensuring behavioural-finance inferences are not misapplied to a specific user's circumstances) and herd-effect risk associated with any future Peer Intelligence feature (Phase 2), both of which carry dedicated review ahead of release.
+
+12. Vision & Long-Term Roadmap
+Nxance's roadmap is organised into three sequential eras, each gated on proof from the era before it rather than pursued in parallel.
+Era 1 — Retail Proof (Current)
+India-first, B2C-first, retail-app-only: Health Check, Construction, and NxanceLM delivered through the consumer application, progressing through MBP, Beta, Phase 1, Phase 2, and Final build stages. No B2B, institutional, or deep-technology work is pursued until this is proven with real paying subscribers.
+Era 2 — Institutional & Deep-Technology Expansion
+Once Era 1 is proven, Nxance expands to B2B and institutional customers, and begins its deep-technology tracks: cloud and quantum computing integration (introduced in three stages — Phase 1 simulated, Phase 2 cloud QPU, Final Phase dedicated quantum infrastructure), an institutional API platform, and NxanceLM's evolution into a broader general-purpose finance AI — continuing to run on licensed third-party language models rather than a model Nxance builds itself, with Nxance's own proprietary investment concentrated in its quantitative engines, orchestration layer, and data — while remaining domain-scoped to finance and economics.
+Era 3+ — Funds, Licences, Government & International
+The long-range vision extends to Nxance operating its own investment funds, holding additional regulatory licences beyond SEBI-RIA, engaging in government and policy-level partnerships, and expanding internationally into both other emerging markets and developed-market institutional use cases — building toward the long-term ambition of functioning as an accessible, explainable equivalent of an institutional-grade platform such as BlackRock's Aladdin, available to individual investors and boutique institutions alike.
+Patents & Intellectual Property
+The company intends to pursue patent protection for its architecture in the future, once funding is secured and the backend is properly built — contingent on the relevant patent authority's assessment of eligibility for this class of software and system architecture.
+
+13. Conclusion
+Nxance is built on a specific, defensible thesis: that the choice between scale and explainability in investment intelligence is a false one, provided the explanation layer is architecturally constrained to only ever describe what a deterministic engine has actually computed. That constraint — Number Guard — combined with a 26-engine Health Check framework, a 26-engine Construction framework sharing a common Selection Engine, and an 18-mini-engine orchestration layer around a licensed third-party language model, is the technical core of the company's differentiation. Nxance's own proprietary intellectual property sits in its two quantitative engines, its orchestration and verification layer, and the terminal application built around them — not in the underlying language model itself, which is deliberately treated as a replaceable, licensed component rather than something the company needs to build from scratch.
+The market opportunity is real and growing on both sides of the equation the company is built to serve: a rapidly expanding, increasingly digitally-native retail investor base in India and other emerging economies with persistently low advisory penetration, and a global WealthTech software market that independent research places in the tens of billions of dollars today, trending toward materially larger figures by the early 2030s as AI-native, cloud-based platforms displace legacy infrastructure across both emerging and developed economies.
+Nxance's near-term funding ask of approximately ₹12.49 crore is scoped to fund eighteen months of disciplined, phase-gated execution against an already-detailed technical and regulatory roadmap — building the backend the company has designed but not yet built, converting a proven frontend prototype and a 500-person waitlist into a live, paying product, and establishing the compliance foundation (principally SEBI-RIA registration) required to expand from suggestion-only intelligence toward personalised advice and, eventually, consent-based execution. The company's positioning as an intelligence platform — not an advisory platform — is intended to remain constant throughout this expansion, as the defining characteristic of the product rather than a stage the company will eventually outgrow.
+
+14. Appendix
+A.1 Glossary
+	•	XIRR — Extended Internal Rate of Return, a return metric for irregular cash flows
+	•	CVaR / VaR — Conditional Value at Risk / Value at Risk, tail-risk measures
+	•	MVO — Mean-Variance Optimisation, a portfolio-construction technique
+	•	HHI — Herfindahl-Hirschman Index, a concentration measure
+	•	RAG — Retrieval-Augmented Generation, an AI architecture pattern
+	•	RIA — Registered Investment Adviser (SEBI licence category)
+	•	TAM / SAM / SOM — Total / Serviceable Addressable / Serviceable Obtainable Market
+	•	LTV / CAC — Customer Lifetime Value / Customer Acquisition Cost
+A.2 Selected Sources
+Market-sizing figures in Section 2 are drawn from publicly published research summaries by Research & Markets, Fortune Business Insights, Next Move Strategy Consulting, Mordor Intelligence, Business Research Insights, and Accenture, together with SEBI's monthly bulletin and reporting by Business Standard, Anand Rathi, Equentis, and Whalesbook on India's demat-account and investor-base growth, all accessed September 2026. All figures describing Nxance's own product, technical, financial, regulatory, and business-model details are drawn from the company's internal architecture specifications, financial model, and founder-confirmed positioning documents.
+— End of Report —

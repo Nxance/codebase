@@ -1,0 +1,376 @@
+
+An investment intelligence platform — not an advisory
+TECHNOLOGY RESEARCH & BUILD PLAN
+Quant Engines, Third-Party AI Integration & Infrastructure
+September 2026  ·  Technical reference for engineering & hiring planning
+0. Key Clarification — What Nxance Builds vs. What It Buys
+This document sets the technology plan straight on one point that changes the entire scope: Nxance does not build, train, or fine-tune its own language model — not even a self-hosted open-source fine-tune. NxanceLM's chat layer runs entirely on a third-party LLM, accessed via API.
+What Nxance does build, train, and own outright:
+	•	Health Check Engine — 26 sub-engines, deterministic quant math, calibrated in-house
+	•	Construction Engine — 26 sub-engines, deterministic quant math, calibrated in-house
+	•	Terminal — the market data / news dashboard, zero AI, entirely Nxance's own data pipeline and UI
+"Trained" for the two engines means something different from AI training: it means their scoring weights (the Selection Engine's 16-layer FIT score, the Health Score) are calibrated — hand-set by domain judgment, then backtested against historical data — not learned by a neural network. This is the honest, accurate way to describe the engines' "training" without overstating it as machine learning.
+This single decision removes GPU training clusters, fine-tuning pipelines, and ML-training hires from the entire plan below — those are the biggest cost and complexity items a technology plan like this usually carries, and none of them apply here.
+1. What "Build" Means, Per Component
+Component
+What "build" means
+Who owns it
+Health Check Engine
+Write and calibrate 26 sub-engines in Python/Rust — gap analysis, risk metrics, Monte Carlo forecasting, backtesting, tax rules, etc.
+Nxance engineering — fully owned IP
+Construction Engine
+Write and calibrate 26 sub-engines — Black-Litterman allocation, MVO, Selection Engine, correlation, rebalancing, etc.
+Nxance engineering — fully owned IP
+Terminal
+Build the data pipeline (market/news feeds) and the dashboard UI — no AI involved at all
+Nxance engineering — fully owned IP
+NxanceLM (chat layer)
+Integrate a third-party LLM via API, wrap it in retrieval (RAG) over Nxance's own data, and wrap that in Number Guard so it never states an unverified figure
+Nxance engineering integrates; the model itself is licensed, not owned
+
+2. Health Check Engine — All 26 Sub-Engines
+#
+Sub-engine
+What it does
+01
+Analysis Engine (gap-finder)
+Compares what's held vs. what's needed for the goal; surfaces every gap with its root cause
+02
+Risk Analysis Engine
+Volatility, Sharpe/Sortino ratio, VaR/CVaR, max drawdown
+03
+Fraud Gate
+Screens holdings against SEBI enforcement and governance flags
+04
+Behaviour Analysis Engine
+Reads crash-reaction and check-frequency answers into a risk archetype
+05
+Tax Efficiency Engine
+LTCG/STCG-aware nudges before any suggested sell
+06
+Forecasting Engine
+Goal-probability via Monte Carlo simulation
+07
+Guidance Engine
+Turns gaps into a ranked, explained list of fixes — an intelligence layer, not a lone decision-maker
+08
+Selection Engine (16 layers)
+Scores replacement candidates across 16 weighted factors; shared with Construction
+09
+Backtesting Engine
+Replays the portfolio through historical crashes (2008, 2020 COVID, etc.)
+10
+Analysis & Managing
+Ongoing watch after the report is delivered
+11
+Rebalancing Engine
+Flags drift beyond a set threshold
+12
+Redesigning Engine (SIP)
+Adjusts an ongoing SIP plan
+13
+Peer Comparison Engine
+Percentile ranking against an anonymized user base
+14
+Goal-Drift Watchdog
+Detects when a stated goal or timeline has changed
+15
+Portfolio Action Engine
+Adds an approved fix to the tracked Portfolio section; no real broker order is placed
+16
+User Behaviour Engine
+Shapes every gap/fix to observed behaviour, not just stated answers
+17
+Quantum Supervisor (Q-Core)
+Global optimality re-check; simulated classically for this build
+18
+NxanceLM Integration
+Wraps the third-party LLM in retrieval + Number Guard to explain every gap and fix in plain language
+19
+Data Intelligence Engine
+Nightly pre-computation of the scored instrument universe
+20
+Speed & Orchestration
+Owns the under-10-second response budget; parallelizes the engine DAG
+21
+Report Card & Tracking
+Generates the downloadable report
+22
+Asset Universe Engine
+Eligibility across the 8 launch asset classes (equity, MF, FD, bonds, gold, ETF, commodities, currency)
+23
+Scenario Sandbox Engine
+Runs "what if" simulations on demand
+24
+Number Guard
+Cross-checks every rupee/percent/date the AI outputs against the source engine result
+25
+Peer Intelligence Engine
+Crowd-level patterns — ships now, activates once enough anonymized users exist
+26
+Compliance & Audit Engine
+Every visible number traces to an engine_id, a version, and an input snapshot
+
+3. Construction Engine — All 26 Sub-Engines
+#
+Sub-engine
+What it does
+01
+Profile & Goal
+Turns questionnaire answers into a structured profile
+02
+Asset Allocation
+Black-Litterman — blends market-implied returns with the user's stated view
+03
+Selection Engine (16 layers)
+Scores every candidate instrument 0-100 across 16 weighted factors; shared with Health Check
+04
+Constraint + Fraud Screen
+Applies exclusions and the fraud list before allocation runs
+05
+Correlation Engine
+Correlation matrix across candidate instruments
+06
+MVO Optimisation
+Markowitz mean-variance portfolio-weight solver
+07
+QAOA Quantum Optimisation
+Long-term R&D track — classical MVO covers this in practice today
+08
+Backtesting Engine
+Replays the candidate portfolio through historical crashes
+09
+Risk Analysis Engine
+Same risk math as Health Check's, run on the proposed portfolio
+10
+Tax-Aware Optimiser
+Adjusts allocation for tax efficiency before finalizing
+11
+Analysis & Managing
+Post-build ongoing watch
+12
+Rebalancing Engine
+Shared with Health Check
+13
+Redesigning Engine (SIP)
+Adjusts the SIP schedule over time
+14
+Portfolio Action Engine
+Adds an approved allocation/rebalance to the tracked Portfolio; no real order placed
+15
+Life-Event Adaptation
+Reacts to a stated life change (job loss, marriage, new goal)
+16
+User Behaviour Engine
+Shared with Health Check
+17
+Quantum Supervisor (Q-Core)
+Shared, simulated for this build
+18
+NxanceLM Integration
+Explains every allocation decision ("why this fund") via the third-party LLM
+19
+Data Intelligence Engine
+Shared nightly-scored universe
+20
+Speed & Orchestration
+Owns under-10-second build time
+21
+Multi-Goal Engine
+Builds/allocates across more than one simultaneous goal
+22
+Scenario Sandbox Engine
+"What if I invest more/less" simulation
+23
+Asset Universe & Eligibility
+Shared with Health Check's asset universe engine
+24
+Number Guard
+Shared verifier
+25
+Peer Intelligence Engine
+Shared — ships now, activates once enough users exist
+26
+Compliance & Audit Engine
+Shared audit trail
+
+4. Quant Technique Research
+Every formula behind Health Check and Construction traces to published, decades-old research — none of it is original R&D.
+Technique
+Research basis
+What it solves
+Library
+Mean-Variance Optimization
+Markowitz, 1952
+Foundation of return/risk portfolio construction
+PyPortfolioOpt, cvxpy
+Black-Litterman allocation
+Black & Litterman, Goldman Sachs, 1990
+Blends market equilibrium with an investor's stated view
+PyPortfolioOpt
+Monte Carlo simulation
+Law of Large Numbers / CLT
+Goal-probability forecasting across thousands of paths
+numpy (vectorized)
+XIRR / IRR solving
+Newton-Raphson / Brent's method
+Cash-flow-based return calculation
+scipy.optimize
+Ledoit-Wolf shrinkage
+Ledoit & Wolf, 2003–2004
+Stabilizes covariance estimation for MVO
+scikit-learn, PyPortfolioOpt
+Hierarchical Risk Parity
+López de Prado, 2016
+MVO alternative — avoids matrix-inversion instability
+PyPortfolioOpt
+
+5. How to Build — Flow
+
+Sequenced so Health Check and Construction are demoable before any AI integration begins.
+	•	Step 1 — Auth + Users + Plans: no engine dependency, pure foundation.
+	•	Step 2 — Number Guard + Retrieval (RAG) pair: build these before the rest of the AI layer, since every AI-touching feature depends on them existing and passing tests.
+	•	Step 3 — Health Check + Construction engines: wire the 26+26 sub-engines behind API endpoints. This is where nearly all of the quant work lives, and it needs zero AI to function or demo.
+	•	Step 4 — Dashboard: depends on Step 3 for portfolio valuation.
+	•	Step 5 — Reports: depends on Step 3, adds Monte Carlo distribution output and portfolio beta/overlap views.
+	•	Step 6 — Billing/paywall gating: one shared has_feature(user, flag) helper, applied consistently rather than scattered per endpoint.
+	•	Step 7 — Terminal: independent, can be built in parallel with Steps 1–6, zero AI.
+	•	Step 8 — NxanceLM chat integration: deliberately last — this is a thin integration layer (third-party API + RAG + Number Guard wrapper), not a build project of its own, and it depends on the engines above already producing trustworthy numbers to narrate.
+This order means Health Check and Construction — the actual quant product — can be built, tested, and demoed end-to-end before a single line of AI-integration code is written.
+6. Technology Stack
+Layer
+Technology
+Why
+Engines (quant/ML math)
+Python — numpy, pandas, scipy, PyPortfolioOpt
+Mature, well-tested libraries implement every formula out of the box
+Latency-critical / Number Guard
+Rust
+Fast, airtight — runs on every AI response
+Orchestration / execution
+Go
+Clean concurrency for the engine DAG
+Frontend
+TypeScript / React
+Matches the existing liquid-glass prototype
+Core data
+Postgres (via Supabase)
+Relational data — users, portfolios, holdings, reports
+Time-series price data
+TimescaleDB extension
+Drop-in Postgres extension, no new infra
+Cache
+Redis
+Nightly-precomputed scores served fast at request time
+RAG / vector search
+pgvector to start, Qdrant if scale demands it
+Grounds the third-party LLM in Nxance's own data
+Event streaming
+Kafka / NATS (as scale requires)
+Decouples services as the system grows
+Hosting
+Railway to start, dedicated infra later
+Cheap, fast to deploy, clear upgrade path
+
+7. Third-Party LLM Options for NxanceLM
+Since NxanceLM is a third-party model accessed via API, the choice is commercial, not technical — which vendor's API is called, not what gets trained.
+Provider / model
+Strength
+Consideration for Nxance
+Claude API (Anthropic)
+Strong instruction-following, careful with factual claims
+Pairs well with a strict Number Guard wrapper
+GPT API (OpenAI)
+Broad ecosystem, strong multilingual support
+Widely used in fintech copilots already
+Gemini API (Google)
+Strong multimodal and retrieval integration
+Worth benchmarking for Hindi/Hinglish quality
+Recommendation: benchmark two providers head-to-head on real Nxance narration tasks (explaining a gap, explaining an allocation) before committing — cost, Hinglish quality, and latency all vary enough to matter, and switching later is a config change, not a rebuild, as long as the RAG/Number Guard wrapper stays provider-agnostic.
+8. RAG / Vector Database Infrastructure
+This is what lets the third-party model answer using Nxance's own data (SEBI circulars, AMFI data, RBI communications, engine outputs) instead of its general training data.
+Option
+Hosting
+Best for
+Scale ceiling
+pgvector
+Extension on existing Postgres/Supabase
+Early-stage — no new infra, joins with relational data in one query
+Comfortable to ~5–10M vectors
+Qdrant
+Cloud, BYOC, or self-host (Rust)
+Complex filtering, multi-tenancy, horizontal scale
+Billions across a cluster
+Recommendation: start on pgvector — it lives inside the stack already decided (Postgres/Supabase), so there is no new service to operate. Move to Qdrant only if the retrieval corpus or filtering needs outgrow it.
+9. Equipment & Infrastructure Needs
+Because there is no in-house model training, the equipment list is short and inexpensive relative to a typical AI-startup plan:
+	•	Developer workstations/laptops — standard development machines for the team, no special GPU requirement
+	•	Cloud hosting — Railway to start (matches the decided stack), scales with usage rather than requiring upfront hardware purchase
+	•	Database hosting — Supabase-managed Postgres to start
+	•	Market data vendor subscription — a licensed NSE/BSE/MCX data feed (e.g. an authorized vendor such as Global Datafeeds) — a recurring cost, not equipment, but budgeted alongside infrastructure
+	•	News feed subscription — a budgeted news API rather than ad-hoc scraping
+	•	Standard dev tooling — GitHub/GitLab, CI/CD (GitHub Actions), error monitoring (e.g. Sentry)
+No GPU training cluster, no dedicated ML hardware, and no data-center commitment are needed anywhere in this plan — that entire category of cost is removed by using a third-party LLM.
+10. Team & Hiring Plan
+Roles needed to build and run this plan, with the ML/AI-training roles from earlier plans removed and replaced by a much lighter integration role:
+Role
+Owns
+Priority
+CTO / Technical founder
+Overall architecture, Number Guard design authority
+Founding — in place (Raghav)
+Quant Engineer — Health Check
+The 26 Health Check sub-engines, their calibration and backtesting
+Core, earliest hire
+Quant Engineer — Construction
+The 26 Construction sub-engines, their calibration and backtesting
+Core, earliest hire
+Backend Engineer(s)
+FastAPI layer, Postgres schema, data ingestion pipeline
+Core, early
+AI Integration Engineer
+Third-party LLM API integration, RAG pipeline, prompt design, Number Guard wrapper — not a model-training role
+Core, but only after the engines exist to narrate
+Frontend Engineer
+React/TypeScript, Terminal UI, the liquid-glass design system
+Core, early — can run in parallel with backend
+DevOps / Security Engineer
+Infrastructure, encryption, deployment pipeline, incident response
+Early-mid — before real user data flows
+QA / Test Engineer
+Quant-correctness testing, adversarial Number Guard testing
+Early-mid — as soon as engines exist to test
+Compliance Advisor
+SEBI-RIA registration scope, DPDP consent design — can start as a consultant, not necessarily a full-time hire initially
+Parallel workstream — start now given registration timelines
+Notably absent from this list, compared to a typical AI-startup hiring plan: an ML Engineer or AI training specialist. Because NxanceLM is a third-party model, that skill set isn't needed — the AI Integration Engineer role above is an API-integration and prompt-engineering skill set, materially cheaper to hire for and faster to onboard than a model-training specialist.
+11. Performance Architecture
+Target: under 10 seconds for an interactive Health Check or Construction result.
+	•	A nightly batch job (Data Intelligence Engine) pre-scores the full instrument universe once — not recomputed per request.
+	•	At request time, engines read from this pre-scored universe (Postgres, hot data cached in Redis).
+	•	Independent sub-engines (Risk, Correlation, Tax, Behaviour) run concurrently, not sequentially, inside a parallel engine DAG.
+	•	Rust hot paths handle Number Guard and any other latency-critical calculation.
+The expensive computation happens off the user's request path entirely — this is what makes the sub-10-second target realistic without special hardware.
+12. Security & Compliance-Relevant Technology
+	•	Encryption at rest for PAN, holdings, and financial goal data — never logged in plaintext, including error logs
+	•	TLS everywhere, including internal service-to-service calls as infrastructure grows
+	•	A versioned audit trail — every computed number traces to an engine_id, a version, and an input-data snapshot
+	•	Regulatory mode gating (Analytics / Research / Personalized Intelligence / Execution) enforced at the API layer, not left as policy alone
+	•	Consent-scoped behavioral tracking — its own toggle, separate from account-creation consent
+	•	A defined retention policy on uploaded CAS/broker files that may contain PAN or date-of-birth data
+13. Key Takeaways
+	•	Dropping in-house LLM training removes the single most expensive and highest-risk line item from the technology plan — GPUs, ML-training hires, and a training pipeline all disappear.
+	•	What remains to build — Health Check, Construction, Terminal — is 90%+ deterministic math with 70+ years of published research behind it, not novel AI research.
+	•	The AI Integration Engineer role (third-party API + RAG + Number Guard) is materially cheaper and faster to hire for than an ML/fine-tuning specialist would have been.
+	•	Every user-visible number still traces to an engine_id + version + input snapshot — the trust story doesn't weaken just because the model itself is bought, not built.
+14. Sources & References
+Internal documents
+	•	Health Check / Construction / NxanceLM v3.1–v3.2 engine specifications
+	•	Nxance Backend Specification
+	•	Nxance Technical Architecture, Quant Engine & AI System Specification
+	•	Nxance Build Document (companion engineering document)
+	•	MIT Quant Bible (quant methods reference)
+External research (Sep 2026)
+	•	Vector database comparison — noqta.tn, guptadeepak.com, techsy.io (2026 production RAG benchmarks)
+	•	India market-data vendor landscape — marketcalls.in, datarade.ai
+	•	Quant finance techniques — standard published research (Markowitz 1952; Black & Litterman 1990; Ledoit & Wolf 2003–04; López de Prado 2016)

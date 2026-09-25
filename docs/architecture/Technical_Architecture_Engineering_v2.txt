@@ -1,0 +1,1615 @@
+
+Technical Architecture, Quant Engine & AI System Specification
+Diagnosis-first investment intelligence engineered for traceable numbers, collective decisions, explainable outputs and staged regulatory controls.
+Document status
+Draft v1.0 - technical source consolidation
+Prepared for
+Nxance
+Date
+04 September 2026
+Classification
+Confidential - product, quant and architecture IP
+DOCUMENT BASIS
+Prepared from the supplied Nxance financial model, Builders Pitch Fest materials, Health Check v3.1 blueprint, Construction v3.1 blueprint, NxanceLM v3.1 blueprint, and previously supplied Nxance pitch / incubation / grant materials. No external web research has been added to the technical design.
+Entity designation requires confirmation
+Internal source materials referenced multiple legal-registration name variants during drafting. This specification standardizes on the single operating name “Nxance” throughout; formal entity-registration detail is tracked as a separate legal/compliance workstream outside the scope of this technical document.
+
+ 
+
+Document Control
+How to read the specification and what is considered current, target, experimental or open.
+Field
+Specification
+Document
+Nxance Technical Architecture, Quant Engine & AI System Specification
+Version
+Draft v1.0
+Source cut-off
+04 September 2026
+Primary audience
+Founders, engineering, quant/research, compliance, investors/incubators, technical due diligence
+Design intent
+Consolidate source blueprints into one implementation-oriented architecture without silently resolving source conflicts.
+
+Status taxonomy
+Status
+Meaning in this document
+CURRENT / SOURCE-CLAIMED
+Explicitly presented by source material as current or working. Not independently repository-verified by this document.
+TARGET
+Specified architecture or engine behaviour intended for implementation / scale.
+EXPERIMENTAL / R&D
+Research path that must benchmark against a classical or production baseline before it can ship.
+OPEN / CONFIRM
+Source conflict, missing non-functional requirement, unverified regulatory interpretation, or founder decision still required.
+
+Source-grounding rule
+Where the source materials conflict, this specification records the conflict and defines a recommended normalization only when it is necessary for system coherence. Recommendations are labelled as such; they are not presented as already-built facts.
+
+Contents
+#
+Section
+1
+Executive Technical Summary
+2
+Source Basis, Versioning and Normalization
+3
+Product Scope and Locked User Journeys
+4
+Engineering Principles and System Invariants
+5
+System Context and Architecture Evolution
+6
+Canonical Data Model and Ingestion
+7
+Health Check Engine Specification
+8
+Construction Engine Specification
+9
+Shared Quantitative Core and Selection
+10
+NxanceLM Specification
+11
+Explainability, Number Guard and Auditability
+12
+Regulatory Feature-Gating
+13
+Security, Privacy and Data Governance
+14
+Infrastructure, DevOps and MLOps
+15
+Performance, Reliability and Cost-Leverage
+16
+Testing, Validation and Model Governance
+17
+18-Month Technical Delivery Roadmap
+18
+Team and Engineering Operating Model
+19
+Technical Budget Mapping
+20
+Technical Risk Register
+21
+Open Decisions for Founder Confirmation
+A
+Health Check 26+ Engine Register
+B
+Construction 26+ Engine Register
+C
+NxanceLM 18+ Mini-Engine Register
+D
+Quant Formula and Verification Register
+E
+Internal Source Register
+
+1  Executive Technical Summary
+Nxance is specified as a diagnosis-first investment-intelligence platform built around three user-facing systems: Health Check, Construction, and NxanceLM. Health Check diagnoses an existing portfolio; Construction builds a goal-aware portfolio; NxanceLM supports the research, analysis and plain-language explanation behind each diagnosis and portfolio build, in addition to conversational intake, retrieval, reporting and supervised cross-engine assistance. The technical blueprints go beyond the simplified pitch description by defining 26+ sub-engines in each investment engine and 18+ coordinated mini-engines in NxanceLM. [S2-S5]
+Core architecture thesis
+Financial truth is computed by deterministic or independently testable quant/data engines. NxanceLM may retrieve, interpret, cross-check and explain those results, but it does not become the sole source of portfolio numbers or the lone investment decision-maker.
+
+1.1 Product-level architecture
+
+Figure 1. Shared intelligence services underlying Health Check, Construction and NxanceLM.
+The source designs make clear that Health Check and Construction should not be implemented as completely separate stacks. They share the Selection Engine, Risk Engine and a broader set of foundation/supervision services: Data Intelligence, Behaviour, Q-Core, NxanceLM, Speed/Orchestration, Number Guard, Peer Intelligence and Compliance/Audit. [S3-S4]
+1.2 Non-negotiable design invariants
+•  Collective Decision Principle. No single engine, parameter, AI model or quantum component independently determines a user-facing portfolio verdict.
+•  Deterministic numbers. Every portfolio number shown by NxanceLM must be sourced from the computed-values ledger or a retrieved, attributable external fact.
+•  Hard gates stay hard. Fraud, suitability, regulatory-mode and user-approval controls are constraints, not scores that can be averaged away.
+•  Classical baseline always exists. Quantum or advanced-model paths may improve a result only after an exact/classical comparison; failure or timeout falls back safely.
+•  Auditability. Every recommendation should be reconstructable from input snapshot, engine versions, scores, constraints, evidence and approvals.
+•  Staged regulation. Analytics/education can precede regulated personalised advice or execution; real-money actions remain gated until the relevant approval/partner model is active.
+1.3 Current versus target architecture
+
+Figure 2. Current pitch-level implementation versus staged target architecture.
+Pitch materials describe a lean current stack of FastAPI + Supabase + Railway and an 80%-code-complete product claim. The deep engineering blueprints describe a target service architecture using Python, Rust, Go, TypeScript, gRPC/protobuf, event streaming, Redis, PostgreSQL/TimescaleDB, vector retrieval, observability and eventually Kubernetes. [S2-S5] The correct interpretation is architecture evolution: keep the current MVP deployable while progressively extracting latency-, correctness- and scale-critical services behind stable contracts.
+2  Source Basis, Versioning and Normalization
+2.1 Source hierarchy used
+ID
+Internal source
+Role in this specification
+S1
+Nxance Financial Sheet.xlsx
+18-month budget, hiring, burn, milestones, regulatory roadmap, business model.
+S2
+Builders Pitch Fest 2026 PDF/PPTX
+External product positioning, current stack, current validation/code-complete claims.
+S3
+Health Check Engine v3.1 Ultimate HTML
+Health Check architecture, 26+ engines, formulas, locked upload-first user flow.
+S4
+Construction Engine v3.1 Ultimate HTML
+Construction architecture, 26+ engines, 16-layer Selection, two-stage v3.1 flow, formulas.
+S5
+NxanceLM v3.1 Ultimate HTML
+18+ mini-engines, RAG/guards, MVP placeholder and from-scratch model roadmap.
+S6
+Nxance Grant Pitch Deck
+Pilot architecture, security/privacy controls, six-month gating, local AI evaluation plan.
+S7
+Nxance i-Hub Application Pitch Deck
+Business model canvas, product status, regulatory readiness and pilot expectations.
+S8
+Nxance - Pitch Deck
+Core product, positioning, validation, market and monetisation source deck.
+
+2.2 Source conflicts recorded, not hidden
+Topic
+What the sources say
+Normalization for this draft
+Legal entity
+LLP appears in pitch/incubation material; Pvt Ltd appears in technical HTML footers.
+RESOLVED. The current live operating entity is Nxance. Any change in registered-entity structure (for example, conversion to a private-limited registration) is planned during the funding process/close, not before; use “Nxance” on external documents until that conversion completes.
+Health Check count/version
+Latest v3.1 register contains 26+ engines; legacy body text still says v2 / 22 systems.
+Use latest 26+ register as target taxonomy; retain legacy wording only as historical trace.
+Construction count
+Latest register contains 26+ engines; build-roadmap copy still says 22 microservices.
+Use 26+ target taxonomy; treat “22” references as earlier architecture text.
+NxanceLM count
+Latest v3 summary contains 18+ mini-engines; older sections say 14.
+Use 18+ latest taxonomy; implementation stage remains smaller.
+Infrastructure
+Pitch: FastAPI/Supabase/Railway. Blueprint: Python/Rust/Go/TS + gRPC/events/K8s.
+Define MVP and target architecture separately; no claim that target distribution already exists.
+Execution
+Pricing copy includes execution; regulatory plan gates execution.
+Regulatory feature gate governs. Subscription entitlement cannot bypass legal/partner readiness.
+Quantum
+Prominent in engine designs; same sources require classical fallback and benchmark shoot-out.
+Treat as experimental accelerator; classical production path is mandatory.
+NxanceLM from scratch
+Source commits to post-MVP own model, while MVP uses TinyLlama placeholder.
+Separate MVP trust layer from longer-horizon model R&D; do not make core portfolio truth depend on model pretraining.
+
+Implementation governance recommendation
+Maintain an Architecture Decision Record (ADR) log. Each conflict above should receive a founder-approved resolution, an effective version, and a migration note before this document is labelled “Approved”.
+
+3  Product Scope and Locked User Journeys
+3.1 Health Check: upload first
+
+Figure 3. Health Check v3.1 locked journey and system hand-offs.
+The v3.1 addendum locks the Health Check sequence: upload existing portfolio first; parse and normalize holdings and one-time invested amount; ask expectation, behaviour and suitability questions; run the 26+ engine pipeline on existing portfolio x stated expectations; compute the Expectation-Match Verdict; present precise gaps and proposed changes; allow Sandbox preview; then move to approval, execution (where permitted) and ongoing tracking. [S3]
+3.2 Construction: questions first
+
+Figure 4. Construction v3.1 locked journey and system hand-offs.
+Construction begins with the question set, derives goal mathematics, risk and behaviour profile, resolves an eligible asset universe, then runs the portfolio-construction pipeline. The source specifically states that monthly SIP is proposed by the engine from goal/tenure/return mathematics and then affordability-confirmed rather than forcing the user to guess the required contribution. [S4]
+3.3 Expectation, behaviour and suitability question set
+Q
+Input
+Engine use
+Q1
+Goal
+Purpose + target amount.
+Q2
+Tenure
+Years to goal; hard or flexible deadline.
+Q3
+Expected return / target corpus
+Convert one to the other; realism-check against asset-class history.
+Q4
+Risk comfort
+Scenario-based loss response and maximum tolerable temporary loss.
+Q5
+Invested amount and SIP
+Health Check extracts one-time amount; Construction asks it. Engine can solve proposed SIP.
+Q6
+Favourable / excluded assets
+Preferences as tilts; exclusions as hard Universe constraints.
+Q7
+Experience
+Years and instruments; explanation depth and archetype prior.
+Q8
+Past crash behaviour
+Sell / hold / buy-more response; strong behaviour signal.
+Q9
+Check frequency
+Daily / weekly / rarely; nudge timing and volatility framing.
+Q10
+Income stability
+Salary/business/variable; contribution resilience.
+Q11
+Age bracket
+Glide-path input.
+Q12
+Emergency fund
+Liquidity buffer before aggressive allocation.
+Q13
+Liabilities / EMIs
+Caps safe contribution.
+Q14
+Dependents
+Protection-first and risk dampening input.
+Q15
+Upcoming liquidity needs
+Keeps near-term money away from volatile/illiquid assets.
+Q16
+Tax bracket / regime
+Activates tax-aware selection/rebalancing.
+Q17
+Ethical / ESG exclusions
+Hard universe constraints.
+Q18
+Multiple goals
+Priority ranking and Multi-Goal allocation.
+
+3.4 NxanceLM interaction boundary
+NxanceLM can conduct the intake conversationally, normalize free text into structured parameters, explain verdicts, answer general finance/economy questions, and narrate engine outputs. A request to build or diagnose a portfolio should route into Construction or Health Check rather than being answered as a free-form chat recommendation. [S5]
+Product boundary
+Chat can explain and research; the portfolio engines compute and decide collectively. This distinction is a product safety mechanism, not merely a UX choice.
+
+4  Engineering Principles and System Invariants
+ID
+Invariant
+Engineering consequence
+P1
+Collective decisions only
+Each component produces evidence/score/constraint. The final verdict is a controlled aggregation, not a single model output.
+P2
+Deterministic financial truth
+XIRR, weights, risk, goal probability, cost leak, tax and other numerical outputs come from quant/data services.
+P3
+Hard constraints are not weighted away
+Fraud, eligibility, suitability, explicit exclusions and regulatory mode can veto a result.
+P4
+Selection and sizing are separate
+“Which instrument” is ranking/eligibility. “How much” is correlation/risk/behaviour/optimisation.
+P5
+Precompute before optimise
+Nightly Data Intelligence scoring/cache is the latency and unit-economics lever.
+P6
+Classical baseline first
+Advanced/quantum paths compete against a reliable baseline and never remove the fallback.
+P7
+Explicit user approval
+No real-money action proceeds without explicit consent and a permitted execution mode.
+P8
+Audit everything material
+Inputs, data versions, engine versions, outputs, rationales, approvals, disclosures and orders are reconstructable.
+P9
+Stable engine contracts
+Incremental implementations can replace simpler versions without breaking upstream/downstream services.
+P10
+Architecture can expand
+Engine #27/#30/#40 should be addable without rewriting the whole platform, provided contracts and governance remain stable.
+
+4.1 Recommended invariant enforcement
+request → profile/universe → data snapshot → engine DAG → hard gates → collective scorer → ledger → NxanceLM → Number Guard → compliance gate → render  No bypass route may connect an individual model output directly to execution.
+
+The source materials state the principle; the bypass prohibition above is the implementation normalization recommended by this specification. It should be enforced in orchestration and contract tests rather than relying on developer convention.
+5  System Context and Architecture Evolution
+5.1 Current/source-claimed MVP context
+•  Application stack. FastAPI + Supabase + Railway is the stack stated in the Builders Pitch Fest technical slide. [S2]
+•  Product modules. Portfolio Builder, Dashboard, Health Check and conversational Nxance AI are presented as end-to-end flows. [S2]
+•  Status claim. Pitch materials state 80% code-complete and 50 early users through the Health Check demo. Founder-confirmed correction: the frontend prototype is complete, not the 80% figure earlier pitch materials stated; the 50 early users tested only the Construction engine frontend, not the full Health Check flow. Backend development has not yet started - it requires the funding raise to secure the engineering resources and technology needed to build it.
+5.2 Target platform context
+
+Figure 5. Target Nxance context: shared quantitative intelligence plus product-specific orchestration.
+Layer
+Target responsibilities
+Experience
+Web/mobile onboarding, upload, dashboards, report cards, NxanceLM chat, Sandbox, admin/R&D panel.
+Edge/API
+Authentication, entitlements, regulatory mode, rate limits, request/session context.
+Orchestration
+Run engine DAG, deadlines, fallbacks, hard gates, aggregation, provenance and result contract.
+Investment intelligence
+Health Check / Construction-specific engines plus shared Selection, Risk, Data, Behaviour, Backtesting, Tax, Q-Core.
+AI explanation
+NxanceLM retrieval, conversational input, explanation/reporting, safety and number verification.
+Trust
+Computed-values ledger, compliance/audit event store, approvals, disclosures, policy versioning.
+Data
+Canonical portfolios, market/fund/security data, time series, vector retrieval, telemetry, anonymised peer outcomes.
+Operations
+Observability, CI/CD, model registry/evaluation, security controls, backups and incident response.
+
+5.3 Migration pattern
+Stage
+Deployment shape
+Reason
+MVP
+FastAPI application + Python engine modules + Postgres/Supabase + cache.
+Preserve speed of iteration and current codebase.
+Modular monolith
+Explicit engine interfaces, isolated packages, worker queue/event bus where valuable.
+Create boundaries before paying distribution complexity.
+Service extraction
+Extract Rust calc/Number Guard, Go orchestration/execution, high-load data and AI serving.
+Correctness, latency, independent scaling and auditability.
+Distributed target
+gRPC/protobuf services + Kafka/NATS + dedicated stores; Kubernetes only at sustained scale.
+Operational scale, institutional APIs and independent lifecycle.
+
+6  Canonical Data Model and Ingestion
+The engine blueprints imply a shared data model but do not provide one final database schema. The model below is therefore a documentation-level normalization required to make engine contracts, audit and ledger provenance coherent. Exact table names, keys and retention rules remain OPEN.
+
+Figure 6. Documentation-level canonical investment data model.
+6.1 Canonical entities
+Entity
+Core fields / concepts
+Primary consumers
+User / Household
+identity ref, locale, regulatory mode, consent state, cohort ref
+Auth, suitability, NxanceLM, compliance
+Profile & Expectation
+goal(s), target, horizon, risk scores, behaviour prior, exclusions, affordability
+Profile, allocation, risk, universe, Multi-Goal
+Portfolio
+portfolio id, source, valuation time, base currency, account links
+Health Check, dashboard, audit
+Holding
+instrument id, quantity, cost basis, current value, account, acquisition data
+Analysis, Selection, risk, tax
+Transaction / Cashflow
+date, instrument, type, quantity, amount, fees/tax
+XIRR, behaviour, tax, audit
+Instrument Master
+canonical id, class/category, issuer/AMC, country, eligibility
+Universe, Selection, compliance
+Market Snapshot
+price/NAV, rates, macro, fundamentals, ratings, disclosures, news refs
+Selection, risk, forecasting, RAG
+Engine Run
+run id, portfolio/profile snapshot, engine version, status, timing
+Orchestrator, audit, observability
+Computed Value
+metric, raw/display value, unit, provenance, formula/model version
+Number Guard, reports, audit
+Recommendation / Proposal
+finding, action, rationale, evidence, suitability status, expiry
+Report, Sandbox, compliance
+Approval / Order
+proposal id, user consent timestamp, execution status, external refs
+Execution, audit
+
+6.2 Ingestion channels
+•  Existing portfolios. CAS PDF, broker statements/exports, CSV, Excel, approved APIs and manual entry appear across the supplied product sources.
+•  Reference/market data. NSE/BSE, AMFI, ratings, macro/policy, price/NAV history, news and approved data vendors are referenced in engine designs.
+•  User context. Questionnaire answers, goals, constraints, explicit exclusions, consent and behaviour telemetry.
+•  Peer outcomes. Anonymised and aggregated cohort outcome data for calibration; source says advisory signal only, not copy-trading.
+6.3 Data Intelligence (Sub-19)
+Data Intelligence is the shared “source of truth” service. Its source-defined responsibilities include ingestion/cleaning, nightly pre-computation of candidate scores, CAS parsing for Health Check, quality validation and serving hot data from cache so request-time engine work stays inside the <10-second target. [S3-S4]
+Pipeline step
+Expected control
+Acquire
+Licenced / approved source, timestamp, source identifier, raw immutable landing copy.
+Validate
+Schema, completeness, stale-data, duplicates, range/outlier and identifier checks.
+Normalize
+Canonical instrument ids, categories/classes, currencies, corporate actions, units.
+Enrich
+Fundamental, risk, rolling-return, crisis, rating, text/document and macro features.
+Precompute
+Per-instrument/per-class scores and reusable matrices; versioned by data cut.
+Publish
+Cache + durable store + feature/vector retrieval, with explicit effective timestamp.
+Observe
+Freshness, failed jobs, anomaly alerts, vendor gaps and backfill status.
+
+6.4 Open data requirements
+•  Final production schema and migration strategy.
+•  Corporate-action normalization rules.
+•  Data-source licensing matrix and allowed redistribution/derived-data rights.
+•  Data freshness SLAs per asset class.
+•  Retention/deletion rules for uploaded financial data and behavioural telemetry.
+•  Data residency, backup geography and cryptographic key-management decisions.
+7  Health Check Engine Specification
+Health Check answers a constrained question: given what the user already owns and what they expect that money to achieve, what is working, what is not, why, and what is the minimum-friction/safest change that improves the outcome? The v3.1 source architecture comprises 26+ sub-engines across Diagnose, Advise, Manage, Supervise and Foundation responsibilities. [S3]
+7.1 Runtime pipeline
+Upload → Parse/normalize → Profile & Expectation → Diagnose gaps → Goal probability → Health Score → Guidance → Selection (when replacement justified) → Backtest → Q-Core/NxanceLM sanity → Number Guard → Compliance gate → Report → Sandbox → Approval → Execute/track
+
+7.2 Diagnose layer
+Engine
+Responsibility
+Analysis Engine
+Finds performance, cost, structure, liquidity and risk-fit gaps; attributes root cause and rupee impact.
+Risk Analysis
+Compares current risk with the minimum risk required to meet the goal.
+Fraud Gate
+Runs source-defined hard checks; a failure vetoes “healthy” treatment.
+Behaviour Analysis
+Uses transaction timing and observed behaviour to separate product problems from investor-behaviour problems.
+Tax Efficiency
+Identifies holding-period/tax state and harvest opportunities; constrains fixes.
+Forecasting
+Projects current trajectory and computes probability of achieving the expectation.
+Peer Comparison
+Cross-validates model-detected gaps against anonymised similar-profile outcomes.
+
+Analysis Engine - six source-defined techniques
+Technique
+Purpose
+Multi-dimensional scoring
+Do not collapse too early into one score; analyse performance, cost, structure, liquidity and risk fit separately.
+Counterfactual comparison
+Quantify rupee impact: what would the result have been under a lower-cost / better-fit alternative?
+Trajectory modelling
+Compare the current path with the required path through the goal date.
+Root-cause attribution
+Distinguish instrument choice, allocation, cost, behaviour and other causes.
+Materiality filtering
+Prioritise gaps by rupee/goal impact so the report stays actionable.
+Peer cross-validation
+Check whether theoretical gaps correlate with worse real-world outcomes for similar cohorts.
+
+7.3 Health Score and Expectation-Match Verdict
+The source design defines a 0-100 Health Score combining returns-vs-goal, diversification, cost efficiency, risk fit, quality, tax efficiency and behaviour fit. It also defines hard caps for specific states (fraud, excessive risk, low goal probability). These weights/caps are design parameters and must be calibrated/approved through governance before public claims. [S3]
+HS = sum_c (w_c * score_c)  Hard-cap concept (source design): - fraud-gate failure -> cap score - risk outside user band -> cap score - very low P(goal) -> cap score  Expectation-Match Verdict = deterministic comparison of current/proposed P(expectation achieved), risk and gap impact.
+
+7.4 Advise: fix in place before replacement
+•  Guidance Engine. For each material gap, decide whether the safest fix is education/no trade, in-place change, rebalance, tax-aware change, contribution/timeline change, or instrument replacement.
+•  Selection only when needed. The shared 16-layer Selection Engine is invoked when an existing instrument genuinely needs replacement.
+•  Switching-cost inequality. Source design requires expected benefit to exceed exit load, tax, transaction cost and safety margin; this prevents churn for marginal improvements.
+•  Backtesting. The proposed fix is stress-replayed and behaviour hold-ability is considered before presentation.
+7.5 Manage and Sandbox
+After an approved fix, the source design adds daily tracking, event-driven rebalancing, SIP redesign, goal-drift/life-event re-analysis, report cards and a Scenario Sandbox. Sandbox re-runs the pipeline on a hypothetical post-fix portfolio so the user can compare current versus proposed outcomes before committing. [S3]
+Health Check implementation priority
+A defensible MVP does not require every advanced sub-engine. The source itself recommends building deterministic XIRR/gap/overlap/cost/risk/score/replacement logic first, then adding forecasting, quantum and behaviour models as data and validation mature.
+
+8  Construction Engine Specification
+Construction builds a new portfolio from the user’s expectations, risk capacity, behaviour, affordability, constraints and eligible universe. The v3.1 design separates asset-class allocation from instrument-specific selection and sizing, which is important because a mutual fund, stock, FD, bond, commodity and currency cannot be judged by one common parameter pack. [S4]
+8.1 Build flow
+Questions → Profile/Expectation → Behaviour-adjusted risk → Universe/eligibility → Asset-class allocation → Per-class Selection → Correlation → MVO baseline → experimental quantum shoot-out → Risk minimum for target → Backtest → Tax → Supervision → Ledger → Explanation → Compliance → Result
+
+8.2 Build layer
+Engine
+Primary output
+Profile & Goal
+Risk score, required return / contribution math, constraints, behaviour signals.
+Asset Allocation
+Black-Litterman-based asset-class blueprint, personalized by risk/horizon.
+Selection Engine
+FIT-ranked eligible instruments by class; separate sizing pass.
+Constraint + Fraud
+Hard filters and vetoes.
+Correlation
+Cross-asset diversification matrix, including crisis-aware correlation.
+MVO
+Reliable classical baseline weights.
+QAOA / quantum optimisation
+Experimental candidate weights/subsets; ship only if exact classical comparison wins.
+Backtesting
+Historical/crisis replay and hold-ability.
+Risk Analysis
+Minimum risk solution that still meets required return/goal constraints.
+Tax-Aware Optimiser
+Post-tax / holding-period-aware nudges and trade constraints.
+
+8.3 v3.1 two-stage selection
+Stage
+Scope
+Decision
+Stage 1 - Macro/main parameters
+Whole user + whole portfolio problem
+Asset-class mix: equity/debt/gold/commodity/currency/etc., constrained by goal, risk, behaviour and eligibility.
+Stage 2 - Per-asset-class parameter pack
+Each eligible instrument inside its own class
+Which instrument and how much; each class uses its own metrics and formulas.
+
+8.4 Manage layer
+Once a portfolio exists, the source target architecture continuously manages drift, SIP changes, life events, multiple goals, scenario analysis and user behaviour. Execution is explicitly user-approved and must also pass regulatory-mode gating. [S4]
+Manage engine
+Trigger / behaviour
+Analysis & Managing
+Daily monitoring / heartbeat.
+Rebalancing
+Event-driven allocation drift; tax and behaviour adapted.
+Redesigning (SIP)
+Monthly or on contribution change.
+Execution & Order
+Only on explicit approval and only if execution mode is permitted.
+Life-Event Adaptation
+Event-driven re-profile of goal/risk/constraints.
+Multi-Goal
+Continuous balancing of multiple goals.
+Scenario Sandbox
+On-demand full hypothetical rerun without commitment.
+
+9  Shared Quantitative Core and Selection
+Selection is the heaviest shared decision system in the source architecture. It uses the same 16-layer skeleton for Construction and Health Check replacement, but v3.1 requires the metric pack and weights to vary by asset class. [S3-S4]
+9.1 The 16 Selection layers
+#
+Layer
+Role
+1
+Fundamental Analysis
+Class-specific fundamental quality: valuation/quality for stocks, cost/portfolio quality for funds, rating/coupon/duration for debt.
+2
+Technical Analysis
+Price/volume/timing signals where meaningful; near-zero relevance for instruments such as FDs.
+3
+Quant Finance
+Factors, risk-adjusted returns, beta/alpha and statistical behaviour.
+4
+Instrument-Specific Deep Data
+Manager tenure, promoter data, real yield, REIT occupancy, roll yield, etc. by class.
+5
+Historical Performance
+Long-cycle performance and category-relative history.
+6
+Crisis / Case Analysis
+Instrument behaviour across defined crisis periods; drawdown and recovery.
+7
+Instrument-Level Risk
+Volatility, downside, VaR and maximum drawdown before portfolio-level risk.
+8
+Fraud Analysis - hard veto
+Regulatory/governance red flags. Failure rejects the instrument regardless of other scores.
+9
+News, Articles & Sentiment
+Recent credible text/news context and sentiment.
+10
+Fresh Performance + Market Mood
+Latest period results and current regime/mood.
+11
+Forecasting + Data Science
+Forward-return projection with uncertainty; separate from historical interrogation.
+12
+User Behaviour Fit
+Does volatility match stated tolerance?
+13
+Data Analysis
+Full-dataset statistical/regime/anomaly/liquidity analysis.
+14
+Own AI (NxanceLM)
+Document/context reading and consistency check; one weighted input, never override.
+15
+Quantum Scoring
+Experimental portfolio-context subset score; QUBO/QAOA path with classical verification.
+16
+Human / Market Behaviour
+Observed user hold-ability plus crowd/market behaviour; observed can override stated behaviour input within approved model design.
+
+9.2 FIT ranking versus quantity
+FIT_i = sum_l (weight[l, asset_class] * normalized_score[i,l]) subject to hard eligibility/fraud/suitability gates.  Which instrument = FIT ranking. How much = separate sizing/optimization using FIT + correlation + behaviour hold-ability + class bounds + risk/return constraints.
+
+This separation is an important architecture invariant. A top-FIT security can receive a smaller allocation if it is highly correlated with already-selected holdings, violates concentration limits, or is unlikely to be held by the user through normal drawdowns.
+9.3 Per-asset-class packs
+Class
+Source-highlighted metrics
+Mutual funds
+Rolling return, alpha consistency, Sharpe/Sortino, volatility, drawdown, expense ratio, capture ratios, manager/AUM stability, overlap, category z-rank.
+Stocks
+P/E, PEG, ROE/ROCE, leverage, FCF, growth, technicals, promoter/pledge, governance, beta/alpha.
+Fixed deposits
+Issuer rating, comparable coupon edge, duration fit, break penalty, DICGC concentration, post-tax yield.
+Bonds
+YTM, credit spread/rating, modified duration, convexity, liquidity, coupon type.
+Commodities
+Roll yield, inflation/real-rate beta, USD sensitivity, storage/carry, seasonality/regime, volatility.
+Currency
+Carry, REER/PPP misvaluation, rate differential, volatility and central-bank stance.
+Gold
+Real-rate beta, INR/USD effect, crisis hedge, SGB coupon/tax edge, premium/discount.
+ETF / REIT
+ETF tracking error/expense/liquidity/index quality; REIT yield/occupancy/lease/NAV/leverage.
+
+9.4 Core quantitative methods
+•  Goal mathematics. Required return / SIP solved numerically from future-value constraints; infeasible goals should produce an explicit “unreachable safely” branch.
+•  Black-Litterman. Market-implied equilibrium plus controlled views for asset allocation, avoiding unstable raw-return optimisation.
+•  Category normalization. Metrics normalized within appropriate peer category before cross-layer aggregation.
+•  Risk. Portfolio variance, parametric/historical VaR, CVaR, downside deviation and max drawdown; crisis windows matter.
+•  Forecasting. Source proposes Monte Carlo goal probability and forward models with uncertainty; output is a probability, not a guarantee.
+•  Optimization. MVO as classical baseline; constrained objective is minimum risk subject to required return and bounds.
+•  Tax. Versioned tax-rule tables rather than hard-coded permanent rates.
+•  Behaviour. Questionnaire and telemetry can modify risk/hold-ability, but model use must be calibrated, consented and audited.
+9.5 Quantum positioning
+Classical-first rule
+QUBO/QAOA and related quantum paths are experimental. The source design itself requires: build the formulation, solve classically first, benchmark quantum/simulated alternatives, exact-rescore the candidates, and ship only a result that beats the classical baseline. Timeout/noise must return the baseline.
+
+10  NxanceLM Specification
+NxanceLM is the human-language intelligence layer around the investment engines. Its latest source taxonomy defines 18+ coordinated mini-engines; this document uses the latest 18+ register. Its analytical scope extends beyond narrow portfolio-specific queries to the broader set of macroeconomic and global-market variables - monetary policy, fiscal policy, trade and geopolitical developments, currency, commodity and energy markets, and other direct or indirect drivers of world-economic conditions - each mapped to its investment relevance. The model is a helper, explainer, retriever and supervised parameter - never the lone portfolio decider. 
+Founder-confirmed product framing: NxanceLM should read to the user as two things at once. First, a live-data terminal - each of the 4 Core Layers (Generative Reasoning Processor, Terminal Speed Node, Global Market Radar, Deep Corporate Auditor) gets its own visible, tappable screen surfacing live data directly (an indices, currency, commodities, trade, news and macro-data terminal view), not hidden behind chat. Second, a full open-domain conversational reasoning interface - free-form dialogue and question-answering capability comparable to a general-purpose large language model, but scoped to the complete set of macroeconomic and cross-domain variables that drive global markets, not narrow finance-only queries. This scope includes monetary policy and interest-rate cycles, inflation and employment data, fiscal policy and government spending, geopolitical events and trade-policy shifts, currency and commodity markets, energy and supply-chain conditions, technology and productivity cycles, demographic and labour-market trends, climate and agricultural shocks, and regulatory or sanctions developments - each treated as a direct or indirect, positive or negative driver of global economic conditions and translated into its quantifiable relevance for portfolio and investment decisions. The conversational layer sits on top of the same live data rather than replacing the terminal view, so the user can address it directly for any market, macroeconomic or investment-relevant query. This positions NxanceLM as core infrastructure in its own right, not merely an explanatory add-on to the two portfolio engines.  NXANCE LM is a proprietary, dual-force financial ecosystem that natively fuses a powerful, in-house AI engine with a fully functional, autonomous Live Market Terminal into a single interface.
+It does not merely aggregate data feeds. When you seek deep strategic insights, the AI actively drives the research, analyzes complex telemetry, and runs continuous diagnostics (Health Check) alongside asset optimization (Construction). Powered by 18+ core mini-engines and 26 specialized sub-engines, the terminal processes multi-dimensional market inputs to generate deep, plain-language explanations in English or Hindi—all backed by an audited evidence trail instead of opaque, "black-box" scores.
+Conversely, when you need pure market analysis, the terminal functions as a complete standalone workspace. Clicking into any section—Market, News, Macro, or Currency—instantly unlocks a full-scale institutional platform where you can independently track, analyze, and view raw, real-time data feeds. The specialized sub-engines run silently in the background, allowing you to click the "Nxance Explain" toggle at any time to instantly overlay plain-language logic and an explicit evidence trail directly onto the live charts.    
+
+     ⚡ Standalone Workspaces with On-Demand AI Insights
+1. 📊 MARKET SECTION (Equities, Derivatives, & Order Flow)
+	•	The Standalone Terminal View: Displays live Level 2/3 market depth, interactive advanced candlestick charting pre-loaded with technical indicators (RSI, MACD, Volume Profiles), complete options chains with live Greeks (Delta, Gamma, Vega, Theta), and sectoral heatmaps.
+	•	The AI Core Explanation: When toggled, the Health Check engine diagnoses volatility anomalies while the Construction engine suggests portfolio adjustments.
+	•	English AI Output: "Portfolio risk has increased due to heavy tech concentration. Health check flags a 5% deviation from baseline. Construction recommends trimming 3% into consumer defensives."
+	•	Hindi AI Output: "टेक शेयर्स में ज़्यादा निवेश होने के कारण पोर्टफोलियो का रिस्क बढ़ा है। हेल्थ चेक आपके बेसलाइन से 5% का बदलाव दिखा रहा है। कंस्ट्रक्शन इंजन 3% कैपिटल कंज्यूमर डिफेंसिव शेयर्स में शिफ्ट करने की सलाह देता है।"
+2. 📰 NEWS SECTION (Institutional Feeds & Real-Time Events)
+	•	The Standalone Terminal View: Connects directly to real-time institutional newswires, exchange press releases, statutory regulatory filings, insider trading disclosures, and live earnings call transcripts.
+	•	The AI Core Explanation: When toggled, the AI engine strips away sensationalized media noise, validates market sentiment, and cross-references historical event templates.
+	•	English AI Output: "Company X missed its quarterly revenue guidance by 2%. Guardrails are active; historical evidence trail shows a 90% probability of recovery within 10 trading days. Hold positions."
+	•	Hindi AI Output: "कंपनी X का तिमाही रेवेन्यू टारगेट 2% कम रहा है। हमारे सुरक्षा नियम (Guardrails) एक्टिव हैं; पुराना डेटा दिखाता है कि 10 दिनों में रिकवरी की 90% संभावना है। होल्ड करें।"
+3. 🌐 MACRO SECTION (Global Economics & Central Bank Telemetry)
+	•	The Standalone Terminal View: Tracks interest rate decisions, monetary policy statements (Fed, RBI, ECB), real-time economic calendars (CPI, GDP, PMI prints), and live sovereign yield curves across all maturities.
+	•	The AI Core Explanation: When toggled, the AI engine stress-tests your specific portfolio configurations against systemic macro shifts and interest rate cycles.
+	•	English AI Output: "Core inflation rose by 0.4%. Activating defensive construction: rotating 6% of active capital out of long-bonds into sovereign gold and short-duration floating notes."
+	•	Hindi AI Output: "कोर महंगाई 0.4% बढ़ी है। तुरंत सुरक्षा घेरा (Hedge) बनाने के लिए: 6% कैपिटल को सॉवरेन गोल्ड और शॉर्ट-टर्म डेट इंस्ट्रूमेंट्स में री-एलोकेट किया जा रहा है।"
+4. 💱 CURRENCY SECTION (Forex Matrix & Capital Velocity)
+	•	The Standalone Terminal View: Features a real-time spot currency matrix (USD/INR, EUR/USD), Dollar Index (DXY) charts, daily FII & DII net inflows/outflows, and currency forward curves.
+	•	The AI Core Explanation: When toggled, the sub-engines automatically map currency depreciation risks directly onto individual company profit margins (exporters vs. importers).
+	•	English AI Output: "Local currency depreciated by 18 paise against USD. Terminal suggests increasing allocation in export-heavy sectors (IT/Pharma) by 4% to capture net forex gains."
+	•	Hindi AI Output: "लोकल करेंसी USD के मुकाबले 18 पैसे कमजोर हुई है। टर्मिनल फॉरेक्स मुनाफे का लाभ उठाने के लिए एक्सपोर्ट-ओरिएंटेड सेक्टर्स (IT/Pharma) में निवेश 4% बढ़ाने की सलाह देता है।"
+
+🛡️ The Ironclad Verification & Trust Standard
+	•	No Bare Scores: NXANCE LM completely eliminates opaque metrics. Click any trend line, data point, or recommendation, and the terminal opens an Evidence Trail displaying the exact raw source data, underlying mathematical calculations, and historical citations used.
+	•	Defined Operational Guardrails: The 18+ mini-engines function inside strict risk-control parameters. The system is blocked from displaying unverified speculation or emotional bias, keeping all insights locked to empirical mathematical evidence.
+	•	Plain-Language Synthesis: Institutional-grade depth is stripped of dense corporate jargon and delivered in clear language, acting as your most trusted, elite human co-analyst.
+ 
+
+Figure 7. NxanceLM layered architecture: perception, knowledge, reasoning, generation/expression and guard/action functions.
+10.1 Mini-engine layers
+Layer
+Mini-engines
+Purpose
+Perception
+01 Intent & Understanding; 02 Tokenizer & Encoder
+Understand user intent and encode finance/Hinglish inputs.
+Knowledge
+03 Knowledge & Retrieval; 14 Memory & Context
+Ground responses in live engine data, finance/macroeconomic corpus and authorized user context.
+Reasoning
+04 Reasoning Core; 05 Research & Analysis; 09 Behaviour Tracking
+Synthesize retrieved facts and provide controlled helper signals.
+Generation
+06 Explainability; 07 Report Card; 08 Market Chat; 10 Daily Reporting
+Turn engine facts into understandable outputs.
+Guard
+11 Number Verification; 12 Safety/Boundary; 13 Quantum Acceleration; 18 Self-Evaluation
+Prevent unsupported numbers/boundary breaches; evaluate quality; experimental acceleration.
+Expression / Action
+15 Multilingual/Hinglish; 16 Voice; 17 Proactive Alerts
+Accessible delivery and behaviour-timed communication.
+
+10.2 Retrieval-grounded response path
+entry point: tappable terminal screen (direct live-data view, e.g. Market) OR user chat message → if terminal screen: render live data directly — no reasoning pipeline required → if chat message: intent detection → if build/diagnose intent: route to Health Check / Construction engine → else: retrieve authorized live engine + knowledge context → reason/synthesize → safety boundary pass → number verification against computed-values ledger → language/expression rendering → memory/evaluation logging (subject to consent/retention)
+
+10.3 Anti-hallucination architecture
+•  RAG grounds words. Factual claims should trace to retrieved data/evidence rather than frozen model memory.
+•  Number Guard grounds digits. All user-visible quantitative tokens must match ledger values or approved retrieved facts with provenance.
+•  Safety/Boundary Guard. Portfolio build/analysis intent routes to deterministic engine workflows; advice/regulated boundaries can be policy-gated.
+•  Self-evaluation. Source proposes nightly/frozen benchmarks, hallucination tracking and feedback loops; release gates must prevent regressions.
+10.4 MVP model versus own-model R&D
+Stage
+Source position
+Technical interpretation
+MVP
+TinyLlama-class temporary placeholder + real intent/explanation/report/chat/Number Guard/Safety scaffolding.
+Core trust and engine integration can ship before training a proprietary foundation model.
+Phase 1
+Custom tokenizer + from-scratch model target; RAG + memory; source mentions ~7B target.
+Treat as separately benchmarked model program with explicit compute/data/legal gates.
+Later
+Hybrid Transformer + Mamba + MoE, behaviour, research, quantum; source mentions 40-70B and a longer-horizon trillion-parameter ambition.
+R&D destination, not a dependency for the 18-month core product unless separately funded and proven.
+
+Runway protection recommendation
+Do not tie Health Check/Construction correctness, regulatory launch or revenue milestones to completion of frontier-scale from-scratch pretraining. The deterministic engines, RAG/guards and a replaceable model interface should remain independently shippable.
+
+11  Explainability, Number Guard and Auditability
+
+Figure 8. Computed-values ledger, NxanceLM generation, Number Guard verification and audit linkage.
+11.1 Computed-values ledger
+The Construction and Health Check sources explicitly define a computed-values ledger with provenance IDs. The schema below is a normalized implementation contract derived from that requirement; exact storage representation remains OPEN.
+Field
+Meaning
+run_id / snapshot_id
+Binds value to a specific portfolio/profile/data cut.
+engine_id + version
+Which deterministic or model service produced it.
+metric / value / unit
+Raw numeric result and unit.
+display_value / rounding policy
+Permitted user-facing representation.
+formula/model version
+Reproducibility reference.
+input_data_version
+Market/user data provenance.
+evidence refs
+Source instrument, rule, retrieved data or calculation inputs.
+timestamp / validity
+When computed and when it may be considered stale.
+regulatory/suitability tags
+Whether value can be used in a user-facing proposal in current mode.
+
+11.2 Number Guard
+For every numeric token n in an NxanceLM output:     require a matching approved ledger/retrieval value v within the metric-specific rounding tolerance.     if no match -> BLOCK the sentence/message and regenerate using injected verified value.  User-visible number → provenance ID → engine output → formula/model version → input snapshot → source data
+
+The source places a Rust verifier on this correctness-critical path and describes verification as microsecond-scale. Production acceptance testing should measure actual latency and false-block / false-pass rates rather than treating that performance claim as guaranteed. [S3-S5]
+11.3 Compliance & Audit Engine
+Sub-26 is defined as an append-only reconstruction layer: which engines ran, scores, selected/rejected rationale, suitability mapping, disclosures, user approvals and executed orders. It also acts as a gate before proposals reach the user and supports a proposal-only mode until regulated execution/advice is enabled. [S3-S4]
+Audit object
+Minimum evidence
+Input snapshot
+User/profile version, portfolio version, market-data cut, consent/regulatory mode.
+Engine trace
+Engine list, versions, timings, failures/fallbacks.
+Decision trace
+Scores, gates, constraints, candidate set, rejection reasons, aggregate verdict.
+LLM trace
+Model/prompt/policy version, retrieval refs, Number Guard result. Do not store hidden reasoning; store auditable evidence/rationale.
+Proposal
+User-facing output, disclosures, suitability status and expiry.
+Approval
+Explicit user action, timestamp, device/session evidence as permitted.
+Execution
+Idempotency key, order lifecycle, broker/payment refs, reconciliation.
+Post-outcome
+Actual result, calibration / peer update linkage, complaints if any.
+
+11.4 Explainable Rejection Log
+The source refers to an Explainable Rejection Log for reviewing why instruments were rejected and for re-tuning layer weights. It does not provide a final schema. Recommended fields: instrument, candidate set, relevant layer scores, hard-gate result, aggregate FIT, competing alternatives, decision version, reviewer action and effective change date. Treat this as an OPEN implementation decision, not a source-complete subsystem.
+12  Regulatory Feature-Gating
+The financial and grant materials treat analytics, research recommendations, personalised advice and execution as different regulatory/partner states. The technical architecture should therefore enforce the boundary in feature entitlements and orchestration, not rely on a disclaimer alone. [S1, S6-S8]
+
+Figure 9. Regulatory mode gates across analytics, research, personalised advice and execution.
+Mode
+Product capability
+Required technical control
+A - Analytics / education
+Historical analysis, portfolio facts, generic education, diagnostics within approved wording.
+Policy mode, disclosures, no prohibited personalised action path.
+B - Research recommendation
+Research methodology and recommendations where legally permitted.
+Research governance, conflicts, AI-use disclosure, records, approved content scope.
+C - Personalised advice
+Suitability-based recommendation to an identified user.
+KYC/risk/suitability, agreements, recordkeeping, adviser/legal approval and appropriate registration/partner status.
+D - Execution / broker integration
+Real-money mandate/order.
+Explicit consent, segregation, partner/broker controls, idempotent execution state machine, reconciliation and full audit.
+
+12.1 Recommended technical feature flags
+regulatory_mode = ANALYTICS | RESEARCH | PERSONALISED_ADVICE | EXECUTION  personalised_advice_enabled = false execution_enabled = false research_recommendation_enabled = false  Every proposal carries required_mode. Orchestrator blocks render/execute if current mode < required_mode.
+
+The feature-flag mechanics above are a technical recommendation aligned with the source gating model; the exact legal classification of each feature must be confirmed by qualified counsel and the chosen regulated-partner structure.
+13  Security, Privacy and Data Governance
+Portfolio holdings, transaction history, behavioural telemetry and suitability data are high-sensitivity product data. Prior grant materials specify data minimisation, access control, encrypted backup, logging, independent assessment and a zero-open-critical-findings gate before paid pilot. [S6]
+13.1 Required control domains
+Domain
+Baseline requirement
+Identity & access
+MFA for privileged users, least privilege, RBAC/ABAC, short-lived service credentials.
+Encryption
+TLS in transit; encrypted databases/object storage/backups; managed key rotation policy.
+Secrets
+Vault/Doppler or equivalent; never stored in source or client bundles.
+Data minimisation
+Collect only data required for product/regulatory purpose; separate optional telemetry consent.
+PII / financial segregation
+Logical separation, field-level controls where warranted, sanitized lower environments.
+Audit logging
+Immutable security/admin/decision events; monitor privileged and data-export actions.
+Application security
+SAST/dependency scanning, VAPT, secure SDLC, rate limits, upload validation, SSRF/file-parser controls.
+Model/RAG security
+Prompt-injection controls, retrieval authorization, source allowlists, no cross-user context leakage.
+Backups & recovery
+Encrypted backups, restore tests and explicit RPO/RTO.
+Incident response
+Severity model, escalation, containment, user/regulatory notification playbooks as applicable.
+Vendor risk
+Data/API/cloud/security review, DPDP/contract terms, subprocessor inventory.
+Privacy lifecycle
+Consent, retention, deletion, access request and purpose limitation.
+
+13.2 Security gates by milestone
+Phase
+Security / compliance gate from source roadmap
+M1-3 Foundation
+Legal opinion, privacy map, disclosure model; baseline architecture/data controls.
+M4-6 Alpha
+First VAPT, incident plan, KYC design; close critical issues before broader pilot.
+M7-9 Closed Beta
+Agreements, recordkeeping, data licences, model monitoring and support controls.
+M10-12 Public V1
+Production VAPT, vendor reviews, complaints/audit processes.
+M13-15 Simulation Alpha
+Model-risk framework, scenario validation and explainability.
+M16-18 Institutional Scale
+ISO/SOC readiness and advanced security review.
+
+13.3 Open security NFRs
+•  RPO/RTO targets.
+•  Production availability target and maintenance window.
+•  Data residency requirement.
+•  Retention periods by data class.
+•  Backup retention and restore-test frequency.
+•  Encryption key ownership/rotation frequency.
+•  Privileged access review cadence.
+•  Pen-test cadence after public launch.
+•  Institutional tenant isolation model.
+14  Infrastructure, DevOps and MLOps
+14.1 Target technology responsibilities
+Technology
+Source-defined / normalized responsibilities
+Python 3.11+
+Quant analytics, ML, forecasting, allocation, research, RAG, most engine logic.
+Rust
+Latency/correctness critical calculation paths, scoring aggregation, Monte Carlo/backtest kernels, tokenizer and Number Guard.
+Go
+DAG orchestration, execution/order, payments, notifications, high-concurrency I/O, event consumers/gateway.
+TypeScript
+React Native / web/admin interfaces and shared API contracts.
+PostgreSQL / Supabase
+Users, portfolios, goals, approvals and transactional product data.
+TimescaleDB / time-series store
+Price/NAV and derived time-series history.
+Redis
+Hot precomputed score/cache, session/short-lived orchestration state.
+Qdrant / pgvector
+RAG embeddings and retrieval index.
+Kafka / NATS
+Event backbone for drift, telemetry, analysis results and asynchronous audit/notifications.
+gRPC + protobuf
+Internal engine/service contracts; REST/GraphQL at application edge.
+
+14.2 Deployment progression
+•  Start simple. The technical source explicitly says Docker Compose / one substantial VM is acceptable early. Do not create dozens of operational microservices just to match the target diagram.
+•  Extract by pressure. Rust calculation/Number Guard, AI serving, orchestrator and execution are natural early extraction candidates due to correctness/latency/independent scaling.
+•  Kubernetes later. Move to Kubernetes when service count, traffic, release independence and institutional requirements justify the operational cost.
+14.3 Observability
+Signal
+Minimum observability
+Request trace
+One trace id through upload/question flow, orchestration, engine calls, ledger, LLM and response.
+Engine timing
+Per-engine start/end/deadline/fallback; identify where the <10s budget was spent.
+Data health
+Freshness, missing vendors, parse failures, stale caches, data-quality check outcomes.
+Decision health
+Gate rates, rejected candidates, calibration drift, fallback use, score distributions.
+AI health
+Retrieval hit rate, Number Guard block rate, hallucination/eval metrics, latency/token usage.
+Business/pilot
+Upload success, Health Check completion, report view, Sandbox use, approval/payment/retention.
+Security
+Auth failures, admin/export activity, unusual data access, secret/token anomalies.
+
+14.4 MLOps and model evaluation
+The source mentions MLflow / Weights & Biases, vLLM/TensorRT-LLM, DeepSpeed/Megatron and staged model evolution. Production should maintain versioned datasets, model registry, immutable evaluation reports and rollback capability. Model promotion must never bypass deterministic guard tests or suitability/regulatory tests.
+15  Performance, Reliability and Cost-Leverage
+15.1 Source performance target
+Both Health Check and Construction blueprints use an under-10-second target for the interactive analysis/build path. Sub-20 Speed & Orchestration owns the parallel DAG, per-stage budgets and graceful degradation. Data Intelligence precomputes expensive reusable features nightly and serves them hot. [S3-S4]
+Technique
+Performance effect
+Failure behaviour
+Nightly precompute
+Moves universe-wide scoring out of request time.
+Use last valid timestamped cache within approved freshness; otherwise fail clearly.
+Parallel DAG
+Runs independent quant/risk/correlation work concurrently.
+Per-stage deadlines and partial/fallback policy must be explicit.
+Rust hot path
+Reduces latency in scoring, risk, Monte Carlo/backtest and Number Guard.
+Python/reference implementation remains useful for correctness testing.
+Redis cache
+Hot scores and reusable context.
+Cache invalidation keyed by data/version; no silent stale mix.
+MVO fallback
+Always-available classical optimizer.
+Quantum timeout/noise returns classical solution.
+Asynchronous audit
+Keeps append-only writes off the critical response path.
+Durable event/retry; proposal should not be considered fully committed until audit event is acknowledged.
+
+15.2 Reliability semantics to specify
+•  What happens if one non-critical engine times out?
+•  Which engines are mandatory for a valid Health Check / Construction result?
+•  Maximum acceptable data staleness by metric.
+•  Whether a cached prior result can be shown during an outage and how it is labelled.
+•  Idempotency and exactly-once expectations for approvals/orders.
+•  Maximum report generation latency separate from quant computation.
+•  Institutional API timeout and retry contract.
+15.3 Cost leverage
+The technical source argues that precomputation turns per-user build cost into cached reads plus short shared CPU/GPU work, while premium data feeds become the larger scaling cost. The company financial workbook, however, budgets technology and AI at a materially larger company-wide level because it also includes team, AI/LLM work, APIs, compute and scaling over 18 months. These two views are not contradictory: one is marginal runtime economics; the other is total program cost. [S1, S3-S5]
+16  Testing, Validation and Model Governance
+16.1 Test pyramid
+Test class
+Minimum coverage
+Known-answer unit tests
+XIRR, FV, overlap, HHI, VaR/CVaR, drawdown, tax, FIT normalization, switching-cost calculations.
+Property/invariant tests
+Weights sum/bounds, fraud/suitability veto cannot be bypassed, no negative quantities, ledger matches outputs.
+Data-quality tests
+Identifier mapping, corporate actions, stale/duplicate/missing data, parser reconciliation to statement totals.
+Contract tests
+Every engine implements stable request/response, version, provenance and error semantics.
+Pipeline integration
+Locked Health Check/Construction journey across data, orchestration, guards, reports and audit.
+Historical/backtest
+Defined crisis periods, recovery, benchmark comparisons; prevent look-ahead/survivorship leakage.
+Optimization shoot-out
+Classical baseline vs simulated annealing/QAOA; exact scoring and deterministic constraints.
+LLM/RAG evaluation
+Grounding, retrieval, instruction/boundary adherence, multilingual quality, prompt injection, cross-user isolation.
+Number Guard
+Adversarial generated numeric strings, currency/percent/date rounding, unsupported numbers must block.
+Security
+SAST/SCA, VAPT, authZ, upload parsers, API abuse, secrets, tenant/user isolation.
+Pilot validation
+Task success, comprehension, activation, repeat use, payment evidence, complaints and qualitative failure analysis.
+
+16.2 Model governance
+•  Version everything. Model, prompt/policy, retrieval index, feature set, score weights, rule tables and datasets.
+•  Frozen benchmark. Do not promote a model/engine because it “looks better”; require pre-defined benchmark improvement without regression on critical safety metrics.
+•  Calibration review. Health Score/FIT/peer and behaviour model weights require drift monitoring and scheduled review.
+•  Human review. Source roadmap explicitly includes human review in Alpha; define escalation and override logging.
+•  No hidden-rationale dependency. Audit should store traceable evidence, calculations and decision rationale, not depend on opaque model chain-of-thought.
+16.3 Release gates
+Gate
+Must be true before release
+Quant correctness
+Known-answer and invariant suites green; no unresolved high-severity calculation defects.
+Data
+Freshness/quality thresholds met; vendor rights approved.
+AI
+Frozen benchmark passes; Number Guard and boundary suite green.
+Security
+No open critical findings; required VAPT/security review complete.
+Regulatory
+Feature wording/mode approved; suitability/consent/record controls active for enabled capabilities.
+Operations
+Monitoring, rollback, backup/restore and incident runbook tested.
+
+17  18-Month Technical Delivery Roadmap
+The following roadmap consolidates the Milestone and Regulatory sheet with the architecture staging in the engine/AI blueprints. Business/user targets are management planning targets, not achieved results. [S1]
+Phase
+Technical build
+Control gate
+Management KPI
+M1-3 Foundation
+Portfolio import, Health Score, analytics engine, admin QA; Data Intelligence foundation; simplified deterministic Selection/quant core.
+Legal opinion, privacy map, AI disclosure boundary.
+100 interviews / 30-50 testers.
+M4-6 Alpha
+Risk profiling, suitability, Monte Carlo, human review; full trust layer, backtesting, tax, Number Guard; first modular service extraction.
+SEBI-readiness design, KYC design, first VAPT, incident plan.
+100+ analyses; 40% repeat target.
+M7-9 Closed Beta
+Payments, recommendation flow, model monitoring, support; behaviour telemetry v1; controlled execution integration remains gated.
+Agreements, recordkeeping, disclosures and data licences.
+300-500 users; 25-50 paying target.
+M10-12 Public V1
+Production-scale monitoring/reporting; full Selection parameter packs; robust observability; public SaaS scaling.
+Production VAPT, vendor reviews, complaints/audit process.
+1,000+ users; recurring revenue target.
+M13-15 Simulation Alpha
+Market replay, synthetic scenarios, behavioural agents, stress testing; deeper Q-Core experiments.
+Model-risk framework, scenario validation/explainability.
+2 design partners.
+M16-18 Institutional Scale
+Advisor/simulation platform, APIs, enterprise dashboards, tenant controls, institutional pilots.
+ISO/SOC readiness and advanced security review.
+3 institutional pilots; 5,000-user target.
+
+17.1 Architecture migration gates
+When
+Migration decision
+Before Alpha
+Stable internal engine contracts; computed-values ledger and audit event schema established.
+Alpha -> Closed Beta
+Extract correctness-critical Number Guard/calc services if needed; introduce durable event backbone; production-like staging.
+Closed Beta -> Public V1
+Scale data pipelines/caches, isolate AI serving, enforce production SLOs/security controls.
+Public V1 -> Simulation
+Separate simulation workloads from transactional path; model-risk governance and reproducible scenario datasets.
+Institutional
+Tenant isolation, enterprise auth/API governance, stronger audit/export, security assurance and contractual SLOs.
+
+18  Team and Engineering Operating Model
+The financial workbook provides a staged hiring plan. This section maps the source roles to accountable technical areas rather than inventing a new organization chart. [S1]
+Role / source timing
+Primary ownership
+CTO / founders - M1
+Architecture decisions, integration standard, code/review quality, security delivery and technical roadmap.
+Quant - Health Check - M1
+Health Score, gap logic, XIRR/goal math, diagnostic calibration, replacement evidence.
+Quant - Construction - M1
+Allocation, Selection/FIT, MVO/risk, backtesting, optimization and class parameter packs.
+ML Engineer - M1
+Forecasting, behaviour models, data-science features, evaluation pipelines.
+AI Engineer - M1
+NxanceLM/RAG/guards integration, model serving, multilingual/reporting pipeline.
+Backend Engineer 1 - M2
+API, canonical model, orchestration/product integration.
+Frontend Engineer - M2
+Web/mobile user journeys, reports, dashboard, Sandbox.
+Backend Engineer 2 - M5
+Scale, event services, integrations, execution/order support.
+QA/Test Engineer - M5
+Known-answer, integration, regression, pilot QA and release evidence.
+Cybersecurity/DevOps - M5
+CI/CD, infrastructure, security monitoring, VAPT remediation, backup/DR.
+Compliance Officer - M9
+Operational controls, records, feature-mode governance, complaints/audit coordination.
+Tech Research - M10
+Advanced simulation/quantum/model R&D and benchmark evidence.
+
+18.1 Ownership model
+•  Engine owner. Each engine has one accountable owner for specification, code, tests, calibration and monitoring.
+•  Independent validation. Quant/model changes receive review from a second owner or research/compliance function before release.
+•  Evidence package. Every milestone has test evidence, benchmark report, security status and pilot metrics - matching the grant-governance direction in prior materials.
+•  ADR governance. Architecture and calibration decisions are versioned and signed off rather than living only in code or slide decks.
+19  Technical Budget Mapping
+This section uses the supplied 18-month management financial model. It does not replace the workbook; it maps the model to technical workstreams and highlights architectural implications. [S1]
+Financial metric
+Management model
+Recommended funding ask
+~Rs 12.49 Cr
+18-month operating burn
+~Rs 11.10 Cr
+Contingency (12%)
+~Rs 1.33 Cr
+Technology & AI use of funds
+Rs 345.3 lakh (~Rs 3.453 Cr; ~27.7% of ask)
+Investment & research
+Rs 294.5 lakh (~Rs 2.945 Cr; ~23.6%)
+Peak month-18 cash use
+~Rs 76.91 lakh/month
+Gross 18-month subscription revenue scenario
+Rs 76.05 lakh; treated as upside and not netted against the ask
+Exit headcount capacity
+40
+Exit monthly payroll/team cost
+~Rs 37.85 lakh
+
+19.1 Confirmed Pricing and Subscriber Milestones (Sep 2026 financial sheet)
+The latest official financial sheet (Sep 2026) confirms the Section 19 budget figures above and adds subscription-pricing and milestone detail not present in earlier source materials. Founder-confirmed, current figures: one-time Health Check unlock ₹99; Plan 1 Starter ₹399/month (2 portfolios, Health Check + Construction, 7-8 sub-engines, limited NxanceLM); Plan 2 Growth ₹899/month (2-5 portfolios, 10-15 sub-engines, rebalancing nudges, execution, priority queue); Plan 3 Pro ₹1,499/month (5-10 portfolios, all 26+ sub-engines, unlimited NxanceLM, fastest queue, priority support, early access). Subscriber milestones: 75 paying subscribers by month 5, 600 by month 12, 2,200 by month 18. Gross 18-month subscription revenue estimate is ₹76.05 lakh, kept as upside and not netted against the funding ask.
+19.2 Technology cost logic
+The workbook includes server/cloud, AI/LLM, larger AI compute, APIs and the engineering/AI/quant team over the runway. The engine blueprints separately describe much lower early runtime infrastructure sketches. Do not compare those as like-for-like: the financial model is total program cash planning; the blueprint sketches are marginal/early infrastructure estimates.
+Technical investment
+Why it exists
+Cost control principle
+Data + APIs
+Market/fund/security/reference data powers every deterministic engine and RAG.
+Stage premium feeds; contract for rights/freshness before scaling.
+Cloud / application
+Product/API/database/monitoring and burst workloads.
+One production shape early; scale based on measured load.
+GPU / AI compute
+Model evaluation/serving, ML training and optional quantum simulation.
+Shared capacity early; do not buy frontier-scale training before milestone gate.
+Engineering/quant team
+Correctness, product, security, ML, QA and operations.
+Prioritize shared platform + trust layer before edge R&D.
+Security/compliance
+VAPT, controls, auditability, legal/regulatory readiness.
+Release gate, not optional overhead.
+
+Budget-to-architecture implication
+The financial model can support a serious engineering program, but the highest leverage is sequencing: deterministic trust layer + data + core product first; advanced model/quantum/simulation spend follows evidence gates. This reduces the risk that R&D consumes runway before the paid product is stable.
+
+20  Technical Risk Register
+ID
+Risk
+Severity
+Primary control
+R1
+LLM unsupported facts/numbers
+Critical
+RAG + computed-values ledger + Number Guard + safety/boundary evaluation.
+R2
+Bad/ambiguous input portfolio data
+High
+Parser reconciliation, quality rules, user confirmation, source timestamp/provenance.
+R3
+Architecture complexity outruns team
+High
+Modular monolith first, stable contracts, extract by pressure, avoid premature K8s/service sprawl.
+R4
+Quantum marketing outruns evidence
+High
+Classical baseline, benchmark shoot-out, exact re-score, classical fallback; label experimental.
+R5
+Regulatory feature breach
+Critical
+Feature modes/gates, suitability, proposal-only execution, counsel/partner approval.
+R6
+Score/model calibration drift
+High
+Frozen benchmarks, cohort calibration, review tickets, versioned weights, drift monitoring.
+R7
+Security/privacy incident
+Critical
+Least privilege, encryption, VAPT, audit logging, incident response, vendor controls.
+R8
+<10s latency not achieved
+Medium/High
+Precompute/cache, parallel DAG, Rust hot path, deadlines/fallbacks, tracing.
+R9
+Data vendor cost / licensing
+High
+Stage feeds, rights matrix, vendor redundancy, derive/cache within contract.
+R10
+From-scratch NxanceLM consumes runway
+High
+Decouple product from model program; milestone/funding gates; replaceable model interface.
+R11
+Behaviour model harms suitability
+High
+Consent, conservative use, explainability, calibration, never sole decider, human review.
+R12
+Audit cannot reproduce a prior decision
+Critical
+Immutable snapshots/versions/provenance, ledger, engine traces, deterministic replay where feasible.
+R13
+Peer intelligence causes herd feedback
+Medium/High
+Aggregate/anonymise, advisory-only signal, calibration not copy behaviour, bias monitoring.
+R14
+Execution duplicate/partial failure
+Critical
+Idempotency, order state machine, reconciliation, explicit approval and immutable order audit.
+
+21  Open Decisions for Founder Confirmation
+Decision
+What must be approved
+O1 Legal entity
+RESOLVED (founder-confirmed, Sep 2026): the current live operating entity is Nxance. Conversion to a private-limited registration is planned to happen during the funding process/close, not before. All external documents/contracts should reference "Nxance" until that conversion completes.
+O2 Current implementation inventory
+RESOLVED (founder-confirmed): the frontend prototype is complete, not the 80% figure in earlier pitch materials; backend development has not yet started and requires the funding raise to secure the engineering resources and technology needed to build it. The 50 early users referenced in pitch materials tested only the Construction engine frontend specifically — not the full Health Check flow end-to-end across all three engines as earlier materials implied.
+O3 NxanceLM delivery scope
+Confirm whether from-scratch 7B / 40-70B work is inside the 18-month funded plan or a separate R&D track.
+O4 Data vendors / rights
+Confirm production sources, update frequencies, licences and redistribution/derived-data rights.
+O5 Canonical schema
+Approve identifiers, snapshots, transactions, goals, ledger and audit schema.
+O6 NFRs
+Set uptime, RPO/RTO, latency percentile, concurrency, data freshness and report-generation SLOs.
+O7 Security architecture
+Finalize tenant/user isolation, key management, data residency, retention/deletion and privileged-access model.
+O8 Legal feature mapping
+Qualified counsel to map each UX action to analytics/research/advice/execution mode.
+O9 Selection weights
+Governance and validation policy for 16-layer class weights; who can change them, evidence required, rollback.
+O10 Health Score calibration
+Approve component weights/caps and public interpretation; validate against outcomes.
+O11 Quantum acceptance test
+Define minimum statistically meaningful improvement / latency/cost threshold over classical baseline.
+O12 Peer Intelligence
+Define minimum cohort size, anonymisation, bias checks and whether/when it may influence production scores.
+O13 Behaviour telemetry
+Consent model, feature list, retention, calibration and user-facing explanation/appeal.
+O14 Simulation product boundary
+Define who can use scenario/simulation outputs and whether they are analytics, research or advice.
+O15 Institutional API
+Tenant model, auth, rate limits, data entitlements, audit export and contractual SLOs.
+
+Approval condition
+Until these items are resolved, this document should remain “Draft / Technical Source Consolidation”. A founder-approved v1.0 should include an implementation inventory, architecture decision record list, named owners and release-gate thresholds.
+
+A  Appendix A - Health Check 26+ Engine Register
+#
+Engine
+Layer
+Runs
+Core job
+01
+Analysis Engine
+Diagnose
+Every check-in
+Find gaps and root cause.
+02
+Risk Analysis
+Diagnose
+Every check-in
+Current risk vs minimum needed.
+03
+Fraud Gate
+Diagnose
+Every check-in
+Hard checks / veto.
+04
+Behaviour Analysis
+Diagnose
+Every check-in
+Transaction timing and bias patterns.
+05
+Tax Efficiency
+Diagnose
+Every check-in
+Tax status / harvest / constraints.
+06
+Forecasting
+Diagnose
+Every check-in
+Monte Carlo trajectory / P(goal).
+07
+Guidance Engine
+Advise
+When gap found
+Safest fix-in-place vs replace.
+08
+Selection Engine
+Advise
+When replacement needed
+16-layer replacement selection + switching cost.
+09
+Backtesting
+Advise
+Before recommendation
+Stress/crash replay + hold-ability.
+10
+Analysis & Managing
+Manage
+Daily after execution
+Confirm and track.
+11
+Rebalancing
+Manage
+Event-driven
+Drift fix.
+12
+Redesigning (SIP)
+Manage
+Monthly / on-demand
+Contribution/plan redesign.
+13
+Peer Comparison
+Diagnose
+Every check-in
+Cross-validate gaps.
+14
+Goal-Drift Watchdog
+Manage
+Event-driven
+Life change -> re-analysis.
+15
+Execution & Order
+Advise/Manage
+Every action
+User-approved real orders when permitted.
+16
+User Behaviour Engine
+Supervise
+Always
+Behaviour-shaped analysis/advice/management.
+17
+Quantum Supervisor (Q-Core)
+Supervise
+Always
+Experimental global optimality/risk/min-time verification.
+18
+Own AI (NxanceLM)
+Supervise
+Always
+Sanity check/helper/reporting.
+19
+Data Intelligence
+Foundation
+Nightly + live
+Source of truth, parse, precompute.
+20
+Speed & Orchestration
+Foundation
+Every check-in
+Parallel DAG / deadlines / <10s target.
+21
+Report Card & Tracking
+Manage
+Daily/periodic
+Health grade and goal progress.
+22
+Asset Universe
+Diagnose
+Every check-in
+India/global + affordability eligibility.
+23
+Scenario Sandbox
+Advise
+On-demand
+Preview post-fix / what-if.
+24
+Number Guard
+Supervise
+Every LLM output
+Verify digits vs ledger.
+25
+Peer Intelligence
+Supervise
+Quarterly/on-demand
+Calibration vs anonymised outcomes.
+26
+Compliance & Audit
+Foundation
+Every event
+Immutable trail, suitability, disclosures, proposal-only toggle.
+
+B  Appendix B - Construction 26+ Engine Register
+#
+Engine
+Layer
+Runs
+Core job
+01
+Profile & Goal
+Build
+Once
+Risk/goal/required return/behaviour signals.
+02
+Asset Allocation
+Build
+Once + redesign
+Black-Litterman asset-class mix.
+03
+Selection Engine
+Build
+Once + rebalance
+16-layer which + separate how-much.
+04
+Constraint + Fraud
+Build
+Once
+Hard filters / veto.
+05
+Correlation
+Build
+Build + rebalance
+Diversification matrix.
+06
+MVO Optimisation
+Build
+Build + rebalance
+Classical baseline weights.
+07
+QAOA Quantum Opt
+Build
+Build + rebalance
+Experimental candidate; ships only if better.
+08
+Backtesting
+Build
+Once + loop
+Crash replay / hold-ability.
+09
+Risk Analysis
+Build
+Once + continuous
+Minimum risk that hits target.
+10
+Tax-Aware Optimiser
+Build
+Build + rebalance
+Tax-aware weight/trade nudges.
+11
+Analysis & Managing
+Manage
+Daily
+Watch/monitor.
+12
+Rebalancing
+Manage
+Event-driven
+Tax/behaviour-aware drift fix.
+13
+Redesigning (SIP)
+Manage
+Monthly/on-demand
+Contribution redesign.
+14
+Execution & Order
+Manage
+Every action
+User-approved execution if permitted.
+15
+Life-Event Adaptation
+Manage
+Event-driven
+Re-profile on goal/context change.
+16
+User Behaviour
+Supervise
+Always
+Behaviour-shape construction/management.
+17
+Quantum Supervisor (Q-Core)
+Supervise
+Always
+Experimental independent optimality/risk/min-time check.
+18
+Own AI (NxanceLM)
+Supervise
+Always
+Cross-engine helper/explanation.
+19
+Data Intelligence
+Foundation
+Nightly + live
+Single source of truth / precompute.
+20
+Speed & Orchestration
+Foundation
+Every build
+Parallel DAG / deadlines / degradation.
+21
+Multi-Goal
+Manage
+Continuous
+Allocate across multiple goals.
+22
+Scenario Sandbox
+Manage
+On-demand
+What-if full reruns.
+23
+Asset Universe & Eligibility
+Foundation
+Every build/review
+Country/global/affordability eligibility.
+24
+Number Guard
+Supervise
+Every LLM output
+Verify user-visible numbers.
+25
+Peer Intelligence
+Supervise
+Quarterly/on-demand
+Calibrate theory vs anonymised outcomes.
+26
+Compliance & Audit
+Foundation
+Every event
+Audit, suitability, disclosures, proposal-only gate.
+
+C  Appendix C - NxanceLM 18+ Mini-Engine Register
+#
+Mini-engine
+Layer
+Core job
+01
+Intent & Understanding
+Perception
+Intent/entity/language routing.
+02
+Tokenizer & Encoder
+Perception
+Finance-native tokenization; source target custom Rust BPE.
+03
+Knowledge & Retrieval (RAG)
+Knowledge
+Retrieve live engine/user/finance context.
+04
+Reasoning Core
+Reasoning
+Source target hybrid model; helper synthesis.
+05
+Research & Analysis
+Reasoning
+Multi-source analysis / clean parameter.
+06
+Explainability
+Generation
+Reconstruct why with evidence/counterfactuals.
+07
+Report Card Generator
+Generation
+Verified reports / PDFs/UI output.
+08
+Economy & Market Chat
+Generation
+General finance and global-economy chat; redirect portfolio workflows.
+09
+Behaviour Tracking
+Reasoning
+Telemetry features to shared Behaviour engines.
+10
+Daily Reporting
+Generation
+Goal-progress digests.
+11
+Number-Verification Guard
+Guard
+Every numeric output matched to source/ledger.
+12
+Safety & Boundary Guard
+Guard
+Helper-not-decider, redirects, policy/PII checks.
+13
+Quantum Acceleration
+Guard/R&D
+Experimental acceleration with classical fallback.
+14
+Memory & Context
+Knowledge
+Authorized cross-session context.
+15
+Multilingual & Hinglish
+Expression
+User-language output.
+16
+Voice (ASR + TTS)
+Expression
+Voice interface target.
+17
+Proactive Alerts & Nudges
+Action
+Behaviour-timed reminders/alerts.
+18
+Self-Evaluation & Learning
+Guard
+Nightly/frozen eval, feedback and model release evidence.
+
+.
+D  Appendix D - Quant Formula and Verification Register
+Area
+Source method
+Required verification
+Goal / required return
+Solve FV(existing + SIP, r, T) = Goal for r; numerical bisection in source design.
+Known-answer goals; infeasible branch.
+Actual portfolio XIRR
+Solve irregular dated cashflows plus current value for r.
+Known cashflow fixtures; Newton + fallback behavior.
+Risk score adjustment
+RS = weighted stated/capacity/loss/experience; behaviour adjustment in source design.
+Bounds, monotonicity, calibration review.
+Black-Litterman
+Posterior returns combine market equilibrium and uncertain views.
+Reference library cross-check; sensitivity to view confidence.
+Category normalization
+z=(x-mu_category)/sigma_category -> percentile/0-100.
+Category membership and outlier handling.
+FIT
+FIT=sum(weight_l,class * score_l), subject to hard gates.
+Weights sum; gate cannot be bypassed.
+Quantity
+Proportional seed using FIT, correlation penalty and hold-ability; refined by optimizer.
+Bounds, concentration, required return and risk.
+Overlap
+sum_h min(weight_h,A, weight_h,B).
+Known overlapping fund-holding fixtures.
+Concentration
+HHI=sum(w_i^2); effective bets = 1/HHI.
+Weight normalization.
+Cost leak
+Counterfactual expense/cost difference compounded over actual holding period.
+Direct/regular pairs, date correctness.
+VaR/CVaR/MDD
+Parametric & historical VaR, expected shortfall, max drawdown.
+Reference samples; tail behavior.
+Goal probability
+Fraction of Monte Carlo paths reaching Goal; source uses 10,000 paths.
+Seed/reproducibility, interval, stress calibration.
+MVO
+min w^T Sigma w s.t. expected return >= required, bounds and sum weights=1.
+Feasibility and solver cross-check.
+Switching-cost rule
+Replace only when expected benefit > exit load + tax + transaction cost + safety margin.
+Boundary fixtures, no-churn cases.
+Behaviour hold-ability
+H_i = 1 - P(panic-sell | archetype, drawdown profile), clipped in source design.
+Calibration, fairness, no sole-decision effect.
+Peer calibration
+CE=E[actual-predicted XIRR | segment].
+Minimum cohort/privacy, drift thresholds.
+QUBO/QAOA
+Binary subset/constraint formulation; experimental solver candidate.
+Classical baseline, exact re-score, timeout fallback.
+Number Guard
+Every output number maps to approved value within metric rounding tolerance.
+Adversarial formatting, currency, percent/date tests.
+
+Formula governance
+Several formulas in the source blueprints include example coefficients/thresholds. Treat those as design parameters until they have documented data provenance, calibration evidence, owner approval and effective version. Mathematical correctness does not by itself establish suitability or predictive validity.
+
+
+
+Technical architecture principle
+Data → deterministic financial intelligence → collective decision logic → traceable AI explanation → compliance / user approval.
+No single model decides alone. Every material number and recommendation is designed to be reconstructable.

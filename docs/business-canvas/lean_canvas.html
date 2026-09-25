@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Nxance — Lean Canvas</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+  :root{
+    --navy:#0B1F3A;
+    --blue:#1A6BFF;
+    --cyan:#00D4FF;
+    --paper:#F7F9FC;
+    --card:#FFFFFF;
+    --line:#D9E2F1;
+    --muted:#5B6B85;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    padding:32px;
+    background:var(--paper);
+    font-family:'Inter',sans-serif;
+    color:var(--navy);
+  }
+
+  .sheet{
+    max-width:1400px;
+    margin:0 auto;
+    background:var(--card);
+    border:2px solid var(--blue);
+    border-radius:14px;
+    padding:28px;
+    box-shadow:0 20px 50px rgba(26,107,255,0.08);
+  }
+
+  .header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding-bottom:20px;
+    margin-bottom:22px;
+    border-bottom:1px solid var(--line);
+  }
+  .header-left{display:flex;align-items:center;gap:16px;}
+  .header-left img{height:52px;width:auto;display:block;}
+  .header-title{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-size:13px;
+    font-weight:600;
+    color:var(--muted);
+    letter-spacing:0.01em;
+    border-left:1px solid var(--line);
+    padding-left:16px;
+  }
+  .header-title span{display:block;color:var(--navy);font-size:15px;font-weight:700;margin-top:2px;}
+  .header-right{
+    font-size:12px;
+    color:var(--muted);
+    text-align:right;
+    line-height:1.5;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns: 1.05fr 1.05fr 1.15fr 1.05fr 1.05fr;
+    grid-template-rows: auto auto auto;
+    gap:10px;
+  }
+
+  .box{
+    background:#FBFCFE;
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:14px 16px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+
+  .box h3{
+    margin:0;
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-size:14px;
+    font-weight:700;
+    color:var(--blue);
+  }
+  .box .tag{
+    font-size:10.5px;
+    font-weight:600;
+    color:var(--cyan);
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    margin-top:-6px;
+  }
+
+  .box p, .box li{
+    font-size:12.3px;
+    line-height:1.5;
+    color:#2A3A55;
+    margin:0;
+  }
+  .box ul{
+    margin:0;
+    padding-left:16px;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+  .box .stat{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:800;
+    color:var(--navy);
+  }
+  .box .sub{
+    font-size:11px;
+    font-weight:700;
+    color:var(--navy);
+    margin-top:4px;
+  }
+
+  /* Grid placement to mirror the reference template */
+  .problem{grid-column:1; grid-row:1;}
+  .alternatives{grid-column:1; grid-row:2/4; background:#F1F5FE;}
+  .solution{grid-column:2; grid-row:1;}
+  .metrics{grid-column:2; grid-row:2/4;}
+  .uvp{grid-column:3; grid-row:1/4; align-items:flex-start; background:linear-gradient(180deg,#0B1F3A 0%,#123069 100%); border-color:#0B1F3A;}
+  .uvp h3{color:var(--cyan);}
+  .uvp .tag{color:#8FD9FF;}
+  .uvp p, .uvp li{color:#E7EEFB;}
+  .uvp .headline{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:800;
+    font-size:16.5px;
+    line-height:1.35;
+    color:#fff;
+    margin:2px 0 4px 0;
+  }
+  .advantage{grid-column:4; grid-row:1;}
+  .channels{grid-column:4; grid-row:2/4;}
+  .segments{grid-column:5; grid-row:1/4;}
+  .cost{grid-column:1/4; grid-row:4;}
+  .revenue{grid-column:4/6; grid-row:4;}
+
+  .bottom-row{margin-top:10px;}
+
+  .pill{
+    display:inline-block;
+    font-size:10.5px;
+    font-weight:600;
+    padding:2px 8px;
+    border-radius:20px;
+    background:#EAF2FF;
+    color:var(--blue);
+    margin:2px 4px 0 0;
+  }
+  .uvp .pill{background:rgba(0,212,255,0.15); color:#8FD9FF;}
+
+  .divider{height:1px;background:var(--line);margin:2px 0;}
+  .uvp .divider{background:rgba(255,255,255,0.15);}
+
+  .footer{
+    margin-top:18px;
+    display:flex;
+    justify-content:space-between;
+    font-size:10.5px;
+    color:var(--muted);
+    padding-top:12px;
+    border-top:1px solid var(--line);
+  }
+</style>
+</head>
+<body>
+  <div class="sheet">
+    <div class="header">
+      <div class="header-left">
+        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/4QC8RXhpZgAASUkqAAgAAAAGABIBAwABAAAAAQAAABoBBQABAAAAVgAAABsBBQABAAAAXgAAACgBAwABAAAAAgAAABMCAwABAAAAAQAAAGmHBAABAAAAZgAAAAAAAABgAAAAAQAAAGAAAAABAAAABgAAkAcABAAAADAyMTABkQcABAAAAAECAwAAoAcABAAAADAxMDABoAMAAQAAAP//AAACoAMAAQAAAPQBAAADoAMAAQAAAPQBAAAAAAAA/+EPC2h0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8APD94cGFja2V0IGJlZ2luPSfvu78nIGlkPSdXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQnPz4KPHg6eG1wbWV0YSB4bWxuczp4PSdhZG9iZTpuczptZXRhLyc+CjxyZGY6UkRGIHhtbG5zOnJkZj0naHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyc+CgogPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9JycKICB4bWxuczpBdHRyaWI9J2h0dHA6Ly9ucy5hdHRyaWJ1dGlvbi5jb20vYWRzLzEuMC8nPgogIDxBdHRyaWI6QWRzPgogICA8cmRmOlNlcT4KICAgIDxyZGY6bGkgcmRmOnBhcnNlVHlwZT0nUmVzb3VyY2UnPgogICAgIDxBdHRyaWI6Q3JlYXRlZD4yMDI2LTAxLTI2PC9BdHRyaWI6Q3JlYXRlZD4KICAgICA8QXR0cmliOkRhdGE+eyZxdW90O2RvYyZxdW90OzomcXVvdDtEQUctcTRRX3VUWSZxdW90OywmcXVvdDt1c2VyJnF1b3Q7OiZxdW90O1VBRnNENFJ1MC1VJnF1b3Q7LCZxdW90O2JyYW5kJnF1b3Q7OiZxdW90O1Byb3NvZnQmIzM5O3MgQ2xhc3MmcXVvdDt9PC9BdHRyaWI6RGF0YT4KICAgICA8QXR0cmliOkV4dElkPmQ4YjA4ODZhLTMxYzAtNDJhMC04Y2I0LWQ5ZGQ2MTY5NWUxZTwvQXR0cmliOkV4dElkPgogICAgIDxBdHRyaWI6RmJJZD41MjUyNjU5MTQxNzk1ODA8L0F0dHJpYjpGYklkPgogICAgIDxBdHRyaWI6VG91Y2hUeXBlPjI8L0F0dHJpYjpUb3VjaFR5cGU+CiAgICA8L3JkZjpsaT4KICAgPC9yZGY6U2VxPgogIDwvQXR0cmliOkFkcz4KIDwvcmRmOkRlc2NyaXB0aW9uPgoKIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PScnCiAgeG1sbnM6ZGM9J2h0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvJz4KICA8ZGM6dGl0bGU+CiAgIDxyZGY6QWx0PgogICAgPHJkZjpsaSB4bWw6bGFuZz0neC1kZWZhdWx0Jz5CbHVlIFJlZCBDb3Jwb3JhdGUgTW9kZXJuIFN0b2NrIFRyYWRlIEZpbmFuY2UgTG9nbyAtIDk8L3JkZjpsaT4KICAgPC9yZGY6QWx0PgogIDwvZGM6dGl0bGU+CiA8L3JkZjpEZXNjcmlwdGlvbj4KCiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0nJwogIHhtbG5zOnBkZj0naHR0cDovL25zLmFkb2JlLmNvbS9wZGYvMS4zLyc+CiAgPHBkZjpBdXRob3I+UmFnaGF2IEtyaXBhc3RoYXlhOTk5PC9wZGY6QXV0aG9yPgogPC9yZGY6RGVzY3JpcHRpb24+CgogPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9JycKICB4bWxuczp4bXA9J2h0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8nPgogIDx4bXA6Q3JlYXRvclRvb2w+Q2FudmEgKFJlbmRlcmVyKSBkb2M9REFHLXE0UV91VFkgdXNlcj1VQUZzRDRSdTAtVSBicmFuZD1Qcm9zb2Z0JiMzOTtzIENsYXNzPC94bXA6Q3JlYXRvclRvb2w+CiA8L3JkZjpEZXNjcmlwdGlvbj4KPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKPD94cGFja2V0IGVuZD0ndyc/Pv/bAEMABgQFBgUEBgYFBgcHBggKEAoKCQkKFA4PDBAXFBgYFxQWFhodJR8aGyMcFhYgLCAjJicpKikZHy0wLSgwJSgpKP/bAEMBBwcHCggKEwoKEygaFhooKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKP/AABEIAfQB9AMBIgACEQEDEQH/xAAfAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgv/xAC1EAACAQMDAgQDBQUEBAAAAX0BAgMABBEFEiExQQYTUWEHInEUMoGRoQgjQrHBFVLR8CQzYnKCCQoWFxgZGiUmJygpKjQ1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4eLj5OXm5+jp6vHy8/T19vf4+fr/xAAfAQADAQEBAQEBAQEBAAAAAAAAAQIDBAUGBwgJCgv/xAC1EQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/APqTyIf+eUf/AHyKT7PD/wA8Y/8AvkVLRQBF9nh/54x/98ij7PD/AM8Y/wDvkVLRQBF9nh/54x/98ij7PD/zxj/75FS0UARfZ4f+eMf/AHyKPs8P/PGP/vkVLRQBF9nh/wCeMf8A3yKPs8P/ADxj/wC+RUtFAEf2eH/njH/3yKT7PD/zxj/75FS0UAR+RD/zyj/75FJ9nh/54x/98ipaKAIvs8H/ADxj/wC+BR9nh/54x/8AfIqWigCL7PD/AM8Y/wDvkUfZ4f8AnjH/AN8ipaKAI/Ih/wCeUf8A3yKT7PD/AM8Y/wDvkVLRQBF9nh/54x/98ij7PD/zxj/75FS0UAR/Z4f+eMf/AHyKT7PD/wA8Y/8AvkVLRQBF9nh/54x/98ij7PD/AM8Y/wDvgVLRQBF9ng/54xf98Cj7PB/zxj/74FS0UARfZ4f+eMf/AHyKPs8P/PGP/vgVLRQBF9nh/wCeMf8A3yKXyIf+eUf/AHyKkooAj8iH/nlH/wB8ik+zw/8APGP/AL5FS0UARfZ4f+eMf/fIo+zw/wDPGP8A75FS0UARfZ4f+eMf/fIo+zw/88Y/++RUtFAEX2eD/njF/wB8Cj7NB/zxi/74FS0UARfZ4P8AnjF/3wKPs8P/ADxj/wC+BUtFAEX2eH/njH/3wKPs8P8Azxj/AO+RUtFAEX2eH/njH/3yKPs8P/PGP/vkVLRQBF9nh/54x/8AfIo+zw/88Y/++RUtFAEX2eH/AJ4x/wDfIo+zw/8APGP/AL5FS0UARfZ4f+eMf/fIo+zwf88Yv++BUtFAEX2eH/njH/3yKPs8H/PGL/vgVLRQBF9mg/54xf8AfAo+zQf88Yv++BUtFAEX2eD/AJ4x/wDfAo+zw/8APGP/AL5FS0UARfZ4f+eMf/fIo+zw/wDPGP8A75FS0UARfZ4P+eMf/fAo+zw/88Y/++RUtFAEX2eH/njH/wB8iipaKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooqnqep2WlQLNqV1DaxM2wPK4UE+nP0pxi5O0VdibSV2XKKwP+Ey8N/9BvT/APv8taum6haanb/aNPuYrmDJXfG24ZHUZrSdGpBXnFpehMakJOydy1RRRWRYUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAU2WRYo2dzhV5J9KdVPVzjTLn/cNVFXaRM5csXLsWwQQCDkGlrltF1c27LBcsTCeAx/h/+tXUAggEHIPerq0nSdmZUMRGvG6ForlfHl1PbRWX2eaSIszZ2MVzwPSsPwzqF5LrtpHLdzvGzEFWkJB4NdFPBSnS9qn3/AxqYyMKvsrdvxPRqK5P4lrqy+HWutEu5beW2bzJFi4Lp359uteK/wDCZeIv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OXaNmj3n1YKQCfeuh06xtdNs47Swt47e2jGFjjXAFfUZnn9LGYV0YQabte+y66Hi4PK50K3tJS0RZqOSGOV43kRWeM7kJHKnGOKkor5VO2x7bV9wooooAKq6nY2+p6fcWV7GJbedDG6HuDVqimm4u63E0mrM+QfGWgTeG/EN1ptxkiM7o3P8aH7rf571pfDTxQ/hXxJFcsx+xzYiuV7bSfvfUdfzr3L4p+Bz4wsLdrNoYtStmPlySZAZD1UkAn3H/wBevL/+FLeJc/8AHzpf/f1//iK++w+bYTGYTkxUkm1Zp/n+p8vVwFfD1+ajFtLVH0RE6SxpJGwZHAZWByCD0Ip1cx8O9K1bQ/DkWm61LbyvbnbE8Llvk7A5A6dPpXT18LWhGnUcIu6XXufTU5OcFJqzCiiisiwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/Z" alt="Nxance logo">
+        <div class="header-title">Lean Canvas<span>Investment intelligence, engineered for precision.</span></div>
+      </div>
+      <div class="header-right">Ohshn Intelligence LLP · Investor Working Doc<br>v1 · Sep 2026</div>
+    </div>
+
+    <div class="grid">
+
+      <div class="box problem">
+        <div class="tag">Top 3 problems</div>
+        <h3>Problem</h3>
+        <ul>
+          <li><b>Investing blind</b> — 21.6 Cr demat accounts, most held with zero professional guidance on what's inside them.</li>
+          <li><b>Silent failure</b> — 9 in 10 individual F&O traders lost money in FY25 (₹1.06 lakh Cr combined), unnoticed for years.</li>
+          <li><b>Advice is scarce</b> — under 1,000 SEBI-registered advisers for 20+ Cr investors, ~1 per 2 million people.</li>
+        </ul>
+      </div>
+
+      <div class="box alternatives">
+        <div class="tag">Existing alternatives</div>
+        <h3>How it's "solved" today</h3>
+        <ul>
+          <li>Free trackers (INDmoney, Groww) show holdings, don't diagnose them</li>
+          <li>AUM-fee advisory (Wright Research, Ionic Wealth) — costly, gated to HNI/accredited investors</li>
+          <li>Distributor-sold MF/PMS — commission-driven, misaligned incentives</li>
+          <li>Tips from friends, YouTube, Telegram groups</li>
+        </ul>
+      </div>
+
+      <div class="box solution">
+        <div class="tag">One app, three engines</div>
+        <h3>Solution</h3>
+        <ul>
+          <li><b>Health Check</b> — 26+ quant sub-engines diagnose an existing portfolio, instantly, in plain language</li>
+          <li><b>Construction</b> — 26+ quant sub-engines build a new portfolio around goal, risk profile, constraints</li>
+          <li><b>NxanceLM</b> — our own AI + live market terminal; explains the "why," never decides alone</li>
+        </ul>
+      </div>
+
+      <div class="box metrics">
+        <div class="tag">How we know it's working</div>
+        <h3>Key Metrics</h3>
+        <ul>
+          <li>0–100 portfolio Health Score per user</li>
+          <li>Subscriber milestones: <span class="stat">75 → 600 → 2,200</span> over 18 months</li>
+          <li>₹99 Health Check unlock → paid-intent qualifier</li>
+          <li>Target LTV:CAC above 8x</li>
+        </ul>
+      </div>
+
+      <div class="box uvp">
+        <div class="tag">Single, clear message</div>
+        <h3>Unique Value Proposition</h3>
+        <div class="headline">Diagnosis before advice — explainable, not a black box.</div>
+        <p>We tell every Indian investor if their portfolio actually works, and exactly how to fix it — with every number traced to real data, not a guess.</p>
+        <div class="divider"></div>
+        <span class="pill">No AUM fees</span>
+        <span class="pill">Flat ₹499–999/mo</span>
+        <span class="pill">Broker-agnostic</span>
+      </div>
+
+      <div class="box advantage">
+        <div class="tag">Can't be easily copied</div>
+        <h3>Unfair Advantage</h3>
+        <ul>
+          <li>Number Guard — zero-hallucination architecture; AI never states a figure the quant engines didn't compute</li>
+          <li>Collective Decision Principle — 26+ sub-engines do the analysis; no single engine or AI parameter ever decides alone</li>
+          <li>Commission-free model is structurally hard for distributor-funded incumbents to replicate</li>
+        </ul>
+      </div>
+
+      <div class="box channels">
+        <div class="tag">Path to customers</div>
+        <h3>Channels</h3>
+        <ul>
+          <li>Direct app (nxance.com) — free Health Check as the hook</li>
+          <li>Content & education around portfolio literacy</li>
+          <li>B2B licensing: brokers, AMCs, RIAs, VC/PE distribution</li>
+        </ul>
+      </div>
+
+      <div class="box segments">
+        <div class="tag">Target customers</div>
+        <h3>Customer Segments</h3>
+        <ul>
+          <li>Retail investors, first SIP through HNI</li>
+          <li>SOM: 4.52 Cr active trading accounts</li>
+          <li><b>B2B:</b> boutique firms, RIAs, banks, AMCs, VC/PE firms</li>
+        </ul>
+      </div>
+
+      <div class="box cost bottom-row">
+        <div class="tag">18-month operating burn — ₹12.49 Cr</div>
+        <h3>Cost Structure</h3>
+        <ul>
+          <li><b>Technology & AI</b> 27.7% — cloud, AI/LLM, APIs, engineering</li>
+          <li><b>Investment & Research</b> 23.6% — quant, portfolio, risk, compliance expertise</li>
+          <li><b>Marketing & Branding</b> 17.1% — social, ads, media ramp</li>
+          <li><b>Founders + Org/Office + Sales + Compliance + Contingency</b> — remaining ~31.6%</li>
+        </ul>
+      </div>
+
+      <div class="box revenue bottom-row">
+        <div class="tag">Sources of revenue</div>
+        <h3>Revenue Streams</h3>
+        <ul>
+          <li><b>₹99</b> one-time Health Check unlock</li>
+          <li><b>Starter ₹399/mo</b> · <b>Growth ₹899/mo</b> · <b>Pro ₹1,499/mo</b> subscriptions</li>
+          <li>Future: HNI advisory fees & B2B licensing of the engines</li>
+          <li>18-month gross revenue est. ₹76.05L (treated as upside)</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      <span>Nxance · Ohshn Intelligence LLP</span>
+      <span>Intelligence that leads to clearer decisions.</span>
+    </div>
+  </div>
+</body>
+</html>

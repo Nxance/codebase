@@ -1,0 +1,697 @@
+NXANCE  ·  INVESTOR DECK
+Founders' Reference
+Every number in the deck — where it came from, how it was calculated, and how to defend it.
+Ohshn Intelligence LLP  ·  September 2026  ·  Internal — not for circulation with the deck
+Read this before your first investor meeting
+The deck carries about forty numbers. Every one of them is in this document, with its source and its arithmetic. If you cannot say where a number came from in one sentence, do not say the number.
+The one rule: never estimate live in a meeting. If you are asked something that is not in here, say "I don't have that to hand — I'll send it across today", and then actually send it. A wrong number said confidently costs more than an honest gap.
+
+What is in here
+1.  How to read Indian money units — crore, lakh crore, basis points
+2.  The market slide — the number that gets challenged most
+3.  The three exclusions, and the four double counts we must never make
+4.  The ask, the valuation, the burn and the tranches
+5.  Problem, why-now and traction figures
+6.  Product, pricing and competitors
+7.  Exit routes — internal numbers, deliberately not on the slide
+8.  Three things wrong in our own spreadsheet
+9.  Crib sheet — if an investor asks X, say Y
+10.  Full source list with links
+
+1.  How to read the units
+Most of our numbers are in Indian units and most foreign investors are not. Get comfortable converting both ways, because you will be asked to.
+Unit
+Means
+In US dollars, at ₹96 = $1
+1 lakh
+100,000
+≈ $1,040
+1 crore (Cr)
+10 million (100 lakh)
+≈ $104,000
+1 lakh crore (L Cr)
+1 trillion rupees (₹1,00,000 Cr)
+≈ $10.4 billion
+1 basis point (bps)
+one hundredth of one per cent, 0.01%
+—
+50 bps
+0.50% — ₹50 on every ₹10,000
+—
+Exchange rate used throughout: ₹95.99 to the dollar, 18 September 2026. We round to ₹96 in speech. The rupee fell 8.95% against the dollar in the year to September 2026, so refresh this before any meeting where you quote dollars.
+The conversion you will need most
+₹68,500 Cr ≈ US$7.1 bn  (TAM)   ·   ₹41,200 Cr ≈ US$4.3 bn  (SAM)   ·   ₹165 Cr ≈ US$17 mn  (SOM)
+₹158 lakh crore of assets ≈ US$1.65 trillion.
+2.  The market slide (slide 9)
+This is the slide that gets challenged. The numbers are defensible, but only if you explain the method before you say the figure. Lead with the method.
+2.1  Why we size a fee pool and not a pile of assets
+We can charge three different ways, and we probably will charge all three: a flat monthly subscription, a percentage of assets we advise on (AUA), and a licence fee when a distributor or bank runs our engines inside their own product.
+That creates a problem for conventional market sizing. If we sized the market as number of investors × our subscription price, the "market" would change every time we changed our pricing. A market that moves when your price list moves is not a market — it is a revenue forecast wearing a costume.
+So we size the fee pool instead:
+TAM  =  the assets we could advise on  ×  the rate at which advice is actually paid for
+Say this out loud in the meeting. It is monetisation-agnostic: whether that rupee of revenue arrives as a subscription, an AUA fee or a licence, it is the same rupee coming out of the same pool. That is the whole argument, and it is a strength, not a hedge.
+2.2  The base — ₹158.18 lakh crore of addressable assets
+Everything an Indian can hold digitally, across every type of holder. Directly purchased physical real estate and physical commodities are excluded by design — we cannot see them, connect to them or advise on them.
+Cut one: by instrument — this is what the chart on slide 9 shows
+Instrument
+₹ lakh crore
+Where it comes from
+Mutual funds, all categories
+80.33
+AMFI Investor Trends, February 2026 — total industry AUM ₹82.03 L Cr, less ₹1.68 L Cr held by banks and financial institutions
+Listed equity, held directly
+66.55
+NSE India Ownership Tracker Q1 FY26 shares, applied to NSE market capitalisation of ₹462.2 L Cr (June 2026)
+AIFs, Categories I–III
+7.00
+SEBI, March 2026 — funds actually raised, not funds committed
+REITs, InvITs and Sovereign Gold Bonds
+4.29
+REITs ₹2.17 L Cr market cap (Aug 2026), InvITs ₹1.00 L Cr non-institutional share, SGBs ₹1.12 L Cr outstanding (132 tonnes)
+Total
+158.18
+Figures are rounded; the unrounded lines total ₹158.18 L Cr
+Cut two: by holder — this is the version to use if someone asks "whose money is that?"
+Holder
+₹ L Cr
+What it is
+Fee rate we apply
+Individuals and HUFs
+95.66
+Direct equity ₹44.37 + mutual funds ₹50.17 + SGBs ₹1.12. HUFs sit inside the "individual" category in Indian shareholding patterns.
+50 bps
+Family and corporate investment vehicles
+22.19
+Non-promoter corporate equity ₹8.78 + private and family trusts, LLPs, partnership firms and NRIs ₹13.40.
+50 bps
+Alternatives
+10.17
+AIFs ₹7.00 + REITs ₹2.17 + InvITs ₹1.00.
+50 bps
+Corporate treasury
+30.16
+Company money parked in mutual funds. Banks and financial institutions are excluded — that is true institutional money, not an advisory client.
+15 bps
+Know this arithmetic cold
+Direct listed equity = 9.6% of ₹462.2 L Cr = ₹44.37 L Cr (individuals and HUFs)
+plus 1.9% = ₹8.78 L Cr (non-promoter investment companies)  ·  plus 2.9% = ₹13.40 L Cr (trusts, LLPs, NRIs)
+Mutual funds: AMFI publishes the split directly — 61.2% individual = ₹50.17 L Cr, corporates ₹30.16 L Cr, banks and FIs ₹1.68 L Cr, on ₹82.03 L Cr total.
+2.3  The rate — 50 basis points, and 15 on treasury
+Why 50 bps. It is the low end of the trail commission paid on a regular-plan mutual fund. That is money Indian investors are already paying, every year, for guidance that comes with a conflict of interest attached. Using it means we are claiming redirected spending, not new spending — a far easier argument than persuading an investor that Indians will start paying for something they have never paid for. It is also one-fifth of SEBI's 2.5% cap on adviser fees, so nobody can call it aggressive.
+Why only 15 bps on corporate treasury. Advising a company on where to park its cash earns a fraction of what advising on a portfolio earns. Liquid-fund total expense ratios themselves run 10–20 bps, so 15 is the honest number. Pricing treasury at the full 50 bps would have added roughly ₹10,000 Cr to TAM for no defensible reason — and an investor who knows the space would have caught it.
+2.4  TAM — ₹68,500 Cr a year
+Pool
+Assets
+×  rate
+=  annual fee pool
+Investor assets (individuals, family vehicles, alternatives)
+₹128.02 L Cr
+0.50%
+₹64,000 Cr
+Corporate treasury
+₹30.16 L Cr
+0.15%
+₹4,500 Cr
+TAM
+₹158.18 L Cr
+—
+₹68,500 Cr  (~US$7.1 bn)
+The sentence: "Indians hold about ₹158 lakh crore in instruments we can see and advise on. At the rate India already pays for advice, that is a ₹68,500 crore a year fee pool — roughly seven billion dollars."
+2.5  SAM — ₹41,200 Cr a year
+SAM strips out money that is not actually live. India has 13.1 crore unique registered investors but only 4.60 crore who actually transact. Dormant money cannot be sold advice, so it should not sit in a serviceable market.
+Pool
+We keep
+Why
+Assets kept
+Individual equity and funds (₹94.54 L Cr)
+55%
+the share belonging to investors who actually transact, not dormant registrants
+₹52.00 L Cr
+Sovereign Gold Bonds (₹1.12 L Cr)
+100%
+a bought-and-held instrument with a known holder
+₹1.12 L Cr
+Family and corporate vehicles (₹22.19 L Cr)
+70%
+advice-seekers by construction, but many sit with entrenched wealth managers
+₹15.53 L Cr
+Alternatives (₹10.17 L Cr)
+100%
+nobody holds an AIF passively
+₹10.17 L Cr
+Corporate treasury (₹30.16 L Cr)
+40%
+reachable, but needs a B2B motion rather than a consumer one
+₹12.06 L Cr
+SAM
+—
+₹78.81 L Cr at 50 bps + ₹12.06 L Cr at 15 bps
+₹90.9 L Cr of assets
+→ ₹41,200 Cr
+2.6  SOM — ₹165 Cr of annual recurring revenue
+SOM is a coverage number, not an ambition. It is what a team and set of channels funded by this raise can physically serve by year five. It is 0.4% of SAM — and the key point is that it is reachable three separate ways, so our revenue does not depend on one pricing bet landing.
+Route
+The arithmetic
+Annual revenue
+Subscription
+2.1 lakh subscribers × ₹7,900 a year
+₹166 Cr
+Assets under advice
+₹33,000 Cr advised × 0.50%
+₹165 Cr
+Licensing
+66 institutional licensees × ₹2.5 Cr
+₹165 Cr
+The ₹7,900 comes from our own price list: 60% of subscribers on Starter (₹399), 30% on Growth (₹899), 10% on Pro (₹1,499). That is (0.6 × 399) + (0.3 × 899) + (0.1 × 1,499) = ₹659 a month = ₹7,908 a year. Our own financial model independently implies about ₹690 a month, so the two cross-check.
+2.7  The crossover — ₹15.8 lakh
+A flat ₹7,900 a year equals 50 bps of assets on a portfolio of ₹15.8 lakh (₹7,900 ÷ 0.005). Below that, the flat subscription earns us more than an AUA fee would. Above it, AUA earns more. Institutions get SaaS licensing, which is uncapped by portfolio size.
+Why this matters in the room: it turns "your pricing model is unproven" into "we have three ways to monetise the same pool, and we know exactly where each one wins". If an investor pushes on subscription fatigue, this is your answer.
+
+3.  What we left out, and why
+The footnote on slide 9 reads "Promoter stakes, institutions and PMS excluded." Each of those three is a deliberate deduction, and each one makes our number smaller. Being able to explain them is what makes the rest of the slide credible.
+3.1  Promoter stakes — 50.0% of the market, gone
+Half of the value of every company listed on the NSE is held by its founders, their families or its parent company. Those are control blocks. They are not traded, not rebalanced, and never the subject of portfolio advice — a promoter who sold down would be making a corporate decision, not an investment one.
+So: we count 9.6% + 1.9% + 2.9% = 14.4% of NSE market cap as addressable, and leave the remaining 85.6% out. That removes about ₹231 lakh crore of promoter holdings alone.
+3.2  Institutions — foreign funds, banks and insurers
+Foreign portfolio investors hold 17.3% of the market; domestic banks, insurers and other institutions hold another 5.5%. EPFO is excluded too. These are organisations with in-house research desks, Bloomberg terminals and sell-side coverage. They are not going to buy a ₹1,499-a-month diagnosis, and pretending otherwise would be obvious.
+The one institutional-looking pool we do keep is corporate treasury — ordinary companies parking cash in mutual funds — and we discount it heavily, both in rate (15 bps) and in reach (40% in SAM).
+3.3  PMS — the one that looks like a mistake but is not
+SEBI reports ₹44.1 lakh crore under portfolio managers, of which ₹31.9 lakh crore is EPFO. The remaining ₹9.03 lakh crore looks like a large addressable pool sitting right there in the statistics — and we removed all of it.
+The reason: in India, a PMS does not hold your shares. Your shares sit in your own demat account and the portfolio manager has a power of attorney to trade them. So every rupee of PMS assets is already counted in our direct-equity line. Adding PMS would count the same shares twice.
+The identical logic removes registered investment adviser AUA and distributor AUA. These are all wrappers over assets we have already counted, not additional assets.
+If an investor says "your market looks small for India"
+That is the right response to get. Answer: "It is smaller than the headline numbers because we took out promoter control blocks, institutional money and every advisory wrapper that double-counts the underlying assets. What is left is money that can actually be advised. We would rather defend a small honest number than a large one."
+3.4  The four double counts we must never make
+Each of these is a mistake we made and corrected while building the model. If any of them reappears in a spreadsheet, a follow-up email or an answer given live, it will be caught.
+The trap
+Why it is wrong
+What we use instead
+Using 18.5% of market cap as individual equity holdings
+That widely quoted figure is individuals' holdings direct AND through mutual funds. About ₹40 lakh crore of it is their mutual fund holdings — which we already count on a separate line.
+NSE's 9.6% direct figure. The ₹40.7 L Cr gap is exactly 84% of domestic mutual fund equity, which is how we confirmed it.
+Adding PMS AUM
+Indian PMS holds securities in the client's own demat account — the same shares, counted a second time.
+Excluded entirely. Same for RIA and distributor AUA.
+Using AIF committed capital
+SEBI reports ₹16.94 lakh crore committed. Committed money is a promise, not an asset that exists to be advised on.
+₹7.00 lakh crore actually raised.
+Counting bank and FI money in mutual funds
+₹1.68 lakh crore of the AMFI total belongs to banks and financial institutions — institutional money, not an advisory client.
+Deducted from the ₹82.03 L Cr industry AUM before use.
+How the biggest one was caught
+The 18.5%-versus-9.6% error was worth about ₹40 lakh crore of phantom assets and survived several passes of the model. It only surfaced when someone asked a question nobody had asked before — "have you included assets held by entities other than individuals?" — which forced a rebuild of the base by holder type rather than by instrument.
+The lesson worth keeping: when a number will not reconcile two different ways, it is wrong. Build every important figure twice, from different angles, and make them agree.
+
+4.  The ask, the valuation and the burn
+4.1  Where ₹12.49 Cr comes from
+The ask is not a round number chosen for effect. It is three lines added together, and you should be able to recite them.
+Line
+Amount
+What it is
+Operating burn, 18 months
+₹11.10 Cr
+Everything it costs to run the company for 18 months — people, technology, marketing, office, compliance.
+Contingency reserve
+₹1.33 Cr
+10.7% of the round, held back. We intend to close the round with it intact.
+SEBI-RIA deposit
+₹0.05 Cr
+A ₹5 lakh refundable deposit required for registered investment adviser registration. It comes back.
+Total ask
+₹12.49 Cr
+Lines are rounded to two decimals; the unrounded lines total exactly ₹12.49 Cr.
+4.2  The valuation — and which way the arithmetic runs
+This is the single most common place a founder trips up. The pre-money valuation is not something we picked and then worked backwards from. It falls out of the two things we actually negotiated: how much we are raising, and how much of the company we are giving up.
+Step
+Arithmetic
+Result
+1. Agree the ask
+—
+₹12.49 Cr
+2. Agree the dilution
+—
+20.0%
+3. Post-money follows
+₹12.49 Cr ÷ 0.20
+₹62.44 Cr
+4. Pre-money follows
+₹62.44 Cr − ₹12.49 Cr
+₹49.95 Cr
+Say it in this order. "We are raising ₹12.49 crore for 20%, which puts the post-money at ₹62.44 crore and the pre-money at ₹49.95 crore." If you lead with the pre-money you invite a negotiation about a number that was never independently set.
+4.3  The three tranches
+Capital and equity release together, in three six-month tranches, and only once the previous tranche's deliverables have been evidenced. An investor is not funding a phase — they are funding a checkpoint.
+Tranche
+Period
+Capital
+Per month
+Equity
+Cumulative capital
+Cumulative equity
+1
+M1–6
+₹2.74 Cr
+₹45.69 L
+6%
+₹2.74 Cr
+6%
+2
+M7–12
+₹5.27 Cr
+₹87.87 L
+7%
+₹8.01 Cr
+13%
+3
+M13–18
+₹4.48 Cr
+₹74.60 L
+7%
+₹12.49 Cr
+20%
+Checks that must hold: 274.14 + 527.24 + 447.62 = ₹1,249.00 lakh = ₹12.49 Cr. 6 + 7 + 7 = 20%. Each per-month figure is the tranche divided by six.
+Why tranche 2 is the biggest
+Tranche
+Capital released
+Burn it covers
+What explains the gap
+1 (M1–6)
+₹274.14 L
+₹274.14 L
+Funds its six months exactly. No buffer.
+2 (M7–12)
+₹527.24 L
+₹388.70 L
+Carries the ₹5 lakh SEBI deposit and the entire ₹1.33 Cr contingency.
+3 (M13–18)
+₹447.62 L
+₹447.61 L
+Funds its six months exactly — the buffer is already in hand.
+Closing cash balance: ₹0.00 Cr at end of month 6  ·  ₹1.34 Cr at end of month 12  ·  ₹1.34 Cr at end of month 18.
+A real risk — raise it yourselves before an investor raises it
+Tranche 1 equals the first six months of burn to the rupee, so the balance at end of month 6 is exactly nil and the whole contingency sits inside tranche 2. Any slip in the tranche-2 gate, or in the mechanics of wiring the money, leaves the company with no runway at all.
+Two ways to fix it: move part of the contingency into tranche 1, or agree a funding-date buffer in the term sheet so tranche 2 is committed to land before tranche 1 runs out. Decide which before the first term-sheet conversation.
+What each tranche delivers
+Tranche
+Delivers
+1  ·  M1–6
+Private Limited registration and ESOP pool · founder and core payroll active · minimum buildable product feature-complete across all three engines · Number Guard live from day one · core team hired
+2  ·  M7–12
+Open beta live · SEBI-RIA application filed · legal and compliance consultant onboard · VAPT and data-security plan executed · Construction engine hardened
+3  ·  M13–18
+SEBI-RIA registration secured · paid conversion and repeat-use data validated · ML/AI and cybersecurity engineers onboard · Phase-1 roadmap (Gold, ETF) underway · growth channels, statutory audit and next-financing path prepared
+4.4  The burn curve (slide 16)
+Figure
+Value
+What it means
+Month 1 burn
+₹27.6 L
+Before the team scales. This is the number an investor checks against the headcount plan.
+Average monthly burn
+₹61.97 L
+Across all 18 months.
+Peak monthly burn
+₹76.91 L
+Month 18, at full headcount.
+Total operating requirement
+₹11.10 Cr
+The sum of all 18 months — the first line of the ask.
+The point the chart makes: burn ramps with the build, not ahead of it. We do not hire the full team on day one and hope. Source: the Monthly Burn sheet of the Nxance Financial Sheet.
+4.5  Where the money goes (slide 15)
+Category
+Share
+Amount
+Building and growing
+72.6%
+₹9.06 Cr
+      Technology & AI
+27.7%
+₹3.45 Cr
+      Investment & research
+23.6%
+₹2.95 Cr
+      Marketing & brand
+17.1%
+₹2.14 Cr
+      Sales & support
+4.2%
+₹0.52 Cr
+Running and protecting
+27.4%
+₹3.41 Cr
+      Founder draws
+7.6%
+₹0.95 Cr
+      Organisation & office
+6.1%
+₹0.76 Cr
+      Compliance & insurance
+3.0%
+₹0.37 Cr
+      Contingency reserve
+10.7%
+₹1.33 Cr
+Two things to be ready for. First, 51.3% of the round goes into technology plus investment and research — that is the answer to "how much of this is actually product?". Second, founder draws are 7.6%, which is low, and worth saying out loud rather than waiting to be asked.
+4.6  Revenue during the 18 months
+The model projects 75 → 600 → 2,200 subscribers over the 18 months, collecting ₹76.05 lakh. This is shown as upside and is not netted off the ask. If an investor asks why not, the answer is that we would rather be funded to reach the milestones without depending on early revenue arriving on schedule. If it arrives, it extends runway.
+4.7  The people numbers (slide 14)
+Figure
+Value
+Source
+Exit headcount
+40 people
+Hiring plan in the financial model
+Costed hiring lines in the budget
+25
+Named roles with salaries, not a headcount allowance
+Budgeted people cost, 18 months
+₹5.83 Cr
+Personnel lines of the financial model
+Share of that pool in investment and research
+43%
+Derived from the same lines
+
+5.  Problem, why-now and traction figures
+5.1  The problem slide (slide 2)
+Figure
+Exactly what it counts
+Source
+21.6 crore demat accounts
+Accounts, not people. NSE reports about 26 crore accounts and 13.1 crore unique investors. Never say "21.6 crore investors" — it is the easiest factual slip in the deck to be caught on.
+SEBI Depository Statistics, December 2025
+9 in 10 F&O traders lost money
+Individual traders in equity futures and options in FY25. They lost ₹1.06 lakh crore between them. It is our proof that portfolios fail silently and for years.
+SEBI, "Profit & Loss of Individual Traders in Equity F&O", July 2025
+Fewer than 1,000 registered advisers
+SEBI-registered investment advisers. A second source counts 973 RIAs and 1,330 research analysts. Roughly one regulated adviser per two million people.
+The Ken, 2025; cross-checked against Trade Brains, 2026
+5.2  The why-now slide (slide 3)
+Figure
+What it says
+Source
+US$112 bn → US$550 bn
+India's fintech market, 2024 to 2030
+TechSci Research, India FinTech Market Report
+~1 lakh a day
+New demat accounts opened, on a base of 21.6 crore
+SEBI Chairperson, remarks at IITF, November 2025
+₹32,087 Cr
+Monthly SIP inflows — a record, March 2026. Up from ₹3,100 Cr in 2016, so roughly 8× in a decade.
+AMFI, monthly SIP contribution
+The argument the slide is making: the timing case is two-sided. Demand has been compounding for a decade (SIPs up 8×), and supply only just became possible (language models made one-to-one explanation affordable). Neither half alone would justify building this in 2026 — say both.
+5.3  The traction slide (slide 12)
+These are our own numbers. Nobody else can check them, which is exactly why they must be stated precisely and never rounded up. An investor who catches a founder inflating a number they alone control will discount everything else on the slide.
+Figure
+What it is precisely
+12
+Investor and user conversations that pressure-tested the problem
+8 of 12
+Said they would pay for an honest answer on their existing holdings
+50
+Early users who walked the working Construction engine end to end
+500+
+Users signed up to the pre-launch waitlist
+Built
+A full clickable frontend across all three engines — demoed, not yet public
+Next
+The quant engines and the Number Guard layer. This is what the raise funds.
+Entity
+Ohshn Intelligence LLP, incorporated July 2026. Converting to Private Limited at close.
+About the quote on slide 12
+The line — "Everyone tells you to put your money to work. Nobody tells you how — or whether the money you have already put in is working." — is a composite paraphrase of what came up in almost every early conversation. It is not attributed to any one person, and it must never be presented as a verbatim customer quote. If asked, say plainly: "That is the sentence we heard, in one form or another, in nearly every conversation."
+6.  Product, pricing and competitors
+6.1  The engine count — 70
+This number appears on the technology slide and gets repeated. It was stated inconsistently in the old deck (26, 26, 18, "52+", "70") and is now standardised everywhere.
+Component
+Engines
+What they do
+Health Check
+26
+XIRR and time-weighted returns, VaR, CVaR, Sharpe, Sortino, maximum drawdown, Jaccard holdings overlap, Monte Carlo over 10,000 paths, Hidden Markov regime detection, FinBERT news sentiment, cost and fraud screens
+Construction
+26
+Mean-variance optimisation, Black-Litterman views, Ledoit-Wolf shrinkage, goal and drawdown limits, every rejection recorded, cost and fraud screens, risk metrics on the mix, Monte Carlo goal probability
+NxanceLM
+18
+Turns engine output into English or Hindi, answers questions on the user's own holdings, writes report explanations, runs the live market and news terminal, Nxance Explain on any chart
+Total
+70
+52 quantitative sub-engines plus 18 language mini-engines. Source: our three engine specification documents.
+The line that matters on that slide: "70 engines compute. The AI only explains." Number Guard enforces it — every figure must trace back to an engine output, with a verified source, confirmed inputs, a checked calculation and an audit ID. The model cannot produce a number it was not handed. That is our answer to "isn't this just a GPT wrapper?".
+6.2  Our pricing
+Tier
+Price
+What it opens
+Health Check
+Free
+Run the diagnosis on holdings already owned
+Full report unlock
+₹99 once
+The complete report — a paid-intent qualifier, not the business
+Starter
+₹399/mo
+2 portfolios, Health Check plus Construction, core engines
+Growth
+₹899/mo
+2–5 portfolios, deeper engines, re-checks and rebalancing
+Pro
+₹1,499/mo
+5–10 portfolios, all engines, full NxanceLM access
+Never say "₹499–999". That range appeared on three slides of the old deck and contradicted both the model and our own price list. The correct range everywhere is ₹399–1,499.
+6.3  What the regulator lets anyone charge
+Rule
+The cap
+Why it matters to us
+SEBI investment adviser fee, individual client
+2.5% of assets under advice, or ₹1,51,000 a year
+Our 50 bps assumption is one-fifth of this ceiling — nobody can call it aggressive
+SEBI research analyst fee
+₹1,51,000 a year per client
+Sets the ceiling on a pure research subscription
+Non-individual and accredited clients
+No cap
+Trusts, LLPs and investment companies can be charged freely — this is why the family-vehicle tier is worth more per relationship than a retail subscriber
+6.4  Competitors (slide 8)
+Everything on the competition slide comes from company websites and public app listings as at 2026. Pricing and positioning change — re-check before any meeting where you expect to be pushed on a specific competitor.
+Competitor
+What we say
+Watch out for
+Kalpi.ai
+Serves DIY strategy builders. Free, then premium tiers. Rule-based builder.
+Closest on price, furthest on depth
+Wright Research
+Managed money, RIA/PMS. ~1.5–2% of assets. ML factor models.
+The strongest AI claim among the four
+Ionic Wealth
+HNI and UHNI, ₹1–25 Cr. PMS/AIF fees, accredited investors only. Angel One-backed.
+Well funded — do not dismiss it, differentiate on who it serves
+MyFi
+Retail mutual fund and stock investors. Free, monetised via lending. Chat over fund scores.
+Free is hard to argue with — our answer is that free-via-lending is a conflict, not a price
+Dezerv
+6 lakh+ users. HNI-oriented, advisory-fee and relationship-manager-led.
+Cited as demand proof, not as a comparable. It shows Indians will pay for advice. Do not position against it head-on.
+Our one-line differentiation: "Nobody else starts with a diagnosis of what you already own, shows its reasoning, and charges a flat fee." All three halves of that sentence have to be true at once — that is the defensible claim, not any one of them alone.
+6.5  The global-coverage price premium
+We advise on globally invested portfolios, and there is evidence that global coverage carries a price premium in India. Trendlyne charges about ₹310 a month for domestic coverage and ₹1,500–2,000 a month for its global tiers — roughly five times. Supporting demand evidence: outward remittances for equity and debt investment under the RBI's Liberalised Remittance Scheme ran at US$1.06 bn in April–June FY27 alone, double the year before, and it is the fastest-growing purpose category in that data. India has about 390,000 dollar-millionaires holding US$1.64 trillion.
+
+7.  Exit routes
+Slide 17 names five routes and deliberately carries no valuation numbers. At seed stage, naming plausible buyers matters more than modelling a multiple, and an investor who knows the category will do their own arithmetic anyway.
+Route
+The logic
+Strategic acquisition
+Brokers, AMCs and banks already own the customer relationship that Nxance makes stickier
+Wealthtech consolidation
+An established advisory or wealthtech platform acquiring the engines and the user base
+Infrastructure buyer
+An AMC, insurer or bank taking the engines as the intelligence layer behind its own product
+Secondary sale
+Early investors taking partial or full liquidity in a later growth round
+The long path: IPO
+SEBI-RIA registration, then a scaled advisory book, then a public listing
+The line that earns the slide: because the engines can be licensed as readily as they are used, an infrastructure sale stays open even if the consumer product plateaus. That is a genuine second door, and it is why the slide is worth showing at all.
+Internal only — the numbers behind the routes. These are deliberately NOT on the slide.
+On ₹12.49 Cr at 20%, diluted to 13.0% after future rounds: a 3.0× return needs a ₹288 Cr exit (24.6% IRR) · 5.0× needs ₹480 Cr (38.0%) · 7.8× needs ₹750 Cr (50.8%) · 10.0× needs ₹961 Cr (58.5%).
+Cross-check from the other direction: the base case of ₹62.9 Cr of Year-5 revenue at a 6× revenue multiple implies a ₹377 Cr exit — 3.9×, or a 31.5% IRR. A 10× return would require about 11.9× that Year-5 revenue.
+Wealthtech M&A in India has transacted at roughly 8–15× revenue.
+If pushed for numbers in a meeting: "The exit sensitivities are in the model — happy to walk you through them separately." Then do. Do not improvise a multiple across the table.
+8.  Three things to fix in our own spreadsheet
+These came up while reconciling the deck against the financial model. None of them changes the story, all of them will be found in diligence, and each one is a small credibility tax if an investor finds it before we do.
+#
+The inconsistency
+What to do
+1
+The Funding Tranches sheet shows four tranches on an M1–4 / M5–8 / M9–12 / M13–18 schedule. The Executive Summary shows M1–3 / M4–6 / M7–9 / M10–18. The live structure is three tranches of six months each.
+Rebuild both to the three-tranche structure. Two schedules in one workbook is the kind of thing that stops a diligence call.
+2
+The sheet header still reads "₹13.00 Cr / 20.00% Equity" while the rows beneath it total ₹12.49 Cr.
+Correct the header. Anyone reading the tab sees ₹13.00 Cr before they see the rows.
+3
+The cumulative-capital column had read 305.98 / 240.98 / 159.86 / 78.74 instead of the correct 2.50 / 5.62 / 8.74 / 12.49. It is corrected in the tranche PDF.
+Confirm the correction has been carried back into the .xlsx, not just the PDF.
+Open decision
+Zero cash at end of month 6 — the whole contingency sits in tranche 2 (see section 4.3).
+Decide before the first term sheet: shift contingency into tranche 1, or write a funding-date buffer into the terms.
+Two other open items
+Product screenshots. The images on slide 5 are re-used from the old PDF and are low-resolution. They will look soft on a projector. Replace with clean exports.
+The logo. The source file we were given is a 500×500 JPEG whose actual mark is only about 234×72 pixels. It is upscaled roughly 3× on the cover and will look soft in print. A vector file (SVG, AI or EPS) or a high-resolution PNG fixes this permanently.
+One genuine gap in the market model. Non-government NPS (All Citizen and Corporate tiers) is real addressable money, estimated at ₹2.5–3.5 lakh crore, and we left it out because PFRDA publishes no clean split. Including it would add roughly ₹1,250–1,750 Cr to TAM. Mentioning it unprompted is a credibility gain, not a loss.
+
+9.  Crib sheet
+One-breath answers. If the follow-up goes deeper than this, the detail is earlier in this document — offer to send it rather than reaching for it live.
+If they ask…
+Say…
+How did you get to ₹68,500 crore?
+"We sized the fee pool, not the assets. ₹158 lakh crore of digitally held assets, at 50 basis points — the low end of what India already pays in trail commissions. We are claiming redirected spending, not new spending."
+Isn't that market too small for India?
+"It is smaller than the headline numbers because we removed promoter control blocks, institutional money and every advisory wrapper that double-counts the underlying assets. What is left is money that can actually be advised."
+Why exclude PMS? That's ₹9 lakh crore.
+"In India, a PMS holds securities in the client's own demat account. Those shares are already in our direct-equity line. Adding PMS would count them twice."
+Your pricing model is unproven.
+"It is one of three. The same pool monetises as subscription, as assets under advice, or as a licence — and we know the crossover: a flat ₹7,900 a year equals 50 basis points at a ₹15.8 lakh portfolio. Below that the subscription wins, above it AUA does."
+Why should Indians pay for advice when nobody does?
+"They already do — about 50 basis points a year, inside their regular-plan mutual funds, for advice that comes with a conflict attached. We are not creating a payment habit. We are redirecting one."
+Isn't this just a GPT wrapper?
+"Seventy engines compute; the AI only explains. Number Guard blocks any figure the engines did not produce — verified source, confirmed inputs, checked calculation, audit ID. The model cannot invent a number because it is never allowed to generate one."
+Who is your real competition?
+"Nobody does all three of: start with a diagnosis of what you already own, show the reasoning, and charge a flat fee. Individually each exists. Together they do not."
+What about Dezerv?
+"Dezerv is demand proof, not a comparable — six lakh users paying for advice. They serve HNIs with relationship managers. We serve everyone from a first SIP upward, with software."
+What's your valuation?
+"We are raising ₹12.49 crore for 20%. That puts post-money at ₹62.44 crore, pre-money at ₹49.95 crore."
+Why 18 months and not 24?
+"Eighteen months takes us from backend build to institutional pilots and SEBI-RIA registration. It is released in three six-month tranches against evidenced deliverables, so you are funding checkpoints, not a runway."
+What happens if you miss a milestone?
+"The next tranche does not release, and neither does the equity. That is the structure working as intended. One thing we will flag ourselves: tranche 1 has no buffer in it, and we would like to fix that in the terms."
+What's the exit?
+"Five routes — strategic buyers, wealthtech consolidation, an infrastructure sale of the engines, secondary, or the long IPO path via SEBI-RIA. The engines can be licensed as readily as used, so the infrastructure route stays open even if the consumer product plateaus. Sensitivities are in the model and I can walk you through them separately."
+How much revenue during the 18 months?
+"₹76 lakh projected, 75 to 2,200 subscribers. We show it as upside and do not net it off the ask — we would rather not depend on early revenue arriving on schedule."
+What are you spending it on?
+"Just over half — 51% — goes into technology plus investment and research. Founder draws are 7.6%."
+
+10.  Sources
+Marked P for a primary source (a regulator, an exchange, an industry body, our own records) and S for a secondary one (press or research coverage of a primary figure). Where we use a secondary source, the underlying figure is published by a primary one — prefer the primary link if you are sending anything to an investor.
+10.1  Market and asset data
+
+Source
+What we take from it
+P
+NSE — India Ownership Tracker, Q1 FY26
+https://nsearchives.nseindia.com/web/sites/default/files/inline-files/India%20Ownership%20Report_June%202025.pdf
+Individual direct equity 9.6%, non-promoter corporates 1.9%, other non-institutional 2.9%, promoters 50.0%, FPIs 17.3%, banks and insurers 5.5%
+P
+AMFI — Investor Trends, February 2026
+https://www.amfiindia.com/investor-corner/knowledge-center/industry-trends
+Industry AUM ₹82.03 L Cr; individual 61.2% = ₹50.17 L Cr; corporates ₹30.16 L Cr; banks and FIs ₹1.68 L Cr
+P
+AMFI — monthly SIP contribution
+https://www.amfiindia.com/research-information/amfi-monthly
+Monthly SIP inflows ₹32,087 Cr, record March 2026; ₹3,100 Cr in 2016
+P
+SEBI — assets managed by portfolio managers
+https://www.sebi.gov.in/statistics/assets-managed.html
+PMS AUM ₹44,10,822 Cr, of which EPFO ₹31,86,580 Cr; discretionary ₹37,36,925 Cr; non-discretionary ₹3,52,523 Cr; co-investment ₹6,712 Cr. All excluded, as a double count.
+P
+SEBI — Alternative Investment Fund statistics, March 2026
+https://www.sebi.gov.in/statistics/1392982252002.html
+AIF Categories I–III: ₹16.94 lakh crore committed, ₹7.00 lakh crore raised, ₹6.76 lakh crore invested. We use funds raised.
+P
+SEBI — Depository Statistics, December 2025
+https://www.sebi.gov.in/statistics/1392982252005.html
+21.6 crore demat accounts
+P
+RBI — Liberalised Remittance Scheme monthly data
+https://www.rbi.org.in/Scripts/BS_ViewBulletin.aspx
+US$1.06 bn remitted for equity and debt investment, April–June FY27, roughly double year on year
+P
+RBI — Sovereign Gold Bond issuance
+https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx
+147 tonnes issued, 132 tonnes outstanding, ₹1.12 lakh crore
+S
+Business Today — REIT and gold market coverage, 2026
+https://www.businesstoday.in/markets
+6 listed REITs, ₹3.17 L Cr gross AUM, ₹2.17 L Cr market capitalisation, 4.85 lakh unitholders; gold ETF AUM ₹1.71 L Cr, up 191%
+S
+Business Standard — Bharat InvITs Association coverage
+https://www.business-standard.com/markets
+InvIT sector ₹7 trillion today, projected ₹21 trillion by FY30. We use the ₹1.00 L Cr non-institutional share.
+S
+ICICI Direct / NSE market statistics
+https://www.icicidirect.com/research/equity/trending-news
+About 26 crore accounts, 13.1 crore unique investors
+S
+Exchange activity data, August 2026
+https://exchanges.broker/
+4.60 crore active clients — the denominator behind the 55% SAM filter
+S
+Angel One — mutual fund investor statistics
+https://www.angelone.in/knowledge-center/mutual-funds
+6.09 crore unique mutual fund investors
+S
+IBEF — mutual fund industry
+https://www.ibef.org/industry/mutual-funds-india
+FY26 mutual fund AUM and SIP inflow cross-checks
+S
+Trading Economics — USD/INR
+https://tradingeconomics.com/india/currency
+₹95.99 to the dollar, 18 September 2026; rupee down 8.95% year on year
+10.2  Problem, demand and competitive data
+
+Source
+What we take from it
+P
+SEBI — Profit & Loss of Individual Traders in Equity F&O, July 2025
+https://www.sebi.gov.in/reports-and-statistics/research/jul-2025
+9 in 10 individual F&O traders lost money in FY25; ₹1.06 lakh crore of aggregate losses
+P
+SEBI — Master Circular for Investment Advisers, 27 June 2025
+https://www.sebi.gov.in/legal/master-circulars
+Fee cap: 2.5% of assets under advice or ₹1,51,000 a year per individual client; no cap on non-individual or accredited clients
+P
+SEBI — Research Analyst Guidelines, 8 January 2025
+https://www.sebi.gov.in/legal/circulars
+Research analyst fee cap of ₹1,51,000 a year per client
+S
+The Ken — "SEBI-registered advisors are an endangered species", 2025
+https://the-ken.com/
+Fewer than 1,000 registered investment advisers serving 20+ crore investors
+S
+Trade Brains — adviser and analyst registration counts, 2026
+https://tradebrains.in/
+Cross-check: 973 RIAs and 1,330 research analysts
+S
+Capgemini — World Wealth Report 2026
+https://www.capgemini.com/insights/research-library/world-wealth-report/
+390,000 Indian HNWIs holding US$1.64 trillion, growing about 3% a year
+S
+Mordor Intelligence — India retail brokerage market
+https://www.mordorintelligence.com/industry-reports/india-retail-brokerage-market
+US$6.98 bn in 2026 rising to US$13.09 bn by 2031
+S
+TechSci Research — India FinTech Market Report
+https://www.techsciresearch.com/report/india-fintech-market/
+US$112 bn in 2024 to US$550 bn by 2030
+S
+Trendlyne — subscription plans
+https://trendlyne.com/subscription/plans/
+₹310 a month domestic versus ₹1,500–2,000 a month for global tiers — the ~5× global premium
+S
+Competitor websites and public app listings, 2026
+Kalpi.ai, Wright Research, Ionic Wealth, MyFi and Dezerv positioning, pricing and user counts
+10.3  Our own documents
+Document
+What the deck takes from it
+Nxance Financial Sheet.xlsx
+Monthly burn curve (₹27.6 L → ₹76.91 L, ₹61.97 L average, ₹11.10 Cr total) · use of funds · valuation and dilution · business-model subscriber ramp · hiring plan and people cost · exit sensitivities
+Funding tranche schedule (PDF, September 2026)
+The three-tranche structure: ₹2.74 Cr / ₹5.27 Cr / ₹4.48 Cr at 6% / 7% / 7%, with deliverables per tranche. Supersedes the four-tranche version still sitting in the workbook.
+Health Check engine specification
+26 quantitative sub-engines
+Construction engine specification
+26 quantitative sub-engines
+NxanceLM specification
+18 language mini-engines
+Our own user and investor conversation records
+All traction figures: 12 conversations, 8 of 12, 50 early Construction users, 500+ waitlist
+
+A closing note on discipline. Five separate errors were found and corrected while building this model, and the largest — worth about ₹40 lakh crore of phantom assets — survived several review passes before a single unexpected question exposed it. The market number in the deck is now right because it was rebuilt twice from different directions until the two agreed. Hold every future number to the same test.

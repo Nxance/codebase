@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Nxance — NxanceLM v3.0 Ultimate — 18+ Mini-Engines · Own AI From Scratch · AI Quant Core</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+:root{
+  --bg:#02030A;--c2:#0A0D1A;--c3:#0D1122;--bo:#151828;--b2:#191D35;
+  --tx:#EAF0FF;--t2:#586298;--t3:#222640;
+  --g:#A855F7;--gt:rgba(168,85,247,.1);--gr:rgba(168,85,247,.24);--cyan:#00C4FF;--cyant:rgba(0,196,255,.09);--cyanr:rgba(0,196,255,.3);
+  --gold:#FFB830;--goldt:rgba(255,184,48,.09);--goldr:rgba(255,184,48,.3);
+  --red:#FF3F60;--redt:rgba(255,63,96,.09);--redr:rgba(255,63,96,.3);
+  --blue:#4A8FFF;--bluet:rgba(74,143,255,.09);--bluer:rgba(74,143,255,.3);
+  --purple:#9B6DFF;--purplet:rgba(155,109,255,.09);--purpler:rgba(155,109,255,.32);
+  --teal:#00D4B1;--tealt:rgba(0,212,177,.09);--tealr:rgba(0,212,177,.3);
+  --pink:#FF6B9D;--pinkt:rgba(255,107,157,.09);--pinkr:rgba(255,107,157,.3);
+  --org:#FF7A35;--orgt:rgba(255,122,53,.09);--orgr:rgba(255,122,53,.3);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);line-height:1.72;font-size:14px}
+.mono{font-family:'JetBrains Mono',monospace}
+.cover{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 28px;text-align:center;
+  background:radial-gradient(ellipse 80% 55% at 50% -8%,rgba(0,196,255,.10),transparent 58%),
+             radial-gradient(ellipse 40% 30% at 8% 90%,rgba(155,109,255,.08),transparent 55%),
+             radial-gradient(ellipse 35% 25% at 92% 88%,rgba(255,107,157,.05),transparent 50%)}
+.ctag{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--g);background:var(--gt);border:1px solid var(--gr);padding:5px 20px;border-radius:20px;display:inline-block;margin-bottom:22px}
+.ch{font-family:'Space Grotesk',sans-serif;font-size:clamp(26px,4.8vw,50px);font-weight:700;line-height:1.08;letter-spacing:-.025em;margin-bottom:12px}
+.ch em{font-style:normal;color:var(--g)}
+.ch .qem{font-style:normal;color:var(--purple)}
+.csub{font-size:14.5px;color:var(--t2);max-width:800px;margin:0 auto 28px;line-height:1.82}
+.badges{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin-bottom:36px;max-width:960px}
+.bd{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;padding:4px 13px;border-radius:20px;letter-spacing:.04em}
+.bg{color:var(--g);background:var(--gt);border:1px solid var(--gr)}
+.bgold{color:var(--gold);background:var(--goldt);border:1px solid var(--goldr)}
+.bred{color:var(--red);background:var(--redt);border:1px solid var(--redr)}
+.bp{color:var(--purple);background:var(--purplet);border:1px solid var(--purpler)}
+.bteal{color:var(--teal);background:var(--tealt);border:1px solid var(--tealr)}
+.bpink{color:var(--pink);background:var(--pinkt);border:1px solid var(--pinkr)}
+.bo2{color:var(--org);background:var(--orgt);border:1px solid var(--orgr)}
+.bblue{color:var(--blue);background:var(--bluet);border:1px solid var(--bluer)}
+.cover-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;max-width:1000px;width:100%;align-items:stretch}
+.cg{background:var(--c2);border:1.5px solid var(--b2);border-radius:11px;padding:12px 9px 13px;text-align:center;min-height:92px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;overflow:hidden}
+.cg.newcg{border-color:var(--purpler);background:linear-gradient(180deg,rgba(155,109,255,.07),var(--c2))}
+.cg-icon{font-size:19px;margin-bottom:6px;display:block;line-height:1}
+.cg-num{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--t3);margin-bottom:5px;letter-spacing:.08em;white-space:nowrap}
+.cg.newcg .cg-num{color:var(--purple)}
+.cg-name{font-size:9.5px;font-weight:700;color:var(--tx);line-height:1.32;word-break:break-word;hyphens:auto}
+@media(max-width:760px){.cover-grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px 80px}
+.sec{margin-bottom:78px}
+.hr{height:1px;background:var(--bo);margin:64px 0}
+.slabel{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--g);background:var(--gt);border:1px solid var(--gr);padding:3px 13px;border-radius:20px;display:inline-block;margin-bottom:14px}
+.slabel.q{color:var(--purple);background:var(--purplet);border-color:var(--purpler)}
+.slabel.pk{color:var(--pink);background:var(--pinkt);border-color:var(--pinkr)}
+.slabel.gd{color:var(--gold);background:var(--goldt);border-color:var(--goldr)}
+.slabel.tl{color:var(--teal);background:var(--tealt);border-color:var(--tealr)}
+.stitle{font-family:'Space Grotesk',sans-serif;font-size:27px;font-weight:700;letter-spacing:-.015em;margin-bottom:6px}
+.stitle em{font-style:normal;color:var(--g)}
+.stitle .qem{font-style:normal;color:var(--purple)}
+.stitle .pkm{font-style:normal;color:var(--pink)}
+.ssub{font-size:14px;color:var(--t2);margin-bottom:24px;max-width:800px;line-height:1.82}
+.card{background:var(--c2);border:1.5px solid var(--b2);border-radius:14px;padding:22px;margin-bottom:14px}
+.card.qcard{border-color:var(--purpler);background:linear-gradient(180deg,rgba(155,109,255,.05),var(--c2))}
+.card.pkcard{border-color:var(--pinkr);background:linear-gradient(180deg,rgba(255,107,157,.05),var(--c2))}
+.card.tlcard{border-color:var(--tealr);background:linear-gradient(180deg,rgba(0,212,177,.05),var(--c2))}
+.card.gdcard{border-color:var(--goldr);background:linear-gradient(180deg,rgba(255,184,48,.05),var(--c2))}
+.ctitle{font-family:'Space Grotesk',sans-serif;font-size:16.5px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.chip{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;padding:2px 10px;border-radius:12px;letter-spacing:.05em}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}
+@media(max-width:860px){.grid2,.grid3,.grid4{grid-template-columns:1fr}}
+@media(min-width:560px) and (max-width:860px){.grid4,.grid3{grid-template-columns:1fr 1fr}}
+.kv{margin-bottom:11px}
+.kv:last-child{margin-bottom:0}
+.k{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g);margin-bottom:3px}
+.k.q{color:var(--purple)}.k.pk{color:var(--pink)}.k.gd{color:var(--gold)}.k.tl{color:var(--teal)}.k.rd{color:var(--red)}.k.or{color:var(--org)}.k.bl{color:var(--blue)}
+.v{font-size:13.2px;color:#B9C3E8;line-height:1.75}
+.v b,.v strong{color:var(--tx)}
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin:14px 0}
+th{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t2);text-align:left;padding:9px 12px;border-bottom:1.5px solid var(--b2)}
+td{padding:10px 12px;border-bottom:1px solid var(--bo);color:#B9C3E8;vertical-align:top;line-height:1.6}
+td b{color:var(--tx)}
+tr:last-child td{border-bottom:none}
+td.mono,th.mono{font-family:'JetBrains Mono',monospace;font-size:11.5px}
+.callout{border-radius:14px;padding:18px 20px;margin:16px 0;font-size:13.2px;line-height:1.78;color:#B9C3E8}
+.callout b{color:var(--tx)}
+.co-g{background:var(--gt);border:1.5px solid var(--gr)}
+.co-q{background:var(--purplet);border:1.5px solid var(--purpler)}
+.co-gold{background:var(--goldt);border:1.5px solid var(--goldr)}
+.co-red{background:var(--redt);border:1.5px solid var(--redr)}
+.co-teal{background:var(--tealt);border:1.5px solid var(--tealr)}
+.co-pink{background:var(--pinkt);border:1.5px solid var(--pinkr)}
+.co-head{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;margin-bottom:7px;color:var(--tx)}
+pre{background:#05070F;border:1.5px solid var(--b2);border-radius:12px;padding:18px;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.7;color:#9DB0E8;margin:14px 0}
+pre .cm{color:#3D4670}
+pre .kw{color:var(--purple)}
+pre .st{color:var(--teal)}
+pre .fn{color:var(--g)}
+pre .nm{color:var(--gold)}
+.flow{background:var(--c2);border:1.5px solid var(--b2);border-radius:16px;padding:24px;margin:16px 0}
+.fstage{border-radius:12px;padding:14px 16px;margin-bottom:10px}
+.fs-build{background:rgba(0,196,255,.05);border:1.5px solid var(--gr)}
+.fs-manage{background:rgba(0,212,177,.05);border:1.5px solid var(--tealr)}
+.fs-super{background:rgba(155,109,255,.06);border:1.5px solid var(--purpler)}
+.fs-label{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:9px}
+.fnode{background:var(--c3);border:1px solid var(--b2);border-radius:9px;padding:8px 12px;font-size:11.5px;color:#B9C3E8;display:inline-block;margin:3px 3px}
+.fnode b{color:var(--tx);font-size:11.5px}
+.arrow{text-align:center;color:var(--t2);font-size:15px;margin:4px 0}
+.tbar{display:flex;border-radius:10px;overflow:hidden;border:1.5px solid var(--b2);margin:14px 0;min-height:52px}
+.tseg{display:flex;flex-direction:column;justify-content:center;padding:8px 6px;font-family:'JetBrains Mono',monospace;text-align:center}
+.tseg .tt{font-size:9px;font-weight:700;letter-spacing:.03em;line-height:1.3}
+.tseg .tv{font-size:10px;font-weight:700;margin-top:2px}
+.behav{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:14px 0}
+.bcard{background:var(--c3);border:1.5px solid var(--b2);border-radius:12px;padding:16px}
+.bcard .bic{font-size:22px;margin-bottom:7px}
+.bcard .bn{font-family:'Space Grotesk',sans-serif;font-size:13.5px;font-weight:700;margin-bottom:5px;color:var(--pink)}
+.bcard .bdsc{font-size:12px;color:#9AA5CE;line-height:1.65;margin-bottom:8px}
+.bcard .brx{font-size:11.5px;color:#B9C3E8;line-height:1.6;border-top:1px solid var(--bo);padding-top:8px}
+.bcard .brx b{color:var(--teal);font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:3px}
+.footer{border-top:1px solid var(--bo);padding:36px 28px;text-align:center;color:var(--t2);font-size:12px}
+.footer .fb{font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--tx);font-size:15px;letter-spacing:-.01em}
+.footer .fb em{font-style:normal;color:var(--g)}
+.num{font-family:'JetBrains Mono',monospace;color:var(--t3);font-size:10px;font-weight:700;letter-spacing:.1em}
+ul.dash{list-style:none;margin:8px 0}
+ul.dash li{padding-left:18px;position:relative;font-size:13.2px;color:#B9C3E8;line-height:1.75;margin-bottom:7px}
+ul.dash li:before{content:"—";position:absolute;left:0;color:var(--g)}
+ul.dash.q li:before{color:var(--purple)}
+ul.dash.pk li:before{color:var(--pink)}
+ul.dash li b{color:var(--tx)}
+.toc{background:var(--c2);border:1.5px solid var(--b2);border-radius:16px;padding:24px 28px;margin:0 0 20px}
+.toc-h{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--g);margin-bottom:16px}
+.toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px 28px}
+@media(max-width:860px){.toc-grid{grid-template-columns:1fr}}
+.toc a{color:#9AA5CE;text-decoration:none;font-size:12.5px;padding:5px 0;display:flex;gap:11px;border-bottom:1px solid rgba(255,255,255,.03);transition:color .15s}
+.toc a:hover{color:var(--g)}
+.toc a b{font-family:'JetBrains Mono',monospace;color:var(--t3);font-size:10.5px;min-width:26px;font-weight:700}
+.toc a.new b{color:var(--purple)}
+.example-flow{background:var(--c2);border:1.5px solid var(--b2);border-radius:16px;padding:6px 0;overflow:hidden;margin:16px 0}
+.exrow{display:grid;grid-template-columns:80px 1fr;gap:0;border-bottom:1px solid var(--bo)}
+.exrow:last-child{border-bottom:none}
+.extime{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--gold);padding:14px 16px;background:rgba(255,184,48,.04);display:flex;align-items:center;border-right:1px solid var(--bo)}
+.exbody{padding:13px 18px}
+.exbody .ex-eng{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;color:var(--g);letter-spacing:.06em;margin-bottom:4px}
+.exbody .ex-txt{font-size:12.5px;color:#B9C3E8;line-height:1.65}
+.exbody .ex-txt b{color:var(--tx)}
+.assetpill{display:inline-flex;flex-direction:column;gap:2px;background:var(--c3);border:1px solid var(--b2);border-radius:10px;padding:9px 13px;margin:3px;min-width:96px}
+.assetpill .ap-n{font-size:11.5px;font-weight:700;color:var(--tx)}
+.assetpill .ap-t{font-family:'JetBrains Mono',monospace;font-size:8.5px;color:var(--t2);letter-spacing:.04em}
+.assetpill.locked{opacity:.5;border-style:dashed}
+.assetpill.locked .ap-t{color:var(--org)}
+.tier-row{display:flex;align-items:stretch;gap:10px;margin:10px 0;flex-wrap:wrap}
+.tierbox{flex:1;min-width:180px;background:var(--c3);border:1.5px solid var(--b2);border-radius:12px;padding:14px 16px}
+.tierbox .tb-h{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.06em;margin-bottom:8px}
+.tierbox .tb-b{font-size:12px;color:#9AA5CE;line-height:1.6}
+.tierbox .tb-b b{color:var(--tx)}
+.dstrip{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+@media(max-width:860px){.dstrip{grid-template-columns:1fr 1fr}}
+.dstat{background:var(--c2);border:1.5px solid var(--b2);border-radius:12px;padding:14px 12px;text-align:center}
+.dstat .dv{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;line-height:1;margin-bottom:5px}
+.dstat .dl{font-size:10px;color:var(--t2);line-height:1.4}
+.dstat .dd{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--teal);margin-top:4px;letter-spacing:.04em}
+
+.scratch-c{--sc:#4ADE80;--sct:rgba(74,222,128,.1);--scr:rgba(74,222,128,.3)}
+.co-scratch{background:rgba(74,222,128,.08);border:1.5px solid rgba(74,222,128,.3)}
+.bscratch{color:#4ADE80;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.3)}
+.chip.bscratch{color:#4ADE80;background:rgba(74,222,128,.12);border:1px solid rgba(74,222,128,.3)}
+.chat{display:flex;flex-direction:column;gap:10px;margin:14px 0}
+.umsg{align-self:flex-end;max-width:82%;padding:11px 15px;border-radius:14px 14px 4px 14px;background:var(--gt);border:1px solid var(--gr);font-size:12.5px;color:var(--tx);line-height:1.6}
+.amsg{align-self:flex-start;max-width:92%;padding:12px 15px;border-radius:14px 14px 14px 4px;background:var(--c2);border:1px solid var(--b2);font-size:12.5px;color:#B9C3E8;line-height:1.65}
+.amsg b{color:var(--tx)}
+.k.sc{color:#4ADE80}
+
+.formula{background:#05070F;border:1.5px solid var(--b2);border-radius:12px;padding:16px 18px;margin:12px 0;font-family:'JetBrains Mono',monospace;font-size:13px;color:#CFE0FF;overflow-x:auto;line-height:2.1}
+.formula .fx{color:var(--g);font-weight:600}
+.formula .qx{color:var(--purple);font-weight:600}
+.formula sub,.formula sup{font-size:9.5px}
+.fwhere{font-size:12px;color:#9AA5CE;line-height:1.85;margin:8px 0 0}
+.fwhere b{color:var(--tx);font-family:'JetBrains Mono',monospace;font-size:11px}
+.fhead{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:16px 0 4px}
+</style>
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<div class="cover">
+  <div class="ctag">Ohshn Intelligence — Nxance Engineering Division — v3.0 Ultimate Edition</div>
+  <h1 class="ch">NxanceLM <em>v3.0</em><br>18+ Mini-Engines · <span class="qem">Own AI, Built From Scratch</span></h1>
+  <p class="csub">Nxance's own AI, from scratch — not one monolithic model but <b style="color:var(--g)">18+ coordinated mini-engines</b> that together form a proper intelligence. It is woven through the Construction and Health Check engines as a helper (never a lone decision-maker), generates every report card and explanation the user reads, tracks user behaviour, researches and answers finance questions in chat, and evaluates trillions of parameters — quantum-accelerated where it counts. After the MVP's temporary TinyLlama placeholder, every weight is trained by Ohshn Intelligence from token zero. <b style="color:var(--tx)">The motive it serves never changes: get the user to their goal with less risk, higher return, in minimum time, shaped to real behaviour. <b>And this document is a floor, not a ceiling:</b> mini-engines and parameters keep getting added over time — every one ships behind the same internal contract, so adding mini-engine #19, #25, #30 never requires touching the others. The count grows; the motive never changes.</b></p>
+  <div class="badges">
+    <span class="bd bg">18+ MINI-ENGINES · ALWAYS EXPANDING</span>
+    <span class="bd bgold">AI QUANT CORE · FORMULAS</span>
+    <span class="bd bscratch">100% BUILT FROM SCRATCH</span>
+    <span class="bd bp">QUANTUM-ACCELERATED</span>
+    <span class="bd bpink">BEHAVIOUR TRACKING</span>
+    <span class="bd bteal">HELPER, NOT DICTATOR</span>
+    <span class="bd bcyan">TRILLION-PARAM SCALE TARGET</span>
+    <span class="bd bgold">REPORT CARDS + EXPLANATIONS</span>
+    <span class="bd bo2">FULL ECONOMY + MARKET CHAT</span>
+  </div>
+  <div class="cover-grid">
+    <div class="cg"><span class="cg-icon">👂</span><div class="cg-num">MINI 01</div><div class="cg-name">Intent &amp; Understanding</div></div>
+    <div class="cg"><span class="cg-icon">🔤</span><div class="cg-num">MINI 02</div><div class="cg-name">Tokenizer &amp; Encoder</div></div>
+    <div class="cg"><span class="cg-icon">📚</span><div class="cg-num">MINI 03</div><div class="cg-name">Knowledge &amp; Retrieval (RAG)</div></div>
+    <div class="cg"><span class="cg-icon">🧠</span><div class="cg-num">MINI 04</div><div class="cg-name">Reasoning Core (hybrid model)</div></div>
+    <div class="cg"><span class="cg-icon">🔬</span><div class="cg-num">MINI 05</div><div class="cg-name">Research &amp; Analysis</div></div>
+    <div class="cg"><span class="cg-icon">💬</span><div class="cg-num">MINI 06</div><div class="cg-name">Explainability Engine</div></div>
+    <div class="cg"><span class="cg-icon">📋</span><div class="cg-num">MINI 07</div><div class="cg-name">Report Card Generator</div></div>
+    <div class="cg"><span class="cg-icon">🌐</span><div class="cg-num">MINI 08</div><div class="cg-name">Economy &amp; Market Chat</div></div>
+    <div class="cg"><span class="cg-icon">🧭</span><div class="cg-num">MINI 09</div><div class="cg-name">Behaviour Tracking</div></div>
+    <div class="cg"><span class="cg-icon">📅</span><div class="cg-num">MINI 10</div><div class="cg-name">Daily Reporting</div></div>
+    <div class="cg"><span class="cg-icon">🔢</span><div class="cg-num">MINI 11</div><div class="cg-name">Number-Verification Guard</div></div>
+    <div class="cg"><span class="cg-icon">🛡️</span><div class="cg-num">MINI 12</div><div class="cg-name">Safety &amp; Boundary Guard</div></div>
+    <div class="cg"><span class="cg-icon">⚛️</span><div class="cg-num">MINI 13</div><div class="cg-name">Quantum Acceleration</div></div>
+    <div class="cg"><span class="cg-icon">🧩</span><div class="cg-num">MINI 14</div><div class="cg-name">Memory &amp; Context</div></div>
+    <div class="cg newcg"><span class="cg-icon">🗣️</span><div class="cg-num">MINI 15 · NEW</div><div class="cg-name">Multilingual &amp; Hinglish</div></div>
+    <div class="cg newcg"><span class="cg-icon">🎙️</span><div class="cg-num">MINI 16 · NEW</div><div class="cg-name">Voice (ASR + TTS)</div></div>
+    <div class="cg newcg"><span class="cg-icon">🔔</span><div class="cg-num">MINI 17 · NEW</div><div class="cg-name">Proactive Alerts &amp; Nudges</div></div>
+    <div class="cg newcg"><span class="cg-icon">📈</span><div class="cg-num">MINI 18 · NEW</div><div class="cg-name">Self-Evaluation &amp; Learning</div></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- ============ TABLE OF CONTENTS ============ -->
+<div class="toc">
+  <div class="toc-h">Contents — 18+ Mini-Engines across 5 Layers · AI Quant Core Included</div>
+  <div class="toc-grid">
+    <a href="#s01"><b>01</b> Overview — What NxanceLM Is (and Isn't)</a>
+    <a href="#s02"><b>02</b> The 5-Layer Architecture — How 18+ Mini-Engines Fit</a>
+    <a href="#s03"><b>03</b> Integration — How It Sits Inside Both Engines</a>
+    <a href="#s04"><b>04</b> The Golden Rule — Helper, Never a Lone Decider</a>
+    <a href="#s05"><b>05</b> Mini-Engines 01–04 · Perception &amp; Reasoning Core</a>
+    <a href="#s06"><b>06</b> Mini-Engines 05–08 · Research, Explain, Report, Chat</a>
+    <a href="#s07"><b>07</b> Mini-Engines 09–14 · Behaviour, Safety, Quantum, Memory</a>
+    <a href="#sNM" class="new"><b>07B</b> Mini 15–18 · Hinglish, Voice, Nudges, Self-Learning</a>
+    <a href="#s08"><b>08</b> The Chat Assistant — Economy, Markets &amp; Redirects</a>
+    <a href="#s09"><b>09</b> Trillion Parameters — What It Actually Means</a>
+    <a href="#s10" class="new"><b>10</b> Quantum Computing Inside NxanceLM (Q1–Q5)</a>
+    <a href="#s11" class="new"><b>11</b> Quantum Build Stack</a>
+    <a href="#sQC" class="new"><b>11B</b> The AI Quant Core — Formulas of the Model Itself</a>
+    <a href="#s12"><b>12</b> Built From Scratch — No Third-Party Base Model</a>
+    <a href="#s13" class="new"><b>13</b> Full Build Stack — Every Mini-Engine, Every Tool</a>
+    <a href="#s14" class="new"><b>14</b> How to Actually Build This — MVP → From-Scratch</a>
+    <a href="#s15" class="new"><b>15</b> Cost &amp; Economics — Training &amp; Serving</a>
+    <a href="#s16"><b>16</b> Complete Summary — All 18+ at a Glance</a>
+    <a href="#v31"><b>v3.1</b> Selection &amp; Analysis End-to-End</a>
+  </div>
+</div>
+
+<!-- ============ ARCHITECTURE DIAGRAM ============ -->
+<div class="sec" id="sArch" style="margin-bottom:44px">
+  <div class="slabel">The Whole AI — One Picture</div>
+  <h2 class="stitle">18+ Mini-Engines, <em>5 Layers</em>, One Intelligence</h2>
+  <p class="ssub">NxanceLM is not one model — it's 14 mini-engines in five layers. A query flows down: Perception understands it, Knowledge retrieves facts, the Reasoning Core thinks, Generation produces the answer, and the Guard layer wraps everything so no number is invented and no boundary is crossed. Read top-to-bottom; the Guard layer on the right is always watching every box.</p>
+  <svg viewBox="0 0 900 660" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:900px;display:block;margin:0 auto;border-radius:16px">
+    <rect width="900" height="660" rx="16" fill="#0A0618" stroke="#241858" stroke-width="1.5"/>
+    <text x="30" y="34" font-size="13" font-weight="700" fill="#F2ECFF" font-family="Space Grotesk,sans-serif">NxanceLM v3.0 — 18+ Mini-Engines, System Map</text>
+
+    <!-- Guard layer on right -->
+    <rect x="648" y="52" width="222" height="500" rx="13" fill="rgba(74,222,128,.05)" stroke="#4ADE80" stroke-width="1.5" stroke-dasharray="6 4"/>
+    <text x="660" y="76" font-size="10.5" font-weight="700" fill="#4ADE80" font-family="JetBrains Mono,monospace">GUARD — always on</text>
+    <g font-family="Inter,sans-serif">
+      <rect x="662" y="90" width="194" height="82" rx="10" fill="rgba(74,222,128,.1)" stroke="#4ADE80" stroke-width="1"/>
+      <text x="676" y="112" font-size="10.5" font-weight="700" fill="#4ADE80" font-family="JetBrains Mono,monospace">MINI-11 · Number Guard</text>
+      <text x="676" y="132" font-size="9.5" fill="#8A80C8">Every ₹, %, date cross-</text>
+      <text x="676" y="147" font-size="9.5" fill="#8A80C8">checked vs engine data.</text>
+      <text x="676" y="162" font-size="9.5" fill="#8A80C8">Narrates numbers, never</text>
+
+      <rect x="662" y="182" width="194" height="82" rx="10" fill="rgba(74,222,128,.1)" stroke="#4ADE80" stroke-width="1"/>
+      <text x="676" y="204" font-size="10.5" font-weight="700" fill="#4ADE80" font-family="JetBrains Mono,monospace">MINI-12 · Safety Guard</text>
+      <text x="676" y="224" font-size="9.5" fill="#8A80C8">No lone financial calls,</text>
+      <text x="676" y="239" font-size="9.5" fill="#8A80C8">no unhedged predictions,</text>
+      <text x="676" y="254" font-size="9.5" fill="#8A80C8">redirects to the 2 engines.</text>
+
+      <rect x="662" y="274" width="194" height="150" rx="10" fill="rgba(74,222,128,.06)" stroke="#4ADE80" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="676" y="296" font-size="10" font-weight="700" fill="#4ADE80" font-family="JetBrains Mono,monospace">THE GOLDEN RULE</text>
+      <text x="676" y="318" font-size="9.5" fill="#8A80C8">NxanceLM never decides</text>
+      <text x="676" y="333" font-size="9.5" fill="#8A80C8">alone. Inside the engines</text>
+      <text x="676" y="348" font-size="9.5" fill="#8A80C8">it is ONE parameter among</text>
+      <text x="676" y="363" font-size="9.5" fill="#8A80C8">many. In chat it researches</text>
+      <text x="676" y="378" font-size="9.5" fill="#8A80C8">&amp; answers, but for "build"</text>
+      <text x="676" y="393" font-size="9.5" fill="#8A80C8">or "analyse" it redirects</text>
+      <text x="676" y="408" font-size="9.5" fill="#8A80C8">to the two real engines.</text>
+
+      <rect x="662" y="434" width="194" height="106" rx="10" fill="rgba(168,85,247,.08)" stroke="#A855F7" stroke-width="1"/>
+      <text x="676" y="456" font-size="10.5" font-weight="700" fill="#A855F7" font-family="JetBrains Mono,monospace">MINI-13 · Quantum Accel</text>
+      <text x="676" y="476" font-size="9.5" fill="#8A80C8">Speeds retrieval search,</text>
+      <text x="676" y="491" font-size="9.5" fill="#8A80C8">sampling &amp; combinatorial</text>
+      <text x="676" y="506" font-size="9.5" fill="#8A80C8">sub-problems. Classical</text>
+      <text x="676" y="521" font-size="9.5" fill="#8A80C8">fallback always ready.</text>
+    </g>
+
+    <!-- Perception layer -->
+    <rect x="30" y="52" width="596" height="70" rx="12" fill="rgba(0,229,255,.05)" stroke="#00E5FF" stroke-width="1.5"/>
+    <text x="44" y="74" font-size="10.5" font-weight="700" fill="#00E5FF" font-family="JetBrains Mono,monospace">PERCEPTION — understands the query</text>
+    <g font-family="Inter,sans-serif" font-size="9.5" fill="#B9C3E8">
+      <rect x="44" y="84" width="270" height="28" rx="7" fill="#0A0618" stroke="#241858"/><text x="56" y="102" fill="#F2ECFF" font-weight="600">MINI-01 · Intent &amp; Understanding</text>
+      <rect x="326" y="84" width="286" height="28" rx="7" fill="#0A0618" stroke="#241858"/><text x="338" y="102" fill="#F2ECFF" font-weight="600">MINI-02 · Tokenizer &amp; Encoder (own BPE)</text>
+    </g>
+
+    <!-- Knowledge layer -->
+    <rect x="30" y="134" width="596" height="60" rx="12" fill="rgba(255,184,48,.05)" stroke="#FFB830" stroke-width="1.5"/>
+    <text x="44" y="156" font-size="10.5" font-weight="700" fill="#FFB830" font-family="JetBrains Mono,monospace">KNOWLEDGE — retrieves the facts</text>
+    <g font-family="Inter,sans-serif" font-size="9.5" fill="#B9C3E8">
+      <rect x="44" y="164" width="270" height="24" rx="7" fill="#0A0618" stroke="#241858"/><text x="56" y="180" fill="#F2ECFF" font-weight="600">MINI-03 · Knowledge &amp; Retrieval (RAG)</text>
+      <rect x="326" y="164" width="286" height="24" rx="7" fill="#0A0618" stroke="#241858"/><text x="338" y="180" fill="#F2ECFF" font-weight="600">MINI-14 · Memory &amp; Context (cross-session)</text>
+    </g>
+
+    <!-- Reasoning core -->
+    <rect x="30" y="206" width="596" height="96" rx="12" fill="rgba(168,85,247,.06)" stroke="#A855F7" stroke-width="2"/>
+    <text x="44" y="228" font-size="10.5" font-weight="700" fill="#A855F7" font-family="JetBrains Mono,monospace">REASONING CORE — the actual intelligence</text>
+    <g font-family="Inter,sans-serif" font-size="9" fill="#B9C3E8">
+      <rect x="44" y="238" width="568" height="30" rx="6" fill="rgba(168,85,247,.09)" stroke="#A855F7"/><text x="54" y="257" fill="#A855F7" font-weight="700">MINI-04 · Reasoning Core — Hybrid Transformer + Mamba (SSM) + Mixture-of-Experts, trained from scratch</text>
+      <rect x="44" y="272" width="290" height="24" rx="6" fill="#0A0618" stroke="#241858"/><text x="54" y="288" fill="#F2ECFF">MINI-05 · Research &amp; Analysis</text>
+      <rect x="342" y="272" width="270" height="24" rx="6" fill="#0A0618" stroke="#241858"/><text x="352" y="288" fill="#F2ECFF">MINI-09 · Behaviour Tracking (feeds both engines)</text>
+    </g>
+
+    <!-- Generation layer -->
+    <rect x="30" y="314" width="596" height="130" rx="12" fill="rgba(255,63,96,.05)" stroke="#FF3F60" stroke-width="1.5"/>
+    <text x="44" y="336" font-size="10.5" font-weight="700" fill="#FF3F60" font-family="JetBrains Mono,monospace">GENERATION — produces the output</text>
+    <g font-family="Inter,sans-serif" font-size="9" fill="#B9C3E8">
+      <rect x="44" y="346" width="184" height="26" rx="6" fill="#0A0618" stroke="#241858"/><text x="54" y="363" fill="#F2ECFF">MINI-06 · Explainability</text>
+      <rect x="236" y="346" width="184" height="26" rx="6" fill="#0A0618" stroke="#241858"/><text x="246" y="363" fill="#F2ECFF">MINI-07 · Report Card Gen</text>
+      <rect x="428" y="346" width="184" height="26" rx="6" fill="#0A0618" stroke="#241858"/><text x="438" y="363" fill="#F2ECFF">MINI-08 · Economy Chat</text>
+      <rect x="44" y="380" width="568" height="26" rx="6" fill="#0A0618" stroke="#241858"/><text x="54" y="397" fill="#F2ECFF">MINI-10 · Daily Reporting — proactive "how is my portfolio doing" digests</text>
+    </g>
+    <text x="44" y="426" font-size="9.5" fill="#6A60A8" font-family="Inter">Output: one coherent explanation / report / answer the user actually reads — every number traceable to a real engine.</text>
+
+    <!-- User -->
+    <rect x="180" y="456" width="316" height="40" rx="9" fill="rgba(168,85,247,.06)" stroke="#A855F7" stroke-width="1.3"/>
+    <text x="338" y="481" text-anchor="middle" font-size="10" fill="#A855F7" font-weight="700" font-family="JetBrains Mono,monospace">USER — sees a single, coherent answer</text>
+
+    <!-- Scratch banner -->
+    <rect x="30" y="512" width="596" height="40" rx="9" fill="rgba(74,222,128,.05)" stroke="#4ADE80" stroke-width="1.3"/>
+    <text x="328" y="530" text-anchor="middle" font-size="9.5" fill="#4ADE80" font-weight="700" font-family="JetBrains Mono,monospace">MVP: TinyLlama placeholder only. Phase 1 onward: trained from token zero — own everything.</text>
+    <text x="328" y="544" text-anchor="middle" font-size="8.5" fill="#6A60A8">Own tokenizer · own architecture · own data · own weights · own compute (OhshnCUDA)</text>
+
+    <!-- Motive footer -->
+    <rect x="30" y="578" width="840" height="56" rx="12" fill="rgba(255,184,48,.05)" stroke="#FFB830" stroke-width="1.5"/>
+    <text x="450" y="602" text-anchor="middle" font-size="11" font-weight="700" fill="#FFB830" font-family="Space Grotesk,sans-serif">THE ONE LOCKED MOTIVE</text>
+    <text x="450" y="622" text-anchor="middle" font-size="10.5" fill="#F2ECFF" font-family="Inter">Help both engines get the user to their goal — minimum risk, minimum time, shaped to real behaviour. NxanceLM never decides alone.</text>
+  </svg>
+</div>
+
+
+<div class="hr"></div>
+<div class="sec" id="v31">
+  <div style="background:linear-gradient(90deg,#FFB830,#FF6B9D);color:#0A0E1A;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:10px 16px;border-radius:10px;margin:8px 0 14px;text-align:center">★ v3.1 — Selection &amp; Analysis, End to End ★</div>
+  <div class="slabel">v3.1 — Two-Stage Selection · Pipeline · Backend Scoring · User Flows</div>
+  <div class="stitle">How Selection &amp; Analysis Work — One Place, No Repetition</div>
+  <div class="ssub">The operational summary every build phase must respect. Full detail lives in the two engine documents; this is
+  the same story in one place: two stages, per-asset-class parameters + formulas, both pipelines, the hidden backend number
+  system, and the front-end vs backend user flows.</div>
+
+  <div class="stitle" style="font-size:19px;margin:24px 0 6px">1 · Two Stages, Never One Yardstick</div>
+  <div class="grid2">
+    <div class="card"><div class="k">STAGE 1 · MACRO PARAMETERS → ASSET-CLASS MIX</div>
+      <div class="v" style="margin-top:8px">Whole portfolio / whole questionnaire → asset-class allocation. Technical · Fundamental ·
+      Data Analysis · Data Science · Market Segment · Global Market · Risk · Quant Finance · Human Behaviour · Quantum · AI ·
+      Forecasting · Crisis · Fraud · + extensible.</div></div>
+    <div class="card"><div class="k">STAGE 2 · PER-ASSET-CLASS PARAMETERS → INSTRUMENT + QTY</div>
+      <div class="v" style="margin-top:8px">Each instrument graded on its own class pack — MF · Stock · FD · Bond · Commodity ·
+      Currency · Gold · ETF/REIT — each with its own parameters and formulas (below). A fund and an FD are never judged alike.</div></div>
+  </div>
+
+  <div class="stitle" style="font-size:19px;margin:26px 0 6px">2 · Stage-2 Parameter Packs (with formulas)</div>
+  
+    <div class="card">
+      <div class="k gd">MF</div>
+      <div class="stitle" style="font-size:18px;margin-top:6px">Mutual Funds — EQUITY / DEBT / HYBRID</div>
+      <div class="v" style="margin-top:4px"><b>What matters most:</b> Rolling Return · Alpha-over-Benchmark · Consistency-of-Alpha · Sharpe · Std Dev · Max Drawdown · Expense Ratio · Downside &amp; Upside Capture.</div>
+      <div style="margin-top:10px"><div class="v" style="margin:4px 0"><b>Rolling Return</b> — return over every rolling N-year window, not one flattering stretch.</div><div class="v" style="margin:4px 0"><b>Alpha over Benchmark</b> — excess return vs the fund's true benchmark, after fees.</div><div class="v" style="margin:4px 0"><b>Consistency of Alpha</b> — % of rolling windows where alpha stayed positive — steady beats lumpy.</div><div class="v" style="margin:4px 0"><b>Sharpe / Sortino</b> — risk-adjusted return; Sortino punishes only downside.</div><div class="v" style="margin:4px 0"><b>Standard Deviation</b> — annualised volatility — the fund's own bumpiness.</div><div class="v" style="margin:4px 0"><b>Max Drawdown</b> — worst peak-to-trough fall the holder had to sit through.</div><div class="v" style="margin:4px 0"><b>Expense Ratio</b> — annual cost drag; Direct-vs-Regular gap flagged in ₹.</div><div class="v" style="margin:4px 0"><b>Downside Capture</b> — how much of the market's fall the fund catches — lower is better.</div><div class="v" style="margin:4px 0"><b>Upside Capture</b> — how much of the market's rise the fund catches — higher is better.</div></div>
+      <div class="formula" style="margin-top:10px"><div style="margin:6px 0"><span class="fx">Rolling</span>&nbsp; RR(N)=median[(NAV<sub>t+N</sub>/NAV<sub>t</sub>)<sup>1/N</sup>−1] · Cons<sub>α</sub>=#(α&gt;0)/#windows</div><div style="margin:6px 0"><span class="fx">Alpha</span>&nbsp; α=R<sub>f</sub>−[R<sub>rf</sub>+β(R<sub>b</sub>−R<sub>rf</sub>)] , β=Cov(R<sub>f</sub>,R<sub>b</sub>)/Var(R<sub>b</sub>)</div><div style="margin:6px 0"><span class="fx">Sharpe</span>&nbsp; S=(R<sub>p</sub>−R<sub>f</sub>)/σ · Sortino=(R<sub>p</sub>−R<sub>f</sub>)/σ<sub>down</sub></div><div style="margin:6px 0"><span class="fx">Capture</span>&nbsp; Down=ΣR<sub>f</sub>|<sub>mkt&lt;0</sub>/ΣR<sub>m</sub>|<sub>mkt&lt;0</sub> · Up=ΣR<sub>f</sub>|<sub>mkt&gt;0</sub>/ΣR<sub>m</sub>|<sub>mkt&gt;0</sub></div><div style="margin:6px 0"><span class="fx">MDD</span>&nbsp; max<sub>t</sub>((Peak<sub>t</sub>−NAV<sub>t</sub>)/Peak<sub>t</sub>)</div></div>
+    </div>
+    <div class="card">
+      <div class="k gd">STOCK</div>
+      <div class="stitle" style="font-size:18px;margin-top:6px">Stocks — EQUITY</div>
+      <div class="v" style="margin-top:4px"><b>What matters most:</b> Fundamentals (P/E, PEG, ROE, ROCE, D/E, FCF, growth) + Technicals (trend, RSI, volume) + governance + β/α.</div>
+      <div style="margin-top:10px"><div class="v" style="margin:4px 0"><b>Fundamentals</b> — P/E, PEG, ROE, ROCE, Debt/Equity, FCF, revenue &amp; earnings growth.</div><div class="v" style="margin:4px 0"><b>Valuation</b> — P/E &amp; EV/EBITDA vs sector; PEG for growth-adjusted value.</div><div class="v" style="margin:4px 0"><b>Technicals</b> — 50/200-DMA trend, RSI, MACD, volume — entry-timing only.</div><div class="v" style="margin:4px 0"><b>Governance</b> — promoter holding trend, pledge %, auditor flags.</div><div class="v" style="margin:4px 0"><b>Risk</b> — beta vs index, standalone σ, max drawdown.</div><div class="v" style="margin:4px 0"><b>Alpha</b> — CAPM alpha vs Nifty/sector benchmark.</div></div>
+      <div class="formula" style="margin-top:10px"><div style="margin:6px 0"><span class="fx">Valuation</span>&nbsp; PEG=(P/E)/g · EV/EBITDA=(MktCap+Debt−Cash)/EBITDA</div><div style="margin:6px 0"><span class="fx">Quality</span>&nbsp; ROE=NI/Equity · ROCE=EBIT/(D+E) · D/E=Debt/Equity</div><div style="margin:6px 0"><span class="fx">β / α</span>&nbsp; β=Cov(R<sub>s</sub>,R<sub>m</sub>)/Var(R<sub>m</sub>) · α=R<sub>s</sub>−[R<sub>f</sub>+β(R<sub>m</sub>−R<sub>f</sub>)]</div><div style="margin:6px 0"><span class="fx">Technical</span>&nbsp; RSI=100−100/(1+RS) · trend=sign(50DMA−200DMA)</div></div>
+    </div>
+    <div class="card">
+      <div class="k gd">FD</div>
+      <div class="stitle" style="font-size:18px;margin-top:6px">Fixed Deposits — DEBT</div>
+      <div class="v" style="margin-top:4px"><b>What matters most:</b> Issuer credit rating · real coupon vs market · duration fit · break penalty · post-tax yield. Technical weight ≈ 0.</div>
+      <div style="margin-top:10px"><div class="v" style="margin:4px 0"><b>Issuer Rating</b> — CRISIL/ICRA/CARE rating of the bank/NBFC — safety first.</div><div class="v" style="margin:4px 0"><b>Real Coupon Edge</b> — offered rate minus best prevailing rate for same tenure.</div><div class="v" style="margin:4px 0"><b>Duration Fit</b> — does lock-in match the goal date?</div><div class="v" style="margin:4px 0"><b>Break Penalty</b> — premature-withdrawal rate cut — the real liquidity cost.</div><div class="v" style="margin:4px 0"><b>Insurance</b> — DICGC ₹5L cover per bank — concentration beyond it flagged.</div><div class="v" style="margin:4px 0"><b>Post-tax Yield</b> — yield after the user's slab — what actually reaches the goal.</div></div>
+      <div class="formula" style="margin-top:10px"><div style="margin:6px 0"><span class="fx">Edge</span>&nbsp; Δ=r<sub>offered</sub>−r<sub>market</sub>(tenure,rating)</div><div style="margin:6px 0"><span class="fx">Post-tax</span>&nbsp; y<sub>net</sub>=r(1−tax) · y<sub>eff</sub>=(1+r/n)<sup>n</sup>−1</div><div style="margin:6px 0"><span class="fx">Break-adj</span>&nbsp; y<sub>adj</sub>=y<sub>net</sub>−P(early_exit)·penalty · rating&lt;A → hard cap</div></div>
+    </div>
+    <div class="card">
+      <div class="k gd">BOND</div>
+      <div class="stitle" style="font-size:18px;margin-top:6px">Bonds — DEBT</div>
+      <div class="v" style="margin-top:4px"><b>What matters most:</b> Yield-to-Maturity · credit spread · modified duration · convexity · liquidity.</div>
+      <div style="margin-top:10px"><div class="v" style="margin:4px 0"><b>YTM</b> — true return if held to maturity.</div><div class="v" style="margin:4px 0"><b>Credit Spread</b> — extra yield over same-tenure G-Sec — default-risk pay.</div><div class="v" style="margin:4px 0"><b>Modified Duration</b> — % price move per 1% rate change — core rate risk.</div><div class="v" style="margin:4px 0"><b>Convexity</b> — second-order rate sensitivity — matters for long bonds.</div><div class="v" style="margin:4px 0"><b>Liquidity</b> — volume / bid-ask — can the user exit at fair price?</div></div>
+      <div class="formula" style="margin-top:10px"><div style="margin:6px 0"><span class="fx">YTM</span>&nbsp; Price=ΣC/(1+y)<sup>t</sup>+F/(1+y)<sup>T</sup></div><div style="margin:6px 0"><span class="fx">Duration</span>&nbsp; D<sub>mod</sub>=D<sub>mac</sub>/(1+y) · ΔP≈−D<sub>mod</sub>·Δy·P</div><div style="margin:6px 0"><span class="fx">Spread</span>&nbsp; spread=YTM<sub>bond</sub>−YTM<sub>gsec</sub></div></div>
+    </div>
+    <div class="card">
+      <div class="k gd">COMMODITY</div>
+      <div class="stitle" style="font-size:18px;margin-top:6px">Commodities — COMMODITY</div>
+      <div class="v" style="margin-top:4px"><b>What matters most:</b> Roll-yield · inflation beta · USD sensitivity · real-rate beta · seasonality. No P/E, no dividends.</div>
+      <div style="margin-top:10px"><div class="v" style="margin:4px 0"><b>Roll Yield</b> — gain/loss from rolling futures — backwardation pays, contango bleeds.</div><div class="v" style="margin:4px 0"><b>Inflation Beta</b> — how much it rises with CPI — the hedge value.</div><div class="v" style="margin:4px 0"><b>USD Sensitivity</b> — USD-priced; INR-USD move changes local return.</div><div class="v" style="margin:4px 0"><b>Real-Rate Beta</b> — sensitivity to real interest rates (esp. gold).</div><div class="v" style="margin:4px 0"><b>Seasonality</b> — supply-demand cycle, storage &amp; carry cost.</div><div class="v" style="margin:4px 0"><b>Volatility</b> — high-σ — sized small for nervous users.</div></div>
+      <div class="formula" style="margin-top:10px"><div style="margin:6px 0"><span class="fx">Roll</span>&nbsp; roll=(F<sub>near</sub>−F<sub>far</sub>)/F<sub>far</sub></div><div style="margin:6px 0"><span class="fx">Inflation β</span>&nbsp; β<sub>π</sub>=Cov(R<sub>c</sub>,π)/Var(π)</div><div style="margin:6px 0"><span class="fx">Total</span>&nbsp; R<sub>tot</sub>=spot+roll+collateral</div></div>
+    </div>
+    <div class="card">
+      <div class="k gd">CURRENCY</div>
+      <div class="stitle" style="font-size:18px;margin-top:6px">Currency — FOREX</div>
+      <div class="v" style="margin-top:4px"><b>What matters most:</b> Interest-rate carry · REER/PPP mis-valuation · rate-differential trend · volatility · CB stance. A macro hedge, not a growth engine.</div>
+      <div style="margin-top:10px"><div class="v" style="margin:4px 0"><b>Carry</b> — rate differential earned holding the higher-yield currency.</div><div class="v" style="margin:4px 0"><b>REER / PPP</b> — is the pair over/under-valued vs fair purchasing-power level?</div><div class="v" style="margin:4px 0"><b>Rate Diff Trend</b> — direction of the policy-rate gap.</div><div class="v" style="margin:4px 0"><b>Volatility</b> — realised &amp; implied vol — carry only worth it if vol contained.</div><div class="v" style="margin:4px 0"><b>CB Stance</b> — hawkish/dovish signal from the two central banks.</div></div>
+      <div class="formula" style="margin-top:10px"><div style="margin:6px 0"><span class="fx">Carry</span>&nbsp; carry=i<sub>dom</sub>−i<sub>for</sub></div><div style="margin:6px 0"><span class="fx">REER</span>&nbsp; REER=NEER·(P<sub>dom</sub>/P<sub>for</sub>) · misval=REER−mean</div><div style="margin:6px 0"><span class="fx">Carry/vol</span>&nbsp; Sharpe<sub>fx</sub>=carry/σ<sub>fx</sub></div></div>
+    </div>
+    <div class="card">
+      <div class="k gd">GOLD</div>
+      <div class="stitle" style="font-size:18px;margin-top:6px">Gold — SGB / ETF</div>
+      <div class="v" style="margin-top:4px"><b>What matters most:</b> Real-rate beta · crisis-hedge score · SGB coupon+tax edge · premium/discount · INR-USD effect.</div>
+      <div style="margin-top:10px"><div class="v" style="margin:4px 0"><b>Real-Rate Beta</b> — gold rises when real rates fall — the primary driver.</div><div class="v" style="margin:4px 0"><b>Crisis Hedge</b> — how well it held up in past equity crashes.</div><div class="v" style="margin:4px 0"><b>SGB Edge</b> — SGB's 2.5% coupon + tax-free maturity vs plain ETF.</div><div class="v" style="margin:4px 0"><b>Premium/Discount</b> — market price vs physical spot — avoid overpaying.</div></div>
+      <div class="formula" style="margin-top:10px"><div style="margin:6px 0"><span class="fx">Real-rate β</span>&nbsp; β<sub>rr</sub>=Cov(R<sub>g</sub>,−real_rate)/Var(real_rate)</div><div style="margin:6px 0"><span class="fx">SGB</span>&nbsp; R<sub>SGB</sub>=price+2.5%+tax-free maturity</div></div>
+    </div>
+    <div class="card">
+      <div class="k gd">ETF/REIT</div>
+      <div class="stitle" style="font-size:18px;margin-top:6px">ETFs &amp; REITs — INDEX / REIT</div>
+      <div class="v" style="margin-top:4px"><b>What matters most:</b> ETF: tracking error · expense · liquidity. REIT: distribution yield · occupancy · lease quality · NAV premium · leverage.</div>
+      <div style="margin-top:10px"><div class="v" style="margin:4px 0"><b>Tracking Error</b> — how tightly the ETF follows its index — lower is better.</div><div class="v" style="margin:4px 0"><b>Liquidity</b> — on-screen volume &amp; bid-ask.</div><div class="v" style="margin:4px 0"><b>Distribution Yield</b> — REIT rental income yield to unit-holders.</div><div class="v" style="margin:4px 0"><b>Occupancy &amp; Lease</b> — % leased + weighted lease expiry — income durability.</div><div class="v" style="margin:4px 0"><b>NAV Premium</b> — trading above or below asset value?</div><div class="v" style="margin:4px 0"><b>Leverage</b> — REIT loan-to-value — high LTV magnifies rate risk.</div></div>
+      <div class="formula" style="margin-top:10px"><div style="margin:6px 0"><span class="fx">TE</span>&nbsp; TE=σ(R<sub>etf</sub>−R<sub>idx</sub>)</div><div style="margin:6px 0"><span class="fx">REIT</span>&nbsp; yield=distributions/price · FFO=NI+D&amp;A−gains</div></div>
+    </div>
+
+  <div class="stitle" style="font-size:19px;margin:26px 0 6px">3 · Health-Check Pipeline</div>
+  
+  <div class="stitle" style="font-size:20px;margin:30px 0 6px">The Full Health-Check Pipeline — Read → Macro → Select → Engines → Backtest → Report</div>
+  <div class="ssub">Every run follows this exact order. The backtest is a hard gate — nothing reaches the user unless the result is
+  verified correct <em>and</em> proven to fulfil the user's expectation.</div>
+  <div class="flow">
+      <div class="fstage fs-build" style="border-color:var(--gr)">
+        <div class="fs-label" style="color:var(--g)">STEP 1 · READ &amp; UNDERSTAND</div>
+        <div class="v" style="margin-top:4px;font-size:14px"><b>Read the uploaded portfolio + the questionnaire</b></div>
+        <div class="v" style="margin-top:4px">The engine reads <b>what the user holds</b> (every instrument, quantity, buy date, cost) and <b>what they expect</b> — goal, amount, timeline, true risk tolerance from their answers. Nothing is judged yet: this builds the complete <em>has-vs-needs</em> picture.</div>
+      </div><div class="arrow">↓</div>
+      <div class="fstage fs-build" style="border-color:var(--gr)">
+        <div class="fs-label" style="color:var(--g)">STEP 2 · MACRO ANALYSIS · STAGE 1</div>
+        <div class="v" style="margin-top:4px;font-size:14px"><b>Macro-analyse every held asset vs the user's expectation</b></div>
+        <div class="v" style="margin-top:4px">Each bought instrument runs through the <b>15 macro parameters</b>. The question: <b>is this asset even the right kind of asset</b> for this user's stated expectation — right class, right risk, right for the timeline?</div>
+      </div><div class="arrow">↓</div>
+      <div class="fstage fs-build" style="border-color:var(--gr)">
+        <div class="fs-label" style="color:var(--g)">STEP 3 · SELECTION · STAGE 2</div>
+        <div class="v" style="margin-top:4px;font-size:14px"><b>Find the best alternative — 16 layers, per-asset-class parameters</b></div>
+        <div class="v" style="margin-top:4px">For every weak/mismatched holding, the Selection Engine runs all 16 layers graded on the <b>parameter pack for that asset's class</b> (above), producing the <b>best alternative</b> and the <b>quantity</b> that moves the user toward the goal.</div>
+      </div><div class="arrow">↓</div>
+      <div class="fstage fs-build" style="border-color:var(--gr)">
+        <div class="fs-label" style="color:var(--g)">STEP 4 · ALL OTHER ENGINES</div>
+        <div class="v" style="margin-top:4px;font-size:14px"><b>Every other sub-engine adds its part</b></div>
+        <div class="v" style="margin-top:4px">Risk, Correlation, Forecasting (Monte-Carlo goal probability), Crisis/backtest data, Tax, Behaviour, Peer-Intelligence and Number-Guard each contribute — so the report is <b>complete</b>: exact gap in ₹, goal-probability lift, risk-fit, cost leak.</div>
+      </div><div class="arrow">↓</div>
+      <div class="fstage fs-build" style="border-color:var(--gr)">
+        <div class="fs-label" style="color:var(--g)">STEP 5 · BACKTEST · THE GATE</div>
+        <div class="v" style="margin-top:4px;font-size:14px"><b>Backtest the report &amp; alternatives before anything reaches the user</b></div>
+        <div class="v" style="margin-top:4px">The whole report is <b>backtested</b>: is the analysis correct, and would the alternatives have <b>fulfilled the user's expectation</b> across real history + the 5-crash stress set? <b>PASS →</b> report. <b>FAIL →</b> loop to Step 3. Nothing that fails is ever shown.</div>
+      </div><div class="arrow">↓</div>
+      <div class="fstage fs-build" style="border-color:var(--gr)">
+        <div class="fs-label" style="color:var(--g)">STEP 6 · REPORT TO USER</div>
+        <div class="v" style="margin-top:4px;font-size:14px"><b>Deliver the plain-language report</b></div>
+        <div class="v" style="margin-top:4px">Only on PASS: the report states <b>what is wrong</b>, the <b>main reason</b> it exists, the <b>best alternative</b>, the quantity, and <b>exactly why this one was chosen</b> — in language a retail investor understands.</div>
+      </div></div>
+  <div class="stitle" style="font-size:19px;margin:26px 0 6px">4 · Construction Pipeline</div>
+  
+  <div class="stitle" style="font-size:20px;margin:30px 0 6px">The Full Construction Pipeline — Questionnaire → Analyse → Blueprint → Select → Engines → Backtest → Execute</div>
+  <div class="ssub">Every run follows this exact order. The backtest is a hard gate — nothing reaches the user unless the result is
+  verified correct <em>and</em> proven to fulfil the user's expectation.</div>
+  <div class="flow">
+      <div class="fstage fs-build" style="border-color:var(--gr)">
+        <div class="fs-label" style="color:var(--g)">STEP 1 · QUESTIONNAIRE</div>
+        <div class="v" style="margin-top:4px;font-size:14px"><b>User answers the questionnaire</b></div>
+        <div class="v" style="margin-top:4px">Goal, amount, timeline, real risk tolerance, constraints — the raw input for everything below.</div>
+      </div><div class="arrow">↓</div>
+      <div class="fstage fs-build" style="border-color:var(--gr)">
+        <div class="fs-label" style="color:var(--g)">STEP 2 · ANALYSE THE USER</div>
+        <div class="v" style="margin-top:4px;font-size:14px"><b>Work out what portfolio this user needs</b></div>
+        <div class="v" style="margin-top:4px">The Analysis engine derives <b>what kind of portfolio</b> this user needs, the required XIRR, and the constraints — defining the target the whole build must hit.</div>
+      </div><div class="arrow">↓</div>
+      <div class="fstage fs-build" style="border-color:var(--gr)">
+        <div class="fs-label" style="color:var(--g)">STEP 3 · BLUEPRINT · STAGE 1</div>
+        <div class="v" style="margin-top:4px;font-size:14px"><b>Decide the % split across asset classes</b></div>
+        <div class="v" style="margin-top:4px">Using the macro parameters against the user's expectation, the engine sets the <b>diversified blueprint</b>: how much % to stocks, MF, FD, gold, commodities, currency — a genuinely diversified mix for <em>this</em> user.</div>
+      </div><div class="arrow">↓</div>
+      <div class="fstage fs-build" style="border-color:var(--gr)">
+        <div class="fs-label" style="color:var(--g)">STEP 4 · SELECTION · STAGE 1 → STAGE 2</div>
+        <div class="v" style="margin-top:4px;font-size:14px"><b>Pick the specific instruments and their quantity</b></div>
+        <div class="v" style="margin-top:4px">The Selection Engine first filters with the <b>overall macro parameters</b>, then enters each class and uses the <b>per-asset-class parameters</b> to choose the <b>specific instrument</b> and decide <b>quantity</b> — e.g. inside equity, exactly which stocks/funds and how many units.</div>
+      </div><div class="arrow">↓</div>
+      <div class="fstage fs-build" style="border-color:var(--gr)">
+        <div class="fs-label" style="color:var(--g)">STEP 5 · ALL OTHER ENGINES</div>
+        <div class="v" style="margin-top:4px;font-size:14px"><b>Shape the best diversified portfolio</b></div>
+        <div class="v" style="margin-top:4px">Correlation (so slots don't secretly overlap), Risk, Forecasting, Crisis/backtest, Tax and Behaviour all contribute to make the blend optimal, not just a list of individually-good names.</div>
+      </div><div class="arrow">↓</div>
+      <div class="fstage fs-build" style="border-color:var(--gr)">
+        <div class="fs-label" style="color:var(--g)">STEP 6 · BACKTEST · THE GATE</div>
+        <div class="v" style="margin-top:4px;font-size:14px"><b>Backtest the built portfolio vs the user's expectation</b></div>
+        <div class="v" style="margin-top:4px">The finished portfolio is <b>backtested</b> across real history + the 5-crash set. <b>PASS →</b> send to user. <b>FAIL →</b> rebuild loop. Nothing that fails is shown.</div>
+      </div><div class="arrow">↓</div>
+      <div class="fstage fs-build" style="border-color:var(--gr)">
+        <div class="fs-label" style="color:var(--g)">STEP 7 · SEND + EXPLAIN → EXECUTE</div>
+        <div class="v" style="margin-top:4px;font-size:14px"><b>User reviews, with a reason for every number</b></div>
+        <div class="v" style="margin-top:4px">On PASS, the portfolio goes to the user with a <b>detailed explanation</b>: why this much amount in this asset, why this instrument. The user can <b>change</b> anything — any change <b>restarts the whole pipeline</b> (re-analyse → re-select → re-backtest). If happy, they <b>execute</b>.</div>
+      </div></div>
+
+  
+  <div class="stitle" style="font-size:20px;margin:30px 0 6px">The Backend Number System — Everything Becomes a Score</div>
+  <div class="ssub">To keep all of this fast and objective, the engine turns <b>every single thing into a number</b> behind the scenes.
+  Every parameter, every layer, every instrument gets a score; the engine simply <b>picks the highest-scoring options</b> when
+  analysing the portfolio. <b>This is 100% backend</b> — the user never sees raw numbers, only the plain-language result and its reason.</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="k bl">HOW SCORING WORKS (HIDDEN)</div>
+      <div class="v" style="margin-top:8px">
+        1 · Each <b>macro parameter</b> scores every asset 0–100 (Stage 1).<br>
+        2 · Each <b>per-asset-class parameter</b> scores every instrument 0–100 within its own category (Stage 2, z-scored).<br>
+        3 · Layers combine into one <b>FIT score</b> per instrument (weighted per class).<br>
+        4 · The <b>Fraud gate</b> can zero out any score (hard veto).<br>
+        5 · The engine <b>ranks by score</b>, picks the best; quantity is a second scored pass (correlation + behaviour trim).<br>
+        6 · The whole result gets a <b>backtest score</b> — the pass/fail gate before the user sees anything.
+      </div>
+    </div>
+    <div class="card">
+      <div class="k gd">USER SEES vs BACKEND DOES</div>
+      <div class="v" style="margin-top:8px"><b>Backend (hidden):</b> hundreds of 0–100 parameter scores, FIT scores, correlation
+      matrices, rank tables, backtest scores — pure math in the Rust/Python core.</div>
+      <div class="v" style="margin-top:8px"><b>Front-end (shown):</b> only the outcome in plain language — "this holding drags you
+      down because X; the better fit is Y; here's how much; here's why." No raw scores, no formulas on screen.</div>
+    </div>
+  </div>
+  <div class="formula">
+    <div style="margin:4px 0"><span class="fx">Score</span> every param<sub>k</sub> → s<sub>k</sub>∈[0,100] · z=(x−μ<sub>cat</sub>)/σ<sub>cat</sub>→100·Φ(z)</div>
+    <div style="margin:4px 0"><span class="fx">FIT</span><sub>instrument</sub>=Σ<sub>k</sub> w<sub>k</sub>·s<sub>k</sub> · fraud fail → FIT=0 (hard veto)</div>
+    <div style="margin:4px 0"><span class="fx">Choose</span>=argmax(FIT) per slot · Quantity=f(FIT, correlation, behaviour)</div>
+    <div style="margin:4px 0"><span class="qx">Backtest</span>=PASS if accuracy≥θ AND expectation-fulfilled≥θ, else loop</div>
+  </div>
+  <div class="callout" style="background:rgba(155,109,255,.06);border:1px solid var(--purpler)">
+    <b>The rule (Number Guard):</b> the Rust/Python core computes every score; NxanceLM can <b>explain</b> any number in words but
+    <b>computes none</b>. Scores drive the decision; language delivers it; the raw number system stays hidden from the user.
+  </div>
+
+  <div class="stitle" style="font-size:19px;margin:26px 0 6px">Health Check · User Flows</div>
+  
+  <div class="stitle" style="font-size:20px;margin:30px 0 6px">Two User Flows — Front-End (what the user does) &amp; Backend (what the engine does)</div>
+  <div class="ssub">The same journey from two sides. The front-end is simple and number-free; the backend is where all the scoring,
+  selection and backtesting actually happens.</div>
+  <div class="grid2">
+    
+    <div class="card" style="padding:0;overflow:hidden">
+      <div style="padding:14px 18px;border-bottom:1.5px solid var(--b2)"><div class="k bl">FRONT-END USER FLOW</div></div>
+      <div class="example-flow" style="border:none;border-radius:0;margin:0"><div class="exrow"><div class="extime">01</div><div class="exbody"><div class="ex-eng">USER</div><div class="ex-txt">Uploads existing portfolio (or connects account) + answers a short questionnaire.</div></div></div><div class="exrow"><div class="extime">02</div><div class="exbody"><div class="ex-eng">APP</div><div class="ex-txt">Shows a friendly "analysing your portfolio…" state. No numbers, no jargon.</div></div></div><div class="exrow"><div class="extime">03</div><div class="exbody"><div class="ex-eng">APP</div><div class="ex-txt">Presents the Health Report: what's wrong, the reason, the better alternative, the quantity, and <b>why</b>.</div></div></div><div class="exrow"><div class="extime">04</div><div class="exbody"><div class="ex-eng">USER</div><div class="ex-txt">Reads, understands, decides whether to act on the fixes.</div></div></div></div>
+    </div>
+    
+    <div class="card" style="padding:0;overflow:hidden">
+      <div style="padding:14px 18px;border-bottom:1.5px solid var(--b2)"><div class="k gd">BACKEND USER FLOW</div></div>
+      <div class="example-flow" style="border:none;border-radius:0;margin:0"><div class="exrow"><div class="extime">01</div><div class="exbody"><div class="ex-eng">READ</div><div class="ex-txt">Parse every holding + questionnaire → build the has-vs-needs picture.</div></div></div><div class="exrow"><div class="extime">02</div><div class="exbody"><div class="ex-eng">STAGE 1</div><div class="ex-txt">Macro-score every held asset vs expectation (0–100 per parameter).</div></div></div><div class="exrow"><div class="extime">03</div><div class="exbody"><div class="ex-eng">STAGE 2</div><div class="ex-txt">Selection · 16 layers · per-asset-class FIT scores → best alternative + quantity.</div></div></div><div class="exrow"><div class="extime">04</div><div class="exbody"><div class="ex-eng">ENGINES</div><div class="ex-txt">Risk, correlation, forecasting, tax, crisis, behaviour, peer → full scored report.</div></div></div><div class="exrow"><div class="extime">05</div><div class="exbody"><div class="ex-eng">BACKTEST</div><div class="ex-txt">Score report accuracy + expectation-fulfilment. FAIL → loop to Stage 2.</div></div></div><div class="exrow"><div class="extime">06</div><div class="exbody"><div class="ex-eng">RENDER</div><div class="ex-txt">On PASS, NxanceLM turns winning scores into plain language. Raw numbers stay hidden.</div></div></div></div>
+    </div>
+  </div>
+  <div class="stitle" style="font-size:19px;margin:26px 0 6px">Construction · User Flows</div>
+  
+  <div class="stitle" style="font-size:20px;margin:30px 0 6px">Two User Flows — Front-End (what the user does) &amp; Backend (what the engine does)</div>
+  <div class="ssub">The same journey from two sides. The front-end is simple and number-free; the backend is where all the scoring,
+  selection and backtesting actually happens.</div>
+  <div class="grid2">
+    
+    <div class="card" style="padding:0;overflow:hidden">
+      <div style="padding:14px 18px;border-bottom:1.5px solid var(--b2)"><div class="k bl">FRONT-END USER FLOW</div></div>
+      <div class="example-flow" style="border:none;border-radius:0;margin:0"><div class="exrow"><div class="extime">01</div><div class="exbody"><div class="ex-eng">USER</div><div class="ex-txt">Fills the questionnaire — goal, amount, timeline, risk comfort, constraints.</div></div></div><div class="exrow"><div class="extime">02</div><div class="exbody"><div class="ex-eng">APP</div><div class="ex-txt">Shows a "building your portfolio…" state. No numbers, no jargon.</div></div></div><div class="exrow"><div class="extime">03</div><div class="exbody"><div class="ex-eng">APP</div><div class="ex-txt">Presents the diversified portfolio: each asset, the amount, and a clear reason for every choice.</div></div></div><div class="exrow"><div class="extime">04</div><div class="exbody"><div class="ex-eng">USER</div><div class="ex-txt">Reviews. Can <b>change</b> anything (→ full rebuild restarts) or, if happy, taps <b>Execute</b>.</div></div></div></div>
+    </div>
+    
+    <div class="card" style="padding:0;overflow:hidden">
+      <div style="padding:14px 18px;border-bottom:1.5px solid var(--b2)"><div class="k gd">BACKEND USER FLOW</div></div>
+      <div class="example-flow" style="border:none;border-radius:0;margin:0"><div class="exrow"><div class="extime">01</div><div class="exbody"><div class="ex-eng">INTAKE</div><div class="ex-txt">Capture questionnaire → derive required XIRR + constraints (the target).</div></div></div><div class="exrow"><div class="extime">02</div><div class="exbody"><div class="ex-eng">ANALYSE</div><div class="ex-txt">Work out what portfolio type this user needs.</div></div></div><div class="exrow"><div class="extime">03</div><div class="exbody"><div class="ex-eng">STAGE 1</div><div class="ex-txt">Macro parameters → asset-class % blueprint (scored allocation).</div></div></div><div class="exrow"><div class="extime">04</div><div class="exbody"><div class="ex-eng">STAGE 2</div><div class="ex-txt">Selection: overall filter, then per-asset-class FIT scores → instruments + quantity.</div></div></div><div class="exrow"><div class="extime">05</div><div class="exbody"><div class="ex-eng">ENGINES</div><div class="ex-txt">Correlation, risk, forecasting, tax, crisis, behaviour → optimise the blend.</div></div></div><div class="exrow"><div class="extime">06</div><div class="exbody"><div class="ex-eng">BACKTEST</div><div class="ex-txt">Score portfolio vs expectation across history + 5 crashes. FAIL → rebuild.</div></div></div><div class="exrow"><div class="extime">07</div><div class="exbody"><div class="ex-eng">EXECUTE</div><div class="ex-txt">On PASS, explain every number in words → user edits (restart) or executes.</div></div></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ============ SEC 01: OVERVIEW ============ -->
+<div class="sec" id="s01">
+  <div class="slabel">Section 01 — Overview</div>
+  <h2 class="stitle">What NxanceLM <em>Actually Is</em></h2>
+  <p class="ssub">Not a bolt-on chatbot, and not one monolithic model. NxanceLM is Nxance's <b style="color:var(--tx)">own AI, built from scratch</b>, made of <b style="color:var(--tx)">14 mini-engines</b> that together form a proper intelligence. It does four things: (1) works <em>inside</em> Construction and Health Check as a helper, (2) generates every report card and explanation, (3) tracks user behaviour to feed both engines, and (4) answers finance/economy questions in chat. The core rule that governs all of it: <b style="color:var(--tx)">it never decides alone — it helps the real engines and the user, and it serves the one locked motive.</b></p>
+
+  <div class="dstrip">
+    <div class="dstat"><div class="dv" style="color:var(--g)">14</div><div class="dl">Mini-engines</div><div class="dd">ONE INTELLIGENCE</div></div>
+    <div class="dstat"><div class="dv" style="color:var(--cyan)">5</div><div class="dl">Architecture layers</div><div class="dd">PERCEPTION→GUARD</div></div>
+    <div class="dstat"><div class="dv" style="color:#4ADE80">100%</div><div class="dl">Built from scratch</div><div class="dd">POST-MVP</div></div>
+    <div class="dstat"><div class="dv" style="color:var(--purple)">Helper</div><div class="dl">Never a lone decider</div><div class="dd">ONE PARAMETER</div></div>
+    <div class="dstat"><div class="dv" style="color:var(--gold)">1</div><div class="dl">Motive, unchanged</div><div class="dd">NON-NEGOTIABLE</div></div>
+  </div>
+
+  <div class="grid4">
+    <div class="card tlcard">
+      <div class="ctitle">🏗️ ROLE 1 <span class="chip bteal">HELPER INSIDE ENGINES</span></div>
+      <div class="v">Inside Construction &amp; Health Check, NxanceLM works as <b>one parameter among many</b> — clarifies vague goals, catches contradictions, narrates progress, sanity-checks outputs. It never picks a fund or moves money alone; it makes the other engines smoother and clearer.</div>
+    </div>
+    <div class="card gdcard">
+      <div class="ctitle">📋 ROLE 2 <span class="chip bgold">REPORTS &amp; EXPLANATIONS</span></div>
+      <div class="v">Generates the <b>report cards, analysis reports, daily digests, and "why we chose this" explanations</b> the user actually reads — translating raw scores from dozens of sub-engines into one plain-language, verified-numbers-only document.</div>
+    </div>
+    <div class="card pkcard">
+      <div class="ctitle">🧭 ROLE 3 <span class="chip bpink">BEHAVIOUR TRACKING</span></div>
+      <div class="v">Continuously <b>tracks how the user actually behaves</b> — panic-sells, chases trends, forgets to book profit — and feeds that behaviour signal to both engines' Behaviour sub-engines so the portfolio and advice fit the real human, not a questionnaire guess.</div>
+    </div>
+    <div class="card">
+      <div class="ctitle">🌐 ROLE 4 <span class="chip bg">ECONOMY CHAT</span></div>
+      <div class="v">A full <b>finance &amp; economy conversational assistant</b> — countries, IPOs, policy, markets, portfolio comparison — grounded in live data. But for "build me a portfolio" or "analyse mine" it <b>redirects to the two real engines</b>, because those give the best answer.</div>
+    </div>
+  </div>
+
+  <div class="callout co-gold">
+    <div class="co-head">🎯 The Motive — locked, never diluted</div>
+    Every mini-engine, every report, every chat answer exists for one reason: to help the user reach their goal with <b>less risk, higher return, in minimum time, shaped around how they actually behave.</b> NxanceLM's job is to make the two real engines smarter and clearer and to keep the human informed and in control — never to replace their collective decision-making with its own single opinion.
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ============ SEC 02: 5-LAYER ARCHITECTURE ============ -->
+<div class="sec" id="s02">
+  <div class="slabel">Section 02 — Architecture</div>
+  <h2 class="stitle">The 5 Layers — <em>How 18+ Mini-Engines Fit Together</em></h2>
+  <p class="ssub">A query flows down through five layers. Each mini-engine has one job; together they behave like a single intelligence. This is why "mini-engines" and not "one model" — each part is independently buildable, testable, and upgradable, exactly like the sub-engine philosophy in Construction and Health Check.</p>
+
+  <div class="tier-row">
+    <div class="tierbox" style="border-color:var(--cyanr)"><div class="tb-h" style="color:var(--cyan)">1 · PERCEPTION</div><div class="tb-b"><b>Mini 01–02.</b> Understands what the user actually asked and turns text into tokens the model reads — using NxanceLM's own tokenizer, not a borrowed one.</div></div>
+    <div class="tierbox" style="border-color:var(--goldr)"><div class="tb-h" style="color:var(--gold)">2 · KNOWLEDGE</div><div class="tb-b"><b>Mini 03, 14.</b> Retrieves the right facts (RAG over live engine data + finance corpus) and remembers the conversation across sessions.</div></div>
+    <div class="tierbox" style="border-color:var(--purpler)"><div class="tb-h" style="color:var(--purple)">3 · REASONING CORE</div><div class="tb-b"><b>Mini 04, 05, 09.</b> The actual intelligence — the hybrid from-scratch model, plus research/analysis and behaviour tracking.</div></div>
+  </div>
+  <div class="tier-row">
+    <div class="tierbox" style="border-color:var(--pinkr)"><div class="tb-h" style="color:var(--pink)">4 · GENERATION</div><div class="tb-b"><b>Mini 06, 07, 08, 10.</b> Turns reasoning into the actual output — explanations, report cards, chat answers, daily digests.</div></div>
+    <div class="tierbox" style="border-color:var(--scratchr)"><div class="tb-h" style="color:#4ADE80">5 · GUARD</div><div class="tb-b"><b>Mini 11, 12, 13.</b> Wraps everything — verifies every number, enforces boundaries (helper not decider), and accelerates the heavy sub-problems with quantum.</div></div>
+    <div class="tierbox" style="border-color:var(--b2)"><div class="tb-h" style="color:var(--t2)">WHY 14, NOT 1</div><div class="tb-b">Same reason Construction has 22 sub-engines: many specialised parts, each independently improvable, converging on a better answer than one black box.</div></div>
+  </div>
+
+  <div class="pb"><strong>Key mental model:</strong> the Reasoning Core (Mini-04) is the "brain," but a brain alone isn't useful. Perception feeds it clean input, Knowledge feeds it facts, Generation gives it a mouth, and the Guard layer keeps it honest and safe. Remove any layer and the AI breaks — which is exactly why it's built as coordinated mini-engines.</div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ============ SEC 03: INTEGRATION ============ -->
+<div class="sec" id="s03">
+  <div class="slabel">Section 03 — Integration</div>
+  <h2 class="stitle">Where NxanceLM Sits — <em>Between Every Engine and the User</em></h2>
+  <p class="ssub">Both engines produce raw numbers — FIT scores, gap-scores, risk figures, flags. None of it is human-readable on its own. NxanceLM sits between the engines and the user, turning all of it into one coherent explanation, and feeding behaviour signals back down into the engines.</p>
+
+  <div class="flow">
+    <div class="fstage" style="background:rgba(0,196,255,.05);border:1.5px solid rgba(0,196,255,.3)">
+      <div class="fs-label" style="color:var(--cyan)">⬇️ THE TWO ENGINES PRODUCE RAW OUTPUT</div>
+      <span class="fnode"><b>Health Check</b> · 22 sub-engines → gap-scores, risk numbers, fraud flags, tax status</span>
+      <span class="fnode"><b>Construction</b> · 22 sub-engines → FIT scores, weights, projections, backtests</span>
+    </div>
+    <div class="arrow">▼ ALL of it passes through NxanceLM ▼</div>
+    <div class="fstage" style="background:rgba(168,85,247,.06);border:1.5px solid var(--purpler)">
+      <div class="fs-label" style="color:var(--purple)">🧠 NXANCELM PROCESSES — 18+ MINI-ENGINES</div>
+      <span class="fnode"><b>Mini-06</b> Explainability — reconstructs the "why" reasoning chain</span>
+      <span class="fnode"><b>Mini-07</b> Report Card — synthesises a readable document</span>
+      <span class="fnode"><b>Mini-11</b> Number Guard — verifies every ₹, %, date against source</span>
+      <span class="fnode"><b>Mini-09</b> Behaviour — feeds the user's real behaviour BACK into both engines</span>
+    </div>
+    <div class="arrow">▼ produces ▼</div>
+    <div class="fstage" style="background:rgba(255,184,48,.05);border:1.5px solid rgba(255,184,48,.3)">
+      <div class="fs-label" style="color:var(--gold)">📤 OUTPUTS THE USER SEES</div>
+      <span class="fnode">Plain-language issue cards (HC) &amp; build explanations (Construction)</span>
+      <span class="fnode">Full report cards + downloadable analysis reports</span>
+      <span class="fnode">Daily "how is my portfolio doing" digests</span>
+      <span class="fnode">Free-form economy/market chat — independent of any engine run</span>
+    </div>
+    <div class="arrow">▼ and behaviour flows back down ▼</div>
+    <div class="nb" style="margin:8px 0 0">The loop is two-way: NxanceLM doesn't just report the engines' output upward to the user — via Mini-09 it feeds the user's <em>observed behaviour</em> back down into both engines' Behaviour sub-engines, so the next portfolio or analysis fits the real human better. It is the connective tissue of the whole platform.</div>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ============ SEC 04: GOLDEN RULE ============ -->
+<div class="sec" id="s04">
+  <div class="slabel">Section 04 — The Rule Above All Rules</div>
+  <h2 class="stitle">The Golden Rule — <em>Helper, Never a Lone Decider</em></h2>
+  <p class="ssub">This is the one constraint that no mini-engine and no future upgrade is ever allowed to break. It's what makes NxanceLM trustworthy in a finance product.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="ctitle">🤝 Inside the Engines — One Parameter Among Many</div>
+      <div class="v">When NxanceLM works inside Construction or Health Check, it is <b>a sub-engine and a parameter, weighted like any other</b> — for example, one scoring layer of Selection's 16. It can flag, adjust, and explain. It <b>cannot</b> override the collective verdict, cannot bypass the Fraud Gate, and cannot execute anything. The pipeline order is fixed: all engines and parameters run first → everything is checked → then one collective best decision is produced. <b>NxanceLM is a voice at the table, never the chair.</b></div>
+    </div>
+    <div class="card">
+      <div class="ctitle">💬 In Chat — Research &amp; Answer, Then Redirect</div>
+      <div class="v">In free chat, NxanceLM researches and answers finance/economy questions fully. But when a user asks it to <b>"build me a portfolio"</b> or <b>"analyse my portfolio,"</b> it doesn't try to do that itself in chat — it says: <em>"use the Construction / Health Check option in the app — those give you the best, fully-analysed answer."</em> Because a proper build/analysis needs all 22 sub-engines and quantum optimisation, not a single chat response. <b>The chat knows its own limits and points to the real tools.</b></div>
+    </div>
+  </div>
+
+  <div class="callout co-scratch">
+    <div class="co-head">⚖️ Why this rule exists — and why it's permanent</div>
+    A single AI confidently deciding your money is exactly the thing that goes catastrophically wrong. Nxance's entire trust model is that <b>no single component — not even the AI — decides alone.</b> Using many engines and parameters has one purpose: the final answer survives dozens of independent checks, not one model's opinion. Removing this rule to make NxanceLM "more powerful" or "more decisive" would be a trust regression, not an upgrade — no matter how good the model gets. It is architecture, not policy.
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ============ SEC 05: MINI 01-04 ============ -->
+<div class="sec" id="s05">
+  <div class="slabel">Section 05 — Perception &amp; Reasoning Core</div>
+  <h2 class="stitle">Mini-Engines 01–04 — <em>Understanding &amp; Thinking</em></h2>
+  <p class="ssub">The first four mini-engines take a raw query and turn it into understood, tokenised input, then run it through the actual from-scratch intelligence. Everything else in NxanceLM depends on these getting it right.</p>
+
+  <!-- MINI 01 -->
+  <div class="card">
+    <div class="ctitle">👂 MINI-01 · Intent &amp; Understanding Engine <span class="chip bcyan">PERCEPTION</span></div>
+    <div class="kv"><div class="k">What it does</div><div class="v">Reads the user's message and works out <b>what they actually want</b> — is this a portfolio-build request, an analysis request, a factual economy question, a "why did you recommend this" explanation request, or casual chat? This routing decision determines everything downstream.</div></div>
+    <div class="kv"><div class="k">Why it's first</div><div class="v">A "build me a portfolio" message must be <b>redirected to the Construction engine</b>, not answered in chat (Golden Rule). Mini-01 is the engine that detects that intent and routes correctly — answer here, or point to the right app tool.</div></div>
+    <div class="kv"><div class="k">Handles Hinglish</div><div class="v">Trained to understand mixed Hindi-English ("mera portfolio theek hai kya?") natively — intent detection works across code-switched language, which most off-the-shelf models handle poorly.</div></div>
+  </div>
+
+  <!-- MINI 02 -->
+  <div class="card">
+    <div class="ctitle">🔤 MINI-02 · Tokenizer &amp; Encoder <span class="chip bcyan">PERCEPTION</span></div>
+    <div class="kv"><div class="k">What it does</div><div class="v">Converts text into tokens the model reads — using NxanceLM's <b>own custom BPE tokenizer</b> (32k vocabulary, written in Rust), built specifically to preserve AMFI scheme codes, Hinglish tokens, and ₹ formatting as single meaningful units.</div></div>
+    <div class="kv"><div class="k">Why own, not borrowed</div><div class="v">GPT/Llama tokenizers split "₹1,50,000" or "HDFC Top 100 Direct Growth" into clumsy fragments, wasting context and losing meaning. A finance-native tokenizer keeps these intact — better accuracy and cheaper compute per query. This is step one of "built from scratch."</div></div>
+    <pre><span class="cm"># Own tokenizer — trained on OUR corpus, not reused</span>
+tokenizer = NxanceTokenizer.train(
+    corpus_path=<span class="st">"data/nxance_corpus/"</span>,
+    vocab_size=<span class="nm">32000</span>,
+    special_tokens=[<span class="st">"&lt;AMFI_CODE&gt;"</span>, <span class="st">"&lt;RS_AMOUNT&gt;"</span>, <span class="st">"&lt;HINGLISH&gt;"</span>]
+)  <span class="cm"># preserves ₹ amounts, scheme codes, Hinglish as single tokens</span></pre>
+  </div>
+
+  <!-- MINI 03 -->
+  <div class="card gdcard">
+    <div class="ctitle">📚 MINI-03 · Knowledge &amp; Retrieval Engine (RAG) <span class="chip bgold">KNOWLEDGE</span></div>
+    <div class="kv"><div class="k gd">What it does</div><div class="v">Before the model answers, this engine <b>retrieves the relevant facts</b> — from the live engine outputs (this user's actual numbers), the finance knowledge base (SEBI rules, fund data, macro), and market data. The model then reasons over <em>retrieved facts</em>, not just its training memory.</div></div>
+    <div class="kv"><div class="k gd">Why RAG matters here</div><div class="v">Markets change daily; a model's frozen training data goes stale. RAG lets NxanceLM answer with <b>today's</b> NAVs, <b>this</b> user's real holdings, and <b>current</b> policy — grounding every answer in verifiable data instead of hallucinated recall. This is what makes finance answers trustworthy.</div></div>
+    <div class="kv"><div class="k gd">Powered by</div><div class="v">A vector database (Qdrant / pgvector) over the Data Intelligence store shared with both engines, plus live market-data adapters.</div></div>
+  </div>
+
+  <!-- MINI 04 -->
+  <div class="card">
+    <div class="ctitle">🧠 MINI-04 · Reasoning Core — The Actual Intelligence <span class="chip bp">REASONING CORE</span></div>
+    <div class="kv"><div class="k">The architecture</div><div class="v">A <b>hybrid Transformer + Mamba (SSM) + Mixture-of-Experts</b> model, trained 100% from scratch. Three ingredients, each for a reason:</div></div>
+    <div class="g3" style="margin-top:6px">
+      <div class="params">
+        <div class="param"><span class="pn">Transformer (Attention)</span><span class="pv">Holds <b>exact-number precision</b> — critical when a single wrong digit in a ₹ figure destroys trust. Attention is unbeaten at precise, local reasoning.</span></div>
+      </div>
+      <div class="params">
+        <div class="param"><span class="pn">Mamba (SSM)</span><span class="pv">Holds <b>long historical context</b> cheaply — years of a user's transaction history, decades of market data — where pure attention would be too expensive.</span></div>
+      </div>
+      <div class="params">
+        <div class="param"><span class="pn">Mixture-of-Experts</span><span class="pv"><b>Trillion-scale capacity at a fraction of the compute</b> — only the relevant expert subset activates per query (sparse routing), so full knowledge, cheap inference.</span></div>
+      </div>
+    </div>
+    <div class="pb" style="margin-top:8px"><strong>Why this specific hybrid:</strong> a finance AI needs three things at once — exact numbers (Attention), long memory (Mamba), and huge knowledge without huge cost (MoE). No single classic architecture gives all three, so NxanceLM combines them. This is a genuine architectural decision, not a copy of any existing open model's config.</div>
+    <pre><span class="cm"># Reasoning Core — random init, NO external checkpoint ever loaded</span>
+model = NxanceLMHybridModel(
+    n_layers=<span class="nm">48</span>, d_model=<span class="nm">4096</span>, n_experts=<span class="nm">8</span>,   <span class="cm"># Attention + Mamba + MoE</span>
+    vocab_size=tokenizer.vocab_size
+)
+model.apply(xavier_init)   <span class="cm"># starts knowing NOTHING — trained from token zero</span>
+<span class="cm"># NOTE: no model.load_state_dict(llama_weights) — not now, not ever</span></pre>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ============ SEC 06: MINI 05-08 ============ -->
+<div class="sec" id="s06">
+  <div class="slabel">Section 06 — Research, Explain, Report, Chat</div>
+  <h2 class="stitle">Mini-Engines 05–08 — <em>Turning Thinking Into Output</em></h2>
+  <p class="ssub">These four take the reasoning core's output and turn it into the things the user actually sees — researched answers, plain-language explanations of "why," report cards, and free-form chat.</p>
+
+  <!-- MINI 05 -->
+  <div class="card">
+    <div class="ctitle">🔬 MINI-05 · Research &amp; Analysis Engine <span class="chip bp">REASONING</span></div>
+    <div class="kv"><div class="k">What it does</div><div class="v">When a question needs more than a single fact — "compare India vs China growth," "is this IPO worth applying to," "how does this policy affect my tax" — this engine <b>pulls multiple data sources, cross-references them, and synthesises a reasoned answer</b> rather than a shallow lookup.</div></div>
+    <div class="kv"><div class="k">Analysing "multiple data to give better result"</div><div class="v">Exactly the capability your brief asks for: it evaluates <b>many data points across markets, history, filings and macro</b> together — the same "trillions of data points considered" scale the platform uses — and returns the one clearest conclusion, not raw data dumps.</div></div>
+    <div class="kv"><div class="k">Helps both engines</div><div class="v">When Construction/Health Check need a news-sentiment score or a fresh macro read (e.g. Selection Layer 09), this engine does that research and hands back a clean parameter — one input among many, never the deciding vote.</div></div>
+  </div>
+
+  <!-- MINI 06 -->
+  <div class="card gdcard">
+    <div class="ctitle">💬 MINI-06 · Explainability Engine <span class="chip bgold">GENERATION</span></div>
+    <div class="kv"><div class="k gd">The hardest job it has</div><div class="v">Not summarising a number, but <b>reconstructing the actual reasoning chain</b> across many sub-engines into something a non-technical user finds genuinely convincing — "why did we choose THIS."</div></div>
+    <div class="kv"><div class="k gd">Counterfactual inclusion</div><div class="v">It explicitly mentions the next-best alternative and why it lost — "Fund B scored close, but Fund A has 40% lower cost for similar risk" is far more convincing than just naming the winner.</div></div>
+    <span class="k" style="display:block;margin:12px 0 6px">Example — Real Explanation Output (Hinglish)</span>
+    <div class="chat">
+      <div class="umsg">Yeh fund kyun suggest kiya?</div>
+      <div class="amsg">Aapka goal hai 10 saal mein <b>₹50L</b>, jiske liye ~12% annual return chahiye. Maine 340 large-cap funds check kiye — <b>HDFC Top 100</b> top pe aaya kyunki: (1) 10-saal CAGR 13.2%, category average se better; (2) expense ratio sirf 0.8%, aapke current fund se 0.6% kam; (3) 2020 crash mein sirf 28% gira jabki category average 34% tha. Doosra option Axis Bluechip bhi close tha, lekin uska Direct-plan expense thoda zyada hai similar return ke liye.</div>
+    </div>
+    <div class="callout co-teal" style="margin-bottom:0"><strong>Why this matters more than accuracy alone:</strong> a mathematically correct recommendation the user doesn't trust gets ignored. For a finance product, explainability is what decides whether the underlying math ever gets acted on — it's not decoration, it's the bridge to action.</div>
+  </div>
+
+  <!-- MINI 07 -->
+  <div class="card" style="border-color:var(--redt)">
+    <div class="ctitle">📋 MINI-07 · Report Card Generator <span class="chip bred">GENERATION</span></div>
+    <div class="kv"><div class="k">Two document types</div><div class="v"><b>Report Card:</b> 1–2 page grade-style summary (Health Score, top 3 issues, top 3 strengths) understood in under 2 minutes. <b>Analysis Report:</b> full multi-page document with every sub-engine's findings, reasoning chains and backtests, for power users and the admin R&D team.</div></div>
+    <div class="kv"><div class="k">Daily + periodic</div><div class="v">Also produces the recurring cards — monthly/quarterly health grades and the "here's what changed" summaries — in the user's preferred language (Hinglish/English), behaviour-adapted (Panic-Prone user's card leads with reassurance; Disciplined user's with raw numbers).</div></div>
+    <pre><span class="cm"># Report generator — narrates numbers, NEVER invents them</span>
+<span class="kw">def</span> <span class="fn">generate_report_card</span>(self, engine_results, user):
+    sections = {
+        <span class="st">"headline"</span>:   self.summarize_score(engine_results.score),
+        <span class="st">"top_issues"</span>: self.rank_and_explain(engine_results.gaps, limit=<span class="nm">3</span>),
+        <span class="st">"strengths"</span>:  self.identify_strengths(engine_results),
+        <span class="st">"next_steps"</span>: self.actionable(engine_results.gaps, user),
+    }
+    <span class="cm"># every number traced to its source engine before render</span>
+    <span class="kw">return</span> self.render(<span class="st">"report_card"</span>, sections, verify_numbers=<span class="kw">True</span>)</pre>
+    <div class="goldb" style="margin-bottom:0"><strong>The verify_numbers step is non-negotiable:</strong> every ₹ figure, %, and date is cross-checked against real engine output (via Mini-11) before the document is finalised — NxanceLM narrates numbers, it never invents them, especially in a downloadable report a user might show an advisor.</div>
+  </div>
+
+  <!-- MINI 08 -->
+  <div class="card tlcard">
+    <div class="ctitle">🌐 MINI-08 · Economy &amp; Market Chat <span class="chip bteal">GENERATION</span></div>
+    <div class="kv"><div class="k tl">What it covers</div><div class="v">A full standalone finance/economy assistant — countries &amp; macro, startups &amp; IPOs, companies &amp; policy, growth rates, concept explanations, and portfolio comparison — grounded in live data via Mini-03/05, explained in plain language.</div></div>
+    <div class="kv"><div class="k tl">The redirect rule</div><div class="v">If the user asks it to <b>build or analyse a portfolio in chat</b>, it researches enough to be helpful but points them to the app's Construction/Health Check options — "wahan aapko poora analysed answer milega." Full behaviour detailed in Section 08.</div></div>
+    <div class="tealb" style="margin-bottom:0"><strong>Easy &amp; readable design principle:</strong> plain language first, ₹ amounts and % always shown together, jargon only with an immediate explanation, and every complex topic given as a short direct answer followed by an offer to go deeper.</div>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ============ SEC 07: MINI 09-14 ============ -->
+<div class="sec" id="s07">
+  <div class="slabel">Section 07 — Behaviour, Safety, Quantum, Memory</div>
+  <h2 class="stitle">Mini-Engines 09–14 — <em>Tracking, Guarding &amp; Accelerating</em></h2>
+  <p class="ssub">The final six mini-engines make NxanceLM genuinely useful and genuinely safe: it tracks behaviour for both engines, reports daily, verifies every number, enforces its own boundaries, accelerates with quantum, and remembers context across sessions.</p>
+
+  <!-- MINI 09 -->
+  <div class="card pkcard">
+    <div class="ctitle">🧭 MINI-09 · Behaviour Tracking Engine <span class="chip bpink">REASONING · FEEDS BOTH ENGINES</span></div>
+    <div class="kv"><div class="k q">What it does</div><div class="v">Continuously observes <b>how the user actually behaves</b> — app-open frequency, reaction to red days, whether they act on recommendations fast/slow/never, panic-sell patterns, profit-booking habits — and builds a live behaviour archetype.</div></div>
+    <div class="kv"><div class="k q">Helps Construction &amp; Health Check</div><div class="v">This is the crucial link your brief calls out: NxanceLM <b>feeds the behaviour signal into both engines' Behaviour sub-engines</b> (Construction Sub-16, Health Check Sub-16). Same goal, same risk, same timeline — but different behaviour needs different portfolios and different advice. NxanceLM is where that behaviour intelligence lives and flows from.</div></div>
+    <div class="kv"><div class="k rd">Still not a decider</div><div class="v">It <b>supplies</b> the behaviour parameter; the engines decide collectively. It never trades or overrides on its own.</div></div>
+  </div>
+
+  <!-- MINI 10 -->
+  <div class="card" style="border-color:var(--redt)">
+    <div class="ctitle">📅 MINI-10 · Daily Reporting Engine <span class="chip bred">GENERATION</span></div>
+    <div class="kv"><div class="k">What it does</div><div class="v">Produces the <b>daily "how is my portfolio doing" digest</b> — a short, plain-language update: what moved, whether the user is still on-track for the goal, and whether anything needs attention. Not raw P&amp;L noise, but goal-progress framing.</div></div>
+    <div class="kv"><div class="k">Behaviour-aware frequency</div><div class="v">A Daily-Watcher gets a calm, timeframe-focused daily note; a Set-and-Forget user gets a weekly/monthly summary instead — Mini-09 decides the cadence so the reporting helps rather than triggers anxiety.</div></div>
+    <div class="kv"><div class="k">Proactive, not just reactive</div><div class="v">If a held stock hits the news or a policy change affects the user's plan, it surfaces a short proactive message — frequency-limited to avoid notification fatigue.</div></div>
+  </div>
+
+  <!-- MINI 11 -->
+  <div class="card scratch-c" style="border-color:var(--scratchr)">
+    <div class="ctitle">🔢 MINI-11 · Number-Verification Guard <span class="chip bscratch">GUARD</span></div>
+    <div class="kv"><div class="k sc">What it does</div><div class="v">The single most important safety engine. Every ₹ figure, percentage, and date NxanceLM is about to output is <b>cross-checked against the actual structured engine data</b> before it reaches the user. If a number doesn't match its source, the output is blocked and regenerated.</div></div>
+    <div class="kv"><div class="k sc">Why it exists</div><div class="v">LLMs hallucinate numbers — unacceptable in finance. This guard makes hallucinated figures <b>structurally impossible</b> in any report or answer. NxanceLM is allowed to phrase things freely, but it is never allowed to invent a number. This is the digit-verifier concept from the MVP, made a permanent engine.</div></div>
+  </div>
+
+  <!-- MINI 12 -->
+  <div class="card scratch-c" style="border-color:var(--scratchr)">
+    <div class="ctitle">🛡️ MINI-12 · Safety &amp; Boundary Guard <span class="chip bscratch">GUARD</span></div>
+    <div class="kv"><div class="k sc">Enforces the Golden Rule in code</div><div class="v">This engine is where "helper, not lone decider" is physically enforced: it <b>blocks NxanceLM from outputting any real-money action directly</b>, blocks unhedged predictions ("this will definitely go up"), and triggers the <b>redirect-to-app</b> behaviour when a user asks for a build/analysis in chat.</div></div>
+    <div class="kv"><div class="k sc">Confidence calibration</div><div class="v">Well-established facts stated plainly; forward-looking claims explicitly hedged. It prevents the model sounding equally certain about "XIRR is defined as..." and "the market will..."</div></div>
+    <div class="kv"><div class="k rd">What it must never allow</div><div class="v">A "confident advice mode" that strips hedging to sound authoritative. The whole trust model depends on honesty about uncertainty — this guard protects that permanently.</div></div>
+  </div>
+
+  <!-- MINI 13 -->
+  <div class="card qcard">
+    <div class="ctitle">⚛️ MINI-13 · Quantum Acceleration Engine <span class="chip bp">GUARD / ACCELERATION</span></div>
+    <div class="kv"><div class="k q">What it does</div><div class="v">Speeds up the heavy sub-problems inside NxanceLM: large-scale <b>retrieval search</b> (finding the right facts among millions), <b>sampling</b> for uncertainty estimates, and any <b>combinatorial</b> analysis the Research engine needs. Full mechanics in Section 10.</div></div>
+    <div class="kv"><div class="k q">Always has a classical fallback</div><div class="v">If quantum resources aren't available or time out, the classical path runs and the answer still ships. Quantum is an accelerator, never a dependency.</div></div>
+  </div>
+
+  <!-- MINI 14 -->
+  <div class="card">
+    <div class="ctitle">🧩 MINI-14 · Memory &amp; Context Engine <span class="chip bgold">KNOWLEDGE</span></div>
+    <div class="kv"><div class="k">What it does</div><div class="v">Remembers context <b>across sessions</b> — a conversation from last week is available when the user returns. Real financial planning is a multi-week dialogue, not a single sitting.</div></div>
+    <div class="kv"><div class="k">What it holds</div><div class="v">The user's goals, past questions, prior explanations given, and stated preferences — so NxanceLM never re-asks what it already knows and every answer builds on the relationship's history.</div></div>
+    <div class="kv"><div class="k">Privacy-bounded</div><div class="v">Memory is per-user and encrypted; it informs answers but is never shared across users or used outside the user's own context.</div></div>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ============ SEC 07B: MINI 15-18 ============ -->
+<div class="sec" id="sNM">
+  <div class="slabel q">Section 07B — New Mini-Engines · MINI 15 to 18</div>
+  <h2 class="stitle">Hinglish · Voice · Nudges · <span class="qem">Self-Learning</span></h2>
+  <p class="ssub">Four additions that make NxanceLM help the app better in exactly the ways users feel: it speaks <b style="color:var(--tx)">their language</b>, works <b style="color:var(--tx)">by voice</b>, reaches out <b style="color:var(--tx)">before panic instead of after</b>, and <b style="color:var(--tx)">measures its own quality every night</b>.</p>
+
+  <div class="card qcard">
+    <div class="ctitle">🗣️ MINI 15 · Multilingual &amp; Hinglish Engine <span class="chip bp">BHARAT-FIRST</span></div>
+    <div class="kv"><div class="k q">What it does</div><div class="v">Understands and answers in <b>Hinglish, Hindi, English and major regional languages</b> — not translated-after-the-fact, but trained into the model from token zero (the from-scratch tokenizer reserves vocabulary for Devanagari + romanised Hindi + Indian finance terms like "SIP", "LTCG", "chit fund"). Every report card, daily pulse and chat answer renders in the user's chosen language with the same Number-Guard-verified figures.</div></div>
+    <div class="kv"><div class="k q">Why it's a moat</div><div class="v">Global models handle Hinglish as an afterthought; Indian retail investors <b>think</b> in it. "Ye fund thik hai ya nikal du?" deserves an answer in the same register. This engine is also why NxanceLM's training corpus (Mini 03's store) deliberately includes Indian-language finance content global models under-sample.</div></div>
+  </div>
+
+  <div class="card qcard">
+    <div class="ctitle">🎙️ MINI 16 · Voice Engine (ASR + TTS) <span class="chip bp">SPEAK &amp; LISTEN</span></div>
+    <div class="kv"><div class="k q">What it does</div><div class="v"><b>ASR</b> (speech → text) tuned for Indian accents and code-switching mid-sentence; <b>TTS</b> that reads the daily pulse or report card aloud in natural Hinglish. The user can ask "mera portfolio kaisa chal raha hai?" while driving and hear the verified answer.</div></div>
+    <div class="kv"><div class="k q">Build path</div><div class="v">MVP: whisper-class open ASR + open TTS fine-tuned on Indian speech. From-scratch phase: distilled in-house ASR/TTS heads sharing NxanceLM's encoder — one model family, voice as an interface, not a separate product. Voice output passes through the same Number Guard as text.</div></div>
+  </div>
+
+  <div class="card qcard">
+    <div class="ctitle">🔔 MINI 17 · Proactive Alerts &amp; Nudge Engine <span class="chip bp">REACHES OUT FIRST</span></div>
+    <div class="kv"><div class="k q">What it does</div><div class="v">Event-driven, behaviour-timed outreach: the <b>crash-day calm note</b> that lands before a Panic-Prone user opens the app ("aapka goal 12 saal door hai — 2020 me aisa hi hua tha, aur recovery aisi thi"), SIP-date reminders for Set-and-Forget users, milestone celebrations ("40% of target reached — 2 months ahead"), and rebalance one-tap prompts. Every nudge is composed by NxanceLM, verified by Number Guard, timed by Mini-09's archetype model.</div></div>
+    <div class="kv"><div class="k q">The boundary</div><div class="v">Nudges inform and celebrate — they never pressure a transaction, never use fear framing, never bypass the approval flow. Frequency is capped per archetype, and every nudge type is user-mutable. A nudge engine that annoys is worse than none; restraint is a design requirement, not a nicety.</div></div>
+  </div>
+
+  <div class="card qcard">
+    <div class="ctitle">📈 MINI 18 · Self-Evaluation &amp; Learning Engine <span class="chip bp">THE AI THAT MEASURES ITSELF</span></div>
+    <div class="kv"><div class="k q">What it does</div><div class="v">Runs the <b>nightly eval harness</b>: a frozen benchmark set of finance questions, report-card generations, Hinglish answers and number-grounding tests, scored automatically after every model update. Tracks hallucination rate (any Number-Guard block counts as one), answer win-rate vs the previous model version, latency and cost per response. A new checkpoint ships <b>only if it beats the incumbent</b> on the scorecard — the same shoot-out rule the quant engines use, applied to the AI itself.</div></div>
+    <div class="kv"><div class="k q">The learning loop</div><div class="v">User feedback (thumbs, corrections, unanswered questions), Number-Guard blocks and Peer-Intelligence calibration gaps flow into a curated fine-tuning queue — reviewed, deduplicated, privacy-scrubbed — and become the next training round's data. This is how NxanceLM gets measurably better every month without anyone guessing whether it did.</div></div>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ============ SEC 08: CHAT ASSISTANT ============ -->
+<div class="sec" id="s08">
+  <div class="slabel tl">Section 08 — The Chat Assistant</div>
+  <h2 class="stitle">Economy &amp; Market Chat — <em>Research, Answer, Then Redirect</em></h2>
+  <p class="ssub">Independent of any engine run, NxanceLM is a full finance/economy assistant. It researches and answers freely — but knows its boundary: a real portfolio build or analysis belongs to the two engines, not a chat reply.</p>
+
+  <div class="grid3">
+    <div class="card"><div class="ctitle" style="font-size:13px">🌍 Country / Macro</div><div class="v" style="font-size:11.5px">"India vs China growth?" · "Fed rate cut ka matlab?"</div></div>
+    <div class="card"><div class="ctitle" style="font-size:13px">🚀 Startups + IPOs</div><div class="v" style="font-size:11.5px">"Is IPO ke liye apply karun?" · "Ye startup karta kya hai?"</div></div>
+    <div class="card"><div class="ctitle" style="font-size:13px">🏢 Companies + Policy</div><div class="v" style="font-size:11.5px">"Is company mein dikkat hai?" · "New tax rule ka asar?"</div></div>
+    <div class="card"><div class="ctitle" style="font-size:13px">📊 Portfolio Comparison</div><div class="v" style="font-size:11.5px">"Mera portfolio Nifty 50 se better hai ya worse?"</div></div>
+    <div class="card"><div class="ctitle" style="font-size:13px">📈 Growth Rates + Data</div><div class="v" style="font-size:11.5px">"India ki GDP growth is quarter?"</div></div>
+    <div class="card"><div class="ctitle" style="font-size:13px">💡 Concept Explanation</div><div class="v" style="font-size:11.5px">"XIRR kya hai?" · "Rates badhne pe market kyun girta hai?"</div></div>
+  </div>
+
+  <span class="k" style="display:block;margin:18px 0 6px">Sample — Portfolio Comparison (answers fully, grounded in real data)</span>
+  <div class="chat">
+    <div class="umsg">Mera portfolio Nifty 50 index fund se better hai ya worse?</div>
+    <div class="amsg">Pichhle 5 saal mein aapka portfolio <b>11.8% CAGR</b> laaya, jabki Nifty 50 index fund ne <b>13.1%</b> diya — matlab aap benchmark se thoda peeche hain. Sabse bada reason: aapke 3 mid-cap funds is period mein underperform kiye, unka combined drag ~1.5% saalana hai. Chaho to main dikha sakta hun agar sirf index fund hota to aaj kitna zyada hota.</div>
+    <div class="umsg">Haan dikhao</div>
+    <div class="amsg">Agar pichhle 5 saal poora Nifty 50 index fund mein hote, aaj value ~<b>₹8.4L</b> hoti, current ~<b>₹7.6L</b> ke against — yaani ~₹80,000 zyada. Ye sirf illustration hai, future guarantee nahi. Ye gap aapke Health Check ke Cost-Leak aur Performance findings se bhi match karta hai.</div>
+  </div>
+
+  <span class="k" style="display:block;margin:18px 0 6px">Sample — The Redirect (build/analysis request → points to the app)</span>
+  <div class="chat">
+    <div class="umsg">Mere liye ek naya portfolio bana do na yahin chat mein</div>
+    <div class="amsg">Main aapko guide kar sakta hun, lekin ek <b>proper portfolio</b> banane ke liye app ka <b>Construction</b> option use karo — wahan poore 22 sub-engines chalte hain (allocation, selection, risk, backtest, quantum optimisation, sab) aur aapki behaviour ke hisaab se sabse best, fully-analysed portfolio banta hai. Chat ka ek jawab utna deep nahi ho sakta. Similarly apna existing portfolio check karna ho to <b>Health Check</b> option — ye dono aapko sabse accurate answer denge. Chalein, main aapko Construction pe le jaun?</div>
+  </div>
+  <div class="callout co-scratch" style="margin-bottom:0"><strong>Why redirect instead of answering:</strong> a build or analysis needs all 22 sub-engines, quantum optimisation and the full collective decision — exactly what the Golden Rule protects. A single chat reply would be a lone-AI decision, which NxanceLM is designed never to make. Pointing to the app isn't a limitation; it's the product working as intended.</div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ============ SEC 09: TRILLION PARAMETERS ============ -->
+<div class="sec" id="s09">
+  <div class="slabel">Section 09 — Scale</div>
+  <h2 class="stitle">Checking <em>Trillions of Parameters</em> — What It Actually Means</h2>
+  <p class="ssub">Worth explaining precisely, because "trillion parameters" gets used loosely. Two different things are both true for NxanceLM — and being honest about which is which is part of the trust model.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="ctitle">1️⃣ Model Parameter Count</div>
+      <div class="kv"><div class="k">What it is</div><div class="v">The literal number of learned weights inside NxanceLM's neural network — every value adjusted during training to encode financial knowledge.</div></div>
+      <div class="kv"><div class="k">Realistic path</div><div class="v">Phase 1: ~7B dense. Full Final: ~40–70B total via 8-expert MoE. Post-Full-Final: 200–500B+ via more experts. True <b>1T+ total-parameter</b> scale is a multi-year, post-Full-Final ambition — not an early-roadmap promise.</div></div>
+    </div>
+    <div class="card qcard">
+      <div class="ctitle">2️⃣ Parameters / Data Points Evaluated Per Query</div>
+      <div class="kv"><div class="k q">What it is</div><div class="v">Beyond model weights, every analysis cross-references thousands of instruments × 16 layers × decades of daily data — this is where "trillions of data points considered" is <b>honestly accurate today</b>.</div></div>
+      <div class="kv"><div class="k q">Already true</div><div class="v">7,400+ instruments × 16 layers × 25 years of daily data × multiple metrics genuinely reaches billions-to-trillions of individual data points per full portfolio analysis.</div></div>
+    </div>
+  </div>
+
+  <div class="nb"><strong>The honest framing to use publicly:</strong> "NxanceLM evaluates trillions of data points across every instrument, market history, and analysis layer" is accurate <em>today</em>. "NxanceLM is a trillion-parameter model" is a Full-Final-and-beyond target — the roadmap says so explicitly rather than letting the two get conflated. Honesty about scale is itself part of the trust model (Mini-12 enforces it).</div>
+
+  <span class="k" style="display:block;margin:16px 0 6px">Scaling Path — Model Size by Phase</span>
+  <table>
+    <tr><th>Phase</th><th>Total Parameters</th><th>Active / Token (MoE)</th><th>What Enables the Jump</th></tr>
+    <tr><td>Phase 1</td><td>~7B (dense, no MoE yet)</td><td>7B (all active)</td><td>Hybrid Attention + Mamba base architecture</td></tr>
+    <tr><td>Full Final</td><td>~40–70B</td><td>~10–14B</td><td>8-expert MoE sparsity added on hybrid base</td></tr>
+    <tr><td>Post-Full-Final (aspirational)</td><td>~200–500B+</td><td>~30–50B</td><td>Expanded expert count (16–32+), larger corpus</td></tr>
+    <tr><td>Frontier target (multi-year)</td><td>1T+</td><td>~50–100B</td><td>OhshnCUDA hardware maturity + major compute investment</td></tr>
+  </table>
+</div>
+
+<div class="hr"></div>
+
+<!-- ============ SEC 10: QUANTUM INSIDE NXANCELM ============ -->
+<div class="sec" id="s10">
+  <div class="slabel q">Section 10 — Quantum, End to End</div>
+  <h2 class="stitle">Quantum Computing <span class="qem">Inside NxanceLM</span> — Q1 to Q5</h2>
+  <p class="ssub">NxanceLM doesn't do portfolio optimisation itself (that's the engines' job). Its quantum use is different: accelerating the AI's own heavy sub-problems — search, sampling, and combinatorial reasoning. Every quantum path is simulated in Phase 1 and has a classical fallback. Here's exactly where and how.</p>
+
+  <table>
+    <tr><th>#</th><th>Where in NxanceLM</th><th>Quantum Method</th><th>Why Quantum Helps</th></tr>
+    <tr><td class="mono">Q1</td><td><b>Mini-03 · Retrieval Search</b></td><td>Grover-style amplitude amplification (simulated)</td><td>Finding the few relevant facts among millions of vectors — Grover gives a quadratic speedup on unstructured search</td></tr>
+    <tr><td class="mono">Q2</td><td><b>Mini-05 · Research Sampling</b></td><td>Quantum-amplitude-estimation Monte Carlo</td><td>Uncertainty estimates on forward-looking answers reach target confidence quadratically faster than classical sampling</td></tr>
+    <tr><td class="mono">Q3</td><td><b>Mini-05 · Combinatorial Analysis</b></td><td>QAOA / quantum annealing (simulated)</td><td>"Compare 3 things across 8 dimensions" style problems that explode combinatorially map naturally to QUBO</td></tr>
+    <tr><td class="mono">Q4</td><td><b>Reasoning Core · MoE routing (research)</b></td><td>Quantum-inspired sampling for expert selection</td><td>Choosing the optimal sparse expert subset per query is itself a combinatorial pick — a long-horizon research avenue</td></tr>
+    <tr><td class="mono">Q5</td><td><b>Mini-13 · Verification</b></td><td>Quantum Monte Carlo cross-check</td><td>Independent second opinion on any probabilistic claim before it's shown — cheap confidence at scale</td></tr>
+  </table>
+
+  <div class="grid2" style="margin-top:16px">
+    <div class="card qcard">
+      <div class="ctitle">🎯 How Quantum Serves the Motive</div>
+      <div class="v">Every quantum use here has one purpose: <b>make NxanceLM faster and more thorough</b> so the engines' answers reach the user in the &lt;10s budget with more data considered — which serves "minimum time" and "best result" directly. Quantum isn't a gimmick bolted on; it's applied only where it genuinely beats classical.</div>
+    </div>
+    <div class="card qcard">
+      <div class="ctitle">🛟 The Honest Status — Phase 1 = Simulated</div>
+      <div class="v">Real quantum hardware isn't reliable at useful scale yet. So in Phase 1 <b>every quantum method above runs on simulators</b> (or quantum-inspired classical algorithms), architected so that when real QPUs mature, the same code targets them via a hardware adapter. The classical fallback always produces a valid answer — quantum is upside, never a dependency.</div>
+    </div>
+  </div>
+
+  <div class="callout co-q">
+    <div class="co-head">⚛️ The boundary — quantum accelerates, it never decides</div>
+    Just like the Golden Rule for the AI itself: quantum results are <b>inputs that get verified</b> by the classical pipeline before anything is shown. A quantum-derived answer that can't survive the number-guard (Mini-11) and safety-guard (Mini-12) is discarded. Speed never buys a shortcut around trust.
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ============ SEC 11: QUANTUM BUILD STACK ============ -->
+<div class="sec" id="s11">
+  <div class="slabel q">Section 11 — Quantum Build Stack</div>
+  <h2 class="stitle">What It Takes to <span class="qem">Build the Quantum Layer</span></h2>
+  <p class="ssub">Exactly what your brief asks: which language, tech stack and tools build the quantum part — for NxanceLM specifically. The same stack is shared with Construction and Health Check's quantum engines, so it's built once.</p>
+
+  <table>
+    <tr><th>Layer</th><th>Tool / Language</th><th>Role</th></tr>
+    <tr><td>Circuit framework</td><td><b>Qiskit</b> (Python) / <b>PennyLane</b></td><td>Build &amp; simulate quantum circuits — Grover, QAOA, amplitude estimation</td></tr>
+    <tr><td>QUBO formulation</td><td><b>PyQUBO</b>, <b>D-Wave Ocean SDK</b></td><td>Turn combinatorial sub-problems into quantum-solvable form</td></tr>
+    <tr><td>Simulation backend</td><td><b>Qiskit Aer</b>, <b>cuQuantum</b> (GPU)</td><td>Run circuits on classical GPUs at Phase-1 scale — fast, no real QPU needed</td></tr>
+    <tr><td>Quantum-inspired classical</td><td><b>Custom Rust / CUDA</b></td><td>Production fallback — tensor-network &amp; annealing-inspired solvers that run on normal hardware</td></tr>
+    <tr><td>Hardware adapter (future)</td><td><b>IBM Quantum</b>, <b>AWS Braket</b>, <b>IonQ</b> APIs</td><td>When real QPUs mature, same circuits target them without rewriting the AI</td></tr>
+    <tr><td>Orchestration</td><td><b>Python</b> service + <b>gRPC</b></td><td>Quantum layer exposed as an internal service both the AI and engines call</td></tr>
+  </table>
+
+  <div class="scratchb"><strong>The build philosophy:</strong> write the quantum logic once, in a hardware-agnostic way. Phase 1 runs it on GPU simulators (Qiskit Aer + cuQuantum) and quantum-inspired Rust solvers. Nothing about the product depends on quantum hardware existing — but the day it matures, NxanceLM and both engines get faster for free, because the adapter layer was built in from the start.</div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ============ AI QUANT CORE ============ -->
+<div class="sec" id="sQC">
+  <div class="slabel gd">Section 11B — The AI Quant Core</div>
+  <h2 class="stitle">Formulas of the Model Itself — <em>Transformer to Trillion Parameters</em></h2>
+  <p class="ssub">The Construction and Health Check documents carry the finance math; this page carries the <b style="color:var(--tx)">math of the AI itself</b> — the exact equations Raghav will implement to build NxanceLM from scratch, and the honest engineering behind the trillion-parameter claim.</p>
+
+  <div class="card gdcard">
+    <div class="ctitle">🧠 A · The Transformer Core (Mini-04's substrate)</div>
+    <div class="fhead">A1 · Attention — the one equation the whole model is built on</div>
+    <div class="formula"><span class="fx">Attention(Q,K,V) = softmax( QKᵀ / √d<sub>k</sub> ) · V</span></div>
+    <div class="fwhere"><b>Q,K,V</b> = query/key/value projections of the token embeddings &nbsp;·&nbsp; <b>d<sub>k</sub></b> = key dimension (the √d<sub>k</sub> keeps gradients stable). Multi-head: run h attention heads in parallel on d/h-dim slices, concatenate, project — <span class="mono">MultiHead = Concat(head₁…head_h)·Wᴼ</span>. Production choices: RoPE positional encoding, grouped-query attention (GQA) for cheap inference, SwiGLU feed-forward, RMSNorm.</div>
+    <div class="fhead">A2 · Parameter count — where the size actually lives</div>
+    <div class="formula"><span class="fx">P ≈ 12 · L · d²</span> &nbsp;&nbsp;(L layers, hidden size d; embeddings add V·d)</div>
+    <div class="fwhere">Example: L=32, d=4096 → ≈6.4B params (a Llama-7B-class model). Training compute: <span class="mono">FLOPs ≈ 6·P·N</span> for N training tokens — this formula is how the GPU budget in the Cost section is derived, not guessed.</div>
+  </div>
+
+  <div class="card gdcard">
+    <div class="ctitle">🎓 B · Training Math (the from-scratch phase)</div>
+    <div class="fhead">B1 · The objective — next-token cross-entropy</div>
+    <div class="formula"><span class="fx">L = −(1/N) Σ<sub>t</sub> log p<sub>θ</sub>( x<sub>t</sub> | x<sub>&lt;t</sub> )</span></div>
+    <div class="fhead">B2 · Chinchilla scaling — how much data the model size demands</div>
+    <div class="formula"><span class="fx">N<sub>tokens</sub><sup>optimal</sup> ≈ 20 × P</span> &nbsp;&nbsp;→&nbsp; a 7B model wants ~140B tokens; a 70B model wants ~1.4T tokens</div>
+    <div class="fwhere">This is the law that disciplines the roadmap: model size without matching data is wasted compute. Nxance's corpus strategy (Indian finance filings, AMFI data, concalls, Hinglish finance content + open web) is sized against this rule per phase. LR schedule: warmup → cosine decay; AdamW; bf16 mixed precision; FSDP/ZeRO sharding across GPUs.</div>
+  </div>
+
+  <div class="card gdcard">
+    <div class="ctitle">🐘 C · The Trillion-Parameter Path — Mixture of Experts, Honestly</div>
+    <div class="fhead">C1 · MoE layer — total parameters vs active parameters</div>
+    <div class="formula"><span class="fx">y = Σ<sub>i∈TopK(g(x))</sub> g<sub>i</sub>(x) · E<sub>i</sub>(x)</span></div>
+    <div class="fwhere"><b>E<sub>i</sub></b> = expert feed-forward networks (dozens to hundreds) &nbsp;·&nbsp; <b>g(x)</b> = learned router picking top-K (usually 2) experts per token. This is how "trillion+ parameters" is actually engineered: <b>total</b> parameters scale with expert count (64 experts × ~16B ≈ 1T+), while <b>active</b> parameters per token stay ~30–50B — trillion-scale knowledge at mid-size compute cost. Load-balancing loss keeps the router from collapsing onto favourite experts.</div>
+    <div class="callout co-gold" style="margin:10px 0 0">
+      <b>The honest claim, precisely worded:</b> "NxanceLM evaluates trillions of parameters" = trillion+ <b>total</b> MoE parameters, with tens of billions active per token, over a knowledge store of trillions of data points (Mini-03). That sentence survives technical due-diligence; a claimed dense trillion-parameter model trained by a 2-person startup would not — the compute bill alone falsifies it. Say it right, and it's a strength.
+    </div>
+  </div>
+
+  <div class="card gdcard">
+    <div class="ctitle">🎯 D · Alignment — Making It Helpful and Safe (SFT → DPO)</div>
+    <div class="formula">SFT: &nbsp;<span class="fx">L = −Σ log p<sub>θ</sub>(response | prompt)</span> &nbsp; on curated finance Q&amp;A, report cards, Hinglish dialogues<br>
+    DPO: &nbsp;<span class="fx">L = −log σ( β·[ log(p<sub>θ</sub>(y<sub>w</sub>|x)/p<sub>ref</sub>(y<sub>w</sub>|x)) − log(p<sub>θ</sub>(y<sub>l</sub>|x)/p<sub>ref</sub>(y<sub>l</sub>|x)) ] )</span></div>
+    <div class="fwhere"><b>y<sub>w</sub>, y<sub>l</sub></b> = preferred vs rejected answer pairs (from Mini-18's feedback queue). DPO chosen over full RLHF: same alignment effect, no reward-model training, no PPO instability — the right choice for a small team. Safety boundaries (Mini-12) are trained here too: refuse stock tips, redirect portfolio requests to the two app engines, never invent numbers.</div>
+  </div>
+
+  <div class="card gdcard">
+    <div class="ctitle">⚡ E · Efficiency Math — Fitting Real Hardware</div>
+    <div class="formula">LoRA fine-tune: &nbsp;<span class="fx">W′ = W + B·A</span> , rank r ≪ d &nbsp;→ trainable params ~0.1–1% of full<br>
+    KV-cache per token: &nbsp;<span class="fx">2 · L · d · bytes</span> &nbsp;→ why GQA + quantised cache matter at long context<br>
+    Quantisation: &nbsp;<span class="fx">W ≈ s · round(W/s)</span> &nbsp;(INT8/INT4) — 2–4× memory cut, ~1% quality cost<br>
+    Speculative decoding: draft model proposes k tokens, target verifies → <span class="fx">speed ≈ (accepted+1)×</span> per verify step</div>
+    <div class="fwhere">These four are why NxanceLM serves cheaply on one GPU node in MVP/growth phases (vLLM with paged attention, continuous batching) — the Cost section's serving numbers derive from here.</div>
+  </div>
+
+  <div class="card gdcard">
+    <div class="ctitle">📚 F · RAG Math (Mini-03) + the Number Guard Rule (Mini-11)</div>
+    <div class="formula">Retrieval score: &nbsp;<span class="fx">s(q,d) = cos( E(q), E(d) )</span> → top-k → cross-encoder rerank → context<br>
+    Grounding requirement: &nbsp;<span class="fx">every factual claim c must have source(c) ∈ retrieved set</span><br>
+    Number Guard: &nbsp;<span class="fx">∀ n ∈ numbers(output): ∃ ledger value v, |n − v| ≤ tol(v)</span> — else the sentence is blocked &amp; regenerated</div>
+    <div class="fwhere"><b>E</b> = the embedding model (own-trained in from-scratch phase) &nbsp;·&nbsp; ledger = the computed-values store from Construction/Health Check engines. Together these two rules are the anti-hallucination architecture: RAG grounds the words, Number Guard grounds the digits.</div>
+  </div>
+
+  <div class="card qcard">
+    <div class="ctitle">⚛️ G · Quantum ML Math (Mini-13)</div>
+    <div class="formula">Quantum kernel: &nbsp;<span class="qx">k(x,x′) = |⟨φ(x)|φ(x′)⟩|²</span> &nbsp;— similarity in Hilbert space, used experimentally for behaviour-pattern classification<br>
+    Variational circuit: &nbsp;<span class="qx">f(x;θ) = ⟨0| U†(x,θ) M U(x,θ) |0⟩</span> &nbsp;— trained like a tiny neural net, candidate for regime detection<br>
+    Data/feature selection QUBO: &nbsp;<span class="qx">min xᵀQx</span> — which training-corpus slices / which features maximise eval gain per token budget</div>
+    <div class="fwhere">Same honesty rule as everywhere: these run on GPU simulators in Phase 1, ship only if they beat classical baselines on Mini-18's scorecard, and always keep the classical fallback. The most valuable near-term quantum use inside the AI is the <b>QUBO data-selection</b> problem — it directly reduces training cost.</div>
+  </div>
+
+  <div class="card gdcard">
+    <div class="ctitle">📈 H · Evaluation Math (Mini-18) + the Master Inference Pipeline</div>
+    <div class="formula">Perplexity: &nbsp;<span class="fx">PPL = exp( L<sub>cross-entropy</sub> )</span> &nbsp;·&nbsp; Hallucination rate: <span class="fx">HR = guard-blocks / responses</span> &nbsp;·&nbsp; Win-rate: <span class="fx">WR = P(new ≻ old | frozen benchmark)</span> — ship only if WR &gt; 0.5 with HR not worse</div>
+    <pre><span class="kw">def</span> <span class="fn">respond</span>(user_msg):                                <span class="cm"># the full path, every message</span>
+    intent  = mini01.understand(user_msg)             <span class="cm"># language + intent + entities</span>
+    <span class="kw">if</span> intent <span class="kw">in</span> (CREATE_PORTFOLIO, ANALYSE_PORTFOLIO):
+        <span class="kw">return</span> mini08.redirect_to_app_engines()       <span class="cm"># "app me ye 2 options use karo —</span>
+                                                      <span class="cm">#  wahi best answer denge"</span>
+    ctx     = mini03.retrieve(intent)                 <span class="cm"># RAG over the trillion-datapoint store (F)</span>
+    draft   = mini04.reason(intent, ctx)              <span class="cm"># transformer core (A) + research (05)</span>
+    draft   = mini12.safety_pass(draft)               <span class="cm"># boundaries, no tips, no advice breach</span>
+    draft   = mini11.number_guard(draft)              <span class="cm"># every digit vs ledger (F) — block/regen</span>
+    reply   = mini15.render_language(draft, user.lang)<span class="cm"># Hinglish/Hindi/regional</span>
+    mini14.remember(user_msg, reply); mini18.log_for_eval(reply)
+    <span class="kw">return</span> reply                                      <span class="cm"># voice users: mini16.tts(reply)</span></pre>
+    <div class="callout co-g" style="margin-bottom:0">
+      <div class="co-head">Reading this page as a build checklist</div>
+      MVP phase: A + F on a fine-tuned open base (TinyLlama-class placeholder) — attention math is inherited, RAG + Number Guard are built in-house first because they're the trust layer. From-scratch phase: B (pretraining) → D (alignment) → C (MoE scale-up) → E (efficiency) — in that order, each gated by H's shoot-out rule. <b>The trust layer ships first; the trillion parameters come after.</b> That ordering is what keeps the motive intact while the model grows.
+    </div>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ============ SEC 12: BUILT FROM SCRATCH ============ -->
+<div class="sec" id="s12">
+  <div class="slabel scratch">Section 12 — The Core Commitment</div>
+  <h2 class="stitle">Built From Scratch — <em>No Third-Party Base Model, Ever</em></h2>
+  <p class="ssub">The clearest possible statement: the MVP uses TinyLlama as a temporary, explicitly-labelled placeholder. From Phase 1 onward the real NxanceLM is trained from random initialisation — never fine-tuned on top of Llama, Mistral, GPT, or any other foundation model's weights.</p>
+
+  <div class="card scratch-c" style="border-color:var(--scratchr)">
+    <div class="ctitle">🧬 What "From Scratch" Technically Means — Every Layer Is Ours</div>
+    <div class="kv"><div class="k sc">Architecture</div><div class="v">Hybrid Transformer + Mamba + MoE layer design, layer count, dimensions — decided and implemented by the Nxance ML team, not copied from an existing open model's config.</div></div>
+    <div class="kv"><div class="k sc">Tokenizer</div><div class="v">Custom Rust BPE tokenizer, 32k vocabulary, built to preserve AMFI codes, Hinglish, and ₹ formatting — not GPT/Llama's tokenizer.</div></div>
+    <div class="kv"><div class="k sc">Initial weights</div><div class="v">Random initialisation (Xavier/He) — the model starts knowing literally nothing, exactly as every frontier lab's own foundation model does.</div></div>
+    <div class="kv"><div class="k sc">Training data</div><div class="v">2T+ token corpus assembled specifically for NxanceLM — AMFI, NSE, RBI, SEBI, Hinglish conversational data, general web text — curated independently, not inherited from another model's run.</div></div>
+    <div class="kv"><div class="k sc">Training run</div><div class="v">Full pre-training from token zero on Ohshn Cloud's own GPU pool (via OhshnCUDA) — every gradient update, every checkpoint, is Nxance's own compute spend.</div></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="ctitle">🪜 The MVP Bridge — Why TinyLlama First</div>
+      <div class="v">Training a from-scratch model takes months and serious compute. To ship the MVP and validate the product now, NxanceLM's interface runs on <b>TinyLlama (temporary placeholder)</b> wrapped with the number-guard so it never hallucinates figures. Users get a working assistant on day one; the real model replaces it underneath without any interface change.</div>
+    </div>
+    <div class="card scratch-c" style="border-color:var(--scratchr)">
+      <div class="ctitle">🎯 The Permanent Commitment</div>
+      <div class="v">After MVP, NxanceLM has <b>zero dependency on any third-party language model</b> — not as a base, not as a fine-tuning start, not even as a distillation teacher. Every weight is trained by Ohshn Intelligence, on Ohshn Intelligence's own infrastructure, from token zero. TinyLlama's role ends at MVP and is never mentioned again.</div>
+    </div>
+  </div>
+
+  <pre><span class="cm">## NxanceLM pre-training — starts from nothing, no external checkpoint</span>
+<span class="kw">import</span> torch
+<span class="kw">from</span> nxancelm.architecture <span class="kw">import</span> NxanceLMHybridModel
+<span class="kw">from</span> nxancelm.tokenizer <span class="kw">import</span> NxanceTokenizer   <span class="cm"># our own, not GPT2Tokenizer</span>
+
+<span class="cm"># 1. Tokenizer from OUR corpus</span>
+tokenizer = NxanceTokenizer.train(corpus_path=<span class="st">"data/nxance_corpus_2T/"</span>,
+                                  vocab_size=<span class="nm">32000</span>,
+                                  special_tokens=[<span class="st">"&lt;AMFI_CODE&gt;"</span>, <span class="st">"&lt;RS_AMOUNT&gt;"</span>, <span class="st">"&lt;HINGLISH&gt;"</span>])
+<span class="cm"># 2. Random init — NOT loading any pretrained checkpoint (the critical line)</span>
+model = NxanceLMHybridModel(n_layers=<span class="nm">48</span>, d_model=<span class="nm">4096</span>, n_experts=<span class="nm">8</span>,
+                            vocab_size=tokenizer.vocab_size)
+model.apply(xavier_init)                    <span class="cm"># starts knowing nothing</span>
+<span class="cm"># NOTE: no model.load_state_dict(llama_weights) — ever</span>
+<span class="cm"># 3. Full pretraining on Ohshn Cloud GPU pool</span>
+trainer = DeepSpeedTrainer(model=model, tokenizer=tokenizer,
+                           data=nxance_corpus, hardware=<span class="st">"ohshncuda_gpu_pool"</span>,
+                           total_tokens=<span class="nm">2_000_000_000_000</span>)   <span class="cm"># 2 trillion tokens</span>
+trainer.train()                             <span class="cm"># every gradient step is Nxance's own</span></pre>
+</div>
+
+<div class="hr"></div>
+
+<!-- ============ SEC 13: FULL BUILD STACK ============ -->
+<div class="sec" id="s13">
+  <div class="slabel">Section 13 — Full Build Stack</div>
+  <h2 class="stitle">Every Mini-Engine — <em>Language, Tools &amp; APIs</em></h2>
+  <p class="ssub">Exactly what your brief asks: which language, tech stack, architecture, tools and APIs build the whole own-AI, mini-engine by mini-engine. The rule: Python for ML/research, Rust for anything on the latency-critical or correctness-critical path, Go for high-throughput services.</p>
+
+  <table>
+    <tr><th>Mini-Engine</th><th>Language / Stack</th><th>Key Tools &amp; APIs</th></tr>
+    <tr><td>01 · Intent &amp; Understanding</td><td>Python</td><td>Own classifier head on the core model; intent taxonomy; fastText fallback</td></tr>
+    <tr><td>02 · Tokenizer &amp; Encoder</td><td><b>Rust</b></td><td>Custom BPE (HuggingFace <code>tokenizers</code> Rust core), 32k vocab</td></tr>
+    <tr><td>03 · Knowledge &amp; Retrieval</td><td>Python + Rust</td><td><b>Qdrant / pgvector</b>, embeddings, live market-data adapters</td></tr>
+    <tr><td>04 · Reasoning Core</td><td>Python (<b>PyTorch</b>)</td><td>Custom hybrid model; <b>DeepSpeed / Megatron</b>; Mamba SSM kernels; FlashAttention; MoE routing</td></tr>
+    <tr><td>05 · Research &amp; Analysis</td><td>Python</td><td>LangGraph-style orchestration (own), web/data connectors, Mini-13 quantum calls</td></tr>
+    <tr><td>06 · Explainability</td><td>Python</td><td>Reasoning-chain templates + model generation; traces from both engines</td></tr>
+    <tr><td>07 · Report Card Generator</td><td>Python + <b>TS</b></td><td>Template engine, PDF export (WeasyPrint/React-PDF), verify-numbers hook</td></tr>
+    <tr><td>08 · Economy &amp; Market Chat</td><td>Python + Next.js</td><td>Streaming API (SSE/WebSocket), live-data RAG, redirect logic</td></tr>
+    <tr><td>09 · Behaviour Tracking</td><td><b>Go</b> + Python</td><td>Event stream (Kafka), feature store, archetype model; feeds both engines</td></tr>
+    <tr><td>10 · Daily Reporting</td><td>Go</td><td>Scheduler (cron/Temporal), notification service, digest templates</td></tr>
+    <tr><td>11 · Number-Verification Guard</td><td><b>Rust</b></td><td>Deterministic cross-check vs structured engine output — zero tolerance</td></tr>
+    <tr><td>12 · Safety &amp; Boundary Guard</td><td>Python + Rust</td><td>Policy engine, hedging classifier, redirect trigger, PII filter</td></tr>
+    <tr><td>13 · Quantum Acceleration</td><td>Python + Rust</td><td><b>Qiskit, PennyLane, PyQUBO, cuQuantum</b> (see Section 11)</td></tr>
+    <tr><td>14 · Memory &amp; Context</td><td>Go + Postgres</td><td>Per-user encrypted store, session graph, retrieval into Mini-03</td></tr>
+  </table>
+
+  <div class="grid3" style="margin-top:14px">
+    <div class="card"><div class="ctitle" style="font-size:13px">🖥️ Training Infra</div><div class="v" style="font-size:11.5px">PyTorch + DeepSpeed/Megatron on a multi-GPU pool (Ohshn Cloud / cloud credits). Data pipeline in Rust + Python. Experiment tracking: Weights &amp; Biases / MLflow.</div></div>
+    <div class="card"><div class="ctitle" style="font-size:13px">⚡ Serving Infra</div><div class="v" style="font-size:11.5px">vLLM / TensorRT-LLM for fast inference, MoE-aware. Rust gateway for the number-guard. Autoscaling GPU nodes; Redis cache for hot context.</div></div>
+    <div class="card"><div class="ctitle" style="font-size:13px">🔗 Shared With Engines</div><div class="v" style="font-size:11.5px">Data Intelligence store, vector DB, quantum layer, and behaviour signals are shared infrastructure with Construction &amp; Health Check — build once, use everywhere.</div></div>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ============ SEC 14: HOW TO BUILD ============ -->
+<div class="sec" id="s14">
+  <div class="slabel">Section 14 — Build Roadmap</div>
+  <h2 class="stitle">How to Actually Build This — <em>MVP → From-Scratch</em></h2>
+  <p class="ssub">A 14-mini-engine own-AI is the destination, not the starting line. Here's the realistic path for a small team — ship value fast, then replace the placeholder with the real thing underneath, without ever breaking the interface.</p>
+
+  <div class="tier-row">
+    <div class="tierbox" style="border-color:var(--gr)"><div class="tb-h" style="color:var(--g)">STAGE 1 · MVP</div><div class="tb-b"><b>TinyLlama + guards.</b> Ship Mini-01 (intent), Mini-06 (explain), Mini-07 (report card), Mini-08 (chat), Mini-11 (number guard), Mini-12 (safety). The model is a placeholder; the <em>engines around it</em> are real. Users get a working assistant now.</div></div>
+    <div class="tierbox" style="border-color:var(--cyanr)"><div class="tb-h" style="color:var(--cyan)">STAGE 2 · PHASE 1</div><div class="tb-b"><b>Own model, 7B from scratch.</b> Build the tokenizer (Mini-02), train the hybrid core (Mini-04) from token zero, add RAG (Mini-03) and memory (Mini-14). Swap out TinyLlama underneath — interface unchanged.</div></div>
+    <div class="tierbox" style="border-color:var(--goldr)"><div class="tb-h" style="color:var(--gold)">STAGE 3 · FULL FINAL</div><div class="tb-b"><b>MoE + behaviour + quantum.</b> Add MoE sparsity (40–70B), behaviour tracking (Mini-09), daily reporting (Mini-10), research (Mini-05), and the quantum layer (Mini-13). Now a complete 14-mini-engine AI.</div></div>
+  </div>
+
+  <div class="callout co-scratch">
+    <div class="co-head">🔑 The one principle that makes this buildable by a small team</div>
+    <b>Interface stability.</b> Every mini-engine talks to the others through fixed contracts, so the placeholder model in Stage 1 can be replaced by the real from-scratch model in Stage 2 <em>without touching</em> the report generator, chat, or guards. Build the scaffolding once; upgrade the brain inside it over time. Same incremental philosophy as the 22-sub-engine engines.
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ============ SEC 15: COST & ECONOMICS ============ -->
+<div class="sec" id="s15">
+  <div class="slabel">Section 15 — Cost &amp; Economics</div>
+  <h2 class="stitle">What It Takes to <em>Train &amp; Run</em></h2>
+  <p class="ssub">An honest view of the money, because a from-scratch trillion-scale ambition has real costs — and a realistic staged path keeps them survivable for a startup.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="ctitle">💸 Training Cost — Staged</div>
+      <div class="kv"><div class="k">MVP</div><div class="v"><b>~₹0 model cost.</b> TinyLlama is open and tiny — runs on a single modest GPU. All spend is engineering time.</div></div>
+      <div class="kv"><div class="k">Phase 1 (7B from scratch)</div><div class="v">The real cost begins — a 7B model on ~2T tokens is a meaningful GPU-hour bill. <b>Cloud credits</b> (Microsoft/NVIDIA/AWS/Google startup programs) are specifically targeted to cover most of this early training.</div></div>
+      <div class="kv"><div class="k">Full Final &amp; beyond</div><div class="v">MoE 40–70B and larger needs sustained compute — funded from revenue + grants (SISFS, MeitY, IndiaAI) + the OhshnCUDA hardware strategy, not upfront cash.</div></div>
+    </div>
+    <div class="card">
+      <div class="ctitle">⚡ Serving Cost — Per Query</div>
+      <div class="kv"><div class="k">The MoE advantage</div><div class="v">Sparse routing means only ~10–14B of a 70B model activates per query — <b>full knowledge, a fraction of the inference cost.</b> This is what makes trillion-scale ambition economically survivable at serving time.</div></div>
+      <div class="kv"><div class="k">Cache + RAG</div><div class="v">RAG means a smaller model can punch above its weight (facts retrieved, not memorised), and hot-context caching cuts repeat compute — keeping per-user cost low enough for a ₹-priced subscription.</div></div>
+      <div class="kv"><div class="k">Quantum</div><div class="v">Simulated on existing GPUs in Phase 1 — no separate hardware cost until real QPUs are both mature and cheaper than the classical path.</div></div>
+    </div>
+  </div>
+
+  <div class="goldb"><strong>The economic thesis in one line:</strong> ship on a free placeholder, train the real model with cloud credits and grants, serve it cheaply via MoE sparsity + RAG + caching — so a solo-founder-scale company can genuinely own its AI without frontier-lab budgets. The trillion-scale model is a destination funded by revenue over years, not a day-one cash requirement.</div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ============ SEC 16: SUMMARY ============ -->
+<div class="sec" id="s16">
+  <div class="slabel">Section 16 — Complete Summary</div>
+  <h2 class="stitle">All 18+ Mini-Engines — <em>At a Glance</em></h2>
+  <table>
+    <tr><th>#</th><th>Mini-Engine</th><th>Layer</th><th>Core Job</th></tr>
+    <tr><td class="mono">01</td><td><b>Intent &amp; Understanding</b></td><td>Perception</td><td>Works out what the user wants; routes or redirects</td></tr>
+    <tr><td class="mono">02</td><td><b>Tokenizer &amp; Encoder</b></td><td>Perception</td><td>Own finance-native BPE; preserves ₹, AMFI codes, Hinglish</td></tr>
+    <tr><td class="mono">03</td><td><b>Knowledge &amp; Retrieval (RAG)</b></td><td>Knowledge</td><td>Grounds answers in live data, not stale memory</td></tr>
+    <tr><td class="mono">04</td><td><b>Reasoning Core</b></td><td>Reasoning</td><td>Hybrid Transformer + Mamba + MoE, from scratch</td></tr>
+    <tr><td class="mono">05</td><td><b>Research &amp; Analysis</b></td><td>Reasoning</td><td>Multi-source synthesis; feeds engines a clean parameter</td></tr>
+    <tr><td class="mono">06</td><td><b>Explainability</b></td><td>Generation</td><td>Reconstructs "why we chose this," with counterfactuals</td></tr>
+    <tr><td class="mono">07</td><td><b>Report Card Generator</b></td><td>Generation</td><td>Report cards + analysis reports, verified numbers only</td></tr>
+    <tr><td class="mono">08</td><td><b>Economy &amp; Market Chat</b></td><td>Generation</td><td>Full finance chat; redirects build/analysis to the app</td></tr>
+    <tr><td class="mono" style="color:var(--pink)">09</td><td><b>Behaviour Tracking</b></td><td>Reasoning</td><td>Tracks real behaviour; feeds both engines' Behaviour sub-engines</td></tr>
+    <tr><td class="mono" style="color:var(--red)">10</td><td><b>Daily Reporting</b></td><td>Generation</td><td>Daily/periodic goal-progress digests, behaviour-paced</td></tr>
+    <tr><td class="mono" style="color:#4ADE80">11</td><td><b>Number-Verification Guard</b></td><td>Guard</td><td>Every ₹/%/date checked vs source — no hallucinated figures</td></tr>
+    <tr><td class="mono" style="color:#4ADE80">12</td><td><b>Safety &amp; Boundary Guard</b></td><td>Guard</td><td>Enforces "helper not decider" + redirect + hedging</td></tr>
+    <tr><td class="mono" style="color:var(--purple)">13</td><td><b>Quantum Acceleration</b></td><td>Guard</td><td>Speeds search/sampling/combinatorics; classical fallback</td></tr>
+    <tr><td class="mono" style="color:var(--gold)">14</td><td><b>Memory &amp; Context</b></td><td>Knowledge</td><td>Cross-session memory; multi-week planning continuity</td></tr>
+    <tr><td class="mono" style="color:var(--purple)">15</td><td><b>Multilingual &amp; Hinglish</b> <span class="chip bp">NEW</span></td><td>Expression</td><td>Understands + answers in Hinglish, Hindi &amp; regional languages — reports in the user's own language</td></tr>
+    <tr><td class="mono" style="color:var(--purple)">16</td><td><b>Voice (ASR + TTS)</b> <span class="chip bp">NEW</span></td><td>Expression</td><td>Speak to Nxance, hear the report — Bharat-first accessibility</td></tr>
+    <tr><td class="mono" style="color:var(--purple)">17</td><td><b>Proactive Alerts &amp; Nudges</b> <span class="chip bp">NEW</span></td><td>Action</td><td>Crash-day calm notes, SIP reminders, milestone celebrations — behaviour-timed, before the user panics</td></tr>
+    <tr><td class="mono" style="color:var(--purple)">18</td><td><b>Self-Evaluation &amp; Learning</b> <span class="chip bp">NEW</span></td><td>Guard</td><td>Nightly eval benchmarks, hallucination tracking, feedback → fine-tune loop — the AI that measures itself</td></tr>
+  </table>
+
+  <div class="callout co-scratch">
+    <div class="co-head">The Complete Picture — NxanceLM v3</div>
+    NxanceLM is not a chatbot bolted onto a finance app. It is Nxance's <b>own AI, built from scratch as 18+ coordinated mini-engines</b> across five layers — Perception, Knowledge, Reasoning Core, Generation, and Guard. It works <b>inside</b> both the Construction and Health Check engines as one helper-parameter among many (never a lone decider), <b>generates</b> every report card, explanation and daily digest the user reads, <b>tracks</b> the user's real behaviour and feeds it back into both engines, and <b>answers</b> finance/economy questions in chat — redirecting any build-or-analyse request to the two real engines because those give the best, fully-analysed answer. It is quantum-accelerated where quantum genuinely helps, evaluates trillions of data points today with a trillion-parameter model as a multi-year target, and after the MVP's TinyLlama placeholder carries <b>zero dependency on any third-party model</b> — own tokenizer, own architecture, own data, own weights, own compute. And through all of it, one thing never changes: <b>it serves the single locked motive — get the user to their goal with less risk, higher return, in minimum time, shaped to how they actually behave — and it never decides alone.</b>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<div class="footer">
+  <div class="fb">nxancelm <em>· v2.0</em></div>
+  <div style="margin-top:6px">Ohshn Intelligence Pvt Ltd &nbsp;|&nbsp; Palampur, Himachal Pradesh &nbsp;|&nbsp; 2026 &nbsp;|&nbsp; 18+ Mini-Engines · Own AI, Built From Scratch · Quantum-Accelerated · Confidential</div>
+</div>
+
+
+<!-- ═══════ v3.1 ADDENDUM: LOCKED USER FLOW, QUESTION SET & ARCHITECTURE ═══════ -->
+<div style="max-width:1080px;margin:30px auto;padding:0 24px">
+  <div style="border-top:2px solid #FFB830;padding-top:26px">
+  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.18em;color:#FFB830;text-transform:uppercase;margin-bottom:6px">v3.1 Addendum — Locked Product Decisions</div>
+  <div style="font-family:'Space Grotesk',Inter,sans-serif;font-size:24px;font-weight:700;color:#EAF0FF;margin-bottom:6px">NxanceLM — Its Role in the Question &amp; Verdict Flow</div>
+  <div style="font-size:12.5px;color:#8A94BD;margin-bottom:16px">Adds to everything above — nothing replaced. The flow, the full question set, and the architecture path for this journey, locked as product decisions.</div>
+  
+  <div style="background:#070B18;border:1.5px solid #1E2A4A;border-radius:14px;padding:20px 24px;margin:14px 0">
+    <div style="font-family:'Space Grotesk',Inter,sans-serif;font-size:16px;font-weight:700;color:#EAF0FF;margin-bottom:10px">🗣️ NxanceLM's Role in This Flow</div>
+    <div style="font-size:13.5px;color:#B9C3E8;line-height:1.85">NxanceLM is the conversational layer of the question flow and the voice of the verdict: it can ask the Question Set conversationally (Hinglish/Hindi/English), normalise free-text answers into engine parameters ("bacchon ki padhai ke liye, 10 saal" → goal=education, tenure=10y), explain the <b style="color:#FFB830">Expectation-Match Verdict</b> in the user's own language, and narrate every recommended change with its why — while the <b style="color:#00C4FF">Number Guard guarantees</b> that every figure in that narration came from the deterministic engines, never from the model.</div>
+  </div>
+  <div style="background:#070B18;border:1.5px solid #1E2A4A;border-radius:14px;padding:22px 24px;margin:14px 0">
+    <div style="font-family:'Space Grotesk',Inter,sans-serif;font-size:16px;font-weight:700;color:#EAF0FF;margin-bottom:12px">❓ The Question Set — Expectation, Behaviour &amp; Suitability</div>
+    <div style="font-size:12.5px;color:#8A94BD;margin-bottom:14px">Every question exists to sharpen one output: <b style="color:#B9C3E8">achieve the user's expectation in minimum time with the least risk.</b> Adaptive skip-logic keeps it to ~8 screens; one-tap options; Hinglish toggle; every answer feeds the profile and the Behaviour Engine.</div>
+    <div style="font-size:11px;font-weight:700;letter-spacing:.12em;color:#00C4FF;margin:10px 0 6px">CORE EXPECTATION SET (THE SIX)</div>
+    <ul style="list-style:none;margin:0;padding:0;font-size:13px;color:#B9C3E8;line-height:1.8">
+      <li><b style="color:#EAF0FF">Q1 · Goal</b> — what for + target amount (retirement / house / education / wealth / custom).</li>
+      <li><b style="color:#EAF0FF">Q2 · Invested tenure</b> — how many years, and whether the deadline is hard or flexible.</li>
+      <li><b style="color:#EAF0FF">Q3 · Expected return / target corpus</b> — either one; the engine converts and runs a realism check against asset-class history before accepting it.</li>
+      <li><b style="color:#EAF0FF">Q4 · Risk comfort</b> — scenario-based, never jargon: "your portfolio falls 20% in a month — what do you do?" + maximum temporary loss the user can sleep through.</li>
+      <li><b style="color:#EAF0FF">Q5 · Total invested amount</b> — <b style="color:#FFB830">one-time</b> (in Health Check: auto-extracted from the uploaded portfolio file, user only confirms; in Construction: asked directly) + <b style="color:#FFB830">monthly SIP</b> — auto-calculated by the engine from goal, tenure and return math (FV annuity solved for P), then shown to the user for an affordability yes/no. The user never has to guess the SIP — the engine proposes it.</li>
+      <li><b style="color:#EAF0FF">Q6 · Favourable assets</b> — asset classes the user prefers or wants excluded, plus comfort with global assets. The engine treats preferences as tilts and exclusions as hard constraints (Universe Engine).</li>
+    </ul>
+    <div style="font-size:11px;font-weight:700;letter-spacing:.12em;color:#9B6DFF;margin:14px 0 6px">BEHAVIOUR &amp; PERSONALISATION</div>
+    <ul style="list-style:none;margin:0;padding:0;font-size:13px;color:#B9C3E8;line-height:1.8">
+      <li><b style="color:#EAF0FF">Q7 · Experience</b> — years investing + instruments used (calibrates explanation depth and archetype prior).</li>
+      <li><b style="color:#EAF0FF">Q8 · Past crash behaviour</b> — in the last big fall, did you sell, hold, or buy more? (strongest single archetype signal).</li>
+      <li><b style="color:#EAF0FF">Q9 · Check frequency</b> — daily / weekly / rarely (sets nudge timing and volatility framing).</li>
+      <li><b style="color:#EAF0FF">Q10 · Income stability</b> — salaried / business / variable (SIP resilience and emergency-buffer sizing).</li>
+    </ul>
+    <div style="font-size:11px;font-weight:700;letter-spacing:.12em;color:#3DDC97;margin:14px 0 6px">RESEARCHED ADDITIONS — FOR BETTER RESULTS (STANDARD SUITABILITY PRACTICE)</div>
+    <ul style="list-style:none;margin:0;padding:0;font-size:13px;color:#B9C3E8;line-height:1.8">
+      <li><b style="color:#EAF0FF">Q11 · Age bracket</b> — drives the equity glide-path as the goal approaches.</li>
+      <li><b style="color:#EAF0FF">Q12 · Emergency fund</b> — months of expenses covered; below 3 months, the engine recommends building the buffer before aggressive allocation.</li>
+      <li><b style="color:#EAF0FF">Q13 · Liabilities / EMIs</b> — share of income already committed (caps safe SIP).</li>
+      <li><b style="color:#EAF0FF">Q14 · Dependents</b> — protection-first flag and risk dampener.</li>
+      <li><b style="color:#EAF0FF">Q15 · Upcoming liquidity needs</b> — any big expense in 12–24 months (keeps that money out of volatile assets).</li>
+      <li><b style="color:#EAF0FF">Q16 · Tax bracket / regime</b> — activates tax-aware instrument choice and rebalancing (LTCG/STCG optimiser).</li>
+      <li><b style="color:#EAF0FF">Q17 · Ethical / ESG exclusions</b> — sectors the user refuses (hard Universe constraint).</li>
+      <li><b style="color:#EAF0FF">Q18 · Multiple goals?</b> — if yes, priority ranking → Multi-Goal engine allocates across buckets instead of one pot.</li>
+    </ul>
+  </div>
+  </div>
+</div>
+
+</body>
+</html>
