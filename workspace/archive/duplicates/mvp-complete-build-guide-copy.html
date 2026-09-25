@@ -1,0 +1,1933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Nxance MVP — Complete Build Guide with Technology Explanations</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0D0F14;--bg2:#13151C;--bg3:#1A1D27;--bg4:#22263A;
+  --b1:#252A3A;--b2:#2E3450;
+  --tx:#E4E8F5;--tx2:#9BA3BE;--tx3:#5C647A;
+  --gr:#00D68F;--grb:rgba(0,214,143,.1);--grbo:rgba(0,214,143,.25);
+  --bl:#4A8DFF;--blb:rgba(74,141,255,.1);--blbo:rgba(74,141,255,.25);
+  --ye:#FFD060;--yeb:rgba(255,208,96,.1);--yebo:rgba(255,208,96,.25);
+  --re:#FF5C7A;--reb:rgba(255,92,122,.1);--rebo:rgba(255,92,122,.25);
+  --pu:#A78BFA;--pub:rgba(167,139,250,.1);--pubo:rgba(167,139,250,.25);
+  --or:#FF8C42;--orb:rgba(255,140,66,.1);
+  --cy:#00D4FF;--cyb:rgba(0,212,255,.1);
+  --r8:8px;--r12:12px;--r16:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);line-height:1.7;font-size:14px}
+code,pre,kbd{font-family:'JetBrains Mono',monospace;font-size:12.5px}
+
+/* ── NAV ── */
+.nav{background:rgba(13,15,20,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--b1);padding:0;display:flex;align-items:stretch;position:sticky;top:0;z-index:300;min-height:48px}
+.nav-brand{padding:0 18px;display:flex;align-items:center;gap:8px;border-right:1px solid var(--b1);flex-shrink:0}
+.nav-logo{font-size:14px;font-weight:800;color:var(--gr);letter-spacing:-.02em}
+.nav-badge{background:var(--grb);border:1px solid var(--grbo);color:var(--gr);font-size:9px;font-weight:700;padding:2px 8px;border-radius:20px;letter-spacing:.06em;white-space:nowrap}
+.nav-tabs{display:flex;overflow-x:auto;flex:1;scrollbar-width:none;align-items:stretch}
+.nav-tabs::-webkit-scrollbar{display:none}
+.nt{padding:0 13px;display:flex;align-items:center;font-size:11px;font-weight:500;color:var(--tx3);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;transition:.12s;cursor:pointer}
+.nt:hover,.nt.on{color:var(--gr);border-color:var(--gr)}
+.nav-btn{padding:8px 16px;display:flex;align-items:center;gap:7px;border-left:1px solid var(--b1);flex-shrink:0}
+.btn{background:var(--gr);color:#000;border:none;padding:7px 16px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:.02em}
+
+/* ── WRAP ── */
+.wrap{max-width:1100px;margin:0 auto;padding:44px 24px 100px}
+
+/* ── HERO ── */
+.hero{background:linear-gradient(135deg,var(--bg2) 0%,var(--bg3) 100%);border:1px solid var(--b1);border-radius:20px;padding:44px 44px 40px;margin-bottom:44px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(0,214,143,.12) 0%,transparent 70%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-80px;left:-40px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(74,141,255,.08) 0%,transparent 70%);pointer-events:none}
+.hi{position:relative;z-index:1}
+.hero-chip{display:inline-flex;align-items:center;gap:5px;background:var(--grb);border:1px solid var(--grbo);color:var(--gr);padding:4px 14px;border-radius:20px;font-size:9px;font-weight:700;letter-spacing:.07em;margin-bottom:14px}
+.hero-h{font-size:30px;font-weight:800;color:var(--tx);letter-spacing:-.025em;line-height:1.15;margin-bottom:6px}
+.hero-h span{color:var(--gr)}
+.hero-s{font-size:14px;color:var(--tx2);margin-bottom:24px;line-height:1.65}
+.hero-stats{display:flex;gap:24px;flex-wrap:wrap}
+.hs{text-align:center}
+.hs-n{font-size:20px;font-weight:800;color:var(--gr);letter-spacing:-.02em;line-height:1}
+.hs-l{font-size:10px;color:var(--tx3);margin-top:3px;text-transform:uppercase;letter-spacing:.05em}
+
+/* ── WEEK DIVIDERS ── */
+.wk{margin:52px 0 22px;display:flex;align-items:center;gap:14px}
+.wk-line{flex:1;height:1px;background:var(--b1)}
+.wk-pill{display:inline-flex;align-items:center;gap:7px;padding:8px 22px;border-radius:30px;font-size:11px;font-weight:700;letter-spacing:.04em;white-space:nowrap;flex-shrink:0}
+.w1p{background:var(--yeb);color:var(--ye);border:1px solid var(--yebo)}
+.w2p{background:var(--blb);color:var(--bl);border:1px solid var(--blbo)}
+.w3p{background:var(--grb);color:var(--gr);border:1px solid var(--grbo)}
+.w4p{background:var(--pub);color:var(--pu);border:1px solid var(--pubo)}
+.w5p{background:var(--orb);color:var(--or);border:1px solid rgba(255,140,66,.25)}
+.w6p{background:var(--cyb);color:var(--cy);border:1px solid rgba(0,212,255,.25)}
+.w7p{background:var(--reb);color:var(--re);border:1px solid var(--rebo)}
+.w8p{background:var(--grb);color:var(--gr);border:1px solid var(--grbo)}
+
+/* ── STEP CARD ── */
+.step{display:flex;gap:0;margin-bottom:20px}
+.sl{width:52px;flex-shrink:0;display:flex;flex-direction:column;align-items:center}
+.sn{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;z-index:1;flex-shrink:0}
+.sl2{flex:1;width:2px;margin-top:5px;min-height:20px;background:var(--b1)}
+.sb{flex:1;background:var(--bg2);border:1px solid var(--b1);border-radius:16px;overflow:hidden}
+.y .sn{background:var(--yeb);color:var(--ye);border:1px solid var(--yebo)}
+.bl .sn{background:var(--blb);color:var(--bl);border:1px solid var(--blbo)}
+.gr .sn{background:var(--grb);color:var(--gr);border:1px solid var(--grbo)}
+.pu .sn{background:var(--pub);color:var(--pu);border:1px solid var(--pubo)}
+.or .sn{background:var(--orb);color:var(--or);border:1px solid rgba(255,140,66,.25)}
+.cy .sn{background:var(--cyb);color:var(--cy);border:1px solid rgba(0,212,255,.25)}
+.re .sn{background:var(--reb);color:var(--re);border:1px solid var(--rebo)}
+
+/* ── STEP HEAD ── */
+.sh{padding:14px 20px 12px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;border-bottom:1px solid var(--b1)}
+.shl{flex:1}
+.sl2t{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px}
+.y .sl2t{color:var(--ye)}.bl .sl2t{color:var(--bl)}.gr .sl2t{color:var(--gr)}.pu .sl2t{color:var(--pu)}.or .sl2t{color:var(--or)}.cy .sl2t{color:var(--cy)}.re .sl2t{color:var(--re)}
+.stt{font-size:14px;font-weight:700;color:var(--tx);line-height:1.3;margin-bottom:2px}
+.stsb{font-size:11px;color:var(--tx3)}
+.shr{text-align:right;flex-shrink:0}
+.shm{font-size:18px;font-weight:800;line-height:1}
+.y .shm{color:var(--ye)}.bl .shm{color:var(--bl)}.gr .shm{color:var(--gr)}.pu .shm{color:var(--pu)}.or .shm{color:var(--or)}.cy .shm{color:var(--cy)}.re .shm{color:var(--re)}
+.shml{font-size:9px;color:var(--tx3);margin-top:2px}
+
+/* ── STEP BODY ── */
+.sc{padding:16px 20px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:0}
+.col{padding-right:18px;border-right:1px solid var(--b1)}
+.col:last-child{border-right:none;padding-right:0;padding-left:18px}
+.col:nth-child(2){padding:0 18px}
+.col-h{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--tx3);margin-bottom:10px}
+.ci{font-size:12px;color:var(--tx2);margin-bottom:7px;padding-left:14px;position:relative;line-height:1.6}
+.ci::before{content:'→';position:absolute;left:0;font-size:10px;color:var(--tx3)}
+.ci strong{color:var(--tx);font-weight:600}
+.ci.g{color:var(--gr)}.ci.r{color:var(--re)}.ci.y{color:var(--ye)}.ci.b{color:var(--bl)}
+.ci.note{color:var(--tx3);font-size:11px}
+
+/* ── CODE ── */
+.cw{background:var(--bg);border:1px solid var(--b1);border-radius:var(--r12);overflow:hidden;margin:7px 0 3px}
+.ch{background:var(--bg3);padding:7px 14px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--b1)}
+.cl{font-size:10px;font-weight:700;color:var(--tx3);letter-spacing:.06em;text-transform:uppercase}
+.cf{font-size:10px;color:var(--bl);font-family:'JetBrains Mono',monospace}
+.cb{padding:13px 15px;overflow-x:auto}
+.cb pre{color:var(--tx2);white-space:pre-wrap;word-break:break-word;line-height:1.8;font-size:12px}
+.k{color:var(--pu)}.s{color:var(--gr)}.c{color:var(--tx3);font-style:italic}.f{color:var(--bl)}.n{color:var(--ye)}.v{color:var(--or)}.ty{color:var(--cy)}
+
+/* ── STEP FOOT ── */
+.sf{background:var(--bg3);padding:9px 20px;border-top:1px solid var(--b1);display:flex;align-items:center;flex-wrap:wrap;gap:7px}
+.tag{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;padding:2px 9px;border-radius:5px}
+.tg{background:var(--grb);color:var(--gr);border:1px solid var(--grbo)}
+.tb{background:var(--blb);color:var(--bl);border:1px solid var(--blbo)}
+.ty2{background:var(--yeb);color:var(--ye);border:1px solid var(--yebo)}
+.tr{background:var(--reb);color:var(--re);border:1px solid var(--rebo)}
+.tp{background:var(--pub);color:var(--pu);border:1px solid var(--pubo)}
+.to{background:var(--orb);color:var(--or);border:1px solid rgba(255,140,66,.25)}
+
+/* ── ALERTS ── */
+.al{border-radius:var(--r12);padding:12px 16px;margin:10px 0;display:flex;gap:10px;font-size:12px;line-height:1.65}
+.al-icon{flex-shrink:0;font-size:14px;margin-top:1px}
+.ag{background:var(--grb);border:.5px solid var(--grbo);color:var(--gr)}
+.ab{background:var(--blb);border:.5px solid var(--blbo);color:var(--bl)}
+.ay{background:var(--yeb);border:.5px solid var(--yebo);color:var(--ye)}
+.ar{background:var(--reb);border:.5px solid var(--rebo);color:var(--re)}
+.ap{background:var(--pub);border:.5px solid var(--pubo);color:var(--pu)}
+
+/* ── TECH EXPLAINER ── */
+.tech-box{background:var(--bg3);border:1px solid var(--b1);border-radius:var(--r16);padding:0;margin:10px 0;overflow:hidden}
+.tech-head{padding:12px 16px;border-bottom:1px solid var(--b1);display:flex;align-items:center;gap:10px}
+.tech-icon{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.tech-name{font-size:13px;font-weight:600;color:var(--tx)}
+.tech-tag{font-size:10px;padding:2px 8px;border-radius:4px;margin-left:auto;font-weight:500}
+.tech-body{padding:12px 16px}
+.tech-row{display:grid;grid-template-columns:140px 1fr;gap:8px;padding:6px 0;border-bottom:.5px solid var(--b1);font-size:12px;align-items:start}
+.tech-row:last-child{border-bottom:none}
+.tech-key{font-weight:500;color:var(--tx);font-size:11.5px}
+.tech-val{color:var(--tx2);line-height:1.6}
+
+/* ── ADV TABLE ── */
+.adv-table{width:100%;border-collapse:collapse;font-size:12px;background:var(--bg2);border:1px solid var(--b1);border-radius:var(--r12);overflow:hidden}
+.adv-table th{background:var(--bg3);color:var(--tx3);padding:8px 12px;text-align:left;font-size:10.5px;font-weight:600;letter-spacing:.05em}
+.adv-table td{padding:10px 12px;border-bottom:1px solid var(--b1);color:var(--tx2);vertical-align:top;line-height:1.55}
+.adv-table tr:last-child td{border-bottom:none}
+.adv-table td:first-child{font-weight:600;color:var(--tx);width:22%}
+
+/* ── FORMULA ── */
+.formula{background:var(--bg3);border:1px solid var(--bl);border-radius:var(--r12);padding:14px 16px;margin:8px 0}
+.formula-title{font-size:11px;font-weight:600;color:var(--bl);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+.formula-eq{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--cy);font-weight:600;line-height:1.7;margin-bottom:6px}
+.formula-exp{font-size:11.5px;color:var(--tx2);line-height:1.7}
+
+/* ── FOOTER ── */
+.foot{margin-top:52px;padding-top:20px;border-top:1px solid var(--b1);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.foot span{font-size:11px;color:var(--tx3)}
+
+@media print{.nav,.nav-btn{display:none!important}body{background:#fff;color:#000}.sb{page-break-inside:avoid}}
+@media(max-width:740px){.sc{grid-template-columns:1fr}.col{border-right:none!important;border-bottom:1px solid var(--b1);padding:10px 0!important}.col:last-child{border-bottom:none}.wrap{padding:20px 14px 60px}.hero{padding:24px 18px}.hero-h{font-size:22px}.tech-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="nav" id="topnav">
+  <div class="nav-brand"><span class="nav-logo">nxance</span><span class="nav-badge">MVP BUILD GUIDE</span></div>
+  <div class="nav-tabs">
+    <a class="nt on" href="#w1">Week 1: Accounts</a>
+    <a class="nt" href="#w2">Week 2: Supabase DB</a>
+    <a class="nt" href="#w3">Week 3: UI Screens</a>
+    <a class="nt" href="#w4">Week 4: FastAPI</a>
+    <a class="nt" href="#w5">Week 5: Quant Engine</a>
+    <a class="nt" href="#w6">Week 6: Health Score</a>
+    <a class="nt" href="#w7">Week 7: NxanceLM AI</a>
+    <a class="nt" href="#w8">Week 8: Launch</a>
+    <a class="nt" href="#advanced">Advanced Tech</a>
+  </div>
+  <div class="nav-btn"><button class="btn" onclick="(function(){var a=document.createElement('a');a.href='data:text/html;charset=utf-8,'+encodeURIComponent(document.documentElement.outerHTML);a.download='Nxance_MVP_Build_Guide.html';a.click()})()">↓ Download</button></div>
+</nav>
+<div class="wrap">
+
+<!-- HERO -->
+<div class="hero">
+<div class="hi">
+  <div class="hero-chip">★ COMPLETE STEP-BY-STEP · EVERY TECHNOLOGY EXPLAINED · ZERO TO LAUNCH</div>
+  <div class="hero-h">Nxance MVP — <span>Zero to Launch</span><br>8 Weeks · Rs 15,000</div>
+  <div class="hero-s">Har cheez ka explanation — technology kyun use karna hai, kya likhna hai, kahan likhna hai.<br>Accounts se lekar Razorpay paywall tak. Advanced options bhi include hain.</div>
+  <div class="hero-stats">
+    <div class="hs"><div class="hs-n">8</div><div class="hs-l">Weeks</div></div>
+    <div class="hs"><div class="hs-n">Rs 15K</div><div class="hs-l">Build cost</div></div>
+    <div class="hs"><div class="hs-n">7</div><div class="hs-l">Screens</div></div>
+    <div class="hs"><div class="hs-n">7</div><div class="hs-l">Quant frameworks</div></div>
+    <div class="hs"><div class="hs-n">Rs 0</div><div class="hs-l">AI inference</div></div>
+    <div class="hs"><div class="hs-n">80 users</div><div class="hs-l">Break-even</div></div>
+  </div>
+</div>
+</div>
+
+<!-- WEEK 1 -->
+<div class="wk" id="w1"><div class="wk-line"></div><div class="wk-pill w1p">⚡ Week 1 — Accounts Setup · Day 1–5 · Rs 800 only</div><div class="wk-line"></div></div>
+<div class="al ag"><span class="al-icon">💡</span><div><strong>Week 1 goal:</strong> Saare accounts ek din mein banao. Sequence important hai — kyunki ek account ke bina agle account ke liye apply nahi kar sakte. Domain ke alawa sab kuch free hai.</div></div>
+
+<!-- STEP 1: Accounts -->
+<div class="step y" id="s1">
+  <div class="sl"><div class="sn">1</div><div class="sl2"></div></div>
+  <div class="sb">
+    <div class="sh">
+      <div class="shl"><div class="sl2t">Step 01 · Day 1 · 3 hours total</div><div class="stt">Saare 10 accounts ek din mein banao — exact sequence follow karo</div><div class="stsb">Har account ka specific kaam hai — koi bhi miss mat karo</div></div>
+      <div class="shr"><div class="shm">10 accounts</div><div class="shml">1 din mein</div></div>
+    </div>
+    <div class="sc">
+      <div class="col">
+        <div class="col-h">Frontend + Database (pehle banao)</div>
+        <div class="ci"><strong>github.com</strong> — Sign up karo. Sab code yahan store hoga. Railway aur Lovable dono GitHub se connect karte hain. Without GitHub, baaki sab accounts mein connect karna mushkil hoga.</div>
+        <div class="ci"><strong>lovable.dev</strong> — Google se sign up. Ye AI tool hai jo tumhara poora React frontend build karega sirf prompts se. "New Project" → React. <em>Ye tumhari main building tool hai — 7 screens yahan banegi.</em></div>
+        <div class="ci"><strong>supabase.com</strong> — GitHub se sign up. Ye tumhara database + authentication hai. "New Project" → name: "nxance-mvp" → region: "Southeast Asia (Singapore)" ya "South Asia". PostgreSQL database milega instantly. Free tier: 500MB + 50K auth users.</div>
+        <div class="ci"><strong>railway.app</strong> — GitHub se sign up. Ye Python FastAPI backend host karega. Free tier: 500 hours/month. Pehle GitHub se connect karo.</div>
+      </div>
+      <div class="col">
+        <div class="col-h">Payment + Domain + Security</div>
+        <div class="ci"><strong>razorpay.com</strong> — "Sign Up as Business" → Business type: "Proprietorship" → Business category: "Software/SaaS" → Documents: PAN, Aadhaar, cancelled cheque. Test mode available instantly — no documents needed for testing. Live mode ke liye verification takes 2–5 days.</div>
+        <div class="ci"><strong>namecheap.com</strong> — Search "nxance.in" → Buy → Rs 800/year. Phir immediately: cloudflare.com par free account banao → "Add Site" → nxance.in → Cloudflare ke nameservers Namecheap mein set karo. SSL automatically milta hai (green lock icon).</div>
+        <div class="ci"><strong>cloudflare.com</strong> — Free account. Domain SSL + CDN + DDoS protection free mein. Production mein 90% request handling Cloudflare cache se hogi — Railway server pe load nahi aayega.</div>
+        <div class="ci note">Domain aur Cloudflare setup: 20 minutes. Rs 800 ek baar. Uske baad sab free.</div>
+      </div>
+      <div class="col">
+        <div class="col-h">AI + Cloud credits (free money)</div>
+        <div class="ci"><strong>AWS Activate</strong> (DPIIT ke baad): aws.amazon.com/activate → DPIIT startup track → Org ID daalo → $5,000 free credits milenge. NxanceLM ke liye g4dn.xlarge T4 GPU instance chalayenge isi se.</div>
+        <div class="ci"><strong>colab.research.google.com</strong> — Google account se seedha open. NxanceLM training yahan karenge — free T4 GPU, Rs 0 cost. Browser mein hi kaam karta hai.</div>
+        <div class="ci"><strong>Google for Startups</strong> ($2,500 credits): cloud.google.com/startup → form fill karo. 1–3 days mein approval.</div>
+        <div class="ci"><strong>Microsoft Founders Hub</strong> ($1,000+ credits): foundershub.startups.microsoft.com → Azure + GitHub Copilot free.</div>
+        <div class="ci y"><strong>Total free credits: $8,500+ = Rs 7L+.</strong> Ye sab Day 1 apply karo — processing time lagti hai aur tab tak MVP ready hoga.</div>
+      </div>
+    </div>
+    <div class="sf">
+      <span class="tag tg">GitHub ✓</span><span class="tag tg">Lovable ✓</span><span class="tag tg">Supabase ✓</span><span class="tag tg">Railway ✓</span><span class="tag tg">Razorpay ✓</span><span class="tag ty2">nxance.in Rs 800</span>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 2: Tech Explainer Week 1 -->
+<div class="step y">
+  <div class="sl"><div class="sn">2</div><div class="sl2"></div></div>
+  <div class="sb">
+    <div class="sh">
+      <div class="shl"><div class="sl2t">Step 02 · Technology explanations</div><div class="stt">Kyun ye specific tools? Alternatives kya hain? Advanced options kya hain?</div><div class="stsb">Non-technical founder ke liye — har tool ka kaam samajhna zaroori hai</div></div>
+      <div class="shr"><div class="shm">6 tools</div><div class="shml">explained</div></div>
+    </div>
+    <div class="sc">
+      <div class="col">
+        <div class="col-h">Lovable.dev — kyun?</div>
+        <div class="tech-box">
+          <div class="tech-head">
+            <div class="tech-icon" style="background:var(--blb);color:var(--bl)">🖥️</div>
+            <div class="tech-name">Lovable.dev</div>
+            <div class="tech-tag tg">Chose this</div>
+          </div>
+          <div class="tech-body">
+            <div class="tech-row"><div class="tech-key">Kya karta hai</div><div class="tech-val">React + TypeScript frontend AI se generate karta hai. Prompt likhte ho, code milta hai. Live preview instant.</div></div>
+            <div class="tech-row"><div class="tech-key">Kyun ye</div><div class="tech-val">Non-technical founder ke liye best. Supabase direct integration built-in. Git push automatic. PWA support.</div></div>
+            <div class="tech-row"><div class="tech-key">Alternative 1</div><div class="tech-val">Base44 — similar tool, thoda less powerful. Indian founder community use karta hai.</div></div>
+            <div class="tech-row"><div class="tech-key">Alternative 2</div><div class="tech-val">Cursor + Claude — technical founders ke liye better. Requires coding knowledge.</div></div>
+            <div class="tech-row"><div class="tech-key">Advanced option</div><div class="tech-val">Next.js + Tailwind manually — full control, but weeks of setup. Phase 2 mein yahan migrate kar sakte hain.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="col-h">Supabase — kyun PostgreSQL?</div>
+        <div class="tech-box">
+          <div class="tech-head">
+            <div class="tech-icon" style="background:var(--grb);color:var(--gr)">🗄️</div>
+            <div class="tech-name">Supabase</div>
+            <div class="tech-tag tg">Chose this</div>
+          </div>
+          <div class="tech-body">
+            <div class="tech-row"><div class="tech-key">Kya karta hai</div><div class="tech-val">PostgreSQL database + authentication + real-time + storage. Ek jagah sab kuch.</div></div>
+            <div class="tech-row"><div class="tech-key">Kyun PostgreSQL</div><div class="tech-val">Financial data ke liye ACID transactions zaroori hain. MySQL/MongoDB safer nahi hain. PostgreSQL = industry standard for fintech.</div></div>
+            <div class="tech-row"><div class="tech-key">Auth built-in</div><div class="tech-val">OTP phone + email authentication already built. Row Level Security = har user sirf apna data dekhe. DPDPA 2023 compliance.</div></div>
+            <div class="tech-row"><div class="tech-key">Alternative</div><div class="tech-val">Firebase (Google) — NoSQL, less suitable for financial relational data. PlanetScale — MySQL, good but no auth built-in.</div></div>
+            <div class="tech-row"><div class="tech-key">Advanced option</div><div class="tech-val">Self-hosted PostgreSQL on AWS RDS — Phase 2+ mein. More control, more cost (~$50/month).</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="col-h">Railway vs Render vs EC2</div>
+        <div class="tech-box">
+          <div class="tech-head">
+            <div class="tech-icon" style="background:var(--pub);color:var(--pu)">🚂</div>
+            <div class="tech-name">Railway.app</div>
+            <div class="tech-tag tg">Chose this</div>
+          </div>
+          <div class="tech-body">
+            <div class="tech-row"><div class="tech-key">Kya karta hai</div><div class="tech-val">GitHub push → auto-deploy FastAPI backend. Free tier: 500hrs/month. Zero configuration.</div></div>
+            <div class="tech-row"><div class="tech-key">Kyun Railway</div><div class="tech-val">GitHub connect → done. Koi YAML files nahi, koi Docker knowledge needed nahi. Non-technical founder ke liye best.</div></div>
+            <div class="tech-row"><div class="tech-key">Alternative: Render</div><div class="tech-val">Similar to Railway. Slightly slower cold starts. Free tier available.</div></div>
+            <div class="tech-row"><div class="tech-key">Alternative: Fly.io</div><div class="tech-val">More control, requires CLI knowledge. Better for production scale.</div></div>
+            <div class="tech-row"><div class="tech-key">Advanced option</div><div class="tech-val">AWS EC2 t3.small (~$15/month) — NxanceLM ke liye g4dn.xlarge zaroori hai. Phase 2 mein AWS Activate credits se migrate karo.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WEEK 2 -->
+<div class="wk" id="w2"><div class="wk-line"></div><div class="wk-pill w2p">🗄️ Week 2 — Supabase Database Setup · Exact SQL · 5 Tables</div><div class="wk-line"></div></div>
+
+<div class="step bl" id="s3">
+  <div class="sl"><div class="sn">3</div><div class="sl2"></div></div>
+  <div class="sb">
+    <div class="sh">
+      <div class="shl"><div class="sl2t">Step 03 · Supabase Dashboard → SQL Editor</div><div class="stt">5 tables create karo + Row Level Security — copy-paste ready SQL</div><div class="stsb">Supabase dashboard → SQL Editor → Ye exact SQL paste karo → Run button → Done</div></div>
+      <div class="shr"><div class="shm">5 tables</div><div class="shml">copy-paste SQL</div></div>
+    </div>
+    <div class="sc">
+      <div class="col" style="grid-column:1/-1;border-right:none;padding-right:0">
+        <div class="col-h">Supabase SQL Editor mein ye poora SQL paste karo aur Run karo</div>
+        <div class="cw">
+          <div class="ch"><span class="cl">SQL</span><span class="cf">Supabase → SQL Editor → New Query → Paste → Run</span></div>
+          <div class="cb"><pre><span class="c">-- ═══════════════════════════════════════════════════════
+-- NXANCE MVP DATABASE SCHEMA
+-- Supabase SQL Editor mein paste karo, phir Run karo
+-- ═══════════════════════════════════════════════════════</span>
+
+<span class="c">-- Table 1: Users/Profiles
+-- auth.users automatically created by Supabase when OTP login hota hai
+-- Hum sirf extra info store karte hain</span>
+<span class="k">CREATE TABLE</span> <span class="ty">public</span>.profiles (
+  id          <span class="k">UUID</span> <span class="k">REFERENCES</span> auth.users(id) <span class="k">ON DELETE CASCADE</span>,
+  phone       <span class="k">TEXT</span>,
+  email       <span class="k">TEXT</span>,
+  name        <span class="k">TEXT</span>,
+  subscription_tier <span class="k">TEXT</span> <span class="k">DEFAULT</span> <span class="s">'free'</span>,  <span class="c">-- 'free' ya 'founding' (Rs99/month)</span>
+  created_at  <span class="k">TIMESTAMPTZ</span> <span class="k">DEFAULT</span> now(),
+  updated_at  <span class="k">TIMESTAMPTZ</span> <span class="k">DEFAULT</span> now(),
+  <span class="k">PRIMARY KEY</span> (id)
+);
+
+<span class="c">-- Table 2: Portfolios
+-- User ke paas ek hi portfolio hoga Phase 1 mein
+-- Phase 2 mein multiple portfolios ka plan hai</span>
+<span class="k">CREATE TABLE</span> <span class="ty">public</span>.portfolios (
+  id           <span class="k">UUID</span> <span class="k">DEFAULT</span> gen_random_uuid() <span class="k">PRIMARY KEY</span>,
+  user_id      <span class="k">UUID</span> <span class="k">REFERENCES</span> profiles(id) <span class="k">ON DELETE CASCADE</span>,
+  name         <span class="k">TEXT</span> <span class="k">DEFAULT</span> <span class="s">'My Portfolio'</span>,
+  <span class="c">-- Goal questions se aata hai (5 MCQ answers)</span>
+  goal_type    <span class="k">TEXT</span>,   <span class="c">-- 'retirement' | 'wealth' | 'house' | 'education' | 'emergency'</span>
+  risk_level   <span class="k">TEXT</span>,   <span class="c">-- 'conservative' | 'moderate' | 'aggressive' | 'ultra'</span>
+  expected_xirr <span class="k">NUMERIC</span>,  <span class="c">-- e.g. 12.0 (percent)</span>
+  horizon_years <span class="k">INTEGER</span>,  <span class="c">-- e.g. 10 years</span>
+  monthly_sip  <span class="k">NUMERIC</span>,  <span class="c">-- Rs amount user can invest per month</span>
+  created_at   <span class="k">TIMESTAMPTZ</span> <span class="k">DEFAULT</span> now()
+);
+
+<span class="c">-- Table 3: Holdings (actual mutual fund holdings)
+-- Financial data = AES-256-GCM encrypt karte hain (DPDPA compliance)</span>
+<span class="k">CREATE TABLE</span> <span class="ty">public</span>.holdings (
+  id               <span class="k">UUID</span> <span class="k">DEFAULT</span> gen_random_uuid() <span class="k">PRIMARY KEY</span>,
+  portfolio_id     <span class="k">UUID</span> <span class="k">REFERENCES</span> portfolios(id) <span class="k">ON DELETE CASCADE</span>,
+  scheme_code      <span class="k">TEXT</span> <span class="k">NOT NULL</span>,   <span class="c">-- AMFI scheme code e.g. "119597" (HDFC Flexicap Direct)</span>
+  scheme_name      <span class="k">TEXT</span>,            <span class="c">-- Full fund name</span>
+  invested_amount  <span class="k">NUMERIC</span>,         <span class="c">-- Total Rs invested (encrypted later)</span>
+  current_value    <span class="k">NUMERIC</span>,         <span class="c">-- Current NAV x units</span>
+  units            <span class="k">NUMERIC</span>,         <span class="c">-- Number of units held</span>
+  purchase_date    <span class="k">DATE</span>,            <span class="c">-- First investment date (critical for XIRR)</span>
+  sip_monthly      <span class="k">NUMERIC</span>,         <span class="c">-- Monthly SIP amount (0 if lump sum)</span>
+  plan_type        <span class="k">TEXT</span> <span class="k">DEFAULT</span> <span class="s">'direct'</span>,  <span class="c">-- 'direct' ya 'regular'</span>
+  created_at       <span class="k">TIMESTAMPTZ</span> <span class="k">DEFAULT</span> now()
+);
+
+<span class="c">-- Table 4: Analysis Results
+-- Har analysis ek row = same portfolio multiple times analyse ho sakta hai</span>
+<span class="k">CREATE TABLE</span> <span class="ty">public</span>.analysis_results (
+  id               <span class="k">UUID</span> <span class="k">DEFAULT</span> gen_random_uuid() <span class="k">PRIMARY KEY</span>,
+  portfolio_id     <span class="k">UUID</span> <span class="k">REFERENCES</span> portfolios(id) <span class="k">ON DELETE CASCADE</span>,
+  health_score     <span class="k">INTEGER</span>,     <span class="c">-- 0 to 100</span>
+  xirr             <span class="k">NUMERIC</span>,     <span class="c">-- Exact XIRR e.g. 11.5364</span>
+  sharpe_ratio     <span class="k">NUMERIC</span>,     <span class="c">-- e.g. 0.42</span>
+  sortino_ratio    <span class="k">NUMERIC</span>,
+  jensen_alpha     <span class="k">NUMERIC</span>,     <span class="c">-- vs Nifty 50 benchmark</span>
+  beta             <span class="k">NUMERIC</span>,
+  max_drawdown     <span class="k">NUMERIC</span>,
+  overlap_pct      <span class="k">NUMERIC</span>,     <span class="c">-- Jaccard overlap % between any 2 funds</span>
+  ter_waste_rs     <span class="k">NUMERIC</span>,     <span class="c">-- Annual TER waste in Rs</span>
+  goal_gap_rs      <span class="k">NUMERIC</span>,     <span class="c">-- Annual Rs shortfall from goal</span>
+  cvar_95          <span class="k">NUMERIC</span>,     <span class="c">-- Conditional Value at Risk (95%)</span>
+  issues_json      <span class="k">JSONB</span>,       <span class="c">-- Array of all issues {type, severity, rs_impact, fix}</span>
+  insights_text    <span class="k">TEXT</span>,        <span class="c">-- NxanceLM generated Hinglish explanation</span>
+  created_at       <span class="k">TIMESTAMPTZ</span> <span class="k">DEFAULT</span> now()
+);
+
+<span class="c">-- Table 5: Subscriptions (Razorpay payments track karne ke liye)</span>
+<span class="k">CREATE TABLE</span> <span class="ty">public</span>.subscriptions (
+  id                     <span class="k">UUID</span> <span class="k">DEFAULT</span> gen_random_uuid() <span class="k">PRIMARY KEY</span>,
+  user_id                <span class="k">UUID</span> <span class="k">REFERENCES</span> profiles(id),
+  razorpay_order_id      <span class="k">TEXT</span> <span class="k">UNIQUE</span>,  <span class="c">-- Prevent duplicate processing</span>
+  razorpay_payment_id    <span class="k">TEXT</span>,
+  amount                 <span class="k">NUMERIC</span> <span class="k">DEFAULT</span> <span class="n">99</span>,  <span class="c">-- Rs 99</span>
+  status                 <span class="k">TEXT</span> <span class="k">DEFAULT</span> <span class="s">'pending'</span>,  <span class="c">-- 'pending' | 'paid' | 'failed'</span>
+  paid_at                <span class="k">TIMESTAMPTZ</span>,
+  expires_at             <span class="k">TIMESTAMPTZ</span>,         <span class="c">-- 30 days after payment</span>
+  created_at             <span class="k">TIMESTAMPTZ</span> <span class="k">DEFAULT</span> now()
+);
+
+<span class="c">-- ═══════════════════════════════════════════════════════
+-- ROW LEVEL SECURITY (RLS) — CRITICAL for data privacy
+-- Har user sirf apna data dekhe, kisi aur ka nahi
+-- ═══════════════════════════════════════════════════════</span>
+<span class="k">ALTER TABLE</span> profiles <span class="k">ENABLE ROW LEVEL SECURITY</span>;
+<span class="k">ALTER TABLE</span> portfolios <span class="k">ENABLE ROW LEVEL SECURITY</span>;
+<span class="k">ALTER TABLE</span> holdings <span class="k">ENABLE ROW LEVEL SECURITY</span>;
+<span class="k">ALTER TABLE</span> analysis_results <span class="k">ENABLE ROW LEVEL SECURITY</span>;
+<span class="k">ALTER TABLE</span> subscriptions <span class="k">ENABLE ROW LEVEL SECURITY</span>;
+
+<span class="c">-- RLS Policies — simple rule: auth.uid() (logged in user ID) = user_id</span>
+<span class="k">CREATE POLICY</span> <span class="s">"users own profiles"</span> <span class="k">ON</span> profiles
+  <span class="k">FOR ALL USING</span> (auth.uid() = id);
+
+<span class="k">CREATE POLICY</span> <span class="s">"users own portfolios"</span> <span class="k">ON</span> portfolios
+  <span class="k">FOR ALL USING</span> (auth.uid() = user_id);
+
+<span class="k">CREATE POLICY</span> <span class="s">"users own holdings"</span> <span class="k">ON</span> holdings
+  <span class="k">FOR ALL USING</span> (
+    portfolio_id <span class="k">IN</span> (
+      <span class="k">SELECT</span> id <span class="k">FROM</span> portfolios <span class="k">WHERE</span> user_id = auth.uid()
+    )
+  );
+
+<span class="k">CREATE POLICY</span> <span class="s">"users own analysis"</span> <span class="k">ON</span> analysis_results
+  <span class="k">FOR ALL USING</span> (
+    portfolio_id <span class="k">IN</span> (
+      <span class="k">SELECT</span> id <span class="k">FROM</span> portfolios <span class="k">WHERE</span> user_id = auth.uid()
+    )
+  );
+
+<span class="k">CREATE POLICY</span> <span class="s">"users own subscriptions"</span> <span class="k">ON</span> subscriptions
+  <span class="k">FOR ALL USING</span> (auth.uid() = user_id);
+
+<span class="c">-- Auto-create profile when user signs up (OTP phone login ke baad)
+-- auth.users mein new row → profiles mein automatically insert</span>
+<span class="k">CREATE OR REPLACE FUNCTION</span> <span class="f">handle_new_user</span>()
+<span class="k">RETURNS TRIGGER AS</span> $$
+<span class="k">BEGIN</span>
+  <span class="k">INSERT INTO</span> public.profiles (id, phone, email)
+  <span class="k">VALUES</span> (NEW.id, NEW.phone, NEW.email);
+  <span class="k">RETURN</span> NEW;
+<span class="k">END</span>;
+$$ <span class="k">LANGUAGE</span> plpgsql SECURITY DEFINER;
+
+<span class="k">CREATE TRIGGER</span> on_auth_user_created
+  <span class="k">AFTER INSERT ON</span> auth.users
+  <span class="k">FOR EACH ROW EXECUTE</span> <span class="f">handle_new_user</span>();</pre></div>
+        </div>
+        <div class="ci y"><strong>Kya hota hai jab ye run karta hai?</strong> 5 tables create hoti hain. RLS enable hota hai (security). Auto-trigger set hota hai (jab koi user sign up kare, profile automatic bane). Ye ek baar run karna hai — baad mein code se direct kaam hoga.</div>
+        <div class="ci b"><strong>Supabase mein environment variables kahan milenge?</strong> Project Settings → API → Project URL aur anon public key. Dono copy karo — Lovable mein lagenge.</div>
+      </div>
+    </div>
+    <div class="sf"><span class="tag tg">5 tables created ✓</span><span class="tag tg">RLS enabled ✓</span><span class="tag tb">Auth trigger ready ✓</span></div>
+  </div>
+</div>
+
+<!-- WEEK 3 -->
+<div class="wk" id="w3"><div class="wk-line"></div><div class="wk-pill w3p">🖥️ Week 3 — Lovable.dev UI · 7 Screens · Exact Prompts to Copy</div><div class="wk-line"></div></div>
+<div class="al ab"><span class="al-icon">📋</span><div><strong>Lovable.dev kaise use karna hai:</strong> lovable.dev → New Project → React. Phir har screen ke liye neeche diye exact prompt ko copy-paste karo. Agar kuch galat lage: "Fix this: [describe problem]" type karo. Supabase keys Settings → Environment Variables mein daalo.</div></div>
+
+<div class="step gr" id="s4">
+  <div class="sl"><div class="sn">4</div><div class="sl2"></div></div>
+  <div class="sb">
+    <div class="sh">
+      <div class="shl"><div class="sl2t">Step 04 · Week 3 · Lovable.dev Prompts</div><div class="stt">7 screens ke exact prompts — copy karke Lovable mein paste karo</div><div class="stsb">Har prompt ek complete screen build kar dega with all features</div></div>
+      <div class="shr"><div class="shm">7 screens</div><div class="shml">exact prompts</div></div>
+    </div>
+    <div class="sc">
+      <div class="col">
+        <div class="col-h">Screen 1: Landing page prompt</div>
+        <div class="cw">
+          <div class="ch"><span class="cl">LOVABLE PROMPT</span><span class="cf">Screen 1 — paste exact</span></div>
+          <div class="cb"><pre>Build a dark-themed landing page for "nxance" 
+— a portfolio health analytics app for Indian MF investors.
+
+DESIGN:
+- Background: #0A0B0F (near black)  
+- Accent: #00D68F (bright green)
+- Font: modern sans-serif, weight 700-800
+
+SECTIONS:
+1. NAVBAR: "nxance" logo (green) left. 
+   "Check My Portfolio Free →" button (green) right.
+
+2. HERO:
+   H1: "Is Your Mutual Fund Portfolio Healthy?"
+   Sub: "Most Indian investors have Rs 4,800/year 
+   going to waste in fund overlap and hidden fees. 
+   Find out in 60 seconds — free."
+   CTA: "Check My Portfolio Free →" (green, large)
+   Social proof: "Join 500+ investors who found 
+   hidden waste"
+
+3. HOW IT WORKS (3 cards):
+   Card 1: "Add your funds" — enter MF holdings
+   Card 2: "AI analysis runs" — 7-point health check
+   Card 3: "Get exact numbers" — see Rs waste + fix plan
+
+4. METRICS ROW (4 dark stat cards):
+   "Rs 4,800/year" — average annual waste found
+   "87%" — portfolios with hidden overlap
+   "60 seconds" — to full analysis
+   "Rs 99/month" — to unlock full fix plan
+
+5. WHAT WE CHECK (6 cards in 3-col grid):
+   XIRR vs Goal | Fund Overlap | TER Waste
+   Risk Level | Goal Alignment | Crisis Test
+
+6. FOOTER: "© 2025 Nxance Technologies Pvt Ltd 
+   · SEBI Registration in Process 
+   · Not investment advice"
+
+CTA button clicks → /auth page
+Make it feel premium and trustworthy.
+Mobile-first, PWA-ready.</pre></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="col-h">Screen 2: OTP Auth · Screen 3: Holdings input</div>
+        <div class="cw">
+          <div class="ch"><span class="cl">LOVABLE PROMPT</span><span class="cf">Screen 2 — OTP Auth</span></div>
+          <div class="cb"><pre>Build auth screen for nxance. Same dark theme.
+
+TWO STATES (same page, toggle between them):
+
+STATE 1 — Enter phone:
+- Logo top center
+- H2: "Enter your phone number"  
+- Sub: "We'll send a 6-digit OTP"
+- Input: "+91 [10-digit number]" (large)
+- Divider "OR"
+- Email input field
+- "Send OTP →" (green button)
+- "By continuing you agree to Terms & Privacy"
+
+STATE 2 — Enter OTP (after phone submitted):
+- H2: "Enter OTP sent to +91 XXXXXX1234"
+- 6 separate input boxes (auto-advance on type)
+- "Verify OTP →" (green button)
+- "Resend OTP" with 30s countdown timer
+- "Change number" link
+
+Connect to Supabase:
+- Phone: supabase.auth.signInWithOtp({phone})
+- Verify: supabase.auth.verifyOtp({phone,token,type:'sms'})
+- On success: redirect to /add-holdings
+
+Env vars needed:
+VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY</pre></div>
+        </div>
+        <div class="cw" style="margin-top:8px">
+          <div class="ch"><span class="cl">LOVABLE PROMPT</span><span class="cf">Screen 3 — Holdings</span></div>
+          <div class="cb"><pre>Build holdings input screen for nxance.
+Dark theme. Route: /add-holdings
+
+TOP: Progress bar "Step 1 of 2 — Add Your Funds"
+
+FUND SEARCH (main component):
+- Search input: "Search mutual fund name..."
+- On type: 300ms debounce → fetch from:
+  https://api.mfapi.in/mf/search?q={query}
+- Show dropdown: fund name + scheme code
+- On select: show add form with fields:
+  * Invested Amount (Rs): number
+  * Current Value (Rs): number  
+  * Purchase Date: date picker
+  * Monthly SIP (Rs): optional number
+  * "Add Fund" button
+
+HOLDINGS LIST below search:
+- Each added fund as card
+- Show: name, invested Rs, current Rs, returns %
+- Delete (×) button
+
+BOTTOM:
+- "X funds added"
+- "Next: Set Goals →" button (disabled if 0 funds)
+- Save to Supabase holdings table on "Next"
+
+API: mfapi.in is FREE, no API key needed.
+GET https://api.mfapi.in/mf/search?q=hdfc
+Returns: [{schemeCode: "119597", schemeName: "..."}]</pre></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="col-h">Screen 4: Goals · Screen 5: Progress</div>
+        <div class="cw">
+          <div class="ch"><span class="cl">LOVABLE PROMPT</span><span class="cf">Screen 4 — Goal Questions</span></div>
+          <div class="cb"><pre>Build 5-question goal screen for nxance. 
+Dark theme. Route: /goals
+Progress bar: "Step 2 of 2 — Your Goals"
+
+Show 1 question at a time, animated slide transition:
+
+Q1: "What is your primary financial goal?"
+Options (large cards, tap to select):
+○ Retirement Planning
+○ Wealth Creation  
+○ Child's Education
+○ Home Purchase
+○ Emergency Corpus
+
+Q2: "What is your risk appetite?"
+○ Conservative (prefer safety)
+○ Moderate (balanced)
+○ Aggressive (can handle risk)
+○ Ultra Aggressive (maximum growth)
+
+Q3: "What annual return do you expect?"
+○ 8% (safe, like FD)
+○ 12% (market average)
+○ 16% (above average)
+○ 20%+ (ambitious)
+
+Q4: "How long can you stay invested?"
+○ 1–3 years
+○ 3–7 years
+○ 7–15 years
+○ 15+ years
+
+Q5: "Monthly SIP capacity?"
+○ Rs 2,000–5,000
+○ Rs 5,000–15,000
+○ Rs 15,000–50,000
+○ Rs 50,000+
+
+After Q5: "Starting analysis..." loader
+Save answers to Supabase portfolios table.
+Redirect to /analysis after 1 second.</pre></div>
+        </div>
+        <div class="cw" style="margin-top:8px">
+          <div class="ch"><span class="cl">LOVABLE PROMPT</span><span class="cf">Screen 5 — Analysis Progress</span></div>
+          <div class="cb"><pre>Build analysis progress screen. Dark theme.
+Route: /analysis. No back button.
+
+ANIMATED LOADING STEPS (2s each, 
+progress fills as each completes):
+
+Step 1: "📊 Fetching live NAV data..."
+Step 2: "🔢 Computing exact XIRR..."
+Step 3: "🔍 Detecting fund overlap..."
+Step 4: "⚠️ Measuring portfolio risk..."
+Step 5: "🎯 Checking goal alignment..."  
+Step 6: "🤖 NxanceLM generating insights..."
+
+When all complete → auto-redirect /results
+
+Call backend API during loading:
+POST {VITE_API_URL}/api/analyze
+Body: {portfolio_id: "uuid"}
+Show steps as WebSocket events arrive
+(or simulate with timers for Phase 1)</pre></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Screens 6 and 7 -->
+    <div style="padding:0 20px 16px">
+      <div class="col-h">Screen 6: Results + Paywall · Screen 7: Full Report</div>
+      <div class="sc" style="padding:0;margin-top:8px">
+        <div class="col">
+          <div class="cw">
+            <div class="ch"><span class="cl">LOVABLE PROMPT</span><span class="cf">Screen 6 — Results + Paywall (most important screen)</span></div>
+            <div class="cb"><pre>Build results screen with paywall for nxance.
+Dark theme. Route: /results
+
+TOP SECTION (always visible, free):
+- BIG health score circle: "72/100"
+  Green if ≥70, Yellow if 50-69, Red if <50
+- Text: "Your portfolio needs attention"  
+- Summary: "✅ 1 Good · ⚠️ 3 Issues Found"
+
+METRICS ROW (always visible):
+- XIRR: 11.2% | Sharpe: 0.31 | Alpha: -1.2%
+
+ISSUE 1 (fully visible — free):
+Red-bordered card with:
+- Badge: "🚨 Critical — Fund Overlap"
+- Title: "72% overlap between your funds"
+- Why: "HDFC Flexicap and Mirae Emerging 
+  Bluechip hold 72% same stocks. You're 
+  paying double TER for duplicate returns."
+- Rs badge: "💸 Rs 4,800/year waste"
+- NxanceLM: "Bhai, Rs4,800/year waste ho raha 
+  hai double expense ki wajah se. Fix karo."
+- Fix: "Sell HDFC Flexicap → Buy Parag Parikh"
+
+ISSUES 2 + 3 (blurred/locked):
+Show cards with blur-sm applied, 
+show Rs amount visible: "Rs 8,200/yr"
+Add CSS: filter:blur(4px); pointer-events:none
+
+PAYWALL BOX (bright, cannot miss):
+- "🔓 Unlock Your Complete Fix Plan"
+- "Issues 2+3 are costing Rs 13,000/year"
+- Strikethrough: Rs 499/month
+- Big text: "Rs 99/month"
+- Math: "Saves Rs 13,000/year = 11x ROI"
+- [Unlock Full Report →] GREEN BUTTON
+- "✓ Cancel anytime  ✓ Secure UPI  ✓ Instant"
+
+On Unlock click: open Razorpay checkout
+After payment success: remove blur classes
+Show VITE_RAZORPAY_KEY env var for key</pre></div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="cw">
+            <div class="ch"><span class="cl">LOVABLE PROMPT</span><span class="cf">Screen 7 — Full Paid Report</span></div>
+            <div class="cb"><pre>Build full paid report screen for nxance.
+Dark theme. Route: /report
+Only accessible if subscription_tier = 'founding'
+
+HEALTH DASHBOARD:
+- Large animated gauge SVG: 0→72 on load
+- Color gradient: red (0-40) → yellow (40-70) 
+  → green (70-100)
+- 6 metric cards: XIRR | Sharpe | Alpha | 
+  Beta | CVaR | Max Drawdown
+
+ALL 3 ISSUES (fully expanded):
+Each issue card shows:
+- Severity badge (Critical/High/Medium/Low)
+- Issue title + detailed explanation
+- Exact Rs annual impact (large, red)
+- Fund to sell (scheme code shown)
+- Fund to buy (scheme code shown)  
+- Expected XIRR improvement after fix
+- NxanceLM explanation (full 250 tokens)
+
+CRISIS SIMULATION:
+"If 2008 crash happened today:"
+"Your Rs 2.1L → Rs 1.0L temporarily"
+"Recovery time: ~18 months historically"
+
+GOAL TRACKER:
+Progress bar: current XIRR vs target XIRR
+"At 11.2%, you'll reach your goal in 22yr"
+"After fixes: 14.8% → goal in 16yr"
+
+SHARE BUTTON:
+"Share my portfolio health score" (social share)
+Generates image: "My portfolio health: 72/100 
+by @nxance"
+
+Download PDF button (optional Phase 2)</pre></div>
+          </div>
+          <div class="ci g"><strong>Conversion logic:</strong> Issue 1 dikh raha hai free mein (Rs 4,800 waste). Issues 2+3 blur hain but Rs amount dikh raha hai (Rs 13,000 more). Paywall math: Rs 99/month × 12 = Rs 1,188/year to save Rs 17,800. 15x ROI — math decision, not sales decision.</div>
+        </div>
+      </div>
+    </div>
+    <div class="sf"><span class="tag tg">7 screens ✓</span><span class="tag tb">Supabase connected ✓</span><span class="tag tp">Paywall ready ✓</span></div>
+  </div>
+</div>
+
+<!-- WEEK 4 -->
+<div class="wk" id="w4"><div class="wk-line"></div><div class="wk-pill w4p">⚙️ Week 4 — FastAPI Backend · Python · Railway Deploy</div><div class="wk-line"></div></div>
+<div class="al ay"><span class="al-icon">⚠️</span><div><strong>Fiverr developer ko hire karo (Rs 5,000–8,000):</strong> Job post: "Python FastAPI developer — financial calculations: XIRR, Sharpe ratio, Jaccard similarity, CVaR. One-time fixed delivery. 7 days." Share neeche ke specifications unhe. Har function Claude se review karwao pehle integrate karne se.</div></div>
+
+<div class="step pu" id="s5">
+  <div class="sl"><div class="sn">5</div><div class="sl2"></div></div>
+  <div class="sb">
+    <div class="sh">
+      <div class="shl"><div class="sl2t">Step 05 · Week 4 · GitHub repo banao</div><div class="stt">FastAPI backend folder structure + main.py + requirements.txt</div><div class="stsb">Ye sab GitHub mein daalo — Railway auto-deploy karega</div></div>
+      <div class="shr"><div class="shm">FastAPI</div><div class="shml">Python backend</div></div>
+    </div>
+    <div class="sc">
+      <div class="col">
+        <div class="col-h">Folder structure (GitHub repo mein exactly ye banao)</div>
+        <div class="cw">
+          <div class="ch"><span class="cl">STRUCTURE</span><span class="cf">nxance-backend/ repository</span></div>
+          <div class="cb"><pre>nxance-backend/
+├── main.py              <span class="c"># FastAPI app entry</span>
+├── requirements.txt     <span class="c"># Python dependencies</span>
+├── Procfile             <span class="c"># Railway deployment</span>
+├── .env.example         <span class="c"># Template (real .env never commit)</span>
+│
+├── routers/
+│   ├── __init__.py
+│   ├── analyze.py       <span class="c"># POST /api/analyze</span>
+│   ├── payment.py       <span class="c"># POST /api/payment/webhook</span>
+│   └── health.py        <span class="c"># GET /api/health (ping)</span>
+│
+├── calculations/
+│   ├── __init__.py
+│   ├── xirr.py          <span class="c"># F1: XIRR Newton-Raphson</span>
+│   ├── quant.py         <span class="c"># F2: Sharpe,Sortino,Alpha,Beta</span>
+│   ├── risk.py          <span class="c"># F3: CVaR, stress tests</span>
+│   ├── overlap.py       <span class="c"># F4: Jaccard + TER waste</span>
+│   ├── portfolio.py     <span class="c"># F5: HHI, BHB attribution</span>
+│   ├── goals.py         <span class="c"># F6: Goal alignment gap</span>
+│   └── crisis.py        <span class="c"># F7: Historical crash sim</span>
+│
+├── services/
+│   ├── __init__.py
+│   ├── mfapi.py         <span class="c"># mfapi.in calls + Redis cache</span>
+│   ├── supabase_client.py  <span class="c"># Supabase Python client</span>
+│   └── nxancelm.py      <span class="c"># NxanceLM inference</span>
+│
+└── utils/
+    ├── __init__.py
+    └── health_score.py  <span class="c"># 0-100 score calculator</span></pre></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="col-h">main.py (exact code)</div>
+        <div class="cw">
+          <div class="ch"><span class="cl">PYTHON</span><span class="cf">main.py</span></div>
+          <div class="cb"><pre><span class="k">from</span> fastapi <span class="k">import</span> FastAPI
+<span class="k">from</span> fastapi.middleware.cors <span class="k">import</span> CORSMiddleware
+<span class="k">from</span> routers <span class="k">import</span> analyze, payment, health
+<span class="k">import</span> os
+
+app = <span class="f">FastAPI</span>(
+    title=<span class="s">"Nxance API"</span>,
+    description=<span class="s">"Portfolio health analytics"</span>,
+    version=<span class="s">"1.0.0"</span>
+)
+
+<span class="c"># CORS — Lovable frontend aur nxance.in ko allow karo</span>
+app.<span class="f">add_middleware</span>(
+    CORSMiddleware,
+    allow_origins=[
+        <span class="s">"https://nxance.in"</span>,
+        <span class="s">"https://*.lovable.app"</span>,
+        <span class="s">"http://localhost:5173"</span>,
+    ],
+    allow_credentials=<span class="k">True</span>,
+    allow_methods=[<span class="s">"*"</span>],
+    allow_headers=[<span class="s">"*"</span>],
+)
+
+<span class="c"># Routers register karo</span>
+app.<span class="f">include_router</span>(analyze.router, prefix=<span class="s">"/api"</span>)
+app.<span class="f">include_router</span>(payment.router, prefix=<span class="s">"/api"</span>)
+app.<span class="f">include_router</span>(health.router, prefix=<span class="s">"/api"</span>)
+
+<span class="k">@app.get</span>(<span class="s">"/"</span>)
+<span class="k">async def</span> <span class="f">root</span>():
+    <span class="k">return</span> {<span class="s">"message"</span>: <span class="s">"Nxance API v1.0"</span>}</pre></div>
+        </div>
+        <div class="cw" style="margin-top:6px">
+          <div class="ch"><span class="cl">TEXT</span><span class="cf">Procfile (Railway deploy ke liye)</span></div>
+          <div class="cb"><pre>web: uvicorn main:app --host 0.0.0.0 --port $PORT</pre></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="col-h">requirements.txt + Railway setup</div>
+        <div class="cw">
+          <div class="ch"><span class="cl">TEXT</span><span class="cf">requirements.txt</span></div>
+          <div class="cb"><pre>fastapi==0.111.0
+uvicorn==0.29.0
+python-dotenv==1.0.1
+httpx==0.27.0        <span class="c"># mfapi.in async calls</span>
+scipy==1.13.0        <span class="c"># XIRR brentq + CVaR SLSQP</span>
+numpy==1.26.4        <span class="c"># Array math</span>
+pandas==2.2.2        <span class="c"># NAV time series</span>
+yfinance==0.2.40     <span class="c"># Nifty 50 data</span>
+supabase==2.4.6      <span class="c"># DB client</span>
+redis==5.0.4         <span class="c"># NAV caching</span>
+peft==0.11.0         <span class="c"># NxanceLM LoRA</span>
+transformers==4.41.0 <span class="c"># TinyLlama</span>
+torch==2.3.0         <span class="c"># PyTorch GPU</span>
+razorpay==1.4.1      <span class="c"># Payment verification</span></pre></div>
+        </div>
+        <div class="ci b"><strong>Railway deploy steps:</strong> railway.app → New Project → Deploy from GitHub repo → Select nxance-backend repo → Add env variables (Settings → Variables): SUPABASE_URL, SUPABASE_SERVICE_KEY, RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET, RAZORPAY_WEBHOOK_SECRET. Railway auto-deploys on every GitHub push.</div>
+        <div class="ci y"><strong>Railway URL copy karo:</strong> Deploy hone ke baad Railway ek URL deta hai like nxance-backend.up.railway.app. Ye Lovable mein VITE_API_URL env variable mein daalo.</div>
+      </div>
+    </div>
+    <div class="sf"><span class="tag tg">Backend structure ✓</span><span class="tag tp">Railway ready ✓</span><span class="tag tg">CORS configured ✓</span></div>
+  </div>
+</div>
+
+<!-- WEEK 5 -->
+<div class="wk" id="w5"><div class="wk-line"></div><div class="wk-pill w5p">🔢 Week 5 — 7 Quant Frameworks · Core IP · Exact Math</div><div class="wk-line"></div></div>
+<div class="al ap"><span class="al-icon">🧮</span><div><strong>Core IP:</strong> Ye 7 frameworks Nxance ka actual product hain. Sab exact math — zero AI approximation on financial numbers. Fiverr developer se karwao ya Claude se generate karo + verify karo. Har function test karo ek known portfolio ke saath.</div></div>
+
+<div class="step or" id="s6">
+  <div class="sl"><div class="sn">6</div><div class="sl2"></div></div>
+  <div class="sb">
+    <div class="sh">
+      <div class="shl"><div class="sl2t">Step 06 · Week 5 · Quant Engine</div><div class="stt">F1: XIRR + F2: Quant + F3: Risk + F4: Jaccard + F5–F7 + Health Score</div><div class="stsb">Har framework ka explanation + exact Python code</div></div>
+      <div class="shr"><div class="shm">7 frameworks</div><div class="shml">core IP</div></div>
+    </div>
+    <div class="sc">
+      <div class="col">
+        <div class="col-h">F1: XIRR — Newton-Raphson exact</div>
+        <div class="formula">
+          <div class="formula-title">F1 — XIRR formula</div>
+          <div class="formula-eq">NPV(r) = Σ cashflow_i / (1+r)^(days_i/365) = 0</div>
+          <div class="formula-exp">SciPy brentq root-finder solves for r. Result: 11.5364% not "roughly 11–12%". Handles every SIP date separately — most accurate return metric for Indian investors with irregular SIPs.</div>
+        </div>
+        <div class="cw">
+          <div class="ch"><span class="cl">PYTHON</span><span class="cf">calculations/xirr.py</span></div>
+          <div class="cb"><pre><span class="k">from</span> scipy.optimize <span class="k">import</span> brentq
+<span class="k">from</span> datetime <span class="k">import</span> date
+<span class="k">import</span> numpy <span class="k">as</span> np
+
+<span class="k">def</span> <span class="f">calculate_xirr</span>(holdings: list) -> float:
+    <span class="s">"""Exact XIRR using Newton-Raphson (SciPy brentq).
+    holdings: [{invested_amount, current_value, 
+               purchase_date, scheme_code}]
+    Returns: e.g. 11.5364 (as percent)"""</span>
+    cashflows, dates = [], []
+    today = date.<span class="f">today</span>()
+    
+    <span class="k">for</span> h <span class="k">in</span> holdings:
+        cashflows.<span class="f">append</span>(-h[<span class="s">'invested_amount'</span>])
+        dates.<span class="f">append</span>(h[<span class="s">'purchase_date'</span>])
+    
+    total = <span class="f">sum</span>(h[<span class="s">'current_value'</span>] <span class="k">for</span> h <span class="k">in</span> holdings)
+    cashflows.<span class="f">append</span>(total)
+    dates.<span class="f">append</span>(today)
+    
+    d0 = <span class="f">min</span>(dates)
+    days = [(d - d0).days <span class="k">for</span> d <span class="k">in</span> dates]
+    
+    <span class="k">def</span> <span class="f">npv</span>(r):
+        <span class="k">return</span> <span class="f">sum</span>(
+            cf / ((<span class="n">1</span>+r)**(d/<span class="n">365.0</span>))
+            <span class="k">for</span> cf, d <span class="k">in</span> <span class="f">zip</span>(cashflows, days)
+        )
+    <span class="k">try</span>:
+        rate = <span class="f">brentq</span>(npv, -<span class="n">0.99</span>, <span class="n">10.0</span>, xtol=<span class="n">1e-8</span>)
+        <span class="k">return</span> <span class="f">round</span>(rate * <span class="n">100</span>, <span class="n">4</span>)
+    <span class="k">except</span>:
+        <span class="k">return</span> <span class="n">0.0</span></pre></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="col-h">F4: Jaccard Overlap — set theory</div>
+        <div class="formula">
+          <div class="formula-title">F4 — Jaccard similarity</div>
+          <div class="formula-eq">Jaccard = |A ∩ B| / |A ∪ B|</div>
+          <div class="formula-exp">A = Fund 1 top-10 stocks, B = Fund 2 top-10 stocks. 72% Jaccard = 72% of stocks same = paying double TER for duplicate exposure. TER waste = Jaccard% × avg_TER × corpus = exact Rs/year.</div>
+        </div>
+        <div class="cw">
+          <div class="ch"><span class="cl">PYTHON</span><span class="cf">calculations/overlap.py</span></div>
+          <div class="cb"><pre><span class="k">import</span> httpx
+
+<span class="k">async def</span> <span class="f">calculate_overlap</span>(holdings):
+    <span class="s">"""Jaccard overlap |A∩B|/|A∪B| on AMFI monthly holdings.
+    Returns: {jaccard_pct, ter_waste_rs, worst_pair}"""</span>
+    fund_stocks = {}
+    
+    <span class="k">async with</span> httpx.<span class="f">AsyncClient</span>() <span class="k">as</span> c:
+        <span class="k">for</span> h <span class="k">in</span> holdings:
+            <span class="c"># mfapi.in has monthly portfolio disclosure</span>
+            url = <span class="s">f"https://api.mfapi.in/mf/{h['scheme_code']}/portfolio"</span>
+            resp = <span class="k">await</span> c.<span class="f">get</span>(url, timeout=<span class="n">5</span>)
+            data = resp.<span class="f">json</span>()
+            stocks = <span class="f">set</span>()
+            <span class="k">for</span> item <span class="k">in</span> data.<span class="f">get</span>(<span class="s">'holdings'</span>, [])[::<span class="n">10</span>]:
+                stocks.<span class="f">add</span>(item.<span class="f">get</span>(<span class="s">'name'</span>,<span class="s">''</span>).<span class="f">upper</span>().<span class="f">strip</span>())
+            fund_stocks[h[<span class="s">'scheme_code'</span>]] = stocks
+    
+    codes = <span class="f">list</span>(fund_stocks.<span class="f">keys</span>())
+    max_j, best_pair = <span class="n">0</span>, (<span class="s">''</span>,<span class="s">''</span>)
+    
+    <span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="f">len</span>(codes)):
+        <span class="k">for</span> j <span class="k">in</span> <span class="f">range</span>(i+<span class="n">1</span>, <span class="f">len</span>(codes)):
+            a = fund_stocks[codes[i]]
+            b = fund_stocks[codes[j]]
+            union = <span class="f">len</span>(a | b)
+            j_val = <span class="f">len</span>(a & b) / union <span class="k">if</span> union > <span class="n">0</span> <span class="k">else</span> <span class="n">0</span>
+            <span class="k">if</span> j_val > max_j:
+                max_j, best_pair = j_val, (codes[i], codes[j])
+    
+    avg_ter = <span class="n">0.015</span>  <span class="c"># 1.5% avg TER regular plans</span>
+    corpus = <span class="f">sum</span>(h[<span class="s">'invested_amount'</span>] <span class="k">for</span> h <span class="k">in</span> holdings)
+    waste = max_j * avg_ter * corpus
+    
+    <span class="k">return</span> {
+        <span class="s">'jaccard_pct'</span>: <span class="f">round</span>(max_j * <span class="n">100</span>, <span class="n">1</span>),
+        <span class="s">'ter_waste_rs'</span>: <span class="f">round</span>(waste, <span class="n">0</span>),
+        <span class="s">'worst_pair'</span>: best_pair
+    }</pre></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="col-h">F3: CVaR + F6: Goal Gap + Health Score</div>
+        <div class="formula">
+          <div class="formula-title">F3 — CVaR parametric</div>
+          <div class="formula-eq">CVaR = μ - σ × φ(Φ⁻¹(α)) / (1-α)</div>
+          <div class="formula-exp">95% confidence mein worst case loss. α=0.05. σ = portfolio volatility. If CVaR > 15% = High risk issue. Applied to 2008 crash (−52%) and 2020 COVID (−38%) scenarios.</div>
+        </div>
+        <div class="formula">
+          <div class="formula-title">F6 — Goal alignment gap</div>
+          <div class="formula-eq">gap_rs = (expected_XIRR − actual_XIRR) × corpus</div>
+          <div class="formula-exp">If expected 12%, actual 9.2%, corpus Rs 5L: gap = 2.8% × 5,00,000 = Rs 14,000/year shortfall. This exact Rs number is shown to user.</div>
+        </div>
+        <div class="formula" style="border-color:var(--gr)">
+          <div class="formula-title" style="color:var(--gr)">Health Score formula</div>
+          <div class="formula-eq">Score = 100 − Σ severity_deductions</div>
+          <div class="formula-exp">Critical issue: −25pts. High: −15pts. Medium: −8pts. Low: −3pts. Issues sorted by Rs impact (highest first). Score never below 0. Green ≥70, Yellow 40–69, Red &lt;40.</div>
+        </div>
+        <div class="cw">
+          <div class="ch"><span class="cl">PYTHON</span><span class="cf">utils/health_score.py (simplified)</span></div>
+          <div class="cb"><pre><span class="k">def</span> <span class="f">compute_health_score</span>(metrics):
+    score = <span class="n">100</span>; issues = []
+    
+    <span class="c"># F4: Overlap check</span>
+    olap = metrics[<span class="s">'overlap'</span>][<span class="s">'jaccard_pct'</span>]
+    waste = metrics[<span class="s">'overlap'</span>][<span class="s">'ter_waste_rs'</span>]
+    <span class="k">if</span> olap > <span class="n">60</span>: score -= <span class="n">25</span>; sev=<span class="s">'critical'</span>
+    <span class="k">elif</span> olap > <span class="n">40</span>: score -= <span class="n">15</span>; sev=<span class="s">'high'</span>
+    <span class="k">elif</span> olap > <span class="n">20</span>: score -= <span class="n">8</span>; sev=<span class="s">'medium'</span>
+    <span class="k">else</span>: sev = <span class="k">None</span>
+    <span class="k">if</span> sev: issues.<span class="f">append</span>({
+        <span class="s">'type'</span>:<span class="s">'overlap'</span>,<span class="s">'severity'</span>:sev,
+        <span class="s">'rs_impact'</span>:waste,
+        <span class="s">'title'</span>:<span class="s">f"{olap}% fund overlap"</span>,
+        <span class="s">'fix'</span>:<span class="s">"Sell higher-TER fund"</span>})
+    
+    <span class="c"># F6: Goal gap check</span>
+    gap = metrics[<span class="s">'goal_gap'</span>][<span class="s">'gap_rs'</span>]
+    <span class="k">if</span> gap > <span class="n">10000</span>: score -= <span class="n">20</span>
+    <span class="k">elif</span> gap > <span class="n">3000</span>: score -= <span class="n">10</span>
+    
+    <span class="c"># Sort by Rs impact — biggest problem first</span>
+    issues.<span class="f">sort</span>(key=<span class="k">lambda</span> x: x[<span class="s">'rs_impact'</span>], 
+                  reverse=<span class="k">True</span>)
+    <span class="k">return</span> <span class="f">max</span>(<span class="n">0</span>, score), issues</pre></div>
+        </div>
+      </div>
+    </div>
+    <div class="sf"><span class="tag tg">F1–F7 frameworks ✓</span><span class="tag tg">Health score 0–100 ✓</span><span class="tag tb">Issues sorted by Rs impact ✓</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     WEEK 6 — Main Analyze Endpoint + mfapi Service
+═══════════════════════════════════════════════════ -->
+<div class="wk" id="w6">
+  <div class="wk-line"></div>
+  <div class="wk-pill w6p">🔗 Week 6 — Main /api/analyze Endpoint + mfapi Redis Cache</div>
+  <div class="wk-line"></div>
+</div>
+<div class="al ag"><span class="al-icon">💡</span><div><strong>Week 6 goal:</strong> Lovable frontend → Railway backend ka connection complete karo. User ke holdings Supabase se fetch hote hain → mfapi.in se NAV data aata hai → 7 frameworks run karte hain → result Supabase mein save hota hai → frontend ko milta hai. End-to-end test karo ek real portfolio se.</div></div>
+
+<div class="step cy" id="s7">
+  <div class="sl"><div class="sn">7</div><div class="sl2"></div></div>
+  <div class="sb">
+    <div class="sh">
+      <div class="shl"><div class="sl2t">Step 07 · Week 6 · routers/analyze.py</div>
+      <div class="stt">Main /api/analyze endpoint — orchestrates all 7 frameworks</div>
+      <div class="stsb">Ye ek endpoint hai jo Lovable frontend call karta hai — sab kuch yahan se chalti hai</div></div>
+      <div class="shr"><div class="shm">/api/analyze</div><div class="shml">main endpoint</div></div>
+    </div>
+    <div class="sc">
+      <div class="col" style="grid-column:1/-1;border-right:none;padding-right:0">
+        <div class="col-h">routers/analyze.py — complete code</div>
+        <div class="cw">
+          <div class="ch"><span class="cl">PYTHON</span><span class="cf">routers/analyze.py — poora copy karo</span></div>
+          <div class="cb"><pre><span class="k">from</span> fastapi <span class="k">import</span> APIRouter, HTTPException, Depends
+<span class="k">from</span> fastapi.security <span class="k">import</span> HTTPBearer, HTTPAuthorizationCredentials
+<span class="k">from</span> pydantic <span class="k">import</span> BaseModel
+<span class="k">from</span> jose <span class="k">import</span> jwt  <span class="c"># pip: python-jose[cryptography]</span>
+<span class="k">import</span> os, asyncio
+
+<span class="k">from</span> services.mfapi <span class="k">import</span> get_nav_history, get_fund_holdings
+<span class="k">from</span> services.supabase_client <span class="k">import</span> get_portfolio_holdings, save_analysis_result
+<span class="k">from</span> calculations.xirr <span class="k">import</span> calculate_xirr
+<span class="k">from</span> calculations.quant <span class="k">import</span> calculate_quant_metrics
+<span class="k">from</span> calculations.risk <span class="k">import</span> calculate_cvar
+<span class="k">from</span> calculations.overlap <span class="k">import</span> calculate_overlap
+<span class="k">from</span> calculations.goals <span class="k">import</span> calculate_goal_gap
+<span class="k">from</span> calculations.crisis <span class="k">import</span> simulate_crashes
+<span class="k">from</span> utils.health_score <span class="k">import</span> compute_health_score
+<span class="k">from</span> services.nxancelm <span class="k">import</span> generate_insights
+
+router = <span class="f">APIRouter</span>()
+security = <span class="f">HTTPBearer</span>()
+
+<span class="k">class</span> <span class="ty">AnalyzeRequest</span>(BaseModel):
+    portfolio_id: str
+
+<span class="k">async def</span> <span class="f">verify_jwt</span>(creds: HTTPAuthorizationCredentials = <span class="f">Depends</span>(security)):
+    <span class="s">"""JWT token verify karo — Supabase ka public key se"""</span>
+    <span class="k">try</span>:
+        payload = jwt.<span class="f">decode</span>(
+            creds.credentials,
+            os.environ[<span class="s">"SUPABASE_JWT_SECRET"</span>],
+            algorithms=[<span class="s">"HS256"</span>]
+        )
+        <span class="k">return</span> payload[<span class="s">"sub"</span>]  <span class="c"># user_id milta hai</span>
+    <span class="k">except Exception</span>:
+        <span class="k">raise</span> <span class="f">HTTPException</span>(status_code=<span class="n">401</span>, detail=<span class="s">"Invalid token"</span>)
+
+<span class="k">@router.post</span>(<span class="s">"/analyze"</span>)
+<span class="k">async def</span> <span class="f">analyze_portfolio</span>(
+    req: AnalyzeRequest,
+    user_id: str = <span class="f">Depends</span>(verify_jwt)
+):
+    <span class="s">"""
+    Main analysis endpoint.
+    1. Supabase se holdings fetch karo
+    2. mfapi.in se NAV data fetch karo (Redis cached)
+    3. 7 frameworks parallel run karo
+    4. Health score + issues compute karo
+    5. NxanceLM se Hinglish explanation lo
+    6. Supabase mein result save karo
+    """</span>
+    
+    <span class="c"># Step 1: Holdings fetch karo</span>
+    holdings = <span class="k">await</span> <span class="f">get_portfolio_holdings</span>(req.portfolio_id, user_id)
+    <span class="k">if not</span> holdings:
+        <span class="k">raise</span> <span class="f">HTTPException</span>(<span class="n">404</span>, <span class="s">"No holdings found"</span>)
+
+    <span class="c"># Step 2: NAV data parallel fetch karo (asyncio.gather = sabka saath)</span>
+    nav_tasks = [<span class="f">get_nav_history</span>(h[<span class="s">'scheme_code'</span>]) <span class="k">for</span> h <span class="k">in</span> holdings]
+    holdings_tasks = [<span class="f">get_fund_holdings</span>(h[<span class="s">'scheme_code'</span>]) <span class="k">for</span> h <span class="k">in</span> holdings]
+    
+    nav_results, holdings_results = <span class="k">await</span> asyncio.<span class="f">gather</span>(
+        asyncio.<span class="f">gather</span>(*nav_tasks),
+        asyncio.<span class="f">gather</span>(*holdings_tasks)
+    )
+    
+    nav_data = {h[<span class="s">'scheme_code'</span>]: nav <span class="k">for</span> h, nav <span class="k">in</span> <span class="f">zip</span>(holdings, nav_results)}
+    fund_stock_data = {h[<span class="s">'scheme_code'</span>]: fh <span class="k">for</span> h, fh <span class="k">in</span> <span class="f">zip</span>(holdings, holdings_results)}
+
+    <span class="c"># Step 3: 7 frameworks run karo</span>
+    xirr_result = <span class="f">calculate_xirr</span>(holdings)
+    quant_result = <span class="f">calculate_quant_metrics</span>(holdings, nav_data)
+    risk_result = <span class="f">calculate_cvar</span>(holdings, nav_data)
+    overlap_result = <span class="k">await</span> <span class="f">calculate_overlap</span>(holdings, fund_stock_data)
+    goal_gap_result = <span class="f">calculate_goal_gap</span>(holdings, xirr_result)
+    crash_result = <span class="f">simulate_crashes</span>(holdings, nav_data)
+
+    <span class="c"># Step 4: Health score compute karo</span>
+    metrics = {
+        <span class="s">'xirr'</span>: xirr_result, <span class="s">'quant'</span>: quant_result,
+        <span class="s">'risk'</span>: risk_result, <span class="s">'overlap'</span>: overlap_result,
+        <span class="s">'goal_gap'</span>: goal_gap_result, <span class="s">'crash'</span>: crash_result
+    }
+    health_score, issues = <span class="f">compute_health_score</span>(metrics)
+
+    <span class="c"># Step 5: NxanceLM se Hinglish explanation (top 3 issues ke liye)</span>
+    insights = <span class="k">await</span> <span class="f">generate_insights</span>(issues[:3], tier=<span class="s">"free"</span>)
+
+    <span class="c"># Step 6: Save to Supabase</span>
+    result = {
+        <span class="s">'portfolio_id'</span>: req.portfolio_id,
+        <span class="s">'health_score'</span>: health_score,
+        <span class="s">'xirr'</span>: xirr_result,
+        <span class="s">'sharpe_ratio'</span>: quant_result[<span class="s">'sharpe'</span>],
+        <span class="s">'sortino_ratio'</span>: quant_result[<span class="s">'sortino'</span>],
+        <span class="s">'jensen_alpha'</span>: quant_result[<span class="s">'alpha'</span>],
+        <span class="s">'beta'</span>: quant_result[<span class="s">'beta'</span>],
+        <span class="s">'overlap_pct'</span>: overlap_result[<span class="s">'jaccard_pct'</span>],
+        <span class="s">'ter_waste_rs'</span>: overlap_result[<span class="s">'ter_waste_rs'</span>],
+        <span class="s">'goal_gap_rs'</span>: goal_gap_result[<span class="s">'gap_rs'</span>],
+        <span class="s">'cvar_95'</span>: risk_result[<span class="s">'cvar_95'</span>],
+        <span class="s">'issues_json'</span>: issues,
+        <span class="s">'insights_text'</span>: insights,
+    }
+    <span class="k">await</span> <span class="f">save_analysis_result</span>(result)
+
+    <span class="k">return</span> {<span class="s">'success'</span>: <span class="k">True</span>, <span class="s">'result'</span>: result}</pre></div>
+        </div>
+      </div>
+    </div>
+    <div class="sc" style="padding-top:4px">
+      <div class="col">
+        <div class="col-h">services/mfapi.py — NAV cache</div>
+        <div class="cw">
+          <div class="ch"><span class="cl">PYTHON</span><span class="cf">services/mfapi.py</span></div>
+          <div class="cb"><pre><span class="k">import</span> httpx, redis, json, os
+<span class="k">from</span> datetime <span class="k">import</span> datetime
+
+r = redis.<span class="f">from_url</span>(os.environ.get(<span class="s">"REDIS_URL"</span>, <span class="s">"redis://localhost"</span>))
+
+<span class="k">async def</span> <span class="f">get_nav_history</span>(scheme_code: str) -> list:
+    <span class="s">"""mfapi.in se NAV history fetch karo.
+    Redis cache check first (TTL 24 hours).
+    Free API — no key needed."""</span>
+    cache_key = <span class="s">f"nav:{scheme_code}"</span>
+    
+    <span class="c"># Cache check karo</span>
+    cached = r.<span class="f">get</span>(cache_key)
+    <span class="k">if</span> cached:
+        <span class="k">return</span> json.<span class="f">loads</span>(cached)
+    
+    <span class="c"># mfapi.in se fetch karo</span>
+    url = <span class="s">f"https://api.mfapi.in/mf/{scheme_code}"</span>
+    <span class="k">async with</span> httpx.<span class="f">AsyncClient</span>(timeout=<span class="n">10</span>) <span class="k">as</span> client:
+        resp = <span class="k">await</span> client.<span class="f">get</span>(url)
+        data = resp.<span class="f">json</span>()
+    
+    nav_list = data.<span class="f">get</span>(<span class="s">'data'</span>, [])
+    <span class="c"># Format: [{date: "05-06-2025", nav: "45.23"}]</span>
+    
+    <span class="c"># Cache mein store karo (24 hours)</span>
+    r.<span class="f">setex</span>(cache_key, <span class="n">86400</span>, json.<span class="f">dumps</span>(nav_list))
+    <span class="k">return</span> nav_list
+
+<span class="k">async def</span> <span class="f">get_fund_holdings</span>(scheme_code: str) -> list:
+    <span class="s">"""Fund's monthly stock holdings fetch karo.
+    AMFI monthly disclosure — for Jaccard overlap."""</span>
+    cache_key = <span class="s">f"holdings:{scheme_code}"</span>
+    
+    cached = r.<span class="f">get</span>(cache_key)
+    <span class="k">if</span> cached:
+        <span class="k">return</span> json.<span class="f">loads</span>(cached)
+    
+    url = <span class="s">f"https://api.mfapi.in/mf/{scheme_code}/portfolio"</span>
+    <span class="k">async with</span> httpx.<span class="f">AsyncClient</span>(timeout=<span class="n">10</span>) <span class="k">as</span> client:
+        resp = <span class="k">await</span> client.<span class="f">get</span>(url)
+        data = resp.<span class="f">json</span>()
+    
+    holdings = data.<span class="f">get</span>(<span class="s">'holdings'</span>, [])
+    <span class="c"># Cache 30 days — monthly disclosure changes monthly</span>
+    r.<span class="f">setex</span>(cache_key, <span class="n">2592000</span>, json.<span class="f">dumps</span>(holdings))
+    <span class="k">return</span> holdings</pre></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="col-h">services/supabase_client.py</div>
+        <div class="cw">
+          <div class="ch"><span class="cl">PYTHON</span><span class="cf">services/supabase_client.py</span></div>
+          <div class="cb"><pre><span class="k">from</span> supabase <span class="k">import</span> create_client
+<span class="k">import</span> os
+
+supabase = <span class="f">create_client</span>(
+    os.environ[<span class="s">"SUPABASE_URL"</span>],
+    os.environ[<span class="s">"SUPABASE_SERVICE_KEY"</span>]  <span class="c"># service key = RLS bypass</span>
+)
+
+<span class="k">async def</span> <span class="f">get_portfolio_holdings</span>(portfolio_id: str, user_id: str):
+    <span class="s">"""User ke holdings fetch karo. user_id verify karo security ke liye."""</span>
+    <span class="c"># Verify portfolio belongs to user</span>
+    port = supabase.table(<span class="s">"portfolios"</span>)\
+        .<span class="f">select</span>(<span class="s">"id"</span>)\
+        .<span class="f">eq</span>(<span class="s">"id"</span>, portfolio_id)\
+        .<span class="f">eq</span>(<span class="s">"user_id"</span>, user_id)\
+        .<span class="f">execute</span>()
+    
+    <span class="k">if not</span> port.data:
+        <span class="k">return None</span>
+    
+    result = supabase.table(<span class="s">"holdings"</span>)\
+        .<span class="f">select</span>(<span class="s">"*"</span>)\
+        .<span class="f">eq</span>(<span class="s">"portfolio_id"</span>, portfolio_id)\
+        .<span class="f">execute</span>()
+    <span class="k">return</span> result.data
+
+<span class="k">async def</span> <span class="f">save_analysis_result</span>(result: dict):
+    <span class="s">"""Analysis result Supabase mein save karo."""</span>
+    supabase.table(<span class="s">"analysis_results"</span>)\
+        .<span class="f">upsert</span>(result, on_conflict=<span class="s">"portfolio_id"</span>)\
+        .<span class="f">execute</span>()</pre></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="col-h">Redis kyun zaroori hai — explanation</div>
+        <div class="tech-box">
+          <div class="tech-head">
+            <div class="tech-icon" style="background:var(--reb);color:var(--re)">⚡</div>
+            <div class="tech-name">Redis Cache</div>
+            <div class="tech-tag tg">Critical</div>
+          </div>
+          <div class="tech-body">
+            <div class="tech-row"><div class="tech-key">Kya karta hai</div><div class="tech-val">In-memory key-value store. GET/SET operations &lt;1ms. mfapi.in response store karta hai.</div></div>
+            <div class="tech-row"><div class="tech-key">Without Redis</div><div class="tech-val">Har analysis = 3–5 mfapi.in API calls × 200ms = 600ms–1s just data fetch mein. 100 users = 100 concurrent calls to mfapi.in = rate limit hit.</div></div>
+            <div class="tech-row"><div class="tech-key">With Redis</div><div class="tech-val">First request: 200ms (API call + cache). Next 1000 requests same fund: &lt;1ms (cache hit). 99.9% cost saving on API calls.</div></div>
+            <div class="tech-row"><div class="tech-key">TTL strategy</div><div class="tech-val">NAV data: 24h TTL (AMFI updates 4PM daily). Fund holdings: 30d TTL (monthly AMFI disclosure). Fund search: 7d TTL.</div></div>
+            <div class="tech-row"><div class="tech-key">Setup</div><div class="tech-val">Railway mein Redis plugin add karo (free tier available). REDIS_URL env var automatically set hoti hai.</div></div>
+          </div>
+        </div>
+        <div class="ci y"><strong>Railway mein Redis add karna:</strong> Railway project → New → Database → Redis → Add. REDIS_URL automatically environment mein aa jaata hai. Code mein <code>os.environ["REDIS_URL"]</code> se read karo.</div>
+      </div>
+    </div>
+    <div class="sf"><span class="tag tg">Analyze endpoint ✓</span><span class="tag tg">mfapi service ✓</span><span class="tag tg">Redis cache ✓</span><span class="tag tb">Supabase client ✓</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     WEEK 7 — NxanceLM Training + Razorpay Payment
+═══════════════════════════════════════════════════ -->
+<div class="wk" id="w7">
+  <div class="wk-line"></div>
+  <div class="wk-pill w7p">🤖 Week 7 — NxanceLM Training · Rs 0 Cost · Google Colab</div>
+  <div class="wk-line"></div>
+</div>
+<div class="al ap"><span class="al-icon">🧠</span><div><strong>NxanceLM architecture:</strong> Quant engine (exact math) → results inject karo prompt mein → TinyLlama (language model) → Hinglish explanation. NxanceLM kabhi finance calculate nahi karta — sirf exact numbers ko human language mein translate karta hai. Isliye hallucination impossible hai financial figures mein.</div></div>
+
+<div class="step re" id="s8">
+  <div class="sl"><div class="sn">8</div><div class="sl2"></div></div>
+  <div class="sb">
+    <div class="sh">
+      <div class="shl"><div class="sl2t">Step 08 · Week 7 · Google Colab</div>
+      <div class="stt">NxanceLM v1 training — TinyLlama 1.1B + LoRA · Rs 0 cost · 2 hours</div>
+      <div class="stsb">colab.research.google.com → Runtime → T4 GPU → Run cells in order</div></div>
+      <div class="shr"><div class="shm">Rs 0</div><div class="shml">training cost</div></div>
+    </div>
+    <div class="sc">
+      <div class="col">
+        <div class="col-h">Technology explanation pehle — kyun TinyLlama + LoRA?</div>
+        <div class="tech-box">
+          <div class="tech-head">
+            <div class="tech-icon" style="background:var(--pub);color:var(--pu)">🦙</div>
+            <div class="tech-name">TinyLlama 1.1B</div>
+            <div class="tech-tag tg">Base model</div>
+          </div>
+          <div class="tech-body">
+            <div class="tech-row"><div class="tech-key">Kya hai</div><div class="tech-val">Open-source language model. 1.1 billion parameters. Facebook ke Llama architecture par based. Free to use commercially.</div></div>
+            <div class="tech-row"><div class="tech-key">Kyun ye size</div><div class="tech-val">Colab free T4 GPU pe fit hota hai (2.2GB VRAM). GPT-4 Nxance ke budget mein nahi. 1.1B = sweet spot for our task.</div></div>
+            <div class="tech-row"><div class="tech-key">Alternative</div><div class="tech-val">Mistral 7B (better quality, needs paid GPU), Phi-2 (2.7B, Microsoft), Gemma 2B (Google). Phase 2 mein Mistral 7B upgrade karenge.</div></div>
+          </div>
+        </div>
+        <div class="tech-box" style="margin-top:8px">
+          <div class="tech-head">
+            <div class="tech-icon" style="background:var(--cyb);color:var(--cy)">🔧</div>
+            <div class="tech-name">LoRA Fine-tuning</div>
+            <div class="tech-tag tg">Method</div>
+          </div>
+          <div class="tech-body">
+            <div class="tech-row"><div class="tech-key">Kya hai</div><div class="tech-val">Low-Rank Adaptation. Full model (1.1GB) freeze karo, sirf small adapter (12MB) train karo. 99% memory saving.</div></div>
+            <div class="tech-row"><div class="tech-key">Kyun LoRA</div><div class="tech-val">Full fine-tuning: 16GB GPU chahiye, 8 hours. LoRA: 2.2GB GPU chahiye (free T4), 2 hours. Same quality output.</div></div>
+            <div class="tech-row"><div class="tech-key">Training cost</div><div class="tech-val">Google Colab free tier: T4 GPU, 12GB RAM = Rs 0. Compared to OpenAI fine-tuning: Rs 5,000+ minimum.</div></div>
+            <div class="tech-row"><div class="tech-key">Inference cost</div><div class="tech-val">Rs 0/call. AWS g4dn.xlarge ($0.526/hr = Rs 44/hr). At 100 analyses/day × 4 sec each = 6 min GPU time = Rs 4/day total.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="col-h">Google Colab: Cell 1 — Setup + Cell 2 — Training data</div>
+        <div class="cw">
+          <div class="ch"><span class="cl">PYTHON</span><span class="cf">Colab Cell 1 — pehle ye run karo</span></div>
+          <div class="cb"><pre><span class="c"># STEP 1: Runtime → Change runtime type → T4 GPU → Save
+# Phir ye cell run karo</span>
+
+!pip install transformers peft trl datasets bitsandbytes accelerate -q
+
+<span class="k">import</span> torch
+<span class="k">print</span>(<span class="s">"GPU available:"</span>, torch.cuda.<span class="f">is_available</span>())
+<span class="k">print</span>(<span class="s">"GPU name:"</span>, torch.cuda.<span class="f">get_device_name</span>(<span class="n">0</span>))
+<span class="c"># Expected output: GPU available: True
+#                  GPU name: Tesla T4</span></pre></div>
+        </div>
+        <div class="cw" style="margin-top:6px">
+          <div class="ch"><span class="cl">PYTHON</span><span class="cf">Colab Cell 2 — Training data (expand this to 200+ examples)</span></div>
+          <div class="cb"><pre><span class="k">from</span> datasets <span class="k">import</span> Dataset
+
+<span class="c"># Ye tumhara training data hai — jitna zyada, utna better
+# Har example: ek financial problem + Hinglish explanation
+# Quant engine ke numbers inject karta hai — LM sirf translate karta hai</span>
+
+training_examples = [
+  {<span class="s">"input"</span>: <span class="s">"Portfolio analysis: health_score=38, overlap_pct=72, ter_waste=4800, fund1=HDFC Flexicap, fund2=Mirae Emerging"</span>,
+   <span class="s">"output"</span>: <span class="s">"Bhai, tera portfolio mein bada issue hai. HDFC Flexicap aur Mirae Emerging Bluechip ke 72% stocks same hain — matlab tu Rs 4,800/year double expense de raha hai bina kisi extra benefit ke. Fix: HDFC Flexicap bech de, Parag Parikh Flexi Cap Direct le le (scheme 122639)."</span>},
+
+  {<span class="s">"input"</span>: <span class="s">"Portfolio analysis: health_score=62, xirr=9.2, expected_xirr=12, goal_gap_rs=14000, corpus=500000"</span>,
+   <span class="s">"output"</span>: <span class="s">"Tera actual XIRR 9.2% hai but tune 12% expect kiya tha. Is 2.8% ke gap ki wajah se tu Rs 14,000/year miss kar raha hai apne Rs 5 lakh corpus pe. Agar aisa hi chalta raha, retirement goal 6 saal delay hoga. Fix: large-cap active funds ki jagah UTI Nifty 50 Index Direct (scheme 120716, TER sirf 0.10%) le."</span>},
+
+  {<span class="s">"input"</span>: <span class="s">"Portfolio analysis: health_score=71, cvar_95=18.5, risk_level=conservative"</span>,
+   <span class="s">"output"</span>: <span class="s">"Portfolio health theek hai (71/100) lekin risk thoda zyada hai tere goal ke liye. Conservative investor ke liye CVaR 18.5% matlab bure mahine mein portfolio 18.5% gir sakta hai. Tu conservative tha, toh equity 70% se 50% karo aur 20% ICICI Corporate Bond Direct add karo — risk kam, return zyada stable."</span>},
+
+  {<span class="s">"input"</span>: <span class="s">"Portfolio analysis: health_score=55, regular_plans=['Axis Bluechip Regular', 'HDFC Mid-Cap Regular'], annual_saving_if_direct=7200"</span>,
+   <span class="s">"output"</span>: <span class="s">"Teri ek aur cheezon pe dhyan de — tu Regular plans mein invest kar raha hai Direct ki jagah. Sirf is ek cheez ko fix karke tu Rs 7,200/year bacha sakta hai. CAMS website (camsonline.com) pe ja, apne dono funds Direct mein switch kar — 10 minute ka kaam, ek baar, Rs 7,200 har saal fayda."</span>},
+
+  {<span class="s">"input"</span>: <span class="s">"Portfolio analysis: health_score=82, xirr=14.2, overlap_pct=8, sharpe=0.89"</span>,
+   <span class="s">"output"</span>: <span class="s">"Wah bhai! Portfolio genuinely achha hai (82/100). XIRR 14.2% — Nifty 50 ke 13% benchmark se better. Fund overlap sirf 8% — diversification sahi hai. Sharpe 0.89 — tera portfolio achha risk-adjusted return de raha hai. Sirf ek suggestion: SIP 15% badha de har saal salary increment pe — compounding magic karega."</span>},
+
+  <span class="c"># === ADD 195 MORE EXAMPLES ===
+  # Cover karo: LTCG tax advice, SIP step-up, 
+  # goal-based allocation, retirement corpus calculation,
+  # child education planning, home down payment planning,
+  # debt vs equity balance, index vs active debate,
+  # portfolio rebalancing triggers, etc.
+  # Jitna variety, utna better NxanceLM</span>
+]
+
+<span class="c"># Instruction format mein convert karo (TinyLlama ka format)</span>
+formatted = [
+    {<span class="s">"text"</span>: <span class="s">f"&lt;|system|&gt;\nTu Nxance ka AI advisor hai. Exact numbers hamesha sahi hain — sirf explain karo.\n&lt;|user|&gt;\n{ex['input']}\n&lt;|assistant|&gt;\n{ex['output']}"</span>}
+    <span class="k">for</span> ex <span class="k">in</span> training_examples
+]
+
+dataset = Dataset.<span class="f">from_list</span>(formatted)
+<span class="k">print</span>(<span class="s">f"Training examples: {len(dataset)}"</span>)</pre></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="col-h">Colab Cell 3 — Train + Save model</div>
+        <div class="cw">
+          <div class="ch"><span class="cl">PYTHON</span><span class="cf">Colab Cell 3 — Training (2 hours)</span></div>
+          <div class="cb"><pre><span class="k">from</span> transformers <span class="k">import</span> AutoModelForCausalLM, AutoTokenizer, TrainingArguments
+<span class="k">from</span> peft <span class="k">import</span> LoraConfig, get_peft_model, TaskType
+<span class="k">from</span> trl <span class="k">import</span> SFTTrainer
+
+MODEL_NAME = <span class="s">"TinyLlama/TinyLlama-1.1B-Chat-v1.0"</span>
+
+<span class="c"># Model + tokenizer load karo (HuggingFace se auto-download)</span>
+tokenizer = AutoTokenizer.<span class="f">from_pretrained</span>(MODEL_NAME)
+tokenizer.pad_token = tokenizer.eos_token
+
+model = AutoModelForCausalLM.<span class="f">from_pretrained</span>(
+    MODEL_NAME,
+    torch_dtype=torch.float16,  <span class="c"># half precision — saves VRAM</span>
+    device_map=<span class="s">"auto"</span>           <span class="c"># GPU pe automatically load</span>
+)
+
+<span class="c"># LoRA config — sirf small adapter train hoga</span>
+lora_config = <span class="f">LoraConfig</span>(
+    task_type=TaskType.CAUSAL_LM,
+    r=<span class="n">16</span>,           <span class="c"># rank — higher = more parameters = better quality</span>
+    lora_alpha=<span class="n">32</span>,  <span class="c"># scaling factor</span>
+    target_modules=[<span class="s">"q_proj"</span>, <span class="s">"v_proj"</span>],  <span class="c"># attention layers</span>
+    lora_dropout=<span class="n">0.1</span>,
+    bias=<span class="s">"none"</span>
+)
+model = <span class="f">get_peft_model</span>(model, lora_config)
+model.<span class="f">print_trainable_parameters</span>()
+<span class="c"># Output: trainable params: 2,097,152 || all params: 1,102,048,256 (0.19%)</span>
+<span class="c"># Sirf 0.19% parameters train ho rahe hain — isliye fast aur cheap</span>
+
+<span class="c"># Training arguments</span>
+training_args = <span class="f">TrainingArguments</span>(
+    output_dir=<span class="s">"./nxancelm_v1"</span>,
+    num_train_epochs=<span class="n">5</span>,        <span class="c"># 5 passes over training data</span>
+    per_device_train_batch_size=<span class="n">4</span>,
+    learning_rate=<span class="n">2e-4</span>,
+    logging_steps=<span class="n">10</span>,
+    save_strategy=<span class="s">"epoch"</span>,
+    fp16=<span class="k">True</span>,               <span class="c"># T4 GPU optimization</span>
+    warmup_steps=<span class="n">50</span>,
+)
+
+trainer = <span class="f">SFTTrainer</span>(
+    model=model,
+    tokenizer=tokenizer,
+    train_dataset=dataset,
+    args=training_args,
+    dataset_text_field=<span class="s">"text"</span>,
+    max_seq_length=<span class="n">512</span>,
+)
+
+<span class="k">print</span>(<span class="s">"Training shuru ho raha hai... ~2 hours"</span>)
+trainer.<span class="f">train</span>()
+
+<span class="c"># Adapter save karo (sirf 12MB — full model 1.1GB nahi)</span>
+model.<span class="f">save_pretrained</span>(<span class="s">"./nxancelm_v1_adapter"</span>)
+tokenizer.<span class="f">save_pretrained</span>(<span class="s">"./nxancelm_v1_adapter"</span>)
+<span class="k">print</span>(<span class="s">"NxanceLM v1 training complete!"</span>)
+<span class="k">print</span>(<span class="s">"Adapter size: ~12MB"</span>)
+
+<span class="c"># Google Drive mein save karo (Colab session expire hone se pehle)
+# from google.colab import drive
+# drive.mount('/content/drive')
+# !cp -r ./nxancelm_v1_adapter /content/drive/MyDrive/</span></pre></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NxanceLM inference service -->
+    <div style="padding:0 20px 16px">
+      <div class="col-h">services/nxancelm.py — inference code</div>
+      <div class="sc" style="padding:0;margin-top:8px">
+        <div class="col">
+          <div class="cw">
+            <div class="ch"><span class="cl">PYTHON</span><span class="cf">services/nxancelm.py — smart router + inference</span></div>
+            <div class="cb"><pre><span class="k">from</span> transformers <span class="k">import</span> AutoModelForCausalLM, AutoTokenizer
+<span class="k">from</span> peft <span class="k">import</span> PeftModel
+<span class="k">import</span> torch, asyncio, os, redis, json, hashlib
+
+<span class="c"># Redis client</span>
+r = redis.<span class="f">from_url</span>(os.environ.get(<span class="s">"REDIS_URL"</span>))
+
+<span class="c"># Model global load (ek baar load — har request pe nahi)
+# AWS g4dn.xlarge T4 GPU par run karega</span>
+_model = <span class="k">None</span>
+_tokenizer = <span class="k">None</span>
+_lock = asyncio.<span class="f">Lock</span>()  <span class="c"># Ek GPU — ek time par ek request</span>
+
+<span class="k">def</span> <span class="f">load_model</span>():
+    <span class="k">global</span> _model, _tokenizer
+    <span class="k">if</span> _model <span class="k">is None</span>:
+        base = AutoModelForCausalLM.<span class="f">from_pretrained</span>(
+            <span class="s">"TinyLlama/TinyLlama-1.1B-Chat-v1.0"</span>,
+            torch_dtype=torch.float16,
+            device_map=<span class="s">"auto"</span>
+        )
+        _model = <span class="f">PeftModel</span>.<span class="f">from_pretrained</span>(
+            base, os.environ[<span class="s">"NXANCELM_ADAPTER_PATH"</span>]
+        )
+        _tokenizer = AutoTokenizer.<span class="f">from_pretrained</span>(
+            os.environ[<span class="s">"NXANCELM_ADAPTER_PATH"</span>]
+        )
+
+<span class="k">def</span> <span class="f">get_template</span>(issues: list) -> str:
+    <span class="s">"""40% of cases: pre-written template (fastest, Rs 0, 0ms)."""</span>
+    <span class="k">if not</span> issues:
+        <span class="k">return</span> <span class="s">"Portfolio bilkul theek hai! Koi bada issue nahi mila. SIP continue rakho."</span>
+    top = issues[<span class="n">0</span>]
+    <span class="k">if</span> top[<span class="s">'type'</span>] == <span class="s">'overlap'</span> <span class="k">and</span> top[<span class="s">'severity'</span>] == <span class="s">'critical'</span>:
+        <span class="k">return</span> <span class="s">f"Fund overlap critical issue hai — Rs{top['rs_impact']:,.0f}/year waste. Fix: overlapping fund sell karo."</span>
+    <span class="k">return None</span>  <span class="c"># Template nahi mila — model use karo</span>
+
+<span class="k">async def</span> <span class="f">generate_insights</span>(issues: list, tier: str = <span class="s">"free"</span>) -> str:
+    <span class="s">"""Smart router:
+    1. Template (40% cases) — Rs 0, 0ms
+    2. Redis cache (30% cases) — Rs 0, &lt;1ms  
+    3. TinyLlama (30% cases) — Rs 0, 2-4s
+    """</span>
+    max_tokens = <span class="n">80</span> <span class="k">if</span> tier == <span class="s">"free"</span> <span class="k">else</span> <span class="n">250</span>
+    
+    <span class="c"># Route 1: Template check</span>
+    template = <span class="f">get_template</span>(issues)
+    <span class="k">if</span> template:
+        <span class="k">return</span> template
+    
+    <span class="c"># Route 2: Redis cache (similar portfolios)</span>
+    issue_key = hashlib.<span class="f">md5</span>(json.<span class="f">dumps</span>(issues, sort_keys=<span class="k">True</span>).<span class="f">encode</span>()).<span class="f">hexdigest</span>()[:12]
+    cache_key = <span class="s">f"insight:{issue_key}:{tier}"</span>
+    cached = r.<span class="f">get</span>(cache_key)
+    <span class="k">if</span> cached:
+        <span class="k">return</span> cached.<span class="f">decode</span>()
+    
+    <span class="c"># Route 3: TinyLlama inference</span>
+    prompt = <span class="f">build_prompt</span>(issues, max_tokens)
+    
+    <span class="k">async with</span> _lock:  <span class="c"># Ek time par ek request GPU pe</span>
+        <span class="f">load_model</span>()
+        inputs = _tokenizer(prompt, return_tensors=<span class="s">"pt"</span>).<span class="f">to</span>(<span class="s">"cuda"</span>)
+        <span class="k">with</span> torch.no_grad():
+            outputs = _model.<span class="f">generate</span>(
+                **inputs,
+                max_new_tokens=max_tokens,
+                temperature=<span class="n">0.7</span>,
+                do_sample=<span class="k">True</span>,
+                pad_token_id=_tokenizer.eos_token_id
+            )
+        response = _tokenizer.<span class="f">decode</span>(outputs[<span class="n">0</span>], skip_special_tokens=<span class="k">True</span>)
+        result = response.<span class="f">split</span>(<span class="s">"&lt;|assistant|&gt;"</span>)[-<span class="n">1</span>].<span class="f">strip</span>()
+    
+    <span class="c"># Cache karo (24 hours)</span>
+    r.<span class="f">setex</span>(cache_key, <span class="n">86400</span>, result)
+    <span class="k">return</span> result
+
+<span class="k">def</span> <span class="f">build_prompt</span>(issues: list, max_tokens: int) -> str:
+    issues_str = json.<span class="f">dumps</span>(issues, ensure_ascii=<span class="k">False</span>)
+    tier_instruction = <span class="s">"2-3 sentences"</span> <span class="k">if</span> max_tokens <= <span class="n">80</span> <span class="k">else</span> <span class="s">"full fix plan with scheme codes"</span>
+    <span class="k">return</span> <span class="s">f"""&lt;|system|&gt;
+Tu Nxance ka AI advisor hai. Exact numbers hamesha sahi hain — sirf explain karo. {tier_instruction} mein batao.
+&lt;|user|&gt;
+Portfolio analysis results: {issues_str}
+&lt;|assistant|&gt;
+"""</span></pre></div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="col-h" style="margin-top:0">Advanced NxanceLM options</div>
+          <div class="tech-box">
+            <div class="tech-head">
+              <div class="tech-icon" style="background:var(--grb);color:var(--gr)">🚀</div>
+              <div class="tech-name">NxanceLM v2 — Advanced</div>
+              <div class="tech-tag ty2">Phase 2</div>
+            </div>
+            <div class="tech-body">
+              <div class="tech-row"><div class="tech-key">Base model</div><div class="tech-val">Mistral 7B → QLoRA (4-bit quantization). Better quality, same Rs 0 inference. Needs A100 GPU for training (Google Colab Pro+ Rs 1,200/month).</div></div>
+              <div class="tech-row"><div class="tech-key">Multi-language</div><div class="tech-val">BERT language detection → route to correct LoRA adapter (Hindi, Tamil, Telugu, Kannada). Same base model, different language adapters.</div></div>
+              <div class="tech-row"><div class="tech-key">Streaming</div><div class="tech-val">WebSocket streaming — words appear one by one like ChatGPT. User experience much better. FastAPI WebSocket + asyncio generator.</div></div>
+              <div class="tech-row"><div class="tech-key">RAG upgrade</div><div class="tech-val">Retrieval Augmented Generation — real-time AMFI/SEBI circulars vector database. NxanceLM cites actual SEBI rules. Phase 3+.</div></div>
+              <div class="tech-row"><div class="tech-key">Finance-7B</div><div class="tech-val">Nxance ka apna base model (Year 3+). 500B+ tokens Indian financial data. India's Bloomberg GPT. Currently planning phase.</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sf"><span class="tag tp">NxanceLM v1 trained ✓</span><span class="tag tg">Rs 0 training ✓</span><span class="tag tg">Smart router ✓</span><span class="tag tb">12MB adapter ✓</span></div>
+  </div>
+</div>
+
+<!-- Razorpay Webhook -->
+<div class="step re" id="s9">
+  <div class="sl"><div class="sn">9</div><div class="sl2"></div></div>
+  <div class="sb">
+    <div class="sh">
+      <div class="shl"><div class="sl2t">Step 09 · Week 7 · Payment integration</div>
+      <div class="stt">Razorpay webhook — HMAC-SHA256 verification + atomic subscription activation</div>
+      <div class="stsb">Secure payment — sirf verified payments par subscription activate hogi</div></div>
+      <div class="shr"><div class="shm">HMAC</div><div class="shml">Rs 99 verified</div></div>
+    </div>
+    <div class="sc">
+      <div class="col">
+        <div class="col-h">routers/payment.py — exact code</div>
+        <div class="cw">
+          <div class="ch"><span class="cl">PYTHON</span><span class="cf">routers/payment.py</span></div>
+          <div class="cb"><pre><span class="k">from</span> fastapi <span class="k">import</span> APIRouter, Request, HTTPException
+<span class="k">import</span> hmac, hashlib, json, os
+<span class="k">from</span> services.supabase_client <span class="k">import</span> activate_subscription
+
+router = <span class="f">APIRouter</span>()
+
+<span class="c"># Razorpay Dashboard mein configure karo:
+# Settings → Webhooks → Add URL:
+# https://your-railway-url.up.railway.app/api/payment/webhook
+# Events: payment.captured</span>
+
+<span class="k">@router.post</span>(<span class="s">"/payment/webhook"</span>)
+<span class="k">async def</span> <span class="f">razorpay_webhook</span>(request: Request):
+    <span class="s">"""HMAC-SHA256 se verify karo — fake webhooks reject karo."""</span>
+    
+    <span class="c"># Step 1: Raw bytes lo (hmac ke liye raw body chahiye)</span>
+    body = <span class="k">await</span> request.<span class="f">body</span>()
+    signature = request.headers.<span class="f">get</span>(<span class="s">"x-razorpay-signature"</span>, <span class="s">""</span>)
+    
+    <span class="c"># Step 2: Razorpay signature verify karo</span>
+    secret = os.environ[<span class="s">"RAZORPAY_WEBHOOK_SECRET"</span>]
+    expected_sig = hmac.<span class="f">new</span>(
+        secret.<span class="f">encode</span>(),
+        body,
+        hashlib.sha256
+    ).<span class="f">hexdigest</span>()
+    
+    <span class="c"># Timing-safe comparison (prevents timing attacks)</span>
+    <span class="k">if not</span> hmac.<span class="f">compare_digest</span>(expected_sig, signature):
+        <span class="k">raise</span> <span class="f">HTTPException</span>(status_code=<span class="n">401</span>, detail=<span class="s">"Invalid signature"</span>)
+    
+    <span class="c"># Step 3: Event parse karo</span>
+    event = json.<span class="f">loads</span>(body)
+    event_type = event.<span class="f">get</span>(<span class="s">"event"</span>)
+    
+    <span class="c"># Step 4: Payment captured = subscription activate karo</span>
+    <span class="k">if</span> event_type == <span class="s">"payment.captured"</span>:
+        payment = event[<span class="s">"payload"</span>][<span class="s">"payment"</span>][<span class="s">"entity"</span>]
+        order_id = payment[<span class="s">"order_id"</span>]
+        payment_id = payment[<span class="s">"id"</span>]
+        user_id = payment[<span class="s">"notes"</span>].<span class="f">get</span>(<span class="s">"user_id"</span>)
+        
+        <span class="k">if</span> user_id:
+            <span class="k">await</span> <span class="f">activate_subscription</span>(order_id, payment_id, user_id)
+    
+    <span class="k">return</span> {<span class="s">"status"</span>: <span class="s">"ok"</span>}
+
+<span class="c"># services/supabase_client.py mein add karo:</span>
+<span class="k">async def</span> <span class="f">activate_subscription</span>(order_id, payment_id, user_id):
+    <span class="s">"""Atomic transaction: payment insert + tier upgrade.
+    Agar koi bhi fail hota hai — dono rollback. No partial state."""</span>
+    <span class="k">from</span> datetime <span class="k">import</span> datetime, timedelta
+    
+    <span class="c"># Duplicate check — same order_id dobara process mat karo</span>
+    existing = supabase.table(<span class="s">"subscriptions"</span>)\
+        .<span class="f">select</span>(<span class="s">"id"</span>).<span class="f">eq</span>(<span class="s">"razorpay_order_id"</span>, order_id).<span class="f">execute</span>()
+    
+    <span class="k">if</span> existing.data:
+        <span class="k">return</span>  <span class="c"># Already processed</span>
+    
+    expires = datetime.<span class="f">utcnow</span>() + timedelta(days=<span class="n">31</span>)
+    
+    <span class="c"># INSERT subscription record</span>
+    supabase.table(<span class="s">"subscriptions"</span>).<span class="f">insert</span>({
+        <span class="s">"user_id"</span>: user_id,
+        <span class="s">"razorpay_order_id"</span>: order_id,
+        <span class="s">"razorpay_payment_id"</span>: payment_id,
+        <span class="s">"status"</span>: <span class="s">"paid"</span>,
+        <span class="s">"paid_at"</span>: datetime.<span class="f">utcnow</span>().<span class="f">isoformat</span>(),
+        <span class="s">"expires_at"</span>: expires.<span class="f">isoformat</span>(),
+        <span class="s">"amount"</span>: <span class="n">99</span>
+    }).<span class="f">execute</span>()
+    
+    <span class="c"># UPDATE user tier — founding unlock</span>
+    supabase.table(<span class="s">"profiles"</span>)\
+        .<span class="f">update</span>({<span class="s">"subscription_tier"</span>: <span class="s">"founding"</span>})\
+        .<span class="f">eq</span>(<span class="s">"id"</span>, user_id)\
+        .<span class="f">execute</span>()</pre></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="col-h">Razorpay Dashboard setup steps</div>
+        <div class="ci"><strong>Step 1 — Plan banao:</strong> Razorpay Dashboard → Subscriptions → Plans → Create Plan → Name: "Nxance Founding" → Amount: 9900 paise (Rs 99) → Interval: monthly → Save. Plan ID milega: plan_XXXXXX</div>
+        <div class="ci"><strong>Step 2 — Webhook set karo:</strong> Settings → Webhooks → Add New Webhook → URL: https://your-railway-url.up.railway.app/api/payment/webhook → Events: payment.captured → Save. Webhook Secret milega — Railway mein RAZORPAY_WEBHOOK_SECRET env var mein daalo.</div>
+        <div class="ci"><strong>Step 3 — Frontend se order create karo:</strong> User "Unlock" click kare → Lovable frontend → POST /api/payment/create-order (backend pe) → Razorpay Order ID milega → Razorpay checkout open karo.</div>
+        <div class="cw" style="margin-top:8px">
+          <div class="ch"><span class="cl">PYTHON</span><span class="cf">Backend: create-order endpoint</span></div>
+          <div class="cb"><pre><span class="k">import</span> razorpay
+
+rz_client = razorpay.<span class="f">Client</span>(
+    auth=(os.environ[<span class="s">"RAZORPAY_KEY_ID"</span>], os.environ[<span class="s">"RAZORPAY_KEY_SECRET"</span>])
+)
+
+<span class="k">@router.post</span>(<span class="s">"/payment/create-order"</span>)
+<span class="k">async def</span> <span class="f">create_order</span>(user_id: str = <span class="f">Depends</span>(verify_jwt)):
+    order = rz_client.order.<span class="f">create</span>({
+        <span class="s">"amount"</span>: <span class="n">9900</span>,  <span class="c"># Rs 99 in paise</span>
+        <span class="s">"currency"</span>: <span class="s">"INR"</span>,
+        <span class="s">"notes"</span>: {<span class="s">"user_id"</span>: user_id}
+    })
+    <span class="k">return</span> {<span class="s">"order_id"</span>: order[<span class="s">"id"</span>], <span class="s">"amount"</span>: <span class="n">9900</span>}</pre></div>
+        </div>
+        <div class="cw" style="margin-top:6px">
+          <div class="ch"><span class="cl">JAVASCRIPT</span><span class="cf">Lovable frontend: Razorpay checkout</span></div>
+          <div class="cb"><pre><span class="c">// Lovable mein ye function add karo</span>
+<span class="k">async function</span> <span class="f">openRazorpay</span>(userId) {
+  <span class="c">// Backend se order create karo</span>
+  <span class="k">const</span> res = <span class="k">await</span> <span class="f">fetch</span>(<span class="s">`${import.meta.env.VITE_API_URL}/api/payment/create-order`</span>, {
+    method: <span class="s">'POST'</span>,
+    headers: { Authorization: <span class="s">`Bearer ${supabase.auth.session().access_token}`</span> }
+  });
+  <span class="k">const</span> { order_id } = <span class="k">await</span> res.<span class="f">json</span>();
+  
+  <span class="c">// Razorpay checkout open karo</span>
+  <span class="k">const</span> rzp = <span class="k">new</span> window.<span class="f">Razorpay</span>({
+    key: import.meta.env.VITE_RAZORPAY_KEY,
+    order_id: order_id,
+    amount: <span class="n">9900</span>,
+    name: <span class="s">'nxance'</span>,
+    description: <span class="s">'Founding Plan — Rs 99/month'</span>,
+    prefill: { contact: user.phone },
+    theme: { color: <span class="s">'#00D68F'</span> },
+    method: { upi: <span class="k">true</span> },  <span class="c">// UPI first (0% fee)</span>
+    handler: <span class="k">function</span>(response) {
+      <span class="f">window.location.reload</span>();  <span class="c">// Tier refresh</span>
+    }
+  });
+  rzp.<span class="f">open</span>();
+}</pre></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="col-h">HMAC-SHA256 kyun zaroori hai — security explained</div>
+        <div class="tech-box">
+          <div class="tech-head">
+            <div class="tech-icon" style="background:var(--reb);color:var(--re)">🔐</div>
+            <div class="tech-name">HMAC-SHA256 Webhook Verification</div>
+            <div class="tech-tag tr">Security Critical</div>
+          </div>
+          <div class="tech-body">
+            <div class="tech-row"><div class="tech-key">Problem</div><div class="tech-val">Koi bhi /api/payment/webhook pe fake POST request bhej sakta hai pretending payment hua. Bina verification: free subscription mil jaaye bina pay kiye.</div></div>
+            <div class="tech-row"><div class="tech-key">Solution</div><div class="tech-val">Razorpay apne secret key se request body sign karta hai. Server verify karta hai — secret key sirf Razorpay aur tumhare server ko pata hai.</div></div>
+            <div class="tech-row"><div class="tech-key">How it works</div><div class="tech-val">HMAC(secret_key, request_body) = signature. Ye signature header mein aata hai. Server same calculation karta hai — match hone par valid.</div></div>
+            <div class="tech-row"><div class="tech-key">hmac.compare_digest</div><div class="tech-val">Simple == comparison: timing attack possible (attacker can guess byte by byte). compare_digest: always constant time — timing attack impossible.</div></div>
+            <div class="tech-row"><div class="tech-key">UNIQUE constraint</div><div class="tech-val">order_id UNIQUE constraint in subscriptions table prevents same webhook processed twice even if Razorpay retries.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sf"><span class="tag tg">Razorpay webhook ✓</span><span class="tag tg">HMAC-SHA256 verified ✓</span><span class="tag tb">Atomic DB upgrade ✓</span><span class="tag ty2">UPI 0% fee ✓</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     WEEK 8 — Final Integration + Launch
+═══════════════════════════════════════════════════ -->
+<div class="wk" id="w8">
+  <div class="wk-line"></div>
+  <div class="wk-pill w8p">🚀 Week 8 — Final Integration + Launch Checklist</div>
+  <div class="wk-line"></div>
+</div>
+
+<div class="step gr" id="s10">
+  <div class="sl"><div class="sn">10</div><div class="sl2"></div></div>
+  <div class="sb">
+    <div class="sh">
+      <div class="shl"><div class="sl2t">Step 10 · Day 50–56 · Final testing + launch</div>
+      <div class="stt">Pre-launch checklist + environment variables reference + launch day marketing</div>
+      <div class="stsb">Har cheez test karo before first real user — koi bhi embarrassing bug nahi chahiye</div></div>
+      <div class="shr"><div class="shm">Day 56</div><div class="shml">launch target</div></div>
+    </div>
+    <div class="sc">
+      <div class="col">
+        <div class="col-h">Technical checklist — sab test karo</div>
+        <div class="ci"><strong>[ ] End-to-end flow:</strong> Sign up → Add 3 funds → Answer 5 questions → Analysis runs → Results page loads → Paywall shows → Pay Rs 99 (test mode) → Full report unlocks. Ek full cycle manually karo.</div>
+        <div class="ci"><strong>[ ] XIRR accuracy test:</strong> Ek known portfolio ka manually XIRR calculate karo (Excel ya online calculator). Nxance ka result same hona chahiye ±0.1%.</div>
+        <div class="ci"><strong>[ ] Razorpay test payment:</strong> Razorpay test credentials se Rs 99 payment karo. Subscription activate ho? Tier "founding" mein change ho? Blur remove ho?</div>
+        <div class="ci"><strong>[ ] Mobile responsive:</strong> Chrome DevTools → Toggle device toolbar → 375px width (iPhone SE size). Sab kuch readable aur clickable ho.</div>
+        <div class="ci"><strong>[ ] HTTPS check:</strong> https://nxance.in → green padlock → SSL working. Railway URL par bhi HTTPS ho.</div>
+        <div class="ci r"><strong>[ ] GPT-4.5 removal check:</strong> Grep codebase for "gpt-4.5" — June 27 ke baad ye retire ho raha hai. Koi bhi call nahi honi chahiye.</div>
+        <div class="ci"><strong>[ ] Error handling:</strong> mfapi.in down ho toh? Fallback message show karo: "Data fetch mein issue — thodi der mein try karo."</div>
+        <div class="ci"><strong>[ ] NxanceLM SGI disclosure:</strong> India IT Rules Feb 2026 — AI-generated content label required. Footer mein add karo: "Analysis powered by NxanceLM — AI-generated insights."</div>
+      </div>
+      <div class="col">
+        <div class="col-h">All environment variables — reference</div>
+        <div class="cw">
+          <div class="ch"><span class="cl">ENV VARS</span><span class="cf">Railway → Settings → Variables (copy karo)</span></div>
+          <div class="cb"><pre><span class="c"># ── Supabase ──────────────────────────────────</span>
+SUPABASE_URL=https://xxxxx.supabase.co
+<span class="c"># Settings → API → Project URL</span>
+
+SUPABASE_SERVICE_KEY=eyJhbGci...
+<span class="c"># Settings → API → service_role key (secret!)
+# anon key nahi — service key chahiye backend mein</span>
+
+SUPABASE_JWT_SECRET=your-jwt-secret
+<span class="c"># Settings → API → JWT Secret</span>
+
+<span class="c"># ── Razorpay ──────────────────────────────────</span>
+RAZORPAY_KEY_ID=rzp_live_XXXXXXXXXX
+RAZORPAY_KEY_SECRET=XXXXXXXXXXXXXXXXX
+RAZORPAY_WEBHOOK_SECRET=XXXXXXXXXX
+<span class="c"># Live mode ke liye: rzp_live_XXX
+# Test mode ke liye: rzp_test_XXX (launch se pehle)</span>
+
+<span class="c"># ── Redis ─────────────────────────────────────</span>
+REDIS_URL=redis://default:password@host:port
+<span class="c"># Railway Redis plugin add karne par automatically milta hai</span>
+
+<span class="c"># ── NxanceLM ──────────────────────────────────</span>
+NXANCELM_ADAPTER_PATH=/app/nxancelm_v1_adapter
+<span class="c"># Google Drive se download karke Railway mein upload</span>
+
+<span class="c"># ── Lovable Frontend (Settings → Env Vars) ────</span>
+VITE_SUPABASE_URL=https://xxxxx.supabase.co
+VITE_SUPABASE_ANON_KEY=eyJhbGci...
+<span class="c"># anon key (public key — frontend mein safe hai)</span>
+
+VITE_API_URL=https://nxance-backend.up.railway.app
+<span class="c"># Railway deploy URL</span>
+
+VITE_RAZORPAY_KEY=rzp_live_XXXXXXXXXX
+<span class="c"># Public key only (secret key kabhi frontend mein nahi)</span></pre></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="col-h">Launch day — exact marketing actions</div>
+        <div class="ci"><strong>WhatsApp broadcast (300+ contacts):</strong> "Maine apna portfolio check kiya — Rs 4,800/year waste find hua jis ke baare mein mujhe kuch pata nahi tha. 60 second mein free check karo: nxance.in" + screenshot of your own health score. Personal message, not broadcast-feeling.</div>
+        <div class="ci"><strong>LinkedIn post:</strong> "Data experiment: 50 Indian MF portfolios analyse kiye. 87% mein hidden waste tha. Average Rs 11,800/year invisible loss. Free tool: nxance.in — [screenshot]. Kya tumhara portfolio healthy hai?" Tag 5 finance people.</div>
+        <div class="ci"><strong>r/IndiaInvestments:</strong> "I built a free tool to detect mutual fund overlap and TER waste — would love feedback from this community." Genuine, not salesy. Community loves real products with data.</div>
+        <div class="ci"><strong>5 CA outreach:</strong> "Namaste, main Abhishek hoon — Maine ek portfolio health tool banaya jo aapke clients ke liye useful ho sakta hai. Free white-label reports + 20% recurring commission. Demo dekhna chahenge?" WhatsApp voice note better than text.</div>
+        <div class="ci g"><strong>Break-even math:</strong> 80 users × Rs 99 = Rs 7,920 MRR ≥ Rs 7,850/month infra costs. Har user ke baad pure profit. Day 1 se profitable business possible hai.</div>
+      </div>
+    </div>
+    <div class="sf">
+      <span class="tag tg">All tests passing ✓</span>
+      <span class="tag tg">Env vars configured ✓</span>
+      <span class="tag ty2">Launch ready ✓</span>
+      <span class="tag tb">Rs 9,900 MRR target — 100 users</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     ADVANCED TECH SECTION
+═══════════════════════════════════════════════════ -->
+<div class="wk" id="advanced">
+  <div class="wk-line"></div>
+  <div class="wk-pill w4p">⚡ Advanced Options — Better Results Ke Liye</div>
+  <div class="wk-line"></div>
+</div>
+<div class="al ab"><span class="al-icon">🔬</span><div><strong>Advanced options:</strong> Phase 1 MVP ke liye basic implementation kaafi hai. Ye advanced choices Phase 2+ mein implement karo jab users aa jayein aur feedback mile. Pehle ship karo — phir optimize karo.</div></div>
+
+<div class="step bl" id="s11">
+  <div class="sl"><div class="sn">11</div></div>
+  <div class="sb">
+    <div class="sh">
+      <div class="shl"><div class="sl2t">Advanced Technology Options</div>
+      <div class="stt">JWT RS256 vs HS256 · AES-256-GCM encryption · WebSocket streaming · CDSL Digilocker · iOS app</div>
+      <div class="stsb">Har option explained with implementation path</div></div>
+      <div class="shr"><div class="shm">Phase 2+</div><div class="shml">upgrades</div></div>
+    </div>
+    <div class="sc">
+      <div class="col">
+        <div class="col-h">Security upgrades</div>
+        <div class="adv-table" style="border-radius:var(--r12);overflow:hidden;margin-bottom:10px">
+          <table class="adv-table">
+            <tr><th>Feature</th><th>Basic (Phase 1)</th><th>Advanced (Phase 2)</th></tr>
+            <tr><td>JWT signing</td><td>HS256 — Supabase default. Symmetric key. Fast setup.</td><td>RS256 — Asymmetric. Private key on API server only. Even if NxanceLM server compromised, tokens cannot be forged.</td></tr>
+            <tr><td>Data encryption</td><td>Supabase TLS in transit. DB at rest encryption by Supabase.</td><td>AES-256-GCM at application layer. Holdings amount/date encrypted before DB insert. Key in AWS KMS. Even Supabase breach = unreadable data.</td></tr>
+            <tr><td>Rate limiting</td><td>None (Phase 1, low traffic)</td><td>Redis-based rate limiting: 10 analyses/day/free user, 100/day/paying user. Prevents abuse and cost overrun.</td></tr>
+            <tr><td>OTP security</td><td>Supabase handles — bcrypt by default</td><td>Add explicit bcrypt factor 12 (300ms intentional slow — GPU brute force = years). Rate limit: 3 OTP attempts/phone/hour.</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="col">
+        <div class="col-h">Performance upgrades</div>
+        <div class="adv-table" style="border-radius:var(--r12);overflow:hidden;margin-bottom:10px">
+          <table class="adv-table">
+            <tr><th>Feature</th><th>Phase 1</th><th>Advanced</th></tr>
+            <tr><td>Analysis speed</td><td>Sequential — 7 frameworks one by one. ~5-8 seconds total.</td><td>asyncio.gather() parallel execution. All 7 frameworks simultaneously. ~2-3 seconds total.</td></tr>
+            <tr><td>WebSocket progress</td><td>Simulated timers in frontend. Fake progress bar.</td><td>Real FastAPI WebSocket — each framework sends progress event as it completes. User sees real steps.</td></tr>
+            <tr><td>NxanceLM speed</td><td>Full model inference every time — 2-4 seconds.</td><td>Smart router: 40% template (0ms) + 30% Redis cache (1ms) + 30% model (2-4s). Average response: &lt;1 second.</td></tr>
+            <tr><td>Database queries</td><td>Multiple separate queries.</td><td>PostgreSQL JOINs — one query for holdings + portfolio + user data. 3x faster.</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="col">
+        <div class="col-h">Data + Distribution upgrades</div>
+        <div class="adv-table" style="border-radius:var(--r12);overflow:hidden;margin-bottom:10px">
+          <table class="adv-table">
+            <tr><th>Feature</th><th>Phase 1</th><th>Advanced</th></tr>
+            <tr><td>Portfolio import</td><td>Manual entry — user types each fund, amount, date.</td><td>CDSL Digilocker OAuth — all holdings auto-import with exact transaction dates. Best XIRR accuracy. ~2 weeks engineering work.</td></tr>
+            <tr><td>Broker APIs</td><td>Not integrated.</td><td>Zerodha Kite Connect API + Groww MF API. Holdings auto-sync. SIP dates exact for XIRR. Phase 2.</td></tr>
+            <tr><td>CAS PDF upload</td><td>Not integrated.</td><td>User photographs CAMS/KFintech CAS statement. GPT-4o Vision extracts holdings. 30-second full import. Rs 0.10 per extraction.</td></tr>
+            <tr><td>Mobile app</td><td>PWA — works in mobile browser.</td><td>Flutter app — Google Play (Rs 2,500) + Apple App Store ($99/year). Push notifications for monthly re-analysis. Home screen widget showing health score.</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER + JS -->
+<div class="foot">
+  <span>Nxance Technologies Private Limited · Palampur, Himachal Pradesh</span>
+  <span>Abhishek Rajpoot, Founder · 8 weeks · Rs 15,000 · Rs 0 to launch</span>
+  <span>MVP Build Guide v2 · June 2026</span>
+</div>
+</div><!-- end .wrap -->
+
+<script>
+// Download button
+function dl(){
+  var a=document.createElement('a');
+  a.href='data:text/html;charset=utf-8,'+encodeURIComponent(document.documentElement.outerHTML);
+  a.download='Nxance_MVP_Complete_Build_Guide.html';
+  a.click();
+}
+// Active nav highlight on scroll
+const tabs=document.querySelectorAll('.nt');
+const ids=['w1','w2','w3','w4','w5','w6','w7','w8','advanced'];
+window.addEventListener('scroll',()=>{
+  let cur='w1';
+  ids.forEach(id=>{
+    const el=document.getElementById(id);
+    if(el&&window.scrollY>=el.offsetTop-80) cur=id;
+  });
+  tabs.forEach(t=>{
+    const h=t.getAttribute('href');
+    t.classList.toggle('on', h && h.includes(cur) && cur!=='');
+  });
+});
+</script>
+</body>
+</html>

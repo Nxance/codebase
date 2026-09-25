@@ -48,3 +48,14 @@ next-env.d.ts
 # Local Worker secrets
 .dev.vars
 .dev.vars.*
+
+# workspace/ (Python API, Flutter app, prototypes)
+workspace/**/__pycache__/
+workspace/**/*.pyc
+workspace/**/.venv/
+workspace/**/*.db
+workspace/**/*.apk
+workspace/product/mobile/build/
+workspace/product/mobile/.dart_tool/
+workspace/product/mobile/android/.gradle/
+workspace/product/mobile/android/local.properties

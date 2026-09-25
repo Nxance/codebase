@@ -14,3 +14,13 @@ Reference material pulled from the Nxance Google Drive folders. Refresh with `sc
 | `business/one-pagers/` | One-pagers, grant one-pagers, company information. |
 | `business/finance/` | Financial sheet, MVP grant budget, funding tranches, cap table. **Confidential: keep this repo private.** |
 | `business/media/` | `nxance_walkthrough_v3.mp4` product walkthrough. |
+
+## Local workspace (`../workspace/`)
+
+The earlier local Nxance workspace, with its original layout kept so its links still work:
+
+- `workspace/README.md`, `INDEX.md`, `CLOSEOUT.md`: run instructions, file catalog, phase sign-off.
+- `workspace/product/mbp/`: **existing Python/FastAPI intelligence API** (engines, India data platform, training data and models).
+- `workspace/product/mobile/`: Flutter Android app. `workspace/product/web-portal/`: static web portal. `workspace/product/releases/`: demo videos and notes (APK not committed; too large for GitHub).
+- `workspace/docs/`: numbered product, engine, technical, roadmap, fundraising and UX docs.
+- `workspace/prototypes/`, `workspace/archive/`: older experiments, duplicates and the Codex handoff zip.

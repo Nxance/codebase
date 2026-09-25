@@ -1,0 +1,118 @@
+{
+  "ocr_status": {
+    "tesseract_bin": true,
+    "tesseract_path": "/opt/homebrew/bin/tesseract",
+    "pytesseract": true,
+    "pillow": true,
+    "ready": true,
+    "engine": "nxance_ocr_v4",
+    "cost": "zero",
+    "note": "brew install tesseract; optional: pip install pillow pytesseract",
+    "features": [
+      "multi_psm",
+      "multi_preprocess",
+      "layout_v4",
+      "lexicon_correct",
+      "confidence_pick"
+    ]
+  },
+  "n_images": 10,
+  "avg_layout_plaintext_recall": 0.927,
+  "avg_full_ocr_recall": 0.927,
+  "lexicon_garble_acc": 1.0,
+  "details": [
+    {
+      "i": 0,
+      "n_gt": 5,
+      "layout_on_plaintext_recall": 1.0,
+      "full_ocr_lots": 5,
+      "full_ocr_recall": 1.0,
+      "lexicon_corrections": 5,
+      "ocr_backend": "pytesseract+default+psm4"
+    },
+    {
+      "i": 1,
+      "n_gt": 3,
+      "layout_on_plaintext_recall": 1.0,
+      "full_ocr_lots": 3,
+      "full_ocr_recall": 1.0,
+      "lexicon_corrections": 2,
+      "ocr_backend": "pytesseract+default+psm6"
+    },
+    {
+      "i": 2,
+      "n_gt": 4,
+      "layout_on_plaintext_recall": 1.0,
+      "full_ocr_lots": 4,
+      "full_ocr_recall": 1.0,
+      "lexicon_corrections": 3,
+      "ocr_backend": "pytesseract+default+psm4"
+    },
+    {
+      "i": 3,
+      "n_gt": 3,
+      "layout_on_plaintext_recall": 0.667,
+      "full_ocr_lots": 3,
+      "full_ocr_recall": 0.667,
+      "lexicon_corrections": 3,
+      "ocr_backend": "pytesseract+default+psm4"
+    },
+    {
+      "i": 4,
+      "n_gt": 3,
+      "layout_on_plaintext_recall": 1.0,
+      "full_ocr_lots": 3,
+      "full_ocr_recall": 1.0,
+      "lexicon_corrections": 3,
+      "ocr_backend": "pytesseract+default+psm4"
+    },
+    {
+      "i": 5,
+      "n_gt": 3,
+      "layout_on_plaintext_recall": 1.0,
+      "full_ocr_lots": 3,
+      "full_ocr_recall": 1.0,
+      "lexicon_corrections": 3,
+      "ocr_backend": "pytesseract+default+psm6"
+    },
+    {
+      "i": 6,
+      "n_gt": 5,
+      "layout_on_plaintext_recall": 0.8,
+      "full_ocr_lots": 5,
+      "full_ocr_recall": 0.8,
+      "lexicon_corrections": 4,
+      "ocr_backend": "pytesseract+default+psm4"
+    },
+    {
+      "i": 7,
+      "n_gt": 3,
+      "layout_on_plaintext_recall": 1.0,
+      "full_ocr_lots": 3,
+      "full_ocr_recall": 1.0,
+      "lexicon_corrections": 3,
+      "ocr_backend": "pytesseract+default+psm4"
+    },
+    {
+      "i": 8,
+      "n_gt": 3,
+      "layout_on_plaintext_recall": 1.0,
+      "full_ocr_lots": 3,
+      "full_ocr_recall": 1.0,
+      "lexicon_corrections": 3,
+      "ocr_backend": "pytesseract+default+psm6"
+    },
+    {
+      "i": 9,
+      "n_gt": 5,
+      "layout_on_plaintext_recall": 0.8,
+      "full_ocr_lots": 5,
+      "full_ocr_recall": 0.8,
+      "lexicon_corrections": 4,
+      "ocr_backend": "pytesseract+default+psm4"
+    }
+  ],
+  "cost": "zero",
+  "stack": "Pillow \u2192 multi-PSM Tesseract \u2192 layout v4 \u2192 lexicon \u2192 india_portfolio_v1",
+  "engine": "nxance_ocr_v4"
+}

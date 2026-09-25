@@ -1,0 +1,8 @@
+file '/Users/bhaskar_pandey/Documents/Nxance/product/releases/demo_video/howto_parts/01_login.mp4'
+file '/Users/bhaskar_pandey/Documents/Nxance/product/releases/demo_video/howto_parts/02_home.mp4'
+file '/Users/bhaskar_pandey/Documents/Nxance/product/releases/demo_video/howto_parts/03_sample_health.mp4'
+file '/Users/bhaskar_pandey/Documents/Nxance/product/releases/demo_video/howto_parts/04_manual_health.mp4'
+file '/Users/bhaskar_pandey/Documents/Nxance/product/releases/demo_video/howto_parts/05_upload.mp4'
+file '/Users/bhaskar_pandey/Documents/Nxance/product/releases/demo_video/howto_parts/06_pay.mp4'
+file '/Users/bhaskar_pandey/Documents/Nxance/product/releases/demo_video/howto_parts/07_settings.mp4'
+file '/Users/bhaskar_pandey/Documents/Nxance/product/releases/demo_video/howto_parts/08_recap.mp4'

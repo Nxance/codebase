@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Nxance — Investor & Accelerator Target List</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+:root{
+  --bg:#02030A;--c2:#0A0D1A;--bo:#151828;--b2:#191D35;
+  --tx:#EAF0FF;--t2:#586298;--t3:#222640;
+  --g:#00D4B1;--gt:rgba(0,212,177,.1);--gr:rgba(0,212,177,.22);
+  --gold:#FFB830;--goldt:rgba(255,184,48,.09);
+  --red:#FF3F60;--redt:rgba(255,63,96,.09);
+  --blue:#4A8FFF;--bluet:rgba(74,143,255,.09);
+  --purple:#9B6DFF;--purplet:rgba(155,109,255,.09);
+  --grn:#1EC896;--grnt:rgba(30,200,150,.09);
+  --cyan:#00C4FF;--cyant:rgba(0,196,255,.09);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);line-height:1.7;font-size:13.5px}
+.cover{min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 28px 40px;text-align:center;
+  background:radial-gradient(ellipse 80% 55% at 50% -8%,rgba(0,212,177,.1),transparent 58%),radial-gradient(ellipse 35% 25% at 92% 88%,rgba(74,143,255,.06),transparent 50%)}
+.ctag{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--g);background:var(--gt);border:1px solid var(--gr);padding:5px 20px;border-radius:20px;display:inline-block;margin-bottom:22px}
+.ch{font-family:'Space Grotesk',sans-serif;font-size:clamp(26px,4.5vw,46px);font-weight:700;line-height:1.1;letter-spacing:-.02em;margin-bottom:12px}
+.ch em{font-style:normal;color:var(--g)}
+.csub{font-size:14px;color:var(--t2);max-width:700px;margin:0 auto 24px;line-height:1.8}
+.stat-row{display:flex;gap:28px;justify-content:center;flex-wrap:wrap}
+.stat{text-align:center}
+.stat-v{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:700;color:var(--g)}
+.stat-l{font-size:10px;color:var(--t2);text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px 70px}
+.sec{margin-bottom:50px}
+.slabel{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--g);background:var(--gt);border:1px solid var(--gr);padding:3px 13px;border-radius:20px;display:inline-block;margin-bottom:12px}
+.stitle{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;letter-spacing:-.01em;margin-bottom:4px}
+.stitle em{font-style:normal;color:var(--g)}
+.ssub{font-size:12.5px;color:var(--t2);margin-bottom:16px;max-width:760px;line-height:1.7}
+table{width:100%;border-collapse:collapse;margin:8px 0 4px;font-size:12px}
+th{background:rgba(255,255,255,.04);padding:7px 10px;text-align:left;font-family:'JetBrains Mono',monospace;font-size:8.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--t3);border-bottom:1px solid var(--b2)}
+td{padding:7px 10px;border-bottom:1px solid rgba(255,255,255,.03);color:var(--t2);vertical-align:top}
+tr:last-child td{border:none}
+tr:hover td{background:rgba(255,255,255,.012)}
+td:first-child{color:var(--tx);font-weight:600;white-space:nowrap}
+.idx{color:var(--t3)!important;font-family:'JetBrains Mono',monospace;font-size:10px;width:24px}
+.note{background:var(--gt);border:1px solid var(--gr);border-radius:8px;padding:10px 14px;font-size:11.5px;color:var(--g);margin:14px 0;line-height:1.6}
+.note.b{background:var(--bluet);border-color:rgba(74,143,255,.25);color:var(--blue)}
+.note.gold{background:var(--goldt);border-color:rgba(255,184,48,.25);color:var(--gold)}
+.note.p{background:var(--purplet);border-color:rgba(155,109,255,.25);color:var(--purple)}
+.footer{text-align:center;padding:40px 0 20px;border-top:1px solid var(--bo);margin-top:10px}
+.fl{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;background:linear-gradient(135deg,var(--g),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px}
+.ft{font-size:10.5px;color:var(--t3)}
+@media print{body{background:#fff}}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="ctag">Ohshn Intelligence — Nxance Fundraising</div>
+  <div class="ch">Investor &amp; Accelerator <em>Target List</em></div>
+  <div class="csub">100+ pre-seed/seed VCs, angel networks, accelerators, and government schemes relevant to Nxance — organised by category with focus area, stage, and how to approach each.</div>
+  <div class="stat-row">
+    <div class="stat"><div class="stat-v">108</div><div class="stat-l">Total Targets</div></div>
+    <div class="stat"><div class="stat-v">6</div><div class="stat-l">Categories</div></div>
+    <div class="stat"><div class="stat-v">3</div><div class="stat-l">HP / Local Ties</div></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- A: SEED/PRE-SEED FOCUSED VC FUNDS -->
+<div class="sec">
+  <div class="slabel">Category A &mdash; 36 Funds</div>
+  <div class="stitle">Pre-Seed / Seed-Stage VC Funds</div>
+  <div class="ssub">India-focused funds writing first cheques at pre-seed/seed, several with explicit fintech or AI focus. Highest-probability targets for Nxance's stage.</div>
+  <table>
+    <thead><tr><th class="idx">#</th><th>Fund Name</th><th>Stage Focus</th><th>Sector Tilt</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td class="idx">1</td><td>Blume Ventures</td><td>Seed-Series A</td><td>SaaS, fintech, consumer tech</td><td>One of India's most active early-stage funds; strong fintech track record</td></tr>
+      <tr><td class="idx">2</td><td>100X.VC</td><td>Pre-Seed</td><td>Sector-agnostic</td><td>India's most active pre-seed investor; invests via iSAFE notes</td></tr>
+      <tr><td class="idx">3</td><td>3one4 Capital</td><td>Pre-Seed-Series A</td><td>SaaS, fintech, consumer, AI, deeptech</td><td>India-first lens; runs annual 3one4 Summit</td></tr>
+      <tr><td class="idx">4</td><td>India Quotient</td><td>Pre-Seed-Seed</td><td>Consumer, fintech, vernacular India</td><td>Strong India-first, vernacular-market thesis fits Hinglish positioning</td></tr>
+      <tr><td class="idx">5</td><td>Better Capital</td><td>Pre-Seed-Seed</td><td>Sector-agnostic</td><td>"Shadow" investor model; fast decisions, founder-friendly</td></tr>
+      <tr><td class="idx">6</td><td>Titan Capital</td><td>Pre-Seed-Seed</td><td>Sector-agnostic</td><td>Founder-led; strong mentorship alongside funding</td></tr>
+      <tr><td class="idx">7</td><td>First Cheque</td><td>Pre-Seed</td><td>Sector-agnostic</td><td>Often among the first institutional investors; quick decisions</td></tr>
+      <tr><td class="idx">8</td><td>Stellaris Venture Partners</td><td>Seed-Series A</td><td>Consumer tech, SaaS, fintech</td><td>Strong India early-stage reputation</td></tr>
+      <tr><td class="idx">9</td><td>Chiratae Ventures</td><td>Seed-Series B</td><td>Consumer, SaaS, fintech</td><td>Long-standing India fund, large portfolio</td></tr>
+      <tr><td class="idx">10</td><td>Speciale Invest</td><td>Pre-Seed-Seed</td><td>Deep tech (space, robotics, semiconductors)</td><td>Rs.600 Cr Fund III; relevant given Nxance's quantum/AI ambitions</td></tr>
+      <tr><td class="idx">11</td><td>Exfinity Venture Partners</td><td>Seed-Series A</td><td>AI, machine learning</td><td>Bengaluru-based; direct AI focus fits NxanceLM thesis</td></tr>
+      <tr><td class="idx">12</td><td>Gemba Capital</td><td>Seed-Series A</td><td>Fintech, consumer tech, B2B</td><td>Bengaluru family office; explicit fintech focus</td></tr>
+      <tr><td class="idx">13</td><td>AdvantEdge Founders</td><td>Pre-Seed-Seed</td><td>Sector-agnostic</td><td>VC + incubator hybrid; hands-on early support</td></tr>
+      <tr><td class="idx">14</td><td>Incubate Fund India</td><td>Pre-Seed-Seed</td><td>Sector-agnostic</td><td>Japanese VC backing; global network bridge</td></tr>
+      <tr><td class="idx">15</td><td>Endiya Partners</td><td>Seed-Series A</td><td>Deep tech, SaaS, consumer</td><td>Hyderabad-based; technical-founder friendly</td></tr>
+      <tr><td class="idx">16</td><td>WaterBridge Ventures</td><td>Seed-Series A</td><td>Consumer internet, fintech</td><td>Consumer-tech focused early fund</td></tr>
+      <tr><td class="idx">17</td><td>Rainmatter Capital (Zerodha)</td><td>Seed onwards</td><td>Fintech, capital markets specific</td><td>Founded by Zerodha; deep fintech/capital markets thesis, patient capital</td></tr>
+      <tr><td class="idx">18</td><td>Avaana Capital</td><td>Seed-Series A</td><td>Climate, fintech for inclusion</td><td>Impact-oriented; fintech-for-good angle</td></tr>
+      <tr><td class="idx">19</td><td>Unitus Ventures</td><td>Seed-Series A</td><td>Fintech, healthtech, inclusion</td><td>Impact-first fintech for underserved segments</td></tr>
+      <tr><td class="idx">20</td><td>Sixth Sense Ventures</td><td>Seed-Series B</td><td>Consumer brands, fintech</td><td>Consumer-tech and brand-building expertise</td></tr>
+      <tr><td class="idx">21</td><td>Omnivore</td><td>Seed-Series A</td><td>Agritech, rural fintech, climate</td><td>$150M Fund III; rural fintech angle if Nxance expands beyond urban</td></tr>
+      <tr><td class="idx">22</td><td>Beenext Capital</td><td>Seed</td><td>Early-stage tech, India/SEA/Japan</td><td>Singapore-HQ but active India deployment</td></tr>
+      <tr><td class="idx">23</td><td>Together Fund</td><td>Pre-Seed-Seed</td><td>AI, SaaS</td><td>AI-focused early fund</td></tr>
+      <tr><td class="idx">24</td><td>Pravega Ventures</td><td>Pre-Seed-Seed</td><td>Sector-agnostic</td><td>Bengaluru-based early-stage fund</td></tr>
+      <tr><td class="idx">25</td><td>We Founder Circle</td><td>Pre-Seed-Seed</td><td>Sector-agnostic</td><td>9,000+ investor base; large syndicate reach</td></tr>
+      <tr><td class="idx">26</td><td>ah! Ventures</td><td>Seed</td><td>Sector-agnostic</td><td>62,000+ entrepreneur network; venture consultancy model</td></tr>
+      <tr><td class="idx">27</td><td>Z47 (formerly Matrix Partners India)</td><td>Seed-Series B</td><td>Fintech, consumer, SaaS</td><td>Major India early-stage brand, strong fintech portfolio</td></tr>
+      <tr><td class="idx">28</td><td>Lightspeed India</td><td>Seed-Series B</td><td>Consumer, fintech, SaaS, AI</td><td>Global brand with active India seed deployment</td></tr>
+      <tr><td class="idx">29</td><td>Elevation Capital</td><td>Seed-Series B</td><td>Consumer internet, fintech</td><td>Long India track record (formerly SAIF Partners)</td></tr>
+      <tr><td class="idx">30</td><td>Kalaari Capital</td><td>Seed-Series B</td><td>Consumer, fintech, enterprise</td><td>Bengaluru HQ; founded by Vani Kola</td></tr>
+      <tr><td class="idx">31</td><td>Nexus Venture Partners</td><td>Seed-Series B</td><td>Enterprise software, AI, fintech</td><td>Cross-border India-US thesis; growing AI/deep-tech emphasis</td></tr>
+      <tr><td class="idx">32</td><td>Vertex Ventures SEA &amp; India</td><td>Seed-Series A</td><td>Fintech, consumer, SaaS</td><td>Temasek-backed; good for India + regional ambition</td></tr>
+      <tr><td class="idx">33</td><td>Quona Capital</td><td>Seed-Series A</td><td>Fintech for emerging markets</td><td>Direct fintech-for-inclusion thesis fits Nxance's mass-retail angle</td></tr>
+      <tr><td class="idx">34</td><td>Flourish Ventures</td><td>Seed onwards</td><td>Fintech, financial health</td><td>Global fund backing fintechs improving financial health</td></tr>
+      <tr><td class="idx">35</td><td>Fin Capital</td><td>Seed onwards</td><td>B2B fintech software</td><td>Useful if Nxance pursues B2B licensing angle later</td></tr>
+      <tr><td class="idx">36</td><td>Antler India</td><td>Pre-Team/Pre-Seed</td><td>Sector-agnostic</td><td>Global pre-seed platform; also runs residency program (see Category C)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- B: LARGER MULTI-STAGE VCs -->
+<div class="sec">
+  <div class="slabel">Category B &mdash; 12 Funds</div>
+  <div class="stitle">Larger Multi-Stage Funds (Seed Pockets)</div>
+  <div class="ssub">Bigger funds that maintain dedicated seed/discovery programs — harder to access directly, but worth targeting via referral or their accelerator arms.</div>
+  <table>
+    <thead><tr><th class="idx">#</th><th>Fund Name</th><th>Stage Focus</th><th>Sector Tilt</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td class="idx">37</td><td>Peak XV Partners</td><td>Seed-Growth</td><td>Fintech, consumer, SaaS, healthcare</td><td>Formerly Sequoia India; runs Surge accelerator (see Cat. C) for seed entry</td></tr>
+      <tr><td class="idx">38</td><td>Accel India</td><td>Seed-Series C</td><td>Fintech, SaaS, consumer, AI</td><td>Runs Accel Atoms accelerator for AI pre-seed (see Cat. C)</td></tr>
+      <tr><td class="idx">39</td><td>Tiger Global</td><td>Seed-Growth</td><td>AI, fintech, consumer, SaaS, healthcare</td><td>Large cheque writer; approach with strong traction signal</td></tr>
+      <tr><td class="idx">40</td><td>Sequoia Capital (Global)</td><td>Seed-Growth</td><td>Fintech, AI, consumer</td><td>Cross-border angle if Nxance pursues global ambitions</td></tr>
+      <tr><td class="idx">41</td><td>Bessemer Venture Partners (India)</td><td>Seed-Growth</td><td>Fintech infra, SaaS</td><td>Global fintech infrastructure specialist</td></tr>
+      <tr><td class="idx">42</td><td>Steadview Capital</td><td>Series A onwards</td><td>Consumer, fintech</td><td>Later-stage target once Nxance graduates pre-seed</td></tr>
+      <tr><td class="idx">43</td><td>Multiples Alternate Asset Mgmt</td><td>Growth</td><td>Fintech, consumer</td><td>Future-stage relationship to seed early</td></tr>
+      <tr><td class="idx">44</td><td>Norwest Venture Partners India</td><td>Series A-Growth</td><td>Fintech, SaaS, consumer</td><td>Good for warm-intro pipeline building now</td></tr>
+      <tr><td class="idx">45</td><td>Prosus Ventures</td><td>Series A-Growth</td><td>Fintech, consumer internet</td><td>Strategic corporate VC, India fintech-heavy portfolio</td></tr>
+      <tr><td class="idx">46</td><td>General Catalyst (India)</td><td>Seed-Growth</td><td>AI, fintech, healthcare</td><td>Increasingly active in India AI-fintech crossover deals</td></tr>
+      <tr><td class="idx">47</td><td>Ribbit Capital</td><td>Seed onwards</td><td>Fintech specialist</td><td>Global fintech-only fund; worth a long-shot approach</td></tr>
+      <tr><td class="idx">48</td><td>QED Investors</td><td>Seed-Growth</td><td>Fintech specialist (global)</td><td>One of the most fintech-focused global funds; India-relevant deals increasing</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- C: ACCELERATORS -->
+<div class="sec">
+  <div class="slabel">Category C &mdash; 22 Programs</div>
+  <div class="stitle">Startup Accelerators &amp; Incubators</div>
+  <div class="ssub">Structured cohort programs offering capital, mentorship, and demo-day investor access. Several are zero-equity; good parallel track alongside direct VC outreach.</div>
+  <table>
+    <thead><tr><th class="idx">#</th><th>Program</th><th>Run By</th><th>Equity / Terms</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td class="idx">49</td><td>Peak XV Surge</td><td>Peak XV Partners</td><td>Negotiated per company</td><td>Up to $3M seed capital, 16-week curriculum; apex India accelerator</td></tr>
+      <tr><td class="idx">50</td><td>Accel Atoms</td><td>Accel India</td><td>Negotiated; co-invest up to $2M via Google AI Futures Fund</td><td>Specifically for AI pre-seed — strong fit for NxanceLM angle</td></tr>
+      <tr><td class="idx">51</td><td>Google for Startups Accelerator: India</td><td>Google</td><td>Equity-free</td><td>Targets AI-first Seed-Series A startups; cloud credits + mentorship</td></tr>
+      <tr><td class="idx">52</td><td>Y Combinator</td><td>YC (Global)</td><td>7% for $125K + $375K uncapped MFN SAFE</td><td>157+ India-HQ companies funded; requires relocation for batch</td></tr>
+      <tr><td class="idx">53</td><td>Techstars Bangalore</td><td>Techstars</td><td>~6% for $220K (varies)</td><td>Strong AI/B2B/SaaS network; global mentor bench</td></tr>
+      <tr><td class="idx">54</td><td>T-Hub</td><td>Telangana Govt + corporates</td><td>Varies by program</td><td>Hyderabad; India's largest innovation hub, sector-agnostic</td></tr>
+      <tr><td class="idx">55</td><td>NSRCEL (IIM Bangalore)</td><td>IIM Bangalore</td><td>Launchpad: free, zero-equity</td><td>Runs dedicated Fintech Program; 585+ ventures supported</td></tr>
+      <tr><td class="idx">56</td><td>IIMA Ventures (CIIE.CO)</td><td>IIM Ahmedabad</td><td>Varies</td><td>Pre-seed investor + accelerator; strong India-first thesis</td></tr>
+      <tr><td class="idx">57</td><td>JioGenNext</td><td>Reliance</td><td>Equity-free / minimal</td><td>170+ startups incubated; direct Reliance ecosystem access</td></tr>
+      <tr><td class="idx">58</td><td>Venture Catalysts</td><td>Independent</td><td>Equity-based</td><td>110+ startups backed; India's most active seed platform claim</td></tr>
+      <tr><td class="idx">59</td><td>Indian Angel Network Incubator</td><td>IAN</td><td>Equity-based</td><td>Access to IAN's full angel network post-program</td></tr>
+      <tr><td class="idx">60</td><td>AWS Generative AI Accelerator</td><td>Amazon</td><td>Equity-free</td><td>Up to $1M in AWS credits + mentorship for AI startups</td></tr>
+      <tr><td class="idx">61</td><td>NVIDIA Inception</td><td>NVIDIA</td><td>Equity-free</td><td>GPU pricing, training credits — relevant for NxanceLM/AI compute needs</td></tr>
+      <tr><td class="idx">62</td><td>SAP.iO Foundry Bangalore</td><td>SAP</td><td>Equity-free</td><td>13-week B2B software program; enterprise customer access</td></tr>
+      <tr><td class="idx">63</td><td>Microsoft for Startups Founders Hub</td><td>Microsoft</td><td>Equity-free</td><td>Azure credits, mentorship — directly useful for AI compute costs</td></tr>
+      <tr><td class="idx">64</td><td>PedalStart</td><td>Independent</td><td>Equity-based</td><td>Community-led accelerator; strong early-traction support</td></tr>
+      <tr><td class="idx">65</td><td>91springboard / India Accelerator</td><td>Independent</td><td>Varies</td><td>Coworking + accelerator hybrid; pan-India presence</td></tr>
+      <tr><td class="idx">66</td><td>GINSERV</td><td>Independent</td><td>Equity-based</td><td>Bengaluru; product-stage founder focus</td></tr>
+      <tr><td class="idx">67</td><td>Axilor Ventures</td><td>Infosys founders</td><td>Equity-based</td><td>Enterprise, fintech, healthcare focus; strong 0-to-1 mentorship</td></tr>
+      <tr><td class="idx">68</td><td>Sequoia Spark</td><td>Peak XV Partners</td><td>$100K grant, no equity</td><td>Women-founder specific — relevant if Nxance has women co-founders/leads</td></tr>
+      <tr><td class="idx">69</td><td>Antler India Residency</td><td>Antler</td><td>Negotiated</td><td>Global pre-seed platform for idea-stage founders, helps find co-founders too</td></tr>
+      <tr><td class="idx">70</td><td>NASSCOM Deeptech Foundation</td><td>NASSCOM</td><td>Varies</td><td>AI/deeptech-specific incubation; co-runs programs with NSRCEL</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- D: ANGEL NETWORKS -->
+<div class="sec">
+  <div class="slabel">Category D &mdash; 16 Networks</div>
+  <div class="stitle">Angel Networks &amp; Investment Platforms</div>
+  <div class="ssub">Structured groups of individual angel investors. Best approached via online application + warm intro from an existing portfolio founder.</div>
+  <table>
+    <thead><tr><th class="idx">#</th><th>Network</th><th>HQ</th><th>Sector Tilt</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td class="idx">71</td><td>Indian Angel Network (IAN)</td><td>Delhi</td><td>Sector-agnostic</td><td>284+ portfolio companies, 4 unicorns, SEBI-registered; largest early-stage platform claim</td></tr>
+      <tr><td class="idx">72</td><td>Mumbai Angels</td><td>Mumbai</td><td>Tech, consumer, fintech</td><td>252+ portfolio, 19 years active, 750+ investors</td></tr>
+      <tr><td class="idx">73</td><td>LetsVenture</td><td>Bengaluru</td><td>Sector-agnostic</td><td>Largest angel investing platform alongside AngelList India; SAMRIDH govt partnership</td></tr>
+      <tr><td class="idx">74</td><td>AngelList India</td><td>Bengaluru</td><td>Sector-agnostic</td><td>Major platform for syndicate-based angel investing</td></tr>
+      <tr><td class="idx">75</td><td>Chennai Angels</td><td>Chennai</td><td>Sector-agnostic</td><td>South India-focused angel group</td></tr>
+      <tr><td class="idx">76</td><td>Chandigarh Angels Network</td><td>Chandigarh</td><td>Sector-agnostic</td><td>North India focus — geographically closer to Palampur, HP</td></tr>
+      <tr><td class="idx">77</td><td>We Founder Circle</td><td>Mumbai</td><td>Sector-agnostic</td><td>9,000+ investor base, fast-growing platform</td></tr>
+      <tr><td class="idx">78</td><td>ah! Ventures</td><td>Mumbai</td><td>Sector-agnostic</td><td>62,000+ entrepreneur, 3,000+ investor network</td></tr>
+      <tr><td class="idx">79</td><td>Jito Angel Network</td><td>Mumbai</td><td>Sector-agnostic</td><td>Part of Jain International Trade Organisation</td></tr>
+      <tr><td class="idx">80</td><td>Faad Network</td><td>Delhi</td><td>Sector-agnostic</td><td>Member-based investor network, hands-on guidance</td></tr>
+      <tr><td class="idx">81</td><td>Hyderabad Angels</td><td>Hyderabad</td><td>Sector-agnostic</td><td>Active South India angel community</td></tr>
+      <tr><td class="idx">82</td><td>Calcutta Angels</td><td>Kolkata</td><td>Sector-agnostic</td><td>East India angel network</td></tr>
+      <tr><td class="idx">83</td><td>Campus Angels Network</td><td>Bengaluru</td><td>Sector-agnostic</td><td>Active co-investor with IAN and others</td></tr>
+      <tr><td class="idx">84</td><td>Rajasthan Angel Investors Network (RAIN)</td><td>Jaipur</td><td>Sector-agnostic</td><td>Regional network; useful for Tier-2 city narrative fit</td></tr>
+      <tr><td class="idx">85</td><td>Venture Catalysts</td><td>Mumbai</td><td>Sector-agnostic</td><td>Also operates as incubator (see Cat. C); 176+ portfolio companies</td></tr>
+      <tr><td class="idx">86</td><td>Inflection Point Ventures</td><td>Gurugram</td><td>Sector-agnostic</td><td>Active co-investor across many India seed rounds</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- E: GOVERNMENT SCHEMES -->
+<div class="sec">
+  <div class="slabel">Category E &mdash; 11 Schemes</div>
+  <div class="stitle">Government Schemes &amp; Non-Dilutive Capital</div>
+  <div class="ssub">Central and state government grants — non-dilutive, should be pursued in parallel with every equity round. No equity given up.</div>
+  <table>
+    <thead><tr><th class="idx">#</th><th>Scheme</th><th>Run By</th><th>What It Offers</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td class="idx">87</td><td>Startup India Seed Fund Scheme (SISFS)</td><td>DPIIT / GOI</td><td>Up to Rs.20L grant + Rs.50L debt/convertible</td><td>945 Cr total outlay; disbursed to 3,600+ entrepreneurs via 300+ incubators</td></tr>
+      <tr><td class="idx">88</td><td>Startup India Investor Connect</td><td>DPIIT / GOI</td><td>Investor matchmaking platform</td><td>Free platform connecting DPIIT-registered startups to investors</td></tr>
+      <tr><td class="idx">89</td><td>Credit Guarantee Scheme for Startups</td><td>DPIIT / GOI</td><td>Loan guarantee (no collateral)</td><td>Useful once Nxance needs working-capital debt</td></tr>
+      <tr><td class="idx">90</td><td>Startup India Fund of Funds 2.0</td><td>DPIIT / SIDBI</td><td>Indirect — invests in VC funds</td><td>Increases capital available at funds in Category A/B above</td></tr>
+      <tr><td class="idx">91</td><td>MeitY Startup Hub / AI Mission Grants</td><td>MeitY</td><td>Grants + compute credits</td><td>Relevant given NxanceLM/AI ambitions; India AI Mission Rs.10,372Cr</td></tr>
+      <tr><td class="idx">92</td><td>Atal Innovation Mission</td><td>NITI Aayog</td><td>Grants, incubation support</td><td>Broad innovation-ecosystem grants</td></tr>
+      <tr><td class="idx">93</td><td>Himachal Pradesh Startup Scheme</td><td>HP Govt / HPCED</td><td>Seed capital up to Rs.25L, rental reimbursement, stamp duty exemption</td><td><b>Directly applicable — Nxance is HP-based.</b> Apply via Startup Himachal Cell, Shimla</td></tr>
+      <tr><td class="idx">94</td><td>Him Startup Yojana (HIMSUP)</td><td>IIT Mandi Catalyst</td><td>Incubation + funding support</td><td><b>Local to HP</b> — IIT Mandi's startup incubation arm</td></tr>
+      <tr><td class="idx">95</td><td>Palampur Incubation Centre (CSIR-IHBT / YS Parmar Univ)</td><td>HP Govt-affiliated institutes</td><td>Incubation, lab access, mentorship</td><td><b>Same city as Nxance</b> — Palampur-based incubation infrastructure</td></tr>
+      <tr><td class="idx">96</td><td>SIDBI Fund of Funds</td><td>SIDBI</td><td>Indirect — invests in VC funds</td><td>Complements Startup India FoF 2.0</td></tr>
+      <tr><td class="idx">97</td><td>BIRAC BIG Grant</td><td>Dept of Biotechnology</td><td>Grant (if biotech-adjacent angle)</td><td>Lower priority unless Nxance touches health/biotech data</td></tr>
+    </tbody>
+  </table>
+  <div class="note gold">Apply for #93, #94, and #95 first — these are non-dilutive, HP-specific, and directly relevant since Nxance is Palampur-based. No other applicant in these programs will have a stronger "local founder" story than Nxance.</div>
+</div>
+
+<!-- F: FAMILY OFFICES & MICRO-VCs -->
+<div class="sec">
+  <div class="slabel">Category F &mdash; 11 Targets</div>
+  <div class="stitle">Family Offices, Corporate VCs &amp; Niche Funds</div>
+  <div class="ssub">Smaller, more selective pools of capital — often better suited to founders with a strong personal narrative (relevant given Nxance's Palampur-first positioning).</div>
+  <table>
+    <thead><tr><th class="idx">#</th><th>Name</th><th>Type</th><th>Focus</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td class="idx">98</td><td>Sony Innovation Ventures</td><td>Corporate VC</td><td>Fintech, entertainment</td><td>$250K-$10M range; global corporate VC active in India</td></tr>
+      <tr><td class="idx">99</td><td>Razorpay Rize</td><td>Corporate accelerator</td><td>Fintech specific</td><td>Direct fintech-infrastructure relevance; payments-adjacent thesis</td></tr>
+      <tr><td class="idx">100</td><td>InnoVen Capital</td><td>Venture debt</td><td>Sector-agnostic</td><td>Post-equity-round venture debt option for runway extension</td></tr>
+      <tr><td class="idx">101</td><td>Trifecta Capital</td><td>Venture debt</td><td>Sector-agnostic</td><td>Alternative/complementary to equity dilution</td></tr>
+      <tr><td class="idx">102</td><td>Multiplier Ventures</td><td>Micro VC</td><td>Fintech, SaaS</td><td>Smaller, founder-friendly cheques</td></tr>
+      <tr><td class="idx">103</td><td>Survam Partners</td><td>Family office</td><td>Sector-agnostic</td><td>Active early-stage family office</td></tr>
+      <tr><td class="idx">104</td><td>Mela Ventures</td><td>Micro VC</td><td>Fintech, consumer</td><td>Smaller fund, hands-on approach</td></tr>
+      <tr><td class="idx">105</td><td>LetsGrow Capital</td><td>Micro VC</td><td>Sector-agnostic</td><td>Operator-led smaller fund</td></tr>
+      <tr><td class="idx">106</td><td>9Unicorns</td><td>Accelerator-VC hybrid</td><td>Sector-agnostic</td><td>Backed by Venture Catalysts; fast-moving seed cheques</td></tr>
+      <tr><td class="idx">107</td><td>Capital A</td><td>Micro VC</td><td>Consumer, fintech</td><td>Smaller, India-focused fund</td></tr>
+      <tr><td class="idx">108</td><td>India Quotient Angel Syndicate</td><td>Syndicate</td><td>Consumer, fintech</td><td>Syndicate arm alongside the main fund (see #4)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- HOW TO APPROACH -->
+<div class="sec">
+  <div class="slabel">Outreach Strategy</div>
+  <div class="stitle">How to Sequence This List</div>
+  <div class="note">
+    <strong>Week 1-2:</strong> Apply to non-dilutive schemes first (#87-97) — zero cost, zero dilution, no downside. Start with HP-specific ones (#93-95) since approval odds are highest there.
+  </div>
+  <div class="note b">
+    <strong>Week 2-4:</strong> Submit to equity-free/low-equity accelerators (#51, #60-63 — Google, AWS, NVIDIA, Microsoft) for cloud/AI compute credits, which directly reduces NxanceLM's training cost.
+  </div>
+  <div class="note p">
+    <strong>Week 3-6:</strong> Warm-intro outreach to Category A funds (#1-36) — these are the highest-probability cheque-writers for Nxance's exact stage. Prioritise #4, #11, #17, #21, #33, #34, #35 for direct fintech/India/AI thesis overlap.
+  </div>
+  <div class="note gold">
+    <strong>Ongoing:</strong> Apply to 2-3 accelerator cohorts (#49, #50, #68, #69) in parallel — even rejections generate investor relationships, and acceptance brings both capital and a credible signal for the rest of the list.
+  </div>
+</div>
+
+<div class="footer">
+  <div class="fl">nxance</div>
+  <div class="ft">Ohshn Intelligence Pvt Ltd &nbsp;|&nbsp; Palampur, Himachal Pradesh &nbsp;|&nbsp; 2026<br>Investor &amp; Accelerator Target List &nbsp;|&nbsp; Confidential &nbsp;|&nbsp; Verify current contact details and focus areas before outreach, as fund mandates change</div>
+</div>
+</div>
+</body>
+</html>

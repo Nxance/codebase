@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Nxance — Portfolio Health Check Engine</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+:root{--bg:#02030A;--card:#07000C;--c2:#0B0E1C;--bo:#161930;--b2:#1A1E38;--tx:#EAF0FF;--t2:#5A6CA0;--t3:#252A48;--g:#00D4B1;--gt:rgba(0,212,177,.1);--gr:rgba(0,212,177,.22);--gold:#FFB830;--goldt:rgba(255,184,48,.09);--red:#FF3F60;--redt:rgba(255,63,96,.09);--blue:#4A8FFF;--bluet:rgba(74,143,255,.09);--purple:#9B6DFF;--purplet:rgba(155,109,255,.09);--grn:#1EC896;--grnt:rgba(30,200,150,.09);--pink:#FF6B9D;--pinkt:rgba(255,107,157,.09);--cyan:#00C4FF;--cyant:rgba(0,196,255,.09);--org:#FF7A35;--orgt:rgba(255,122,53,.09)}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);line-height:1.72;font-size:14px}
+.cover{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 28px;text-align:center;background:radial-gradient(ellipse 80% 55% at 50% -8%,rgba(0,212,177,.09),transparent 58%),radial-gradient(ellipse 45% 30% at 92% 90%,rgba(74,143,255,.06),transparent 50%)}
+.ctag{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--g);background:var(--gt);border:1px solid var(--gr);padding:5px 20px;border-radius:20px;display:inline-block;margin-bottom:28px}
+.ch{font-family:'DM Serif Display',serif;font-size:clamp(32px,5.5vw,58px);line-height:1.08;letter-spacing:-.025em;margin-bottom:12px}
+.ch em{font-style:italic;color:var(--g)}
+.cs{font-size:15px;color:var(--t2);max-width:680px;margin:0 auto 36px;line-height:1.82}
+.badges{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:44px}
+.bd{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;padding:4px 14px;border-radius:20px;letter-spacing:.04em}
+.bg{color:var(--g);background:var(--gt);border:1px solid var(--gr)}.bb{color:var(--blue);background:var(--bluet);border:1px solid rgba(74,143,255,.3)}.bgold{color:var(--gold);background:var(--goldt);border:1px solid rgba(255,184,48,.3)}.bp{color:var(--purple);background:var(--purplet);border:1px solid rgba(155,109,255,.3)}.bred{color:var(--red);background:var(--redt);border:1px solid rgba(255,63,96,.3)}.bcyan{color:var(--cyan);background:var(--cyant);border:1px solid rgba(0,196,255,.3)}.borg{color:var(--org);background:var(--orgt);border:1px solid rgba(255,122,53,.3)}.bpink{color:var(--pink);background:var(--pinkt);border:1px solid rgba(255,107,157,.3)}
+.cgrid{display:grid;grid-template-columns:repeat(8,1fr);gap:9px;max-width:900px;width:100%}
+.cg{background:var(--c2);border:1.5px solid var(--b2);border-radius:11px;padding:14px 7px;text-align:center}
+.cg-icon{font-size:20px;margin-bottom:6px;display:block}.cg-num{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--t3);margin-bottom:3px}.cg-name{font-size:9px;font-weight:700;color:var(--tx);line-height:1.3}
+.wrap{max-width:1060px;margin:0 auto;padding:0 28px 80px}
+.sec{margin-bottom:80px}
+.slabel{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--g);background:var(--gt);border:1px solid var(--gr);padding:3px 13px;border-radius:20px;display:inline-block;margin-bottom:14px}
+.stitle{font-family:'DM Serif Display',serif;font-size:32px;letter-spacing:-.015em;margin-bottom:6px}
+.stitle em{font-style:italic;color:var(--g)}
+.ssub{font-size:14px;color:var(--t2);margin-bottom:26px;max-width:740px;line-height:1.82}
+.hr{height:1px;background:var(--bo);margin:68px 0}
+.ic-g{background:var(--gt);border:1.5px solid var(--gr)}.ic-b{background:var(--bluet);border:1.5px solid rgba(74,143,255,.3)}.ic-gold{background:var(--goldt);border:1.5px solid rgba(255,184,48,.3)}.ic-red{background:var(--redt);border:1.5px solid rgba(255,63,96,.3)}.ic-p{background:var(--purplet);border:1.5px solid rgba(155,109,255,.3)}.ic-grn{background:var(--grnt);border:1.5px solid rgba(30,200,150,.3)}.ic-cyan{background:var(--cyant);border:1.5px solid rgba(0,196,255,.3)}.ic-org{background:var(--orgt);border:1.5px solid rgba(255,122,53,.3)}.ic-pink{background:var(--pinkt);border:1.5px solid rgba(255,107,157,.3)}
+.ecard{background:var(--c2);border:1.5px solid var(--bo);border-radius:16px;overflow:hidden;margin-bottom:18px}
+.ehead{padding:20px 24px;border-bottom:1px solid var(--bo);display:flex;align-items:center;gap:16px}
+.eicon{width:54px;height:54px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
+.eid{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--g);margin-bottom:3px}.ename{font-size:20px;font-weight:700;color:var(--tx);margin-bottom:2px}.etag{font-size:12px;color:var(--t2)}
+.ebody{padding:22px 24px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px}.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.slbl{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--t3);margin-bottom:8px;margin-top:14px;display:block}
+.slbl:first-child{margin-top:0}
+.params{display:flex;flex-direction:column;gap:5px}
+.param{display:flex;align-items:flex-start;gap:10px;padding:8px 11px;background:rgba(255,255,255,.02);border:1px solid var(--bo);border-radius:7px;font-size:12px}
+.pn{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--g);flex-shrink:0;min-width:145px}.pv{color:var(--t2);line-height:1.55}
+.code{background:rgba(0,0,0,.55);border:1px solid var(--b2);border-radius:9px;padding:13px 15px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#7A90CC;line-height:1.72;overflow-x:auto;white-space:pre;margin:10px 0}
+.formula{background:linear-gradient(135deg,rgba(0,212,177,.07),rgba(74,143,255,.04));border:1.5px solid rgba(0,212,177,.18);border-radius:10px;padding:13px 17px;margin:10px 0;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--tx);text-align:center;line-height:1.8}
+.nb{background:var(--gt);border:1px solid var(--gr);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--g);margin:10px 0;line-height:1.65}
+.wb{background:var(--redt);border:1px solid rgba(255,63,96,.25);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--red);margin:10px 0;line-height:1.65}
+.ib{background:var(--bluet);border:1px solid rgba(74,143,255,.25);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--blue);margin:10px 0;line-height:1.65}
+.goldb{background:var(--goldt);border:1px solid rgba(255,184,48,.25);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--gold);margin:10px 0;line-height:1.65}
+.pb{background:var(--purplet);border:1px solid rgba(155,109,255,.25);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--purple);margin:10px 0;line-height:1.65}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:12.5px}
+th{background:rgba(255,255,255,.04);padding:9px 12px;text-align:left;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--t3);border-bottom:1px solid var(--b2)}
+td{padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.03);color:var(--t2);vertical-align:top}
+tr:last-child td{border:none}tr:hover td{background:rgba(255,255,255,.013)}td:first-child{color:var(--tx);font-weight:600}
+.layer{border:1.5px solid var(--b2);border-radius:11px;overflow:hidden;margin-bottom:9px}
+.lh{padding:11px 16px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--bo)}
+.ln{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;padding:2px 10px;border-radius:4px}
+.lname{font-size:13px;font-weight:700;color:var(--tx)}.lw{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;padding:2px 9px;border-radius:4px;flex-shrink:0}
+.lbody{padding:13px 16px;background:rgba(255,255,255,.01);font-size:12.5px;color:var(--t2);line-height:1.72}
+.issue{background:rgba(255,255,255,.02);border:1.5px solid var(--b2);border-radius:12px;padding:15px 18px;margin-bottom:10px;position:relative;overflow:hidden}
+.issue::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3.5px}
+.ih::before{background:var(--red)}.im::before{background:var(--gold)}.il::before{background:var(--grn)}
+.itop{display:flex;align-items:flex-start;gap:10px;margin-bottom:9px;flex-wrap:wrap}
+.isev{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;padding:2px 9px;border-radius:4px;flex-shrink:0}
+.ish{color:var(--red);background:var(--redt);border:1px solid rgba(255,63,96,.3)}.ism{color:var(--gold);background:var(--goldt);border:1px solid rgba(255,184,48,.3)}.isl{color:var(--grn);background:var(--grnt);border:1px solid rgba(30,200,150,.3)}
+.irs{margin-left:auto;text-align:right}
+.irsm{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--red);display:block}.irss{font-size:10px;color:var(--t3)}
+.ititle{font-size:14px;font-weight:700;color:var(--tx);margin-bottom:6px}.ibody{font-size:12px;color:var(--t2);line-height:1.72}
+.ifix{background:var(--gt);border:1px solid var(--gr);border-radius:6px;padding:7px 11px;font-size:12px;color:var(--g);margin-top:8px}
+.isel{background:var(--purplet);border:1px solid rgba(155,109,255,.25);border-radius:6px;padding:8px 12px;font-size:12px;color:var(--purple);margin-top:6px;line-height:1.7}
+.goal-meter{background:var(--c2);border:1.5px solid var(--b2);border-radius:12px;padding:20px;margin:14px 0}
+.gmrow{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.gmlabel{font-size:12px;font-weight:600;color:var(--tx);min-width:210px}
+.gmbar{flex:1;height:9px;background:rgba(255,255,255,.06);border-radius:5px;overflow:hidden}
+.gmfill{height:100%;border-radius:5px}
+.gmval{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;min-width:60px;text-align:right}
+.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+.sv{border-radius:12px;padding:18px;text-align:center;border:2px solid}
+.sv-a{background:rgba(30,200,150,.07);border-color:rgba(30,200,150,.3)}.sv-b{background:rgba(255,184,48,.07);border-color:rgba(255,184,48,.3)}.sv-c{background:rgba(255,63,96,.07);border-color:rgba(255,63,96,.3)}
+.svicon{font-size:26px;margin-bottom:7px;display:block}.svtitle{font-size:14px;font-weight:700;margin-bottom:4px}.svrange{font-family:'JetBrains Mono',monospace;font-size:12px;margin-bottom:5px}.svdesc{font-size:11px;color:var(--t2);line-height:1.6}
+.footer{text-align:center;padding:48px 0 20px;border-top:1px solid var(--bo);margin-top:20px}
+.fl{font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;background:linear-gradient(135deg,var(--g),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+.ft{font-size:11.5px;color:var(--t3)}
+@media(max-width:760px){.cgrid{grid-template-columns:repeat(4,1fr)}.g2,.g3,.sgrid{grid-template-columns:1fr}.wrap{padding:0 14px 60px}}
+</style>
+</head>
+<body>
+<!-- COVER -->
+<div class="cover">
+  <div class="ctag">Nxance &mdash; Ohshn Intelligence</div>
+  <div class="ch">Portfolio Health Check<br><em>Engine Architecture</em></div>
+  <div class="cs">Complete workflow — 7 engines that analyse your existing portfolio, find every hidden rupee of loss, give specific guidance with Selection Engine picks, and manage all changes if you execute them</div>
+  <div class="badges">
+    <span class="bd bg">E-01 Analysis (14 Modules)</span>
+    <span class="bd bp">Selection Engine (12 Layers)</span>
+    <span class="bd bp">E-02 Guidance</span>
+    <span class="bd bgold">E-03 Backtesting</span>
+    <span class="bd bred">E-04 Risk Analysis</span>
+    <span class="bd bb">E-05 Execution Mgt</span>
+    <span class="bd bcyan">E-06 Rebalancing</span>
+    <span class="bd borg">E-07 SIP Redesign</span>
+  </div>
+  <div class="cgrid">
+    <div class="cg"><span class="cg-icon">&#128202;</span><div class="cg-num">E-01</div><div class="cg-name">Analysis Engine</div></div>
+    <div class="cg"><span class="cg-icon">&#128301;</span><div class="cg-num">SEL</div><div class="cg-name">Selection Engine</div></div>
+    <div class="cg"><span class="cg-icon">&#127775;</span><div class="cg-num">E-02</div><div class="cg-name">Guidance Engine</div></div>
+    <div class="cg"><span class="cg-icon">&#128240;</span><div class="cg-num">E-03</div><div class="cg-name">Backtesting</div></div>
+    <div class="cg"><span class="cg-icon">&#128737;</span><div class="cg-num">E-04</div><div class="cg-name">Risk Analysis</div></div>
+    <div class="cg"><span class="cg-icon">&#9989;</span><div class="cg-num">E-05</div><div class="cg-name">Execution Mgt</div></div>
+    <div class="cg"><span class="cg-icon">&#9878;</span><div class="cg-num">E-06</div><div class="cg-name">Rebalancing</div></div>
+    <div class="cg"><span class="cg-icon">&#128260;</span><div class="cg-num">E-07</div><div class="cg-name">SIP Redesign</div></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- ══════════════════════════════════════
+     SECTION 1: MASTER ARCHITECTURE SVG
+══════════════════════════════════════ -->
+<div class="sec">
+  <div class="slabel">Master Architecture</div>
+  <div class="stitle">Complete System &mdash; <em>All Engines in One Diagram</em></div>
+  <div class="ssub">From portfolio upload to ongoing management. E-01 runs 14 analysis modules. Selection Engine is called for every gap found. Path A = read-only. Path B = execute changes.</div>
+
+  <svg viewBox="0 0 860 1100" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:860px;display:block;margin:0 auto 28px;border-radius:14px">
+    <defs>
+      <marker id="a1" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#252A48"/></marker>
+      <marker id="ag" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#00D4B1"/></marker>
+      <marker id="ab" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#4A8FFF"/></marker>
+      <marker id="ap" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#9B6DFF"/></marker>
+    </defs>
+    <rect width="860" height="1100" rx="14" fill="#07000C" stroke="#161930" stroke-width="1.5"/>
+    <text x="430" y="30" text-anchor="middle" font-size="13" font-weight="700" fill="#EAF0FF" font-family="DM Serif Display,serif">Portfolio Health Check — Master Architecture</text>
+
+    <!-- STEP 1: INPUT -->
+    <rect x="28" y="46" width="804" height="86" rx="11" fill="rgba(0,212,177,.05)" stroke="#00D4B1" stroke-width="1.5"/>
+    <rect x="28" y="46" width="4" height="86" rx="2" fill="#00D4B1"/>
+    <text x="52" y="68" font-size="9" fill="#00D4B1" font-weight="700" font-family="JetBrains Mono,monospace">STEP 1 — USER INPUT</text>
+    <text x="52" y="84" font-size="12" font-weight="700" fill="#EAF0FF">Existing Portfolio + Goals + Profile + Live Data</text>
+    <rect x="52" y="94" width="145" height="28" rx="6" fill="rgba(0,212,177,.07)" stroke="rgba(0,212,177,.2)" stroke-width="1"/>
+    <text x="124" y="112" text-anchor="middle" font-size="9" fill="#EAF0FF">Holdings + NAV</text>
+    <rect x="206" y="94" width="145" height="28" rx="6" fill="rgba(0,212,177,.07)" stroke="rgba(0,212,177,.2)" stroke-width="1"/>
+    <text x="278" y="112" text-anchor="middle" font-size="9" fill="#EAF0FF">Goal: Rs. Target + Year</text>
+    <rect x="360" y="94" width="145" height="28" rx="6" fill="rgba(0,212,177,.07)" stroke="rgba(0,212,177,.2)" stroke-width="1"/>
+    <text x="432" y="112" text-anchor="middle" font-size="9" fill="#EAF0FF">Age, Risk, SIP amount</text>
+    <rect x="514" y="94" width="145" height="28" rx="6" fill="rgba(0,212,177,.07)" stroke="rgba(0,212,177,.2)" stroke-width="1"/>
+    <text x="586" y="112" text-anchor="middle" font-size="9" fill="#EAF0FF">CSV / CAS PDF / Photo</text>
+    <rect x="668" y="94" width="152" height="28" rx="6" fill="rgba(0,212,177,.07)" stroke="rgba(0,212,177,.2)" stroke-width="1"/>
+    <text x="744" y="112" text-anchor="middle" font-size="9" fill="#EAF0FF">Live AMFI NAV + NSE</text>
+    <line x1="430" y1="132" x2="430" y2="148" stroke="#252A48" stroke-width="1.5" marker-end="url(#a1)"/>
+
+    <!-- STEP 2: E-01 ANALYSIS (14 modules) -->
+    <rect x="28" y="150" width="804" height="228" rx="11" fill="rgba(0,212,177,.04)" stroke="#00D4B1" stroke-width="1.5"/>
+    <rect x="28" y="150" width="4" height="228" rx="2" fill="#00D4B1"/>
+    <text x="52" y="172" font-size="9" fill="#00D4B1" font-weight="700" font-family="JetBrains Mono,monospace">STEP 2 — E-01: ANALYSIS ENGINE — 14 MODULES</text>
+    <text x="52" y="188" font-size="11" font-weight="700" fill="#EAF0FF">Each module outputs: severity + annual Rs. loss + gap type A/B/C/D + Selection Engine trigger</text>
+    <!-- Row 1: M01-M07 -->
+    <rect x="40" y="200" width="107" height="52" rx="7" fill="rgba(0,212,177,.07)" stroke="#00D4B1" stroke-width="1"/>
+    <text x="93" y="220" text-anchor="middle" font-size="8" fill="#00D4B1" font-weight="700">M-01 XIRR</text>
+    <text x="93" y="234" text-anchor="middle" font-size="9" fill="#EAF0FF" font-weight="600">Real Return</text>
+    <text x="93" y="246" text-anchor="middle" font-size="8" fill="#5A6CA0">scipy.brentq</text>
+    <rect x="154" y="200" width="107" height="52" rx="7" fill="rgba(74,143,255,.07)" stroke="#4A8FFF" stroke-width="1"/>
+    <text x="207" y="220" text-anchor="middle" font-size="8" fill="#4A8FFF" font-weight="700">M-02 Risk</text>
+    <text x="207" y="234" text-anchor="middle" font-size="9" fill="#EAF0FF" font-weight="600">Sharpe+CVaR</text>
+    <text x="207" y="246" text-anchor="middle" font-size="8" fill="#5A6CA0">Sortino+Beta</text>
+    <rect x="268" y="200" width="107" height="52" rx="7" fill="rgba(255,63,96,.07)" stroke="#FF3F60" stroke-width="1"/>
+    <text x="321" y="220" text-anchor="middle" font-size="8" fill="#FF3F60" font-weight="700">M-03 TER Waste</text>
+    <text x="321" y="234" text-anchor="middle" font-size="9" fill="#EAF0FF" font-weight="600">Cost Leak</text>
+    <text x="321" y="246" text-anchor="middle" font-size="8" fill="#5A6CA0">AMFI live</text>
+    <rect x="382" y="200" width="107" height="52" rx="7" fill="rgba(255,184,48,.07)" stroke="#FFB830" stroke-width="1"/>
+    <text x="435" y="220" text-anchor="middle" font-size="8" fill="#FFB830" font-weight="700">M-04 Benchmark</text>
+    <text x="435" y="234" text-anchor="middle" font-size="9" fill="#EAF0FF" font-weight="600">vs Nifty 50</text>
+    <text x="435" y="246" text-anchor="middle" font-size="8" fill="#5A6CA0">Rs. gap/yr</text>
+    <rect x="496" y="200" width="107" height="52" rx="7" fill="rgba(155,109,255,.07)" stroke="#9B6DFF" stroke-width="1"/>
+    <text x="549" y="220" text-anchor="middle" font-size="8" fill="#9B6DFF" font-weight="700">M-05 Overlap</text>
+    <text x="549" y="234" text-anchor="middle" font-size="9" fill="#EAF0FF" font-weight="600">Jaccard Sets</text>
+    <text x="549" y="246" text-anchor="middle" font-size="8" fill="#5A6CA0">Duplicate cost</text>
+    <rect x="610" y="200" width="107" height="52" rx="7" fill="rgba(30,200,150,.07)" stroke="#1EC896" stroke-width="1"/>
+    <text x="663" y="220" text-anchor="middle" font-size="8" fill="#1EC896" font-weight="700">M-06 Goal</text>
+    <text x="663" y="234" text-anchor="middle" font-size="9" fill="#EAF0FF" font-weight="600">FV formula</text>
+    <text x="663" y="246" text-anchor="middle" font-size="8" fill="#5A6CA0">Rs. gap</text>
+    <rect x="724" y="200" width="100" height="52" rx="7" fill="rgba(0,196,255,.07)" stroke="#00C4FF" stroke-width="1"/>
+    <text x="774" y="220" text-anchor="middle" font-size="8" fill="#00C4FF" font-weight="700">M-07 SIP</text>
+    <text x="774" y="234" text-anchor="middle" font-size="9" fill="#EAF0FF" font-weight="600">Adequacy</text>
+    <text x="774" y="246" text-anchor="middle" font-size="8" fill="#5A6CA0">Monthly gap</text>
+    <!-- Row 2: M08-M14 -->
+    <rect x="40" y="260" width="107" height="52" rx="7" fill="rgba(255,107,157,.07)" stroke="#FF6B9D" stroke-width="1"/>
+    <text x="93" y="280" text-anchor="middle" font-size="8" fill="#FF6B9D" font-weight="700">M-08 Conc.</text>
+    <text x="93" y="294" text-anchor="middle" font-size="9" fill="#EAF0FF" font-weight="600">Concentration</text>
+    <text x="93" y="306" text-anchor="middle" font-size="8" fill="#5A6CA0">Fund/sector</text>
+    <rect x="154" y="260" width="107" height="52" rx="7" fill="rgba(255,122,53,.07)" stroke="#FF7A35" stroke-width="1"/>
+    <text x="207" y="280" text-anchor="middle" font-size="8" fill="#FF7A35" font-weight="700">M-09 D/E</text>
+    <text x="207" y="294" text-anchor="middle" font-size="9" fill="#EAF0FF" font-weight="600">Debt-Equity</text>
+    <text x="207" y="306" text-anchor="middle" font-size="8" fill="#5A6CA0">Age-based</text>
+    <rect x="268" y="260" width="107" height="52" rx="7" fill="rgba(255,63,96,.1)" stroke="#FF3F60" stroke-width="2"/>
+    <text x="321" y="280" text-anchor="middle" font-size="8" fill="#FF3F60" font-weight="700">M-10 FRAUD</text>
+    <text x="321" y="294" text-anchor="middle" font-size="9" fill="#FF3F60" font-weight="700">GATE</text>
+    <text x="321" y="306" text-anchor="middle" font-size="8" fill="#FF3F60">1 fail=EXIT NOW</text>
+    <rect x="382" y="260" width="107" height="52" rx="7" fill="rgba(0,196,255,.07)" stroke="#00C4FF" stroke-width="1"/>
+    <text x="435" y="280" text-anchor="middle" font-size="8" fill="#00C4FF" font-weight="700">M-11 Macro</text>
+    <text x="435" y="294" text-anchor="middle" font-size="9" fill="#EAF0FF" font-weight="600">RBI+Sector</text>
+    <text x="435" y="306" text-anchor="middle" font-size="8" fill="#5A6CA0">Rate cycle</text>
+    <rect x="496" y="260" width="107" height="52" rx="7" fill="rgba(155,109,255,.07)" stroke="#9B6DFF" stroke-width="1"/>
+    <text x="549" y="280" text-anchor="middle" font-size="8" fill="#9B6DFF" font-weight="700">M-12 Behaviour</text>
+    <text x="549" y="294" text-anchor="middle" font-size="9" fill="#EAF0FF" font-weight="600">Bias detect</text>
+    <text x="549" y="306" text-anchor="middle" font-size="8" fill="#5A6CA0">FOMO/herd</text>
+    <rect x="610" y="260" width="107" height="52" rx="7" fill="rgba(30,200,150,.07)" stroke="#1EC896" stroke-width="1"/>
+    <text x="663" y="280" text-anchor="middle" font-size="8" fill="#1EC896" font-weight="700">M-13 Tax</text>
+    <text x="663" y="294" text-anchor="middle" font-size="9" fill="#EAF0FF" font-weight="600">Efficiency</text>
+    <text x="663" y="306" text-anchor="middle" font-size="8" fill="#5A6CA0">LTCG/STCG</text>
+    <rect x="724" y="260" width="100" height="52" rx="7" fill="rgba(0,212,177,.07)" stroke="#00D4B1" stroke-width="1"/>
+    <text x="774" y="280" text-anchor="middle" font-size="8" fill="#00D4B1" font-weight="700">M-14 Forecast</text>
+    <text x="774" y="294" text-anchor="middle" font-size="9" fill="#EAF0FF" font-weight="600">Monte Carlo</text>
+    <text x="774" y="306" text-anchor="middle" font-size="8" fill="#5A6CA0">Goal prob %</text>
+    <!-- Score bar -->
+    <rect x="40" y="322" width="784" height="44" rx="7" fill="rgba(255,255,255,.03)" stroke="#1A1E38" stroke-width="1"/>
+    <text x="430" y="340" text-anchor="middle" font-size="10" fill="#5A6CA0" font-family="JetBrains Mono,monospace">HEALTH SCORE = 100 - penalties(A+B+C+D gaps)</text>
+    <text x="430" y="358" text-anchor="middle" font-size="10" fill="#5A6CA0" font-family="JetBrains Mono,monospace">Type A: Performance | Type B: Cost | Type C: Structure | Type D: Goal</text>
+    <line x1="430" y1="378" x2="430" y2="394" stroke="#9B6DFF" stroke-width="1.5" marker-end="url(#ap)"/>
+
+    <!-- SELECTION ENGINE -->
+    <rect x="28" y="396" width="804" height="58" rx="10" fill="rgba(155,109,255,.06)" stroke="#9B6DFF" stroke-width="1.5"/>
+    <rect x="28" y="396" width="4" height="58" rx="2" fill="#9B6DFF"/>
+    <text x="52" y="416" font-size="9" fill="#9B6DFF" font-weight="700" font-family="JetBrains Mono,monospace">SELECTION ENGINE — Called by E-01 for EVERY gap found</text>
+    <text x="52" y="432" font-size="10" fill="#5A6CA0">12 layers: Market Data · Fundamental · Technical · Risk · Fraud Gate · Quant Finance · Sentiment · User Behaviour · Macro · Forecasting · Instrument · QAOA</text>
+    <text x="52" y="448" font-size="10" fill="#9B6DFF">FIT SCORE 0-100 per candidate | Only 75+ suggested | MF name + AMFI code + Stock symbol + Rs. improvement + break-even shown</text>
+    <line x1="430" y1="454" x2="430" y2="470" stroke="#252A48" stroke-width="1.5" marker-end="url(#a1)"/>
+
+    <!-- E-02 GUIDANCE -->
+    <rect x="28" y="472" width="804" height="54" rx="10" fill="rgba(155,109,255,.04)" stroke="#9B6DFF" stroke-width="1.2"/>
+    <rect x="28" y="472" width="4" height="54" rx="2" fill="#9B6DFF"/>
+    <text x="52" y="492" font-size="9" fill="#9B6DFF" font-weight="700" font-family="JetBrains Mono,monospace">STEP 3 — E-02: GUIDANCE ENGINE</text>
+    <text x="52" y="508" font-size="12" font-weight="700" fill="#EAF0FF">Specific fix per issue · Exact Rs. impact · AMFI codes · Step-by-step actions</text>
+    <text x="52" y="520" font-size="10" fill="#5A6CA0">Issues ranked by Rs./year loss · Issue 1 always free · Selection Engine picks shown · NxanceLM plain English</text>
+    <line x1="430" y1="526" x2="430" y2="542" stroke="#252A48" stroke-width="1.5" marker-end="url(#a1)"/>
+
+    <!-- E-03 + E-04 -->
+    <rect x="28" y="544" width="392" height="54" rx="10" fill="rgba(255,184,48,.04)" stroke="#FFB830" stroke-width="1.2"/>
+    <rect x="28" y="544" width="4" height="54" rx="2" fill="#FFB830"/>
+    <text x="52" y="564" font-size="9" fill="#FFB830" font-weight="700" font-family="JetBrains Mono,monospace">STEP 4 — E-03: BACKTESTING</text>
+    <text x="52" y="580" font-size="11" font-weight="700" fill="#EAF0FF">5 Crashes · Current vs Recommended</text>
+    <text x="52" y="592" font-size="9" fill="#5A6CA0">2008 GFC · 2013 Taper · 2018 NBFC · 2020 COVID · 2022 Rates</text>
+    <rect x="440" y="544" width="392" height="54" rx="10" fill="rgba(255,63,96,.04)" stroke="#FF3F60" stroke-width="1.2"/>
+    <rect x="440" y="544" width="4" height="54" rx="2" fill="#FF3F60"/>
+    <text x="464" y="564" font-size="9" fill="#FF3F60" font-weight="700" font-family="JetBrains Mono,monospace">STEP 5 — E-04: RISK ANALYSIS</text>
+    <text x="464" y="580" font-size="11" font-weight="700" fill="#EAF0FF">7 Metrics · Over + Under Risk Both</text>
+    <text x="464" y="592" font-size="9" fill="#5A6CA0">Sharpe · Sortino · CVaR · Beta · Drawdown · Goal Prob · VaR</text>
+    <line x1="430" y1="598" x2="430" y2="614" stroke="#252A48" stroke-width="1.5" marker-end="url(#a1)"/>
+
+    <!-- USER DECISION -->
+    <rect x="28" y="616" width="804" height="18" rx="5" fill="rgba(255,255,255,.03)" stroke="#1A1E38" stroke-width="1"/>
+    <text x="430" y="629" text-anchor="middle" font-size="10" fill="#252A48" font-family="JetBrains Mono,monospace" font-weight="700">USER DECISION: PATH A (Read-Only) — OR — PATH B (Execute Changes)</text>
+
+    <!-- PATH A -->
+    <line x1="220" y1="634" x2="168" y2="652" stroke="#1EC896" stroke-width="1.5"/>
+    <rect x="28" y="654" width="280" height="46" rx="9" fill="rgba(30,200,150,.06)" stroke="#1EC896" stroke-width="1.5"/>
+    <rect x="28" y="654" width="4" height="46" rx="2" fill="#1EC896"/>
+    <text x="52" y="672" font-size="9" fill="#1EC896" font-weight="700" font-family="JetBrains Mono,monospace">PATH A — READ ONLY</text>
+    <text x="52" y="688" font-size="11" fill="#EAF0FF" font-weight="600">Report saved. E-05/06/07 stay OFF.</text>
+
+    <!-- PATH B -->
+    <line x1="640" y1="634" x2="692" y2="652" stroke="#4A8FFF" stroke-width="1.5"/>
+    <rect x="552" y="654" width="280" height="46" rx="9" fill="rgba(74,143,255,.06)" stroke="#4A8FFF" stroke-width="1.5"/>
+    <rect x="552" y="654" width="4" height="46" rx="2" fill="#4A8FFF"/>
+    <text x="576" y="672" font-size="9" fill="#4A8FFF" font-weight="700" font-family="JetBrains Mono,monospace">PATH B — USER EXECUTES</text>
+    <text x="576" y="688" font-size="11" fill="#EAF0FF" font-weight="600">Approves guidance. E-05 activates.</text>
+
+    <!-- E-05 -->
+    <line x1="692" y1="700" x2="692" y2="716" stroke="#4A8FFF" stroke-width="1.5" marker-end="url(#ab)"/>
+    <rect x="440" y="718" width="392" height="56" rx="10" fill="rgba(74,143,255,.05)" stroke="#4A8FFF" stroke-width="1.2"/>
+    <rect x="440" y="718" width="4" height="56" rx="2" fill="#4A8FFF"/>
+    <text x="464" y="738" font-size="9" fill="#4A8FFF" font-weight="700" font-family="JetBrains Mono,monospace">STEP 6 — E-05: EXECUTION MANAGING ENGINE</text>
+    <text x="464" y="754" font-size="11" font-weight="700" fill="#EAF0FF">Track Changes · Score Updates Live · E-01 Re-runs</text>
+    <text x="464" y="768" font-size="9" fill="#5A6CA0">Before/after Rs. · Progress dashboard · Pending action impact</text>
+
+    <!-- E-06 -->
+    <line x1="636" y1="774" x2="636" y2="790" stroke="#252A48" stroke-width="1.5" marker-end="url(#a1)"/>
+    <rect x="440" y="792" width="392" height="50" rx="10" fill="rgba(0,196,255,.04)" stroke="#00C4FF" stroke-width="1.2"/>
+    <rect x="440" y="792" width="4" height="50" rx="2" fill="#00C4FF"/>
+    <text x="464" y="812" font-size="9" fill="#00C4FF" font-weight="700" font-family="JetBrains Mono,monospace">STEP 7 — E-06: REBALANCING ENGINE</text>
+    <text x="464" y="828" font-size="11" font-weight="700" fill="#EAF0FF">Drift Detected → Restore Balance</text>
+    <text x="464" y="840" font-size="9" fill="#5A6CA0">Drift &gt;5% · Risk breach · Annual age adjustment · Tax-loss harvest</text>
+
+    <!-- E-07 -->
+    <line x1="636" y1="842" x2="636" y2="858" stroke="#252A48" stroke-width="1.5" marker-end="url(#a1)"/>
+    <rect x="440" y="860" width="392" height="50" rx="10" fill="rgba(255,122,53,.04)" stroke="#FF7A35" stroke-width="1.2"/>
+    <rect x="440" y="860" width="4" height="50" rx="2" fill="#FF7A35"/>
+    <text x="464" y="880" font-size="9" fill="#FF7A35" font-weight="700" font-family="JetBrains Mono,monospace">STEP 8 — E-07: SIP REDESIGN ENGINE</text>
+    <text x="464" y="896" font-size="11" font-weight="700" fill="#EAF0FF">Monthly Recalculation · Live NAV · Exact Units</text>
+    <text x="464" y="908" font-size="9" fill="#5A6CA0">Rs. fixed · Qty flexes · Amount change = rebuild + Selection Engine</text>
+
+    <!-- NxanceLM -->
+    <line x1="430" y1="910" x2="430" y2="926" stroke="#00D4B1" stroke-width="1.5" marker-end="url(#ag)"/>
+    <rect x="28" y="928" width="804" height="48" rx="10" fill="rgba(0,212,177,.06)" stroke="#00D4B1" stroke-width="1.5"/>
+    <rect x="28" y="928" width="4" height="48" rx="2" fill="#00D4B1"/>
+    <text x="52" y="948" font-size="9" fill="#00D4B1" font-weight="700" font-family="JetBrains Mono,monospace">STEP 9 — NXANCELM</text>
+    <text x="52" y="964" font-size="12" font-weight="700" fill="#EAF0FF">Plain English After Every Engine · Rs. + % Always Together</text>
+    <text x="52" y="976" font-size="9" fill="#5A6CA0">Every issue, every fix, every change explained in simple language with exact rupee amounts</text>
+
+    <!-- LEGEND -->
+    <rect x="28" y="988" width="804" height="96" rx="8" fill="rgba(255,255,255,.02)" stroke="#1A1E38" stroke-width="1"/>
+    <text x="52" y="1008" font-size="9" fill="#252A48" font-weight="700" font-family="JetBrains Mono,monospace">LEGEND:</text>
+    <rect x="110" y="998" width="10" height="10" rx="2" fill="#00D4B1" opacity=".6"/><text x="126" y="1008" font-size="9" fill="#5A6CA0">Always Runs (Path A and B)</text>
+    <rect x="300" y="998" width="10" height="10" rx="2" fill="#1EC896" opacity=".6"/><text x="316" y="1008" font-size="9" fill="#5A6CA0">Path A Only</text>
+    <rect x="410" y="998" width="10" height="10" rx="2" fill="#4A8FFF" opacity=".6"/><text x="426" y="1008" font-size="9" fill="#5A6CA0">Path B Only (Execute Changes)</text>
+    <rect x="620" y="998" width="10" height="10" rx="2" fill="#9B6DFF" opacity=".6"/><text x="636" y="1008" font-size="9" fill="#5A6CA0">Selection Engine (Inside E-01)</text>
+    <text x="52" y="1030" font-size="9" fill="#252A48" font-weight="700" font-family="JetBrains Mono,monospace">GAP TYPES:</text>
+    <text x="130" y="1030" font-size="9" fill="#4A8FFF">Type A: Performance (XIRR, Sharpe, Benchmark)</text>
+    <text x="430" y="1030" font-size="9" fill="#FF3F60">Type B: Cost (TER waste, Overlap, Tax drag)</text>
+    <text x="52" y="1048" font-size="9" fill="#FF7A35">Type C: Structure (Concentration, Debt-Eq, Macro, Fraud)</text>
+    <text x="430" y="1048" font-size="9" fill="#1EC896">Type D: Goal (Goal gap, SIP gap, Monte Carlo probability)</text>
+    <text x="52" y="1082" font-size="9" fill="#252A48" font-family="JetBrains Mono,monospace">Nxance Health Check Engine v2.0  |  Ohshn Intelligence  |  Palampur HP  |  2026  |  Confidential</text>
+  </svg>
+</div>
+
+<div class="hr"></div>
+<!-- ══════════════════════════════════════
+     SECTION 2: E-01 ANALYSIS ENGINE
+══════════════════════════════════════ -->
+<div class="sec">
+  <div class="slabel">Engine 01 — Deep Dive</div>
+  <div class="stitle">Analysis Engine &mdash; <em>All 14 Modules</em></div>
+  <div class="ssub">Every module finds a specific type of problem and calls the Selection Engine for the best fix. All output always shows Rs. AND percentages both.</div>
+
+  <div class="ecard">
+    <div class="ehead">
+      <div class="eicon ic-g">&#128202;</div>
+      <div>
+        <div class="eid">E-01 — PORTFOLIO ANALYSIS ENGINE (14 MODULES)</div>
+        <div class="ename">Every Gap Found. Every Rs. Quantified.</div>
+        <div class="etag">Performance · Cost · Structure · Goal · Risk · Behaviour · Tax · Forecasting — all 14 modules run sequentially</div>
+      </div>
+    </div>
+    <div class="ebody">
+
+      <span class="slbl">&#9679; Performance Modules — Type A Gaps</span>
+
+      <div class="layer">
+        <div class="lh"><span class="ln" style="color:var(--g);background:var(--gt);border:1px solid var(--gr)">M-01</span><span class="lname">XIRR — Real Annual Return</span><span class="lw" style="color:var(--g);background:var(--gt);border:1px solid var(--gr)">15%</span></div>
+        <div class="lbody">
+          <div class="g2">
+            <div>
+              <div class="formula">NPV(r) = &sum;[ CF_i / (1+r)^t_i ] = 0 &rarr; r = XIRR</div>
+              <div class="code">from scipy.optimize import brentq
+
+def calculate_xirr(holdings):
+    cfs, dates = [], []
+    for h in holdings:
+        cfs.append(-h.invested_amount)
+        dates.append(h.purchase_date)
+    cfs.append(sum(h.current_value for h in holdings))
+    dates.append(datetime.today())
+    d0 = dates[0]
+    t  = [(d - d0).days / 365.25 for d in dates]
+    npv = lambda r: sum(c/(1+r)**ti for c,ti in zip(cfs,t))
+    return round(brentq(npv, -0.9999, 10.0) * 100, 2)</div>
+            </div>
+            <div>
+              <span class="slbl">XIRR Compared Against</span>
+              <div class="params">
+                <div class="param"><span class="pn">Goal-Required XIRR</span><span class="pv">What % return is needed to reach Rs. target by deadline? Most important comparison.</span></div>
+                <div class="param"><span class="pn">Nifty 50 (14.5%/yr)</span><span class="pv">20-year automatic index return. Main benchmark for active funds.</span></div>
+                <div class="param"><span class="pn">Category Average</span><span class="pv">Is this fund beating its category peers? If not, Selection Engine triggered.</span></div>
+                <div class="param"><span class="pn">Inflation (6.5%)</span><span class="pv">Real return = XIRR minus 6.5%. Must be positive. If negative, goal is eroding.</span></div>
+                <div class="param"><span class="pn">FD Rate (7.0%)</span><span class="pv">Minimum acceptable. Equity risk must earn more than FD.</span></div>
+              </div>
+              <div class="wb" style="font-size:11px;margin-top:8px"><strong>Selection Engine Trigger:</strong> XIRR below goal-required rate → find instruments to improve portfolio XIRR to target. XIRR below Nifty 50 → find Index fund alternatives with 0.06-0.20% TER.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="layer">
+        <div class="lh"><span class="ln" style="color:var(--blue);background:var(--bluet);border:1px solid rgba(74,143,255,.3)">M-02</span><span class="lname">Risk Metrics — Sharpe + Sortino + CVaR + Beta</span><span class="lw" style="color:var(--blue);background:var(--bluet);border:1px solid rgba(74,143,255,.3)">12%</span></div>
+        <div class="lbody">
+          <div class="g3">
+            <div>
+              <div class="formula" style="font-size:10px;padding:9px">Sharpe = (XIRR - 6.5%) / Volatility<br><span style="color:var(--t2);font-size:9px">6.5% = India G-Sec rate</span></div>
+              <div class="params">
+                <div class="param" style="font-size:11px"><span class="pn" style="min-width:70px">Above 1.0</span><span class="pv">Excellent</span></div>
+                <div class="param" style="font-size:11px"><span class="pn" style="min-width:70px">0.5 — 1.0</span><span class="pv">Acceptable</span></div>
+                <div class="param" style="font-size:11px"><span class="pn" style="min-width:70px">Below 0.5</span><span class="pv">Trigger Selection Engine</span></div>
+              </div>
+            </div>
+            <div>
+              <div class="formula" style="font-size:10px;padding:9px">Sortino = (XIRR-6.5%) / Downside Dev<br><span style="color:var(--t2);font-size:9px">Penalises only losses</span></div>
+              <div class="params">
+                <div class="param" style="font-size:11px"><span class="pn" style="min-width:70px">Target</span><span class="pv">Above 1.0. Better metric than Sharpe.</span></div>
+              </div>
+            </div>
+            <div>
+              <div class="formula" style="font-size:10px;padding:9px">CVaR = mean(worst 5% days)<br>x Portfolio = Rs. at risk</div>
+              <div class="params">
+                <div class="param" style="font-size:11px"><span class="pn" style="min-width:70px">In Rs.</span><span class="pv">Avg loss on worst 5% of days shown as Rs. always</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="layer">
+        <div class="lh"><span class="ln" style="color:var(--gold);background:var(--goldt);border:1px solid rgba(255,184,48,.3)">M-04</span><span class="lname">Benchmark Comparison — Rs. Missed Per Year</span><span class="lw" style="color:var(--gold);background:var(--goldt);border:1px solid rgba(255,184,48,.3)">8%</span></div>
+        <div class="lbody">
+          <table>
+            <thead><tr><th>Benchmark</th><th>20yr CAGR</th><th>If Your XIRR = 11.2%</th><th>Rs. Gap/Year on Rs.5L</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr><td>Nifty 50 Index</td><td>14.5%</td><td style="color:var(--red)">−3.3%</td><td style="color:var(--red)">−Rs.16,500</td><td>Gap &gt;2% → Selection Engine</td></tr>
+              <tr><td>Category Average (LC)</td><td>13.2%</td><td style="color:var(--red)">−2.0%</td><td style="color:var(--red)">−Rs.10,000</td><td>Losing to peers → Switch trigger</td></tr>
+              <tr><td>Fixed Deposit</td><td>7.0%</td><td style="color:var(--grn)">+4.2%</td><td style="color:var(--grn)">+Rs.21,000</td><td>Must beat FD minimum</td></tr>
+              <tr><td>Inflation</td><td>6.5%</td><td style="color:var(--grn)">+4.7%</td><td style="color:var(--grn)">Real return positive</td><td>Real return must be &gt;0</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <span class="slbl">&#9679; Cost Modules — Type B Gaps</span>
+
+      <div class="layer">
+        <div class="lh"><span class="ln" style="color:var(--red);background:var(--redt);border:1px solid rgba(255,63,96,.3)">M-03</span><span class="lname">TER Waste — Regular Plan Annual Cost Leak</span><span class="lw" style="color:var(--red);background:var(--redt);border:1px solid rgba(255,63,96,.3)">14%</span></div>
+        <div class="lbody">
+          <div class="g2">
+            <div>
+              <div class="code">def ter_waste_analysis(holdings):
+    for h in holdings:
+      if h.plan_type == 'regular':
+        reg_ter = amfi.fetch_ter(h.scheme_code)
+        dir_ter = amfi.fetch_ter(h.direct_code)
+        annual_waste = h.current_value*(reg_ter-dir_ter)/100
+        ten_yr_loss  = annual_waste * ((1.12**10-1)/0.12)
+        
+        if annual_waste > 1500:
+            suggestions = SelectionEngine.find_better(
+                category=h.category, user=user,
+                must_be='direct', min_fit_score=75
+            )
+        yield {
+            'annual_waste_rs': annual_waste,
+            'ten_yr_loss_rs':  ten_yr_loss,
+            'sel_engine_picks': suggestions
+        }</div>
+            </div>
+            <div>
+              <table style="font-size:11.5px">
+                <thead><tr><th>Plan</th><th>TER Range</th><th>On Rs.5L</th></tr></thead>
+                <tbody>
+                  <tr><td>Regular</td><td>1.5–2.5%/yr</td><td>Rs.7,500–12,500/yr</td></tr>
+                  <tr><td>Direct</td><td>0.1–1.0%/yr</td><td>Rs.500–5,000/yr</td></tr>
+                  <tr><td style="color:var(--red)">Wasted</td><td style="color:var(--red)">0.5–1.8%/yr</td><td style="color:var(--red)">Rs.2,500–9,000 EXTRA</td></tr>
+                </tbody>
+              </table>
+              <div class="formula" style="font-size:10px;padding:9px;margin-top:8px">10yr loss = waste × ((1.12^10 − 1) / 0.12)</div>
+              <div class="wb" style="font-size:11px">Same fund, same manager, same stocks. Only fee differs. Distributor pockets the gap. You get nothing extra.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="layer">
+        <div class="lh"><span class="ln" style="color:var(--purple);background:var(--purplet);border:1px solid rgba(155,109,255,.3)">M-05</span><span class="lname">Fund Overlap — Jaccard Set Similarity</span><span class="lw" style="color:var(--purple);background:var(--purplet);border:1px solid rgba(155,109,255,.3)">7%</span></div>
+        <div class="lbody">
+          <div class="g2">
+            <div>
+              <div class="formula">Jaccard = |A ∩ B| / |A ∪ B| × 100%</div>
+              <div class="code">def overlap_analysis(portfolio):
+    for fund_a, fund_b in combinations(portfolio.mfs, 2):
+        top_a = set(amfi.top10(fund_a.code))
+        top_b = set(amfi.top10(fund_b.code))
+        score = len(top_a & top_b) / len(top_a | top_b) * 100
+        
+        if score > 40:
+            replacement = SelectionEngine.find_zero_overlap(
+                existing=portfolio, replace=fund_b, user=user)
+        yield {'overlap_pct':score, 'common':list(top_a&top_b),
+               'suggestion':replacement}</div>
+            </div>
+            <div>
+              <div class="params">
+                <div class="param"><span class="pn">0–25% Jaccard</span><span class="pv">Good diversification. No action.</span></div>
+                <div class="param"><span class="pn">26–40% Jaccard</span><span class="pv">Low severity. Monitor.</span></div>
+                <div class="param"><span class="pn">41–60% Jaccard</span><span class="pv">MEDIUM — Selection Engine finds zero-overlap replacement.</span></div>
+                <div class="param"><span class="pn">Above 60% Jaccard</span><span class="pv">HIGH — Immediate replacement suggestion.</span></div>
+              </div>
+              <div class="ib" style="font-size:11px;margin-top:8px">Axis Bluechip + Mirae Asset Large Cap = 52% Jaccard. You pay two TERs for one portfolio. Selection Engine bonus points for candidates with low correlation to existing holdings.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="layer">
+        <div class="lh"><span class="ln" style="color:var(--grn);background:var(--grnt);border:1px solid rgba(30,200,150,.3)">M-13</span><span class="lname">Tax Efficiency — LTCG, STCG, Dividend Drag, 80C</span><span class="lw" style="color:var(--grn);background:var(--grnt);border:1px solid rgba(30,200,150,.3)">4%</span></div>
+        <div class="lbody">
+          <div class="g2">
+            <div>
+              <div class="params">
+                <div class="param"><span class="pn">LTCG Tracking</span><span class="pv">Each lot tracked. Equity: 1yr for 10% LTCG. Below 1yr: 15% STCG.</span></div>
+                <div class="param"><span class="pn">Switch Timing</span><span class="pv">LTCG milestone 15 days away: delay switch to avoid STCG.</span></div>
+                <div class="param"><span class="pn">Dividend Drag</span><span class="pv">Dividend plan = annual tax event. Growth plan = no tax until redemption.</span></div>
+                <div class="param"><span class="pn">Loss Harvest</span><span class="pv">Before March 31: book losses to offset gains. Rs.5k–40k saved/yr.</span></div>
+                <div class="param"><span class="pn">80C Gap</span><span class="pv">ELSS below Rs.1.5L = flag. Up to Rs.46,800 tax saved/yr.</span></div>
+              </div>
+            </div>
+            <div>
+              <div class="formula" style="font-size:10px;padding:9px">Net benefit = (annual_saving × years) − switch_tax_cost<br>Break-even = switch_tax_cost / annual_saving</div>
+              <div class="nb" style="font-size:11px">Selection Engine includes tax cost in net benefit. "Switch saves Rs.4,500/yr but triggers STCG Rs.8,000. Break-even: Year 2. Switch if holding 3+ years."</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <span class="slbl">&#9679; Goal Alignment Modules — Type D Gaps</span>
+
+      <div class="layer">
+        <div class="lh"><span class="ln" style="color:var(--grn);background:var(--grnt);border:1px solid rgba(30,200,150,.3)">M-06</span><span class="lname">Goal Alignment — Is Portfolio On Track for Rs. Target?</span><span class="lw" style="color:var(--grn);background:var(--grnt);border:1px solid rgba(30,200,150,.3)">16%</span></div>
+        <div class="lbody">
+          <div class="g2">
+            <div>
+              <div class="formula">FV = PV × (1+r)^n + SIP × [((1+r)^n − 1) / r]<br>Goal Gap = Target − FV<br>Extra SIP = Gap / [((1+r)^n − 1) / r]</div>
+              <div class="code">def goal_alignment(portfolio, goal, user):
+    pv  = portfolio.total_value
+    r   = portfolio.xirr / 100    # Real current XIRR
+    n   = goal.years_remaining
+    sip = portfolio.monthly_sip
+    
+    projected  = pv*(1+r)**n + sip*12*(((1+r)**n-1)/r)
+    gap_rs     = goal.target - projected
+    
+    if gap_rs > 0:
+        required_r = find_required_xirr(pv,sip,n,goal.target)
+        # Call Selection Engine to find instruments
+        # that improve portfolio XIRR to required_r
+        suggestions = SelectionEngine.find_for_xirr(
+            current=portfolio, target=required_r, user=user)
+    
+    return {
+        'projected_rs':  projected,
+        'gap_rs':        max(0, gap_rs),
+        'extra_sip_rs':  calc_sip(gap_rs, r, n),
+        'required_xirr': required_r * 100,
+        'suggestions':   suggestions
+    }</div>
+            </div>
+            <div>
+              <span class="slbl">Goal Progress Meter</span>
+              <div class="goal-meter">
+                <div class="gmrow"><div class="gmlabel">Target (Rs.1 Crore)</div><div class="gmbar"><div class="gmfill" style="width:100%;background:var(--t3)"></div></div><div class="gmval" style="color:var(--t2)">Rs.1Cr</div></div>
+                <div class="gmrow"><div class="gmlabel">Current XIRR 11.2%</div><div class="gmbar"><div class="gmfill" style="width:71%;background:var(--red)"></div></div><div class="gmval" style="color:var(--red)">Rs.71L</div></div>
+                <div class="gmrow"><div class="gmlabel">After TER Fix → 12.2%</div><div class="gmbar"><div class="gmfill" style="width:81%;background:var(--gold)"></div></div><div class="gmval" style="color:var(--gold)">Rs.81L</div></div>
+                <div class="gmrow"><div class="gmlabel">After Sel. Engine → 13.5%</div><div class="gmbar"><div class="gmfill" style="width:95%;background:var(--g)"></div></div><div class="gmval" style="color:var(--g)">Rs.95L</div></div>
+                <div class="gmrow" style="margin-bottom:0"><div class="gmlabel">+ Extra SIP Rs.2,500/mo</div><div class="gmbar"><div class="gmfill" style="width:100%;background:var(--grn)"></div></div><div class="gmval" style="color:var(--grn)">Rs.1.02Cr</div></div>
+              </div>
+              <div class="nb" style="font-size:11px">3 paths to close gap: (1) Better instruments via Selection Engine. (2) More SIP. (3) Both. All 3 shown with projected Rs. and implementation effort.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="layer">
+        <div class="lh"><span class="ln" style="color:var(--g);background:var(--gt);border:1px solid var(--gr)">M-14</span><span class="lname">Goal Probability — Monte Carlo 10,000 Simulations</span><span class="lw" style="color:var(--g);background:var(--gt);border:1px solid var(--gr)">8%</span></div>
+        <div class="lbody">
+          <div class="g2">
+            <div>
+              <div class="code">import numpy as np
+
+def goal_probability(portfolio, goal):
+    results = []
+    for _ in range(10_000):
+        value = portfolio.total_value
+        for month in range(goal.months_remaining):
+            ret = np.random.normal(
+                mean  = portfolio.xirr / 12,
+                sigma = portfolio.volatility / np.sqrt(12)
+            )
+            value = value*(1+ret) + portfolio.monthly_sip
+        results.append(value)
+    
+    results = np.array(results)
+    return {
+        'current_prob':   float((results>=goal.target).mean()*100),
+        'median':         float(np.percentile(results, 50)),
+        'worst_10pct':    float(np.percentile(results, 10)),
+        'after_guidance': rerun_with_suggestions(portfolio, goal)
+    }</div>
+            </div>
+            <div>
+              <div class="params">
+                <div class="param"><span class="pn">Current portfolio</span><span class="pv">Goal probability: 54% at XIRR 11.2%</span></div>
+                <div class="param"><span class="pn">After TER fix</span><span class="pv">Probability improves to 62%</span></div>
+                <div class="param"><span class="pn">After Sel. Engine picks</span><span class="pv">Probability reaches 75%</span></div>
+                <div class="param"><span class="pn">After + extra SIP Rs.2k</span><span class="pv">Probability reaches 83%. Goal achieved.</span></div>
+              </div>
+              <div class="nb" style="font-size:11px">Runs twice — on CURRENT and on AFTER-GUIDANCE portfolio. User sees exactly how much probability improves by following the guidance.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <span class="slbl">&#9679; Structure Modules — Type C Gaps</span>
+
+      <div class="layer" style="border-color:rgba(255,63,96,.4)">
+        <div class="lh" style="background:rgba(255,63,96,.04)">
+          <span class="ln" style="color:var(--red);background:var(--redt);border:1px solid rgba(255,63,96,.3)">M-10</span>
+          <span class="lname" style="color:var(--red)">🚫 FRAUD GATE — One Fail = EXIT Signal Immediately</span>
+          <span class="lw" style="color:var(--red);background:var(--redt);border:1px solid rgba(255,63,96,.3)">GATE</span>
+        </div>
+        <div class="lbody">
+          <div class="g2">
+            <div>
+              <span class="slbl">7 Hard Checks Per Holding</span>
+              <div class="params">
+                <div class="param"><span class="pn" style="color:var(--red)">Promoter Pledge &gt;50%</span><span class="pv">EXIT. Promoter using shares as collateral = desperate for cash.</span></div>
+                <div class="param"><span class="pn" style="color:var(--red)">Qualified Audit</span><span class="pv">EXIT. Qualified opinion in last 3 years = auditor found something wrong.</span></div>
+                <div class="param"><span class="pn" style="color:var(--red)">Net Loss 3+ Years</span><span class="pv">EXIT. Business not viable.</span></div>
+                <div class="param"><span class="pn" style="color:var(--red)">SEBI/ED/CBI Case</span><span class="pv">EXIT immediately. Any active regulatory case.</span></div>
+                <div class="param"><span class="pn" style="color:var(--red)">D/E above 4x</span><span class="pv">EXIT. Non-finance company. Over-leveraged.</span></div>
+                <div class="param"><span class="pn" style="color:var(--red)">ROE below 5% (5yr)</span><span class="pv">EXIT. Destroys shareholder capital.</span></div>
+                <div class="param"><span class="pn" style="color:var(--red)">Heavy Insider Selling</span><span class="pv">EXIT. Promoter exits while recommending buy.</span></div>
+              </div>
+            </div>
+            <div>
+              <span class="slbl">Advanced Fraud Signals</span>
+              <div class="params">
+                <div class="param"><span class="pn">Revenue-CF Gap</span><span class="pv">Revenue growing but cash flat = accounting manipulation</span></div>
+                <div class="param"><span class="pn">Receivables Spike</span><span class="pv">Growing faster than revenue = fake revenue booking</span></div>
+                <div class="param"><span class="pn">Related Party Txns</span><span class="pv">Above 20% revenue with promoter entities = siphoning</span></div>
+                <div class="param"><span class="pn">Auditor Change</span><span class="pv">Frequent changes = hiding something</span></div>
+                <div class="param"><span class="pn">TER Spike (MF)</span><span class="pv">AMC raised TER → alert + Selection Engine finds cheaper option</span></div>
+                <div class="param"><span class="pn">Fund Manager Exit</span><span class="pv">Sudden departure → reassess fund without that manager</span></div>
+              </div>
+              <div class="wb" style="font-size:11px;margin-top:8px">Any fail on existing holding: Immediate EXIT alert. Selection Engine automatically finds safe replacement in same category passing all 7 checks with FIT SCORE 75+.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="layer">
+        <div class="lh"><span class="ln" style="color:var(--purple);background:var(--purplet);border:1px solid rgba(155,109,255,.3)">M-12</span><span class="lname">Behaviour Analysis — Portfolio Biases Detected</span><span class="lw" style="color:var(--purple);background:var(--purplet);border:1px solid rgba(155,109,255,.3)">4%</span></div>
+        <div class="lbody">
+          <div class="g2">
+            <div>
+              <div class="params">
+                <div class="param"><span class="pn">Recency Bias</span><span class="pv">Heavy in sectors that recently rallied. Show 10yr rolling data.</span></div>
+                <div class="param"><span class="pn">Herd Behaviour</span><span class="pv">Most popular fund of last year overweight. Flag valuation risk.</span></div>
+                <div class="param"><span class="pn">Loss Aversion</span><span class="pv">Holding losers anchored to buy price. Show Rs. cost of holding vs selling.</span></div>
+                <div class="param"><span class="pn">Home Country Bias</span><span class="pv">100% India, zero international. Flag USD hedge gap.</span></div>
+                <div class="param"><span class="pn">Complexity Bias</span><span class="pv">8+ funds with high overlap. 3-4 may suffice. Simplify.</span></div>
+              </div>
+            </div>
+            <div>
+              <div class="params">
+                <div class="param"><span class="pn">Timeline Mismatch</span><span class="pv">3yr user with 80% equity will panic-sell at first crash.</span></div>
+                <div class="param"><span class="pn">Return Expectation</span><span class="pv">User expects 25%/yr from portfolio giving 11%. Reality check.</span></div>
+                <div class="param"><span class="pn">Risk Tolerance Gap</span><span class="pv">Said "handle -30%" but CVaR shows -42% possible. Recalibrate.</span></div>
+              </div>
+              <div class="pb" style="font-size:11px;margin-top:8px">Selection Engine uses M-12 to FILTER suggestions. Instruments that reinforce detected bias are excluded from recommendations entirely.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Health Score -->
+      <span class="slbl">&#9679; Health Score Calculation</span>
+      <div class="code">def health_score(results):
+    score = 100
+    # Type A: Performance gaps (max -35 pts)
+    if xirr_gap > 5:      score -= 20
+    elif xirr_gap > 2:    score -= 12
+    elif xirr_gap > 0:    score -= 5
+    if sharpe < 0.3:      score -= 10
+    elif sharpe < 0.5:    score -= 5
+    # Type B: Cost gaps (max -22 pts)
+    waste_pct = ter_waste_rs / total_value * 100
+    if waste_pct > 1.5:   score -= 18
+    elif waste_pct > 0.5: score -= 10
+    elif waste_pct > 0:   score -= 5
+    if max_jaccard > 60:  score -= 8
+    elif max_jaccard > 40: score -= 4
+    # Type C: Structure (max -18 pts)
+    if fraud_flag:        score -= 15  # Immediate
+    if conc > 60:         score -= 8
+    if equity_gap > 20:   score -= 5
+    # Type D: Goal (max -25 pts)
+    if goal_gap_pct > 0.30: score -= 15
+    elif goal_gap_pct > 0:  score -= 8
+    if goal_prob < 50:    score -= 10
+    elif goal_prob < 65:  score -= 5
+    return max(0, round(score))</div>
+      <div class="sgrid">
+        <div class="sv sv-a"><span class="svicon">&#127881;</span><div class="svtitle" style="color:var(--grn)">A — Excellent</div><div class="svrange" style="color:var(--grn)">86 – 100</div><div class="svdesc">Well-optimized. Goal on track. Minor fixes only.</div></div>
+        <div class="sv sv-b"><span class="svicon">&#9888;</span><div class="svtitle" style="color:var(--gold)">B/C — Average</div><div class="svrange" style="color:var(--gold)">50 – 85</div><div class="svdesc">Issues found. Hidden losses. Guidance has specific fixes.</div></div>
+        <div class="sv sv-c"><span class="svicon">&#128680;</span><div class="svtitle" style="color:var(--red)">D/F — Critical</div><div class="svrange" style="color:var(--red)">0 – 49</div><div class="svdesc">Major losses every year. Goal unreachable at current rate.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hr"></div>
+<!-- ══════════════════════════════════════
+     SECTION 3: SELECTION ENGINE
+══════════════════════════════════════ -->
+<div class="sec">
+  <div class="slabel">Selection Engine Integration</div>
+  <div class="stitle">How Selection Engine <em>Powers Every Suggestion</em></div>
+  <div class="ssub">The 12-layer Selection Engine is called by E-01 for every gap found. It finds the best instrument to fix each specific problem — not generic advice, but a specific fund with AMFI code, FIT SCORE, Rs. improvement, and tax break-even.</div>
+
+  <div class="ecard">
+    <div class="ehead">
+      <div class="eicon ic-p">&#128301;</div>
+      <div>
+        <div class="eid">SELECTION ENGINE — 12 Layers Called Per Gap (FIT SCORE 0-100)</div>
+        <div class="ename">Best Instrument for Each Specific Problem.</div>
+        <div class="etag">Quantum QAOA final ranking · Only 75+ suggested · MF name + AMFI code + Stock symbol shown</div>
+      </div>
+    </div>
+    <div class="ebody">
+      <span class="slbl">What Module Triggers Selection Engine and For What Task</span>
+      <table>
+        <thead><tr><th>Module</th><th>Trigger Condition</th><th>Selection Engine Task</th><th>Scoring Bonus</th></tr></thead>
+        <tbody>
+          <tr><td style="color:var(--g)">M-01 XIRR</td><td>XIRR below goal-required rate</td><td>Find instruments to improve portfolio XIRR</td><td>Bonus for XIRR contribution</td></tr>
+          <tr><td style="color:var(--red)">M-03 TER Waste</td><td>Regular plan detected</td><td>Find Direct equivalent + Index alternatives</td><td>Bonus for low TER (&lt;0.20%)</td></tr>
+          <tr><td style="color:var(--gold)">M-04 Benchmarks</td><td>Losing to category peers</td><td>Find top-quartile fund in same category</td><td>Bonus for alpha generation</td></tr>
+          <tr><td style="color:var(--purple)">M-05 Overlap</td><td>Jaccard above 40%</td><td>Find zero-overlap replacement</td><td>Bonus for low correlation</td></tr>
+          <tr><td style="color:var(--grn)">M-06 Goal Gap</td><td>Portfolio Rs. shortfall</td><td>Find instruments to reach required XIRR</td><td>Ranked by goal contribution</td></tr>
+          <tr><td style="color:var(--cyan)">M-07 SIP Gap</td><td>Monthly SIP insufficient</td><td>Find best instrument for extra SIP amount</td><td>Bonus for what portfolio is missing</td></tr>
+          <tr><td style="color:var(--pink)">M-08 Concentration</td><td>Fund/sector above limit</td><td>Find different sector, cap, or geography</td><td>Bonus for reducing portfolio correlation</td></tr>
+          <tr><td style="color:var(--org)">M-09 Debt-Equity</td><td>Balance off for age</td><td>Find debt or equity to restore balance</td><td>Weighted by gap size</td></tr>
+          <tr><td style="color:var(--red)">M-10 Fraud Gate</td><td>Any hard fail on holding</td><td>Find safe replacement in same category</td><td>Must pass all 7 fraud checks</td></tr>
+          <tr><td style="color:var(--purple)">M-12 Behaviour</td><td>Bias detected</td><td>Exclude bias-reinforcing instruments</td><td>Filter applied before scoring</td></tr>
+          <tr><td style="color:var(--grn)">M-13 Tax</td><td>Tax drag detected</td><td>Show break-even timeline for switch</td><td>Tax cost deducted from net benefit</td></tr>
+        </tbody>
+      </table>
+
+      <span class="slbl">How Selection Engine Scores in Health Check Context</span>
+      <div class="code">def selection_for_health_check(gap_type, user, portfolio):
+    candidates = get_universe(gap_type.category)
+    scored = []
+    
+    for c in candidates:
+        base_score = run_all_12_layers(c, user)  # Standard 12-layer scoring
+        
+        # EXTRA Health Check scoring factors:
+        if gap_type.type == 'xirr_gap':
+            xirr_boost = simulate_xirr_improvement(portfolio, c)
+            base_score += xirr_boost * 20        # Weight XIRR improvement
+        
+        elif gap_type.type == 'overlap':
+            new_jaccard = jaccard(c.top10, portfolio.all_holdings)
+            base_score += (1 - new_jaccard/100) * 15  # Bonus for zero overlap
+        
+        elif gap_type.type == 'ter_waste':
+            ter_bonus = max(0, (1.5 - c.ter) * 10)
+            base_score += ter_bonus               # Bonus for low TER
+        
+        # EXCLUSIONS for Health Check:
+        # Do not suggest what user already holds
+        # Do not suggest instruments that worsen overlap
+        # Do not suggest if tax cost > 3yr benefit
+        if not is_excluded(c, portfolio, gap_type):
+            scored.append((c, base_score))
+    
+    return QAOA.rank_for_portfolio(scored, portfolio, gap_type)</div>
+
+      <span class="slbl">Sample Issue Cards with Selection Engine Output</span>
+
+      <div class="issue ih">
+        <div class="itop">
+          <span class="isev ish">HIGH SEVERITY — TER WASTE</span>
+          <span class="isev" style="color:var(--g);background:var(--gt);border-color:var(--gr)">FREE</span>
+          <div class="irs"><span class="irsm">Rs.6,240/year</span><span class="irss">Rs.1,09,000 over 10 years</span></div>
+        </div>
+        <div class="ititle">Issue #1 — Regular Plan Cost Leak — Axis Bluechip Fund</div>
+        <div class="ibody">You hold Axis Bluechip Regular (AMFI: 120505). The EXACT same fund exists as Direct (AMFI: 120503). Same fund manager, same stocks, same portfolio. Regular TER: 1.68%/yr. Direct TER: 0.50%/yr. You are paying 1.18% extra annually as distributor commission. On your Rs.5.28L holding: Rs.6,230/year going to your distributor. You receive nothing extra for paying more.</div>
+        <div class="ifix">Fix: mfcentral.com → Transactions → Switch → Axis Bluechip Regular → Axis Bluechip Direct (120503). Zero exit load. Zero tax event. Done in 3-5 working days.</div>
+        <div class="isel">
+          <strong>Selection Engine picks (FIT SCORE shown):</strong><br>
+          • <strong>Axis Bluechip Direct (120503)</strong> — FIT 87 — TER 0.50% — Same portfolio, Rs.6,230 saved/year<br>
+          • <strong>HDFC Nifty 50 Index Direct (118990)</strong> — FIT 94 — TER 0.20% — Outperforms Axis Bluechip over 10yr. Rs.7,760 saved/year<br>
+          • <strong>Navi Nifty 50 Index Direct (149000)</strong> — FIT 88 — TER 0.06% — Lowest TER. Rs.8,500 saved/year<br>
+          • <strong>TCS (TCS.NS) + HDFC Bank (HDFCBANK.NS)</strong> — FIT 86 — Zero TER forever. Together = 25% of Nifty 50.
+        </div>
+      </div>
+
+      <div class="issue im">
+        <div class="itop">
+          <span class="isev ism">GOAL GAP — D-TYPE</span>
+          <span class="isev" style="color:var(--purple);background:var(--purplet);border-color:rgba(155,109,255,.3)">PREMIUM</span>
+          <div class="irs"><span class="irsm">Rs.29L gap at 2040</span><span class="irss">Goal: Rs.1Cr. Projected: Rs.71L</span></div>
+        </div>
+        <div class="ititle">Issue #2 — Portfolio XIRR 11.2% Below Required 13.8% — Goal Probability Only 54%</div>
+        <div class="ibody">At XIRR 11.2%/yr with Rs.8,000/month SIP, your portfolio reaches Rs.71L by 2040. You need Rs.1Cr. Gap: Rs.29L. Monte Carlo (10,000 simulations) shows 54% probability. Required XIRR is 13.8%/yr. Nifty 50 Index has given 14.5%/yr over 20 years automatically — your actively managed funds are delivering less while charging more TER.</div>
+        <div class="isel">
+          <strong>Selection Engine picks to close XIRR gap (ranked by goal contribution):</strong><br>
+          • <strong>HDFC Nifty 50 Index Direct (118990)</strong> — FIT 94 — XIRR +1.8% — Replace underperforming LC fund — Goal prob: 62%<br>
+          • <strong>Parag Parikh Flexi Cap Direct (122640)</strong> — FIT 91 — 18.2%/yr 5yr CAGR — 20% international, zero India overlap — Goal prob: 71%<br>
+          • <strong>Mirae Asset Midcap Direct (135781)</strong> — FIT 84 — Different stock universe, zero overlap with LC — Goal prob: 75%<br>
+          • <strong>Persistent Systems (PERSISTENT.NS)</strong> — FIT 87 — IT mid-cap, ROE 35%+, zero TER, 3yr CAGR 50%+ — High risk portion only<br><br>
+          <strong>After top 3 picks + TER fix: XIRR improves to 13.5% → Goal prob 75% → Gap closes from Rs.29L to Rs.5L → Extra SIP needed: only Rs.800/month</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ══════════════════════════════════════
+     SECTION 4: ENGINES 02-07
+══════════════════════════════════════ -->
+<div class="sec">
+  <div class="slabel">Engines 02 to 07</div>
+  <div class="stitle">Guidance · Backtest · Risk · <em>Execution · Rebalancing · SIP</em></div>
+  <div class="ssub">E-02 through E-04 always run. E-05 through E-07 only activate when user chooses Path B and executes changes.</div>
+
+  <!-- E-02 -->
+  <div class="ecard">
+    <div class="ehead">
+      <div class="eicon ic-p">&#127775;</div>
+      <div>
+        <div class="eid">E-02 — GUIDANCE ENGINE</div>
+        <div class="ename">Specific Fixes. Exact Rs. Minimum Risk Path.</div>
+        <div class="etag">Ranked issue cards · AMFI codes · MF + Stock alternatives · NxanceLM plain English · Always runs</div>
+      </div>
+    </div>
+    <div class="ebody">
+      <div class="g2">
+        <div>
+          <span class="slbl">Issue Priority</span>
+          <table style="font-size:11.5px">
+            <thead><tr><th>Issue</th><th>Severity</th><th>Rs. Loss/Year</th><th>Fix Time</th></tr></thead>
+            <tbody>
+              <tr><td>Fraud alert on holding</td><td style="color:var(--red)">CRITICAL</td><td style="color:var(--red)">Rs. at risk</td><td>Today</td></tr>
+              <tr><td>Regular Plan TER</td><td style="color:var(--red)">HIGH</td><td style="color:var(--red)">Rs.2,500–15,000</td><td>5 min</td></tr>
+              <tr><td>Underperforming fund</td><td style="color:var(--red)">HIGH</td><td style="color:var(--red)">Rs.5,000–25,000</td><td>1 day</td></tr>
+              <tr><td>Overlap above 50%</td><td style="color:var(--gold)">MEDIUM</td><td style="color:var(--gold)">Opportunity cost</td><td>1 week</td></tr>
+              <tr><td>Goal gap</td><td style="color:var(--gold)">MEDIUM</td><td style="color:var(--gold)">Future impact</td><td>Ongoing</td></tr>
+              <tr><td>Concentration risk</td><td style="color:var(--gold)">MEDIUM</td><td style="color:var(--gold)">Volatility</td><td>1 week</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <span class="slbl">3 Paths to Close Goal Gap</span>
+          <div class="params">
+            <div class="param"><span class="pn">Option 1 — Instruments</span><span class="pv">Switch to Selection Engine picks. XIRR 11.2% → 13.5%. Gap closes without extra money. 2-4 weeks.</span></div>
+            <div class="param"><span class="pn">Option 2 — More SIP</span><span class="pv">Keep portfolio, add Rs.4,300/month more. Gap closes in 14 years. Extra cash needed.</span></div>
+            <div class="param"><span class="pn">Option 3 — Both (Best)</span><span class="pv">Better instruments + Rs.2,000/month more. Closes gap with least disruption. Recommended.</span></div>
+          </div>
+          <div class="goldb" style="font-size:11px">All 3 options shown with: projected portfolio value in Rs., extra monthly cost, and effort to implement. User chooses based on their situation.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- E-03 -->
+  <div class="ecard">
+    <div class="ehead">
+      <div class="eicon ic-gold">&#128240;</div>
+      <div>
+        <div class="eid">E-03 — BACKTESTING ENGINE</div>
+        <div class="ename">Before AND After. How Much Damage Was Avoidable?</div>
+        <div class="etag">5 historical crashes · Tests current AND recommended portfolio · Rs. difference shown · Always runs</div>
+      </div>
+    </div>
+    <div class="ebody">
+      <div class="g2">
+        <div>
+          <table style="font-size:11.5px">
+            <thead><tr><th>Crisis</th><th>Large Cap</th><th>Mid Cap</th><th>Debt</th><th>Gold</th><th>Recovery</th></tr></thead>
+            <tbody>
+              <tr><td>2008 GFC</td><td style="color:var(--red)">−55%</td><td style="color:var(--red)">−67%</td><td style="color:var(--grn)">+8%</td><td style="color:var(--grn)">+25%</td><td>18 months</td></tr>
+              <tr><td>2013 Taper</td><td style="color:var(--red)">−20%</td><td style="color:var(--red)">−30%</td><td style="color:var(--red)">−5%</td><td style="color:var(--grn)">+3%</td><td>9 months</td></tr>
+              <tr><td>2018 NBFC</td><td style="color:var(--red)">−15%</td><td style="color:var(--red)">−35%</td><td style="color:var(--red)">−3%</td><td style="color:var(--grn)">+4%</td><td>12 months</td></tr>
+              <tr><td>2020 COVID</td><td style="color:var(--red)">−38%</td><td style="color:var(--red)">−41%</td><td style="color:var(--grn)">+6%</td><td style="color:var(--grn)">+18%</td><td>5 months</td></tr>
+              <tr><td>2022 Rate Hike</td><td style="color:var(--red)">−17%</td><td style="color:var(--red)">−22%</td><td style="color:var(--red)">−4%</td><td style="color:var(--grn)">+12%</td><td>12 months</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <span class="slbl">Before vs After on Rs.5L Portfolio</span>
+          <table style="font-size:11.5px">
+            <thead><tr><th>Crisis</th><th>Current</th><th>After E-02 Changes</th><th>Saved</th></tr></thead>
+            <tbody>
+              <tr><td>2008 GFC</td><td style="color:var(--red)">−Rs.1,60,000</td><td style="color:var(--red)">−Rs.1,10,000</td><td style="color:var(--grn)">Rs.50,000</td></tr>
+              <tr><td>2020 COVID</td><td style="color:var(--red)">−Rs.95,000</td><td style="color:var(--red)">−Rs.72,000</td><td style="color:var(--grn)">Rs.23,000</td></tr>
+              <tr><td>2022 Rates</td><td style="color:var(--red)">−Rs.42,000</td><td style="color:var(--red)">−Rs.28,000</td><td style="color:var(--grn)">Rs.14,000</td></tr>
+            </tbody>
+          </table>
+          <div class="nb" style="font-size:11px">E-03 makes guidance tangible. "If I had applied this advice before 2020, my portfolio would have fallen Rs.23,000 less and recovered faster."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- E-04 -->
+  <div class="ecard">
+    <div class="ehead">
+      <div class="eicon ic-red">&#128737;</div>
+      <div>
+        <div class="eid">E-04 — RISK ANALYSIS ENGINE</div>
+        <div class="ename">Is Your Risk Right? Over AND Under Risk Both Cost Money.</div>
+        <div class="etag">7 metrics · Flags too aggressive AND too conservative · Goal probability via Monte Carlo · Always runs</div>
+      </div>
+    </div>
+    <div class="ebody">
+      <div class="g2">
+        <div>
+          <span class="slbl">7 Risk Metrics</span>
+          <div class="params">
+            <div class="param"><span class="pn">Sharpe Ratio</span><span class="pv">Target above 0.8. (XIRR−6.5%)/Volatility.</span></div>
+            <div class="param"><span class="pn">Sortino Ratio</span><span class="pv">Return per unit downside risk. Target above 1.0.</span></div>
+            <div class="param"><span class="pn">CVaR 95%</span><span class="pv">Avg loss in worst 5% scenarios. In Rs. always.</span></div>
+            <div class="param"><span class="pn">Max Drawdown</span><span class="pv">Largest peak-to-trough. vs user's stated tolerance.</span></div>
+            <div class="param"><span class="pn">Beta vs Nifty</span><span class="pv">Portfolio vol vs market. Above 1.0 = riskier than index.</span></div>
+            <div class="param"><span class="pn">VaR 95%</span><span class="pv">Worst single day loss with 95% confidence.</span></div>
+            <div class="param"><span class="pn">Goal Probability</span><span class="pv">Monte Carlo: % chance of hitting target. Must be above 65%.</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="wb" style="margin-bottom:12px"><strong>Over-Risk:</strong> User 55yr, retirement 5yr. Portfolio 85% equity. Beta 1.4. Drawdown was −42%. Crash 2 years before retirement could permanently damage corpus.<br><br><strong>Fix:</strong> Reduce equity to 55%. Move 30% to Short Duration Debt. Drawdown risk drops to −18%.</div>
+          <div class="ib"><strong>Under-Risk:</strong> User 28yr, 20yr horizon. Portfolio 80% FD + Debt at 7%/yr. Inflation 6.5%. Real return: 0.5%/yr. Rs.2Cr goal by age 48 is mathematically impossible at this rate.<br><br><strong>Fix:</strong> Increase equity to 75%. Switch FDs to Short Duration MF + Large Cap Index. XIRR improves to 11-12%/yr.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- E-05 -->
+  <div class="ecard">
+    <div class="ehead">
+      <div class="eicon ic-b">&#9989;</div>
+      <div>
+        <div class="eid">E-05 — EXECUTION MANAGING ENGINE — PATH B ONLY</div>
+        <div class="ename">Track Changes. Score Updates Live. Show Impact.</div>
+        <div class="etag">Activates only when user executes. Health Score recalculates after each action. E-01 re-runs.</div>
+      </div>
+    </div>
+    <div class="ebody">
+      <div class="g2">
+        <div>
+          <span class="slbl">What E-05 Tracks</span>
+          <div class="params">
+            <div class="param"><span class="pn">Switch Status</span><span class="pv">Regular to Direct: Initiated / In Progress / Completed</span></div>
+            <div class="param"><span class="pn">New Purchase</span><span class="pv">New fund/stock: date, Rs. invested, units bought</span></div>
+            <div class="param"><span class="pn">SIP Started</span><span class="pv">New SIP: instrument, Rs./month, start date</span></div>
+            <div class="param"><span class="pn">Score Delta</span><span class="pv">Health Score before vs after each action in real time</span></div>
+            <div class="param"><span class="pn">Rs. Saved</span><span class="pv">Annual Rs. improvement unlocked by each action</span></div>
+            <div class="param"><span class="pn">Pending Actions</span><span class="pv">What is still pending and its potential impact if done</span></div>
+          </div>
+        </div>
+        <div>
+          <span class="slbl">Progress Table</span>
+          <table style="font-size:11.5px">
+            <thead><tr><th>Action</th><th>Status</th><th>Score+</th><th>Rs./Year</th></tr></thead>
+            <tbody>
+              <tr><td>Axis Bluechip → Direct</td><td style="color:var(--grn)">Done</td><td style="color:var(--grn)">+13</td><td style="color:var(--grn)">+Rs.6,240</td></tr>
+              <tr><td>HDFC Top 100 → Direct</td><td style="color:var(--gold)">In Progress</td><td>+8 pending</td><td>+Rs.3,800</td></tr>
+              <tr><td>Add HDFC Nifty 50 SIP</td><td style="color:var(--t3)">Not Started</td><td>+6 if done</td><td>Goal gap −Rs.2.4L</td></tr>
+            </tbody>
+          </table>
+          <div class="nb" style="font-size:11px">After each action: E-01 re-runs on updated portfolio. New Health Score calculated. New goal probability from M-14 shown. User sees live improvement.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- E-06 + E-07 -->
+  <div class="g2">
+    <div class="ecard" style="margin-bottom:0">
+      <div class="ehead" style="padding:14px 18px">
+        <div class="eicon ic-cyan" style="width:46px;height:46px;font-size:22px">&#9878;</div>
+        <div>
+          <div class="eid">E-06 — REBALANCING ENGINE — PATH B ONLY</div>
+          <div class="ename" style="font-size:16px">Drift Detected. Restore Balance.</div>
+          <div class="etag">3 triggers · Tax-loss harvest · Max once per 90 days · Annual age adjustment</div>
+        </div>
+      </div>
+      <div class="ebody" style="padding:16px 18px">
+        <div class="params">
+          <div class="param"><span class="pn">Allocation Drift</span><span class="pv">Any holding drifts more than 5% from ideal target</span></div>
+          <div class="param"><span class="pn">Risk Metric Breach</span><span class="pv">Sharpe below 0.3, goal prob below 50%, concentration above 40%</span></div>
+          <div class="param"><span class="pn">Annual Review</span><span class="pv">Age +1: reduce equity 1-2%, increase debt. Full E-01 re-run.</span></div>
+        </div>
+        <div class="goldb" style="font-size:11px;margin-top:8px">Tax-loss harvesting: sell losing positions first to offset capital gains tax. Saves Rs.5,000–30,000/year on Rs.10L portfolio.</div>
+      </div>
+    </div>
+    <div class="ecard" style="margin-bottom:0">
+      <div class="ehead" style="padding:14px 18px">
+        <div class="eicon ic-org" style="width:46px;height:46px;font-size:22px">&#128260;</div>
+        <div>
+          <div class="eid">E-07 — SIP REDESIGN ENGINE — PATH B ONLY</div>
+          <div class="ename" style="font-size:16px">Monthly Recalculation. Live NAV.</div>
+          <div class="etag">Rs. fixed · Qty flexes · Amount change = rebuild + Selection Engine</div>
+        </div>
+      </div>
+      <div class="ebody" style="padding:16px 18px">
+        <div class="params">
+          <div class="param"><span class="pn">Monthly SIP Date</span><span class="pv">Recalculate all quantities at live AMFI NAV</span></div>
+          <div class="param"><span class="pn">SIP Fund Switched</span><span class="pv">Regular → Direct: SIP redirected. E-07 updates quantities.</span></div>
+          <div class="param"><span class="pn">Amount Increased</span><span class="pv">User adds more after seeing goal gap. Selection Engine picks best instrument for extra SIP.</span></div>
+          <div class="param"><span class="pn">Amount Decreased</span><span class="pv">Recalculate. Below threshold: suggest dropping one instrument.</span></div>
+        </div>
+        <div class="nb" style="font-size:11px;margin-top:8px">Market falls = more units bought for same Rs. SIP cost averaging works automatically. Amount change above 20%: full rebuild with Selection Engine for new candidates.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hr"></div>
+<!-- ══════════════════════════════════════
+     SECTION 5: INTERACTION DIAGRAM
+══════════════════════════════════════ -->
+<div class="sec">
+  <div class="slabel">Engine Interaction Map</div>
+  <div class="stitle">How All 8 Engines <em>Talk to Each Other</em></div>
+  <div class="ssub">E-01 through E-04 always run. E-05 through E-07 only activate on Path B. E-01 re-runs after every completed E-05 action. Selection Engine is embedded inside E-01.</div>
+
+  <svg viewBox="0 0 840 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:840px;display:block;margin:0 auto 22px;border-radius:12px">
+    <rect width="840" height="380" rx="12" fill="#07000C" stroke="#161930" stroke-width="1.5"/>
+    <text x="420" y="26" text-anchor="middle" font-size="11" font-weight="700" fill="#EAF0FF" font-family="DM Serif Display,serif">Engine Interaction Map</text>
+
+    <!-- PATH A label -->
+    <rect x="22" y="42" width="186" height="16" rx="5" fill="rgba(30,200,150,.06)" stroke="#1EC896" stroke-width="1"/>
+    <text x="115" y="54" text-anchor="middle" font-size="8" fill="#1EC896" font-weight="700" font-family="JetBrains Mono,monospace">PATH A — ALWAYS RUNS</text>
+    <!-- PATH B label -->
+    <rect x="430" y="42" width="388" height="16" rx="5" fill="rgba(74,143,255,.06)" stroke="#4A8FFF" stroke-width="1"/>
+    <text x="624" y="54" text-anchor="middle" font-size="8" fill="#4A8FFF" font-weight="700" font-family="JetBrains Mono,monospace">PATH B — ONLY IF USER EXECUTES CHANGES</text>
+
+    <!-- E-01 -->
+    <rect x="22" y="66" width="186" height="52" rx="9" fill="rgba(0,212,177,.07)" stroke="#00D4B1" stroke-width="1.5"/>
+    <text x="115" y="87" text-anchor="middle" font-size="9" fill="#00D4B1" font-weight="700" font-family="JetBrains Mono,monospace">E-01 Analysis Engine</text>
+    <text x="115" y="103" text-anchor="middle" font-size="9" fill="#5A6CA0">14 modules + Health Score</text>
+    <text x="115" y="114" text-anchor="middle" font-size="9" fill="#5A6CA0">Re-runs after each E-05 action</text>
+    <!-- Selection Engine -->
+    <rect x="22" y="126" width="186" height="44" rx="9" fill="rgba(155,109,255,.07)" stroke="#9B6DFF" stroke-width="1.5"/>
+    <text x="115" y="145" text-anchor="middle" font-size="9" fill="#9B6DFF" font-weight="700" font-family="JetBrains Mono,monospace">Selection Engine</text>
+    <text x="115" y="161" text-anchor="middle" font-size="9" fill="#5A6CA0">12 layers · QAOA · FIT 0-100</text>
+    <line x1="115" y1="118" x2="115" y2="126" stroke="#9B6DFF" stroke-width="1.5"/>
+    <!-- E-02 -->
+    <rect x="22" y="178" width="186" height="44" rx="9" fill="rgba(155,109,255,.05)" stroke="#9B6DFF" stroke-width="1.2"/>
+    <text x="115" y="197" text-anchor="middle" font-size="9" fill="#9B6DFF" font-weight="700" font-family="JetBrains Mono,monospace">E-02 Guidance</text>
+    <text x="115" y="213" text-anchor="middle" font-size="9" fill="#5A6CA0">Issue cards + AMFI codes</text>
+    <line x1="115" y1="170" x2="115" y2="178" stroke="#252A48" stroke-width="1.5"/>
+    <!-- E-03 -->
+    <rect x="22" y="230" width="186" height="44" rx="9" fill="rgba(255,184,48,.05)" stroke="#FFB830" stroke-width="1.2"/>
+    <text x="115" y="249" text-anchor="middle" font-size="9" fill="#FFB830" font-weight="700" font-family="JetBrains Mono,monospace">E-03 Backtesting</text>
+    <text x="115" y="265" text-anchor="middle" font-size="9" fill="#5A6CA0">5 crashes · Before/After Rs.</text>
+    <line x1="115" y1="222" x2="115" y2="230" stroke="#252A48" stroke-width="1.5"/>
+    <!-- E-04 -->
+    <rect x="22" y="282" width="186" height="44" rx="9" fill="rgba(255,63,96,.05)" stroke="#FF3F60" stroke-width="1.2"/>
+    <text x="115" y="301" text-anchor="middle" font-size="9" fill="#FF3F60" font-weight="700" font-family="JetBrains Mono,monospace">E-04 Risk Analysis</text>
+    <text x="115" y="317" text-anchor="middle" font-size="9" fill="#5A6CA0">7 metrics · Over + Under risk</text>
+    <line x1="115" y1="274" x2="115" y2="282" stroke="#252A48" stroke-width="1.5"/>
+
+    <!-- DIVIDER -->
+    <line x1="370" y1="42" x2="370" y2="340" stroke="#1A1E38" stroke-width="1.5" stroke-dasharray="5,5"/>
+    <text x="370" y="356" text-anchor="middle" font-size="9" fill="#252A48" font-family="JetBrains Mono,monospace">USER DECISION</text>
+
+    <!-- E-05 -->
+    <rect x="392" y="66" width="186" height="52" rx="9" fill="rgba(74,143,255,.07)" stroke="#4A8FFF" stroke-width="1.5"/>
+    <text x="485" y="87" text-anchor="middle" font-size="9" fill="#4A8FFF" font-weight="700" font-family="JetBrains Mono,monospace">E-05 Execution Mgt</text>
+    <text x="485" y="103" text-anchor="middle" font-size="9" fill="#5A6CA0">Tracks changes · Live score</text>
+    <text x="485" y="114" text-anchor="middle" font-size="9" fill="#5A6CA0">Triggers E-01 re-run</text>
+    <!-- E-06 -->
+    <rect x="392" y="126" width="186" height="44" rx="9" fill="rgba(0,196,255,.05)" stroke="#00C4FF" stroke-width="1.2"/>
+    <text x="485" y="145" text-anchor="middle" font-size="9" fill="#00C4FF" font-weight="700" font-family="JetBrains Mono,monospace">E-06 Rebalancing</text>
+    <text x="485" y="161" text-anchor="middle" font-size="9" fill="#5A6CA0">Drift/breach/annual review</text>
+    <line x1="485" y1="118" x2="485" y2="126" stroke="#252A48" stroke-width="1.5"/>
+    <!-- E-07 -->
+    <rect x="392" y="178" width="186" height="44" rx="9" fill="rgba(255,122,53,.05)" stroke="#FF7A35" stroke-width="1.2"/>
+    <text x="485" y="197" text-anchor="middle" font-size="9" fill="#FF7A35" font-weight="700" font-family="JetBrains Mono,monospace">E-07 SIP Redesign</text>
+    <text x="485" y="213" text-anchor="middle" font-size="9" fill="#5A6CA0">Monthly + amount change</text>
+    <line x1="485" y1="170" x2="485" y2="178" stroke="#252A48" stroke-width="1.5"/>
+
+    <!-- E-02 to Path B link -->
+    <line x1="208" y1="200" x2="370" y2="200" stroke="#252A48" stroke-width="1.5"/>
+    <line x1="370" y1="200" x2="370" y2="92" stroke="#4A8FFF" stroke-width="1.5"/>
+    <line x1="370" y1="92" x2="392" y2="92" stroke="#4A8FFF" stroke-width="1.5"/>
+
+    <!-- E-05 feedback loop to E-01 -->
+    <path d="M 578 92 C 700 92 730 180 730 230 C 730 290 690 320 620 320 C 560 320 400 320 300 320 C 240 320 200 290 200 260 C 200 235 115 230 115 282" stroke="#252A48" stroke-width="1" fill="none" stroke-dasharray="4,4"/>
+    <text x="700" y="210" font-size="8" fill="#252A48" font-family="JetBrains Mono,monospace" text-anchor="middle">E-01 re-runs</text>
+    <text x="700" y="222" font-size="8" fill="#252A48" font-family="JetBrains Mono,monospace" text-anchor="middle">after each</text>
+    <text x="700" y="234" font-size="8" fill="#252A48" font-family="JetBrains Mono,monospace" text-anchor="middle">completed</text>
+    <text x="700" y="246" font-size="8" fill="#252A48" font-family="JetBrains Mono,monospace" text-anchor="middle">action</text>
+
+    <!-- NxanceLM -->
+    <rect x="620" y="262" width="196" height="44" rx="9" fill="rgba(0,212,177,.06)" stroke="#00D4B1" stroke-width="1"/>
+    <text x="718" y="281" text-anchor="middle" font-size="9" fill="#00D4B1" font-weight="700" font-family="JetBrains Mono,monospace">NxanceLM</text>
+    <text x="718" y="297" text-anchor="middle" font-size="9" fill="#5A6CA0">Plain English · Rs. + % both</text>
+    <line x1="578" y1="200" x2="620" y2="284" stroke="#00D4B1" stroke-width="1" stroke-dasharray="3,3"/>
+  </svg>
+
+  <table>
+    <thead><tr><th>Engine</th><th>Triggers</th><th>When Runs</th><th>Activated By</th><th>Path</th></tr></thead>
+    <tbody>
+      <tr><td style="color:var(--g)">E-01 Analysis</td><td>Selection Engine (per gap), E-02, E-03, E-04</td><td>On upload. Re-runs after each E-05 action.</td><td>User upload + E-05 completed action</td><td>Always</td></tr>
+      <tr><td style="color:var(--purple)">Selection Engine</td><td>Returns FIT SCORE + candidates to E-01</td><td>Inside E-01 for every gap found</td><td>E-01 gap trigger per module</td><td>Always</td></tr>
+      <tr><td style="color:var(--purple)">E-02 Guidance</td><td>Report to user. E-05 if user acts.</td><td>After E-01 + Selection Engine complete</td><td>E-01 analysis output</td><td>Always</td></tr>
+      <tr><td style="color:var(--gold)">E-03 Backtesting</td><td>Before/After crash comparison report</td><td>After E-01 + E-02</td><td>E-01 + E-02 output</td><td>Always</td></tr>
+      <tr><td style="color:var(--red)">E-04 Risk Analysis</td><td>Risk mismatch guidance to E-02</td><td>After E-01</td><td>E-01 output</td><td>Always</td></tr>
+      <tr><td style="color:var(--blue)">E-05 Execution</td><td>E-01 re-run, E-06, E-07</td><td>When user executes each change</td><td>User approval of E-02 guidance</td><td>Path B only</td></tr>
+      <tr><td style="color:var(--cyan)">E-06 Rebalancing</td><td>E-04 recheck after trades</td><td>Drift, risk breach, or annual review</td><td>E-05 tracking, E-04 breach</td><td>Path B only</td></tr>
+      <tr><td style="color:var(--org)">E-07 SIP Redesign</td><td>E-04 recheck, Selection Engine for new instrument</td><td>Monthly SIP date + amount change</td><td>E-05 SIP tracking, user input</td><td>Path B only</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="hr"></div>
+
+<!-- ══════════════════════════════════════
+     SECTION 6: PHASE 2 + SUMMARY TABLE
+══════════════════════════════════════ -->
+<div class="sec">
+  <div class="slabel">Phase 2 Additions + Complete Reference</div>
+  <div class="stitle">More Engines + <em>All 14 Modules Summary</em></div>
+
+  <div class="g2" style="margin-bottom:20px">
+    <div class="ecard" style="margin-bottom:0">
+      <div class="ehead" style="padding:14px 18px">
+        <div class="eicon ic-gold" style="width:46px;height:46px;font-size:22px">&#128200;</div>
+        <div><div class="eid">E-08 — PERFORMANCE MONITORING (Phase 2)</div><div class="ename" style="font-size:15px">Monthly Fund Report Card</div></div>
+      </div>
+      <div class="ebody" style="padding:14px 18px">
+        <div class="params">
+          <div class="param"><span class="pn">Monthly vs Benchmark</span><span class="pv">Every fund vs category benchmark. Beating or losing? By Rs.?</span></div>
+          <div class="param"><span class="pn">Manager Alpha Track</span><span class="pv">Consistent alpha or one-year wonder? Track 3yr vs 1yr separately.</span></div>
+          <div class="param"><span class="pn">Bottom Quartile Alert</span><span class="pv">Fund in bottom quartile 2 quarters = auto switch recommendation via Selection Engine.</span></div>
+          <div class="param"><span class="pn">Manager Exit Alert</span><span class="pv">Fund manager resigned = immediately reassess fund. Check if strategy changes.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ecard" style="margin-bottom:0">
+      <div class="ehead" style="padding:14px 18px">
+        <div class="eicon ic-red" style="width:46px;height:46px;font-size:22px">&#128680;</div>
+        <div><div class="eid">E-09 — FRAUD + RISK ALERT (Phase 2)</div><div class="ename" style="font-size:15px">Real-Time Watch 24/7</div></div>
+      </div>
+      <div class="ebody" style="padding:14px 18px">
+        <div class="params">
+          <div class="param"><span class="pn">SEBI Alerts Live</span><span class="pv">Any notice or ED raid on any holding = immediate EXIT alert</span></div>
+          <div class="param"><span class="pn">Pledge Monitor</span><span class="pv">Promoter pledge rises above 40% = alert with exit timing guidance</span></div>
+          <div class="param"><span class="pn">TER Spike Alert</span><span class="pv">AMC raises TER = alert + Selection Engine finds cheaper alternative</span></div>
+          <div class="param"><span class="pn">NAV Deviation</span><span class="pv">Fund NAV deviates significantly from benchmark = check what happened</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <span class="slbl">All 14 Modules — Complete Reference Table</span>
+  <table>
+    <thead><tr><th>Module</th><th>What It Analyses</th><th>Gap Type</th><th>Selection Engine Trigger</th><th>Weight</th></tr></thead>
+    <tbody>
+      <tr><td style="color:var(--g)">M-01 XIRR</td><td>Real annual return vs goal-required rate</td><td>A — Performance</td><td>XIRR below goal rate → find better instruments</td><td>15%</td></tr>
+      <tr><td style="color:var(--blue)">M-02 Risk Metrics</td><td>Sharpe, Sortino, CVaR, Beta, Volatility</td><td>A — Performance</td><td>Sharpe below 0.5 → find better risk-adjusted options</td><td>12%</td></tr>
+      <tr><td style="color:var(--red)">M-03 TER Waste</td><td>Regular plan annual leak + 10yr compound</td><td>B — Cost</td><td>Regular plan → find Direct + Index alternatives</td><td>14%</td></tr>
+      <tr><td style="color:var(--gold)">M-04 Benchmarks</td><td>XIRR vs Nifty 50, category, FD, inflation</td><td>A — Performance</td><td>Losing to category → find top-quartile replacement</td><td>8%</td></tr>
+      <tr><td style="color:var(--purple)">M-05 Overlap</td><td>Jaccard similarity of fund top-10 holdings</td><td>B — Cost</td><td>Jaccard above 40% → find zero-overlap replacement</td><td>7%</td></tr>
+      <tr><td style="color:var(--grn)">M-06 Goal Alignment</td><td>Portfolio FV vs target. Extra SIP needed.</td><td>D — Goal</td><td>Gap exists → find instruments to improve XIRR</td><td>16%</td></tr>
+      <tr><td style="color:var(--cyan)">M-07 SIP Adequacy</td><td>Monthly SIP vs what goal requires</td><td>D — Goal</td><td>SIP gap → find best instrument for extra SIP amount</td><td>7%</td></tr>
+      <tr><td style="color:var(--pink)">M-08 Concentration</td><td>Single fund, sector, stock weight limits</td><td>C — Structure</td><td>Above limit → find diversifying instrument</td><td>5%</td></tr>
+      <tr><td style="color:var(--org)">M-09 Debt-Equity</td><td>Current vs ideal equity% for user age</td><td>C — Structure</td><td>Off-balance → find debt or equity to restore</td><td>5%</td></tr>
+      <tr><td style="color:var(--red)">M-10 Fraud Gate</td><td>7 hard checks on every existing holding</td><td>C — Structure</td><td>Any fail → EXIT signal + find safe replacement</td><td>GATE</td></tr>
+      <tr><td style="color:var(--cyan)">M-11 Macro Fit</td><td>RBI rate cycle, sector P/E, INR, GDP trend</td><td>C — Structure</td><td>Macro headwind → adjust Selection Engine scoring</td><td>4%</td></tr>
+      <tr><td style="color:var(--purple)">M-12 Behaviour</td><td>Recency bias, FOMO, loss aversion, herd</td><td>C — Structure</td><td>Bias detected → exclude bias-reinforcing options</td><td>4%</td></tr>
+      <tr><td style="color:var(--grn)">M-13 Tax Efficiency</td><td>LTCG, STCG, dividend drag, 80C gap</td><td>B — Cost</td><td>Tax drag → show break-even timeline for switch</td><td>4%</td></tr>
+      <tr><td style="color:var(--g)">M-14 Goal Probability</td><td>Monte Carlo 10,000 simulations</td><td>D — Goal</td><td>Below 65% → re-run with suggestions to show improvement</td><td>8%</td></tr>
+    </tbody>
+  </table>
+
+  <div class="nb" style="margin-top:16px"><strong>Core Design Principle:</strong> Every module that finds a gap immediately calls the Selection Engine to find the best specific instrument to fix it. The Selection Engine uses 12 layers including Quantum QAOA for final ranking. Output is always: specific instrument name + AMFI code + FIT SCORE + Rs. improvement + tax break-even. User always sees exactly what is wrong, exactly what to do, and exactly how much better it will be in Rs. and percentage.</div>
+
+  <div class="nb" style="margin-top:10px"><strong>Health Check vs Construction:</strong> Health Check works on EXISTING portfolios. It diagnoses problems, quantifies every rupee of hidden loss, and guides the user to improve current holdings with minimum disruption and maximum tax efficiency. It never rebuilds from scratch — it improves what is already there.</div>
+</div>
+
+<div class="footer">
+  <div class="fl">nxance</div>
+  <div class="ft">Ohshn Intelligence Pvt Ltd &nbsp;|&nbsp; Palampur, Himachal Pradesh &nbsp;|&nbsp; 2026<br>Portfolio Health Check Engine Complete Architecture v2.0 &nbsp;|&nbsp; Confidential</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Nxance — NxanceLM Engine Architecture</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+:root{
+  --bg:#02030A;--card:#07000C;--c2:#0B0E1C;--bo:#161930;--b2:#1A1E38;
+  --tx:#EAF0FF;--t2:#5A6CA0;--t3:#252A48;
+  --g:#00D4B1;--gt:rgba(0,212,177,.1);--gr:rgba(0,212,177,.22);
+  --gold:#FFB830;--goldt:rgba(255,184,48,.09);
+  --red:#FF3F60;--redt:rgba(255,63,96,.09);
+  --blue:#4A8FFF;--bluet:rgba(74,143,255,.09);
+  --purple:#9B6DFF;--purplet:rgba(155,109,255,.09);
+  --grn:#1EC896;--grnt:rgba(30,200,150,.09);
+  --pink:#FF6B9D;--pinkt:rgba(255,107,157,.09);
+  --cyan:#00C4FF;--cyant:rgba(0,196,255,.09);
+  --org:#FF7A35;--orgt:rgba(255,122,53,.09);
+  --yellow:#FFD700;--yellowt:rgba(255,215,0,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);line-height:1.72;font-size:14px}
+
+.cover{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 28px;text-align:center;
+  background:radial-gradient(ellipse 85% 55% at 50% -8%,rgba(155,109,255,.1),transparent 60%),
+             radial-gradient(ellipse 45% 30% at 92% 90%,rgba(74,143,255,.07),transparent 50%),
+             radial-gradient(ellipse 30% 25% at 8% 80%,rgba(0,212,177,.06),transparent 50%)}
+.ctag{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--purple);background:var(--purplet);border:1px solid rgba(155,109,255,.3);padding:5px 20px;border-radius:20px;display:inline-block;margin-bottom:28px}
+.ch{font-family:'DM Serif Display',serif;font-size:clamp(32px,5.5vw,58px);line-height:1.08;letter-spacing:-.025em;margin-bottom:12px}
+.ch em{font-style:italic;color:var(--purple)}
+.cs{font-size:15px;color:var(--t2);max-width:680px;margin:0 auto 36px;line-height:1.82}
+.badges{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:44px}
+.bd{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;padding:4px 14px;border-radius:20px;letter-spacing:.04em}
+.bp{color:var(--purple);background:var(--purplet);border:1px solid rgba(155,109,255,.3)}
+.bg{color:var(--g);background:var(--gt);border:1px solid var(--gr)}
+.bb{color:var(--blue);background:var(--bluet);border:1px solid rgba(74,143,255,.3)}
+.bgold{color:var(--gold);background:var(--goldt);border:1px solid rgba(255,184,48,.3)}
+.bred{color:var(--red);background:var(--redt);border:1px solid rgba(255,63,96,.3)}
+.bcyan{color:var(--cyan);background:var(--cyant);border:1px solid rgba(0,196,255,.3)}
+.bpink{color:var(--pink);background:var(--pinkt);border:1px solid rgba(255,107,157,.3)}
+.borg{color:var(--org);background:var(--orgt);border:1px solid rgba(255,122,53,.3)}
+.cover-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:680px;width:100%}
+.cg{background:var(--c2);border:1.5px solid var(--b2);border-radius:12px;padding:16px 10px;text-align:center}
+.cg-icon{font-size:22px;margin-bottom:7px;display:block}
+.cg-num{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--t3);margin-bottom:3px}
+.cg-name{font-size:10px;font-weight:700;color:var(--tx);line-height:1.35}
+
+.wrap{max-width:1060px;margin:0 auto;padding:0 28px 80px}
+.sec{margin-bottom:80px}
+.slabel{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--purple);background:var(--purplet);border:1px solid rgba(155,109,255,.3);padding:3px 13px;border-radius:20px;display:inline-block;margin-bottom:14px}
+.stitle{font-family:'DM Serif Display',serif;font-size:32px;letter-spacing:-.015em;margin-bottom:6px}
+.stitle em{font-style:italic;color:var(--purple)}
+.ssub{font-size:14px;color:var(--t2);margin-bottom:26px;max-width:740px;line-height:1.82}
+.hr{height:1px;background:var(--bo);margin:68px 0}
+
+.ic-g{background:var(--gt);border:1.5px solid var(--gr)}.ic-b{background:var(--bluet);border:1.5px solid rgba(74,143,255,.3)}
+.ic-gold{background:var(--goldt);border:1.5px solid rgba(255,184,48,.3)}.ic-red{background:var(--redt);border:1.5px solid rgba(255,63,96,.3)}
+.ic-p{background:var(--purplet);border:1.5px solid rgba(155,109,255,.3)}.ic-grn{background:var(--grnt);border:1.5px solid rgba(30,200,150,.3)}
+.ic-cyan{background:var(--cyant);border:1.5px solid rgba(0,196,255,.3)}.ic-org{background:var(--orgt);border:1.5px solid rgba(255,122,53,.3)}
+.ic-pink{background:var(--pinkt);border:1.5px solid rgba(255,107,157,.3)}.ic-yellow{background:var(--yellowt);border:1.5px solid rgba(255,215,0,.3)}
+
+.ecard{background:var(--c2);border:1.5px solid var(--bo);border-radius:16px;overflow:hidden;margin-bottom:18px}
+.ehead{padding:20px 24px;border-bottom:1px solid var(--bo);display:flex;align-items:center;gap:16px}
+.eicon{width:54px;height:54px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
+.eid{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--purple);margin-bottom:3px}
+.ename{font-size:20px;font-weight:700;color:var(--tx);margin-bottom:2px}.etag{font-size:12px;color:var(--t2)}
+.ebody{padding:22px 24px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.slbl{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--t3);margin-bottom:8px;margin-top:14px;display:block}
+.slbl:first-child{margin-top:0}
+.params{display:flex;flex-direction:column;gap:5px}
+.param{display:flex;align-items:flex-start;gap:10px;padding:8px 11px;background:rgba(255,255,255,.02);border:1px solid var(--bo);border-radius:7px;font-size:12px}
+.pn{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--purple);flex-shrink:0;min-width:148px}
+.pv{color:var(--t2);line-height:1.55}
+.code{background:rgba(0,0,0,.55);border:1px solid var(--b2);border-radius:9px;padding:13px 15px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#8A90CC;line-height:1.72;overflow-x:auto;white-space:pre;margin:10px 0}
+.formula{background:linear-gradient(135deg,rgba(155,109,255,.07),rgba(74,143,255,.04));border:1.5px solid rgba(155,109,255,.2);border-radius:10px;padding:13px 17px;margin:10px 0;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--tx);text-align:center;line-height:1.8}
+.nb{background:var(--gt);border:1px solid var(--gr);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--g);margin:10px 0;line-height:1.65}
+.wb{background:var(--redt);border:1px solid rgba(255,63,96,.25);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--red);margin:10px 0;line-height:1.65}
+.ib{background:var(--bluet);border:1px solid rgba(74,143,255,.25);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--blue);margin:10px 0;line-height:1.65}
+.goldb{background:var(--goldt);border:1px solid rgba(255,184,48,.25);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--gold);margin:10px 0;line-height:1.65}
+.pb{background:var(--purplet);border:1px solid rgba(155,109,255,.25);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--purple);margin:10px 0;line-height:1.65}
+.cyanb{background:var(--cyant);border:1px solid rgba(0,196,255,.25);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--cyan);margin:10px 0;line-height:1.65}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:12.5px}
+th{background:rgba(255,255,255,.04);padding:9px 12px;text-align:left;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--t3);border-bottom:1px solid var(--b2)}
+td{padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.03);color:var(--t2);vertical-align:top}
+tr:last-child td{border:none}tr:hover td{background:rgba(255,255,255,.013)}td:first-child{color:var(--tx);font-weight:600}
+
+/* Chat bubbles */
+.chat{display:flex;flex-direction:column;gap:16px;margin:16px 0}
+.msg{max-width:85%;padding:13px 16px;border-radius:14px;font-size:13px;line-height:1.72}
+.user-msg{align-self:flex-end;background:var(--purplet);border:1px solid rgba(155,109,255,.3);color:var(--tx)}
+.ai-msg{align-self:flex-start;background:var(--c2);border:1px solid var(--bo);color:var(--t2)}
+.ai-msg strong{color:var(--tx)}
+.ai-tag{font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;color:var(--purple);margin-bottom:6px;display:block;letter-spacing:.08em}
+
+/* Layer cards */
+.layer{border:1.5px solid var(--b2);border-radius:11px;overflow:hidden;margin-bottom:9px}
+.lh{padding:11px 16px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--bo)}
+.ln{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;padding:2px 10px;border-radius:4px}
+.lname{font-size:13px;font-weight:700;color:var(--tx)}.lw{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;padding:2px 9px;border-radius:4px;flex-shrink:0}
+.lbody{padding:13px 16px;background:rgba(255,255,255,.01);font-size:12.5px;color:var(--t2);line-height:1.72}
+
+/* Mode cards */
+.mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0}
+.mode{border-radius:13px;padding:20px;border:2px solid}
+.m-hc{background:rgba(0,212,177,.05);border-color:rgba(0,212,177,.25)}
+.m-con{background:rgba(74,143,255,.05);border-color:rgba(74,143,255,.25)}
+.m-chat{background:rgba(155,109,255,.05);border-color:rgba(155,109,255,.25)}
+.m-fin{background:rgba(255,184,48,.05);border-color:rgba(255,184,48,.25)}
+.mode-icon{font-size:28px;margin-bottom:10px;display:block}
+.mode-title{font-size:15px;font-weight:700;margin-bottom:6px;color:var(--tx)}
+.mode-desc{font-size:12px;color:var(--t2);line-height:1.7}
+
+.footer{text-align:center;padding:48px 0 20px;border-top:1px solid var(--bo);margin-top:20px}
+.fl{font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;background:linear-gradient(135deg,var(--purple),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+.ft{font-size:11.5px;color:var(--t3)}
+@media(max-width:760px){.cover-grid{grid-template-columns:repeat(2,1fr)}.g2,.g3,.mode-grid{grid-template-columns:1fr}.wrap{padding:0 14px 60px}}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="ctag">Nxance &mdash; Ohshn Intelligence</div>
+  <div class="ch">NxanceLM<br><em>Language Model Engine</em></div>
+  <div class="cs">The brain that explains everything in plain language. Works with Health Check Engine and Construction Engine to translate complex financial analysis into clear, actionable answers. Also works as a full financial intelligence chat for economy, markets, policy, IPOs, and portfolio questions.</div>
+  <div class="badges">
+    <span class="bd bp">NxanceLM Core</span>
+    <span class="bd bg">Health Check Mode</span>
+    <span class="bd bb">Construction Mode</span>
+    <span class="bd bgold">Financial Intelligence Chat</span>
+    <span class="bd bcyan">Economy + Markets</span>
+    <span class="bd bpink">Portfolio Comparison</span>
+    <span class="bd borg">IPO + Startup Intel</span>
+    <span class="bd bred">Policy Analysis</span>
+  </div>
+  <div class="cover-grid">
+    <div class="cg"><span class="cg-icon">&#129504;</span><div class="cg-num">CORE</div><div class="cg-name">NxanceLM Engine</div></div>
+    <div class="cg"><span class="cg-icon">&#128202;</span><div class="cg-num">MODE 1</div><div class="cg-name">Health Check Explainer</div></div>
+    <div class="cg"><span class="cg-icon">&#127959;</span><div class="cg-num">MODE 2</div><div class="cg-name">Construction Explainer</div></div>
+    <div class="cg"><span class="cg-icon">&#128483;</span><div class="cg-num">MODE 3</div><div class="cg-name">Financial Intelligence Chat</div></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- SECTION 1: MASTER ARCHITECTURE SVG -->
+<div class="sec">
+  <div class="slabel">Master Architecture</div>
+  <div class="stitle">NxanceLM &mdash; <em>Complete System Diagram</em></div>
+  <div class="ssub">NxanceLM sits at the centre of Nxance. It receives structured data from quantitative engines and converts it to plain language. It also handles direct user questions about finance, economy, markets, and portfolios.</div>
+
+  <svg viewBox="0 0 860 980" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:860px;display:block;margin:0 auto 28px;border-radius:14px">
+    <defs>
+      <marker id="a1" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#252A48"/></marker>
+      <marker id="ap" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#9B6DFF"/></marker>
+      <marker id="ag" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#00D4B1"/></marker>
+      <marker id="ab" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#4A8FFF"/></marker>
+      <marker id="agold" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#FFB830"/></marker>
+    </defs>
+    <rect width="860" height="980" rx="14" fill="#07000C" stroke="#161930" stroke-width="1.5"/>
+    <text x="430" y="30" text-anchor="middle" font-size="13" font-weight="700" fill="#EAF0FF" font-family="DM Serif Display,serif">NxanceLM Engine — Complete Architecture</text>
+
+    <!-- INPUTS: Left side -->
+    <!-- Health Check Engine -->
+    <rect x="22" y="50" width="200" height="100" rx="10" fill="rgba(0,212,177,.05)" stroke="#00D4B1" stroke-width="1.5"/>
+    <text x="122" y="73" text-anchor="middle" font-size="9" fill="#00D4B1" font-weight="700" font-family="JetBrains Mono,monospace">HEALTH CHECK ENGINE</text>
+    <text x="122" y="90" text-anchor="middle" font-size="10" font-weight="700" fill="#EAF0FF">14-Module Analysis</text>
+    <text x="122" y="107" text-anchor="middle" font-size="9" fill="#5A6CA0">Health Score 0-100</text>
+    <text x="122" y="122" text-anchor="middle" font-size="9" fill="#5A6CA0">Issue Rs. amounts</text>
+    <text x="122" y="137" text-anchor="middle" font-size="9" fill="#5A6CA0">Selection Engine picks</text>
+    <line x1="222" y1="100" x2="270" y2="100" stroke="#00D4B1" stroke-width="1.5" marker-end="url(#ag)"/>
+
+    <!-- Construction Engine -->
+    <rect x="22" y="168" width="200" height="100" rx="10" fill="rgba(74,143,255,.05)" stroke="#4A8FFF" stroke-width="1.5"/>
+    <text x="122" y="191" text-anchor="middle" font-size="9" fill="#4A8FFF" font-weight="700" font-family="JetBrains Mono,monospace">CONSTRUCTION ENGINE</text>
+    <text x="122" y="208" text-anchor="middle" font-size="10" font-weight="700" fill="#EAF0FF">Portfolio Build Result</text>
+    <text x="122" y="225" text-anchor="middle" font-size="9" fill="#5A6CA0">Asset allocation %</text>
+    <text x="122" y="240" text-anchor="middle" font-size="9" fill="#5A6CA0">Instrument selection</text>
+    <text x="122" y="255" text-anchor="middle" font-size="9" fill="#5A6CA0">QAOA optimized weights</text>
+    <line x1="222" y1="218" x2="270" y2="218" stroke="#4A8FFF" stroke-width="1.5" marker-end="url(#ab)"/>
+
+    <!-- Risk Engine -->
+    <rect x="22" y="286" width="200" height="80" rx="10" fill="rgba(255,63,96,.05)" stroke="#FF3F60" stroke-width="1.2"/>
+    <text x="122" y="309" text-anchor="middle" font-size="9" fill="#FF3F60" font-weight="700" font-family="JetBrains Mono,monospace">RISK + BACKTESTING</text>
+    <text x="122" y="326" text-anchor="middle" font-size="10" font-weight="700" fill="#EAF0FF">7 risk metrics</text>
+    <text x="122" y="342" text-anchor="middle" font-size="9" fill="#5A6CA0">5 crash results</text>
+    <text x="122" y="357" text-anchor="middle" font-size="9" fill="#5A6CA0">Goal probability %</text>
+    <line x1="222" y1="336" x2="270" y2="336" stroke="#FF3F60" stroke-width="1.5" marker-end="url(#a1)"/>
+
+    <!-- Selection Engine -->
+    <rect x="22" y="384" width="200" height="80" rx="10" fill="rgba(255,184,48,.05)" stroke="#FFB830" stroke-width="1.2"/>
+    <text x="122" y="407" text-anchor="middle" font-size="9" fill="#FFB830" font-weight="700" font-family="JetBrains Mono,monospace">SELECTION ENGINE</text>
+    <text x="122" y="424" text-anchor="middle" font-size="10" font-weight="700" fill="#EAF0FF">FIT SCORE 0-100</text>
+    <text x="122" y="440" text-anchor="middle" font-size="9" fill="#5A6CA0">Candidate rankings</text>
+    <text x="122" y="455" text-anchor="middle" font-size="9" fill="#5A6CA0">AMFI codes + reasons</text>
+    <line x1="222" y1="424" x2="270" y2="424" stroke="#FFB830" stroke-width="1.5" marker-end="url(#agold)"/>
+
+    <!-- User Chat Input -->
+    <rect x="22" y="482" width="200" height="80" rx="10" fill="rgba(155,109,255,.05)" stroke="#9B6DFF" stroke-width="1.2"/>
+    <text x="122" y="505" text-anchor="middle" font-size="9" fill="#9B6DFF" font-weight="700" font-family="JetBrains Mono,monospace">USER CHAT QUERY</text>
+    <text x="122" y="522" text-anchor="middle" font-size="10" font-weight="700" fill="#EAF0FF">Any finance question</text>
+    <text x="122" y="538" text-anchor="middle" font-size="9" fill="#5A6CA0">Economy / IPO / Policy</text>
+    <text x="122" y="553" text-anchor="middle" font-size="9" fill="#5A6CA0">Portfolio comparison</text>
+    <line x1="222" y1="522" x2="270" y2="522" stroke="#9B6DFF" stroke-width="1.5" marker-end="url(#ap)"/>
+
+    <!-- Live Data -->
+    <rect x="22" y="580" width="200" height="80" rx="10" fill="rgba(0,196,255,.05)" stroke="#00C4FF" stroke-width="1.2"/>
+    <text x="122" y="603" text-anchor="middle" font-size="9" fill="#00C4FF" font-weight="700" font-family="JetBrains Mono,monospace">LIVE DATA SOURCES</text>
+    <text x="122" y="620" text-anchor="middle" font-size="10" font-weight="700" fill="#EAF0FF">Real-time feeds</text>
+    <text x="122" y="636" text-anchor="middle" font-size="9" fill="#5A6CA0">NSE · AMFI · RBI · SEBI</text>
+    <text x="122" y="651" text-anchor="middle" font-size="9" fill="#5A6CA0">World Bank · IMF APIs</text>
+    <line x1="222" y1="620" x2="270" y2="620" stroke="#00C4FF" stroke-width="1.5" marker-end="url(#a1)"/>
+
+    <!-- NXANCELM CORE (Centre) -->
+    <rect x="272" y="46" width="316" height="620" rx="14" fill="rgba(155,109,255,.05)" stroke="#9B6DFF" stroke-width="2"/>
+    <text x="430" y="72" text-anchor="middle" font-size="9" fill="#9B6DFF" font-weight="700" font-family="JetBrains Mono,monospace" letter-spacing="1">NxanceLM CORE ENGINE</text>
+    <text x="430" y="90" text-anchor="middle" font-size="16" font-weight="700" fill="#EAF0FF" font-family="DM Serif Display,serif">The Plain Language Brain</text>
+
+    <!-- Intent Router -->
+    <rect x="292" y="104" width="276" height="52" rx="8" fill="rgba(155,109,255,.08)" stroke="rgba(155,109,255,.3)" stroke-width="1"/>
+    <text x="430" y="126" text-anchor="middle" font-size="9" fill="#9B6DFF" font-weight="700" font-family="JetBrains Mono,monospace">INTENT CLASSIFIER</text>
+    <text x="430" y="143" text-anchor="middle" font-size="10" fill="#5A6CA0">Route to correct mode: HC / Construction / Chat / Market</text>
+
+    <!-- 4 Processing modes -->
+    <rect x="292" y="168" width="130" height="84" rx="8" fill="rgba(0,212,177,.06)" stroke="rgba(0,212,177,.2)" stroke-width="1"/>
+    <text x="357" y="187" text-anchor="middle" font-size="8" fill="#00D4B1" font-weight="700">HC MODE</text>
+    <text x="357" y="202" text-anchor="middle" font-size="9" fill="#EAF0FF" font-weight="600">Translate</text>
+    <text x="357" y="216" text-anchor="middle" font-size="9" fill="#EAF0FF" font-weight="600">Analysis Results</text>
+    <text x="357" y="233" text-anchor="middle" font-size="8" fill="#5A6CA0">Score → Story</text>
+    <text x="357" y="246" text-anchor="middle" font-size="8" fill="#5A6CA0">Rs. + % always</text>
+
+    <rect x="438" y="168" width="130" height="84" rx="8" fill="rgba(74,143,255,.06)" stroke="rgba(74,143,255,.2)" stroke-width="1"/>
+    <text x="503" y="187" text-anchor="middle" font-size="8" fill="#4A8FFF" font-weight="700">BUILD MODE</text>
+    <text x="503" y="202" text-anchor="middle" font-size="9" fill="#EAF0FF" font-weight="600">Explain Portfolio</text>
+    <text x="503" y="216" text-anchor="middle" font-size="9" fill="#EAF0FF" font-weight="600">Construction</text>
+    <text x="503" y="233" text-anchor="middle" font-size="8" fill="#5A6CA0">Why this fund?</text>
+    <text x="503" y="246" text-anchor="middle" font-size="8" fill="#5A6CA0">Rs. per instrument</text>
+
+    <rect x="292" y="264" width="130" height="84" rx="8" fill="rgba(255,184,48,.06)" stroke="rgba(255,184,48,.2)" stroke-width="1"/>
+    <text x="357" y="283" text-anchor="middle" font-size="8" fill="#FFB830" font-weight="700">CHAT MODE</text>
+    <text x="357" y="298" text-anchor="middle" font-size="9" fill="#EAF0FF" font-weight="600">Financial Q&amp;A</text>
+    <text x="357" y="312" text-anchor="middle" font-size="9" fill="#EAF0FF" font-weight="600">Economy + Markets</text>
+    <text x="357" y="329" text-anchor="middle" font-size="8" fill="#5A6CA0">Plain answers</text>
+    <text x="357" y="342" text-anchor="middle" font-size="8" fill="#5A6CA0">India context</text>
+
+    <rect x="438" y="264" width="130" height="84" rx="8" fill="rgba(255,107,157,.06)" stroke="rgba(255,107,157,.2)" stroke-width="1"/>
+    <text x="503" y="283" text-anchor="middle" font-size="8" fill="#FF6B9D" font-weight="700">COMPARE MODE</text>
+    <text x="503" y="298" text-anchor="middle" font-size="9" fill="#EAF0FF" font-weight="600">Portfolio vs</text>
+    <text x="503" y="312" text-anchor="middle" font-size="9" fill="#EAF0FF" font-weight="600">Portfolio Analysis</span></text>
+    <text x="503" y="329" text-anchor="middle" font-size="8" fill="#5A6CA0">Side by side</text>
+    <text x="503" y="342" text-anchor="middle" font-size="8" fill="#5A6CA0">XIRR / Risk / Cost</text>
+
+    <!-- Response builder -->
+    <rect x="292" y="362" width="276" height="60" rx="8" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+    <text x="430" y="384" text-anchor="middle" font-size="9" fill="#9B6DFF" font-weight="700" font-family="JetBrains Mono,monospace">RESPONSE BUILDER</text>
+    <text x="430" y="400" text-anchor="middle" font-size="10" fill="#5A6CA0">Structured data → Plain English sentences</text>
+    <text x="430" y="416" text-anchor="middle" font-size="10" fill="#5A6CA0">Always: Rs. + % · Never jargon · Hinglish if needed</text>
+
+    <!-- Rules engine -->
+    <rect x="292" y="434" width="130" height="72" rx="8" fill="rgba(255,63,96,.05)" stroke="rgba(255,63,96,.2)" stroke-width="1"/>
+    <text x="357" y="453" text-anchor="middle" font-size="8" fill="#FF3F60" font-weight="700">RULES ENGINE</text>
+    <text x="357" y="468" text-anchor="middle" font-size="9" fill="#5A6CA0">Never give</text>
+    <text x="357" y="482" text-anchor="middle" font-size="9" fill="#5A6CA0">wrong AMFI codes</text>
+    <text x="357" y="497" text-anchor="middle" font-size="9" fill="#5A6CA0">Cite source always</text>
+
+    <rect x="438" y="434" width="130" height="72" rx="8" fill="rgba(30,200,150,.05)" stroke="rgba(30,200,150,.2)" stroke-width="1"/>
+    <text x="503" y="453" text-anchor="middle" font-size="8" fill="#1EC896" font-weight="700">FORMAT ENGINE</text>
+    <text x="503" y="468" text-anchor="middle" font-size="9" fill="#5A6CA0">Simple sentences</text>
+    <text x="503" y="482" text-anchor="middle" font-size="9" fill="#5A6CA0">Bold key numbers</text>
+    <text x="503" y="497" text-anchor="middle" font-size="9" fill="#5A6CA0">3-line summary first</text>
+
+    <!-- Memory -->
+    <rect x="292" y="518" width="276" height="52" rx="8" fill="rgba(0,196,255,.05)" stroke="rgba(0,196,255,.2)" stroke-width="1"/>
+    <text x="430" y="538" text-anchor="middle" font-size="9" fill="#00C4FF" font-weight="700" font-family="JetBrains Mono,monospace">CONTEXT MEMORY</text>
+    <text x="430" y="555" text-anchor="middle" font-size="10" fill="#5A6CA0">Remembers user profile · Portfolio · Goals · Past questions in session</text>
+
+    <!-- Disclaimer -->
+    <rect x="292" y="582" width="276" height="52" rx="8" fill="rgba(255,184,48,.04)" stroke="rgba(255,184,48,.2)" stroke-width="1"/>
+    <text x="430" y="602" text-anchor="middle" font-size="9" fill="#FFB830" font-weight="700" font-family="JetBrains Mono,monospace">DISCLAIMER ENGINE</text>
+    <text x="430" y="618" text-anchor="middle" font-size="10" fill="#5A6CA0">Auto-appends: "This is analysis, not SEBI-registered advice."</text>
+    <text x="430" y="634" text-anchor="middle" font-size="10" fill="#5A6CA0">Appended when output could influence investment decisions</text>
+
+    <!-- OUTPUT: Right side -->
+    <!-- HC Explanation -->
+    <rect x="638" y="50" width="200" height="100" rx="10" fill="rgba(0,212,177,.05)" stroke="#00D4B1" stroke-width="1.5"/>
+    <text x="738" y="73" text-anchor="middle" font-size="9" fill="#00D4B1" font-weight="700" font-family="JetBrains Mono,monospace">HC REPORT OUTPUT</text>
+    <text x="738" y="90" text-anchor="middle" font-size="10" font-weight="700" fill="#EAF0FF">Plain English Issues</text>
+    <text x="738" y="107" text-anchor="middle" font-size="9" fill="#5A6CA0">"You are losing Rs.6,240/yr</text>
+    <text x="738" y="122" text-anchor="middle" font-size="9" fill="#5A6CA0">on this fund for nothing"</text>
+    <text x="738" y="137" text-anchor="middle" font-size="9" fill="#5A6CA0">Guided fix with AMFI code</text>
+    <line x1="588" y1="100" x2="638" y2="100" stroke="#00D4B1" stroke-width="1.5" marker-end="url(#ag)"/>
+
+    <!-- Portfolio Explanation -->
+    <rect x="638" y="168" width="200" height="100" rx="10" fill="rgba(74,143,255,.05)" stroke="#4A8FFF" stroke-width="1.5"/>
+    <text x="738" y="191" text-anchor="middle" font-size="9" fill="#4A8FFF" font-weight="700" font-family="JetBrains Mono,monospace">PORTFOLIO REPORT</text>
+    <text x="738" y="208" text-anchor="middle" font-size="10" font-weight="700" fill="#EAF0FF">Build Explanation</text>
+    <text x="738" y="225" text-anchor="middle" font-size="9" fill="#5A6CA0">"We chose this fund</text>
+    <text x="738" y="240" text-anchor="middle" font-size="9" fill="#5A6CA0">because FIT SCORE 91"</text>
+    <text x="738" y="255" text-anchor="middle" font-size="9" fill="#5A6CA0">Rs. per instrument</text>
+    <line x1="588" y1="218" x2="638" y2="218" stroke="#4A8FFF" stroke-width="1.5" marker-end="url(#ab)"/>
+
+    <!-- Chat answer -->
+    <rect x="638" y="286" width="200" height="100" rx="10" fill="rgba(155,109,255,.05)" stroke="#9B6DFF" stroke-width="1.5"/>
+    <text x="738" y="309" text-anchor="middle" font-size="9" fill="#9B6DFF" font-weight="700" font-family="JetBrains Mono,monospace">CHAT ANSWER</text>
+    <text x="738" y="326" text-anchor="middle" font-size="10" font-weight="700" fill="#EAF0FF">Finance Intelligence</text>
+    <text x="738" y="343" text-anchor="middle" font-size="9" fill="#5A6CA0">IPO · Policy · Economy</text>
+    <text x="738" y="358" text-anchor="middle" font-size="9" fill="#5A6CA0">Country comparison</text>
+    <text x="738" y="373" text-anchor="middle" font-size="9" fill="#5A6CA0">Startup analysis</text>
+    <line x1="588" y1="336" x2="638" y2="336" stroke="#9B6DFF" stroke-width="1.5" marker-end="url(#ap)"/>
+
+    <!-- Compare output -->
+    <rect x="638" y="404" width="200" height="80" rx="10" fill="rgba(255,107,157,.05)" stroke="#FF6B9D" stroke-width="1.2"/>
+    <text x="738" y="427" text-anchor="middle" font-size="9" fill="#FF6B9D" font-weight="700" font-family="JetBrains Mono,monospace">COMPARISON OUTPUT</text>
+    <text x="738" y="444" text-anchor="middle" font-size="10" font-weight="700" fill="#EAF0FF">Portfolio A vs B</text>
+    <text x="738" y="460" text-anchor="middle" font-size="9" fill="#5A6CA0">XIRR · Risk · Cost · Goal</text>
+    <text x="738" y="475" text-anchor="middle" font-size="9" fill="#5A6CA0">Winner per category</text>
+    <line x1="588" y1="444" x2="638" y2="444" stroke="#FF6B9D" stroke-width="1.5" marker-end="url(#a1)"/>
+
+    <!-- Market alert -->
+    <rect x="638" y="502" width="200" height="80" rx="10" fill="rgba(255,184,48,.05)" stroke="#FFB830" stroke-width="1.2"/>
+    <text x="738" y="525" text-anchor="middle" font-size="9" fill="#FFB830" font-weight="700" font-family="JetBrains Mono,monospace">MARKET ALERTS</text>
+    <text x="738" y="542" text-anchor="middle" font-size="10" font-weight="700" fill="#EAF0FF">Live Event Narration</text>
+    <text x="738" y="558" text-anchor="middle" font-size="9" fill="#5A6CA0">"RBI cut rates 0.25%.</text>
+    <text x="738" y="573" text-anchor="middle" font-size="9" fill="#5A6CA0">Your debt fund benefits."</text>
+    <line x1="588" y1="542" x2="638" y2="542" stroke="#FFB830" stroke-width="1.5" marker-end="url(#agold)"/>
+
+    <!-- Arrows from core to outputs -->
+    <line x1="588" y1="160" x2="638" y2="100" stroke="#252A48" stroke-width="1" stroke-dasharray="4,3"/>
+    <line x1="588" y1="300" x2="638" y2="218" stroke="#252A48" stroke-width="1" stroke-dasharray="4,3"/>
+    <line x1="588" y1="380" x2="638" y2="286" stroke="#252A48" stroke-width="1" stroke-dasharray="4,3"/>
+
+    <!-- NxanceLM label -->
+    <text x="430" y="670" text-anchor="middle" font-size="22" fill="#9B6DFF" font-family="DM Serif Display,serif" font-style="italic">nxancelm</text>
+    <text x="430" y="692" text-anchor="middle" font-size="10" fill="#5A6CA0" font-family="JetBrains Mono,monospace">Quantitative data in → Plain English out</text>
+
+    <!-- Key rules below -->
+    <rect x="22" y="680" width="816" height="90" rx="10" fill="rgba(255,255,255,.02)" stroke="#1A1E38" stroke-width="1"/>
+    <text x="430" y="702" text-anchor="middle" font-size="9" fill="#252A48" font-weight="700" font-family="JetBrains Mono,monospace">CORE RULES — ALWAYS FOLLOWED</text>
+    <text x="52" y="722" font-size="10" fill="#5A6CA0" font-family="JetBrains Mono,monospace">&#8226; Rs. AND % always together — never one without the other</text>
+    <text x="52" y="738" font-size="10" fill="#5A6CA0" font-family="JetBrains Mono,monospace">&#8226; No jargon without explanation — CVaR always explained as "worst-case daily loss"</text>
+    <text x="52" y="754" font-size="10" fill="#5A6CA0" font-family="JetBrains Mono,monospace">&#8226; 3-line summary first — full detail below — user reads what they need</text>
+    <text x="440" y="722" font-size="10" fill="#5A6CA0" font-family="JetBrains Mono,monospace">&#8226; Cite source for every number — AMFI / NSE / RBI / SEBI</text>
+    <text x="440" y="738" font-size="10" fill="#5A6CA0" font-family="JetBrains Mono,monospace">&#8226; Hinglish output when user writes in Hindi/Hinglish</text>
+    <text x="440" y="754" font-size="10" fill="#5A6CA0" font-family="JetBrains Mono,monospace">&#8226; Never give specific "buy this today" — give analysis + context always</text>
+
+    <text x="430" y="930" text-anchor="middle" font-size="10" fill="#252A48" font-family="JetBrains Mono,monospace">Nxance NxanceLM Engine v1.0  |  Ohshn Intelligence  |  2026  |  Confidential</text>
+  </svg>
+</div>
+
+<div class="hr"></div>
+
+<!-- SECTION 2: MODES DEEP DIVE -->
+<div class="sec">
+  <div class="slabel">4 Operating Modes</div>
+  <div class="stitle">NxanceLM &mdash; <em>Mode-by-Mode Architecture</em></div>
+  <div class="ssub">NxanceLM automatically detects what the user needs and routes to the correct mode. Each mode has its own processing pipeline and output format.</div>
+
+  <div class="mode-grid" style="grid-template-columns:1fr 1fr">
+    <div class="mode m-hc">
+      <span class="mode-icon">&#128202;</span>
+      <div class="mode-title" style="color:var(--g)">Mode 1 — Health Check Explainer</div>
+      <div class="mode-desc">Receives structured output from E-01 through E-07. Converts Health Score, issue data, and Selection Engine picks into a clear narrative. Explains why each issue costs money, what the exact Rs. impact is, and what the step-by-step fix is. Always includes before/after Health Score projection.</div>
+    </div>
+    <div class="mode m-con">
+      <span class="mode-icon">&#127959;</span>
+      <div class="mode-title" style="color:var(--blue)">Mode 2 — Construction Explainer</div>
+      <div class="mode-desc">Receives portfolio construction output. Explains why each instrument was selected (FIT SCORE, key reasons), what the asset allocation means for the user's specific goal, how QAOA optimized the weights, and what the Monte Carlo probability is. Shows exact Rs. per instrument and SIP plan.</div>
+    </div>
+    <div class="mode m-chat">
+      <span class="mode-icon">&#128483;</span>
+      <div class="mode-title" style="color:var(--purple)">Mode 3 — Financial Intelligence Chat</div>
+      <div class="mode-desc">Handles any finance question directly. Economy, GDP, inflation, sector analysis, policy, RBI decisions, global markets, country comparisons, startup ecosystem, IPO analysis, company fundamentals, government schemes. Pulls live data from APIs. Answers in plain language with India context always.</div>
+    </div>
+    <div class="mode m-fin">
+      <span class="mode-icon">&#9878;</span>
+      <div class="mode-title" style="color:var(--gold)">Mode 4 — Portfolio Comparison</div>
+      <div class="mode-desc">User provides two portfolios (or compares their portfolio vs a benchmark). NxanceLM runs both through E-01 analysis modules, generates a side-by-side comparison of XIRR, Sharpe, TER, goal alignment, overlap, and Health Score. Picks winner per category with exact Rs. difference.</div>
+    </div>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- SECTION 3: MODE 1 HC EXPLAINER -->
+<div class="sec">
+  <div class="slabel">Mode 1 Deep Dive</div>
+  <div class="stitle">Health Check <em>Explainer Pipeline</em></div>
+  <div class="ssub">How NxanceLM converts raw engine outputs into the issue cards and guidance the user reads. Every number is translated. Every jargon term is explained.</div>
+
+  <div class="ecard">
+    <div class="ehead">
+      <div class="eicon ic-g">&#128202;</div>
+      <div>
+        <div class="eid">NXANCELM — MODE 1: HEALTH CHECK EXPLAINER</div>
+        <div class="ename">Score → Story. Data → Action.</div>
+        <div class="etag">Receives structured data from E-01 to E-07 · Outputs plain English issue cards with Rs. amounts</div>
+      </div>
+    </div>
+    <div class="ebody">
+      <div class="g2">
+        <div>
+          <span class="slbl">Input from Analysis Engine</span>
+          <div class="code"># Structured output from E-01 modules
+hc_result = {
+    'health_score':     72,
+    'grade':            'C',
+    'issues': [
+        {
+            'module':         'M-03 TER Waste',
+            'gap_type':       'B',
+            'severity':       'HIGH',
+            'annual_rs_loss': 6240,
+            'ten_yr_loss':    108900,
+            'fund_name':      'Axis Bluechip Regular',
+            'scheme_code':    '120505',
+            'direct_code':    '120503',
+            'direct_name':    'Axis Bluechip Direct',
+            'reg_ter_pct':    1.68,
+            'dir_ter_pct':    0.50,
+        },
+        {
+            'module':         'M-06 Goal Alignment',
+            'gap_type':       'D',
+            'severity':       'MEDIUM',
+            'goal_gap_rs':    2900000,
+            'projected_rs':   7100000,
+            'target_rs':      10000000,
+            'required_xirr':  13.8,
+            'current_xirr':   11.2,
+            'goal_prob_pct':  54,
+        }
+    ],
+    'sel_engine_picks': [...]
+}</div>
+        </div>
+        <div>
+          <span class="slbl">NxanceLM Translation Algorithm</span>
+          <div class="code">def translate_hc_to_plain(hc_result, user_profile):
+    output = []
+    
+    # 1. Score headline
+    output.append(
+        f"Your portfolio Health Score is {hc_result['health_score']}/100 "
+        f"(Grade {hc_result['grade']}). "
+        f"We found {len(hc_result['issues'])} issues costing you "
+        f"Rs.{total_annual_loss:,}/year in hidden losses."
+    )
+    
+    # 2. Per issue translation
+    for issue in hc_result['issues']:
+        if issue['module'] == 'M-03 TER Waste':
+            output.append(translate_ter_issue(issue))
+        elif issue['module'] == 'M-06 Goal Alignment':
+            output.append(translate_goal_issue(issue))
+        # ... per module translator
+    
+    # 3. Selection Engine picks
+    for pick in hc_result['sel_engine_picks']:
+        output.append(translate_sel_pick(pick, issue))
+    
+    # 4. 3-line summary first always
+    return format_with_summary_first(output)</div>
+        </div>
+      </div>
+
+      <span class="slbl">Sample Translations — Raw Data to Plain English</span>
+      <div class="chat">
+        <div class="msg ai-msg">
+          <span class="ai-tag">NXANCELM — HEALTH CHECK REPORT</span>
+          <strong>Your portfolio Health Score is 72/100 (Grade C).</strong> We found 3 issues costing you <strong>Rs.10,240/year</strong> in hidden losses. If fixed, your Health Score improves to 87 and goal probability improves from 54% to 75%.<br><br>
+          <strong>Issue #1 — FREE — Saves Rs.6,240/year (Rs.1,09,000 over 10 years)</strong><br>
+          You hold Axis Bluechip Fund — Regular Plan. The exact same fund exists as Direct Plan with the same stocks and same manager. You are paying Rs.6,240/year extra as distributor commission and getting nothing in return. Switch takes 5 minutes on mfcentral.com. Zero cost. Zero tax.<br><br>
+          <strong>Switch to: Axis Bluechip Direct (AMFI: 120503)</strong> — TER drops from 1.68% to 0.50%.<br>
+          <strong>Even better option: HDFC Nifty 50 Index Direct (AMFI: 118990)</strong> — FIT Score 94 — TER 0.20% — This fund has outperformed Axis Bluechip over 10 years and charges 6x less.<br><br>
+          <strong>Issue #2 — Goal Gap: Rs.29 lakhs short by 2040</strong><br>
+          At your current return of 11.2%/year, your portfolio will reach Rs.71 lakhs by 2040. Your target is Rs.1 crore. You are Rs.29 lakhs short. To reach your target you either need a 13.8%/year return (achievable by switching funds) OR add Rs.4,300/month more SIP, OR a combination of both.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- SECTION 4: MODE 3 CHAT -->
+<div class="sec">
+  <div class="slabel">Mode 3 Deep Dive</div>
+  <div class="stitle">Financial Intelligence <em>Chat Engine</em></div>
+  <div class="ssub">Handles any financial question from any user. Economy, IPO, policy, RBI, global markets, country comparisons, startup ecosystem, company analysis. Always in plain readable language with India context.</div>
+
+  <div class="ecard">
+    <div class="ehead">
+      <div class="eicon ic-p">&#128483;</div>
+      <div>
+        <div class="eid">NXANCELM — MODE 3: FINANCIAL INTELLIGENCE CHAT</div>
+        <div class="ename">Any Finance Question. Plain Answer. India Context.</div>
+        <div class="etag">Economy · IPO · Policy · Markets · Companies · Startups · Countries · Portfolio Q&A</div>
+      </div>
+    </div>
+    <div class="ebody">
+
+      <span class="slbl">What Users Can Ask — Full Scope</span>
+      <table>
+        <thead><tr><th>Category</th><th>Example Questions</th><th>NxanceLM Does</th><th>Data Source</th></tr></thead>
+        <tbody>
+          <tr><td style="color:var(--g)">India Economy</td><td>"India GDP growth rate kya hai?" / "Inflation kitna hai?"</td><td>Latest GDP % with context, comparison to 5yr avg, impact on markets</td><td>World Bank API / RBI data</td></tr>
+          <tr><td style="color:var(--blue)">RBI Policy</td><td>"RBI ne rate cut kiya toh mujhe kya karna chahiye?"</td><td>Explains rate cut → what happens to debt MF, equity, FD, EMI — in Rs. terms for user's portfolio</td><td>RBI circular + user portfolio</td></tr>
+          <tr><td style="color:var(--gold)">IPO Analysis</td><td>"Upcoming IPOs mein kaun best hai?" / "Is IPO ka valuation sahi hai?"</td><td>GMP, P/E vs industry, promoter background, financials, DRHP highlights, risk factors</td><td>SEBI DRHP + NSE IPO data</td></tr>
+          <tr><td style="color:var(--purple)">Company Analysis</td><td>"TCS vs Infosys — kaun better hai long term ke liye?"</td><td>Revenue, ROE, D/E, margin trend, valuation, competitive position, 5yr CAGR comparison</td><td>NSE BSE filings + annual reports</td></tr>
+          <tr><td style="color:var(--red)">Sector Analysis</td><td>"IT sector ka outlook kaisa hai next 2 years?"</td><td>Demand drivers, margin pressure, currency, deal wins, Nifty IT valuation vs history</td><td>NASSCOM data + NSE sector indices</td></tr>
+          <tr><td style="color:var(--cyan)">Global Markets</td><td>"US Fed rate cut ka India pe kya impact hoga?"</td><td>FII flows, rupee movement, which India sectors benefit — with example Rs. amounts</td><td>Fed announcements + historical correlations</td></tr>
+          <tr><td style="color:var(--org)">Country Compare</td><td>"India vs China economy comparison"</td><td>GDP, growth rate, debt/GDP, per capita income, FDI, export structure — visual comparison</td><td>World Bank / IMF APIs</td></tr>
+          <tr><td style="color:var(--pink)">Startup Ecosystem</td><td>"India mein unicorns kitne hain? Best sectors?"</td><td>Unicorn count, sector breakdown, top funded startups, investor landscape, exit history</td><td>Tracxn / Crunchbase data</td></tr>
+          <tr><td style="color:var(--gold)">Government Policy</td><td>"PLI scheme kya hai? Mujhe invest karna chahiye?"</td><td>What PLI is, which sectors, how they benefit stocks, which MFs have max exposure</td><td>Government notifications + AMFI</td></tr>
+          <tr><td style="color:var(--g)">Portfolio Q&A</td><td>"Mera portfolio theek hai? SIP badhaoon ya nahi?"</td><td>If portfolio uploaded: instant E-01 analysis. If not: generic guidance with examples.</td><td>User portfolio + AMFI live</td></tr>
+        </tbody>
+      </table>
+
+      <span class="slbl">Sample Chat Conversations</span>
+      <div class="chat">
+        <div class="msg user-msg">RBI ne aaj interest rate 0.25% cut kiya. Mere portfolio pe kya asar hoga?</div>
+        <div class="msg ai-msg">
+          <span class="ai-tag">NXANCELM — RBI RATE CUT ANALYSIS</span>
+          <strong>RBI ne Repo Rate 6.25% se 6.00% kar diya aaj.</strong> Yeh teesri consecutive cut hai 2025 mein. Aapke portfolio pe 3 direct effects honge:<br><br>
+          <strong>1. Debt Mutual Funds (Positive):</strong> Bond prices rate cut se upar jaate hain. Aapke Long Duration Debt fund mein roughly <strong>1.2–2.5% immediate NAV gain</strong> expect karo. Rs.1L investment pe Rs.1,200–2,500 ek din mein.<br><br>
+          <strong>2. Equity (Positive, moderate):</strong> Companies ka borrowing cost ghata → margin expansion → stock prices typically 2-5% upar jaate hain 30 din mein. IT aur NBFC sector ko sabse zyada fayda.<br><br>
+          <strong>3. FD (Negative):</strong> Banks FD rates ghatate hain rate cut ke baad. Agar aapke paas existing FD hai toh lock-in karo. Naye FD mat karo abhi.<br><br>
+          <strong>Aapke portfolio ke liye suggestion:</strong> Agar Long Duration Debt fund hai toh hold karo — rate cut cycle mein value badhegi. Short Duration ke liye consider karo switch to Medium Duration.
+        </div>
+
+        <div class="msg user-msg">India vs China economy comparison — which country is better for investing?</div>
+        <div class="msg ai-msg">
+          <span class="ai-tag">NXANCELM — COUNTRY COMPARISON</span>
+          <strong>Short answer: India for next 10-20 years. China for short-term stability but structural risks.</strong><br><br>
+          <strong>Key Numbers (2024-25):</strong><br>
+          • GDP Growth: India 6.8% vs China 4.8% — India growing faster<br>
+          • GDP Size: China $18T vs India $3.9T — China 4.5x bigger<br>
+          • Debt/GDP: India 86% vs China 288% — China very high, systemic risk<br>
+          • Demographics: India median age 28 vs China 40 — India has 20yr demographic advantage<br>
+          • FDI: India growing, China declining as companies diversify away<br><br>
+          <strong>India risks:</strong> Infrastructure deficit, slow judicial system, fiscal deficit, rural income gap<br>
+          <strong>China risks:</strong> Property sector collapse (Evergrande), demographic decline, geopolitical isolation, debt bubble<br><br>
+          <strong>For Indian investors:</strong> You cannot invest in China directly. But Mirae Asset China Fund (AMFI: 118551) and several International MFs have China exposure if you want diversification.
+        </div>
+
+        <div class="msg user-msg">Best upcoming IPO kaun sa hai is quarter mein?</div>
+        <div class="msg ai-msg">
+          <span class="ai-tag">NXANCELM — IPO INTELLIGENCE</span>
+          <strong>IPO analysis based on DRHP filings and current GMP:</strong><br><br>
+          NxanceLM scores each IPO on 6 factors: Business quality, Valuation vs peers, Promoter background, Financial health (3yr), GMP trend, Anchor investor quality.<br><br>
+          <strong>Analysis framework for any IPO:</strong><br>
+          • <strong>P/E vs Peers:</strong> If IPO P/E is 40x but listed peers trade at 25x → overvalued, skip<br>
+          • <strong>GMP (Grey Market Premium):</strong> High GMP = listing gain likely, not investment quality<br>
+          • <strong>Revenue growth 3yr:</strong> Must be above 20%/yr for growth sector IPOs<br>
+          • <strong>Promoter shareholding post-IPO:</strong> Above 50% = aligned interests<br>
+          • <strong>Use of proceeds:</strong> Expansion vs OFS (Original shareholders cashing out) — OFS is red flag<br><br>
+          <strong>Rule from NxanceLM:</strong> GMP-based IPO investing ≠ portfolio investing. IPO is Day 1 bet. Portfolio is 10-year strategy. Nxance focuses on portfolio quality, not IPO listing gains.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- SECTION 5: PORTFOLIO COMPARISON MODE -->
+<div class="sec">
+  <div class="slabel">Mode 4 Deep Dive</div>
+  <div class="stitle">Portfolio <em>Comparison Engine</em></div>
+  <div class="ssub">User uploads two portfolios (or compares their portfolio vs a model portfolio). NxanceLM runs both through E-01 and produces a side-by-side comparison with a winner per category.</div>
+
+  <div class="ecard">
+    <div class="ehead">
+      <div class="eicon ic-pink">&#9878;</div>
+      <div>
+        <div class="eid">NXANCELM — MODE 4: PORTFOLIO COMPARISON</div>
+        <div class="ename">Portfolio A vs Portfolio B. Winner Per Category.</div>
+        <div class="etag">Runs E-01 on both portfolios · Side-by-side output · Exact Rs. difference shown</div>
+      </div>
+    </div>
+    <div class="ebody">
+      <div class="g2">
+        <div>
+          <span class="slbl">What Gets Compared</span>
+          <div class="params">
+            <div class="param"><span class="pn">XIRR</span><span class="pv">Real annual return of Portfolio A vs B. Exact % and Rs./year difference.</span></div>
+            <div class="param"><span class="pn">Sharpe Ratio</span><span class="pv">Risk-adjusted return. Who earns more per unit of risk?</span></div>
+            <div class="param"><span class="pn">TER Cost</span><span class="pv">Total annual TER waste. Who pays less for same result?</span></div>
+            <div class="param"><span class="pn">Fund Overlap</span><span class="pv">Jaccard matrix. Which is more genuinely diversified?</span></div>
+            <div class="param"><span class="pn">Goal Probability</span><span class="pv">Monte Carlo: which portfolio reaches goal more reliably?</span></div>
+            <div class="param"><span class="pn">Drawdown Risk</span><span class="pv">Worst expected crash loss in Rs. for each portfolio.</span></div>
+            <div class="param"><span class="pn">Health Score</span><span class="pv">Overall 0-100 score for each portfolio. Issues count.</span></div>
+          </div>
+        </div>
+        <div>
+          <span class="slbl">Sample Comparison Output</span>
+          <div class="chat">
+            <div class="msg user-msg">Compare mera portfolio (A) vs mera friend ka portfolio (B)</div>
+            <div class="msg ai-msg">
+              <span class="ai-tag">NXANCELM — PORTFOLIO COMPARISON RESULT</span>
+              <strong>Portfolio A (Yours) vs Portfolio B (Friend's)</strong><br><br>
+              <strong>XIRR:</strong> A = 11.2%/yr · B = 13.8%/yr — <span style="color:var(--grn)">Portfolio B wins</span> · Rs.13,000/yr more on Rs.5L<br>
+              <strong>TER Cost:</strong> A = Rs.7,200/yr waste · B = Rs.1,100/yr waste — <span style="color:var(--grn)">Portfolio B wins</span> (all Direct plans)<br>
+              <strong>Sharpe Ratio:</strong> A = 0.62 · B = 0.81 — <span style="color:var(--grn)">Portfolio B wins</span><br>
+              <strong>Goal Probability:</strong> A = 54% · B = 71% — <span style="color:var(--grn)">Portfolio B wins</span><br>
+              <strong>Diversification:</strong> A = max overlap 52% · B = max overlap 18% — <span style="color:var(--grn)">Portfolio B wins</span><br>
+              <strong>Health Score:</strong> A = 72/100 · B = 88/100 — <span style="color:var(--grn)">Portfolio B wins</span><br><br>
+              <strong>Conclusion:</strong> Portfolio B is better across all 6 categories. Your friend has mostly Direct plans, no overlap, and better fund selection. To match: switch to Direct plans first (Rs.6,100/yr saved immediately).
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- SECTION 6: TECHNICAL PIPELINE -->
+<div class="sec">
+  <div class="slabel">Technical Architecture</div>
+  <div class="stitle">NxanceLM <em>Processing Pipeline</em></div>
+  <div class="ssub">The technical flow from raw query or engine output to final user-readable response. Every component has a specific job.</div>
+
+  <div class="ecard">
+    <div class="ehead">
+      <div class="eicon ic-p">&#9881;</div>
+      <div>
+        <div class="eid">NXANCELM — TECHNICAL PIPELINE</div>
+        <div class="ename">Input Processing → Intent → Route → Generate → Format</div>
+        <div class="etag">End-to-end pipeline from raw input to user-readable output</div>
+      </div>
+    </div>
+    <div class="ebody">
+
+      <span class="slbl">Step 1 — Input Processing</span>
+      <div class="code">class NxanceLMInputProcessor:
+    def process(self, input_data):
+        # Detect input type
+        if isinstance(input_data, HealthCheckResult):
+            return self.route_to_hc_mode(input_data)
+        elif isinstance(input_data, ConstructionResult):
+            return self.route_to_build_mode(input_data)
+        elif isinstance(input_data, str):  # User chat query
+            intent = self.classify_intent(input_data)
+            return self.route_by_intent(input_data, intent)
+    
+    def classify_intent(self, query: str) -> str:
+        # Intent classification
+        categories = {
+            'economy':      ['gdp', 'inflation', 'growth rate', 'economy'],
+            'rbi_policy':   ['rbi', 'repo rate', 'interest rate', 'monetary policy'],
+            'ipo':          ['ipo', 'upcoming ipo', 'listing', 'grey market', 'gmp'],
+            'company':      ['tcs', 'reliance', 'hdfc', 'fundamentals', 'vs'],
+            'sector':       ['it sector', 'banking', 'pharma', 'sector'],
+            'global':       ['us', 'fed', 'china', 'global', 'dollar'],
+            'portfolio_qa': ['mera portfolio', 'kya sahi hai', 'sip badhao'],
+            'comparison':   ['compare', 'vs', 'better portfolio', 'kaun achha'],
+            'policy':       ['pli', 'budget', 'tax', 'scheme', 'government']
+        }
+        query_lower = query.lower()
+        for intent, keywords in categories.items():
+            if any(kw in query_lower for kw in keywords):
+                return intent
+        return 'general_finance'</div>
+
+      <span class="slbl">Step 2 — Response Generator</span>
+      <div class="code">class NxanceLMResponseGenerator:
+    def generate(self, intent: str, data: dict, user_profile: dict) -> str:
+        
+        if intent == 'hc_report':
+            return self.generate_hc_explanation(data, user_profile)
+        
+        elif intent == 'rbi_policy':
+            live_rate = rbi_api.get_latest_repo_rate()
+            historical = rbi_api.get_rate_history(years=5)
+            user_impact = self.calculate_user_impact(user_profile, live_rate)
+            return self.format_policy_response(live_rate, historical, user_impact)
+        
+        elif intent == 'ipo':
+            ipo_list = sebi_api.get_upcoming_ipos()
+            scored = [self.score_ipo(ipo) for ipo in ipo_list]
+            return self.format_ipo_analysis(scored)
+        
+        elif intent == 'comparison':
+            portfolio_a = user_profile.portfolio
+            portfolio_b = data['comparison_portfolio']
+            a_analysis  = E01.run_analysis(portfolio_a)
+            b_analysis  = E01.run_analysis(portfolio_b)
+            return self.format_comparison(a_analysis, b_analysis)
+        
+        # ... other intents
+    
+    def generate_hc_explanation(self, hc_result, user) -> str:
+        # Rule 1: Rs. + % always together
+        # Rule 2: 3-line summary first
+        # Rule 3: Jargon explained inline
+        # Rule 4: Source cited for every number
+        pass</div>
+
+      <span class="slbl">Step 3 — Format and Output Rules</span>
+      <div class="g2">
+        <div>
+          <div class="params">
+            <div class="param"><span class="pn">Rs. + % Always</span><span class="pv">Never write just "3.3% gap". Always write "3.3% gap = Rs.16,500/year on your Rs.5L".</span></div>
+            <div class="param"><span class="pn">3-Line Summary First</span><span class="pv">First 3 lines = complete picture. User reads further if they want detail.</span></div>
+            <div class="param"><span class="pn">No Jargon Alone</span><span class="pv">Never "CVaR". Always "CVaR (average loss on your worst days)". Always inline.</span></div>
+            <div class="param"><span class="pn">Source Every Number</span><span class="pv">Every % has a source: (AMFI data), (NSE 20yr), (RBI report Dec 2025).</span></div>
+            <div class="param"><span class="pn">Hinglish Detection</span><span class="pv">If user writes in Hindi/Hinglish, output is in Hinglish. Auto-detected.</span></div>
+            <div class="param"><span class="pn">SEBI Disclaimer</span><span class="pv">Auto-appended when output could be construed as investment advice.</span></div>
+          </div>
+        </div>
+        <div>
+          <span class="slbl">What NxanceLM Will NOT Do</span>
+          <div class="params">
+            <div class="param"><span class="pn" style="color:var(--red)">No "Buy Now"</span><span class="pv">Never says "Buy TCS today". Says "TCS fundamentals are strong. Here is the data. You decide."</span></div>
+            <div class="param"><span class="pn" style="color:var(--red)">No Wrong Codes</span><span class="pv">Never invents AMFI codes. If unsure, says "verify on amfiindia.com".</span></div>
+            <div class="param"><span class="pn" style="color:var(--red)">No Outdated Data</span><span class="pv">Always fetches live data for questions about current rates, prices, or NAVs.</span></div>
+            <div class="param"><span class="pn" style="color:var(--red)">No Overconfidence</span><span class="pv">Never says "this will happen". Says "based on historical patterns, this has happened X% of the time".</span></div>
+            <div class="param"><span class="pn" style="color:var(--red)">No Personalized Advice</span><span class="pv">Never says "you should do X". Says "people in your situation often consider X — here is why". SEBI RIA boundary respected.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- SECTION 7: LIVE DATA SOURCES -->
+<div class="sec">
+  <div class="slabel">Data Infrastructure</div>
+  <div class="stitle">Live Data Sources <em>NxanceLM Uses</em></div>
+  <div class="ssub">NxanceLM answers are only as good as the data behind them. Every category of question has a verified live data source. No hallucinated numbers.</div>
+
+  <div class="ecard">
+    <div class="ehead">
+      <div class="eicon ic-cyan">&#127760;</div>
+      <div>
+        <div class="eid">DATA INFRASTRUCTURE — NxanceLM SOURCES</div>
+        <div class="ename">Live APIs + Verified Sources for Every Answer Category.</div>
+        <div class="etag">No hallucinated data · Source cited in every response · Rate limits handled gracefully</div>
+      </div>
+    </div>
+    <div class="ebody">
+      <table>
+        <thead><tr><th>Data Category</th><th>Source</th><th>Update Frequency</th><th>Used For</th></tr></thead>
+        <tbody>
+          <tr><td style="color:var(--g)">MF NAV + TER</td><td>AMFI India API (mfapi.in)</td><td>Daily 4:30pm IST</td><td>TER comparison, portfolio value, XIRR calculation</td></tr>
+          <tr><td style="color:var(--g)">MF Portfolio Holdings</td><td>AMFI monthly disclosure</td><td>Monthly (1st of month)</td><td>Jaccard overlap analysis, sector concentration</td></tr>
+          <tr><td style="color:var(--blue)">NSE Stock Prices</td><td>Yahoo Finance / NSE API</td><td>Real-time (15-min delay)</td><td>Portfolio value, XIRR, stock fundamental data</td></tr>
+          <tr><td style="color:var(--blue)">Company Financials</td><td>NSE BSE filings + Screener.in API</td><td>Quarterly (earnings)</td><td>Fundamental analysis: ROE, D/E, FCF, EPS</td></tr>
+          <tr><td style="color:var(--red)">RBI Monetary Policy</td><td>RBI website (official)</td><td>Per policy announcement</td><td>Rate analysis, debt fund impact, EMI effect</td></tr>
+          <tr><td style="color:var(--red)">SEBI Notices + Alerts</td><td>SEBI official + email alerts</td><td>Real-time</td><td>Fraud gate monitoring, regulatory flags</td></tr>
+          <tr><td style="color:var(--gold)">IPO Data</td><td>SEBI DRHP + NSE IPO section</td><td>Per filing</td><td>IPO analysis, valuation, GMP, risk factors</td></tr>
+          <tr><td style="color:var(--gold)">India Economy</td><td>MOSPI, RBI Monetary Policy Report</td><td>Quarterly/Monthly</td><td>GDP, inflation, sectoral growth rates</td></tr>
+          <tr><td style="color:var(--cyan)">Global Economy</td><td>World Bank API, IMF Data API</td><td>Annual / Quarterly</td><td>Country comparisons, global growth, FDI data</td></tr>
+          <tr><td style="color:var(--cyan)">Global Markets</td><td>Fed Reserve, ECB, BOJ releases</td><td>Per meeting</td><td>Global rate cycle, FII flow impact analysis</td></tr>
+          <tr><td style="color:var(--purple)">Startup + VC Data</td><td>Tracxn / Crunchbase API</td><td>Real-time funding rounds</td><td>India startup ecosystem, unicorn analysis</td></tr>
+          <tr><td style="color:var(--org)">Sector Indices</td><td>NSE Sector Index data</td><td>Real-time</td><td>Sector P/E vs history, sector rotation signals</td></tr>
+        </tbody>
+      </table>
+      <div class="nb" style="margin-top:12px">When live data is unavailable (API down, rate limit), NxanceLM explicitly tells the user: "I am using data from [date]. Live data unavailable right now. Please verify at [source URL]." Never gives stale data without disclosure.</div>
+    </div>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- SECTION 8: PHASE 2 ADDITIONS -->
+<div class="sec">
+  <div class="slabel">Phase 2 Additions</div>
+  <div class="stitle">What Makes NxanceLM <em>Even Better</em></div>
+  <div class="ssub">These additions take NxanceLM from a financial explainer to a full intelligent financial companion. Built in phases as user base and revenue grow.</div>
+
+  <div class="g2">
+    <div class="ecard" style="margin-bottom:14px">
+      <div class="ehead" style="padding:14px 18px">
+        <div class="eicon ic-p" style="width:46px;height:46px;font-size:22px">&#127908;</div>
+        <div><div class="eid">VOICE MODE (Phase 2)</div><div class="ename" style="font-size:16px">Talk to NxanceLM</div></div>
+      </div>
+      <div class="ebody" style="padding:14px 18px">
+        <div class="params">
+          <div class="param"><span class="pn">Voice Input</span><span class="pv">Speak your question in Hindi, Hinglish, or English. Whisper API transcription.</span></div>
+          <div class="param"><span class="pn">Voice Output</span><span class="pv">NxanceLM speaks the answer back. Hindi TTS for Hinglish users.</span></div>
+          <div class="param"><span class="pn">Use Case</span><span class="pv">MFD on the go. "Iska portfolio theek hai ya nahi?" — spoken, answered spoken.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ecard" style="margin-bottom:14px">
+      <div class="ehead" style="padding:14px 18px">
+        <div class="eicon ic-gold" style="width:46px;height:46px;font-size:22px">&#128196;</div>
+        <div><div class="eid">REPORT GENERATOR (Phase 2)</div><div class="ename" style="font-size:16px">PDF Reports in 1 Click</div></div>
+      </div>
+      <div class="ebody" style="padding:14px 18px">
+        <div class="params">
+          <div class="param"><span class="pn">Client Report</span><span class="pv">MFD generates branded PDF report for client with NxanceLM explanation of portfolio health.</span></div>
+          <div class="param"><span class="pn">Annual Statement</span><span class="pv">Full year XIRR, gains, tax liability, goal progress — in plain language PDF.</span></div>
+          <div class="param"><span class="pn">Comparison Report</span><span class="pv">Portfolio A vs B comparison PDF for client meetings.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ecard" style="margin-bottom:14px">
+      <div class="ehead" style="padding:14px 18px">
+        <div class="eicon ic-grn" style="width:46px;height:46px;font-size:22px">&#128204;</div>
+        <div><div class="eid">SCENARIO SIMULATOR (Phase 2)</div><div class="ename" style="font-size:16px">What If Questions</div></div>
+      </div>
+      <div class="ebody" style="padding:14px 18px">
+        <div class="params">
+          <div class="param"><span class="pn">What If SIP +50%</span><span class="pv">"What if I increase SIP from Rs.5k to Rs.7.5k?" → new goal projection instantly</span></div>
+          <div class="param"><span class="pn">What If Market Crashes</span><span class="pv">"What if market falls 40%?" → portfolio value, recovery time, goal probability change</span></div>
+          <div class="param"><span class="pn">What If Switch Fund</span><span class="pv">"What if I switch Axis to HDFC Index?" → before/after XIRR, TER, goal projection</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ecard" style="margin-bottom:14px">
+      <div class="ehead" style="padding:14px 18px">
+        <div class="eicon ic-cyan" style="width:46px;height:46px;font-size:22px">&#128073;</div>
+        <div><div class="eid">PROACTIVE ALERTS (Phase 2)</div><div class="ename" style="font-size:16px">NxanceLM Speaks First</div></div>
+      </div>
+      <div class="ebody" style="padding:14px 18px">
+        <div class="params">
+          <div class="param"><span class="pn">Market Event Alert</span><span class="pv">"RBI aaj rate cut kiya. Aapke portfolio pe effect: Long Duration fund +2.1% expected."</span></div>
+          <div class="param"><span class="pn">Portfolio Trigger Alert</span><span class="pv">"Aapka Equity allocation 87% ho gaya (target 75%). Rebalancing suggest karta hun."</span></div>
+          <div class="param"><span class="pn">Goal Milestone Alert</span><span class="pv">"Aapne 50% of goal amount reach kar liya — 7 saal mein, 3 saal ahead of schedule!"</span></div>
+          <div class="param"><span class="pn">Fraud Alert</span><span class="pv">"Alert: XYZ company mein aapka investment hai. SEBI ne aaj notice issue kiya. Action dekhein."</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- SECTION 9: COMPLETE SUMMARY TABLE -->
+<div class="sec">
+  <div class="slabel">Complete Reference</div>
+  <div class="stitle">NxanceLM &mdash; <em>Complete Component Summary</em></div>
+
+  <table>
+    <thead><tr><th>Component</th><th>What It Does</th><th>Input</th><th>Output</th><th>Phase</th></tr></thead>
+    <tbody>
+      <tr><td style="color:var(--purple)">Intent Classifier</td><td>Routes input to correct mode (HC/Build/Chat/Compare)</td><td>Any text or structured data</td><td>Intent label + routed data</td><td>v1.0</td></tr>
+      <tr><td style="color:var(--g)">HC Explainer (Mode 1)</td><td>Translates Health Check engine output to plain English</td><td>E-01 to E-07 structured result</td><td>Issue cards + guidance + Rs. amounts</td><td>v1.0</td></tr>
+      <tr><td style="color:var(--blue)">Build Explainer (Mode 2)</td><td>Explains portfolio construction results to user</td><td>Construction engine result</td><td>Why each fund, Rs. allocation, SIP plan</td><td>v1.0</td></tr>
+      <tr><td style="color:var(--purple)">Chat Engine (Mode 3)</td><td>Handles all financial Q&A with live data</td><td>User text query</td><td>Plain English answer with source</td><td>v1.0</td></tr>
+      <tr><td style="color:var(--pink)">Compare Engine (Mode 4)</td><td>Runs E-01 on two portfolios and compares</td><td>Two portfolio uploads</td><td>Side-by-side winner per category</td><td>v1.0</td></tr>
+      <tr><td style="color:var(--red)">Rules Engine</td><td>Prevents wrong codes, hallucinated data, overconfident advice</td><td>All responses before output</td><td>Validated, compliant response</td><td>v1.0</td></tr>
+      <tr><td style="color:var(--grn)">Format Engine</td><td>Rs.+%, 3-line summary first, jargon inline, Hinglish detection</td><td>Raw response text</td><td>Formatted user-ready output</td><td>v1.0</td></tr>
+      <tr><td style="color:var(--gold)">Disclaimer Engine</td><td>Auto-appends SEBI disclaimer when needed</td><td>Intent + response content</td><td>Compliant output with disclaimer</td><td>v1.0</td></tr>
+      <tr><td style="color:var(--cyan)">Context Memory</td><td>Remembers user profile, portfolio, goals in session</td><td>User session data</td><td>Personalized contextual answers</td><td>v1.0</td></tr>
+      <tr><td style="color:var(--cyan)">Live Data Fetcher</td><td>Pulls from 12 APIs for current data</td><td>Query type + parameters</td><td>Live numbers with timestamp</td><td>v1.0</td></tr>
+      <tr><td style="color:var(--purple)">Voice Mode</td><td>Speech input + speech output in Hindi/English</td><td>Audio input</td><td>Spoken response</td><td>Phase 2</td></tr>
+      <tr><td style="color:var(--gold)">Report Generator</td><td>PDF reports for MFD client meetings</td><td>Portfolio analysis result</td><td>Branded PDF report</td><td>Phase 2</td></tr>
+      <tr><td style="color:var(--grn)">Scenario Simulator</td><td>What-if questions with instant projections</td><td>User scenario query</td><td>Before/after projection in Rs.</td><td>Phase 2</td></tr>
+      <tr><td style="color:var(--cyan)">Proactive Alerts</td><td>NxanceLM pushes alerts without user asking</td><td>Market events + portfolio triggers</td><td>Push notification with explanation</td><td>Phase 2</td></tr>
+    </tbody>
+  </table>
+
+  <div class="pb" style="margin-top:16px"><strong>NxanceLM's Core Job:</strong> Every quantitative engine in Nxance produces numbers. NxanceLM converts those numbers into sentences a user actually understands. The Selection Engine says "FIT SCORE 91". NxanceLM says "We chose this fund because it has beaten its peers in 8 of the last 10 years and charges 6x less than what you currently pay". That is the translation job.</div>
+  <div class="nb" style="margin-top:10px"><strong>SEBI Boundary:</strong> NxanceLM is not a SEBI-registered Investment Adviser. It gives analysis, context, and education. It never says "buy this today". All outputs include a disclaimer when appropriate. The user always makes the final decision.</div>
+</div>
+
+<div class="footer">
+  <div class="fl">nxancelm</div>
+  <div class="ft">Ohshn Intelligence Pvt Ltd &nbsp;|&nbsp; Palampur, Himachal Pradesh &nbsp;|&nbsp; 2026<br>NxanceLM Engine Architecture v1.0 &nbsp;|&nbsp; Confidential</div>
+</div>
+</div>
+</body>
+</html>

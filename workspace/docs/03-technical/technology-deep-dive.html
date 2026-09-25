@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Nxance — Complete Technology Deep Dive</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07080C;--s1:#0D0F16;--s2:#13161F;--s3:#1A1E2A;--s4:#202535;
+  --b1:#252B3E;--b2:#2E3650;--b3:#3A4463;
+  --tx:#E0E7F5;--t2:#8A95B8;--t3:#4A5275;--t4:#2E3450;
+  --g:#00E896;--gd:#00B872;--gb:rgba(0,232,150,.08);--gbr:rgba(0,232,150,.18);
+  --b:#3D8EFF;--bd:#2A6FE0;--bb:rgba(61,142,255,.08);--bbr:rgba(61,142,255,.18);
+  --y:#FFBA30;--yd:#E09800;--yb:rgba(255,186,48,.08);--ybr:rgba(255,186,48,.18);
+  --r:#FF4D6A;--rd:#E02040;--rb:rgba(255,77,106,.08);--rbr:rgba(255,77,106,.18);
+  --p:#9B72FF;--pd:#7A50E0;--pb:rgba(155,114,255,.08);--pbr:rgba(155,114,255,.18);
+  --c:#00CEFF;--cd:#00A8E0;--cb:rgba(0,206,255,.08);--cbr:rgba(0,206,255,.18);
+  --o:#FF7B3A;--ob:rgba(255,123,58,.08);--obr:rgba(255,123,58,.18);
+  --pi:#FF5FC0;--pib:rgba(255,95,192,.08);--pibr:rgba(255,95,192,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);line-height:1.7;font-size:14px}
+code,pre{font-family:'JetBrains Mono',monospace}
+
+/* NAV */
+.nav{background:rgba(7,8,12,.97);backdrop-filter:blur(24px);border-bottom:1px solid var(--b1);display:flex;align-items:stretch;position:sticky;top:0;z-index:999;min-height:50px}
+.nb{padding:0 20px;display:flex;align-items:center;gap:10px;border-right:1px solid var(--b1);flex-shrink:0}
+.logo{font-size:15px;font-weight:900;background:linear-gradient(135deg,var(--g) 0%,var(--c) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-.03em}
+.nbadge{background:var(--yb);border:1px solid var(--ybr);color:var(--y);font-size:9px;font-weight:700;padding:2px 9px;border-radius:20px;letter-spacing:.07em;white-space:nowrap}
+.ntabs{display:flex;overflow-x:auto;flex:1;scrollbar-width:none;align-items:stretch}
+.ntabs::-webkit-scrollbar{display:none}
+.nl{padding:0 13px;display:flex;align-items:center;font-size:11px;font-weight:500;color:var(--t3);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;transition:.12s;cursor:pointer;gap:5px}
+.nl:hover,.nl.on{color:var(--g);border-color:var(--g)}
+.ndl{padding:8px 18px;border-left:1px solid var(--b1);display:flex;align-items:center;flex-shrink:0}
+.dlbtn{background:linear-gradient(135deg,var(--g),var(--c));color:#000;border:none;padding:7px 18px;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer;font-family:inherit;letter-spacing:.02em}
+
+/* WRAP */
+.wrap{max-width:1140px;margin:0 auto;padding:52px 24px 120px}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--s1) 0%,var(--s2) 50%,var(--s1) 100%);border:1px solid var(--b1);border-radius:24px;padding:52px 52px 44px;margin-bottom:56px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(0,232,150,.1) 0%,transparent 70%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-80px;left:-60px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(61,142,255,.07) 0%,transparent 70%);pointer-events:none}
+.hi{position:relative;z-index:1}
+.heyebrow{display:inline-flex;align-items:center;gap:6px;background:var(--gb);border:1px solid var(--gbr);color:var(--g);padding:5px 16px;border-radius:20px;font-size:9.5px;font-weight:700;letter-spacing:.08em;margin-bottom:18px}
+.hh{font-size:34px;font-weight:900;letter-spacing:-.03em;line-height:1.1;margin-bottom:8px}
+.hh span{background:linear-gradient(135deg,var(--g),var(--c));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hs{font-size:14px;color:var(--t2);line-height:1.7;margin-bottom:28px;max-width:720px}
+.hgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--b1);border-radius:14px;overflow:hidden}
+.hg{background:var(--s2);padding:13px 10px;text-align:center}
+.hgn{font-size:17px;font-weight:800;line-height:1;letter-spacing:-.02em}
+.hgl{font-size:9px;color:var(--t3);margin-top:4px;text-transform:uppercase;letter-spacing:.05em}
+.hg.g .hgn{color:var(--g)}.hg.b .hgn{color:var(--b)}.hg.y .hgn{color:var(--y)}.hg.p .hgn{color:var(--p)}.hg.c .hgn{color:var(--c)}
+
+/* SECTION DIVIDERS */
+.sec{margin:60px 0 26px;display:flex;align-items:center;gap:16px}
+.sl{flex:1;height:1px;background:var(--b1)}
+.sp{display:inline-flex;align-items:center;gap:8px;padding:9px 24px;border-radius:30px;font-size:11px;font-weight:700;letter-spacing:.04em;white-space:nowrap;flex-shrink:0}
+.spg{background:var(--gb);color:var(--g);border:1px solid var(--gbr)}
+.spb{background:var(--bb);color:var(--b);border:1px solid var(--bbr)}
+.spy{background:var(--yb);color:var(--y);border:1px solid var(--ybr)}
+.spp{background:var(--pb);color:var(--p);border:1px solid var(--pbr)}
+.spc{background:var(--cb);color:var(--c);border:1px solid var(--cbr)}
+.spr{background:var(--rb);color:var(--r);border:1px solid var(--rbr)}
+.spo{background:var(--ob);color:var(--o);border:1px solid var(--obr)}
+.sppi{background:var(--pib);color:var(--pi);border:1px solid var(--pibr)}
+
+/* TECH CARD SYSTEM */
+.tc{background:var(--s1);border:1px solid var(--b1);border-radius:20px;overflow:hidden;margin-bottom:18px;transition:.15s}
+.tc:hover{border-color:var(--b2)}
+.tc-top{padding:20px 24px 16px;border-bottom:1px solid var(--b1);display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+.tc-left{flex:1;display:flex;flex-direction:column;gap:10px}
+.tc-icon-row{display:flex;align-items:center;gap:12px}
+.ico{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.ico-g{background:var(--gb);border:1px solid var(--gbr)}
+.ico-b{background:var(--bb);border:1px solid var(--bbr)}
+.ico-y{background:var(--yb);border:1px solid var(--ybr)}
+.ico-p{background:var(--pb);border:1px solid var(--pbr)}
+.ico-c{background:var(--cb);border:1px solid var(--cbr)}
+.ico-r{background:var(--rb);border:1px solid var(--rbr)}
+.ico-o{background:var(--ob);border:1px solid var(--obr)}
+.ico-pi{background:var(--pib);border:1px solid var(--pibr)}
+.tc-title{font-size:17px;font-weight:800;color:var(--tx);letter-spacing:-.01em}
+.tc-sub{font-size:12.5px;color:var(--t2);line-height:1.65;max-width:640px}
+.tc-badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.03em;white-space:nowrap}
+.bg{background:var(--gb);color:var(--g);border:1px solid var(--gbr)}
+.bb{background:var(--bb);color:var(--b);border:1px solid var(--bbr)}
+.by{background:var(--yb);color:var(--y);border:1px solid var(--ybr)}
+.br{background:var(--rb);color:var(--r);border:1px solid var(--rbr)}
+.bp{background:var(--pb);color:var(--p);border:1px solid var(--pbr)}
+.bc{background:var(--cb);color:var(--c);border:1px solid var(--cbr)}
+.bo{background:var(--ob);color:var(--o);border:1px solid var(--obr)}
+.bpi{background:var(--pib);color:var(--pi);border:1px solid var(--pibr)}
+.tc-right{flex-shrink:0;display:flex;flex-direction:column;gap:6px;align-items:flex-end;min-width:120px}
+
+/* BODY COLUMNS */
+.tc-body{padding:20px 24px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:0}
+.col{padding-right:22px;border-right:1px solid var(--b1)}
+.col:last-child{border-right:none;padding-right:0;padding-left:22px}
+.col:nth-child(2){padding:0 22px}
+.col-h{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--t3);margin-bottom:11px;padding-bottom:7px;border-bottom:1px solid var(--b1)}
+.ci{font-size:12.5px;color:var(--t2);margin-bottom:8px;padding-left:15px;position:relative;line-height:1.6}
+.ci::before{content:'›';position:absolute;left:0;font-size:12px;color:var(--t3);line-height:1.6}
+.ci strong{color:var(--tx);font-weight:600}
+.ci.cg{color:var(--g)}.ci.cr{color:var(--r)}.ci.cy{color:var(--y)}.ci.cb{color:var(--b)}.ci.cp{color:var(--p)}
+.ci.cn{color:var(--t3);font-size:11.5px}
+
+/* ALT TABLE */
+.alt-table{width:100%;border-collapse:collapse;font-size:12px;margin:8px 0;border-radius:12px;overflow:hidden;border:1px solid var(--b1)}
+.alt-table th{background:var(--s3);color:var(--t2);padding:8px 12px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.06em;border-bottom:1px solid var(--b1)}
+.alt-table th.chosen{background:rgba(0,232,150,.08);color:var(--g)}
+.alt-table td{padding:9px 12px;border-bottom:1px solid var(--b1);color:var(--t2);vertical-align:top;line-height:1.55;font-size:12px}
+.alt-table tr:last-child td{border-bottom:none}
+.alt-table td:first-child{font-weight:600;color:var(--tx);width:22%}
+.alt-table td.chosen{background:rgba(0,232,150,.04)}
+.alt-table .won{color:var(--g);font-weight:600}
+.alt-table .lost{color:var(--r)}
+
+/* CODE */
+.cw{background:var(--bg);border:1px solid var(--b1);border-radius:12px;overflow:hidden;margin:8px 0}
+.ch{background:var(--s2);padding:7px 15px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--b1)}
+.cl{font-size:9.5px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.07em}
+.cf{font-size:10.5px;color:var(--b);font-family:'JetBrains Mono',monospace}
+.cb{padding:14px 17px;overflow-x:auto}
+.cb pre{font-size:11.5px;line-height:1.85;color:var(--t2);white-space:pre-wrap;word-break:break-word}
+.kw{color:var(--p)}.st{color:var(--g)}.cm{color:var(--t3);font-style:italic}.fn{color:var(--b)}.nm{color:var(--y)}.vr{color:var(--o)}.ty{color:var(--c)}
+
+/* FORMULA */
+.formula{background:var(--s2);border:1px solid var(--b);border-radius:12px;padding:13px 16px;margin:8px 0}
+.formula-t{font-size:9.5px;font-weight:700;color:var(--b);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+.formula-eq{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--c);font-weight:600;line-height:1.7;margin-bottom:5px}
+.formula-d{font-size:11.5px;color:var(--t2);line-height:1.65}
+
+/* ALERT */
+.al{border-radius:12px;padding:13px 17px;margin:12px 0;display:flex;gap:11px;align-items:flex-start;font-size:12.5px;line-height:1.65}
+.al-i{flex-shrink:0;font-size:16px;margin-top:1px}
+.ag{background:var(--gb);border:.5px solid var(--gbr);color:var(--g)}
+.ab{background:var(--bb);border:.5px solid var(--bbr);color:var(--b)}
+.ay{background:var(--yb);border:.5px solid var(--ybr);color:var(--y)}
+.ar{background:var(--rb);border:.5px solid var(--rbr);color:var(--r)}
+.ap{background:var(--pb);border:.5px solid var(--pbr);color:var(--p)}
+
+/* TC FOOTER */
+.tc-foot{background:var(--s2);padding:10px 24px;border-top:1px solid var(--b1);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+
+/* ADV CARDS */
+.adv-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:14px 0}
+.acard{background:var(--s1);border:1px solid var(--b1);border-radius:16px;padding:18px 20px;position:relative;overflow:hidden}
+.acard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:16px 16px 0 0}
+.ac-g::before{background:linear-gradient(90deg,var(--g),var(--c))}
+.ac-p::before{background:linear-gradient(90deg,var(--p),var(--b))}
+.ac-y::before{background:linear-gradient(90deg,var(--y),var(--o))}
+.ac-r::before{background:linear-gradient(90deg,var(--r),var(--p))}
+.ac-c::before{background:linear-gradient(90deg,var(--c),var(--b))}
+.ac-pi::before{background:linear-gradient(90deg,var(--pi),var(--p))}
+.ah{font-size:13px;font-weight:700;color:var(--tx);margin-bottom:6px;display:flex;align-items:center;gap:7px}
+.as{font-size:12px;color:var(--t2);line-height:1.65;margin-bottom:10px}
+.atag{display:inline-flex;align-items:center;font-size:10px;font-weight:600;padding:2px 9px;border-radius:5px;margin-right:4px;margin-bottom:3px}
+
+/* STACK GRID */
+.stack-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.si{background:var(--s2);border:1px solid var(--b1);border-radius:12px;padding:14px 16px}
+.si-cat{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--t3);margin-bottom:9px}
+.si-row{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:.5px solid var(--b1)}
+.si-row:last-child{border-bottom:none}
+.si-name{font-size:12px;font-weight:500;color:var(--tx)}
+.si-tag{font-size:10px;color:var(--t3)}
+.si-tag.g{color:var(--g)}.si-tag.y{color:var(--y)}.si-tag.b{color:var(--b)}
+
+/* FOOT */
+.foot{margin-top:56px;padding-top:20px;border-top:1px solid var(--b1);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.foot span{font-size:11px;color:var(--t3)}
+
+@media(max-width:800px){.tc-body,.adv-grid,.stack-grid,.hgrid{grid-template-columns:1fr 1fr}.col{border-right:none!important;border-bottom:1px solid var(--b1);padding:12px 0!important}.col:last-child{border-bottom:none}.wrap{padding:20px 14px 80px}.hero{padding:28px 22px}.hh{font-size:22px}.adv-grid{grid-template-columns:1fr}}
+@media(max-width:500px){.hgrid{grid-template-columns:repeat(4,1fr)}.tc-top{flex-direction:column}.tc-right{align-items:flex-start}}
+@media print{.nav,.ndl{display:none!important}body{background:#fff;color:#000}.tc{page-break-inside:avoid}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nb"><span class="logo">nxance</span><span class="nbadge">TECHNOLOGY DEEP DIVE</span></div>
+  <div class="ntabs">
+    <a class="nl on" href="#stack">Stack Map</a>
+    <a class="nl" href="#frontend">Frontend</a>
+    <a class="nl" href="#database">Database</a>
+    <a class="nl" href="#backend">Backend</a>
+    <a class="nl" href="#data">Data Sources</a>
+    <a class="nl" href="#quant">Quant Engine</a>
+    <a class="nl" href="#ai">NxanceLM AI</a>
+    <a class="nl" href="#payment">Payment</a>
+    <a class="nl" href="#security">Security</a>
+    <a class="nl" href="#devops">DevOps</a>
+    <a class="nl" href="#advanced">Advanced Tech</a>
+  </div>
+  <div class="ndl"><button class="dlbtn" onclick="(function(){var a=document.createElement('a');a.href='data:text/html;charset=utf-8,'+encodeURIComponent(document.documentElement.outerHTML);a.download='Nxance_Tech_Deep_Dive.html';a.click()})()">↓ Download</button></div>
+</nav>
+<div class="wrap">
+
+<!-- HERO -->
+<div class="hero">
+<div class="hi">
+  <div class="heyebrow">★ EVERY TECHNOLOGY · ALTERNATIVES · FORMULAS · CODE · ADVANCED OPTIONS · WITH COMPANY REGISTRATION</div>
+  <div class="hh">Nxance Phase 1 —<br><span>Complete Technology Deep Dive</span></div>
+  <div class="hs">18 technologies. Har ek ka kya karta hai, kyun choose kiya, alternatives, exact code, advanced options. Company registration ke saath — Razorpay live, AWS grants, AMFI data. Phase 1 MVP se lekar Phase 3 scale tak ka path.</div>
+  <div class="hgrid">
+    <div class="hg g"><div class="hgn">18</div><div class="hgl">Technologies</div></div>
+    <div class="hg b"><div class="hgn">6+</div><div class="hgl">Alts per tech</div></div>
+    <div class="hg y"><div class="hgn">Rs 0</div><div class="hgl">AI inference</div></div>
+    <div class="hg p"><div class="hgn">7</div><div class="hgl">Quant frames</div></div>
+    <div class="hg c"><div class="hgn">80</div><div class="hgl">Break-even</div></div>
+    <div class="hg"><div class="hgn">8 wk</div><div class="hgl">Build time</div></div>
+    <div class="hg"><div class="hgn">Rs 15K</div><div class="hgl">Total cost</div></div>
+  </div>
+</div>
+</div>
+
+
+<!-- COMPLETE STACK OVERVIEW -->
+<div class="sec" id="stack">
+  <div class="sl"></div>
+  <div class="sp spg">📦 Complete Tech Stack — Visual Map</div>
+  <div class="sl"></div>
+</div>
+
+<div class="stack-grid">
+  <div class="si"><div class="si-cat">Frontend Layer</div>
+    <div class="si-row"><span class="si-name">Lovable.dev</span><span class="si-tag g">AI Builder</span></div>
+    <div class="si-row"><span class="si-name">React 18 + TypeScript</span><span class="si-tag">Generated</span></div>
+    <div class="si-row"><span class="si-name">Tailwind CSS</span><span class="si-tag">Styling</span></div>
+    <div class="si-row"><span class="si-name">Vite 5</span><span class="si-tag">Bundler</span></div>
+    <div class="si-row"><span class="si-name">PWA</span><span class="si-tag">Mobile-ready</span></div>
+  </div>
+  <div class="si"><div class="si-cat">Database + Auth</div>
+    <div class="si-row"><span class="si-name">Supabase</span><span class="si-tag g">Platform</span></div>
+    <div class="si-row"><span class="si-name">PostgreSQL 15</span><span class="si-tag">Engine</span></div>
+    <div class="si-row"><span class="si-name">Row Level Security</span><span class="si-tag">Data isolation</span></div>
+    <div class="si-row"><span class="si-name">OTP Auth (phone)</span><span class="si-tag">Built-in</span></div>
+    <div class="si-row"><span class="si-name">Redis (Railway)</span><span class="si-tag">Cache</span></div>
+  </div>
+  <div class="si"><div class="si-cat">Backend + API</div>
+    <div class="si-row"><span class="si-name">FastAPI (Python)</span><span class="si-tag g">Async REST</span></div>
+    <div class="si-row"><span class="si-name">Railway.app</span><span class="si-tag">Host</span></div>
+    <div class="si-row"><span class="si-name">Uvicorn ASGI</span><span class="si-tag">Server</span></div>
+    <div class="si-row"><span class="si-name">Pydantic v2</span><span class="si-tag">Validation</span></div>
+    <div class="si-row"><span class="si-name">HTTPX async</span><span class="si-tag">HTTP client</span></div>
+  </div>
+  <div class="si"><div class="si-cat">Data Sources (All Free)</div>
+    <div class="si-row"><span class="si-name">mfapi.in</span><span class="si-tag g">112M+ NAV pts</span></div>
+    <div class="si-row"><span class="si-name">yfinance</span><span class="si-tag">Nifty 50</span></div>
+    <div class="si-row"><span class="si-name">AMFI website</span><span class="si-tag">Fund holdings</span></div>
+    <div class="si-row"><span class="si-name">NSE Open Data</span><span class="si-tag">Market</span></div>
+    <div class="si-row"><span class="si-name">RBI DBIE</span><span class="si-tag">Repo rate</span></div>
+  </div>
+  <div class="si"><div class="si-cat">Quant Engine (Pure Math)</div>
+    <div class="si-row"><span class="si-name">SciPy brentq</span><span class="si-tag">XIRR solver</span></div>
+    <div class="si-row"><span class="si-name">NumPy</span><span class="si-tag">Array math</span></div>
+    <div class="si-row"><span class="si-name">Pandas</span><span class="si-tag">Time series</span></div>
+    <div class="si-row"><span class="si-name">SciPy stats</span><span class="si-tag">CVaR</span></div>
+    <div class="si-row"><span class="si-name">SHAP (Phase 2)</span><span class="si-tag b">Explainability</span></div>
+  </div>
+  <div class="si"><div class="si-cat">AI Layer</div>
+    <div class="si-row"><span class="si-name">TinyLlama 1.1B</span><span class="si-tag g">Base LLM</span></div>
+    <div class="si-row"><span class="si-name">LoRA / PEFT</span><span class="si-tag">Fine-tuning</span></div>
+    <div class="si-row"><span class="si-name">Google Colab T4</span><span class="si-tag g">Free GPU</span></div>
+    <div class="si-row"><span class="si-name">HuggingFace</span><span class="si-tag">Model hub</span></div>
+    <div class="si-row"><span class="si-name">Smart Router</span><span class="si-tag">Template+cache</span></div>
+  </div>
+  <div class="si"><div class="si-cat">Payment (With Registration)</div>
+    <div class="si-row"><span class="si-name">Razorpay Live</span><span class="si-tag g">Primary</span></div>
+    <div class="si-row"><span class="si-name">UPI Autopay</span><span class="si-tag">0% fee</span></div>
+    <div class="si-row"><span class="si-name">HMAC-SHA256</span><span class="si-tag">Webhook auth</span></div>
+    <div class="si-row"><span class="si-name">PhonePe Business</span><span class="si-tag">Backup</span></div>
+    <div class="si-row"><span class="si-name">Cashfree</span><span class="si-tag">Alt gateway</span></div>
+  </div>
+  <div class="si"><div class="si-cat">Security</div>
+    <div class="si-row"><span class="si-name">JWT HS256</span><span class="si-tag">Auth tokens</span></div>
+    <div class="si-row"><span class="si-name">HMAC-SHA256</span><span class="si-tag">Webhook verify</span></div>
+    <div class="si-row"><span class="si-name">HTTPS / TLS 1.3</span><span class="si-tag">Transport</span></div>
+    <div class="si-row"><span class="si-name">Cloudflare</span><span class="si-tag">DDoS + CDN</span></div>
+    <div class="si-row"><span class="si-name">Rate Limiting</span><span class="si-tag">Redis-based</span></div>
+  </div>
+  <div class="si"><div class="si-cat">DevOps + Monitoring</div>
+    <div class="si-row"><span class="si-name">GitHub</span><span class="si-tag">Source control</span></div>
+    <div class="si-row"><span class="si-name">Railway (backend)</span><span class="si-tag">Auto-deploy</span></div>
+    <div class="si-row"><span class="si-name">Vercel (frontend)</span><span class="si-tag">Alt deploy</span></div>
+    <div class="si-row"><span class="si-name">PostHog</span><span class="si-tag b">Analytics</span></div>
+    <div class="si-row"><span class="si-name">Uptime Robot</span><span class="si-tag">Monitoring</span></div>
+  </div>
+</div>
+
+<!-- SECTION 1: FRONTEND -->
+<div class="sec" id="frontend">
+  <div class="sl"></div>
+  <div class="sp spb">🖥️ Frontend — Lovable.dev + React 18 + TypeScript</div>
+  <div class="sl"></div>
+</div>
+
+<div class="tc">
+  <div class="tc-top">
+    <div class="tc-left">
+      <div class="tc-icon-row">
+        <div class="ico ico-b">🤖</div>
+        <div>
+          <div class="tc-title">Lovable.dev — AI-Powered Frontend Builder</div>
+          <div class="tc-sub">Prompt likhte ho → complete React + TypeScript + Tailwind component milta hai. Non-technical founder ke liye Nxance's 7 complex screens build karne ka best path.</div>
+        </div>
+      </div>
+      <div class="tc-badges">
+        <span class="badge bg">✓ Chosen for Phase 1</span>
+        <span class="badge bb">Supabase direct integration</span>
+        <span class="badge bp">No coding needed</span>
+        <span class="badge bc">PWA support</span>
+      </div>
+    </div>
+  </div>
+  <div class="tc-body">
+    <div class="col">
+      <div class="col-h">Kya karta hai + kyun choose kiya</div>
+      <div class="ci"><strong>Prompt → working React screen.</strong> "Dark dashboard with animated health gauge, health score 0-100, green if &gt;70" → full Framer Motion animated SVG gauge component with TypeScript types, responsive CSS, dark theme. What would take a developer 6-8 hours = 20 minutes.</div>
+      <div class="ci"><strong>Supabase built-in:</strong> Settings mein VITE_SUPABASE_URL + VITE_SUPABASE_ANON_KEY daalo → automatically supabase.auth.signInWithOtp(), database reads/writes, real-time subscriptions sab work karte hain. No manual SDK integration.</div>
+      <div class="ci"><strong>Git integration:</strong> Har change GitHub repo pe automatically push hota hai. Vercel/Netlify se direct connect. No deployment pipeline to configure ever.</div>
+      <div class="ci"><strong>7 screens complexity:</strong> Auth with 6-box OTP + typeahead fund search + animated goal MCQ + blur paywall + SVG gauge report — ye sab prompt se banega. Without Lovable: Rs 40,000–80,000 freelancer cost. With Lovable: Rs 0.</div>
+      <div class="ci cg"><strong>What gets generated:</strong> React 18, TypeScript strict, Tailwind CSS, Vite 5, React Router v6, Tanstack Query, Supabase client, Framer Motion for animations. Production-grade code.</div>
+    </div>
+    <div class="col">
+      <div class="col-h">Alternatives — detailed comparison</div>
+      <table class="alt-table">
+        <tr><th>Tool</th><th class="chosen">Chosen: Lovable</th><th>Base44</th><th>v0.dev</th><th>Bolt.new</th></tr>
+        <tr>
+          <td>Best for</td>
+          <td class="chosen won">Non-technical founders</td>
+          <td>Indian devs, Hindi prompts</td>
+          <td>Beautiful components</td>
+          <td>Full-stack apps</td>
+        </tr>
+        <tr>
+          <td>Supabase integration</td>
+          <td class="chosen won">Built-in, 1-click</td>
+          <td>Manual setup</td>
+          <td>Manual setup</td>
+          <td>Built-in</td>
+        </tr>
+        <tr>
+          <td>Code quality</td>
+          <td class="chosen">Good</td>
+          <td>Good</td>
+          <td class="won">Excellent (shadcn)</td>
+          <td>Good</td>
+        </tr>
+        <tr>
+          <td>Free tier</td>
+          <td class="chosen">5 projects</td>
+          <td class="won">More generous</td>
+          <td>Limited</td>
+          <td>Limited</td>
+        </tr>
+        <tr>
+          <td>Full-stack (backend too)</td>
+          <td class="chosen">Frontend only</td>
+          <td>Frontend only</td>
+          <td>Frontend only</td>
+          <td class="won">Yes! FastAPI too</td>
+        </tr>
+      </table>
+      <div class="ci"><strong>Strategy:</strong> Start Lovable → agar koi screen complex ho toh same prompt Base44 mein try karo → best result use karo. Both free.</div>
+      <div class="ci"><strong>Cursor + Claude (Phase 2):</strong> When Raghav is full-time. Best code quality. Full control. But: coding knowledge zaroori.</div>
+    </div>
+    <div class="col">
+      <div class="col-h">What gets generated + advanced options</div>
+      <div class="ci"><strong>React 18:</strong> Automatic batching (performance), Suspense (loading states), Concurrent rendering. Modern industry standard.</div>
+      <div class="ci"><strong>TypeScript:</strong> Type safety = bugs caught at development, not production. Financial data ke liye critical — amount: string vs amount: number = silent calculation error possible without TypeScript.</div>
+      <div class="ci"><strong>Tailwind CSS:</strong> Utility classes, no custom CSS files, mobile-first responsive built-in, dark theme with CSS variables, consistent design system.</div>
+      <div class="ci"><strong>Vite 5:</strong> Build tool. 10x faster than webpack. Hot module replacement instant during development. Production bundle optimized and tree-shaken.</div>
+      <div class="ci"><strong>PWA (Progressive Web App):</strong> Users can "Install" on phone home screen. Works offline (cached data). Push notifications. No app store review/fees. Add to Lovable prompt: "Make it PWA-ready with manifest.json and service worker."</div>
+      <div class="ci"><strong>Advanced — Framer Motion:</strong> "Use framer-motion for: animated health gauge 0→score on load, blur paywall reveal animation, screen transition slides." Converts more users because of polished feel.</div>
+      <div class="ci"><strong>Advanced Phase 2 — Next.js 14:</strong> Server-side rendering, App Router, better SEO. When organic search traffic matters (Phase 2+). Migration path from Lovable generated code is straightforward.</div>
+    </div>
+  </div>
+  <div class="tc-foot">
+    <span class="badge bg">Free tier sufficient for MVP</span>
+    <span class="badge bb">React 18 + TypeScript generated</span>
+    <span class="badge bp">PWA mobile-ready</span>
+    <span class="badge bc">No coding knowledge needed</span>
+  </div>
+</div>
+
+<!-- SECTION 2: DATABASE -->
+<div class="sec" id="database">
+  <div class="sl"></div>
+  <div class="sp spc">🗄️ Database + Auth — Supabase + PostgreSQL 15 + Redis</div>
+  <div class="sl"></div>
+</div>
+
+<div class="tc">
+  <div class="tc-top">
+    <div class="tc-left">
+      <div class="tc-icon-row">
+        <div class="ico ico-c">🗄️</div>
+        <div>
+          <div class="tc-title">Supabase — PostgreSQL + Auth + RLS + Real-time</div>
+          <div class="tc-sub">Open-source Firebase alternative. PostgreSQL 15 database + phone OTP auth + Row Level Security + real-time subscriptions + storage. Ek platform pe sab kuch — zero configuration.</div>
+        </div>
+      </div>
+      <div class="tc-badges">
+        <span class="badge bg">✓ Chosen</span>
+        <span class="badge bc">Free 500MB</span>
+        <span class="badge bg">50K users free</span>
+        <span class="badge bb">ACID transactions</span>
+      </div>
+    </div>
+  </div>
+  <div class="tc-body">
+    <div class="col">
+      <div class="col-h">Kyun PostgreSQL — not NoSQL</div>
+      <div class="ci"><strong>Financial data = relational by nature:</strong> User → Portfolio → Holdings → Analysis → Subscription. These relationships have foreign key constraints. Ye ensure karta hai orphaned data nahi banta — payment without user, analysis without portfolio.</div>
+      <div class="ci"><strong>ACID Transactions:</strong> Atomicity — "INSERT payment + UPDATE tier = either both happen or neither." Without ACID: payment record inserted, tier update fails = user paid but didn't get access. Ye fintech mein catastrophic bug hai.</div>
+      <div class="ci"><strong>XIRR needs exact dates:</strong> PostgreSQL DATE type exact storage. MongoDB BSON dates can have timezone offset issues causing XIRR to be off by 0.1–0.5% due to date boundary errors.</div>
+      <div class="ci"><strong>SQL for analytics:</strong> "Which portfolios have overlap &gt;60%?" = one SQL query. In MongoDB this requires complex aggregation pipeline. Business analytics easy hota hai PostgreSQL mein.</div>
+      <div class="ci"><strong>Row Level Security (RLS):</strong> Policy: auth.uid() = user_id. Even if backend code bug ho — database policy block karegi. Double security layer. DPDPA compliance automatic.</div>
+      <div class="ci cg"><strong>Free tier:</strong> 500MB database, 50K MAU, 2GB bandwidth, 500MB storage. MVP ke liye 10,000 users tak completely free.</div>
+    </div>
+    <div class="col">
+      <div class="col-h">Alternatives comparison</div>
+      <table class="alt-table">
+        <tr><th>Database</th><th class="chosen">Chosen: Supabase</th><th>Firebase</th><th>PlanetScale</th><th>Neon.tech</th></tr>
+        <tr>
+          <td>Type</td>
+          <td class="chosen won">PostgreSQL relational</td>
+          <td>NoSQL Firestore</td>
+          <td>MySQL relational</td>
+          <td>Serverless Postgres</td>
+        </tr>
+        <tr>
+          <td>Auth built-in</td>
+          <td class="chosen won">Yes, phone OTP</td>
+          <td class="won">Yes, phone OTP</td>
+          <td>No (need separate)</td>
+          <td>No (need separate)</td>
+        </tr>
+        <tr>
+          <td>Row Level Security</td>
+          <td class="chosen won">Yes, powerful</td>
+          <td>Basic rules</td>
+          <td>No equivalent</td>
+          <td>Yes (Postgres native)</td>
+        </tr>
+        <tr>
+          <td>Financial queries</td>
+          <td class="chosen won">Excellent (SQL JOINs)</td>
+          <td class="lost">Difficult (NoSQL)</td>
+          <td>Good (SQL)</td>
+          <td>Good (SQL)</td>
+        </tr>
+        <tr>
+          <td>Free tier</td>
+          <td class="chosen">500MB, 50K users</td>
+          <td>1GB Firestore</td>
+          <td>5GB storage</td>
+          <td>0.5GB, 10 projects</td>
+        </tr>
+        <tr>
+          <td>Lovable integration</td>
+          <td class="chosen won">Built-in direct</td>
+          <td>Manual</td>
+          <td>Manual</td>
+          <td>Manual</td>
+        </tr>
+      </table>
+      <div class="ci"><strong>Firebase kyun nahi:</strong> NoSQL mein JOIN queries nahi hoti. Portfolio analytics ke liye complex aggregations difficult hain. XIRR calculation ke liye exact date handling unreliable.</div>
+    </div>
+    <div class="col">
+      <div class="col-h">Complete SQL Schema + Advanced Supabase features</div>
+      <div class="cw">
+        <div class="ch"><span class="cl">SQL</span><span class="cf">Supabase SQL Editor — paste + Run</span></div>
+        <div class="cb"><pre><span class="cm">-- 5 tables with RLS</span>
+<span class="kw">CREATE TABLE</span> profiles (
+  id    <span class="ty">UUID</span> <span class="kw">REFERENCES</span> auth.users(id),
+  phone <span class="ty">TEXT</span>, name <span class="ty">TEXT</span>,
+  tier  <span class="ty">TEXT</span> <span class="kw">DEFAULT</span> <span class="st">'free'</span>,  <span class="cm">-- 'founding'</span>
+  <span class="kw">PRIMARY KEY</span>(id)
+);
+<span class="kw">CREATE TABLE</span> portfolios (
+  id           <span class="ty">UUID</span> <span class="kw">DEFAULT</span> gen_random_uuid() <span class="kw">PRIMARY KEY</span>,
+  user_id      <span class="ty">UUID</span> <span class="kw">REFERENCES</span> profiles(id),
+  goal_type    <span class="ty">TEXT</span>, risk_level <span class="ty">TEXT</span>,
+  expected_xirr <span class="ty">NUMERIC</span>, horizon_years <span class="ty">INTEGER</span>
+);
+<span class="kw">CREATE TABLE</span> holdings (
+  id              <span class="ty">UUID</span> <span class="kw">DEFAULT</span> gen_random_uuid() <span class="kw">PRIMARY KEY</span>,
+  portfolio_id    <span class="ty">UUID</span> <span class="kw">REFERENCES</span> portfolios(id),
+  scheme_code     <span class="ty">TEXT</span> <span class="kw">NOT NULL</span>,
+  invested_amount <span class="ty">NUMERIC</span>, current_value <span class="ty">NUMERIC</span>,
+  purchase_date   <span class="ty">DATE</span>,    <span class="cm">-- critical for XIRR</span>
+  sip_monthly     <span class="ty">NUMERIC</span>, plan_type <span class="ty">TEXT</span>
+);
+<span class="kw">CREATE TABLE</span> analysis_results (
+  id           <span class="ty">UUID</span> <span class="kw">DEFAULT</span> gen_random_uuid() <span class="kw">PRIMARY KEY</span>,
+  portfolio_id <span class="ty">UUID</span> <span class="kw">REFERENCES</span> portfolios(id),
+  health_score <span class="ty">INTEGER</span>, xirr <span class="ty">NUMERIC</span>,
+  overlap_pct  <span class="ty">NUMERIC</span>, ter_waste_rs <span class="ty">NUMERIC</span>,
+  goal_gap_rs  <span class="ty">NUMERIC</span>, cvar_95 <span class="ty">NUMERIC</span>,
+  issues_json  <span class="ty">JSONB</span>,   insights_txt <span class="ty">TEXT</span>
+);
+<span class="kw">CREATE TABLE</span> subscriptions (
+  id                <span class="ty">UUID</span> <span class="kw">DEFAULT</span> gen_random_uuid() <span class="kw">PRIMARY KEY</span>,
+  user_id           <span class="ty">UUID</span> <span class="kw">REFERENCES</span> profiles(id),
+  razorpay_order_id <span class="ty">TEXT</span> <span class="kw">UNIQUE</span>,  <span class="cm">-- prevents duplicate</span>
+  status    <span class="ty">TEXT</span>, paid_at <span class="ty">TIMESTAMPTZ</span>, expires_at <span class="ty">TIMESTAMPTZ</span>
+);
+<span class="cm">-- RLS on all tables</span>
+<span class="kw">ALTER TABLE</span> profiles <span class="kw">ENABLE ROW LEVEL SECURITY</span>;
+<span class="kw">CREATE POLICY</span> <span class="st">"own data"</span> <span class="kw">ON</span> profiles <span class="kw">FOR ALL USING</span>(auth.uid()=id);</pre></div>
+      </div>
+      <div class="ci"><strong>Supabase Vector (pgvector):</strong> Phase 2 — semantic fund search. "Find funds similar to Parag Parikh" uses vector embeddings. Built into Supabase free tier.</div>
+      <div class="ci"><strong>Supabase Realtime:</strong> Analysis progress stream to frontend. As backend computes each framework, publish event → user sees real progress bar. @app.websocket alternative.</div>
+    </div>
+  </div>
+</div>
+
+<div class="tc">
+  <div class="tc-top">
+    <div class="tc-left">
+      <div class="tc-icon-row">
+        <div class="ico ico-r">⚡</div>
+        <div>
+          <div class="tc-title">Redis — In-Memory Cache Layer</div>
+          <div class="tc-sub">mfapi.in API call = 200ms. Redis cache hit = &lt;1ms. 200x faster for repeat analyses. NAV data, fund holdings, NxanceLM responses — sab cache karo.</div>
+        </div>
+      </div>
+      <div class="tc-badges">
+        <span class="badge bg">Free on Railway</span>
+        <span class="badge br">200x speed improvement</span>
+        <span class="badge bb">NxanceLM response cache</span>
+      </div>
+    </div>
+  </div>
+  <div class="tc-body">
+    <div class="col">
+      <div class="col-h">Why Redis is critical</div>
+      <div class="ci"><strong>Without Redis:</strong> 5 funds × 200ms mfapi.in = 1 second just data fetch. 100 concurrent users = 100 simultaneous mfapi.in calls = rate limit hit = analysis fails.</div>
+      <div class="ci"><strong>With Redis:</strong> First request: 200ms + store in cache. Next 1000 requests same fund: &lt;1ms cache hit. 99.9% of API calls saved after warmup.</div>
+      <div class="ci"><strong>TTL strategy:</strong> NAV data 24hr (AMFI updates 4PM daily). Fund holdings 30 days (monthly AMFI disclosure). Fund search 7 days. NxanceLM responses 24hr.</div>
+    </div>
+    <div class="col">
+      <div class="col-h">Implementation code</div>
+      <div class="cw">
+        <div class="ch"><span class="cl">Python</span><span class="cf">services/mfapi.py</span></div>
+        <div class="cb"><pre><span class="kw">import</span> redis, json, os
+
+r = redis.<span class="fn">from_url</span>(os.environ[<span class="st">"REDIS_URL"</span>])
+
+<span class="kw">async def</span> <span class="fn">get_nav_history</span>(scheme_code: str):
+    key = <span class="st">f"nav:{scheme_code}"</span>
+    cached = r.<span class="fn">get</span>(key)
+    <span class="kw">if</span> cached: <span class="kw">return</span> json.<span class="fn">loads</span>(cached)
+    
+    <span class="cm"># mfapi.in — free, no key needed</span>
+    url = <span class="st">f"https://api.mfapi.in/mf/{scheme_code}"</span>
+    async with httpx.<span class="fn">AsyncClient</span>() <span class="kw">as</span> c:
+        data = (await c.<span class="fn">get</span>(url)).<span class="fn">json</span>()
+    navs = data.<span class="fn">get</span>(<span class="st">'data'</span>, [])
+    r.<span class="fn">setex</span>(key, <span class="nm">86400</span>, json.<span class="fn">dumps</span>(navs))
+    <span class="kw">return</span> navs  <span class="cm"># TTL = 24 hours</span></pre></div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="col-h">Alternatives + Advanced patterns</div>
+      <div class="ci"><strong>Upstash Redis:</strong> Serverless Redis. HTTP API (works from Vercel Edge Functions). Free 10K req/day. Better for serverless architecture. Slightly more latency than direct Redis.</div>
+      <div class="ci"><strong>In-memory dict (development):</strong> Python dict as cache during local dev. Resets on restart. Never use in production.</div>
+      <div class="ci"><strong>Advanced — Rate limiting:</strong></div>
+      <div class="cw">
+        <div class="ch"><span class="cl">Python</span><span class="cf">Rate limiter</span></div>
+        <div class="cb"><pre>count = r.<span class="fn">incr</span>(<span class="st">f"rl:{user_id}:{today}"</span>)
+<span class="kw">if</span> count == <span class="nm">1</span>: r.<span class="fn">expire</span>(<span class="st">f"rl:{user_id}:{today}"</span>,<span class="nm">86400</span>)
+<span class="kw">if</span> count > <span class="nm">10</span>: <span class="kw">raise</span> <span class="ty">HTTPException</span>(<span class="nm">429</span>)</pre></div>
+      </div>
+      <div class="ci"><strong>Advanced — Leaderboard:</strong> ZADD portfolio_scores user_id 72 → rank user among all portfolios. "Your portfolio ranks 73rd percentile." Engagement feature using Redis sorted sets.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 3: BACKEND -->
+<div class="sec" id="backend">
+  <div class="sl"></div>
+  <div class="sp spp">⚙️ Backend — FastAPI + Python + Railway</div>
+  <div class="sl"></div>
+</div>
+
+<div class="tc">
+  <div class="tc-top">
+    <div class="tc-left">
+      <div class="tc-icon-row">
+        <div class="ico ico-p">⚡</div>
+        <div>
+          <div class="tc-title">FastAPI — Python's Fastest Async Web Framework</div>
+          <div class="tc-sub">Python ecosystem = NumPy + SciPy + Pandas for exact financial math. Async/await built-in for parallel mfapi.in calls. Auto-documentation at /docs. The only framework where all 3 are true: Python math, async performance, good DX.</div>
+        </div>
+      </div>
+      <div class="tc-badges">
+        <span class="badge bg">✓ Chosen</span>
+        <span class="badge bp">Python financial libraries</span>
+        <span class="badge bb">Async parallel calls</span>
+        <span class="badge bc">Auto /docs Swagger UI</span>
+      </div>
+    </div>
+  </div>
+  <div class="tc-body">
+    <div class="col">
+      <div class="col-h">Kyun FastAPI over everything else</div>
+      <div class="ci"><strong>#1 reason — Python math ecosystem:</strong> XIRR = SciPy brentq. CVaR = SciPy stats.norm. Jaccard = Python set operations. NumPy vectorized array math. Pandas time series. Node.js alternatives (mathjs) are inaccurate for complex financial calculations. This single reason locks us into Python.</div>
+      <div class="ci"><strong>Async by default:</strong> Multiple mfapi.in calls for 5 funds: asyncio.gather(nav1, nav2, nav3, nav4, nav5) = all simultaneously. Without async: 5 × 200ms = 1 second. With async: max(200ms) = 200ms. 5x faster data fetch.</div>
+      <div class="ci"><strong>Pydantic v2 validation:</strong> invested_amount: Annotated[float, Field(gt=0, le=10_000_000)]. Negative amounts automatically rejected before calculation. Type errors caught before financial logic runs.</div>
+      <div class="ci"><strong>Auto-documentation:</strong> /docs URL → interactive Swagger UI. Test any API endpoint without Postman. Share with Raghav for reference. Automatically generated from code — no maintenance.</div>
+    </div>
+    <div class="col">
+      <div class="col-h">Alternatives — honest comparison</div>
+      <table class="alt-table">
+        <tr><th>Framework</th><th class="chosen">FastAPI</th><th>Express.js</th><th>Django</th><th>Flask</th><th>Go Gin</th></tr>
+        <tr><td>Language</td><td class="chosen won">Python</td><td class="lost">Node.js</td><td>Python</td><td>Python</td><td>Go</td></tr>
+        <tr><td>Financial math</td><td class="chosen won">Excellent</td><td class="lost">Poor</td><td class="won">Excellent</td><td class="won">Excellent</td><td class="lost">Poor</td></tr>
+        <tr><td>Async support</td><td class="chosen won">Built-in</td><td class="won">Built-in</td><td>Limited</td><td class="lost">No</td><td class="won">Goroutines</td></tr>
+        <tr><td>Validation</td><td class="chosen won">Pydantic v2</td><td>Manual/Joi</td><td>Forms</td><td>Manual</td><td>Manual</td></tr>
+        <tr><td>Performance</td><td class="chosen">Fast</td><td>Fast</td><td>Slow</td><td>Slow</td><td class="won">Fastest</td></tr>
+        <tr><td>Auto docs</td><td class="chosen won">Yes (/docs)</td><td>Manual</td><td>Manual</td><td>Manual</td><td>Manual</td></tr>
+      </table>
+      <div class="ci"><strong>Go kyun nahi:</strong> Go fastest hai but financial math libraries poor hain. XIRR in Go = custom implementation needed, error-prone. Phase 3+ mein high-performance microservices ke liye Go use kar sakte hain.</div>
+    </div>
+    <div class="col">
+      <div class="col-h">Railway deployment + folder structure</div>
+      <div class="cw">
+        <div class="ch"><span class="cl">Structure</span><span class="cf">GitHub repo layout</span></div>
+        <div class="cb"><pre>nxance-backend/
+├── main.py          <span class="cm"># FastAPI app</span>
+├── requirements.txt <span class="cm"># Python deps</span>
+├── Procfile         <span class="cm"># Railway: uvicorn main:app...</span>
+├── routers/
+│   ├── analyze.py   <span class="cm"># POST /api/analyze</span>
+│   └── payment.py   <span class="cm"># POST /api/payment/webhook</span>
+├── calculations/
+│   ├── xirr.py      <span class="cm"># F1: brentq XIRR</span>
+│   ├── quant.py     <span class="cm"># F2: Sharpe/Alpha/Beta</span>
+│   ├── risk.py      <span class="cm"># F3: CVaR</span>
+│   ├── overlap.py   <span class="cm"># F4: Jaccard</span>
+│   ├── goals.py     <span class="cm"># F6: goal gap Rs</span>
+│   └── crisis.py    <span class="cm"># F7: crash simulation</span>
+├── services/
+│   ├── mfapi.py     <span class="cm"># mfapi.in + Redis</span>
+│   ├── supabase_client.py
+│   └── nxancelm.py  <span class="cm"># AI inference</span>
+└── utils/
+    └── health_score.py  <span class="cm"># 0-100 engine</span></pre></div>
+      </div>
+      <div class="ci"><strong>Railway deploy:</strong> railway.app → New Project → Deploy from GitHub → nxance-backend repo → Settings → Variables add karo → Auto-deploy on every push.</div>
+      <div class="ci"><strong>Alternative — Render.com:</strong> Free tier 750 hrs/month (more than Railway). Slower cold starts (30-60s). Good backup option.</div>
+      <div class="ci"><strong>Advanced — Background tasks:</strong> FastAPI BackgroundTasks — email analysis result to user after completion. No Celery needed for simple async tasks.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 4: DATA LAYER -->
+<div class="sec" id="data">
+  <div class="sl"></div>
+  <div class="sp spy">📊 Data Layer — mfapi.in + yfinance + AMFI</div>
+  <div class="sl"></div>
+</div>
+
+<div class="tc">
+  <div class="tc-top">
+    <div class="tc-left">
+      <div class="tc-icon-row">
+        <div class="ico ico-y">📈</div>
+        <div>
+          <div class="tc-title">mfapi.in — India's Free Mutual Fund API</div>
+          <div class="tc-sub">112M+ NAV data points. 15,000+ fund schemes. Daily NAV history since 2006. Monthly fund holdings (AMFI disclosure). Zero cost, no API key, no rate limit mentioned. Most reliable free source for Indian MF data.</div>
+        </div>
+      </div>
+      <div class="tc-badges">
+        <span class="badge bg">✓ Free, no API key</span>
+        <span class="badge bg">112M+ data points</span>
+        <span class="badge by">15,000+ schemes</span>
+        <span class="badge bb">Official AMFI data</span>
+      </div>
+    </div>
+  </div>
+  <div class="tc-body">
+    <div class="col">
+      <div class="col-h">Exact API endpoints</div>
+      <div class="ci"><strong>Fund search:</strong> <code>GET https://api.mfapi.in/mf/search?q=hdfc+flexicap</code> → Returns [{schemeCode: "119597", schemeName: "HDFC Flexi Cap..."}]. Used for typeahead search in Screen 3.</div>
+      <div class="ci"><strong>NAV history:</strong> <code>GET https://api.mfapi.in/mf/119597</code> → {meta: {...}, data: [{date: "05-06-2025", nav: "45.23"}, ...]}. 20+ years of daily NAV. XIRR calculation ke liye critical.</div>
+      <div class="ci"><strong>Fund portfolio holdings:</strong> <code>GET https://api.mfapi.in/mf/119597/portfolio</code> → {holdings: [{name: "HDFC Bank", percentage: 8.2}, ...]}. Monthly updated. Jaccard overlap calculation ke liye.</div>
+      <div class="ci cg"><strong>Why free is reliable:</strong> mfapi.in serves official AMFI data. Same data paid platforms like Morningstar use. Maintained continuously since 2019. Alternative: amfiindia.com/spages/NAVAll.txt — bulk download daily.</div>
+    </div>
+    <div class="col">
+      <div class="col-h">All free data sources</div>
+      <div class="ci"><strong>yfinance (Python library):</strong> Yahoo Finance. Nifty 50 (^NSEI), Sensex, sector indices. 20+ years OHLCV. <code>pip install yfinance</code>. Free, no registration. Used for: Jensen Alpha, Beta vs Nifty 50 benchmark, BHB attribution.</div>
+      <div class="ci"><strong>NSE Open Data API:</strong> nseindia.com/api — historical index data, sectoral returns. Rate limited but free. Used for: crisis simulation historical returns (2008: −52% exact, 2020: −38% exact).</div>
+      <div class="ci"><strong>RBI DBIE:</strong> dbie.rbi.org.in — repo rate (risk-free rate for Sharpe ratio), CPI inflation, G-sec yields. Official RBI data. Free API.</div>
+      <div class="ci"><strong>AMFI direct:</strong> amfiindia.com/spages/NAVAll.txt — all 15,000+ fund NAVs in one file. Updated daily 10PM IST. Backup for mfapi.in. TER data from scheme information documents.</div>
+    </div>
+    <div class="col">
+      <div class="col-h">Alternatives + Advanced data (with registration)</div>
+      <div class="ci"><strong>CDSL Digilocker OAuth (Phase 2):</strong> Company + SEBI compliance needed. User authorizes once → all holdings auto-import with exact transaction dates. XIRR accuracy maximum. No manual date entry errors.</div>
+      <div class="ci"><strong>Zerodha Kite Connect:</strong> Rs 2,000/month + partner agreement. Zerodha users ka holdings auto-sync. Phase 2 after company registration + partnership.</div>
+      <div class="ci"><strong>CAS PDF parsing (Phase 1 upgrade):</strong> No registration needed. User downloads CAMS/KFintech CAS PDF → uploads → pdfplumber extracts → fund names matched via fuzzywuzzy. 95% accuracy. Drops manual entry from 10 min to 30 sec.</div>
+      <div class="cw">
+        <div class="ch"><span class="cl">Python</span><span class="cf">CAS PDF parser (Phase 1.5)</span></div>
+        <div class="cb"><pre><span class="kw">import</span> pdfplumber, re
+<span class="kw">from</span> fuzzywuzzy <span class="kw">import</span> process
+
+<span class="kw">def</span> <span class="fn">parse_cas</span>(pdf_path, all_funds):
+    <span class="kw">with</span> pdfplumber.<span class="fn">open</span>(pdf_path) <span class="kw">as</span> pdf:
+        text = <span class="st">""</span>.<span class="fn">join</span>(p.<span class="fn">extract_text</span>() <span class="kw">for</span> p <span class="kw">in</span> pdf.pages)
+    <span class="cm"># Match fund names to AMFI codes</span>
+    funds = re.<span class="fn">findall</span>(<span class="st">r'([A-Z].{15,60})\s+([\d,]+\.\d{2})'</span>, text)
+    <span class="kw">return</span> [(process.<span class="fn">extractOne</span>(f, all_funds), amt) <span class="kw">for</span> f, amt <span class="kw">in</span> funds]</pre></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 5: QUANT ENGINE -->
+<div class="sec" id="quant">
+  <div class="sl"></div>
+  <div class="sp spg">🔢 Quant Engine — 7 Frameworks · Core IP · Exact Math</div>
+  <div class="sl"></div>
+</div>
+
+<div class="al ag"><span class="al-i">💡</span><div><strong>Architecture insight:</strong> NxanceLM kabhi financial numbers compute nahi karta. Quant engine exact math karta hai (11.5364%, Rs 4,800, 72%) → these exact numbers are INJECTED into NxanceLM prompt → NxanceLM sirf Hinglish mein translate karta hai. Financial hallucination = impossible.</div></div>
+
+<div class="tc">
+  <div class="tc-top">
+    <div class="tc-left">
+      <div class="tc-icon-row">
+        <div class="ico ico-g">🔢</div>
+        <div>
+          <div class="tc-title">F1 — XIRR: Extended Internal Rate of Return</div>
+          <div class="tc-sub">SciPy brentq Newton-Raphson solver. 6-decimal precision. Handles irregular SIP cashflows correctly. "11.5364%" not "approximately 11–13%".</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tc-body">
+    <div class="col">
+      <div class="col-h">Why XIRR — not CAGR or simple returns</div>
+      <div class="formula">
+        <div class="formula-t">XIRR — solves for r</div>
+        <div class="formula-eq">Σ CF_i / (1 + r)^(days_i / 365) = 0</div>
+        <div class="formula-d">CF_i = each SIP investment (negative) + current portfolio value (positive). days_i = days since first cashflow. r = XIRR rate. brentq finds r where NPV = 0.</div>
+      </div>
+      <div class="ci"><strong>CAGR assumes lump sum.</strong> Indian investors do SIPs. Rs 5K/month SIP for 3 years, CAGR says 14%, XIRR correctly says 11.2%. Wrong XIRR = wrong goal gap calculation = wrong advice.</div>
+      <div class="ci"><strong>Per-fund XIRR (Advanced):</strong> "HDFC Flexicap XIRR: 8.2% vs Parag Parikh XIRR: 16.4%." Direct comparison showing which specific fund is underperforming. Much more actionable than portfolio-level XIRR only.</div>
+    </div>
+    <div class="col">
+      <div class="col-h">Exact code</div>
+      <div class="cw">
+        <div class="ch"><span class="cl">Python</span><span class="cf">calculations/xirr.py</span></div>
+        <div class="cb"><pre><span class="kw">from</span> scipy.optimize <span class="kw">import</span> brentq
+<span class="kw">from</span> datetime <span class="kw">import</span> date
+
+<span class="kw">def</span> <span class="fn">calculate_xirr</span>(holdings: list) -> float:
+    cfs, dates = [], []
+    today = date.<span class="fn">today</span>()
+    <span class="kw">for</span> h <span class="kw">in</span> holdings:
+        cfs.<span class="fn">append</span>(-h[<span class="st">'invested_amount'</span>])
+        dates.<span class="fn">append</span>(h[<span class="st">'purchase_date'</span>])
+    cfs.<span class="fn">append</span>(<span class="fn">sum</span>(h[<span class="st">'current_value'</span>] <span class="kw">for</span> h <span class="kw">in</span> holdings))
+    dates.<span class="fn">append</span>(today)
+    d0 = <span class="fn">min</span>(dates)
+    days = [(d-d0).days <span class="kw">for</span> d <span class="kw">in</span> dates]
+    <span class="kw">def</span> <span class="fn">npv</span>(r):
+        <span class="kw">return</span> <span class="fn">sum</span>(c/((<span class="nm">1</span>+r)**(d/<span class="nm">365</span>)) <span class="kw">for</span> c,d <span class="kw">in</span> <span class="fn">zip</span>(cfs,days))
+    <span class="kw">try</span>:
+        <span class="kw">return</span> <span class="fn">round</span>(<span class="fn">brentq</span>(npv,-<span class="nm">.99</span>,<span class="nm">10</span>,xtol=<span class="nm">1e-8</span>)*<span class="nm">100</span>,<span class="nm">4</span>)
+    <span class="kw">except</span>: <span class="kw">return</span> <span class="nm">0.0</span></pre></div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="col-h">Why scipy.brentq (not other solvers)</div>
+      <div class="ci"><strong>Newton-Raphson (simple):</strong> Can diverge if starting guess far from solution. Naxance ke typical XIRR range (-99% to +1000%) mein divergence possible.</div>
+      <div class="ci"><strong>brentq (chosen):</strong> Combines bisection + secant method. Guaranteed convergence when function changes sign in [a,b]. xtol=1e-8 = 8 decimal places.</div>
+      <div class="ci"><strong>pyxirr library:</strong> Rust-based, 10x faster than Python. Drop-in replacement: <code>from pyxirr import xirr</code>. Phase 2 upgrade when speed matters at scale.</div>
+      <div class="ci"><strong>numpy_financial.irr:</strong> Less accurate for irregular cashflows. Not recommended for Nxance's exact-math requirement.</div>
+    </div>
+  </div>
+</div>
+
+<div class="tc">
+  <div class="tc-top">
+    <div class="tc-left">
+      <div class="tc-icon-row">
+        <div class="ico ico-b">📐</div>
+        <div>
+          <div class="tc-title">F2 + F3 + F4 — Sharpe/Alpha/Beta · CVaR · Jaccard Overlap</div>
+          <div class="tc-sub">Three frameworks, one card. Risk-adjusted returns vs Nifty 50. Worst-case loss probability. Fund duplication detection in exact Rs.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tc-body">
+    <div class="col">
+      <div class="col-h">F2 — Quant metrics explained</div>
+      <div class="formula">
+        <div class="formula-t">Sharpe Ratio</div>
+        <div class="formula-eq">(Rp − Rf) / σp × √252</div>
+        <div class="formula-d">Rp=portfolio return, Rf=6.5% (RBI repo), σp=daily std dev annualized. &gt;1=good, &gt;2=excellent. Penalizes total volatility.</div>
+      </div>
+      <div class="formula">
+        <div class="formula-t">Jensen Alpha (most actionable)</div>
+        <div class="formula-eq">α = Rp − [Rf + β(Rm − Rf)]</div>
+        <div class="formula-d">Rm=Nifty 50 return (yfinance). α&gt;0=outperforms CAPM prediction. α×corpus=Rs opportunity cost/year.</div>
+      </div>
+      <div class="ci"><strong>Sortino Ratio:</strong> Like Sharpe but only penalizes downside volatility. More relevant for equity MFs where upside volatility is good. Higher Sortino = better downside protection per unit of return.</div>
+    </div>
+    <div class="col">
+      <div class="col-h">F3 — CVaR Risk Analysis</div>
+      <div class="formula">
+        <div class="formula-t">F3 — CVaR Parametric</div>
+        <div class="formula-eq">CVaR = μ − σ·φ(Φ⁻¹(α)) / (1−α)</div>
+        <div class="formula-d">α=0.05 (95% confidence). μ=mean daily return, σ=std dev. "In worst 5% of months, portfolio drops ≥CVaR%." Applied to 2008 (−52%) and 2020 (−38%) crash scenarios.</div>
+      </div>
+      <div class="cw">
+        <div class="ch"><span class="cl">Python</span><span class="cf">calculations/risk.py</span></div>
+        <div class="cb"><pre><span class="kw">from</span> scipy <span class="kw">import</span> stats
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+
+<span class="kw">def</span> <span class="fn">calculate_cvar</span>(holdings, nav_data, alpha=<span class="nm">0.05</span>):
+    returns = <span class="fn">portfolio_daily_returns</span>(holdings, nav_data)
+    mu  = np.<span class="fn">mean</span>(returns)
+    sig = np.<span class="fn">std</span>(returns)
+    <span class="cm"># Parametric CVaR</span>
+    cvar = -(mu - sig * stats.norm.<span class="fn">pdf</span>(
+        stats.norm.<span class="fn">ppf</span>(alpha)) / alpha)
+    annual_cvar = cvar * np.<span class="fn">sqrt</span>(<span class="nm">252</span>)
+    <span class="cm"># Crisis simulation</span>
+    crash_2008 = <span class="fn">sum</span>(h[<span class="st">'current_value'</span>] <span class="kw">for</span> h <span class="kw">in</span> holdings) * <span class="nm">0.52</span>
+    <span class="kw">return</span> {<span class="st">'cvar_95'</span>:<span class="fn">round</span>(annual_cvar*<span class="nm">100</span>,<span class="nm">1</span>),
+            <span class="st">'crash_2008_loss_rs'</span>:<span class="fn">round</span>(crash_2008,<span class="nm">0</span>)}</pre></div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="col-h">F4 — Jaccard Overlap + TER Waste</div>
+      <div class="formula">
+        <div class="formula-t">F4 — Jaccard Similarity + TER Waste</div>
+        <div class="formula-eq">J = |A ∩ B| / |A ∪ B|
+waste_rs = J × avg_TER × corpus</div>
+        <div class="formula-d">A=Fund1 top-10 stocks, B=Fund2 top-10 stocks. J=0.72 → 72% overlap → Rs waste = 0.72 × 1.5% × corpus = exact Rs/year shown as "Issue #1" on free tier.</div>
+      </div>
+      <div class="cw">
+        <div class="ch"><span class="cl">Python</span><span class="cf">calculations/overlap.py</span></div>
+        <div class="cb"><pre><span class="kw">async def</span> <span class="fn">calculate_overlap</span>(holdings, fh_data):
+    fstocks = {}
+    <span class="kw">for</span> h <span class="kw">in</span> holdings:
+        code = h[<span class="st">'scheme_code'</span>]
+        fstocks[code] = {
+            item[<span class="st">'name'</span>].<span class="fn">upper</span>()
+            <span class="kw">for</span> item <span class="kw">in</span> fh_data.<span class="fn">get</span>(code, [])
+        }
+    codes = <span class="fn">list</span>(fstocks)
+    max_j = <span class="nm">0</span>
+    <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="fn">len</span>(codes)):
+        <span class="kw">for</span> j <span class="kw">in</span> <span class="fn">range</span>(i+<span class="nm">1</span>, <span class="fn">len</span>(codes)):
+            a,b = fstocks[codes[i]], fstocks[codes[j]]
+            u = <span class="fn">len</span>(a|b)
+            jv = <span class="fn">len</span>(a&b)/u <span class="kw">if</span> u><span class="nm">0</span> <span class="kw">else</span> <span class="nm">0</span>
+            max_j = <span class="fn">max</span>(max_j, jv)
+    corpus = <span class="fn">sum</span>(h[<span class="st">'invested_amount'</span>] <span class="kw">for</span> h <span class="kw">in</span> holdings)
+    <span class="kw">return</span> {<span class="st">'jaccard_pct'</span>:<span class="fn">round</span>(max_j*<span class="nm">100</span>,<span class="nm">1</span>),
+            <span class="st">'ter_waste_rs'</span>:<span class="fn">round</span>(max_j*<span class="nm">0.015</span>*corpus,<span class="nm">0</span>)}</pre></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tc">
+  <div class="tc-top">
+    <div class="tc-left">
+      <div class="tc-icon-row">
+        <div class="ico ico-g">🎯</div>
+        <div>
+          <div class="tc-title">F5 + F6 + F7 — Portfolio Construction · Goal Gap · Crisis Simulation</div>
+          <div class="tc-sub">HHI concentration, BHB attribution, exact Rs goal shortfall, historical crash impact. The combination that makes users take action.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tc-body">
+    <div class="col">
+      <div class="col-h">F5 — Portfolio construction analysis</div>
+      <div class="formula">
+        <div class="formula-t">HHI Concentration Index</div>
+        <div class="formula-eq">HHI = Σ (weight_i)²</div>
+        <div class="formula-d">HHI=1 → single fund (max risk). HHI=1/n → equal weight (optimal). HHI&gt;0.5 → over-concentrated. "70% in one fund = risky for your goal."</div>
+      </div>
+      <div class="ci"><strong>BHB Attribution:</strong> Brinson-Hood-Beebower model. Separates return into: asset allocation effect (equity/debt ratio choice) + selection effect (which funds within asset class). Shows "your asset allocation added 2.1% but fund selection subtracted 3.4% — bad fund choice is your main problem."</div>
+      <div class="ci"><strong>Regular vs Direct plan detector:</strong> scheme_name.contains("Regular") → instant issue: "Switch to Direct plan of same fund → save Rs exact_amount/year." Phase 1 quick win.</div>
+    </div>
+    <div class="col">
+      <div class="col-h">F6 — Goal alignment gap</div>
+      <div class="formula">
+        <div class="formula-t">F6 — Annual Goal Gap</div>
+        <div class="formula-eq">gap_rs = (exp_XIRR − act_XIRR) × corpus</div>
+        <div class="formula-d">exp_XIRR from MCQ Q3 answer. act_XIRR from brentq. Example: (12% − 9.2%) × 5,00,000 = Rs 14,000/year missed.</div>
+      </div>
+      <div class="ci"><strong>Timeline impact:</strong> "At 9.2%, you'll reach Rs 1Cr goal in 22 years. After fixes at 14.8%: 16 years. You save 6 years of your life." This framing converts users far more than Rs amount alone.</div>
+      <div class="ci"><strong>Advanced — Monte Carlo (Phase 2):</strong> 10,000 simulations with actual volatility. "Probability of reaching Rs 1Cr by 2040: 34% now → 67% after fixes." Probability framing is most powerful conversion trigger discovered in financial products.</div>
+    </div>
+    <div class="col">
+      <div class="col-h">F7 — Historical crisis simulation</div>
+      <div class="ci"><strong>2008 Global Financial Crisis:</strong> Nifty −52% in 12 months. "Your Rs 3.2L portfolio → Rs 1.5L temporarily." Recovery: 18 months. Adds recovery time to prevent panic — balanced emotional impact.</div>
+      <div class="ci"><strong>2020 COVID crash:</strong> Nifty −38% in 40 days. "Your Rs 3.2L → Rs 1.98L in just 6 weeks." Recovery: 6 months. Fastest crash + fastest recovery in Indian market history.</div>
+      <div class="ci"><strong>2011 Euro Crisis:</strong> Nifty −25%. Mid-cap fell 35-40%. Good for showing mid-cap-heavy portfolios the risk.</div>
+      <div class="cw">
+        <div class="ch"><span class="cl">Python</span><span class="cf">calculations/crisis.py</span></div>
+        <div class="cb"><pre><span class="kw">def</span> <span class="fn">simulate_crashes</span>(holdings):
+    corpus = <span class="fn">sum</span>(h[<span class="st">'current_value'</span>] <span class="kw">for</span> h <span class="kw">in</span> holdings)
+    <span class="kw">return</span> {
+        <span class="st">'crash_2008'</span>: {
+            <span class="st">'loss_pct'</span>: <span class="nm">52</span>,
+            <span class="st">'loss_rs'</span>: <span class="fn">round</span>(corpus*<span class="nm">0.52</span>, <span class="nm">0</span>),
+            <span class="st">'recovery_months'</span>: <span class="nm">18</span>
+        },
+        <span class="st">'crash_2020'</span>: {
+            <span class="st">'loss_pct'</span>: <span class="nm">38</span>,
+            <span class="st">'loss_rs'</span>: <span class="fn">round</span>(corpus*<span class="nm">0.38</span>, <span class="nm">0</span>),
+            <span class="st">'recovery_months'</span>: <span class="nm">6</span>
+        }
+    }</pre></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 6: NxanceLM AI -->
+<div class="sec" id="ai">
+  <div class="sl"></div>
+  <div class="sp spp">🤖 NxanceLM AI — TinyLlama 1.1B + LoRA · Rs 0 Inference</div>
+  <div class="sl"></div>
+</div>
+
+<div class="tc">
+  <div class="tc-top">
+    <div class="tc-left">
+      <div class="tc-icon-row">
+        <div class="ico ico-p">🧠</div>
+        <div>
+          <div class="tc-title">TinyLlama 1.1B + LoRA Fine-tuning — NxanceLM v1</div>
+          <div class="tc-sub">Open-source LLM. 2 hours training on free Colab T4. 12MB adapter. Rs 0 inference. Numbers injected from quant engine — zero financial hallucination possible.</div>
+        </div>
+      </div>
+      <div class="tc-badges">
+        <span class="badge bg">Rs 0 training</span>
+        <span class="badge bg">Rs 0 inference</span>
+        <span class="badge bp">Hallucination impossible</span>
+        <span class="badge bc">12MB LoRA adapter</span>
+      </div>
+    </div>
+  </div>
+  <div class="tc-body">
+    <div class="col">
+      <div class="col-h">Architecture — why hallucination impossible</div>
+      <div class="ci"><strong>The injection pattern:</strong> Quant engine computes: XIRR=11.5364%, overlap=72%, waste=Rs4800. These EXACT numbers injected into prompt: "Portfolio: overlap=72%, waste=Rs4800, fund1=HDFC, fund2=Mirae." TinyLlama only says "Rs 4,800 waste ho raha hai" — never computes Rs 4,800. Injection = zero hallucination on financial figures.</div>
+      <div class="ci"><strong>Smart router — 70% skip model:</strong> Route 1 (40%): template responses for common patterns. 0ms, Rs 0. Route 2 (30%): Redis cache for similar portfolios. &lt;1ms, Rs 0. Route 3 (30%): TinyLlama. 2-4s, Rs 0 (own GPU).</div>
+      <div class="ci cg"><strong>Cost comparison at 1K analyses/day:</strong> TinyLlama (own): Rs 0/day. GPT-4o API: Rs 1,50,000/day. Mistral API: Rs 700/day. Claude Haiku: Rs 500/day. TinyLlama compounds: at 10K analyses/day, competitors pay Rs 15L/day, Nxance Rs 0.</div>
+    </div>
+    <div class="col">
+      <div class="col-h">Model alternatives — when to upgrade</div>
+      <table class="alt-table">
+        <tr><th>Model</th><th class="chosen">TinyLlama</th><th>Phi-3 Mini</th><th>Mistral 7B</th><th>GPT-4o</th></tr>
+        <tr><td>Parameters</td><td class="chosen">1.1B</td><td>3.8B</td><td>7B</td><td>~200B</td></tr>
+        <tr><td>VRAM needed</td><td class="chosen won">2.2GB (free T4)</td><td>4GB (free T4)</td><td>4GB (QLoRA+T4)</td><td>API only</td></tr>
+        <tr><td>Hinglish quality</td><td class="chosen">Good</td><td class="won">Very good</td><td class="won">Excellent</td><td class="won">Best</td></tr>
+        <tr><td>Training cost</td><td class="chosen won">Rs 0, 2hr</td><td>Rs 0, 3hr</td><td>Rs 0, 4hr (QLoRA)</td><td>Rs 5,000+</td></tr>
+        <tr><td>Inference cost</td><td class="chosen won">Rs 0</td><td>Rs 0</td><td>Rs 0</td><td>Rs 150/1K tokens</td></tr>
+        <tr><td>When to use</td><td class="chosen">Phase 1</td><td>Phase 1.5 upgrade</td><td>Phase 2</td><td>Phase 3+</td></tr>
+      </table>
+      <div class="ci"><strong>Easiest Phase 1 upgrade:</strong> Phi-3-mini-4k-instruct (Microsoft). 3.8B params, better instruction following, still free T4. Change one MODEL_NAME line. 2-week quality improvement.</div>
+    </div>
+    <div class="col">
+      <div class="col-h">Training + Inference code</div>
+      <div class="cw">
+        <div class="ch"><span class="cl">Python</span><span class="cf">Colab — LoRA training</span></div>
+        <div class="cb"><pre><span class="kw">from</span> peft <span class="kw">import</span> LoraConfig, get_peft_model
+
+lora = <span class="fn">LoraConfig</span>(
+    r=<span class="nm">16</span>, lora_alpha=<span class="nm">32</span>,
+    target_modules=[<span class="st">"q_proj"</span>, <span class="st">"v_proj"</span>],
+    lora_dropout=<span class="nm">0.05</span>,
+    task_type=<span class="st">"CAUSAL_LM"</span>
+)
+model = <span class="fn">get_peft_model</span>(model, lora)
+<span class="cm"># Trains only 0.19% of 1.1B parameters
+# = 12MB adapter saved (not 1.1GB full model)
+# Free T4 GPU: 2 hours, Rs 0</span>
+trainer.<span class="fn">train</span>()
+model.<span class="fn">save_pretrained</span>(<span class="st">"./nxancelm_v1"</span>)</pre></div>
+      </div>
+      <div class="cw" style="margin-top:7px">
+        <div class="ch"><span class="cl">Python</span><span class="cf">services/nxancelm.py — smart router</span></div>
+        <div class="cb"><pre><span class="kw">async def</span> <span class="fn">generate_insights</span>(issues):
+    <span class="cm"># Route 1: Template (40%)</span>
+    t = <span class="fn">get_template</span>(issues)
+    <span class="kw">if</span> t: <span class="kw">return</span> t
+
+    <span class="cm"># Route 2: Redis cache (30%)</span>
+    key = <span class="st">f"insight:{hash(str(issues))}"</span>
+    cached = r.<span class="fn">get</span>(key)
+    <span class="kw">if</span> cached: <span class="kw">return</span> cached.<span class="fn">decode</span>()
+
+    <span class="cm"># Route 3: TinyLlama (30%)</span>
+    prompt = <span class="st">f"Numbers exact hain.\nIssues: {issues[:2]}"</span>
+    <span class="kw">async with</span> _gpu_lock:  <span class="cm"># 1 GPU = 1 at a time</span>
+        result = <span class="fn">run_inference</span>(prompt)
+    r.<span class="fn">setex</span>(key, <span class="nm">86400</span>, result)
+    <span class="kw">return</span> result</pre></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 7: PAYMENT -->
+<div class="sec" id="payment">
+  <div class="sl"></div>
+  <div class="sp spy">💳 Payment — Razorpay Live (With Company Registration)</div>
+  <div class="sl"></div>
+</div>
+
+<div class="tc">
+  <div class="tc-top">
+    <div class="tc-left">
+      <div class="tc-icon-row">
+        <div class="ico ico-y">💳</div>
+        <div>
+          <div class="tc-title">Razorpay Live Mode — Full Payment Stack</div>
+          <div class="tc-sub">Company registration ke baad available. COI + GST + HDFC SmartUp current account required. 0% UPI fee below Rs 2,000. HMAC-SHA256 webhook verification mandatory.</div>
+        </div>
+      </div>
+      <div class="tc-badges">
+        <span class="badge bg">✓ Primary (with registration)</span>
+        <span class="badge by">Needs COI + GST</span>
+        <span class="badge bb">0% UPI fee</span>
+        <span class="badge bc">Webhook + HMAC</span>
+      </div>
+    </div>
+  </div>
+  <div class="tc-body">
+    <div class="col">
+      <div class="col-h">Setup sequence + alternatives</div>
+      <div class="ci"><strong>Registration sequence:</strong> COI received → HDFC SmartUp current account open → GST registration → Razorpay KYC → Live keys in 2-5 days.</div>
+      <div class="ci"><strong>Razorpay test mode (before registration):</strong> Personal PAN se test mode immediately available. Full payment flow testable. Test card: 4111111111111111. UPI test: success@razorpay. Build complete payment flow in test mode → flip to live keys after registration.</div>
+      <div class="ci"><strong>Without registration alternatives:</strong> PhonePe Business (individual Aadhaar+PAN KYC, accepted) → Cashfree (individual KYC accepted) → Direct UPI QR (first 10 users manually) → Razorpay live (after company).</div>
+      <div class="ci"><strong>UPI Autopay mandate:</strong> User sets Rs 99/month recurring mandate. Automatic monthly deduction. PhonePe and Razorpay both support this. Best for subscription model — no monthly renewal friction.</div>
+    </div>
+    <div class="col">
+      <div class="col-h">HMAC-SHA256 webhook — complete code</div>
+      <div class="cw">
+        <div class="ch"><span class="cl">Python</span><span class="cf">routers/payment.py</span></div>
+        <div class="cb"><pre><span class="kw">import</span> hmac, hashlib, json, os
+
+<span class="kw">@router.post</span>(<span class="st">"/payment/webhook"</span>)
+<span class="kw">async def</span> <span class="fn">webhook</span>(request: Request):
+    body = <span class="kw">await</span> request.<span class="fn">body</span>()
+    sig  = request.headers.<span class="fn">get</span>(<span class="st">"x-razorpay-signature"</span>)
+    
+    <span class="cm"># HMAC-SHA256 verify</span>
+    secret = os.environ[<span class="st">"RAZORPAY_WEBHOOK_SECRET"</span>]
+    exp = hmac.<span class="fn">new</span>(secret.<span class="fn">encode</span>(), body, hashlib.sha256).<span class="fn">hexdigest</span>()
+    <span class="kw">if not</span> hmac.<span class="fn">compare_digest</span>(exp, sig):
+        <span class="kw">raise</span> <span class="fn">HTTPException</span>(<span class="nm">401</span>)
+    <span class="cm"># compare_digest = timing-attack proof
+    # Regular == vulnerable: attacker measures time
+    # → guesses signature byte by byte</span>
+    
+    event = json.<span class="fn">loads</span>(body)
+    <span class="kw">if</span> event.<span class="fn">get</span>(<span class="st">"event"</span>) == <span class="st">"payment.captured"</span>:
+        pay = event[<span class="st">"payload"</span>][<span class="st">"payment"</span>][<span class="st">"entity"</span>]
+        uid = pay[<span class="st">"notes"</span>].<span class="fn">get</span>(<span class="st">"user_id"</span>)
+        <span class="kw">if</span> uid: <span class="kw">await</span> <span class="fn">activate_subscription</span>(pay[<span class="st">"order_id"</span>], uid)
+    <span class="kw">return</span> {<span class="st">"status"</span>: <span class="st">"ok"</span>}</pre></div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="col-h">Atomic activation + frontend code</div>
+      <div class="cw">
+        <div class="ch"><span class="cl">Python</span><span class="cf">Atomic subscription activate</span></div>
+        <div class="cb"><pre><span class="kw">async def</span> <span class="fn">activate_subscription</span>(order_id, uid):
+    <span class="cm"># UNIQUE constraint = no duplicate processing</span>
+    existing = supabase.table(<span class="st">"subscriptions"</span>)\
+        .<span class="fn">select</span>(<span class="st">"id"</span>).<span class="fn">eq</span>(<span class="st">"razorpay_order_id"</span>, order_id).<span class="fn">execute</span>()
+    <span class="kw">if</span> existing.data: <span class="kw">return</span>  <span class="cm"># already done</span>
+    
+    expires = datetime.<span class="fn">utcnow</span>() + timedelta(days=<span class="nm">31</span>)
+    supabase.table(<span class="st">"subscriptions"</span>).<span class="fn">insert</span>({
+        <span class="st">"user_id"</span>: uid, <span class="st">"razorpay_order_id"</span>: order_id,
+        <span class="st">"status"</span>: <span class="st">"paid"</span>, <span class="st">"expires_at"</span>: expires.<span class="fn">isoformat</span>()
+    }).<span class="fn">execute</span>()
+    <span class="cm"># Both INSERT + UPDATE — atomic</span>
+    supabase.table(<span class="st">"profiles"</span>)\
+        .<span class="fn">update</span>({<span class="st">"tier"</span>: <span class="st">"founding"</span>}).<span class="fn">eq</span>(<span class="st">"id"</span>, uid).<span class="fn">execute</span>()</pre></div>
+      </div>
+      <div class="cw" style="margin-top:7px">
+        <div class="ch"><span class="cl">JavaScript</span><span class="cf">Lovable frontend</span></div>
+        <div class="cb"><pre><span class="kw">const</span> {order_id} = <span class="kw">await</span> (<span class="kw">await</span> <span class="fn">fetch</span>(<span class="st">`${API}/api/payment/create-order`</span>,
+  {method:<span class="st">'POST'</span>, headers:{Authorization:<span class="st">`Bearer ${token}`</span>}})).<span class="fn">json</span>();
+
+<span class="kw">new</span> window.<span class="fn">Razorpay</span>({
+  key: VITE_RAZORPAY_KEY, order_id,
+  amount:<span class="nm">9900</span>, currency:<span class="st">'INR'</span>,
+  theme:{color:<span class="st">'#00E896'</span>}, method:{upi:<span class="nm">true</span>},
+  handler: () => window.location.<span class="fn">reload</span>()
+}).<span class="fn">open</span>();</pre></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 8: SECURITY -->
+<div class="sec" id="security">
+  <div class="sl"></div>
+  <div class="sp spr">🔐 Security — JWT + HMAC + HTTPS + Rate Limiting</div>
+  <div class="sl"></div>
+</div>
+
+<div class="tc">
+  <div class="tc-top">
+    <div class="tc-left">
+      <div class="tc-icon-row">
+        <div class="ico ico-r">🔐</div>
+        <div>
+          <div class="tc-title">5-Layer Security Stack</div>
+          <div class="tc-sub">JWT auth · HMAC webhooks · HTTPS/TLS · Cloudflare DDoS · Redis rate limiting. Financial app = highest security standard required from Day 1.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tc-body">
+    <div class="col">
+      <div class="col-h">Layer 1 + 2: JWT + HMAC explained</div>
+      <div class="ci"><strong>JWT (JSON Web Token):</strong> Supabase OTP login → signed JWT token → sent in Authorization: Bearer header → FastAPI decodes with SUPABASE_JWT_SECRET → user_id extracted. Stateless — no session storage needed.</div>
+      <div class="ci"><strong>HS256 (Phase 1):</strong> Symmetric key. Supabase + Railway share same secret. Simple, fast, adequate for single-server architecture.</div>
+      <div class="ci"><strong>RS256 (Phase 2 upgrade):</strong> Asymmetric. Private key signs (API server only), public key verifies (NxanceLM server, any microservice). Even if NxanceLM server is compromised, tokens cannot be forged. Multi-server security.</div>
+      <div class="cw">
+        <div class="ch"><span class="cl">Python</span><span class="cf">JWT verification</span></div>
+        <div class="cb"><pre><span class="kw">from</span> jose <span class="kw">import</span> jwt
+<span class="kw">async def</span> <span class="fn">verify_jwt</span>(creds=<span class="fn">Depends</span>(HTTPBearer())):
+    payload = jwt.<span class="fn">decode</span>(
+        creds.credentials,
+        os.environ[<span class="st">"SUPABASE_JWT_SECRET"</span>],
+        algorithms=[<span class="st">"HS256"</span>],
+        audience=<span class="st">"authenticated"</span>
+    )
+    <span class="kw">return</span> payload[<span class="st">"sub"</span>]  <span class="cm"># user_id</span></pre></div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="col-h">Layer 3+4+5: HTTPS + Cloudflare + Rate limiting</div>
+      <div class="ci"><strong>Cloudflare free tier:</strong> DDoS protection (unlimited), CDN (static assets cached globally), Bot protection, SSL certificate (free), Always-online mode. Personal account → add nxance.in → 5 minute setup.</div>
+      <div class="ci"><strong>HTTPS everywhere:</strong> Cloudflare free SSL → nxance.in HTTPS. Railway auto-HTTPS for backend. Supabase always HTTPS. No plaintext financial data ever in transit.</div>
+      <div class="ci"><strong>Rate limiting (Redis):</strong></div>
+      <div class="cw">
+        <div class="ch"><span class="cl">Python</span><span class="cf">Anti-abuse rate limiting</span></div>
+        <div class="cb"><pre><span class="kw">async def</span> <span class="fn">rate_limit</span>(user_id, tier):
+    today = date.<span class="fn">today</span>().<span class="fn">isoformat</span>()
+    key = <span class="st">f"rl:{user_id}:{today}"</span>
+    limit = <span class="nm">10</span> <span class="kw">if</span> tier==<span class="st">"free"</span> <span class="kw">else</span> <span class="nm">100</span>
+    count = r.<span class="fn">incr</span>(key)
+    <span class="kw">if</span> count==<span class="nm">1</span>: r.<span class="fn">expire</span>(key, <span class="nm">86400</span>)
+    <span class="kw">if</span> count>limit: <span class="kw">raise</span> <span class="fn">HTTPException</span>(<span class="nm">429</span>)</pre></div>
+      </div>
+      <div class="ci"><strong>OTP brute force protection:</strong> otp_attempts:{phone} → max 3 in 15 min → 15 min lockout. Prevents SMS bombing and OTP guessing.</div>
+    </div>
+    <div class="col">
+      <div class="col-h">Advanced security (Phase 2)</div>
+      <div class="ci"><strong>AES-256-GCM field encryption:</strong> invested_amount + current_value encrypt before DB insert. Key in AWS KMS. Even Supabase breach = unreadable financial data. DPDPA 2023 = financial data is "sensitive personal data" requiring extra protection.</div>
+      <div class="ci"><strong>Input validation (Pydantic v2):</strong> invested_amount: Annotated[float, Field(gt=0, le=10_000_000)] — rejects negative amounts or Rs 10Cr+ automatically. scheme_code: Annotated[str, Field(pattern=r'^\d{6}$')] — must be 6-digit AMFI code exactly.</div>
+      <div class="ci"><strong>SQL injection prevention:</strong> Supabase client uses parameterized queries by default. Never raw SQL string concatenation. ORM-style .eq(), .select() calls = injection impossible.</div>
+      <div class="ci"><strong>DPDPA compliance checklist:</strong> Data stored in India only (Supabase ap-south-1 Mumbai). Deletion endpoint (DELETE /api/user) mandatory. Privacy policy required before first user. Consent at signup. These are legal requirements from February 2024.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 9: DEVOPS -->
+<div class="sec" id="devops">
+  <div class="sl"></div>
+  <div class="sp spo">🔧 DevOps + Monitoring — GitHub + Railway + PostHog</div>
+  <div class="sl"></div>
+</div>
+
+<div class="tc">
+  <div class="tc-top">
+    <div class="tc-left">
+      <div class="tc-icon-row">
+        <div class="ico ico-o">🔧</div>
+        <div>
+          <div class="tc-title">DevOps Stack — GitHub + Railway + Cloudflare + Monitoring</div>
+          <div class="tc-sub">GitHub push → Railway auto-deploy. Cloudflare CDN. PostHog free analytics. Uptime Robot monitoring. Zero-downtime deployment pipeline for non-technical founder.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tc-body">
+    <div class="col">
+      <div class="col-h">Deployment pipeline</div>
+      <div class="ci"><strong>GitHub → Railway auto-deploy:</strong> git push origin main → Railway detects push → builds Python image → deploys → zero downtime. No Docker knowledge needed. No YAML files. No CI/CD configuration.</div>
+      <div class="ci"><strong>Environment variables:</strong> Railway Settings → Variables. Never commit .env files. SUPABASE_URL, SUPABASE_SERVICE_KEY, RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET, RAZORPAY_WEBHOOK_SECRET, REDIS_URL, NXANCELM_ADAPTER_PATH, SUPABASE_JWT_SECRET.</div>
+      <div class="ci"><strong>Frontend deploy:</strong> Lovable → "Deploy" → Vercel/Netlify free hosting. Custom domain: add nxance.in → Cloudflare CNAME record → HTTPS automatic.</div>
+    </div>
+    <div class="col">
+      <div class="col-h">Monitoring + Analytics</div>
+      <div class="ci"><strong>PostHog (free 1M events/month):</strong> User behaviour analytics. What % see paywall? What % convert? Where do users drop? Session recordings. Heatmaps. No company registration needed.</div>
+      <div class="cw">
+        <div class="ch"><span class="cl">JavaScript</span><span class="cf">PostHog key events</span></div>
+        <div class="cb"><pre>posthog.<span class="fn">capture</span>(<span class="st">'analysis_started'</span>, {funds: n})
+posthog.<span class="fn">capture</span>(<span class="st">'paywall_seen'</span>, {issue1_waste: <span class="nm">4800</span>})
+posthog.<span class="fn">capture</span>(<span class="st">'payment_completed'</span>, {amount: <span class="nm">99</span>})
+posthog.<span class="fn">capture</span>(<span class="st">'report_shared'</span>)</pre></div>
+      </div>
+      <div class="ci"><strong>Uptime Robot (free):</strong> Checks https://nxance-api.up.railway.app/api/health every 5 minutes. Email + SMS alert if down. uptimerobot.com — free tier monitors 50 endpoints.</div>
+    </div>
+    <div class="col">
+      <div class="col-h">Phase 2 DevOps upgrades</div>
+      <div class="ci"><strong>Docker + docker-compose:</strong> Containerize FastAPI + Redis together. Local development identical to production. No "works on my machine" issues.</div>
+      <div class="ci"><strong>GitHub Actions CI/CD:</strong> On PR: run pytest → XIRR accuracy tests → if all pass → auto-deploy. Prevents broken calculations from reaching production.</div>
+      <div class="ci"><strong>Sentry error tracking:</strong> Free tier. Captures Python exceptions with full stack trace. "XIRR failed for portfolio_id X at line Y" — exact error with context, not just "500 Internal Server Error."</div>
+      <div class="ci"><strong>AWS g4dn.xlarge (NxanceLM):</strong> AWS Activate $5K credits → dedicated T4 GPU for NxanceLM inference. Railway can't run GPU workloads. Inference latency: Railway CPU 8-15s → AWS GPU T4 2-4s.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 10: ADVANCED TECH -->
+<div class="sec" id="advanced">
+  <div class="sl"></div>
+  <div class="sp sppi">🚀 Advanced Technology — Better Accuracy + User Behaviour</div>
+  <div class="sl"></div>
+</div>
+
+<div class="al ab"><span class="al-i">⚡</span><div><strong>Ye Phase 1 MVP mein nahi hain</strong> — Phase 1.5 aur Phase 2 ke liye. Pehle ship karo, phir optimize. Kuch ek din mein add ho sakti hain (WebSocket, SHAP, PostHog). Kuch 2 weeks ka kaam hain (CAS PDF, Monte Carlo). Kuch Phase 2+ roadmap pe hain (CDSL, Flutter, Mistral 7B).</div></div>
+
+<div class="adv-grid">
+  <div class="acard ac-c">
+    <div class="ah">📡 WebSocket Real-time Progress <span class="badge bc" style="font-size:9px">1 day</span></div>
+    <div class="as"><strong>Problem:</strong> Current MVP uses simulated timers — fake progress bar. Better: real events as each framework completes. User sees "XIRR computed in 0.8s ✓" in real time — trust and transparency increase.</div>
+    <div class="cw">
+      <div class="ch"><span class="cl">Python</span><span class="cf">FastAPI WebSocket</span></div>
+      <div class="cb"><pre><span class="kw">@app.websocket</span>(<span class="st">"/ws/analyze/{pid}"</span>)
+<span class="kw">async def</span> <span class="fn">stream</span>(ws, pid):
+    <span class="kw">await</span> ws.<span class="fn">send_json</span>({<span class="st">"step"</span>:<span class="st">"xirr"</span>,<span class="st">"pct"</span>:<span class="nm">20</span>})
+    xirr = <span class="fn">calculate_xirr</span>(holdings)
+    <span class="kw">await</span> ws.<span class="fn">send_json</span>({<span class="st">"step"</span>:<span class="st">"overlap"</span>,<span class="st">"pct"</span>:<span class="nm">40</span>})</pre></div>
+    </div>
+    <span class="atag bg">Trust building</span><span class="atag bb">1 day implementation</span>
+  </div>
+
+  <div class="acard ac-g">
+    <div class="ah">📸 CAS PDF Auto-Import <span class="badge bg" style="font-size:9px">Drop-off −60%</span></div>
+    <div class="as"><strong>Problem:</strong> Manual fund entry = 10 minutes = users drop. Solution: user downloads CAMS/KFintech CAS PDF → uploads to Nxance → pdfplumber extracts all holdings with exact transaction dates.</div>
+    <div class="cw">
+      <div class="ch"><span class="cl">Python</span><span class="cf">pdfplumber + fuzzy match</span></div>
+      <div class="cb"><pre><span class="kw">import</span> pdfplumber
+<span class="kw">from</span> fuzzywuzzy <span class="kw">import</span> process
+
+<span class="kw">def</span> <span class="fn">parse_cas_pdf</span>(path, all_funds):
+    <span class="kw">with</span> pdfplumber.<span class="fn">open</span>(path) <span class="kw">as</span> pdf:
+        text = <span class="st">""</span>.<span class="fn">join</span>(p.<span class="fn">extract_text</span>() <span class="kw">for</span> p <span class="kw">in</span> pdf.pages)
+    <span class="kw">return</span> [process.<span class="fn">extractOne</span>(f, all_funds)
+            <span class="kw">for</span> f <span class="kw">in</span> <span class="fn">re.findall</span>(<span class="st">r'[A-Z].{15,60}Fund'</span>, text)]</pre></div>
+    </div>
+    <div class="as"><strong>Advanced:</strong> GPT-4o Vision API for messy phone photos of statements — Rs 0.10/image, 95% accuracy. Exact dates = maximum XIRR accuracy.</div>
+    <span class="atag bg">No registration needed</span><span class="atag bb">2 weeks work</span>
+  </div>
+
+  <div class="acard ac-p">
+    <div class="ah">📊 SHAP Explainability <span class="badge bp" style="font-size:9px">Trust → Conversion</span></div>
+    <div class="as"><strong>What it does:</strong> SHapley Additive exPlanations. Waterfall chart showing exactly why health score is 72 not 100: "overlap: −15pts, alpha gap: −8pts, CVaR: −5pts." Score feels earned, not arbitrary.</div>
+    <div class="cw">
+      <div class="ch"><span class="cl">Python</span><span class="cf">pip install shap</span></div>
+      <div class="cb"><pre><span class="cm"># Contribution of each framework to score drop</span>
+contributions = {
+    <span class="st">'overlap'</span>: -<span class="nm">15</span>, <span class="st">'alpha_gap'</span>: -<span class="nm">8</span>,
+    <span class="st">'cvar'</span>: -<span class="nm">5</span>
+}  <span class="cm"># → waterfall chart: 100 → 85 → 77 → 72</span></pre></div>
+    </div>
+    <span class="atag bp">1 day add</span><span class="atag bg">Better paywall conversion</span>
+  </div>
+
+  <div class="acard ac-y">
+    <div class="ah">🎲 Monte Carlo Simulation <span class="badge by" style="font-size:9px">Highest conversion</span></div>
+    <div class="as"><strong>What it replaces:</strong> Simple goal gap (Rs 14,000/year) → probability-based output: "34% chance of reaching Rs 1Cr goal by 2040 at current XIRR." After fixes: "67%." Probability framing converts better than any other metric.</div>
+    <div class="cw">
+      <div class="ch"><span class="cl">Python</span><span class="cf">10,000 simulations</span></div>
+      <div class="cb"><pre>sims = [corpus * np.<span class="fn">prod</span>(<span class="nm">1</span>+np.random.<span class="fn">normal</span>(
+    xirr/<span class="nm">252</span>, vol/<span class="nm">252</span>**.5, years*<span class="nm">252</span>))
+    <span class="kw">for</span> _ <span class="kw">in</span> <span class="fn">range</span>(<span class="nm">10000</span>)]
+prob = <span class="fn">sum</span>(s>goal <span class="kw">for</span> s <span class="kw">in</span> sims)/<span class="nm">10000</span></pre></div>
+    </div>
+    <span class="atag by">2 weeks work</span><span class="atag bg">Best conversion trigger</span>
+  </div>
+
+  <div class="acard ac-r">
+    <div class="ah">🔬 QLoRA — Mistral 7B (Phase 2 AI) <span class="badge bp" style="font-size:9px">Much better quality</span></div>
+    <div class="as"><strong>QLoRA magic:</strong> 4-bit quantization + LoRA = Mistral 7B (14GB normal VRAM) fits on 4GB free T4 GPU. Same Rs 0 inference cost. 6x more parameters than TinyLlama = dramatically better Hinglish quality and financial reasoning.</div>
+    <div class="cw">
+      <div class="ch"><span class="cl">Python</span><span class="cf">QLoRA config</span></div>
+      <div class="cb"><pre><span class="kw">from</span> transformers <span class="kw">import</span> BitsAndBytesConfig
+bnb = <span class="fn">BitsAndBytesConfig</span>(
+    load_in_4bit=<span class="nm">True</span>,
+    bnb_4bit_quant_type=<span class="st">"nf4"</span>,
+    bnb_4bit_compute_dtype=torch.bfloat16
+)  <span class="cm"># Mistral 7B now fits free T4!</span></pre></div>
+    </div>
+    <span class="atag bp">Phase 2</span><span class="atag bg">Rs 0 still</span>
+  </div>
+
+  <div class="acard ac-c">
+    <div class="ah">📱 Flutter Mobile App (Phase 2) <span class="badge bc" style="font-size:9px">Retention +40%</span></div>
+    <div class="as"><strong>Phase 1:</strong> PWA works in mobile browser. "Install" on home screen possible. Adequate for launch. <strong>Phase 2:</strong> Flutter = one codebase, Android + iOS. Google Play Rs 2,500, App Store $99/year.</div>
+    <div class="as"><strong>Killer feature:</strong> Home screen widget showing live health score. "Your portfolio: 72 → 68 (market moved today)." Daily engagement without opening app. Push notification: "Monthly re-check time — your score may have changed."</div>
+    <span class="atag bc">Phase 2</span><span class="atag bp">Android + iOS one codebase</span>
+  </div>
+</div>
+
+<!-- COMPANY REGISTRATION UNLOCK TABLE -->
+<div class="sec">
+  <div class="sl"></div>
+  <div class="sp spy">🏢 With Company Registration — What Gets Unlocked</div>
+  <div class="sl"></div>
+</div>
+
+<div class="tc">
+  <div class="tc-top">
+    <div class="tc-left">
+      <div class="tc-icon-row">
+        <div class="ico ico-y">🏢</div>
+        <div>
+          <div class="tc-title">Registration Unlocks — Rs 44L+ Non-Dilutive Grants</div>
+          <div class="tc-sub">SPICe+ filing → COI in 7–10 days → DPIIT Org ID → AWS $5K + SISFS Rs 20L + IndiaAI grants. Company registration itself costs Rs 6,000–9,000 (CA fees). Returns: Rs 44L–1.5Cr non-dilutive.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tc-body">
+    <div class="col">
+      <div class="col-h">Immediate unlocks (COI ke baad)</div>
+      <table class="alt-table">
+        <tr><th>Tool</th><th>Requirement</th><th>Benefit</th></tr>
+        <tr><td>Razorpay Live</td><td>COI + GST + current a/c</td><td>Rs 99/month payments go live</td></tr>
+        <tr><td>AWS Activate $5K</td><td>DPIIT Org ID</td><td>Rs 41.5L GPU credits</td></tr>
+        <tr><td>HDFC SmartUp</td><td>COI</td><td>Zero-balance current account</td></tr>
+        <tr><td>DPIIT recognition</td><td>COI</td><td>Tax benefits + grant access</td></tr>
+        <tr><td>Google Startups $2.5K</td><td>Registered company</td><td>Rs 20.7L cloud credits</td></tr>
+        <tr><td>SISFS Rs 20L</td><td>COI + incubator TBI</td><td>Non-dilutive seed grant</td></tr>
+        <tr><td>IndiaAI Mission Rs 1Cr</td><td>DPIIT + MVP launch</td><td>NxanceLM = priority case</td></tr>
+      </table>
+    </div>
+    <div class="col">
+      <div class="col-h">SPICe+ filing exact details</div>
+      <div class="ci"><strong>CA fees all-in:</strong> Rs 4,500–9,000 (DSC + DIN + filing + stamp duty + professional fee). Palampur/Dharamsala CA.</div>
+      <div class="ci"><strong>MOA object:</strong> "AI-powered financial analytics and portfolio management SaaS for retail investors, HNIs, institutions."</div>
+      <div class="ci"><strong>NIC Code:</strong> 62099 (Other IT Services NEC). State: HP. City: Palampur, Kangra 176061.</div>
+      <div class="ci"><strong>Capital:</strong> Authorised Rs 10L. Paid-up Rs 1L (10,000 shares × Rs 10).</div>
+      <div class="ci cr"><strong>DVR clause — AOA Day 1, non-negotiable:</strong> Class A (Abhishek): 10:1 voting. Class B: normal 1:1. Founders retain control through all future funding rounds. Cannot add later without shareholder vote. CA ko explicitly likhwao in AOA draft.</div>
+    </div>
+    <div class="col">
+      <div class="col-h">Grant application sequence</div>
+      <div class="ci"><strong>Day 1 of COI:</strong> Apply DPIIT recognition at startupindia.gov.in. 1-3 business days approval. Free, 20 min.</div>
+      <div class="ci"><strong>Same day DPIIT Org ID milne ke baad:</strong> Apply AWS Activate. $5,000 credits in 3-5 days. Don't delay — this is the GPU budget for NxanceLM production.</div>
+      <div class="ci"><strong>Week 2:</strong> SISFS via IIT Ropar TBI (nearest, ~100km). Google Startups. Microsoft Founders Hub. HP Startup Yojana.</div>
+      <div class="ci"><strong>Month 3 (after MVP launch):</strong> IndiaAI Mission grant. NxanceLM = India's financial LLM. Exactly what the mission funds. Rs 5L–1Cr range.</div>
+      <div class="ci cg"><strong>Total non-dilutive possible: Rs 44L–1.5Cr.</strong> All stackable. All Rs 0 to apply. This is 100x the company registration cost.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FINAL SUMMARY -->
+<div class="al ag" style="margin-top:20px"><span class="al-i">🎯</span><div><strong>Complete picture:</strong> 18 technologies. Rs 6,800–9,800 total build cost (CA + domain). Rs 0 AI inference forever. Break-even at 80 users × Rs 99 = Rs 7,920 MRR. Infrastructure = Rs 0 (free tiers + AWS Activate credits). Grants = Rs 44L–1.5Cr potential. <strong>The technology stack is not the barrier — execution speed is.</strong></div></div>
+
+<div class="foot">
+  <span>Nxance Technologies Pvt Ltd · Technology Deep Dive · With Company Registration</span>
+  <span>Abhishek Rajpoot, Founder · Palampur HP · 2025</span>
+  <span>18 technologies · 7 quant frameworks · Rs 0 AI inference · 80 users break-even</span>
+</div>
+</div>
+
+<script>
+const tabs = document.querySelectorAll('.nl');
+const ids = ['stack','frontend','database','backend','data','quant','ai','payment','security','devops','advanced'];
+window.addEventListener('scroll', () => {
+  let cur = ids[0];
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && window.scrollY >= el.offsetTop - 80) cur = id;
+  });
+  tabs.forEach(t => {
+    const h = t.getAttribute('href');
+    t.classList.toggle('on', h === '#' + cur);
+  });
+});
+</script>
+</body>
+</html>

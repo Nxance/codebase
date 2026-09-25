@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Nxance — 4-Phase Build Roadmap (Updated)</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+:root{
+  --bg:#02030A;--c2:#0A0D1A;--bo:#151828;--b2:#191D35;
+  --tx:#EAF0FF;--t2:#586298;--t3:#222640;
+  --g:#00D4B1;--gt:rgba(0,212,177,.1);--gr:rgba(0,212,177,.22);
+  --gold:#FFB830;--goldt:rgba(255,184,48,.09);
+  --red:#FF3F60;--redt:rgba(255,63,96,.09);
+  --blue:#4A8FFF;--bluet:rgba(74,143,255,.09);
+  --purple:#9B6DFF;--purplet:rgba(155,109,255,.09);
+  --grn:#1EC896;--grnt:rgba(30,200,150,.09);
+  --cyan:#00C4FF;--cyant:rgba(0,196,255,.09);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);line-height:1.72;font-size:14px}
+.cover{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 28px;text-align:center;
+  background:radial-gradient(ellipse 80% 55% at 50% -8%,rgba(0,212,177,.1),transparent 58%),radial-gradient(ellipse 35% 25% at 92% 88%,rgba(74,143,255,.06),transparent 50%)}
+.ctag{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--g);background:var(--gt);border:1px solid var(--gr);padding:5px 20px;border-radius:20px;display:inline-block;margin-bottom:22px}
+.ch{font-family:'Space Grotesk',sans-serif;font-size:clamp(28px,5vw,52px);font-weight:700;line-height:1.08;letter-spacing:-.025em;margin-bottom:12px}
+.ch em{font-style:normal;color:var(--g)}
+.csub{font-size:15px;color:var(--t2);max-width:740px;margin:0 auto 28px;line-height:1.82}
+.timeline-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:900px;width:100%}
+.ts{background:var(--c2);border:1.5px solid var(--b2);border-radius:12px;padding:16px 12px;text-align:center}
+.ts-num{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--t3);margin-bottom:4px}
+.ts-name{font-size:13px;font-weight:700;color:var(--tx);margin-bottom:3px}
+.ts-time{font-size:10px;color:var(--g)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px 80px}
+.sec{margin-bottom:80px}
+.hr{height:1px;background:var(--bo);margin:64px 0}
+.slabel{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--g);background:var(--gt);border:1px solid var(--gr);padding:3px 13px;border-radius:20px;display:inline-block;margin-bottom:14px}
+.stitle{font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;letter-spacing:-.015em;margin-bottom:6px}
+.stitle em{font-style:normal;color:var(--g)}
+.ssub{font-size:14px;color:var(--t2);margin-bottom:24px;max-width:760px;line-height:1.82}
+.phase-hero{border-radius:18px;padding:26px 28px;border:2px solid;margin-bottom:20px}
+.ph-mvp{background:linear-gradient(135deg,rgba(0,212,177,.08),transparent);border-color:rgba(0,212,177,.35)}
+.ph-beta{background:linear-gradient(135deg,rgba(74,143,255,.08),transparent);border-color:rgba(74,143,255,.35)}
+.ph-p1{background:linear-gradient(135deg,rgba(255,184,48,.08),transparent);border-color:rgba(255,184,48,.35)}
+.ph-final{background:linear-gradient(135deg,rgba(155,109,255,.09),transparent);border-color:rgba(155,109,255,.4)}
+.phero-top{display:flex;align-items:center;gap:14px;margin-bottom:10px;flex-wrap:wrap}
+.phero-badge{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;padding:4px 14px;border-radius:20px}
+.phero-title{font-size:24px;font-weight:700;font-family:'Space Grotesk',sans-serif}
+.phero-time{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t2);margin-left:auto}
+.phero-goal{font-size:13px;color:var(--t2);line-height:1.75;margin-bottom:4px}
+.ecard{background:var(--c2);border:1.5px solid var(--bo);border-radius:16px;overflow:hidden;margin-bottom:16px}
+.ehead{padding:16px 20px;border-bottom:1px solid var(--bo);display:flex;align-items:center;gap:12px}
+.eicon{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0}
+.ename{font-size:15px;font-weight:700;color:var(--tx)}
+.etag{font-size:11px;color:var(--t2)}
+.ebody{padding:16px 20px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.slbl{font-family:'JetBrains Mono',monospace;font-size:8.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--t3);margin-bottom:6px;margin-top:12px;display:block}
+.slbl:first-child{margin-top:0}
+.params{display:flex;flex-direction:column;gap:5px}
+.param{display:flex;align-items:flex-start;gap:8px;padding:7px 10px;background:rgba(255,255,255,.02);border:1px solid var(--bo);border-radius:7px;font-size:11px}
+.pn{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--g);flex-shrink:0;min-width:120px}
+.pv{color:var(--t2);line-height:1.5}
+table{width:100%;border-collapse:collapse;margin:9px 0;font-size:11.5px}
+th{background:rgba(255,255,255,.04);padding:8px 10px;text-align:left;font-family:'JetBrains Mono',monospace;font-size:8.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--t3);border-bottom:1px solid var(--b2)}
+td{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.03);color:var(--t2);vertical-align:top}
+tr:last-child td{border:none}td:first-child{color:var(--tx);font-weight:600}
+.nb{background:var(--gt);border:1px solid var(--gr);border-radius:8px;padding:9px 13px;font-size:11.5px;color:var(--g);margin:9px 0;line-height:1.6}
+.ib{background:var(--bluet);border:1px solid rgba(74,143,255,.25);border-radius:8px;padding:9px 13px;font-size:11.5px;color:var(--blue);margin:9px 0;line-height:1.6}
+.goldb{background:var(--goldt);border:1px solid rgba(255,184,48,.25);border-radius:8px;padding:9px 13px;font-size:11.5px;color:var(--gold);margin:9px 0;line-height:1.6}
+.pb{background:var(--purplet);border:1px solid rgba(155,109,255,.25);border-radius:8px;padding:9px 13px;font-size:11.5px;color:var(--purple);margin:9px 0;line-height:1.6}
+.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+.mcard{background:rgba(255,255,255,.02);border:1px solid var(--bo);border-radius:10px;padding:12px;text-align:center}
+.mcard-val{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;margin-bottom:2px}
+.mcard-lbl{font-size:9px;color:var(--t2);text-transform:uppercase;letter-spacing:.04em}
+.footer{text-align:center;padding:48px 0 20px;border-top:1px solid var(--bo);margin-top:20px}
+.fl{font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;background:linear-gradient(135deg,var(--g),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+.ft{font-size:11.5px;color:var(--t3)}
+@media(max-width:760px){.timeline-strip,.g2,.g3,.metric-grid{grid-template-columns:1fr}.wrap{padding:0 14px 60px}}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="ctag">Ohshn Intelligence — Nxance Build Roadmap (Updated)</div>
+  <div class="ch">Nxance &mdash; <em>4-Phase Build Plan</em></div>
+  <div class="csub">How to build Nxance from zero to full production — MVP (Minimum Buyable Product), Beta, Phase 1, and Full Final Phase. Updated with the correct 11 Health Check + 14 Construction sub-engines, hybrid AI architecture, and Account Aggregator data layer.</div>
+  <div class="timeline-strip">
+    <div class="ts"><div class="ts-num">STAGE 1</div><div class="ts-name">MVP</div><div class="ts-time">Month 0-2.5</div></div>
+    <div class="ts"><div class="ts-num">STAGE 2</div><div class="ts-name">Beta</div><div class="ts-time">Month 3-6</div></div>
+    <div class="ts"><div class="ts-num">STAGE 3</div><div class="ts-name">Phase 1</div><div class="ts-time">Month 7-12</div></div>
+    <div class="ts"><div class="ts-num">STAGE 4</div><div class="ts-name">Full Final</div><div class="ts-time">Month 13-24</div></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- ═══ OVERVIEW DIAGRAM ═══ -->
+<div class="sec">
+  <div class="slabel">Overview</div>
+  <div class="stitle">The 4-Phase Build <em>at a Glance</em></div>
+  <div class="ssub">Each phase proves one specific thing before spending more time/money on the next layer. Sub-engine counts and AI capability scale up deliberately — never build Phase 3 tech before Phase 1 is validated.</div>
+
+  <svg viewBox="0 0 860 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:860px;display:block;margin:0 auto 22px;border-radius:14px">
+    <defs><marker id="a1" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#222640"/></marker></defs>
+    <rect width="860" height="340" rx="14" fill="#0A0D1A" stroke="#151828" stroke-width="1.5"/>
+    <text x="430" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="#EAF0FF" font-family="Space Grotesk,sans-serif">Nxance Build Timeline — Updated Sub-Engine + AI Scope</text>
+
+    <line x1="60" y1="100" x2="800" y2="100" stroke="#222640" stroke-width="2"/>
+    <circle cx="150" cy="100" r="12" fill="#00D4B1" opacity=".85"/><text x="150" y="105" text-anchor="middle" font-size="9" fill="#06000C" font-weight="700">1</text>
+    <circle cx="370" cy="100" r="12" fill="#4A8FFF" opacity=".85"/><text x="370" y="105" text-anchor="middle" font-size="9" fill="#06000C" font-weight="700">2</text>
+    <circle cx="590" cy="100" r="12" fill="#FFB830" opacity=".85"/><text x="590" y="105" text-anchor="middle" font-size="9" fill="#06000C" font-weight="700">3</text>
+    <circle cx="780" cy="100" r="12" fill="#9B6DFF" opacity=".85"/><text x="780" y="105" text-anchor="middle" font-size="9" fill="#06000C" font-weight="700">4</text>
+
+    <text x="150" y="80" text-anchor="middle" font-size="9" fill="#00D4B1" font-weight="700" font-family="JetBrains Mono,monospace">MVP</text>
+    <text x="370" y="80" text-anchor="middle" font-size="9" fill="#4A8FFF" font-weight="700" font-family="JetBrains Mono,monospace">BETA</text>
+    <text x="590" y="80" text-anchor="middle" font-size="9" fill="#FFB830" font-weight="700" font-family="JetBrains Mono,monospace">PHASE 1</text>
+    <text x="780" y="80" text-anchor="middle" font-size="9" fill="#9B6DFF" font-weight="700" font-family="JetBrains Mono,monospace">FULL FINAL</text>
+
+    <rect x="60" y="130" width="180" height="176" rx="10" fill="rgba(0,212,177,.06)" stroke="#00D4B1" stroke-width="1.5"/>
+    <text x="150" y="150" text-anchor="middle" font-size="9" fill="#00D4B1" font-weight="700">Proves: AI-driven value works</text>
+    <text x="74" y="170" font-size="8" fill="#586298">4 of 11 HC sub-engines</text>
+    <text x="74" y="184" font-size="8" fill="#586298">TinyLlama AI (own model later)</text>
+    <text x="74" y="198" font-size="8" fill="#586298">No Construction Engine yet</text>
+    <text x="74" y="212" font-size="8" fill="#586298">Manual CAS upload only</text>
+    <text x="74" y="226" font-size="8" fill="#586298">Supabase, web app only</text>
+    <text x="74" y="240" font-size="8" fill="#586298">2-3 people, no admin panel</text>
+    <text x="150" y="262" text-anchor="middle" font-size="9" fill="#00D4B1" font-weight="700">Target: 50-100 users</text>
+    <text x="150" y="276" text-anchor="middle" font-size="8" fill="#586298">Cost: Rs.3-4.5L</text>
+    <text x="150" y="292" text-anchor="middle" font-size="7.5" fill="#00D4B1">"Minimum Buyable Product"</text>
+
+    <rect x="280" y="130" width="180" height="176" rx="10" fill="rgba(74,143,255,.06)" stroke="#4A8FFF" stroke-width="1.5"/>
+    <text x="370" y="150" text-anchor="middle" font-size="9" fill="#4A8FFF" font-weight="700">Proves: Full engines at scale</text>
+    <text x="294" y="170" font-size="8" fill="#586298">All 11 HC sub-engines live</text>
+    <text x="294" y="184" font-size="8" fill="#586298">6 of 14 Construction sub-engines</text>
+    <text x="294" y="198" font-size="8" fill="#586298">Account Aggregator integration</text>
+    <text x="294" y="212" font-size="8" fill="#586298">React Native mobile app ships</text>
+    <text x="294" y="226" font-size="8" fill="#586298">Ohshn Cloud build begins</text>
+    <text x="294" y="240" font-size="8" fill="#586298">4-5 people, basic admin</text>
+    <text x="370" y="262" text-anchor="middle" font-size="9" fill="#4A8FFF" font-weight="700">Target: 1,000 users</text>
+    <text x="370" y="276" text-anchor="middle" font-size="8" fill="#586298">Cost: Rs.18-27L</text>
+
+    <rect x="500" y="130" width="180" height="176" rx="10" fill="rgba(255,184,48,.06)" stroke="#FFB830" stroke-width="1.5"/>
+    <text x="590" y="150" text-anchor="middle" font-size="9" fill="#FFB830" font-weight="700">Proves: Monetisation works</text>
+    <text x="514" y="170" font-size="8" fill="#586298">Construction Engine full (14)</text>
+    <text x="514" y="184" font-size="8" fill="#586298">NxanceLM v1 (hybrid, 7B)</text>
+    <text x="514" y="198" font-size="8" fill="#586298">Ohshn Cloud live (self-hosted)</text>
+    <text x="514" y="212" font-size="8" fill="#586298">Rust/C++/CUDA engines complete</text>
+    <text x="514" y="226" font-size="8" fill="#586298">Full admin panel, 6 depts</text>
+    <text x="514" y="240" font-size="8" fill="#586298">8-10 people</text>
+    <text x="590" y="262" text-anchor="middle" font-size="9" fill="#FFB830" font-weight="700">Target: 10,000 users</text>
+    <text x="590" y="276" text-anchor="middle" font-size="8" fill="#586298">Cost: Rs.55-95L</text>
+
+    <rect x="720" y="130" width="120" height="176" rx="10" fill="rgba(155,109,255,.07)" stroke="#9B6DFF" stroke-width="1.5"/>
+    <text x="780" y="150" text-anchor="middle" font-size="8.5" fill="#9B6DFF" font-weight="700">Proves: Ready to scale 10x</text>
+    <text x="730" y="170" font-size="7.5" fill="#586298">NxanceLM v2 (hybrid+MoE)</text>
+    <text x="730" y="183" font-size="7.5" fill="#586298">QAOA on real QPU</text>
+    <text x="730" y="196" font-size="7.5" fill="#586298">Multi-DC cloud (3 cities)</text>
+    <text x="730" y="209" font-size="7.5" fill="#586298">B2B API launch</text>
+    <text x="730" y="222" font-size="7.5" fill="#586298">15-20 people</text>
+    <text x="780" y="252" text-anchor="middle" font-size="8.5" fill="#9B6DFF" font-weight="700">Target: 1,00,000+</text>
+    <text x="780" y="266" text-anchor="middle" font-size="7.5" fill="#586298">users</text>
+    <text x="780" y="278" text-anchor="middle" font-size="7.5" fill="#586298">Cost: Rs.3.2-7.6Cr</text>
+
+    <text x="430" y="326" text-anchor="middle" font-size="9" fill="#222640" font-family="JetBrains Mono,monospace">MVP = Minimum Buyable Product: the smallest version a real user pays for, not just tries</text>
+  </svg>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══ STAGE 1: MVP ═══ -->
+<div class="sec">
+  <div class="phase-hero ph-mvp">
+    <div class="phero-top">
+      <span class="phero-badge" style="color:var(--g);background:var(--gt)">STAGE 1</span>
+      <span class="phero-title">MVP — Minimum Buyable Product</span>
+      <span class="phero-time">Month 0-2.5 &nbsp;|&nbsp; 2-3 people &nbsp;|&nbsp; Rs.3-4.5L</span>
+    </div>
+    <div class="phero-goal"><strong>Why "Buyable" and not just "Viable":</strong> The goal isn't a demo people politely tolerate — it's the smallest version of Nxance a real stranger will actually pay for. If nobody pays at MVP stage (even a small amount), the product doesn't yet solve a real enough problem, and no amount of Beta/Phase 1 polish will fix that.</div>
+    <div class="phero-goal" style="margin-top:8px"><strong>One job:</strong> Prove that AI-translated portfolio insights, from a genuinely useful subset of the Health Check Engine, make someone reach for their wallet.</div>
+  </div>
+
+  <div class="g2">
+    <div class="ecard" style="margin-bottom:0">
+      <div class="ehead"><div class="eicon" style="background:var(--gt);border:1.5px solid var(--gr)">&#9989;</div><div><div class="ename">What Gets Built</div><div class="etag">4 of 11 HC sub-engines + real AI</div></div></div>
+      <div class="ebody">
+        <div class="params">
+          <div class="param"><span class="pn">Auth</span><span class="pv">Phone OTP login only (Supabase Auth).</span></div>
+          <div class="param"><span class="pn">Portfolio Upload</span><span class="pv">Manual CAS PDF upload + casparser. Account Aggregator is a Beta-phase addition, not MVP.</span></div>
+          <div class="param"><span class="pn">HC Engine — 4 of 11</span><span class="pv">01 Performance, 02 Cost Leak, 03 Goal Alignment, 05 Structure. The 4 that tell the most complete, emotionally compelling story fastest.</span></div>
+          <div class="param"><span class="pn">Health Score</span><span class="pv">Weighted score from just these 4 sub-engines — directionally correct, not the final 11-engine formula.</span></div>
+          <div class="param"><span class="pn">Own AI — TinyLlama 1.1B</span><span class="pv">Self-hosted from Day 1. Translates all 4 sub-engines' output into plain-English issue cards. NxanceLM's real hybrid architecture (Transformer+Mamba+MoE) is a Phase 1 build, not MVP — TinyLlama is the deliberate stand-in.</span></div>
+          <div class="param"><span class="pn">Payment</span><span class="pv">Even a token Rs.49-99 one-time "unlock full report" payment — the whole point of MVP is proving willingness to pay, so payment must exist from Day 1, not be deferred.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ecard" style="margin-bottom:0">
+      <div class="ehead"><div class="eicon" style="background:var(--bluet);border:1.5px solid rgba(74,143,255,.3)">&#128736;</div><div><div class="ename">Technology Used</div><div class="etag">Minimum tooling, AI included from Day 1</div></div></div>
+      <div class="ebody">
+        <div class="params">
+          <div class="param"><span class="pn">Frontend</span><span class="pv">Next.js web app only (TypeScript). Mobile waits for Beta.</span></div>
+          <div class="param"><span class="pn">Backend</span><span class="pv">Python FastAPI monolith with one AI Service module wrapping TinyLlama inference.</span></div>
+          <div class="param"><span class="pn">AI Hosting</span><span class="pv">TinyLlama on a single rented GPU (Vast.ai/RunPod, Rs.5-8k/month) — far cheaper than GPT-4 API at this volume.</span></div>
+          <div class="param"><span class="pn">Database</span><span class="pv">Supabase managed Postgres. No TimescaleDB/Redis/ClickHouse yet.</span></div>
+          <div class="param"><span class="pn">Calculations</span><span class="pv">Pure Python (scipy.optimize.brentq for XIRR) — Rust rewrite is a Phase 1 optimisation, premature now.</span></div>
+          <div class="param"><span class="pn">Payments</span><span class="pv">Razorpay basic integration — one-time payment link, not full subscription infra yet.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="metric-grid">
+    <div class="mcard"><div class="mcard-val" style="color:var(--g)">50-100</div><div class="mcard-lbl">Target Users</div></div>
+    <div class="mcard"><div class="mcard-val" style="color:var(--g)">2-3</div><div class="mcard-lbl">Team Size</div></div>
+    <div class="mcard"><div class="mcard-val" style="color:var(--g)">10 weeks</div><div class="mcard-lbl">Build Time</div></div>
+    <div class="mcard"><div class="mcard-val" style="color:var(--g)">Rs.3-4.5L</div><div class="mcard-lbl">Budget</div></div>
+  </div>
+
+  <div class="nb"><strong>MVP "Done" Criteria — must hit ALL before moving to Beta:</strong> 50+ real users uploaded a real portfolio. At least 15% paid for the full report (this is the actual "buyable" test — not just satisfaction surveys). AI-generated issue text passes a manual accuracy spot-check on 30+ samples with no hallucinated Rs. figures.</div>
+  <div class="ib"><strong>Deliberately skipped:</strong> Construction Engine (all 14 sub-engines), Account Aggregator, mobile app, admin panel, Rust/C++/CUDA, referral, own cloud, NxanceLM's real hybrid architecture, sub-engines 06-11 of Health Check.</div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══ STAGE 2: BETA ═══ -->
+<div class="sec">
+  <div class="phase-hero ph-beta">
+    <div class="phero-top">
+      <span class="phero-badge" style="color:var(--blue);background:var(--bluet)">STAGE 2</span>
+      <span class="phero-title">Beta — Full Health Check + Construction Begins</span>
+      <span class="phero-time">Month 3-6 &nbsp;|&nbsp; 4-5 people &nbsp;|&nbsp; Rs.18-27L</span>
+    </div>
+    <div class="phero-goal"><strong>One job:</strong> Prove the complete 11-sub-engine Health Score is accurate and valuable at real scale, live consent-based data (Account Aggregator) genuinely improves conversion, and the first half of Construction Engine works before committing to the expensive back half (QAOA, quantum).</div>
+  </div>
+
+  <div class="g2">
+    <div class="ecard" style="margin-bottom:0">
+      <div class="ehead"><div class="eicon" style="background:var(--bluet);border:1.5px solid rgba(74,143,255,.3)">&#128202;</div><div><div class="ename">What Gets Built</div><div class="etag">Full HC (11) + half Construction (6/14) + mobile + AA</div></div></div>
+      <div class="ebody">
+        <div class="params">
+          <div class="param"><span class="pn">HC Engine — full 11</span><span class="pv">Adds Fraud Gate, Behaviour, Tax Efficiency, Forecasting, Liquidity, ESG/Suitability, Peer Comparison to the MVP's 4. All 11 live.</span></div>
+          <div class="param"><span class="pn">Account Aggregator</span><span class="pv">Live consent-based data via Setu/Anumati — replaces manual CAS upload as the primary onboarding path, casparser kept as fallback.</span></div>
+          <div class="param"><span class="pn">Selection Engine</span><span class="pv">Basic version — 4-6 of the 12 scoring layers, no QAOA yet. Suggests alternative funds with FIT score.</span></div>
+          <div class="param"><span class="pn">Construction Engine — 6 of 14</span><span class="pv">Sub 01-06: Profile, Goal Decomposer, Constraint Builder, Asset Allocation, Universe Filter, Selection Bridge. Classical MVO only, no QAOA/quantum, no tax-aware optimiser yet.</span></div>
+          <div class="param"><span class="pn">Own AI — TinyLlama scaled</span><span class="pv">Same model, more GPU capacity for higher volume. NxanceLM's real architecture still deferred to Phase 1.</span></div>
+          <div class="param"><span class="pn">Mobile App</span><span class="pv">React Native (TypeScript) ships — Home, Portfolio, Settings, Profile screens.</span></div>
+          <div class="param"><span class="pn">Subscription</span><span class="pv">Rs.199/month Premium tier launches — recurring revenue, not just one-time MVP payment.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ecard" style="margin-bottom:0">
+      <div class="ehead"><div class="eicon" style="background:var(--goldt);border:1.5px solid rgba(255,184,48,.3)">&#9881;</div><div><div class="ename">Technology Upgrades</div><div class="etag">Where polyglot architecture begins</div></div></div>
+      <div class="ebody">
+        <div class="params">
+          <div class="param"><span class="pn">Backend split</span><span class="pv">Monolith splits into User Service + HC Engine Service + Construction Engine Service (all still Python).</span></div>
+          <div class="param"><span class="pn">RBI FIU registration</span><span class="pv">Required compliance step to participate in Account Aggregator network as a data requester — starts early in this phase.</span></div>
+          <div class="param"><span class="pn">Database additions</span><span class="pv">Add Redis (live NAV caching) and TimescaleDB — still on Supabase infra, not self-hosted yet.</span></div>
+          <div class="param"><span class="pn">Own Cloud — groundwork</span><span class="pv">Apply for Ohshn Cloud hardware (20 servers, colocation). Provisioning starts in parallel, not live yet.</span></div>
+          <div class="param"><span class="pn">Basic Admin Panel</span><span class="pv">Single internal dashboard — user list, tickets, basic metrics. Full 6-department system is Phase 1.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <span class="slbl">Beta Team — 4-5 People</span>
+  <table>
+    <thead><tr><th>Role</th><th>Responsibility</th><th>Languages</th></tr></thead>
+    <tbody>
+      <tr><td>Founder/CEO (you)</td><td>Product, user research, go-to-market</td><td>—</td></tr>
+      <tr><td>CTO/Lead Engineer</td><td>Backend architecture, HC+Construction Engine orchestration</td><td>Python, FastAPI</td></tr>
+      <tr><td>Mobile Developer (hire)</td><td>React Native app, all screens</td><td>TypeScript, React Native</td></tr>
+      <tr><td>ML/Data Engineer (hire)</td><td>Selection Engine scoring, TinyLlama integration, AA data pipeline</td><td>Python, scipy, PyTorch</td></tr>
+      <tr><td>Designer (part-time)</td><td>Mobile UI, onboarding flow</td><td>Figma</td></tr>
+    </tbody>
+  </table>
+
+  <div class="metric-grid">
+    <div class="mcard"><div class="mcard-val" style="color:var(--blue)">1,000</div><div class="mcard-lbl">Target Users</div></div>
+    <div class="mcard"><div class="mcard-val" style="color:var(--blue)">4-5</div><div class="mcard-lbl">Team Size</div></div>
+    <div class="mcard"><div class="mcard-val" style="color:var(--blue)">16 weeks</div><div class="mcard-lbl">Build Time</div></div>
+    <div class="mcard"><div class="mcard-val" style="color:var(--blue)">Rs.22L</div><div class="mcard-lbl">Budget</div></div>
+  </div>
+
+  <div class="nb"><strong>Beta "Done" Criteria:</strong> 1,000 users, all 11 HC sub-engines' accuracy validated against 50+ manually-checked portfolios. 100+ paying Premium subscribers. Account Aggregator onboarding shows measurably lower drop-off than manual PDF upload. Mobile app crash-free rate above 99.5%.</div>
+  <div class="ib"><strong>Deliberately skipped:</strong> Construction sub-engines 07-14 (Cross-Asset Correlation, QAOA, Tax-Aware Optimiser, Regime Stress-Test, and beyond), NxanceLM's real trained model, Rust/C++/CUDA rewrite, multi-department admin panel, own cloud going live.</div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══ STAGE 3: PHASE 1 ═══ -->
+<div class="sec">
+  <div class="phase-hero ph-p1">
+    <div class="phero-top">
+      <span class="phero-badge" style="color:var(--gold);background:var(--goldt)">STAGE 3</span>
+      <span class="phero-title">Phase 1 — Production Platform</span>
+      <span class="phero-time">Month 7-12 &nbsp;|&nbsp; 8-10 people &nbsp;|&nbsp; Rs.55-95L</span>
+    </div>
+    <div class="phero-goal"><strong>One job:</strong> Complete both engines to their full sub-engine count (11+14=25), replace TinyLlama with NxanceLM's real hybrid architecture, move onto self-hosted Ohshn Cloud, and stand up the full 6-department admin panel so the business can actually be run day to day.</div>
+  </div>
+
+  <div class="g3">
+    <div class="ecard" style="margin-bottom:0">
+      <div class="ehead" style="padding:13px 16px"><div class="eicon" style="width:38px;height:38px;font-size:17px;background:var(--gt);border:1.5px solid var(--gr)">&#127959;</div><div><div class="ename" style="font-size:13px">Construction Engine — Full 14</div></div></div>
+      <div class="ebody" style="padding:13px 16px">
+        <div class="params">
+          <div class="param" style="font-size:10.5px"><span class="pn" style="min-width:0;font-size:9px">Sub 07-14 added</span><span class="pv">Cross-Asset Correlation, MVO, QAOA (GPU-simulated), Tax-Aware Optimiser, Backtesting, Regime Stress-Test, SIP Designer, Rebalance Scheduler</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ecard" style="margin-bottom:0">
+      <div class="ehead" style="padding:13px 16px"><div class="eicon" style="width:38px;height:38px;font-size:17px;background:var(--purplet);border:1.5px solid rgba(155,109,255,.3)">&#129504;</div><div><div class="ename" style="font-size:13px">NxanceLM v1 — Real Hybrid AI</div></div></div>
+      <div class="ebody" style="padding:13px 16px">
+        <div class="params">
+          <div class="param" style="font-size:10.5px"><span class="pn" style="min-width:0;font-size:9px">Hybrid Transformer+Mamba</span><span class="pv">7B, trained from scratch, 32K context — replaces TinyLlama entirely, all 3 NxanceLM roles active</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ecard" style="margin-bottom:0">
+      <div class="ehead" style="padding:13px 16px"><div class="eicon" style="width:38px;height:38px;font-size:17px;background:var(--cyant);border:1.5px solid rgba(0,196,255,.3)">&#9729;</div><div><div class="ename" style="font-size:13px">Ohshn Cloud — Goes Live</div></div></div>
+      <div class="ebody" style="padding:13px 16px">
+        <div class="params">
+          <div class="param" style="font-size:10.5px"><span class="pn" style="min-width:0;font-size:9px">Self-hosted Postgres</span><span class="pv">Full cutover from Supabase, OpenStack+Ceph live, Mumbai DC, 20 servers</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="ecard" style="margin-bottom:0">
+      <div class="ehead"><div class="eicon" style="background:var(--redt);border:1.5px solid rgba(255,63,96,.3)">&#9881;</div><div><div class="ename">Polyglot Performance Layer</div><div class="etag">Rust + C++ + CUDA enter the stack</div></div></div>
+      <div class="ebody">
+        <div class="params">
+          <div class="param"><span class="pn">Calc Engine (Rust)</span><span class="pv">XIRR/Sharpe/CVaR/correlation rewritten in Rust — 10-50× speedup, called from Python via PyO3.</span></div>
+          <div class="param"><span class="pn">Optimisation Core (C++)</span><span class="pv">MVO engine (Construction Sub-08) rewritten in C++ Eigen, handles full 7,400-instrument universe.</span></div>
+          <div class="param"><span class="pn">QAOA (CUDA)</span><span class="pv">Construction Sub-09 GPU-simulated quantum optimisation goes live in production.</span></div>
+          <div class="param"><span class="pn">CUDA Monte Carlo</span><span class="pv">HC Forecasting sub-engine moves to GPU — 15× faster.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ecard" style="margin-bottom:0">
+      <div class="ehead"><div class="eicon" style="background:var(--grnt);border:1.5px solid rgba(30,200,150,.3)">&#128188;</div><div><div class="ename">Admin Panel — 6 Departments</div><div class="etag">Real operational software, not a dashboard</div></div></div>
+      <div class="ebody">
+        <div class="params">
+          <div class="param"><span class="pn">All 6 live</span><span class="pv">Construction, Sales, Operations, Issue Resolution, Investment/R&D, User Relations — full RBAC, audit logging.</span></div>
+          <div class="param"><span class="pn">Formula Version Control</span><span class="pv">Git-style versioning for all 25 sub-engine formulas, A/B testing framework.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <span class="slbl">Phase 1 Team — 8-10 People</span>
+  <table>
+    <thead><tr><th>New Hires (added to Beta team)</th><th>Responsibility</th><th>Languages</th></tr></thead>
+    <tbody>
+      <tr><td>Backend Engineer (Rust)</td><td>Calc Engine rewrite, performance optimisation</td><td>Rust, Axum, Rayon</td></tr>
+      <tr><td>Quant Engineer (C++)</td><td>MVO/QAOA optimisation core</td><td>C++, Eigen, CUDA</td></tr>
+      <tr><td>ML Engineer (NxanceLM)</td><td>Train hybrid Transformer+Mamba model</td><td>PyTorch, CUDA, mamba-ssm, DeepSpeed</td></tr>
+      <tr><td>DevOps/Infra Engineer</td><td>Ohshn Cloud build-out, Kubernetes, monitoring</td><td>Terraform, K8s, Go</td></tr>
+      <tr><td>Admin Panel Developer</td><td>6-department admin platform</td><td>Next.js, TypeScript</td></tr>
+    </tbody>
+  </table>
+
+  <div class="metric-grid">
+    <div class="mcard"><div class="mcard-val" style="color:var(--gold)">10,000</div><div class="mcard-lbl">Target Users</div></div>
+    <div class="mcard"><div class="mcard-val" style="color:var(--gold)">8-10</div><div class="mcard-lbl">Team Size</div></div>
+    <div class="mcard"><div class="mcard-val" style="color:var(--gold)">24 weeks</div><div class="mcard-lbl">Build Time</div></div>
+    <div class="mcard"><div class="mcard-val" style="color:var(--gold)">Rs.75L</div><div class="mcard-lbl">Budget</div></div>
+  </div>
+
+  <div class="nb"><strong>Phase 1 "Done" Criteria:</strong> 10,000 users, Rs.20L+ MRR. All 25 sub-engines (11 HC + 14 Construction) live and validated. NxanceLM v1 matches or beats TinyLlama quality at a fraction of the per-query cost. Ohshn Cloud running 100% of production traffic, 99.9% uptime for 60+ consecutive days. All 6 admin departments actively used daily.</div>
+  <div class="goldb"><strong>Deliberately skipped:</strong> NxanceLM v2 (MoE sparsity layer), real quantum hardware (QAOA still GPU-simulated), multi-city cloud, B2B API product, on-device AI.</div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══ STAGE 4: FULL FINAL ═══ -->
+<div class="sec">
+  <div class="phase-hero ph-final">
+    <div class="phero-top">
+      <span class="phero-badge" style="color:var(--purple);background:var(--purplet)">STAGE 4</span>
+      <span class="phero-title">Full Final Phase — Scale + Frontier Tech</span>
+      <span class="phero-time">Month 13-24 &nbsp;|&nbsp; 15-20 people &nbsp;|&nbsp; Rs.3.2-7.6Cr</span>
+    </div>
+    <div class="phero-goal"><strong>One job:</strong> NxanceLM gains MoE sparsity for domain specialisation at scale, QAOA moves from GPU simulation to real quantum hardware, on-device AI ships for offline resilience, and the B2B platform (Ohshn Cloud, OhshnQuantum, NxanceLM API) launches externally.</div>
+  </div>
+
+  <div class="g2">
+    <div class="ecard" style="margin-bottom:0">
+      <div class="ehead"><div class="eicon" style="background:var(--purplet);border:1.5px solid rgba(155,109,255,.3)">&#9889;</div><div><div class="ename">Frontier Technology Goes Live</div><div class="etag">The "advanced" layer completing the roadmap</div></div></div>
+      <div class="ebody">
+        <div class="params">
+          <div class="param"><span class="pn">NxanceLM v2 — Hybrid+MoE</span><span class="pv">Adds 8-expert MoE sparsity on top of the hybrid base — ~40-70B total params, ~10-14B active/token, 128K-256K context.</span></div>
+          <div class="param"><span class="pn">QAOA → Real QPU</span><span class="pv">Construction Sub-09 moves from GPU simulation to actual quantum hardware via IBM Quantum Network partnership.</span></div>
+          <div class="param"><span class="pn">On-Device AI</span><span class="pv">ONNX Runtime Mobile + TensorFlow Lite — distilled NxanceLM runs offline for Tier-2/3 India connectivity.</span></div>
+          <div class="param"><span class="pn">Multi-DC Cloud</span><span class="pv">Ohshn Cloud expands Mumbai → Delhi NCR + Chennai. Active-active replication, disaster recovery.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ecard" style="margin-bottom:0">
+      <div class="ehead"><div class="eicon" style="background:var(--bluet);border:1.5px solid rgba(74,143,255,.3)">&#127970;</div><div><div class="ename">B2B Platform Launch</div><div class="etag">Selling infrastructure, not just the consumer app</div></div></div>
+      <div class="ebody">
+        <div class="params">
+          <div class="param"><span class="pn">Ohshn Cloud B2B</span><span class="pv">Public cloud launch — VM, Storage, Database, AI API services sold externally.</span></div>
+          <div class="param"><span class="pn">OhshnQuantum API</span><span class="pv">QAOA/Grover/VQE sold to banks, AMCs, pharma — Rs.1L-10L/month contracts.</span></div>
+          <div class="param"><span class="pn">NxanceLM API (B2B)</span><span class="pv">Finance-tuned hybrid LLM licensed to MFDs, RIAs, AMCs as white-label.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <span class="slbl">Full Final — Complete Feature Set Live</span>
+  <table>
+    <thead><tr><th>System</th><th>Status at Full Final</th></tr></thead>
+    <tbody>
+      <tr><td>Health Check Engine</td><td>All 11 sub-engines, Rust/CUDA-optimised, sub-200ms response</td></tr>
+      <tr><td>Construction Engine</td><td>All 14 sub-engines including QAOA on real quantum hardware</td></tr>
+      <tr><td>NxanceLM</td><td>v2 Hybrid+MoE, multilingual, on-device fallback, all 3 roles fully mature</td></tr>
+      <tr><td>Database + Cloud</td><td>Full Ohshn Cloud — 3 DCs, 500+ servers, GPU pool, B2B services live</td></tr>
+      <tr><td>Admin Panel</td><td>All 6 departments + predictive analytics + automated formula testing</td></tr>
+      <tr><td>Data Layer</td><td>Account Aggregator fully mature, OCEN-based lending features explored</td></tr>
+      <tr><td>B2B Products</td><td>Ohshn Cloud, OhshnQuantum, NxanceLM API all sellable externally</td></tr>
+    </tbody>
+  </table>
+
+  <div class="metric-grid">
+    <div class="mcard"><div class="mcard-val" style="color:var(--purple)">1,00,000+</div><div class="mcard-lbl">Target Users</div></div>
+    <div class="mcard"><div class="mcard-val" style="color:var(--purple)">15-20</div><div class="mcard-lbl">Team Size</div></div>
+    <div class="mcard"><div class="mcard-val" style="color:var(--purple)">52 weeks</div><div class="mcard-lbl">Build Time</div></div>
+    <div class="mcard"><div class="mcard-val" style="color:var(--purple)">Rs.5Cr</div><div class="mcard-lbl">Budget</div></div>
+  </div>
+
+  <div class="pb"><strong>Full Final "Done" Criteria:</strong> 1,00,000+ users, Rs.2Cr+/month combined B2C+B2B MRR. NxanceLM v2 outperforms v1 on quality benchmarks. QAOA on real QPU demonstrably improves Sharpe ratio 9%+ vs classical MVO in production. At least 5 paying B2B enterprise customers.</div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══ SUMMARY TABLE ═══ -->
+<div class="sec">
+  <div class="slabel">Complete Summary</div>
+  <div class="stitle">All 4 Phases &mdash; <em>Side by Side</em></div>
+
+  <table>
+    <thead><tr><th>Dimension</th><th>MVP</th><th>Beta</th><th>Phase 1</th><th>Full Final</th></tr></thead>
+    <tbody>
+      <tr><td>Timeline</td><td>Month 0-2.5</td><td>Month 3-6</td><td>Month 7-12</td><td>Month 13-24</td></tr>
+      <tr><td>Team Size</td><td>2-3</td><td>4-5</td><td>8-10</td><td>15-20</td></tr>
+      <tr><td>HC Engine</td><td>4 of 11 sub-engines</td><td>All 11</td><td>All 11, Rust-optimised</td><td>All 11, sub-200ms</td></tr>
+      <tr><td>Construction Engine</td><td>None</td><td>6 of 14 (no QAOA)</td><td>All 14 + QAOA (GPU)</td><td>All 14 + QAOA (real QPU)</td></tr>
+      <tr><td>Own AI</td><td>TinyLlama 1.1B</td><td>TinyLlama (scaled)</td><td>NxanceLM v1 (Hybrid, 7B)</td><td>NxanceLM v2 (Hybrid+MoE, ~40-70B)</td></tr>
+      <tr><td>Data Onboarding</td><td>Manual CAS PDF only</td><td>Account Aggregator + PDF fallback</td><td>AA mature</td><td>AA + OCEN exploration</td></tr>
+      <tr><td>Database</td><td>Supabase only</td><td>Supabase + Redis</td><td>Self-hosted Ohshn Cloud</td><td>Multi-DC Ohshn Cloud</td></tr>
+      <tr><td>Languages Active</td><td>Python, TypeScript</td><td>+ basic Go</td><td>+ Rust, C++, CUDA</td><td>+ on-device (ONNX)</td></tr>
+      <tr><td>Frontend</td><td>Web only</td><td>+ Mobile (React Native)</td><td>Mobile + Web mature</td><td>+ On-device offline mode</td></tr>
+      <tr><td>Admin Panel</td><td>None</td><td>Single dashboard</td><td>All 6 departments</td><td>+ Predictive analytics</td></tr>
+      <tr><td>Quantum Computing</td><td>None</td><td>None</td><td>QAOA (GPU-simulated)</td><td>QAOA (real QPU)</td></tr>
+      <tr><td>B2B Products</td><td>None</td><td>None</td><td>None</td><td>Cloud, Quantum, LLM API</td></tr>
+      <tr><td>Target Users</td><td>50-100</td><td>1,000</td><td>10,000</td><td>1,00,000+</td></tr>
+      <tr><td>Budget (this stage)</td><td>Rs.3-4.5L</td><td>Rs.18-27L</td><td>Rs.55-95L</td><td>Rs.3.2-7.6Cr</td></tr>
+      <tr><td>Cumulative Spend</td><td>Rs.4L</td><td>Rs.28L</td><td>Rs.1.1Cr</td><td>Rs.4.3-8.7Cr</td></tr>
+    </tbody>
+  </table>
+
+  <div class="goldb" style="margin-top:14px"><strong>The Golden Rule Across All 4 Phases:</strong> Never build the next phase's technology before the current phase's target metric is hit. Building Rust/C++/CUDA engines before MVP validates willingness-to-pay wastes engineering time on a product nobody's paid for. Building real quantum hardware access before Phase 1's 10,000 users wastes crores on optimisation nobody will notice at small scale. Each phase earns the right to build the next.</div>
+  <div class="pb" style="margin-top:10px"><strong>Why "Minimum Buyable" matters as the name:</strong> Calling it "Viable" lets a team convince itself that positive feedback or high engagement is enough to proceed. Calling it "Buyable" forces the only test that actually predicts a real business: did a stranger pay real money for it, with their own card, without being asked to as a favour.</div>
+</div>
+
+<div class="footer">
+  <div class="fl">nxance</div>
+  <div class="ft">Ohshn Intelligence Pvt Ltd &nbsp;|&nbsp; Palampur, Himachal Pradesh &nbsp;|&nbsp; 2026<br>Nxance 4-Phase Build Roadmap (Updated) v3.0 &nbsp;|&nbsp; Confidential</div>
+</div>
+</div>
+</body>
+</html>

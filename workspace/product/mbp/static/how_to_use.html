@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nxance · How to use (internal team)</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0A1628; --navy2: #0F2744; --card: #152C48; --surface: #0C1A2E;
+      --text: #F4F8FC; --muted: #9BB4CC; --dim: #6B849C;
+      --accent: #3DDCFF; --ok: #3DDC97; --warn: #F5B942; --danger: #FF6B7A;
+      --border: rgba(122,173,217,0.2);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "DM Sans", system-ui, sans-serif;
+      background: #050B14;
+      color: var(--text);
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 0;
+    }
+    @media (max-width: 1000px) {
+      body { grid-template-columns: 1fr; }
+      .coach { display: none !important; }
+    }
+    .stage {
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; padding: 28px 20px 40px;
+      background: radial-gradient(900px 500px at 50% 0%, #163A5F 0%, #050B14 55%);
+      min-height: 100vh;
+    }
+    .badge {
+      font-size: 11px; font-weight: 800; letter-spacing: 0.08em;
+      color: var(--warn); background: rgba(245,185,66,0.12);
+      border: 1px solid rgba(245,185,66,0.35); border-radius: 999px;
+      padding: 6px 12px; margin-bottom: 14px;
+    }
+    .phone {
+      width: 390px; height: 780px; border-radius: 36px;
+      border: 3px solid #2a4a6a; background: var(--navy);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(255,255,255,0.04);
+      overflow: hidden; position: relative; display: flex; flex-direction: column;
+    }
+    .notch {
+      height: 28px; background: #050B14; display: flex; align-items: center; justify-content: center;
+      font-size: 10px; color: var(--dim); letter-spacing: 0.04em; flex-shrink: 0;
+    }
+    .appbar {
+      padding: 12px 16px 8px; display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid var(--border); flex-shrink: 0;
+    }
+    .appbar h1 { font-size: 20px; font-weight: 800; letter-spacing: -0.03em; }
+    .appbar .sub { font-size: 11px; color: var(--accent); font-weight: 700; }
+    .content { flex: 1; overflow: auto; padding: 14px 16px 12px; }
+    .tabbar {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px;
+      border-top: 1px solid var(--border); background: #050B14; padding: 8px 4px 12px;
+      flex-shrink: 0;
+    }
+    .tab {
+      text-align: center; font-size: 10px; color: var(--dim); font-weight: 600;
+      padding: 4px 0;
+    }
+    .tab.on { color: var(--accent); }
+    .tab .ico { font-size: 16px; display: block; margin-bottom: 2px; }
+    .btn {
+      width: 100%; border: none; border-radius: 999px; padding: 13px 16px;
+      font-weight: 700; font-size: 14px; cursor: default; margin-top: 8px;
+    }
+    .btn.primary { background: var(--accent); color: #050B14; }
+    .btn.ghost {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .field { margin-bottom: 10px; }
+    .field label { display: block; font-size: 12px; font-weight: 700; margin-bottom: 5px; }
+    .field input, .field select, .field textarea {
+      width: 100%; padding: 11px 12px; border-radius: 12px;
+      border: 1px solid var(--border); background: var(--surface); color: var(--text);
+      font: inherit;
+    }
+    .card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+      padding: 12px; margin-bottom: 10px;
+    }
+    .kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 10px 0; }
+    .kpi {
+      background: rgba(5,11,20,0.45); border: 1px solid var(--border);
+      border-radius: 12px; padding: 10px;
+    }
+    .kpi .l { font-size: 10px; color: var(--dim); font-weight: 700; }
+    .kpi .v { font-size: 16px; font-weight: 800; margin-top: 2px; }
+    .pill {
+      display: inline-block; font-size: 10px; font-weight: 700; padding: 3px 8px;
+      border-radius: 999px; background: rgba(61,220,255,0.12); color: var(--accent);
+      margin: 2px 2px 0 0;
+    }
+    .issue {
+      border-left: 3px solid var(--warn); background: rgba(5,11,20,0.35);
+      border-radius: 10px; padding: 10px; margin: 8px 0; font-size: 12px;
+    }
+    .muted { color: var(--muted); font-size: 13px; line-height: 1.4; }
+    .danger { color: var(--danger); }
+    .ok { color: var(--ok); }
+    .accent { color: var(--accent); }
+    .hero {
+      background: linear-gradient(145deg, var(--surface), var(--navy2));
+      border: 1px solid var(--border); border-radius: 16px; padding: 14px; margin-bottom: 12px;
+    }
+    .hero h2 { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 6px; }
+    .holding {
+      display: flex; justify-content: space-between; gap: 8px;
+      padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 12px;
+    }
+    .progress-wrap {
+      width: min(390px, 100%); margin-top: 16px;
+    }
+    .progress {
+      height: 4px; background: rgba(255,255,255,0.08); border-radius: 99px; overflow: hidden;
+    }
+    .progress i { display: block; height: 100%; background: linear-gradient(90deg, var(--accent), var(--ok)); width: 0; transition: width .35s; }
+    .stepmeta { margin-top: 8px; font-size: 12px; color: var(--dim); text-align: center; font-weight: 600; }
+
+    /* coach panel — internal training */
+    .coach {
+      background: #0c1524; border-left: 1px solid var(--border);
+      padding: 28px 24px; overflow: auto; min-height: 100vh;
+    }
+    .coach h2 {
+      font-size: 13px; letter-spacing: 0.08em; color: var(--warn);
+      font-weight: 800; margin-bottom: 8px;
+    }
+    .coach h3 { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 10px; }
+    .coach .say {
+      background: rgba(61,220,255,0.08); border: 1px solid rgba(61,220,255,0.22);
+      border-radius: 14px; padding: 14px; color: var(--text); line-height: 1.45;
+      font-size: 14px; margin-bottom: 14px;
+    }
+    .coach .say b { color: var(--accent); }
+    .coach ol { margin: 0 0 14px 18px; color: var(--muted); font-size: 13px; line-height: 1.55; }
+    .coach li { margin-bottom: 6px; }
+    .coach .note {
+      font-size: 12px; color: var(--dim); border-top: 1px solid var(--border);
+      padding-top: 12px; margin-top: 12px; line-height: 1.45;
+    }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="badge">INTERNAL TEAM · HOW TO USE · AUTO WALKTHROUGH</div>
+    <div class="phone" id="phone">
+      <div class="notch">NXANCE · ANDROID FLOW</div>
+      <div class="appbar">
+        <div>
+          <h1 id="screenTitle">Sign in</h1>
+          <div class="sub" id="screenSub">Screen 1 / 8</div>
+        </div>
+        <div class="pill" id="livePill">LIVE API</div>
+      </div>
+      <div class="content" id="screenBody"></div>
+      <div class="tabbar" id="tabbar">
+        <div class="tab" data-t="Home"><span class="ico">⌂</span>Home</div>
+        <div class="tab" data-t="Health"><span class="ico">♥</span>Health</div>
+        <div class="tab" data-t="Upload"><span class="ico">↑</span>Upload</div>
+        <div class="tab" data-t="Build"><span class="ico">◎</span>Build</div>
+        <div class="tab" data-t="Pay"><span class="ico">₹</span>Pay</div>
+      </div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress"><i id="bar"></i></div>
+      <div class="stepmeta" id="stepMeta">Starting…</div>
+    </div>
+  </div>
+
+  <aside class="coach" id="coach">
+    <h2>INTERNAL TALK TRACK</h2>
+    <h3 id="coachTitle">Booting…</h3>
+    <div class="say" id="coachSay">Connecting to API and preparing walkthrough.</div>
+    <ol id="coachSteps"></ol>
+    <div class="note" id="coachNote">
+      For team discussion: walk this flow on a phone with API base URL set to your Mac LAN IP.
+      Codes: DEMO-UNLOCK · dummy Pay confirm.
+    </div>
+  </aside>
+
+  <script>
+    const API = (location.port === '8000' || location.hostname === '127.0.0.1' || location.hostname === 'localhost')
+      ? location.origin
+      : 'http://127.0.0.1:8000';
+    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+    const fmt = (n) => (n == null || isNaN(n) ? '—' : Number(n).toLocaleString('en-IN', { maximumFractionDigits: 0 }));
+    const $ = (id) => document.getElementById(id);
+
+    let token = '';
+    let unlocked = false;
+    let userName = 'Demo Investor';
+    let lastHealth = null;
+    let lastUpload = null;
+    let training = null;
+
+    async function api(path, opts = {}) {
+      const headers = { ...(opts.headers || {}) };
+      if (token) headers.Authorization = 'Bearer ' + token;
+      if (opts.json) {
+        headers['Content-Type'] = 'application/json';
+        opts.body = JSON.stringify(opts.json);
+      }
+      const res = await fetch(API + path, { ...opts, headers });
+      const data = await res.json().catch(() => ({}));
+      if (data.session?.token) token = data.session.token;
+      if (data.token) token = data.token;
+      if (data.session?.unlocked != null) unlocked = !!data.session.unlocked;
+      if (data.unlocked != null) unlocked = !!data.unlocked;
+      if (!res.ok) throw new Error(typeof data.detail === 'string' ? data.detail : JSON.stringify(data.detail || res.statusText));
+      return data;
+    }
+
+    function setTabs(active) {
+      document.querySelectorAll('.tab').forEach((t) => {
+        t.classList.toggle('on', t.dataset.t === active);
+      });
+      $('tabbar').classList.toggle('hidden', active === 'Login' || active === 'Close');
+    }
+
+    function coach(title, say, steps, note) {
+      $('coachTitle').textContent = title;
+      $('coachSay').innerHTML = say;
+      $('coachSteps').innerHTML = (steps || []).map((s) => `<li>${s}</li>`).join('');
+      if (note) $('coachNote').textContent = note;
+    }
+
+    function screen(title, sub, html, tab) {
+      $('screenTitle').textContent = title;
+      $('screenSub').textContent = sub;
+      $('screenBody').innerHTML = html;
+      setTabs(tab || title);
+    }
+
+    const scenes = [
+      {
+        id: 'login',
+        tab: 'Login',
+        title: 'Sign in',
+        sub: 'Screen 1 / 8 · Login',
+        coachTitle: '1 · Login (or guest)',
+        say: 'Open with <b>Sign in</b>. Demo auth is name + phone — <b>no OTP cost</b>. Guest also works for a quick sample.',
+        steps: [
+          'Enter any name + 10-digit phone → Continue',
+          'Or tap Continue as guest',
+          'Session token is stored for Health / Upload / Pay',
+        ],
+        note: 'Production later: OTP. For pilots, DEMO login is enough.',
+        run: async () => {
+          screen('Sign in', 'Screen 1 / 8 · Login', `
+            <div class="card">
+              <div class="pill">DEMO AUTH · NO OTP</div>
+              <p class="muted" style="margin-top:8px">Free MBP login. No SMS. Unlock via Pay or DEMO-UNLOCK.</p>
+            </div>
+            <div class="field"><label>Your name</label><input value="Demo Investor" readonly /></div>
+            <div class="field"><label>Phone</label><input value="9876500001" readonly /></div>
+            <button class="btn primary">Continue</button>
+            <button class="btn ghost">Continue as guest</button>
+            <p class="muted" style="margin-top:12px;font-size:11px">Suggestion only · Not SEBI advice</p>
+          `, 'Login');
+          try {
+            const r = await api('/api/login', { method: 'POST', json: { name: 'Demo Investor', phone: '9876500001' } });
+            userName = r.name || userName;
+            $('livePill').textContent = 'LOGGED IN';
+          } catch (e) {
+            $('livePill').textContent = 'API OFF';
+            $('screenBody').innerHTML += `<div class="issue danger">API error: ${e.message}. Start ./run.sh</div>`;
+          }
+        },
+      },
+      {
+        id: 'home',
+        tab: 'Home',
+        title: 'nxance',
+        sub: 'Screen 2 / 8 · Home',
+        coachTitle: '2 · Home hub',
+        say: 'Home is the <b>map of the product</b>. Sample demo first for investors; real path is Upload or Health with own holdings.',
+        steps: [
+          'Run labelled sample demo → jumps to Health teaser',
+          'Upload CAS/PDF/Excel/screenshot for real data',
+          'Pay / unlock for full report',
+          'Settings (from Home) → set API base URL on device',
+        ],
+        note: 'Emulator API: http://10.0.2.2:8000 · Real phone: http://<Mac-LAN-IP>:8000',
+        run: async () => {
+          screen('nxance', 'Screen 2 / 8 · Home', `
+            <div class="pill">INDIA · SUGGESTION ONLY</div>
+            <div class="hero" style="margin-top:10px">
+              <h2>Know if your money is actually working</h2>
+              <p class="muted">Diagnose MF, stocks & FDs with exact ₹ impact. Quant measures · ML scores · DL represents.</p>
+            </div>
+            <p class="accent" style="font-size:12px;font-weight:700;margin-bottom:8px">Hi, ${userName}${unlocked ? ' · Unlocked' : ''}</p>
+            <button class="btn primary">Run labelled sample demo</button>
+            <button class="btn ghost">Health Check — my holdings</button>
+            <button class="btn ghost">Upload CAS / PDF / Excel / screenshot</button>
+            <button class="btn ghost">Build a portfolio</button>
+            <button class="btn ghost">Unlock · dummy ₹99</button>
+          `, 'Home');
+        },
+      },
+      {
+        id: 'sample',
+        tab: 'Health',
+        title: 'Health',
+        sub: 'Screen 3 / 8 · Sample demo',
+        coachTitle: '3 · Sample Health Check',
+        say: 'Always show a <b>labelled sample</b> first. Never invent personal loss without holdings. Teaser shows score + top issue; full list after unlock.',
+        steps: [
+          'Tap Run labelled sample demo on Home',
+          'API: POST /api/demo/run',
+          'Read score, TER waste ₹/yr, overlap ₹/yr',
+          'Explain: sample is intentional Regular/overlap portfolio',
+        ],
+        note: 'If network fails, use canned APK offline story — never fake a user’s loss.',
+        run: async () => {
+          screen('Health', 'Screen 3 / 8 · Loading sample…', `<p class="muted">Running engines on sample portfolio…</p>`, 'Health');
+          try {
+            lastHealth = await api('/api/demo/run', { method: 'POST' });
+            const r = lastHealth;
+            const issues = (r.issues || []).slice(0, 2);
+            screen('Health', 'Screen 3 / 8 · Sample result', `
+              <div class="pill" style="background:rgba(245,185,66,0.15);color:var(--warn)">ILLUSTRATIVE SAMPLE — NOT YOUR PORTFOLIO</div>
+              <p style="font-weight:700;margin:10px 0 6px;font-size:14px">${(r.story && r.story.headline) || r.teaser_summary || 'Sample ready'}</p>
+              <div class="kpis">
+                <div class="kpi"><div class="l">SCORE</div><div class="v accent">${r.score ?? '—'}</div></div>
+                <div class="kpi"><div class="l">GRADE</div><div class="v">${r.grade ?? '—'}</div></div>
+                <div class="kpi"><div class="l">TER WASTE</div><div class="v danger">₹${fmt(r.ter_waste_annual_rs)}/yr</div></div>
+                <div class="kpi"><div class="l">OVERLAP</div><div class="v danger">₹${fmt(r.overlap_waste_annual_rs)}/yr</div></div>
+              </div>
+              ${issues.map((iss) => `
+                <div class="issue">
+                  <strong>${iss.title || 'Issue'}</strong>
+                  <div class="muted" style="margin-top:4px">${iss.description || iss.fix || ''}</div>
+                  ${iss.annual_cost_rs ? `<div class="danger" style="margin-top:4px;font-weight:700">~₹${fmt(iss.annual_cost_rs)}/yr</div>` : ''}
+                </div>
+              `).join('') || '<p class="muted">Unlock for full issue list.</p>'}
+              <button class="btn primary">Unlock full report</button>
+            `, 'Health');
+          } catch (e) {
+            screen('Health', 'Screen 3 / 8 · Error', `<div class="issue danger">${e.message}</div>`, 'Health');
+          }
+        },
+      },
+      {
+        id: 'health_manual',
+        tab: 'Health',
+        title: 'Health',
+        sub: 'Screen 4 / 8 · Own holdings',
+        coachTitle: '4 · Health with user holdings',
+        say: 'Real path: user enters holdings <b>or</b> arrives from Upload. Goal fields feed required return / Monte Carlo — not chat math.',
+        steps: [
+          'Add rows: name, current value, invested, plan Direct/Regular',
+          'Set goal, years, SIP, risk',
+          'Tap Analyse → POST /api/health-check',
+          'No holdings → hard error (by design)',
+        ],
+        note: 'LLM never computes XIRR/TER. Number Guard blocks invented ₹ in chat.',
+        run: async () => {
+          screen('Health', 'Screen 4 / 8 · Manual entry', `
+            <div class="card">
+              <strong style="font-size:13px">Holding 1</strong>
+              <div class="field" style="margin-top:8px"><label>Name</label><input value="Axis Bluechip Regular" readonly /></div>
+              <div class="field"><label>Current ₹</label><input value="185000" readonly /></div>
+              <div class="field"><label>Invested ₹</label><input value="120000" readonly /></div>
+              <div class="pill">plan: regular</div> <div class="pill">mutual_fund</div>
+            </div>
+            <div class="card">
+              <strong style="font-size:13px">Goal questionnaire</strong>
+              <div class="muted" style="margin-top:6px">Wealth · target ₹50L · 10y · SIP ₹10k · moderate</div>
+            </div>
+            <button class="btn primary">Analyse portfolio</button>
+            <button class="btn ghost">Load sample rows</button>
+          `, 'Health');
+        },
+      },
+      {
+        id: 'upload',
+        tab: 'Upload',
+        title: 'Upload',
+        sub: 'Screen 5 / 8 · Documents',
+        coachTitle: '5 · Upload CAS / files',
+        say: 'Preferred real-user path. <b>One endpoint</b> eats PDF, Excel, CSV, screenshot. Then Run Health Check on parsed lots.',
+        steps: [
+          'Choose file → POST /api/ingest/document',
+          'Review count + holdings list',
+          'Run Health Check on these',
+          'Legacy .xls → save as .xlsx first',
+        ],
+        note: 'OCR needs system Tesseract. PDF uses pdfminer. All ₹0 local.',
+        run: async () => {
+          screen('Upload', 'Screen 5 / 8 · Parsing…', `<p class="muted">Uploading sample_portfolio.csv…</p>`, 'Upload');
+          try {
+            const blob = await fetch(API + '/sample_portfolio.csv').then((r) => r.blob());
+            const fd = new FormData();
+            fd.append('file', new File([blob], 'sample_portfolio.csv', { type: 'text/csv' }));
+            const headers = token ? { Authorization: 'Bearer ' + token } : {};
+            const res = await fetch(API + '/api/ingest/document', { method: 'POST', headers, body: fd });
+            lastUpload = await res.json();
+            if (!res.ok) throw new Error(lastUpload.detail || 'upload failed');
+            const holds = lastUpload.holdings || [];
+            screen('Upload', 'Screen 5 / 8 · Parsed', `
+              <div class="card">
+                <div class="pill">CAS · PDF · XLSX · CSV · PNG</div>
+                <p class="muted" style="margin-top:8px">Drop a portfolio document. Free local parse.</p>
+              </div>
+              <div class="kpis">
+                <div class="kpi"><div class="l">KIND</div><div class="v accent">${lastUpload.kind || 'csv'}</div></div>
+                <div class="kpi"><div class="l">HOLDINGS</div><div class="v">${lastUpload.count ?? holds.length}</div></div>
+              </div>
+              ${holds.slice(0, 5).map((h) => `
+                <div class="holding"><span>${h.name}</span><strong class="accent">₹${fmt(h.current_value)}</strong></div>
+              `).join('')}
+              <button class="btn primary">Run Health Check on these</button>
+              <button class="btn ghost">Choose another file</button>
+            `, 'Upload');
+          } catch (e) {
+            screen('Upload', 'Screen 5 / 8 · Formats', `
+              <div class="card">
+                <div class="pill">.pdf .xlsx .csv .png .jpg .json .txt</div>
+                <p class="muted" style="margin-top:8px">Live parse failed: ${e.message}</p>
+              </div>
+              <button class="btn primary">Choose file</button>
+            `, 'Upload');
+          }
+        },
+      },
+      {
+        id: 'pay',
+        tab: 'Pay',
+        title: 'Payments',
+        sub: 'Screen 6 / 8 · Unlock',
+        coachTitle: '6 · Dummy payments / unlock',
+        say: 'Paywall is <b>demo-grade</b>: dummy UPI confirm or code. Full issues + L2/L3 detail after unlock. Re-run Health.',
+        steps: [
+          'Start dummy ₹99 UPI → create order',
+          'I paid — confirm (dummy) → unlocked',
+          'Or paste DEMO-UNLOCK / NXANCE-TEST',
+          'Tell team: no real Razorpay yet',
+        ],
+        note: 'Never demo real UPI. Codes are for internal + pilot only.',
+        run: async () => {
+          screen('Payments', 'Screen 6 / 8 · Creating…', `<p class="muted">Creating dummy order…</p>`, 'Pay');
+          try {
+            const order = await api('/api/payments/create', { method: 'POST', json: { amount_inr: 99, method: 'dummy_upi' } });
+            const conf = await api('/api/payments/confirm', { method: 'POST', json: { payment_id: order.payment_id } });
+            unlocked = true;
+            screen('Payments', 'Screen 6 / 8 · Unlocked', `
+              <div class="hero">
+                <div class="pill ok" style="color:var(--ok)">UNLOCKED</div>
+                <h2 style="margin-top:8px">Full intelligence · ₹99</h2>
+                <p class="muted">Dummy UPI only in this build — no real charge.</p>
+              </div>
+              <div class="card">
+                <div class="muted">Order ${order.payment_id}</div>
+                <div style="margin-top:6px">Status: <strong class="ok">${conf.status}</strong></div>
+                <div>Code: <strong>${conf.unlock_code || 'NXANCE-PAID'}</strong></div>
+                <div class="muted" style="margin-top:8px;font-size:11px">${order.qr_note || ''}</div>
+              </div>
+              <div class="field"><label>Or unlock code</label><input value="DEMO-UNLOCK" readonly /></div>
+              <button class="btn primary">Apply code</button>
+            `, 'Pay');
+          } catch (e) {
+            screen('Payments', 'Screen 6 / 8 · Codes', `
+              <div class="card"><p class="muted">${e.message}</p></div>
+              <div class="field"><label>Unlock code</label><input value="DEMO-UNLOCK" readonly /></div>
+              <button class="btn primary">Apply code</button>
+            `, 'Pay');
+          }
+        },
+      },
+      {
+        id: 'models',
+        tab: 'Home',
+        title: 'Settings',
+        sub: 'Screen 7 / 8 · API + models',
+        coachTitle: '7 · Settings & model status',
+        say: 'On device: <b>set API base URL</b> first. Then Save & test. Training status proves L2/L3/OCR are loaded.',
+        steps: [
+          'Emulator: http://10.0.2.2:8000',
+          'Phone: http://192.168.x.x:8000 (same Wi‑Fi as Mac)',
+          'Save & test connection → health + training JSON',
+          'Sign out resets session',
+        ],
+        note: 'If APK cannot reach API, check Mac firewall + LAN IP.',
+        run: async () => {
+          try {
+            training = await api('/api/training/status');
+          } catch (e) {
+            training = { error: e.message };
+          }
+          const ml = training.model_bundle || {};
+          const dl = training.deep_models || {};
+          const ocr = training.ocr || {};
+          screen('Settings', 'Screen 7 / 8 · Connection', `
+            <div class="field"><label>API base URL</label><input value="${API}" readonly /></div>
+            <button class="btn primary">Save & test connection</button>
+            <div class="card" style="margin-top:12px">
+              <strong style="font-size:12px">Session</strong>
+              <div class="muted" style="margin-top:6px">User: ${userName}<br/>Unlocked: ${unlocked}<br/>Token: ${token ? 'set' : 'none'}</div>
+            </div>
+            <div class="card">
+              <strong style="font-size:12px">Models</strong>
+              <div class="muted" style="margin-top:6px">
+                L2: ${ml.version || '—'} · feats ${ml.n_features || '—'}<br/>
+                L3: ${dl.embedding_version || '—'} · ${dl.sequence_version || '—'}<br/>
+                OCR: ${ocr.engine || '—'} · ready ${ocr.ready}
+              </div>
+              ${(ml.models || []).slice(0, 4).map((m) => `<span class="pill">${m}</span>`).join('')}
+            </div>
+            <button class="btn ghost">Sign out</button>
+          `, 'Home');
+        },
+      },
+      {
+        id: 'close',
+        tab: 'Close',
+        title: 'Done',
+        sub: 'Screen 8 / 8 · Team recap',
+        coachTitle: '8 · Recap for internal discussion',
+        say: 'Flow to remember: <b>Login → sample or Upload → Health → Pay unlock → re-run</b>. Principle: engines compute; chat only explains.',
+        steps: [
+          'Never invent personal loss without data',
+          'Sample is tagged; user data is not',
+          'Unlock reveals full ranked fixes',
+          'APK + web portal share navy system',
+          'Cost stack remains ₹0 for MBP',
+        ],
+        note: 'Q&A: Razorpay, OTP, CAS PDF quality, SEBI disclaimer — all post-pilot.',
+        run: async () => {
+          screen('Done', 'Screen 8 / 8 · Recap', `
+            <div class="hero" style="text-align:center">
+              <div class="pill">TEAM WALKTHROUGH COMPLETE</div>
+              <h2 style="margin-top:12px">nxance</h2>
+              <p class="muted" style="margin-top:8px">Login → Sample/Upload → Health → Unlock → Re-run</p>
+            </div>
+            <div class="card">
+              <div class="holding"><span>1. Login / guest</span><strong class="ok">✓</strong></div>
+              <div class="holding"><span>2. Home hub</span><strong class="ok">✓</strong></div>
+              <div class="holding"><span>3. Sample health</span><strong class="ok">✓</strong></div>
+              <div class="holding"><span>4. Own holdings path</span><strong class="ok">✓</strong></div>
+              <div class="holding"><span>5. Upload documents</span><strong class="ok">✓</strong></div>
+              <div class="holding"><span>6. Dummy pay / codes</span><strong class="ok">✓</strong></div>
+              <div class="holding"><span>7. Settings + models</span><strong class="ok">✓</strong></div>
+            </div>
+            <p class="muted" style="font-size:11px;margin-top:10px">Suggestion only · Not SEBI investment advice · Ohshn Intelligence</p>
+          `, 'Close');
+        },
+      },
+    ];
+
+    (async () => {
+      try {
+        await api('/api/health');
+        $('livePill').textContent = 'LIVE API';
+      } catch {
+        $('livePill').textContent = 'DEMO MODE';
+      }
+
+      const params = new URLSearchParams(location.search);
+      const only = params.get('step'); // 1-based or id
+      const auto = params.get('auto') !== '0';
+
+      async function playOne(i) {
+        const s = scenes[i];
+        $('bar').style.width = (((i + 1) / scenes.length) * 100).toFixed(1) + '%';
+        $('stepMeta').textContent = `${i + 1}/${scenes.length} · ${s.coachTitle}`;
+        coach(s.coachTitle, s.say, s.steps, s.note);
+        document.body.dataset.scene = s.id;
+        document.body.dataset.step = String(i + 1);
+        try {
+          await s.run();
+        } catch (e) {
+          $('screenBody').innerHTML = `<div class="issue danger">${e.message}</div>`;
+        }
+      }
+
+      if (only) {
+        let idx = scenes.findIndex((s) => s.id === only);
+        if (idx < 0) idx = Math.max(0, Math.min(scenes.length - 1, parseInt(only, 10) - 1));
+        if (isNaN(idx) || idx < 0) idx = 0;
+        await playOne(idx);
+        document.body.dataset.demoDone = '1';
+        return;
+      }
+
+      if (!auto) {
+        await playOne(0);
+        return;
+      }
+
+      for (let i = 0; i < scenes.length; i++) {
+        await playOne(i);
+        await sleep(5500);
+      }
+      document.body.dataset.demoDone = '1';
+      $('stepMeta').textContent = 'Walkthrough complete — ready for discussion';
+    })();
+  </script>
+</body>
+</html>

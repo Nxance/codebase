@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Nxance — Complete Product & Technical Document</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap');
+:root{
+  --bg:#F8F9FC;--paper:#fff;--rule:#E5E7EB;--rule2:#D1D5DB;
+  --ink:#0D1117;--ink2:#374151;--ink3:#6B7280;--ink4:#9CA3AF;
+  --teal:#0A7C6E;--teal2:#0E9E8C;--teallt:#ECFDF5;--tealm:#D1FAE5;--tealr:rgba(10,124,110,.2);
+  --amb:#92400E;--amberlt:#FFFBEB;--amberb:#FDE68A;
+  --blue:#1D4ED8;--bluelt:#EFF6FF;--bluer:rgba(29,78,216,.2);
+  --red:#991B1B;--redlt:#FEF2F2;--redr:rgba(153,27,27,.2);
+  --purp:#6D28D9;--purplt:#F5F3FF;
+  --grn:#15803D;--grnlt:#F0FDF4;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);font-size:13.5px;line-height:1.75}
+@media print{
+  body{font-size:11px;background:#fff}
+  .no-print,.nav,.toc{display:none!important}
+  .section{page-break-before:always}
+  .section:first-of-type{page-break-before:auto}
+}
+
+/* NAV */
+.nav{background:#0D1117;color:#fff;padding:0 24px;height:48px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.nav-brand{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:#00C9A7}
+.nav-title{font-size:11px;color:#4B5563}
+.nbtn{background:#00C9A7;color:#000;border:none;padding:5px 14px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit;border-radius:3px}
+
+/* COVER */
+.cover{background:linear-gradient(135deg,#0D1117 0%,#064E3B 100%);color:#fff;padding:48px 60px;border-bottom:none}
+.cover-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:#00C9A7;margin-bottom:12px;opacity:.8}
+.cover-h{font-family:'DM Serif Display',serif;font-size:42px;line-height:1.1;letter-spacing:-.02em;margin-bottom:8px}
+.cover-sub{font-size:15px;color:rgba(255,255,255,.7);max-width:600px;line-height:1.65;margin-bottom:28px}
+.cover-meta{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.cm{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:12px 16px}
+.cm-n{font-family:'DM Serif Display',serif;font-size:22px;color:#00C9A7;line-height:1;margin-bottom:3px}
+.cm-l{font-size:10px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em}
+
+/* TOC */
+.toc{background:var(--paper);border-right:1px solid var(--rule);padding:24px;position:fixed;top:48px;left:0;width:240px;height:calc(100vh - 48px);overflow-y:auto;z-index:50}
+.toc h3{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--ink3);margin-bottom:12px}
+.toc a{display:block;font-size:11.5px;color:var(--ink3);text-decoration:none;padding:4px 8px;border-radius:4px;margin-bottom:1px;border-left:2px solid transparent}
+.toc a:hover{color:var(--teal);background:var(--teallt);border-color:var(--teal)}
+.toc-section{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--teal);margin:12px 0 4px;padding:0 8px}
+
+/* MAIN */
+.main{margin-left:240px}
+
+/* SECTION */
+.section{background:var(--paper);border-bottom:1px solid var(--rule);padding:40px 48px}
+.section:nth-child(even){background:#FAFBFC}
+.sec-eyebrow{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--teal);margin-bottom:8px}
+.sec-h{font-family:'DM Serif Display',serif;font-size:28px;letter-spacing:-.015em;color:var(--ink);margin-bottom:6px}
+.sec-sub{font-size:13.5px;color:var(--ink3);max-width:680px;margin-bottom:22px;line-height:1.65}
+
+/* TYPOGRAPHY */
+h3{font-size:16px;font-weight:700;color:var(--ink);margin:20px 0 8px}
+h4{font-size:13.5px;font-weight:700;color:var(--ink);margin:16px 0 6px}
+p{color:var(--ink2);margin-bottom:10px;line-height:1.72}
+strong{color:var(--ink);font-weight:600}
+code{font-family:'JetBrains Mono',monospace;font-size:11.5px;background:#F1F5F9;border:1px solid var(--rule2);padding:1px 5px;border-radius:3px;color:var(--ink)}
+pre{background:#0D1117;color:#E8EEFF;padding:16px 18px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.65;overflow-x:auto;margin:12px 0}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:12px 0}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0}
+
+/* CARDS */
+.card{background:var(--paper);border:1px solid var(--rule2);border-radius:8px;padding:14px 16px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.ct::before{background:linear-gradient(90deg,var(--teal),var(--teal2))}
+.ca::before{background:linear-gradient(90deg,#F59E0B,#FBBF24)}
+.cb::before{background:linear-gradient(90deg,#2563EB,#60A5FA)}
+.cr::before{background:linear-gradient(90deg,#DC2626,#F87171)}
+.cp::before{background:linear-gradient(90deg,#7C3AED,#A78BFA)}
+.card-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--ink3);margin-bottom:5px}
+.card-t{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.card-b{font-size:12px;color:var(--ink2);line-height:1.68}
+.card-b strong{color:var(--ink)}
+.card-n{font-family:'DM Serif Display',serif;font-size:30px;color:var(--teal);line-height:1;margin-bottom:3px}
+
+/* ALERT BOXES */
+.al{border-radius:6px;padding:12px 16px;margin:10px 0;display:flex;gap:10px;font-size:12.5px;line-height:1.65}
+.al-i{flex-shrink:0;font-size:14px}
+.al-t{background:var(--teallt);border:1px solid var(--tealr)} .al-t .al-i,.al-t strong{color:var(--teal)}
+.al-a{background:var(--amberlt);border:1px solid var(--amberb)} .al-a .al-i,.al-a strong{color:var(--amb)}
+.al-b{background:var(--bluelt);border:1px solid var(--bluer)} .al-b .al-i,.al-b strong{color:var(--blue)}
+.al-r{background:var(--redlt);border:1px solid var(--redr)} .al-r .al-i,.al-r strong{color:var(--red)}
+.al-body{color:var(--ink2)} .al-body strong{font-weight:600}
+
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;font-size:12.5px;margin:12px 0}
+.tbl th{background:var(--ink);color:#fff;padding:8px 12px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+.tbl td{padding:8px 12px;border-bottom:1px solid var(--rule);color:var(--ink2);vertical-align:top}
+.tbl td:first-child{font-weight:600;color:var(--ink)}
+.tbl tr:nth-child(even) td{background:#F9FAFB}
+.tbl .ok{color:var(--grn);font-weight:700}
+.tbl .no{color:var(--ink4)}
+
+/* ENGINE STEP */
+.engine-step{display:grid;grid-template-columns:44px 1fr;gap:14px;margin-bottom:14px;align-items:start}
+.es-num{width:44px;height:44px;border-radius:50%;background:var(--teal);color:#fff;font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.es-t{font-size:13.5px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.es-b{font-size:12px;color:var(--ink2);line-height:1.68}
+
+/* PHASE BAND */
+.phase{border-radius:6px;padding:12px 16px;margin-bottom:8px;border:1px solid;display:grid;grid-template-columns:120px 1fr;gap:14px}
+.ph1{background:var(--teallt);border-color:var(--tealr)}
+.ph2{background:var(--amberlt);border-color:var(--amberb)}
+.ph3{background:var(--bluelt);border-color:var(--bluer)}
+.ph4{background:var(--purplt);border-color:rgba(109,40,217,.2)}
+.ph-tag{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin-bottom:4px}
+.ph1 .ph-tag{color:var(--teal)}.ph2 .ph-tag{color:var(--amb)}.ph3 .ph-tag{color:var(--blue)}.ph4 .ph-tag{color:var(--purp)}
+.ph-yr{font-size:12px;font-weight:700;color:var(--ink)}
+.ph-t{font-size:13.5px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.ph-b{font-size:12px;color:var(--ink2);line-height:1.65}
+
+/* DIVIDER */
+.div-line{border:none;border-top:1px solid var(--rule);margin:24px 0}
+
+/* SCREEN LIST */
+.screen-item{background:#F9FAFB;border:1px solid var(--rule);border-radius:6px;padding:10px 14px;margin-bottom:6px;display:flex;gap:12px;align-items:start}
+.si-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.si-name{font-size:12.5px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.si-desc{font-size:11.5px;color:var(--ink3);line-height:1.5}
+
+/* FLOW DIAGRAM */
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:0;margin:14px 0}
+.flow-box{background:var(--teallt);border:1.5px solid var(--tealr);border-radius:6px;padding:8px 12px;font-size:11.5px;font-weight:600;color:var(--teal);white-space:nowrap}
+.flow-arr{color:var(--ink4);font-size:18px;margin:0 6px}
+.flow-box.alt{background:var(--bluelt);border-color:var(--bluer);color:var(--blue)}
+.flow-box.warn{background:var(--amberlt);border-color:var(--amberb);color:var(--amb)}
+
+/* SECTION NUMBER */
+.sec-num{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;background:var(--ink);color:#fff;padding:2px 8px;border-radius:3px;margin-right:8px}
+
+@media(max-width:900px){
+  .toc{display:none}
+  .main{margin-left:0}
+  .cover{padding:28px 20px}
+  .section{padding:24px 20px}
+  .g2,.g3,.g4{grid-template-columns:1fr}
+  .phase{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav no-print">
+  <div class="nav-brand">nxance</div>
+  <div class="nav-title">Ohshn Intelligence · Master Product & Technical Document</div>
+  <button class="nbtn" onclick="window.print()">⎙ Print / PDF</button>
+</nav>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-eyebrow">Ohshn Intelligence · Brand: Nxance · Master Document · June 2026</div>
+  <div class="cover-h">Nxance — Complete Product,<br>Technical & Build Document</div>
+  <div class="cover-sub">Every feature, every engine, every screen, every technology, every workflow, both build paths (real coding + tools), timeline, and team. Nothing missing.</div>
+  <div class="cover-meta">
+    <div class="cm"><div class="cm-n">3</div><div class="cm-l">Core Products</div></div>
+    <div class="cm"><div class="cm-n">28+</div><div class="cm-l">App Screens</div></div>
+    <div class="cm"><div class="cm-n">14</div><div class="cm-l">Analysis Parameters</div></div>
+    <div class="cm"><div class="cm-n">42+</div><div class="cm-l">Technologies</div></div>
+  </div>
+</div>
+
+<!-- TOC -->
+<nav class="toc no-print">
+  <h3>Contents</h3>
+  <div class="toc-section">Overview</div>
+  <a href="#s1">1. What is Nxance</a>
+  <a href="#s2">2. All App Screens</a>
+  <div class="toc-section">3 Core Products</div>
+  <a href="#s3">3. Portfolio Health Check</a>
+  <a href="#s4">4. Portfolio Construction</a>
+  <a href="#s5">5. NxanceLM AI</a>
+  <div class="toc-section">Technical</div>
+  <a href="#s6">6. System Architecture</a>
+  <a href="#s7">7. All Engines — How They Work</a>
+  <a href="#s8">8. Database Design</a>
+  <a href="#s9">9. Data Sources</a>
+  <a href="#s10">10. Security</a>
+  <div class="toc-section">Build</div>
+  <a href="#s11">11. Path A — Real Coding</a>
+  <a href="#s12">12. Path B — With Tools</a>
+  <a href="#s13">13. Team Required</a>
+  <a href="#s14">14. Timeline</a>
+  <div class="toc-section">Business</div>
+  <a href="#s15">15. Subscription Plans</a>
+  <a href="#s16">16. Execution (No Broker License)</a>
+  <a href="#s17">17. Licenses Required</a>
+</nav>
+
+<div class="main">
+
+<!-- ═══ SECTION 1: WHAT IS NXANCE ═══ -->
+<div class="section" id="s1">
+  <div class="sec-eyebrow">Section 01</div>
+  <div class="sec-h">What is Nxance</div>
+  <div class="sec-sub">One sentence: Nxance tells every Indian investor whether their portfolio is working for them — and exactly how to fix it if it isn't.</div>
+
+  <div class="g3">
+    <div class="card ct">
+      <div class="card-lbl">Product 1</div>
+      <div class="card-t">Portfolio Health Check</div>
+      <div class="card-b">Upload existing portfolio → 14-parameter AI analysis → 0–100 health score → top issues ranked by ₹ annual cost → specific fix for each. B2C primary. ₹99–499/month.</div>
+    </div>
+    <div class="card ca">
+      <div class="card-lbl">Product 2</div>
+      <div class="card-t">Portfolio Construction</div>
+      <div class="card-b">5-question profiling → mathematical optimization (Black-Litterman MVO) → 7-layer instrument analysis → backtesting → user approval → execution. ₹299/month.</div>
+    </div>
+    <div class="card cb">
+      <div class="card-lbl">Product 3 — Linked to Both</div>
+      <div class="card-t">NxanceLM — Own AI</div>
+      <div class="card-b">Proprietary AI model. Not ChatGPT. Not a wrapper. Translates quant engine outputs to plain language in English + Hindi. Zero hallucination architecture. ₹0 inference cost.</div>
+    </div>
+  </div>
+
+  <h3>What Makes Nxance Different — Not Earning Model, Product Difference</h3>
+  <div class="g2">
+    <div>
+      <h4>Groww / Zerodha / ET Money do:</h4>
+      <ul style="padding-left:16px;color:var(--ink2);font-size:12.5px;line-height:1.9">
+        <li>Show portfolio current value ✓</li>
+        <li>Show returns (simple %) ✓</li>
+        <li>Execute transactions ✓</li>
+        <li>Tell you what is wrong ✗</li>
+        <li>Show TER waste in exact ₹ ✗</li>
+        <li>Detect fund overlap ✗</li>
+        <li>Goal alignment probability ✗</li>
+        <li>Cross-asset AI diagnosis ✗</li>
+        <li>Own AI model ✗</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Nxance does all of the above AND:</h4>
+      <ul style="padding-left:16px;color:var(--ink2);font-size:12.5px;line-height:1.9">
+        <li>14-parameter simultaneous diagnosis</li>
+        <li>XIRR vs 4 benchmarks (annualised)</li>
+        <li>Fund overlap — Jaccard similarity</li>
+        <li>TER waste in exact ₹/year</li>
+        <li>Monte Carlo goal probability</li>
+        <li>CVaR — worst case loss</li>
+        <li>Macro sensitivity analysis</li>
+        <li>Investment pattern analysis</li>
+        <li>NxanceLM plain-language explanations</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="al al-t">
+    <div class="al-i">⚡</div>
+    <div class="al-body"><strong>Core structural advantage:</strong> Competitors earn from transaction commissions — they are financially incentivised to NOT tell users "your portfolio is wrong." This conflict is permanent. Nxance earns from subscriptions only — we can always be honest.</div>
+  </div>
+
+  <h3>All 14 Asset Classes Covered</h3>
+  <div class="g4">
+    <div class="card" style="padding:10px 12px;text-align:center"><div style="font-size:18px">📈</div><div style="font-size:11px;font-weight:700;margin-top:4px">Mutual Funds</div><div style="font-size:10px;color:var(--ink3)">All AMFI schemes</div></div>
+    <div class="card" style="padding:10px 12px;text-align:center"><div style="font-size:18px">📊</div><div style="font-size:11px;font-weight:700;margin-top:4px">Stocks</div><div style="font-size:10px;color:var(--ink3)">NSE + BSE</div></div>
+    <div class="card" style="padding:10px 12px;text-align:center"><div style="font-size:18px">🏦</div><div style="font-size:11px;font-weight:700;margin-top:4px">ETFs</div><div style="font-size:10px;color:var(--ink3)">All listed</div></div>
+    <div class="card" style="padding:10px 12px;text-align:center"><div style="font-size:18px">💰</div><div style="font-size:11px;font-weight:700;margin-top:4px">Fixed Deposits</div><div style="font-size:10px;color:var(--ink3)">Rate tracking</div></div>
+    <div class="card" style="padding:10px 12px;text-align:center"><div style="font-size:18px">📋</div><div style="font-size:11px;font-weight:700;margin-top:4px">Bonds</div><div style="font-size:10px;color:var(--ink3)">BSE Bond Platform</div></div>
+    <div class="card" style="padding:10px 12px;text-align:center"><div style="font-size:18px">🥇</div><div style="font-size:11px;font-weight:700;margin-top:4px">Gold</div><div style="font-size:10px;color:var(--ink3)">SGBs + ETF</div></div>
+    <div class="card" style="padding:10px 12px;text-align:center"><div style="font-size:18px">🏢</div><div style="font-size:11px;font-weight:700;margin-top:4px">REITs/InvITs</div><div style="font-size:10px;color:var(--ink3)">All listed</div></div>
+    <div class="card" style="padding:10px 12px;text-align:center"><div style="font-size:18px">₿</div><div style="font-size:11px;font-weight:700;margin-top:4px">Crypto</div><div style="font-size:10px;color:var(--ink3)">Advisory only</div></div>
+    <div class="card" style="padding:10px 12px;text-align:center"><div style="font-size:18px">🏠</div><div style="font-size:11px;font-weight:700;margin-top:4px">Real Estate</div><div style="font-size:10px;color:var(--ink3)">Valuation tracking</div></div>
+    <div class="card" style="padding:10px 12px;text-align:center"><div style="font-size:18px">🚀</div><div style="font-size:11px;font-weight:700;margin-top:4px">Startups</div><div style="font-size:10px;color:var(--ink3)">Manual tracking</div></div>
+    <div class="card" style="padding:10px 12px;text-align:center"><div style="font-size:18px">🌾</div><div style="font-size:11px;font-weight:700;margin-top:4px">Commodities</div><div style="font-size:10px;color:var(--ink3)">MCX</div></div>
+    <div class="card" style="padding:10px 12px;text-align:center"><div style="font-size:18px">💱</div><div style="font-size:11px;font-weight:700;margin-top:4px">Currency</div><div style="font-size:10px;color:var(--ink3)">USDINR + others</div></div>
+    <div class="card" style="padding:10px 12px;text-align:center"><div style="font-size:18px">🌍</div><div style="font-size:11px;font-weight:700;margin-top:4px">International MFs</div><div style="font-size:10px;color:var(--ink3)">Via LRS</div></div>
+    <div class="card" style="padding:10px 12px;text-align:center"><div style="font-size:18px">📦</div><div style="font-size:11px;font-weight:700;margin-top:4px">Others</div><div style="font-size:10px;color:var(--ink3)">P2P, unlisted</div></div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 2: ALL APP SCREENS ═══ -->
+<div class="section" id="s2">
+  <div class="sec-eyebrow">Section 02</div>
+  <div class="sec-h">All App Screens — Complete List</div>
+  <div class="sec-sub">28 screens across 6 sections. Every screen described with what it shows and what user can do.</div>
+
+  <div class="g2">
+    <div>
+      <h3>Auth Screens (3)</h3>
+      <div class="screen-item"><div class="si-icon">🔐</div><div><div class="si-name">S1 — Splash / Onboarding</div><div class="si-desc">Logo animation, 3 value prop screens, "Get Started" button</div></div></div>
+      <div class="screen-item"><div class="si-icon">📱</div><div><div class="si-name">S2 — Register</div><div class="si-desc">Name, email, phone, password. OTP verification via Supabase Auth.</div></div></div>
+      <div class="screen-item"><div class="si-icon">🔑</div><div><div class="si-name">S3 — Login</div><div class="si-desc">Email + password. Biometric login (Face ID / fingerprint) after first login.</div></div></div>
+
+      <h3>Main Dashboard (1)</h3>
+      <div class="screen-item"><div class="si-icon">🏠</div><div><div class="si-name">S4 — Home Dashboard</div><div class="si-desc">
+        Top: Overall portfolio P&amp;L (₹ invested vs current value, % return, XIRR)<br>
+        Middle: Health Score ring (0–100) with Grade A–F + "Analyse" button<br>
+        Below: "Build New Portfolio" button (prominent CTA)<br>
+        Below: Active portfolios summary cards (2–3 visible)<br>
+        Below: Market snapshot (Nifty, Sensex, Gold, USD/INR — live)<br>
+        Bottom: Today's NxanceLM insight (one line, tap to expand)
+      </div></div></div>
+
+      <h3>Portfolio Health Check (5)</h3>
+      <div class="screen-item"><div class="si-icon">📤</div><div><div class="si-name">S5 — Import Portfolio</div><div class="si-desc">4 tabs: CAMS/KFintech OAuth · CAS PDF Upload · Excel/CSV upload · Manual entry. Each tab has clear instructions.</div></div></div>
+      <div class="screen-item"><div class="si-icon">⏳</div><div><div class="si-name">S6 — Analysis Loading</div><div class="si-desc">Animated progress showing each of 14 parameters as they complete. "Running XIRR engine… Checking fund overlap… Running Monte Carlo…" Takes 3–8 seconds.</div></div></div>
+      <div class="screen-item"><div class="si-icon">📊</div><div><div class="si-name">S7 — Health Score Result</div><div class="si-desc">
+        Top: Big score number (0–100) + grade + color (green/yellow/red)<br>
+        Sub-scores: XIRR / Risk / Overlap / TER / Goals (5 mini scores)<br>
+        Portfolio stats: Total value, invested, return %, XIRR<br>
+        NxanceLM summary: 2–3 sentence AI summary in English or Hindi<br>
+        Issues list: Issue #1 fully visible + fix. Issues #2–5 blurred (paywall).<br>
+        "Save to My Portfolio" button
+      </div></div></div>
+      <div class="screen-item"><div class="si-icon">🔍</div><div><div class="si-name">S8 — Issue Detail</div><div class="si-desc">Tap any issue to expand. Full NxanceLM explanation. Exact ₹ cost. Step-by-step fix instructions. Links to action (e.g., MF Central for plan switch).</div></div></div>
+      <div class="screen-item"><div class="si-icon">📈</div><div><div class="si-name">S9 — Benchmark Comparison</div><div class="si-desc">Your XIRR vs Nifty 50, Nifty 500, Category Average, FD Rate. Chart showing performance over time. NxanceLM explains underperformance/outperformance.</div></div></div>
+
+      <h3>Portfolio Construction (6)</h3>
+      <div class="screen-item"><div class="si-icon">❓</div><div><div class="si-name">S10 — Goal Question 1</div><div class="si-desc">What is your goal? (Retirement / House / Education / Wealth / Emergency Fund). Large option cards with illustrations.</div></div></div>
+      <div class="screen-item"><div class="si-icon">📅</div><div><div class="si-name">S11 — Questions 2–5</div><div class="si-desc">Time horizon (slider) → Monthly investment (₹ input) → Risk comfort (3 options) → Existing savings (₹ input). One question per screen, progress bar at top.</div></div></div>
+      <div class="screen-item"><div class="si-icon">⚙️</div><div><div class="si-name">S12 — Building Loading</div><div class="si-desc">"Optimizing allocation… Running backtests… Stress testing…" 5–10 seconds. Shows which step is running.</div></div></div>
+      <div class="screen-item"><div class="si-icon">📋</div><div><div class="si-name">S13 — Allocation Recommendation</div><div class="si-desc">
+        Portfolio metrics: Expected return %, volatility %, Sharpe ratio<br>
+        Each instrument: name, allocation %, monthly SIP ₹, expected return, risk level<br>
+        Bar chart of allocation visually<br>
+        NxanceLM reason for each instrument<br>
+        "Review &amp; Approve" button — never auto-executes
+      </div></div></div>
+      <div class="screen-item"><div class="si-icon">✅</div><div><div class="si-name">S14 — Approval Screen</div><div class="si-desc">Each instrument shown one by one. "Approve / Modify / Skip" for each. User can change allocation %. Final summary before execution. Two-tap confirmation required.</div></div></div>
+      <div class="screen-item"><div class="si-icon">🎯</div><div><div class="si-name">S15 — Goal Tracker</div><div class="si-desc">Progress ring showing % toward goal. Monte Carlo probability (P10/P50/P90). Projected value at goal year. "Add more SIP" recommendation if behind.</div></div></div>
+    </div>
+
+    <div>
+      <h3>My Portfolio Section (4)</h3>
+      <div class="screen-item"><div class="si-icon">📁</div><div><div class="si-name">S16 — My Portfolios List</div><div class="si-desc">All saved portfolios. Each card: name, last health score, total value, last analysed date. "New Health Check" and "New Construction" floating buttons. Count depends on subscription plan.</div></div></div>
+      <div class="screen-item"><div class="si-icon">📊</div><div><div class="si-name">S17 — Portfolio Detail</div><div class="si-desc">All holdings list with current value, return %, XIRR per holding. Overall portfolio metrics. Health score history (trend chart). All executed constructions. "Re-analyse" button.</div></div></div>
+      <div class="screen-item"><div class="si-icon">📜</div><div><div class="si-name">S18 — Script / History</div><div class="si-desc">Every health check result saved. Every construction saved. User can see what changed, what was fixed, what is still pending. Full history timeline.</div></div></div>
+      <div class="screen-item"><div class="si-icon">🔔</div><div><div class="si-name">S19 — Alerts &amp; Notifications</div><div class="si-desc">Portfolio drift alerts. Rebalancing needed. SIP due reminders. Market events affecting holdings. NxanceLM daily insight. All tappable for detail.</div></div></div>
+
+      <h3>Market & News (3)</h3>
+      <div class="screen-item"><div class="si-icon">📰</div><div><div class="si-name">S20 — Economy &amp; News</div><div class="si-desc">Curated financial news filtered by what affects user's portfolio. NxanceLM summarises each news item in 2 lines. "Impact on your portfolio" tag. Sources: ET, Mint, Moneycontrol, RBI, SEBI.</div></div></div>
+      <div class="screen-item"><div class="si-icon">📡</div><div><div class="si-name">S21 — Live Market</div><div class="si-desc">Nifty 50, Nifty 500, Sensex, Bank Nifty, Gold, Silver, Crude, USD/INR — live prices. Top gainers/losers. Sector performance. Portfolio impact (₹ change in your holdings today).</div></div></div>
+      <div class="screen-item"><div class="si-icon">🔎</div><div><div class="si-name">S22 — Asset Intelligence Search</div><div class="si-desc">Type any fund/stock/ETF name → Get complete details. For MF: NAV history, holdings, TER, fund manager, category rank. For stock: price, P/E, P/B, ROE, earnings, promoter holding. NxanceLM explains everything in plain language.</div></div></div>
+
+      <h3>Learn & Community (2)</h3>
+      <div class="screen-item"><div class="si-icon">📚</div><div><div class="si-name">S23 — Learn</div><div class="si-desc">Personalized to user's portfolio. "Why is XIRR important?" shown if user has XIRR issue. Short articles, bite-size lessons, NxanceLM as tutor. CFA/NISM exam prep content.</div></div></div>
+      <div class="screen-item"><div class="si-icon">🎁</div><div><div class="si-name">S24 — Refer &amp; Earn</div><div class="si-desc">Unique referral link. Track referrals. Rewards: 1 month free Pro for each successful referral. Leaderboard. Share to WhatsApp/Instagram in 1 tap.</div></div></div>
+
+      <h3>Account Screens (4)</h3>
+      <div class="screen-item"><div class="si-icon">👤</div><div><div class="si-name">S25 — Profile</div><div class="si-desc">Name, email, phone, KYC status, SEBI risk category. Edit profile. Link broker accounts (Zerodha, Groww, Upstox). Linked CAMS/KFintech.</div></div></div>
+      <div class="screen-item"><div class="si-icon">💳</div><div><div class="si-name">S26 — Subscription</div><div class="si-desc">Current plan. Upgrade options. Feature comparison table. Razorpay payment. Subscription history. Cancel/renew button.</div></div></div>
+      <div class="screen-item"><div class="si-icon">👛</div><div><div class="si-name">S27 — Wallet &amp; Rewards</div><div class="si-desc">NxanceCoins balance. Earn history (referrals, milestones). Redeem for subscription discount. Cashback tracking.</div></div></div>
+      <div class="screen-item"><div class="si-icon">⚙️</div><div><div class="si-name">S28 — Settings</div><div class="si-desc">Language (English/Hindi). Notification preferences. Privacy settings. Data export (DPDPA right). Delete account. About. Help &amp; Support.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 3: PORTFOLIO HEALTH CHECK ENGINE ═══ -->
+<div class="section" id="s3">
+  <div class="sec-eyebrow">Section 03 — Product 1</div>
+  <div class="sec-h">Portfolio Health Check — How It Works</div>
+  <div class="sec-sub">Complete flow from user input to health score. Every parameter explained.</div>
+
+  <h3>Complete User Flow</h3>
+  <div class="flow">
+    <div class="flow-box">User uploads portfolio</div><div class="flow-arr">→</div>
+    <div class="flow-box">Parser extracts holdings</div><div class="flow-arr">→</div>
+    <div class="flow-box">14 engines run in parallel</div><div class="flow-arr">→</div>
+    <div class="flow-box">Scores aggregated</div><div class="flow-arr">→</div>
+    <div class="flow-box">Issues ranked by ₹ impact</div><div class="flow-arr">→</div>
+    <div class="flow-box">NxanceLM explains</div><div class="flow-arr">→</div>
+    <div class="flow-box">User sees score + fixes</div>
+  </div>
+
+  <h3>Step 1 — Portfolio Input Methods</h3>
+  <div class="g2">
+    <div>
+      <h4>Method A — CAMS / KFintech OAuth</h4>
+      <p>User logs in with CAMS/KFintech credentials. API returns all MF holdings with purchase date, NAV, units, invested amount. Fastest method. Covers all mutual fund holdings automatically.</p>
+      <h4>Method B — Account Aggregator (RBI AA Framework)</h4>
+      <p>User gives one-time consent. AA fetches bank accounts, demat holdings, MF portfolios from all linked financial institutions. Most comprehensive — covers all asset classes.</p>
+      <h4>Method C — CAS PDF Upload</h4>
+      <p>User uploads Consolidated Account Statement PDF (from CAMS/KFintech). <code>pdfplumber</code> library parses the PDF. Extracts fund names, units, NAV, invested amount, purchase dates.</p>
+    </div>
+    <div>
+      <h4>Method D — Excel / CSV Upload</h4>
+      <p>User uploads their own spreadsheet. Required columns: Fund Name, Current Value, Invested Amount, Plan Type. Optional: Purchase Date, TER. <code>pandas</code> parses and validates.</p>
+      <h4>Method E — Photo / Screenshot</h4>
+      <p>User takes photo of portfolio screen (any app). <code>Tesseract 5.0 OCR</code> + Vision AI extracts text. Numbers and fund names parsed automatically. NxanceLM validates extracted data before analysis.</p>
+      <h4>Method F — Manual Entry</h4>
+      <p>User types fund name + current value + invested amount. Works for any asset class. Most flexible — no login required with any other service.</p>
+    </div>
+  </div>
+
+  <h3>Step 2 — The 14 Analysis Parameters</h3>
+  <p>All 14 run simultaneously using Python <code>asyncio.gather()</code> — not one by one. Total analysis time: 3–8 seconds.</p>
+
+  <div class="engine-step">
+    <div class="es-num">1</div>
+    <div>
+      <div class="es-t">XIRR — Annualised Return (scipy.brentq)</div>
+      <div class="es-b"><strong>What:</strong> Exact annualised return accounting for timing and size of every investment.<br>
+      <strong>Why:</strong> Simple return % lies — 30% over 5 years = 5.4%/year. XIRR shows the real number.<br>
+      <strong>How:</strong> Newton-Raphson method using <code>scipy.optimize.brentq</code>. Same algorithm as Excel XIRR.<br>
+      <strong>Output:</strong> X% per year vs 4 benchmarks (Nifty 50, Nifty 500, Category Average, FD Rate).<br>
+      <strong>Weight in health score:</strong> 25%</div>
+    </div>
+  </div>
+
+  <div class="engine-step">
+    <div class="es-num">2</div>
+    <div>
+      <div class="es-t">Sharpe + Sortino Ratio</div>
+      <div class="es-b"><strong>What:</strong> How much return per unit of risk taken.<br>
+      <strong>Formula:</strong> Sharpe = (Portfolio Return − Risk Free Rate) / Annual Volatility. Risk free = SBI FD 6.8%/year.<br>
+      <strong>Sortino:</strong> Like Sharpe but only penalises downside volatility (more relevant for investors).<br>
+      <strong>Output:</strong> Ratio with interpretation (Below 0.5 = poor, 0.5–1.0 = ok, 1.0+ = good).</div>
+    </div>
+  </div>
+
+  <div class="engine-step">
+    <div class="es-num">3</div>
+    <div>
+      <div class="es-t">Jaccard Fund Overlap Detection</div>
+      <div class="es-b"><strong>What:</strong> How many common stocks exist between fund pairs. Identifies hidden duplication.<br>
+      <strong>Formula:</strong> Jaccard = |A ∩ B| / |A ∪ B| where A and B are top-30 holdings of two funds.<br>
+      <strong>Data source:</strong> AMFI holdings data (updated monthly) via mfapi.in.<br>
+      <strong>Output:</strong> Overlap % per fund pair + annual ₹ waste = overlap_ratio × portfolio_value × TER_difference.<br>
+      <strong>Example:</strong> Axis Bluechip + Mirae Large Cap = 62% overlap → ₹4,800/year waste on ₹5L portfolio.</div>
+    </div>
+  </div>
+
+  <div class="engine-step">
+    <div class="es-num">4</div>
+    <div>
+      <div class="es-t">HHI — Concentration Index</div>
+      <div class="es-b"><strong>What:</strong> Herfindahl-Hirschman Index measures portfolio concentration.<br>
+      <strong>Formula:</strong> HHI = Σ (weight_i)² × 10,000. HHI above 2,500 = highly concentrated.<br>
+      <strong>Output:</strong> Concentration score + specific holding causing concentration risk.</div>
+    </div>
+  </div>
+
+  <div class="engine-step">
+    <div class="es-num">5</div>
+    <div>
+      <div class="es-t">Jensen's Alpha + Beta</div>
+      <div class="es-b"><strong>Alpha:</strong> Excess return above what CAPM predicts given portfolio's beta.<br>
+      <strong>Beta:</strong> How much portfolio moves relative to Nifty 50. Beta = 1.0 = moves exactly with market.<br>
+      <strong>Interpretation:</strong> Positive alpha = fund manager adding value. High beta + low return = bad risk-reward.</div>
+    </div>
+  </div>
+
+  <div class="engine-step">
+    <div class="es-num">6</div>
+    <div>
+      <div class="es-t">CVaR — Conditional Value at Risk (3 Methods)</div>
+      <div class="es-b"><strong>What:</strong> In the worst 5% of scenarios, expected average loss. More conservative than VaR.<br>
+      <strong>Method 1:</strong> Historical — uses actual past return distribution.<br>
+      <strong>Method 2:</strong> Parametric — assumes normal distribution, faster computation.<br>
+      <strong>Method 3:</strong> Monte Carlo — 10,000 simulated paths, most accurate.<br>
+      <strong>Crisis simulation:</strong> Also tests portfolio against 2008 crash, 2020 COVID crash, 2013 taper tantrum scenarios.<br>
+      <strong>Weight in health score:</strong> 20%</div>
+    </div>
+  </div>
+
+  <div class="engine-step">
+    <div class="es-num">7</div>
+    <div>
+      <div class="es-t">Goal Gap — Monte Carlo Simulation (10,000 paths)</div>
+      <div class="es-b"><strong>What:</strong> Probability of achieving user's financial goal given current portfolio + SIP.<br>
+      <strong>How:</strong> <code>numpy.random.normal()</code> generates 10,000 possible market return sequences. Each path simulates portfolio value at goal year.<br>
+      <strong>Output:</strong> Success probability %. If below 60% — calculates extra monthly SIP needed for 75% probability.<br>
+      <strong>Example:</strong> "Retirement goal ₹50L by 2044 — only 38% probability. Add ₹3,200/month SIP to reach 75%."<br>
+      <strong>Weight in health score:</strong> 15%</div>
+    </div>
+  </div>
+
+  <div class="engine-step">
+    <div class="es-num">8</div>
+    <div>
+      <div class="es-t">Regular vs Direct TER Waste</div>
+      <div class="es-b"><strong>What:</strong> Exact rupees wasted per year in Regular plans vs Direct plans.<br>
+      <strong>Data:</strong> TER for every fund from AMFI (updated daily). Regular TER avg 1.2–1.7%, Direct avg 0.3–0.7%.<br>
+      <strong>Calculation:</strong> Waste = portfolio_value × (regular_TER − direct_TER) / 100.<br>
+      <strong>10-year compound effect:</strong> Also shows how much this compounds to over 10 years assuming 12% CAGR.<br>
+      <strong>Weight in health score:</strong> 20%</div>
+    </div>
+  </div>
+
+  <div class="engine-step">
+    <div class="es-num">9</div>
+    <div>
+      <div class="es-t">Macro Sensitivity Analysis</div>
+      <div class="es-b"><strong>What:</strong> How sensitive is the portfolio to 10 macroeconomic factors.<br>
+      <strong>Factors:</strong> RBI repo rate, CPI inflation, USD/INR, crude oil price, US Fed rate, gold price, India GDP growth, FII flows, global VIX, India VIX.<br>
+      <strong>Method:</strong> Correlation analysis between each holding's returns and each macro factor.<br>
+      <strong>Output:</strong> "Your portfolio is 78% sensitive to RBI rate changes — high interest rate risk."</div>
+    </div>
+  </div>
+
+  <div class="engine-step">
+    <div class="es-num">10</div>
+    <div>
+      <div class="es-t">News Sentiment Analysis (FinBERT)</div>
+      <div class="es-b"><strong>What:</strong> Sentiment of recent news about each holding in user's portfolio.<br>
+      <strong>Model:</strong> FinBERT — BERT fine-tuned on financial news. Classifies each news item as positive/negative/neutral.<br>
+      <strong>Data source:</strong> Financial news APIs (Moneycontrol, ET, Mint) — last 30 days.<br>
+      <strong>Output:</strong> Sentiment score per holding. Alert if negative sentiment spike on any significant holding.</div>
+    </div>
+  </div>
+
+  <div class="engine-step">
+    <div class="es-num">11</div>
+    <div>
+      <div class="es-t">Fraud + Governance Screening</div>
+      <div class="es-b"><strong>What:</strong> Red flags for fraud, governance issues, regulatory problems.<br>
+      <strong>Checks:</strong> SEBI enforcement database (active show cause notices, bans) · Promoter pledge % (high pledge = red flag) · Related party transactions · NSE/BSE surveillance list · Auditor resignation history · High debt companies with falling revenue.<br>
+      <strong>Output:</strong> Warning flags per holding with severity level.</div>
+    </div>
+  </div>
+
+  <div class="engine-step">
+    <div class="es-num">12</div>
+    <div>
+      <div class="es-t">Liquidity Assessment</div>
+      <div class="es-b"><strong>What:</strong> How quickly can each position be liquidated if needed.<br>
+      <strong>Factors:</strong> Average daily trading volume (stocks/ETFs) · Exit load period (MFs) · Lock-in periods (ELSS, SGBs) · Real estate (illiquid by nature).<br>
+      <strong>Output:</strong> Liquidity score + days to liquidate each position + total liquid vs illiquid % breakdown.</div>
+    </div>
+  </div>
+
+  <div class="engine-step">
+    <div class="es-num">13</div>
+    <div>
+      <div class="es-t">Investment Pattern Analysis</div>
+      <div class="es-b"><strong>What:</strong> How portfolio allocation aligns with user's stated financial goals and time horizon.<br>
+      <strong>What is checked:</strong> Asset allocation vs goal type (retirement = more equity, short-term = more debt) · Age-appropriate allocation (100-minus-age rule as baseline) · SIP consistency pattern · Portfolio drift from target.<br>
+      <strong>Output:</strong> "Your allocation is 85% equity but your goal is 4 years away — consider reducing equity for capital preservation."</div>
+    </div>
+  </div>
+
+  <div class="engine-step">
+    <div class="es-num">14</div>
+    <div>
+      <div class="es-t">Rebalancing Signal</div>
+      <div class="es-b"><strong>What:</strong> Has the portfolio drifted from its target allocation due to market movements.<br>
+      <strong>Threshold:</strong> If any asset class drifts more than 5% from target → rebalancing recommended.<br>
+      <strong>Output:</strong> Specific rebalancing actions — sell X amount of A, buy Y amount of B — with tax impact calculation.</div>
+    </div>
+  </div>
+
+  <h3>Step 3 — Health Score Calculation</h3>
+  <pre>health_score = (
+  xirr_score     × 0.25 +   # XIRR vs benchmarks
+  risk_score     × 0.20 +   # CVaR, Sharpe, drawdown
+  overlap_score  × 0.20 +   # Jaccard overlap
+  ter_score      × 0.20 +   # TER waste
+  goal_score     × 0.15     # Monte Carlo probability
+)
+# Final: 0-100 integer
+# Grade: A (86-100), B (71-85), C (56-70), D (41-55), F (0-40)</pre>
+
+  <h3>Step 4 — Issue Ranking + Paywall</h3>
+  <p>All identified issues are sorted by <strong>annual ₹ impact</strong> (highest cost = rank #1). Issue #1 is shown free. Issues #2–5 are blurred behind the ₹99/month paywall. The free issue shows enough value that conversion is obvious — most users lose ₹3,000–8,000/year on Issue #1 alone.</p>
+</div>
+
+<!-- ═══ SECTION 4: PORTFOLIO CONSTRUCTION ENGINE ═══ -->
+<div class="section" id="s4">
+  <div class="sec-eyebrow">Section 04 — Product 2</div>
+  <div class="sec-h">Portfolio Construction — How It Works</div>
+  <div class="sec-sub">From 5 user answers to a mathematically optimised, backtested, NxanceLM-explained portfolio. Every step explained.</div>
+
+  <h3>Step 1 — User Profiling (5 Questions)</h3>
+  <div class="g2">
+    <div>
+      <p><strong>Q1 — Goal:</strong> Retirement / Buy House / Child Education / Wealth Creation / Emergency Fund. This determines time horizon expectation and withdrawal pattern.</p>
+      <p><strong>Q2 — Time Horizon:</strong> Slider from 1–30 years. Most critical variable. Under 3 years = equity cap 30%. Over 7 years = full asset universe available.</p>
+      <p><strong>Q3 — Monthly Investment:</strong> Exact ₹ amount. Determines SIP per instrument. Also determines which asset classes are accessible (under ₹50K = MF only, over ₹5L = direct stocks, SGBs, REITs open).</p>
+    </div>
+    <div>
+      <p><strong>Q4 — Risk Comfort:</strong> "If your portfolio drops 20% tomorrow, what do you do?" Options: Sell everything (Low) / Slightly worried (Medium) / Buy more, it's a discount (High). This sets maximum equity allocation hard limit.</p>
+      <p><strong>Q5 — Existing Savings:</strong> Current savings for this specific goal. Starting value for Monte Carlo projection.</p>
+      <p>Output: <strong>User Profile Vector</strong> = {goal, years, monthly_₹, risk_level, existing_₹}. This vector drives all optimization constraints.</p>
+    </div>
+  </div>
+
+  <h3>Step 2 — Asset Universe Filtering</h3>
+  <p>Based on profile, eligible asset classes are determined:</p>
+  <table class="tbl">
+    <tr><th>Time Horizon</th><th>Risk Level</th><th>Max Equity</th><th>Available Assets</th></tr>
+    <tr><td>Under 3 years</td><td>Low</td><td>30%</td><td>FD, Debt MF, Short Duration, Gold</td></tr>
+    <tr><td>3–5 years</td><td>Medium</td><td>55%</td><td>Above + Large Cap MF, Index Fund, SGBs</td></tr>
+    <tr><td>5–7 years</td><td>Medium</td><td>70%</td><td>Above + Flexi Cap MF, International MF</td></tr>
+    <tr><td>7–10 years</td><td>High</td><td>85%</td><td>Above + Mid Cap MF, Stocks, ETFs</td></tr>
+    <tr><td>10+ years</td><td>High</td><td>95%</td><td>Full universe — all 14 asset classes</td></tr>
+  </table>
+
+  <h3>Step 3 — 7-Layer Instrument Analysis</h3>
+  <p>Every eligible instrument in the universe is scored across 7 layers before entering the optimizer:</p>
+  <div class="g2">
+    <div>
+      <p><strong>Layer 1 — Macro:</strong> How does this instrument behave in current macro environment? (RBI rate cycle, inflation, growth phase). Instruments that benefit from current macro get higher score.</p>
+      <p><strong>Layer 2 — Fundamental:</strong> For stocks/equity MFs — P/E ratio, P/B ratio, ROE, earnings growth, debt levels. Quality scoring using Piotroski F-Score.</p>
+      <p><strong>Layer 3 — Technical:</strong> RSI (momentum), MACD (trend), 50-day vs 200-day moving average, support/resistance levels. Relative strength vs benchmark.</p>
+      <p><strong>Layer 4 — Sentiment:</strong> FinBERT NLP on last 30 days of news + social media sentiment. Negative sentiment = lower score, positive = higher.</p>
+    </div>
+    <div>
+      <p><strong>Layer 5 — Quantitative:</strong> Factor model scores — quality, value, momentum, low volatility. Based on academic factor investing research (Fama-French).</p>
+      <p><strong>Layer 6 — Fraud Check:</strong> Same as health check engine. Any fraud flag = instrument removed from universe completely before optimization.</p>
+      <p><strong>Layer 7 — Position Sizing:</strong> Tax implications (LTCG/STCG), liquidity, minimum investment amount, user's tax bracket, SIP vs lump-sum suitability.</p>
+      <p>Output: Each instrument gets a composite score. Top-scoring instruments per category enter the optimizer.</p>
+    </div>
+  </div>
+
+  <h3>Step 4 — Mathematical Optimization (Black-Letterman MVO)</h3>
+  <pre>from pypfopt import EfficientFrontier, risk_models, expected_returns
+
+# Step 1: Get historical returns for eligible assets
+returns = expected_returns.mean_historical_return(prices_df)
+
+# Step 2: Ledoit-Wolf covariance (more stable than sample covariance)
+cov_matrix = risk_models.CovarianceShrinkage(prices_df).ledoit_wolf()
+
+# Step 3: Maximize Sharpe Ratio subject to constraints
+ef = EfficientFrontier(returns, cov_matrix)
+ef.add_constraint(lambda w: w >= 0.03)        # Min 3% per position
+ef.add_constraint(lambda w: w[equity_idx].sum() <= equity_cap)  # Equity cap
+ef.add_constraint(lambda w: w[debt_idx].sum() >= min_debt)      # Min debt
+
+weights = ef.max_sharpe(risk_free_rate=0.068)  # 6.8% SBI FD rate
+cleaned_weights = ef.clean_weights()</pre>
+
+  <h3>Step 5 — Backtesting + Validation (Before Showing User)</h3>
+  <p>Portfolio is <strong>not shown to user</strong> until it passes all validation checks:</p>
+  <div class="g2">
+    <div>
+      <p><strong>Walk-forward backtesting:</strong> Test portfolio on rolling historical periods (2015–2025). Must beat inflation (6%+) in 80%+ of rolling 3-year windows.</p>
+      <p><strong>Crisis stress test:</strong> Simulate 7 historical crises: 2008 global financial crisis, 2013 taper tantrum, 2016 demonetization, 2020 COVID crash, 2022 rate hike cycle, 2023 US banking crisis, 2024 FII selloff. Portfolio must not lose more than user's stated risk tolerance in any scenario.</p>
+    </div>
+    <div>
+      <p><strong>Monte Carlo projection:</strong> 10,000 simulations of possible market paths over time horizon. Shows P10 (pessimistic), P50 (expected), P90 (optimistic) outcomes at goal year.</p>
+      <p><strong>Sharpe ratio gate:</strong> Portfolio must have Sharpe ratio ≥ 0.5 (acceptable minimum). If optimizer cannot find a portfolio that meets all constraints, it relaxes the least important constraint and retries.</p>
+    </div>
+  </div>
+
+  <h3>Step 6 — User Approval Flow</h3>
+  <div class="al al-t">
+    <div class="al-i">✅</div>
+    <div class="al-body"><strong>Critical rule:</strong> Every action requires explicit user approval. Nxance recommends — user decides and authorises. No automated trades. No auto-execution. This is both a regulatory requirement (SEBI RIA) and our core product promise.</div>
+  </div>
+  <p>For each recommended instrument: NxanceLM explains WHY this instrument, WHAT it contributes to the portfolio, WHAT happens if market falls. User can modify allocation %, approve, or skip each instrument individually. Final confirmation screen requires two taps before any execution request is sent.</p>
+</div>
+
+<!-- ═══ SECTION 5: NXANCELM AI ═══ -->
+<div class="section" id="s5">
+  <div class="sec-eyebrow">Section 05 — Product 3</div>
+  <div class="sec-h">NxanceLM — Own AI Model</div>
+  <div class="sec-sub">India's own financial AI. Not a ChatGPT wrapper. Zero hallucination. Hindi + English. ₹0 inference cost.</div>
+
+  <h3>Zero Hallucination Architecture — Why It Matters</h3>
+  <div class="g2">
+    <div class="card cr">
+      <div class="card-lbl">What ChatGPT does (WRONG for finance)</div>
+      <div class="card-b">User: "Is my portfolio good?"<br>ChatGPT: "Your portfolio has a Sharpe ratio of 1.2 and XIRR of 14%..."<br><br><strong>Problem: ChatGPT invented these numbers. It has no idea what's in the portfolio. This is a hallucination — in finance, this is dangerous.</strong></div>
+    </div>
+    <div class="card ct">
+      <div class="card-lbl">What NxanceLM does (CORRECT)</div>
+      <div class="card-b">Quant engine calculates: XIRR = 11.2%, Sharpe = 0.67, TER waste = ₹4,800<br>→ Numbers injected into NxanceLM prompt<br>→ NxanceLM translates to language<br><br><strong>NxanceLM never generates financial numbers. It only explains numbers that the math engine already computed. Hallucination is architecturally impossible.</strong></div>
+    </div>
+  </div>
+
+  <h3>Smart Router — 3-Layer Response System</h3>
+  <pre>def get_nxancelm_response(query: str, portfolio_data: dict) -> str:
+    
+    # Layer 1: Template DB (40% of queries, 0ms response)
+    # Pre-built responses for common scenarios
+    # e.g., "regular plan issue" → standard explanation template
+    template = template_db.match(query)
+    if template: return template.fill(portfolio_data)
+    
+    # Layer 2: Redis Cache (30% of queries, <1ms)
+    # If same query asked before → return cached answer
+    cached = redis.get(query_hash)
+    if cached: return cached
+    
+    # Layer 3: NxanceLM Generate (30% of queries, 2-4 seconds)
+    # Novel queries that need actual model inference
+    return nxancelm_model.generate(
+        system_prompt=INDIA_FINANCE_SYSTEM_PROMPT,
+        user_query=query,
+        portfolio_context=portfolio_data  # Numbers from quant engine
+    )</pre>
+  <p><strong>Result:</strong> 70% of all responses are instant (0–1ms). Only 30% actually use GPU inference. This makes the system fast and cheap to run.</p>
+
+  <h3>NxanceLM Build Roadmap</h3>
+  <div class="phase ph1">
+    <div><div class="ph-tag">Phase 1</div><div class="ph-yr">Month 1–8 · ₹0</div></div>
+    <div><div class="ph-t">NxanceLM Mini (125M → 1.3B params)</div><div class="ph-b"><strong>Base model:</strong> TinyLlama 1.1B. <strong>Fine-tuning:</strong> LoRA (Low-Rank Adaptation) on India financial data — SEBI circulars, AMFI scheme data, RBI policy, NSE/BSE filings, India economic series (1991–present). <strong>Hardware:</strong> Google Colab T4 GPU — free. <strong>Training time:</strong> 3–4 days. <strong>Cost:</strong> ₹0. <strong>Capability:</strong> Explains health check outputs in English + Hindi. Covers all standard portfolio scenarios. Smart router handles 70% of queries without model inference.</div></div>
+  </div>
+  <div class="phase ph2">
+    <div><div class="ph-tag">Phase 2</div><div class="ph-yr">Year 2 · ₹5–30L</div></div>
+    <div><div class="ph-t">NxanceLM Base (1.3B → 7B params)</div><div class="ph-b"><strong>Base model:</strong> Mistral 7B or LLaMA 3.1 7B. <strong>Fine-tuning:</strong> Full SFT (Supervised Fine-Tuning) + RLHF (Reinforcement Learning from Human Feedback) on India financial corpus. <strong>Capabilities:</strong> Financial research queries, document analysis (upload DRHP → 2-page risk summary), stock comparison, tax planning, portfolio Q&amp;A in any context. <strong>Deployment:</strong> vLLM with PagedAttention for efficient inference. <strong>Available as:</strong> B2B API for institutions (₹25L–1Cr/year enterprise license).</div></div>
+  </div>
+  <div class="phase ph3">
+    <div><div class="ph-tag">Phase 3</div><div class="ph-yr">Year 3–5 · Post-funding</div></div>
+    <div><div class="ph-t">Finance-7B (Custom India Financial Model)</div><div class="ph-b"><strong>Training data:</strong> 500B+ tokens of India financial corpus — every SEBI circular ever issued, all AMFI scheme documents, complete NSE/BSE filings database, RBI Annual Reports 1935–present, all major financial news archives, academic finance papers (India-specific). <strong>Unique advantage:</strong> No global AI model — ChatGPT, Claude, Gemini — has this India financial data at this depth. Finance-7B is more India-finance-knowledgeable than any global model. <strong>Revenue:</strong> Enterprise license ₹25L–1Cr/year per institution.</div></div>
+  </div>
+
+  <h3>Training Data — What NxanceLM Learns From</h3>
+  <table class="tbl">
+    <tr><th>Data Source</th><th>Content</th><th>Size (approx)</th><th>Cost</th></tr>
+    <tr><td>SEBI Circulars Database</td><td>Every circular issued 1992–present</td><td>50,000+ documents</td><td>Free (public)</td></tr>
+    <tr><td>AMFI Scheme Information Documents</td><td>All MF scheme documents with fund strategy, holdings, risks</td><td>2,000+ SIDs</td><td>Free (public)</td></tr>
+    <tr><td>RBI Annual Reports + Monetary Policy</td><td>1935–present economic data + policy decisions</td><td>80 years data</td><td>Free (public)</td></tr>
+    <tr><td>NSE/BSE Company Filings</td><td>Annual reports, quarterly results, corporate announcements</td><td>10M+ filings</td><td>Free (public)</td></tr>
+    <tr><td>Financial News Archive</td><td>ET, Mint, Moneycontrol — India financial news</td><td>20M+ articles</td><td>Web scraping</td></tr>
+    <tr><td>Academic Finance Papers</td><td>India-specific investment research</td><td>10,000+ papers</td><td>Free (arXiv + SSRN)</td></tr>
+    <tr><td>Q&amp;A Pairs (synthetic)</td><td>Generated portfolio question-answer pairs for fine-tuning</td><td>500K+ pairs</td><td>Generate with GPT-4</td></tr>
+  </table>
+</div>
+
+<!-- ═══ SECTION 6: SYSTEM ARCHITECTURE ═══ -->
+<div class="section" id="s6">
+  <div class="sec-eyebrow">Section 06</div>
+  <div class="sec-h">System Architecture</div>
+  <div class="sec-sub">5 system actors, complete data flow, every technology used.</div>
+
+  <h3>5 System Actors</h3>
+  <div class="g2">
+    <div>
+      <div class="card ct" style="margin-bottom:10px">
+        <div class="card-lbl">Actor 1 — User</div>
+        <div class="card-t">All 10 Platform Types</div>
+        <div class="card-b">Mobile app (iOS + Android) via React Native. Web app via React + Next.js. Same UI/UX, same features across all platforms. Single codebase — one team maintains everything.</div>
+      </div>
+      <div class="card ca" style="margin-bottom:10px">
+        <div class="card-lbl">Actor 2 — Backend</div>
+        <div class="card-t">FastAPI + Python 3.11</div>
+        <div class="card-b">6 API routers + WebSocket server for real-time analysis streaming. Celery background workers for nightly re-analysis. All 14 quant engines. gRPC interface to NxanceLM. Hosted on Railway (PoC) → AWS EC2 (Scale).</div>
+      </div>
+      <div class="card cb" style="margin-bottom:10px">
+        <div class="card-lbl">Actor 3 — NxanceLM</div>
+        <div class="card-t">Own AI Model Server</div>
+        <div class="card-b">Separate Python service. PyTorch + HuggingFace Transformers. vLLM for efficient inference. Receives portfolio context + query from backend → returns explanation → backend sends to user. Phase 1: runs on CPU (slow). Phase 2: dedicated GPU server.</div>
+      </div>
+    </div>
+    <div>
+      <div class="card cp" style="margin-bottom:10px">
+        <div class="card-lbl">Actor 4 — Database</div>
+        <div class="card-t">Supabase (PostgreSQL 16)</div>
+        <div class="card-b">All user data, portfolios, health checks, constructions, subscriptions. Row Level Security (RLS) — each user can only see their own data. DPDPA 2023 compliant. AES-256-GCM encryption for sensitive financial data. Supabase also provides Auth (JWT + OTP) and real-time subscriptions.</div>
+      </div>
+      <div class="card ct" style="margin-bottom:10px">
+        <div class="card-lbl">Actor 5 — Admin</div>
+        <div class="card-t">Internal Dashboard</div>
+        <div class="card-b">Separate Next.js app. 5 RBAC roles: Super Admin, Engineer, Finance Ops, AI Reviewer, Compliance. Grafana dashboards (performance monitoring), error tracking, user analytics, revenue metrics, NxanceLM quality review.</div>
+      </div>
+      <div class="card ca">
+        <div class="card-lbl">External Services</div>
+        <div class="card-t">APIs + Third-Party</div>
+        <div class="card-b">mfapi.in (AMFI data), NSE India API (stock prices), Razorpay (payments), WATI (WhatsApp), Supabase Auth, Firebase Push Notifications, Cloudflare (CDN), CAMS/KFintech (portfolio import).</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Complete Data Flow — Health Check</h3>
+  <pre>User uploads portfolio (any method)
+    ↓
+Frontend (React Native) → API call → POST /api/portfolio/analyze
+    ↓
+Backend (FastAPI) receives request
+    ├── Validates Pydantic model (wrong data = 422 error before engines run)
+    ├── Checks subscription tier (how many analyses remaining)
+    └── Starts analysis pipeline
+    ↓
+asyncio.gather() runs ALL engines simultaneously:
+    ├── xirr_engine.py      → XIRR % + benchmark comparison
+    ├── overlap_engine.py   → Jaccard scores + annual ₹ waste
+    ├── risk_engine.py      → CVaR, Sharpe, Sortino, Max Drawdown
+    ├── ter_engine.py       → TER waste in ₹/year per fund
+    ├── goal_engine.py      → Monte Carlo 10,000 paths → success %
+    ├── macro_engine.py     → Macro sensitivity scores
+    ├── sentiment_engine.py → FinBERT news sentiment
+    ├── fraud_engine.py     → SEBI + governance red flags
+    ├── liquidity_engine.py → Days to liquidate each position
+    ├── concentration_engine.py → HHI score
+    ├── alpha_engine.py     → Jensen alpha + beta
+    ├── pattern_engine.py   → Investment pattern vs goals
+    ├── rebalance_engine.py → Drift detection
+    └── xirr_engine.py     → Already done (XIRR = parameter 1)
+    ↓
+health_engine.py aggregates all scores → 0-100 health score
+    ↓
+Issues ranked by annual ₹ impact
+    ↓
+NxanceLM service called → explain_health_report(data, language)
+    ├── Smart router checks template_db (Layer 1)
+    ├── Checks Redis cache (Layer 2)
+    └── Model inference if needed (Layer 3)
+    ↓
+Response assembled:
+    ├── score, grade, grade_label
+    ├── total_value, xirr, return %
+    ├── issues[] (rank, title, cost, fix, explanation)
+    │   ├── Issue #1: fully visible (free)
+    │   └── Issues #2-5: blurred (paywall ₹99)
+    └── summary_text (NxanceLM generated)
+    ↓
+WebSocket streams response to frontend in real-time
+    ↓
+Frontend renders results screen</pre>
+</div>
+
+<!-- ═══ SECTION 7: ALL ENGINES ═══ -->
+<div class="section" id="s7">
+  <div class="sec-eyebrow">Section 07</div>
+  <div class="sec-h">All Engines — Exact Technology Used</div>
+
+  <table class="tbl">
+    <tr><th>Engine</th><th>Python Library</th><th>Key Function/Method</th><th>Input</th><th>Output</th></tr>
+    <tr><td>XIRR Engine</td><td>scipy.optimize</td><td>brentq() — Newton-Raphson root finding</td><td>Cash flows + dates</td><td>Annualised return %</td></tr>
+    <tr><td>Overlap Engine</td><td>Python sets</td><td>len(A &amp; B) / len(A | B)</td><td>Top-30 holdings of each fund</td><td>Jaccard score + ₹ waste</td></tr>
+    <tr><td>Risk Engine</td><td>numpy</td><td>np.percentile(), np.std(), np.cov()</td><td>Monthly return series</td><td>CVaR, Sharpe, Sortino, Beta, Max DD</td></tr>
+    <tr><td>TER Engine</td><td>AMFI API + pandas</td><td>Custom calculation</td><td>Fund names + values</td><td>Annual ₹ waste per fund</td></tr>
+    <tr><td>Goal Engine</td><td>numpy</td><td>np.random.normal() × 10,000 paths</td><td>Target, years, SIP</td><td>Success probability + extra SIP needed</td></tr>
+    <tr><td>Macro Engine</td><td>pandas, statsmodels</td><td>Correlation analysis</td><td>Holdings + macro factor returns</td><td>Sensitivity scores</td></tr>
+    <tr><td>Sentiment Engine</td><td>transformers (FinBERT)</td><td>AutoModelForSequenceClassification</td><td>News text per holding</td><td>Positive/Negative/Neutral score</td></tr>
+    <tr><td>Fraud Engine</td><td>requests + pandas</td><td>SEBI database lookup + rule engine</td><td>ISIN codes</td><td>Red flag list per holding</td></tr>
+    <tr><td>Construction Optimizer</td><td>PyPortfolioOpt</td><td>EfficientFrontier.max_sharpe()</td><td>Returns, covariance, constraints</td><td>Optimal weights per asset</td></tr>
+    <tr><td>Backtest Engine</td><td>pandas + numpy</td><td>Walk-forward validation</td><td>Portfolio weights + history</td><td>Returns across scenarios</td></tr>
+    <tr><td>NxanceLM</td><td>transformers + PEFT</td><td>AutoModelForCausalLM + LoRA</td><td>Portfolio data + query</td><td>Plain language explanation</td></tr>
+    <tr><td>PDF Parser</td><td>pdfplumber</td><td>pdf.pages[i].extract_text()</td><td>CAS PDF</td><td>Holdings data dict</td></tr>
+    <tr><td>Excel Parser</td><td>pandas</td><td>pd.read_excel() / pd.read_csv()</td><td>Excel/CSV file</td><td>Holdings dataframe</td></tr>
+  </table>
+</div>
+
+<!-- ═══ SECTION 8: DATABASE ═══ -->
+<div class="section" id="s8">
+  <div class="sec-eyebrow">Section 08</div>
+  <div class="sec-h">Database Design</div>
+  <div class="sec-sub">Supabase (PostgreSQL 16) with Row Level Security. Every table described.</div>
+
+  <pre>-- USERS TABLE
+CREATE TABLE users (
+  id          UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  email       TEXT UNIQUE NOT NULL,
+  full_name   TEXT NOT NULL,
+  phone       TEXT,
+  created_at  TIMESTAMPTZ DEFAULT NOW(),
+  kyc_status  TEXT DEFAULT 'pending',  -- pending/verified/rejected
+  risk_category TEXT                    -- SEBI risk category post-KYC
+);
+
+-- SUBSCRIPTIONS TABLE
+CREATE TABLE subscriptions (
+  id          UUID PRIMARY KEY,
+  user_id     UUID REFERENCES users(id),
+  plan        TEXT NOT NULL,           -- free/pro/premium/construction/combined
+  price_rs    INTEGER NOT NULL,        -- ₹ per month
+  started_at  TIMESTAMPTZ,
+  expires_at  TIMESTAMPTZ,
+  razorpay_sub_id TEXT,
+  is_active   BOOLEAN DEFAULT TRUE
+);
+
+-- PORTFOLIOS TABLE (multiple portfolios per user)
+CREATE TABLE portfolios (
+  id          UUID PRIMARY KEY,
+  user_id     UUID REFERENCES users(id),
+  name        TEXT NOT NULL,           -- "My Main Portfolio", "Wife's MFs", etc.
+  created_at  TIMESTAMPTZ DEFAULT NOW(),
+  last_analysed_at TIMESTAMPTZ,
+  last_health_score INTEGER,           -- 0-100
+  last_grade  TEXT                     -- A/B/C/D/F
+);
+
+-- HOLDINGS TABLE (each holding in a portfolio)
+CREATE TABLE holdings (
+  id              UUID PRIMARY KEY,
+  portfolio_id    UUID REFERENCES portfolios(id),
+  name            TEXT NOT NULL,
+  asset_class     TEXT NOT NULL,       -- mutual_fund/stock/etf/fd/gold/etc
+  plan_type       TEXT,                -- direct/regular (MF only)
+  isin            TEXT,
+  current_value   NUMERIC NOT NULL,
+  invested_amount NUMERIC NOT NULL,
+  units           NUMERIC,
+  purchase_date   DATE,
+  expense_ratio   NUMERIC,
+  last_updated    TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- HEALTH CHECKS TABLE (history of all analyses)
+CREATE TABLE health_checks (
+  id              UUID PRIMARY KEY,
+  portfolio_id    UUID REFERENCES portfolios(id),
+  user_id         UUID REFERENCES users(id),
+  analysed_at     TIMESTAMPTZ DEFAULT NOW(),
+  score           INTEGER,             -- 0-100
+  grade           TEXT,
+  xirr            NUMERIC,
+  total_value     NUMERIC,
+  issues          JSONB,               -- Full issues array
+  sub_scores      JSONB,               -- {xirr:65, risk:60, overlap:45, ter:40, goal:70}
+  raw_results     JSONB                -- Full engine outputs (encrypted)
+);
+
+-- CONSTRUCTIONS TABLE (built portfolios)
+CREATE TABLE constructions (
+  id              UUID PRIMARY KEY,
+  user_id         UUID REFERENCES users(id),
+  created_at      TIMESTAMPTZ DEFAULT NOW(),
+  profile         JSONB,              -- User's 5 answers
+  allocation      JSONB,              -- Recommended allocation array
+  metrics         JSONB,              -- Expected return, Sharpe, volatility
+  status          TEXT DEFAULT 'pending',  -- pending/approved/executed
+  user_approved_at TIMESTAMPTZ,
+  execution_ref   TEXT                -- BSE StARMF / broker transaction ref
+);
+
+-- Row Level Security: each user sees ONLY their own data
+ALTER TABLE portfolios ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "user_own_portfolios" ON portfolios
+  USING (user_id = auth.uid());
+-- Same policy applied to all tables with user_id</pre>
+</div>
+
+<!-- ═══ SECTION 9: DATA SOURCES ═══ -->
+<div class="section" id="s9">
+  <div class="sec-eyebrow">Section 09</div>
+  <div class="sec-h">Data Sources — Where Every Number Comes From</div>
+
+  <table class="tbl">
+    <tr><th>Data Needed</th><th>Source</th><th>API / Method</th><th>Cost</th><th>Update Frequency</th></tr>
+    <tr><td>MF NAV (current)</td><td>AMFI via mfapi.in</td><td>GET api.mfapi.in/mf/{scheme_code}</td><td>Free</td><td>Daily (3:30 PM)</td></tr>
+    <tr><td>MF Holdings (top-30 stocks)</td><td>AMFI</td><td>Monthly disclosure scrape</td><td>Free</td><td>Monthly</td></tr>
+    <tr><td>MF TER data</td><td>AMFI</td><td>Monthly TER disclosure</td><td>Free</td><td>Monthly</td></tr>
+    <tr><td>Stock prices (NSE)</td><td>NSE India</td><td>nseindia.com unofficial API / yfinance</td><td>Free (unofficial)</td><td>Real-time</td></tr>
+    <tr><td>Stock fundamentals (P/E, ROE)</td><td>NSE / BSE disclosures</td><td>Scrape quarterly results</td><td>Free</td><td>Quarterly</td></tr>
+    <tr><td>SEBI enforcement orders</td><td>SEBI website</td><td>Scrape SEBI.gov.in/intermediaries</td><td>Free</td><td>Weekly</td></tr>
+    <tr><td>RBI macro data</td><td>RBI DBIE</td><td>dbie.rbi.org.in API</td><td>Free</td><td>Monthly</td></tr>
+    <tr><td>Gold price</td><td>RBI / MCX</td><td>Scrape / yfinance GC=F</td><td>Free</td><td>Daily</td></tr>
+    <tr><td>Financial news</td><td>Moneycontrol, ET, Mint</td><td>RSS feeds + scraping</td><td>Free</td><td>Hourly</td></tr>
+    <tr><td>Mutual fund import</td><td>CAMS / KFintech</td><td>OAuth API (apply for access)</td><td>Free (CAMS charges per fetch)</td><td>On-demand</td></tr>
+    <tr><td>Full portfolio import</td><td>Account Aggregator (RBI AA)</td><td>AA ecosystem APIs</td><td>₹2–5 per fetch</td><td>On-demand</td></tr>
+    <tr><td>Broker portfolio import</td><td>Zerodha / Upstox / Angel</td><td>Kite Connect / Upstox API</td><td>Free developer API</td><td>On-demand</td></tr>
+  </table>
+</div>
+
+<!-- ═══ SECTION 10: SECURITY ═══ -->
+<div class="section" id="s10">
+  <div class="sec-eyebrow">Section 10</div>
+  <div class="sec-h">Security Architecture</div>
+
+  <div class="g2">
+    <div>
+      <h3>Authentication</h3>
+      <p><strong>Supabase Auth</strong> — JWT RS256 tokens. Access token (15-min TTL) + Refresh token (7-day TTL). OTP via SMS for phone verification. Biometric login (Face ID/fingerprint) using device secure enclave after first login.</p>
+      <h3>Data Encryption</h3>
+      <p><strong>In transit:</strong> TLS 1.3 everywhere. No HTTP. <strong>At rest:</strong> AES-256-GCM encryption for all financial data (holdings, transactions, health check results). Encryption keys stored in separate key management service — not in database.</p>
+      <h3>Row Level Security</h3>
+      <p>Supabase RLS policies ensure every database query is automatically filtered to the authenticated user's data. A bug in application code cannot leak another user's portfolio data — the database enforces isolation at the query level.</p>
+    </div>
+    <div>
+      <h3>DPDPA 2023 Compliance</h3>
+      <p>India's Digital Personal Data Protection Act 2023: <strong>Purpose limitation</strong> (data only used for what user consented to) · <strong>Data minimisation</strong> (only collect what's needed) · <strong>Right to erasure</strong> (user can delete account + all data) · <strong>Data localisation</strong> (all data stored in India on Supabase Mumbai region).</p>
+      <h3>API Security</h3>
+      <p><strong>Rate limiting:</strong> slowapi — max 100 requests/minute per user. <strong>Input validation:</strong> Pydantic v2 validates every API request body — SQL injection impossible (parameterized queries via SQLAlchemy). <strong>CORS:</strong> Whitelist of allowed origins only. <strong>Payment webhooks:</strong> HMAC-SHA256 signature verification on every Razorpay webhook.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 11: PATH A — REAL CODING ═══ -->
+<div class="section" id="s11">
+  <div class="sec-eyebrow">Section 11 — Build Path A</div>
+  <div class="sec-h">Path A — Real Coding</div>
+  <div class="sec-sub">Complete technology stack, who builds what, week-by-week plan.</div>
+
+  <h3>Complete Tech Stack</h3>
+  <div class="g2">
+    <div>
+      <h4>Frontend — React Native (Expo)</h4>
+      <pre>React Native 0.74 (Expo SDK 51)
+├── expo-router          # Navigation
+├── zustand              # State management  
+├── victory-native       # Charts and graphs
+├── expo-local-auth      # Biometric login
+├── expo-notifications   # Push notifications
+├── react-native-razorpay # Payments
+└── @supabase/supabase-js # Auth + database</pre>
+      <p><strong>Why React Native:</strong> One codebase → iOS + Android. Expo makes setup easy. Large India developer community. Zerodha, Groww both built on React Native.</p>
+
+      <h4>Backend — FastAPI</h4>
+      <pre>Python 3.11 + FastAPI 0.111
+├── sqlalchemy 2.0      # Database ORM (async)
+├── supabase-py         # Supabase client
+├── pydantic v2         # Request validation
+├── celery + redis      # Background jobs
+├── scipy               # XIRR (brentq)
+├── numpy               # Risk calculations
+├── pandas              # Data processing
+├── pypfopt             # Portfolio optimization
+├── transformers        # NxanceLM / FinBERT
+├── pdfplumber          # CAS PDF parsing
+├── openpyxl            # Excel parsing
+├── razorpay            # Payments
+└── loguru              # Logging</pre>
+    </div>
+    <div>
+      <h4>Database</h4>
+      <pre>Supabase (PostgreSQL 16)
+├── Row Level Security
+├── Supabase Auth (JWT)
+├── Real-time subscriptions
+├── Storage (PDF/Excel uploads)
+└── Edge Functions (serverless)</pre>
+
+      <h4>Infrastructure</h4>
+      <pre>Railway (PoC → Month 6)
+├── Free tier: ₹0
+├── Pro: ₹3,000/month at scale
+└── One-click deploy from GitHub
+
+Cloudflare
+├── CDN (global fast loading)
+├── DDoS protection
+└── Free tier sufficient
+
+AWS Activate (via DPIIT): $5,000 credits
+├── EC2 for backend (future)
+├── S3 for file storage
+└── CloudWatch monitoring</pre>
+
+      <h4>Third-Party Services</h4>
+      <pre>Razorpay          # Payments (₹99+ subscriptions)
+WATI              # WhatsApp Business API
+Firebase          # Push notifications
+Supabase Auth     # Authentication
+mfapi.in          # AMFI MF data (free)
+yfinance          # Stock prices (free)
+Google Colab T4   # NxanceLM training (free)</pre>
+    </div>
+  </div>
+
+  <h3>Who Builds What</h3>
+  <table class="tbl">
+    <tr><th>Person</th><th>Responsibility</th><th>When</th></tr>
+    <tr><td>Raghav (CTO)</td><td>FastAPI backend + all quant engines + Supabase setup + API endpoints + deployment on Railway</td><td>Month 1 onwards, full-time</td></tr>
+    <tr><td>ML Engineer (hire Month 3)</td><td>NxanceLM fine-tuning on Colab + FinBERT sentiment integration + model deployment + RLHF pipeline</td><td>Month 3 onwards</td></tr>
+    <tr><td>React Native Developer (hire Month 1)</td><td>All 28 screens + navigation + Supabase integration + Razorpay + push notifications + App Store submission</td><td>Month 1 onwards</td></tr>
+    <tr><td>Abhishek (CEO)</td><td>Product decisions + all APIs for data sources (CAMS, AA framework applications) + SEBI RIA application + investor relations</td><td>Full-time throughout</td></tr>
+  </table>
+
+  <h3>Week-by-Week Build Plan</h3>
+  <div class="g2">
+    <div>
+      <h4>Backend (Raghav)</h4>
+      <p><strong>Week 1–2:</strong> FastAPI project setup + Supabase connected + auth working + basic API structure + Railway deployment</p>
+      <p><strong>Week 3–4:</strong> XIRR engine + TER engine + Overlap engine — all tested with real AMFI data</p>
+      <p><strong>Week 5–6:</strong> Risk engine (CVaR, Sharpe, Sortino) + Goal engine (Monte Carlo) + AMFI data pipeline</p>
+      <p><strong>Week 7–8:</strong> Health score aggregator + issue ranking + paywall logic + /api/portfolio/analyze endpoint working</p>
+      <p><strong>Week 9–10:</strong> PDF parser (CAS) + Excel parser + portfolio CRUD endpoints</p>
+      <p><strong>Week 11–14:</strong> Construction optimizer (PyPortfolioOpt) + backtesting engine + 7-layer instrument analysis</p>
+      <p><strong>Week 15–18:</strong> NxanceLM integration (template system first, model later) + WhatsApp alerts + subscription/payment logic</p>
+      <p><strong>Week 19–24:</strong> Bug fixes + performance optimization + security audit + load testing</p>
+    </div>
+    <div>
+      <h4>Frontend (React Native Dev)</h4>
+      <p><strong>Week 1–2:</strong> Expo project setup + navigation structure + auth screens (register/login) + Supabase auth integration</p>
+      <p><strong>Week 3–4:</strong> Home dashboard screen + portfolio import screen (manual entry first)</p>
+      <p><strong>Week 5–6:</strong> Health check result screen + issue detail screen + score animation</p>
+      <p><strong>Week 7–8:</strong> Portfolio construction screens (5 questions + result + approval flow)</p>
+      <p><strong>Week 9–10:</strong> My Portfolio section (list, detail, history, alerts)</p>
+      <p><strong>Week 11–12:</strong> NxanceLM chat screen + market/news screen</p>
+      <p><strong>Week 13–14:</strong> Subscription screen + Razorpay payment integration</p>
+      <p><strong>Week 15–16:</strong> Profile, settings, refer &amp; earn, wallet screens</p>
+      <p><strong>Week 17–20:</strong> PDF upload + Excel upload + CAMS OAuth integration</p>
+      <p><strong>Week 21–24:</strong> Polish, bug fixes, performance + App Store submission (iOS) + Play Store submission (Android)</p>
+    </div>
+  </div>
+
+  <h3>Monthly Costs — Path A</h3>
+  <table class="tbl">
+    <tr><th>Item</th><th>Month 1–3</th><th>Month 4–6</th><th>Month 7–12</th></tr>
+    <tr><td>React Native Developer</td><td>₹50–70K</td><td>₹50–70K</td><td>₹50–70K</td></tr>
+    <tr><td>ML Engineer (from Month 3)</td><td>—</td><td>₹60–80K</td><td>₹60–80K</td></tr>
+    <tr><td>Railway (backend hosting)</td><td>₹0 (free)</td><td>₹1,500</td><td>₹3,000</td></tr>
+    <tr><td>Supabase (database)</td><td>₹0 (free)</td><td>₹1,700</td><td>₹4,200</td></tr>
+    <tr><td>Razorpay (payment processing)</td><td>₹0</td><td>2% per transaction</td><td>2% per transaction</td></tr>
+    <tr><td>WATI WhatsApp</td><td>₹4,000</td><td>₹4,000</td><td>₹4,000</td></tr>
+    <tr><td>Domain + SSL</td><td>₹2,000</td><td>—</td><td>—</td></tr>
+    <tr><td>Data sources (all free initially)</td><td>₹0</td><td>₹0</td><td>₹0</td></tr>
+    <tr><td><strong>Total Monthly Burn</strong></td><td><strong>₹56–76K</strong></td><td><strong>₹1.17–1.57L</strong></td><td><strong>₹1.22–1.62L</strong></td></tr>
+  </table>
+  <p><strong>AWS Activate ($5,000 = ₹41.5L) covers infrastructure for 12+ months.</strong> Effective infra cost = ₹0 until significant scale.</p>
+</div>
+
+<!-- ═══ SECTION 12: PATH B — WITH TOOLS ═══ -->
+<div class="section" id="s12">
+  <div class="sec-eyebrow">Section 12 — Build Path B</div>
+  <div class="sec-h">Path B — With Tools (Faster)</div>
+  <div class="sec-sub">Lovable.dev for frontend. Claude Code for backend. No need for experienced React Native developer. 4–8 weeks to working MVP.</div>
+
+  <h3>Tool Stack</h3>
+  <div class="g2">
+    <div class="card ct">
+      <div class="card-lbl">Frontend — Lovable.dev</div>
+      <div class="card-t">Natural language → React app</div>
+      <div class="card-b">You describe what you want in plain English → Lovable generates complete React code → deploys automatically with live URL. No React knowledge needed. Cost: $25/month (₹2,100). Timeline: MVP frontend in 1–2 weeks.<br><br><strong>Limitation:</strong> Web app only (no native iOS/Android). But works on mobile browser perfectly. Good enough for pre-seed stage.</div>
+    </div>
+    <div class="card ca">
+      <div class="card-lbl">Backend — Claude Code</div>
+      <div class="card-t">AI-assisted backend development</div>
+      <div class="card-b">Install Claude Code in terminal. Describe what you need. Claude writes the Python FastAPI code directly. Raghav runs it, fixes errors, iterates. Main advantage: Raghav doesn't need prior FastAPI knowledge — Claude guides him step by step.<br><br><strong>Cost:</strong> Claude Pro subscription (~₹1,700/month). <strong>Timeline:</strong> Backend engines in 4–6 weeks with daily work.</div>
+    </div>
+  </div>
+
+  <h3>Lovable.dev — Exact Prompt to Use</h3>
+  <div class="al al-b">
+    <div class="al-i">📋</div>
+    <div class="al-body">Copy this exact prompt into Lovable.dev to generate the Nxance frontend:</div>
+  </div>
+  <pre>Build a fintech web app called Nxance for Indian investors.
+Company: Ohshn Intelligence. Brand: Nxance.
+
+DESIGN: Dark theme (#09090F background, #00C9A7 teal accent).
+Clean, modern, mobile-first. Bottom navigation on mobile.
+
+4 MAIN SECTIONS (bottom nav tabs):
+
+1. HOME DASHBOARD
+- Top: Total portfolio value (₹), return %, XIRR %
+- Middle: Health Score ring 0-100 with grade A-F
+- Two CTA buttons: "Analyse Portfolio" and "Build New Portfolio"  
+- Below: Mini cards for each saved portfolio (name, score, value)
+- Below: Live market strip (Nifty, Gold, USD/INR - mock data ok)
+- Bottom: "Today's NxanceLM insight" card
+
+2. HEALTH CHECK (multi-step flow)
+Step 1 - Import: 3 tabs (Manual Entry, Upload Excel, Load Sample)
+  Manual entry: Fund name, Current value (₹), Invested amount (₹), 
+  Direct/Regular dropdown. Add/remove rows. 
+Step 2 - Loading screen: animated progress showing engine names
+  ("Running XIRR engine... Checking fund overlap... 
+   Running Monte Carlo simulation... NxanceLM explaining...")
+Step 3 - Results:
+  - Big health score (0-100) with color (red/orange/green) and grade
+  - 3 stat boxes: Portfolio Value, Return %, XIRR %/year
+  - "NxanceLM AI Summary" box (teal border) with 2-3 sentence summary
+  - Issues list (top 5):
+    Issue #1: Fully visible - title, ₹/year cost, description, green fix box
+    Issues #2-5: Blurred - show title and cost but description blurred
+  - Paywall card: "Unlock all 5 issues - ₹99/month" with Razorpay button
+  - "Save to My Portfolio" button
+
+3. CONSTRUCTION (multi-step flow)
+Step 1-5: One question per screen with progress bar
+  Q1: Goal selection (4 large cards: Retirement/House/Education/Wealth)
+  Q2: Time horizon (slider 1-30 years)
+  Q3: Monthly investment (₹ number input)
+  Q4: Risk (3 cards: Low/Medium/High with emoji and description)
+  Q5: Existing savings (₹ number input)
+Loading: "Optimizing... Backtesting... NxanceLM preparing..."
+Results:
+  - Portfolio metrics (Expected return %, Volatility %, Sharpe ratio)
+  - NxanceLM explanation card
+  - Each instrument: name, allocation %, ₹/month, expected return, reason
+  - Progress bar for each allocation %
+  - "Review and Approve Each Action" button
+  - Important disclaimer: "Every action needs your approval. 
+    Nxance recommends - you decide."
+
+4. MY PORTFOLIO
+  - List of saved portfolios (cards with name, score, date)
+  - Each card tappable → shows full details
+  - History of all health checks (score trend chart)
+  - All constructions created
+
+ADDITIONAL SCREENS:
+- Profile (name, email, subscription status)
+- Subscription plans (Free/Pro ₹99/Combined ₹349) 
+- NxanceLM Chat (chat UI, 8 quick-question buttons, 
+  knowledge base for: XIRR, TER, overlap, SIP, Sharpe ratio)
+- Settings
+
+CALCULATIONS (all in JavaScript, no backend needed yet):
+Health Score:
+- If any Regular plan funds → TER issue: cost = regular_funds × ₹2,400/yr
+- If 2+ funds → overlap issue: cost = ₹1,800/yr  
+- Score formula: start at 100, subtract 15 per Regular fund, 
+  subtract 10 for overlap, final = max(25, score)
+- Grade: 90+ = A, 75+ = B, 60+ = C, 45+ = D, below = F
+
+Construction Allocation:
+- Low risk: 40% Short Debt MF, 35% Large Cap MF, 15% Gold, 10% FD
+- Medium risk: 35% Large Cap, 25% Flexi Cap, 20% Debt, 10% Gold, 10% Mid Cap
+- High risk: 35% Large Cap, 25% Mid Cap, 20% Flexi Cap, 10% Intl, 10% Gold
+
+NxanceLM responses: Pre-written answers for common questions.
+
+Tech: React + Tailwind CSS. Responsive. No backend needed.
+Deploy on Netlify or Vercel.</pre>
+
+  <h3>Claude Code — How Raghav Uses It</h3>
+  <p><strong>Install:</strong> <code>npm install -g @anthropic-ai/claude-code</code></p>
+  <p><strong>How to use:</strong> Open terminal in the nxance/backend folder. Type <code>claude</code>. Then describe what you want in plain English:</p>
+  <pre>"Write the XIRR calculation engine in Python using scipy.brentq.
+It should take a list of cash flows and dates and return 
+annualised return as percentage."
+
+→ Claude writes xirr_engine.py
+
+"Now run it and show me what happens with these test values:
+invested ₹1,00,000 on 2021-01-01, current value ₹1,45,000 today"
+
+→ Claude runs it and shows output
+
+"Now connect this to the FastAPI endpoint POST /api/portfolio/analyze"
+
+→ Claude writes the route and connects everything</pre>
+  <p>Raghav's job: run the code, tell Claude if it works or what error appeared, iterate. No deep Python knowledge required to start.</p>
+
+  <h3>Path B Timeline</h3>
+  <table class="tbl">
+    <tr><th>Week</th><th>What Gets Done</th><th>Who</th></tr>
+    <tr><td>Week 1</td><td>Lovable.dev → complete frontend with all screens (mock data)</td><td>Abhishek gives prompt, Raghav iterates</td></tr>
+    <tr><td>Week 2</td><td>Netlify deploy → investor demo URL live. Claude Code → FastAPI project setup + auth + Supabase</td><td>Raghav + Claude Code</td></tr>
+    <tr><td>Week 3</td><td>XIRR engine + TER engine + Overlap engine working via Claude Code</td><td>Raghav + Claude Code</td></tr>
+    <tr><td>Week 4</td><td>Health score aggregator + /api/portfolio/analyze endpoint + connect to Lovable frontend</td><td>Raghav + Claude Code</td></tr>
+    <tr><td>Week 5</td><td>Construction optimizer working (PyPortfolioOpt) + basic NxanceLM templates</td><td>Raghav + Claude Code</td></tr>
+    <tr><td>Week 6</td><td>Razorpay subscription + AMFI data pipeline + basic testing</td><td>Raghav + Claude Code</td></tr>
+    <tr><td>Week 7–8</td><td>Bug fixes + performance + deploy on Railway + share with first beta users</td><td>Both</td></tr>
+  </table>
+
+  <h3>Path B Monthly Costs</h3>
+  <table class="tbl">
+    <tr><th>Tool</th><th>Cost/Month</th><th>What For</th></tr>
+    <tr><td>Lovable.dev</td><td>$25 = ₹2,100</td><td>Frontend generation + hosting</td></tr>
+    <tr><td>Claude Pro (for Claude Code)</td><td>$20 = ₹1,700</td><td>Backend code generation + guidance</td></tr>
+    <tr><td>Supabase</td><td>₹0 (free tier)</td><td>Database + auth</td></tr>
+    <tr><td>Railway</td><td>₹0 (free tier)</td><td>Backend hosting</td></tr>
+    <tr><td>Razorpay</td><td>2% per transaction</td><td>Payments</td></tr>
+    <tr><td><strong>Total</strong></td><td><strong>~₹4,000/month</strong></td><td>Full MVP running</td></tr>
+  </table>
+  <div class="al al-t">
+    <div class="al-i">✅</div>
+    <div class="al-body"><strong>Path B total cost to MVP: ₹20,000–25,000</strong> (5–6 weeks × ₹4,000). Plus Raghav's time. Compared to Path A which needs ₹50–70K/month for React Native developer from Day 1.</div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 13: TEAM ═══ -->
+<div class="section" id="s13">
+  <div class="sec-eyebrow">Section 13</div>
+  <div class="sec-h">Team Required</div>
+
+  <table class="tbl">
+    <tr><th>Role</th><th>What They Build</th><th>When</th><th>Monthly Cost</th></tr>
+    <tr><td>Abhishek Rajpoot (CEO)</td><td>Product decisions, investor relations, regulatory applications (SEBI RIA, AMFI ARN), data source partnerships (CAMS, AA framework), business development</td><td>Now, full-time</td><td>Equity only</td></tr>
+    <tr><td>Raghav (CTO)</td><td>FastAPI backend, all quant engines, Supabase setup, API integrations, Railway deployment. With Claude Code support.</td><td>Now, full-time</td><td>Equity only</td></tr>
+    <tr><td>React Native Developer</td><td>All 28 app screens, Expo setup, Supabase integration, Razorpay, push notifications, App Store + Play Store submission</td><td>Month 1 (Path A) or Month 3 (Path B)</td><td>₹50–70K</td></tr>
+    <tr><td>ML Engineer</td><td>NxanceLM TinyLlama fine-tuning on Colab, FinBERT sentiment integration, RLHF pipeline, model deployment with vLLM</td><td>Month 3</td><td>₹60–80K</td></tr>
+    <tr><td>Growth / Marketing</td><td>Content creation, creator partnerships, Google Ads, user acquisition, WhatsApp marketing</td><td>Month 4 (after product is live)</td><td>₹30–40K</td></tr>
+  </table>
+</div>
+
+<!-- ═══ SECTION 14: TIMELINE ═══ -->
+<div class="section" id="s14">
+  <div class="sec-eyebrow">Section 14</div>
+  <div class="sec-h">Realistic Timeline to Market</div>
+
+  <div class="phase ph1">
+    <div><div class="ph-tag">Phase 1</div><div class="ph-yr">Month 1–3</div></div>
+    <div><div class="ph-t">Foundation + Health Check Live</div><div class="ph-b">
+      <strong>Path A:</strong> FastAPI setup + 6 quant engines (XIRR, TER, Overlap, Risk, Goal, Health Score) + React Native auth + home dashboard + health check screens<br>
+      <strong>Path B:</strong> Lovable.dev frontend live + investor demo URL + Claude Code backend basic engines + Supabase connected<br>
+      <strong>Milestone:</strong> First 10 beta users can analyse their portfolio and see real health score
+    </div></div>
+  </div>
+  <div class="phase ph2">
+    <div><div class="ph-tag">Phase 2</div><div class="ph-yr">Month 4–6</div></div>
+    <div><div class="ph-t">Construction + NxanceLM + Subscription Launch</div><div class="ph-b">
+      Portfolio Construction engine (PyPortfolioOpt + backtesting) · NxanceLM v1 (TinyLlama fine-tuned — ML Engineer joins Month 3) · Razorpay subscription (₹99, ₹249, ₹299, ₹349 plans) · PDF/Excel upload · CAMS OAuth · WhatsApp alerts<br>
+      <strong>Milestone:</strong> App Store + Play Store submission. First paying users. ₹99 subscriptions active.
+    </div></div>
+  </div>
+  <div class="phase ph3">
+    <div><div class="ph-tag">Phase 3</div><div class="ph-yr">Month 7–9</div></div>
+    <div><div class="ph-t">Full MVP — All Features Public Launch</div><div class="ph-b">
+      Live market tracking · News feed · Asset Intelligence Search · Refer &amp; Earn · Learn section · All 14 asset classes · Account Aggregator (AA) integration · SEBI RIA license operational (applied Month 3)<br>
+      <strong>Milestone:</strong> Public launch. Marketing begins. Target: 1,000 paid users by Month 9.
+    </div></div>
+  </div>
+  <div class="phase ph4">
+    <div><div class="ph-tag">Phase 4</div><div class="ph-yr">Month 10–18</div></div>
+    <div><div class="ph-t">Scale + NxanceLM v2 + Seed Round</div><div class="ph-b">
+      NxanceLM Base (Mistral 7B fine-tuned — richer explanations, B2B API) · BSE StARMF MF execution (no broker license needed) · Broker API integration (Zerodha Kite Connect — stock execution) · 40,000 retail paid users · ₹3.45 Cr MRR target<br>
+      <strong>Milestone:</strong> Seed round raise ₹3–5 Cr at 3–5× pre-seed valuation. NxanceLM v2 significantly better than v1.
+    </div></div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 15: SUBSCRIPTIONS ═══ -->
+<div class="section" id="s15">
+  <div class="sec-eyebrow">Section 15</div>
+  <div class="sec-h">Subscription Plans</div>
+
+  <table class="tbl">
+    <tr><th>Plan</th><th>Price</th><th>Portfolio Limit</th><th>Health Checks</th><th>Construction</th><th>NxanceLM</th><th>Gross Margin</th></tr>
+    <tr><td>Free</td><td>₹0</td><td>1</td><td>1/month, Issue #1 only</td><td>Preview only</td><td>Basic templates</td><td>—</td></tr>
+    <tr><td>Pro (Health Check)</td><td>₹99/month</td><td>3</td><td>Unlimited, all 5 issues</td><td>No</td><td>Full explanations</td><td>~94%</td></tr>
+    <tr><td>Premium (Health Check+)</td><td>₹249/month</td><td>10</td><td>Unlimited + real-time alerts</td><td>No</td><td>Full + Hindi</td><td>~97%</td></tr>
+    <tr><td>Construction</td><td>₹299/month</td><td>5</td><td>1/month</td><td>Unlimited</td><td>Construction explanations</td><td>~96%</td></tr>
+    <tr><td><strong>Combined ★</strong></td><td><strong>₹349/month</strong></td><td><strong>10</strong></td><td><strong>Unlimited</strong></td><td><strong>Unlimited</strong></td><td><strong>Full</strong></td><td>~95%</td></tr>
+  </table>
+
+  <p><strong>Cost per user per month</strong> — NxanceLM (own model = ₹0 inference) + Supabase + Railway = approximately ₹4–18/month depending on plan. Revenue well exceeds cost at all tiers.</p>
+</div>
+
+<!-- ═══ SECTION 16: EXECUTION ═══ -->
+<div class="section" id="s16">
+  <div class="sec-eyebrow">Section 16</div>
+  <div class="sec-h">Execution — Without Stock Broker License</div>
+
+  <div class="al al-a">
+    <div class="al-i">⚠️</div>
+    <div class="al-body"><strong>Stock Broker License is NOT needed for Phase 1–2.</strong> Requirements: ₹3 Crore net worth, ₹5–10 Crore total setup cost, 12–18 months approval time. This is Year 4–5 territory. Before that, use these two methods:</div>
+  </div>
+
+  <div class="g2">
+    <div class="card ct">
+      <div class="card-lbl">Method 1 — BSE StARMF (Mutual Funds)</div>
+      <div class="card-t">MF Execution — No Broker License Needed</div>
+      <div class="card-b">BSE StARMF is BSE's mutual fund transaction platform. Any company with AMFI ARN can integrate this API and facilitate MF purchases/redemptions on behalf of users.<br><br><strong>License needed:</strong> AMFI ARN only (₹3,000, 1 month)<br><strong>What user can do:</strong> Buy, sell, switch, SIP setup for any AMFI-registered fund<br><strong>Revenue:</strong> Trail commission from AMCs (0.5% AUM/year on regular plans maintained)<br><strong>Timeline to integrate:</strong> 2–3 months after ARN</div>
+    </div>
+    <div class="card ca">
+      <div class="card-lbl">Method 2 — Broker API (Stocks + MF)</div>
+      <div class="card-t">Stock Execution via Zerodha / Upstox — No License Needed</div>
+      <div class="card-b">User links their existing Zerodha/Upstox/Angel One account to Nxance. Nxance sends order via API → broker executes from user's account → Nxance earns referral fee.<br><br><strong>License needed:</strong> None<br><strong>APIs:</strong> Zerodha Kite Connect (₹2,000/month), Upstox API (free), Angel SmartAPI (free)<br><strong>Revenue:</strong> ₹300–500 per new account referral + monthly referral commission<br><strong>Timeline to integrate:</strong> 1–2 months</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 17: LICENSES ═══ -->
+<div class="section" id="s17">
+  <div class="sec-eyebrow">Section 17</div>
+  <div class="sec-h">Licenses Required — When and Why</div>
+
+  <table class="tbl">
+    <tr><th>License</th><th>When</th><th>Why Needed</th><th>Cost</th><th>Time</th></tr>
+    <tr><td>DPIIT Startup Recognition</td><td>Day 1</td><td>Unlocks ₹44L+ non-dilutive resources (AWS, Google, SISFS grant)</td><td>₹0</td><td>2–7 days</td></tr>
+    <tr><td>Udyam (MSME)</td><td>Day 1</td><td>MSME benefits, govt tender access, priority lending</td><td>₹0</td><td>Instant</td></tr>
+    <tr><td>GST Registration</td><td>Day 1</td><td>Mandatory for subscription revenue</td><td>₹0</td><td>3–5 days</td></tr>
+    <tr><td>AMFI ARN</td><td>Month 3</td><td>MF distribution — BSE StARMF execution + trail commissions</td><td>₹3,000</td><td>1 month</td></tr>
+    <tr><td>SEBI RIA (Non-Individual)</td><td>Month 9</td><td>Personalized investment advice legally. Required for health check recommendations being "advice" not just "information"</td><td>₹3–4L + ₹1Cr net worth</td><td>6–9 months</td></tr>
+    <tr><td>IRDAI Corporate Agent</td><td>Year 1</td><td>Insurance advisory + product recommendation</td><td>₹50,000</td><td>3–6 months</td></tr>
+    <tr><td>SEBI Research Analyst</td><td>Year 1</td><td>Stock research reports and buy/sell recommendations</td><td>₹5,000</td><td>1–2 months</td></tr>
+    <tr><td>SEBI PMS</td><td>Year 2</td><td>Discretionary portfolio management for ₹50L+ clients</td><td>₹5Cr net worth</td><td>6 months</td></tr>
+    <tr><td>SEBI Stock Broker</td><td>Year 4–5</td><td>Own brokerage — execute stocks/options directly</td><td>₹3Cr net worth + ₹5–10Cr setup</td><td>12–18 months</td></tr>
+  </table>
+
+  <div class="al al-t">
+    <div class="al-i">✅</div>
+    <div class="al-body"><strong>Immediate priority:</strong> DPIIT + Udyam today (₹0, unlocks ₹44L+ resources). AMFI ARN Month 3 (₹3,000). SEBI RIA Month 9 (most important for legality of personalized advice). Everything else is Phase 2+.</div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<div class="no-print" style="background:#0D1117;color:#4B5563;text-align:center;padding:20px;font-size:11px;font-family:'JetBrains Mono',monospace">
+  Ohshn Intelligence · Nxance Master Product Document · Abhishek Rajpoot, CEO · abhishekpatial415@gmail.com · +91 82199 31720
+</div>
+
+</body>
+</html>

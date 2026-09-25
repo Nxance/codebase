@@ -1,0 +1,63 @@
+{
+  "l2_version": "india_l2_v4",
+  "l2_metrics": {
+    "has_ter_leak": {
+      "train_acc": 0.972,
+      "val_acc": 0.9743,
+      "temperature": 0.55,
+      "n_boost_stumps": 40
+    },
+    "has_overlap": {
+      "train_acc": 0.9967,
+      "val_acc": 1.0,
+      "temperature": 0.55,
+      "n_boost_stumps": 40
+    },
+    "high_concentration": {
+      "train_acc": 0.9687,
+      "val_acc": 0.96,
+      "temperature": 0.55,
+      "n_boost_stumps": 40
+    },
+    "tax_heavy": {
+      "train_acc": 0.9987,
+      "val_acc": 1.0,
+      "temperature": 0.55,
+      "n_boost_stumps": 40
+    },
+    "low_liquidity": {
+      "train_acc": 1.0,
+      "val_acc": 0.9971,
+      "temperature": 0.55,
+      "n_boost_stumps": 40
+    },
+    "health_score": {
+      "train_mae": 4.697,
+      "val_mae": 5.115,
+      "n_boost_stumps": 36
+    }
+  },
+  "embedding": "fund_embedding_v3",
+  "sequence": "nav_sequence_v3",
+  "style_overlap_sample": {
+    "n_pairs": 1,
+    "max_similarity": 0.9116,
+    "cluster_risk": 0.1667,
+    "style_histogram": {
+      "large_cap": 2,
+      "direct_plan": 2,
+      "small_cap": 1,
+      "regular_plan": 1,
+      "equity_stock": 1
+    }
+  },
+  "ocr": {
+    "ready": true,
+    "layout_recall": 0.927,
+    "ocr_recall": 0.927,
+    "lexicon_garble_acc": 1.0,
+    "engine": "nxance_ocr_v4"
+  },
+  "cost": "\u20b90",
+  "stack": "L1 quant \u00b7 L2 bags+boost ML v4 \u00b7 L3 embedding+style+sequence \u00b7 OCR v4 lexicon"
+}

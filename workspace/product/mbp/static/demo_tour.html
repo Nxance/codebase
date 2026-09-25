@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nxance · Live Product Demo</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy-950: #050B14;
+      --navy-900: #0A1628;
+      --navy-800: #0F2744;
+      --surface: #0C1A2E;
+      --card: #152C48;
+      --text: #F4F8FC;
+      --text-2: #9BB4CC;
+      --text-3: #6B849C;
+      --accent: #3DDCFF;
+      --success: #3DDC97;
+      --warning: #F5B942;
+      --danger: #FF6B7A;
+      --border: rgba(122,173,217,0.18);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "DM Sans", system-ui, sans-serif;
+      background: radial-gradient(1200px 600px at 20% -10%, #163A5F 0%, var(--navy-900) 45%, var(--navy-950) 100%);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    .top {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 28px; border-bottom: 1px solid var(--border);
+      background: rgba(5,11,20,0.55); backdrop-filter: blur(12px);
+      position: sticky; top: 0; z-index: 10;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: -0.03em; font-size: 1.2rem; }
+    .mark {
+      width: 32px; height: 32px; border-radius: 9px;
+      background: linear-gradient(145deg, var(--accent), #1E4D7B);
+      display: grid; place-items: center; color: var(--navy-950); font-weight: 800;
+    }
+    .chip {
+      font-size: 11px; font-weight: 800; letter-spacing: 0.06em;
+      color: var(--accent); background: rgba(61,220,255,0.12);
+      border: 1px solid rgba(61,220,255,0.25); border-radius: 999px; padding: 6px 12px;
+    }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 28px 24px 80px; }
+    .progress {
+      height: 4px; background: rgba(255,255,255,0.06); border-radius: 999px; overflow: hidden; margin-bottom: 22px;
+    }
+    .progress > i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), var(--success)); transition: width .4s ease; }
+    .step-label { color: var(--text-3); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; margin-bottom: 8px; }
+    h1 { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 10px; }
+    .lead { color: var(--text-2); font-size: 1.05rem; line-height: 1.5; max-width: 48rem; }
+    .panel {
+      margin-top: 22px; background: linear-gradient(180deg, rgba(21,44,72,0.9), rgba(12,26,46,0.95));
+      border: 1px solid var(--border); border-radius: 20px; padding: 22px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+      min-height: 360px;
+    }
+    .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 16px 0; }
+    .kpi {
+      background: rgba(5,11,20,0.45); border: 1px solid var(--border); border-radius: 14px; padding: 14px;
+    }
+    .kpi .l { color: var(--text-3); font-size: 11px; font-weight: 700; letter-spacing: 0.04em; }
+    .kpi .v { font-size: 1.35rem; font-weight: 800; margin-top: 4px; }
+    .danger { color: var(--danger); }
+    .ok { color: var(--success); }
+    .accent { color: var(--accent); }
+    .issue {
+      border: 1px solid var(--border); border-left: 3px solid var(--warning);
+      border-radius: 12px; padding: 12px 14px; margin: 8px 0; background: rgba(5,11,20,0.35);
+    }
+    .issue h3 { font-size: 0.95rem; margin-bottom: 4px; }
+    .issue p { color: var(--text-2); font-size: 0.88rem; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .card {
+      background: rgba(5,11,20,0.4); border: 1px solid var(--border); border-radius: 14px; padding: 14px;
+    }
+    .card h3 { font-size: 0.95rem; margin-bottom: 6px; }
+    .card p { color: var(--text-2); font-size: 0.88rem; line-height: 1.4; }
+    .pill {
+      display: inline-block; font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 999px;
+      background: rgba(61,220,255,0.12); color: var(--accent); margin: 2px 4px 2px 0;
+    }
+    .footer-note { margin-top: 18px; color: var(--text-3); font-size: 12px; }
+    .big-num { font-family: "Instrument Serif", Georgia, serif; font-size: 3.2rem; color: var(--accent); line-height: 1; }
+    .row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+    .btn {
+      border: none; border-radius: 999px; padding: 10px 16px; font-weight: 700; cursor: default;
+      background: var(--accent); color: var(--navy-950);
+    }
+    .btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
+    .live-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--success);
+      box-shadow: 0 0 0 4px rgba(61,220,151,0.18); display: inline-block; margin-right: 6px;
+    }
+    pre {
+      background: rgba(5,11,20,0.55); border: 1px solid var(--border); border-radius: 12px;
+      padding: 12px; color: var(--text-2); font-size: 11px; overflow: auto; max-height: 180px;
+    }
+    @media (max-width: 800px) {
+      .kpis, .grid-2 { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="brand"><div class="mark">N</div> nxance</div>
+    <div class="chip"><span class="live-dot"></span>LIVE DEMO · ₹0 STACK</div>
+  </div>
+  <div class="wrap">
+    <div class="progress"><i id="bar"></i></div>
+    <div class="step-label" id="stepLabel">STEP 01 · OPENING</div>
+    <h1 id="title">Know if your money is actually working</h1>
+    <p class="lead" id="lead">Portfolio intelligence for India — quant measures, ML scores, deep embeddings. Language only explains.</p>
+    <div class="panel" id="panel">
+      <p style="color:var(--text-2)">Booting live engines…</p>
+    </div>
+    <p class="footer-note" id="foot">Suggestion only · Not SEBI investment advice · Ohshn Intelligence</p>
+  </div>
+  <script>
+    const API = location.origin.includes('5500') || location.origin.includes('file')
+      ? 'http://127.0.0.1:8000' : location.origin;
+    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+    const fmt = (n) => (n == null || isNaN(n) ? '—' : Number(n).toLocaleString('en-IN', { maximumFractionDigits: 0 }));
+    const el = (id) => document.getElementById(id);
+
+    let token = '';
+    let lastReport = null;
+    let lastPay = null;
+    let lastUpload = null;
+    let training = null;
+
+    async function api(path, opts = {}) {
+      const headers = { ...(opts.headers || {}) };
+      if (token) headers.Authorization = 'Bearer ' + token;
+      if (opts.json) {
+        headers['Content-Type'] = 'application/json';
+        opts.body = JSON.stringify(opts.json);
+      }
+      const res = await fetch(API + path, { ...opts, headers });
+      const data = await res.json().catch(() => ({}));
+      if (data.session?.token) token = data.session.token;
+      if (data.token) token = data.token;
+      if (!res.ok) throw new Error(data.detail || res.statusText);
+      return data;
+    }
+
+    function setStep(i, n, label, title, lead) {
+      el('bar').style.width = ((i + 1) / n * 100).toFixed(1) + '%';
+      el('stepLabel').textContent = `STEP ${String(i + 1).padStart(2, '0')} · ${label}`;
+      el('title').textContent = title;
+      el('lead').textContent = lead;
+    }
+
+    const steps = [
+      {
+        label: 'LOGIN',
+        title: 'Demo auth in under a second',
+        lead: 'Name + phone session — no OTP cost. Guest path always works.',
+        run: async () => {
+          const r = await api('/api/login', { method: 'POST', json: { name: 'Demo Investor', phone: '9876500001' } });
+          el('panel').innerHTML = `
+            <div class="grid-2">
+              <div class="card">
+                <h3>Signed in</h3>
+                <p><strong>${r.name}</strong><br/>Phone ${r.phone}<br/>User ${r.user_id}</p>
+                <div class="row"><span class="pill">token set</span><span class="pill">unlocked: false</span></div>
+              </div>
+              <div class="card">
+                <h3>₹0 auth stack</h3>
+                <p>No SMS gateway. Production can plug OTP later. Session feeds Health, Upload & Pay.</p>
+                <div class="big-num" style="font-size:2rem;margin-top:12px">Free</div>
+              </div>
+            </div>`;
+        },
+      },
+      {
+        label: 'SAMPLE DEMO',
+        title: 'One click on a labelled sample',
+        lead: 'No invented personal loss — sample is tagged. Engines surface TER leak + overlap.',
+        run: async () => {
+          const r = await api('/api/demo/run', { method: 'POST' });
+          lastReport = r;
+          el('panel').innerHTML = `
+            <div style="margin-bottom:10px" class="pill">ILLUSTRATIVE SAMPLE — NOT YOUR PORTFOLIO</div>
+            <p style="font-weight:700;margin-bottom:8px">${(r.story && r.story.headline) || r.teaser_summary || ''}</p>
+            <div class="kpis">
+              <div class="kpi"><div class="l">SCORE</div><div class="v accent">${r.score ?? '—'}</div></div>
+              <div class="kpi"><div class="l">GRADE</div><div class="v">${r.grade ?? '—'}</div></div>
+              <div class="kpi"><div class="l">TER WASTE</div><div class="v danger">₹${fmt(r.ter_waste_annual_rs)}/yr</div></div>
+              <div class="kpi"><div class="l">OVERLAP</div><div class="v danger">₹${fmt(r.overlap_waste_annual_rs)}/yr</div></div>
+            </div>
+            ${(r.issues || []).slice(0, 2).map((iss) => `
+              <div class="issue"><h3>${iss.title || ''}</h3><p>${iss.description || iss.fix || ''}</p></div>
+            `).join('')}`;
+        },
+      },
+      {
+        label: 'INTELLIGENCE',
+        title: 'L1 quant · L2 ML · L3 deep',
+        lead: 'Trained India L2 bagged+boost models. Embedding × style factors for fund overlap.',
+        run: async () => {
+          training = await api('/api/training/status');
+          const dl = training.deep_models || {};
+          const ml = training.model_bundle || {};
+          el('panel').innerHTML = `
+            <div class="grid-2">
+              <div class="card">
+                <h3>L2 ML bundle</h3>
+                <p>Version <strong>${ml.version || '—'}</strong><br/>Features ${ml.n_features || '—'} · Boost tasks ${(ml.boost_tasks || []).length}</p>
+                <div class="row">${(ml.models || []).map((m) => `<span class="pill">${m}</span>`).join('')}</div>
+              </div>
+              <div class="card">
+                <h3>L3 deep models</h3>
+                <p>Embedding ${dl.embedding_version || '—'} (dim ${dl.embedding_dim || '—'})<br/>Sequence ${dl.sequence_version || '—'}</p>
+                <div class="row">${(dl.features || []).map((f) => `<span class="pill">${f}</span>`).join('')}</div>
+              </div>
+            </div>
+            <div class="card" style="margin-top:12px">
+              <h3>OCR engine</h3>
+              <p>${(training.ocr && training.ocr.engine) || 'nxance_ocr_v4'} · ready: <strong class="ok">${(training.ocr && training.ocr.ready) ? 'yes' : 'no'}</strong> · multi-PSM + lexicon</p>
+            </div>`;
+        },
+      },
+      {
+        label: 'UPLOAD',
+        title: 'CAS · PDF · Excel · screenshot',
+        lead: 'Universal free ingest — pdfminer, openpyxl, Tesseract. No SaaS OCR bill.',
+        run: async () => {
+          const formats = await api('/api/ingest/formats');
+          // upload sample csv from static
+          const csv = await fetch('/sample_portfolio.csv').then((r) => r.blob()).catch(() => null);
+          let uploadNote = 'Sample CSV not mounted — formats still live.';
+          if (csv) {
+            const fd = new FormData();
+            fd.append('file', new File([csv], 'sample_portfolio.csv', { type: 'text/csv' }));
+            const headers = token ? { Authorization: 'Bearer ' + token } : {};
+            const res = await fetch(API + '/api/ingest/document', { method: 'POST', headers, body: fd });
+            lastUpload = await res.json();
+            uploadNote = `Parsed <strong>${lastUpload.count || 0}</strong> holdings · kind ${lastUpload.kind || 'csv'}`;
+          }
+          el('panel').innerHTML = `
+            <div class="grid-2">
+              <div class="card">
+                <h3>Formats accepted</h3>
+                <div class="row">${(formats.formats || []).map((f) => `<span class="pill">${f}</span>`).join('')}</div>
+                <p style="margin-top:10px">${uploadNote}</p>
+              </div>
+              <div class="card">
+                <h3>Holdings preview</h3>
+                ${(lastUpload && lastUpload.holdings ? lastUpload.holdings : []).slice(0, 4).map((h) =>
+                  `<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span>${h.name}</span><strong class="accent">₹${fmt(h.current_value)}</strong></div>`
+                ).join('') || '<p>Use mobile Upload tab or web portal for your file.</p>'}
+              </div>
+            </div>`;
+        },
+      },
+      {
+        label: 'PAY · UNLOCK',
+        title: 'Dummy ₹99 unlock path',
+        lead: 'No Razorpay yet — confirm demo payment or use DEMO-UNLOCK for full intelligence.',
+        run: async () => {
+          lastPay = await api('/api/payments/create', { method: 'POST', json: { amount_inr: 99, method: 'dummy_upi' } });
+          const conf = await api('/api/payments/confirm', { method: 'POST', json: { payment_id: lastPay.payment_id } });
+          el('panel').innerHTML = `
+            <div class="grid-2">
+              <div class="card">
+                <h3>Order ${lastPay.payment_id}</h3>
+                <p>Amount ₹${lastPay.amount_inr}<br/>VPA ${lastPay.upi_vpa_demo}<br/>Status → <strong class="ok">${conf.status}</strong></p>
+              </div>
+              <div class="card">
+                <h3>Unlocked</h3>
+                <div class="big-num" style="font-size:2.4rem">₹99</div>
+                <p style="margin-top:8px">Code <strong>${conf.unlock_code}</strong> · Full issues + L2/L3 detail</p>
+              </div>
+            </div>
+            <p class="footer-note" style="margin-top:12px">${lastPay.qr_note || ''}</p>`;
+        },
+      },
+      {
+        label: 'STACK',
+        title: 'World-class at ₹0',
+        lead: 'L1 quant · L2 bags+boost · L3 embedding×style · OCR v4 lexicon — no paid APIs.',
+        run: async () => {
+          el('panel').innerHTML = `
+            <div class="kpis">
+              <div class="kpi"><div class="l">COST</div><div class="v ok">₹0</div></div>
+              <div class="kpi"><div class="l">AMFI SEEDS</div><div class="v accent">633+</div></div>
+              <div class="kpi"><div class="l">L2 VERSION</div><div class="v">${(training && training.model_bundle && training.model_bundle.version) || 'india_l2_v4'}</div></div>
+              <div class="kpi"><div class="l">OCR</div><div class="v">v4</div></div>
+            </div>
+            <div class="grid-2">
+              <div class="card">
+                <h3>Android APK</h3>
+                <p>Login · Upload · Pay · Health · Build. Point Settings API to your Mac LAN IP.</p>
+              </div>
+              <div class="card">
+                <h3>Principle</h3>
+                <p>LLM never computes returns, tax, or risk. Quant measures. ML scores. DL represents.</p>
+              </div>
+            </div>
+            <div class="row" style="margin-top:16px">
+              <span class="btn">Install APK</span>
+              <span class="btn ghost">Open web portal</span>
+              <span class="btn ghost">DEMO-UNLOCK</span>
+            </div>`;
+        },
+      },
+      {
+        label: 'CLOSE',
+        title: 'Nxance · Ohshn Intelligence',
+        lead: 'Palampur HP · Suggestion only · Built for Indian retail portfolios.',
+        run: async () => {
+          el('panel').innerHTML = `
+            <div style="text-align:center;padding:28px 10px">
+              <div class="mark" style="margin:0 auto 16px;width:56px;height:56px;font-size:1.4rem">N</div>
+              <div class="big-num">nxance</div>
+              <p style="color:var(--text-2);margin-top:12px;max-width:28rem;margin-left:auto;margin-right:auto">
+                Working demo complete — live API, trained models, document ingest, dummy payments.
+              </p>
+              <div class="row" style="justify-content:center;margin-top:18px">
+                <span class="pill">LIVE</span><span class="pill">MBP</span><span class="pill">₹0 STACK</span>
+              </div>
+            </div>`;
+        },
+      },
+    ];
+
+    (async () => {
+      for (let i = 0; i < steps.length; i++) {
+        const s = steps[i];
+        setStep(i, steps.length, s.label, s.title, s.lead);
+        el('panel').innerHTML = `<p style="color:var(--text-2)">Loading ${s.label.toLowerCase()}…</p>`;
+        try {
+          await s.run();
+        } catch (e) {
+          el('panel').innerHTML = `<p style="color:var(--danger)">Step error: ${e.message}. Is API at ${API} running?</p>`;
+        }
+        // dwell so headless capture can screenshot each beat
+        await sleep(4200);
+      }
+      // hold on close
+      await sleep(2500);
+      document.body.dataset.demoDone = '1';
+    })();
+  </script>
+</body>
+</html>

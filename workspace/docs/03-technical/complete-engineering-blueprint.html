@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Nxance — Complete Engineering Blueprint (Final, Revised)</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+:root{
+  --bg:#02030A;--c2:#0A0D1A;--bo:#151828;--b2:#191D35;
+  --tx:#EAF0FF;--t2:#586298;--t3:#222640;
+  --g:#00D4B1;--gt:rgba(0,212,177,.1);--gr:rgba(0,212,177,.22);
+  --gold:#FFB830;--goldt:rgba(255,184,48,.09);
+  --red:#FF3F60;--redt:rgba(255,63,96,.09);
+  --blue:#4A8FFF;--bluet:rgba(74,143,255,.09);
+  --purple:#9B6DFF;--purplet:rgba(155,109,255,.09);
+  --grn:#1EC896;--grnt:rgba(30,200,150,.09);
+  --cyan:#00C4FF;--cyant:rgba(0,196,255,.09);
+  --org:#FF7A35;--orgt:rgba(255,122,53,.09);
+  --rust:#CE422B;--rustt:rgba(206,66,43,.09);
+  --new:#FF6B9D;--newt:rgba(255,107,157,.1);--newr:rgba(255,107,157,.3);
+  --pink:#FF6B9D;--pinkt:rgba(255,107,157,.09);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);line-height:1.72;font-size:14px}
+.cover{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 28px;text-align:center;
+  background:radial-gradient(ellipse 80% 55% at 50% -8%,rgba(0,212,177,.1),transparent 58%),radial-gradient(ellipse 35% 25% at 92% 88%,rgba(74,143,255,.06),transparent 50%),radial-gradient(ellipse 28% 22% at 6% 76%,rgba(155,109,255,.06),transparent 50%)}
+.ctag{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--g);background:var(--gt);border:1px solid var(--gr);padding:5px 20px;border-radius:20px;display:inline-block;margin-bottom:18px}
+.newtag{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--new);background:var(--newt);border:1px solid var(--newr);padding:5px 20px;border-radius:20px;display:inline-block;margin-bottom:22px}
+.ch{font-family:'Space Grotesk',sans-serif;font-size:clamp(26px,4.8vw,50px);font-weight:700;line-height:1.08;letter-spacing:-.025em;margin-bottom:12px}
+.ch em{font-style:normal;color:var(--g)}
+.csub{font-size:14.5px;color:var(--t2);max-width:760px;margin:0 auto 28px;line-height:1.82}
+.badges{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin-bottom:36px;max-width:920px}
+.bd{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;padding:4px 13px;border-radius:20px;letter-spacing:.04em}
+.bg{color:var(--g);background:var(--gt);border:1px solid var(--gr)}
+.bb{color:var(--blue);background:var(--bluet);border:1px solid rgba(74,143,255,.3)}
+.bgold{color:var(--gold);background:var(--goldt);border:1px solid rgba(255,184,48,.3)}
+.bred{color:var(--red);background:var(--redt);border:1px solid rgba(255,63,96,.3)}
+.bp{color:var(--purple);background:var(--purplet);border:1px solid rgba(155,109,255,.3)}
+.bc{color:var(--cyan);background:var(--cyant);border:1px solid rgba(0,196,255,.3)}
+.bo2{color:var(--org);background:var(--orgt);border:1px solid rgba(255,122,53,.3)}
+.brust{color:var(--rust);background:var(--rustt);border:1px solid rgba(206,66,43,.3)}
+.bnew{color:var(--new);background:var(--newt);border:1px solid var(--newr)}
+.cover-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;max-width:920px;width:100%}
+.cg{background:var(--c2);border:1.5px solid var(--b2);border-radius:11px;padding:13px 8px;text-align:center}
+.cg-icon{font-size:19px;margin-bottom:5px;display:block}
+.cg-num{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--t3);margin-bottom:3px}
+.cg-name{font-size:9px;font-weight:700;color:var(--tx);line-height:1.3}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px 80px}
+.sec{margin-bottom:80px}
+.hr{height:1px;background:var(--bo);margin:64px 0}
+.slabel{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--g);background:var(--gt);border:1px solid var(--gr);padding:3px 13px;border-radius:20px;display:inline-block;margin-bottom:14px}
+.slabel.new{color:var(--new);background:var(--newt);border-color:var(--newr)}
+.stitle{font-family:'Space Grotesk',sans-serif;font-size:27px;font-weight:700;letter-spacing:-.015em;margin-bottom:6px}
+.stitle em{font-style:normal;color:var(--g)}
+.ssub{font-size:14px;color:var(--t2);margin-bottom:24px;max-width:760px;line-height:1.82}
+.ic-g{background:var(--gt);border:1.5px solid var(--gr)}.ic-b{background:var(--bluet);border:1.5px solid rgba(74,143,255,.3)}
+.ic-gold{background:var(--goldt);border:1.5px solid rgba(255,184,48,.3)}.ic-red{background:var(--redt);border:1.5px solid rgba(255,63,96,.3)}
+.ic-p{background:var(--purplet);border:1.5px solid rgba(155,109,255,.3)}.ic-grn{background:var(--grnt);border:1.5px solid rgba(30,200,150,.3)}
+.ic-cyan{background:var(--cyant);border:1.5px solid rgba(0,196,255,.3)}.ic-org{background:var(--orgt);border:1.5px solid rgba(255,122,53,.3)}
+.ic-rust{background:var(--rustt);border:1.5px solid rgba(206,66,43,.3)}.ic-new{background:var(--newt);border:1.5px solid var(--newr)}
+.ecard{background:var(--c2);border:1.5px solid var(--bo);border-radius:16px;overflow:hidden;margin-bottom:18px}
+.ecard.new{border-color:var(--newr)}
+.ehead{padding:18px 22px;border-bottom:1px solid var(--bo);display:flex;align-items:center;gap:14px}
+.eicon{width:50px;height:50px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:23px;flex-shrink:0}
+.eid{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;color:var(--g);margin-bottom:3px}
+.eid.new{color:var(--new)}
+.ename{font-size:18px;font-weight:700;color:var(--tx);margin-bottom:2px}.etag{font-size:11.5px;color:var(--t2)}
+.ebody{padding:20px 22px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:18px}.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:13px}.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}
+.slbl{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.11em;color:var(--t3);margin-bottom:7px;margin-top:13px;display:block}
+.slbl:first-child{margin-top:0}
+.params{display:flex;flex-direction:column;gap:5px}
+.param{display:flex;align-items:flex-start;gap:9px;padding:7px 10px;background:rgba(255,255,255,.02);border:1px solid var(--bo);border-radius:7px;font-size:11.5px}
+.pn{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;color:var(--g);flex-shrink:0;min-width:138px}
+.pn.new{color:var(--new)}
+.pv{color:var(--t2);line-height:1.55}
+.code{background:rgba(0,0,0,.6);border:1px solid var(--b2);border-radius:9px;padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#7A90CC;line-height:1.68;overflow-x:auto;white-space:pre;margin:10px 0}
+.nb{background:var(--gt);border:1px solid var(--gr);border-radius:8px;padding:9px 13px;font-size:11.5px;color:var(--g);margin:9px 0;line-height:1.6}
+.ib{background:var(--bluet);border:1px solid rgba(74,143,255,.25);border-radius:8px;padding:9px 13px;font-size:11.5px;color:var(--blue);margin:9px 0;line-height:1.6}
+.wb{background:var(--redt);border:1px solid rgba(255,63,96,.25);border-radius:8px;padding:9px 13px;font-size:11.5px;color:var(--red);margin:9px 0;line-height:1.6}
+.newb{background:var(--newt);border:1px solid var(--newr);border-radius:8px;padding:9px 13px;font-size:11.5px;color:var(--new);margin:9px 0;line-height:1.6}
+.goldb{background:var(--goldt);border:1px solid rgba(255,184,48,.25);border-radius:8px;padding:9px 13px;font-size:11.5px;color:var(--gold);margin:9px 0;line-height:1.6}
+.pb{background:var(--purplet);border:1px solid rgba(155,109,255,.25);border-radius:8px;padding:9px 13px;font-size:11.5px;color:var(--purple);margin:9px 0;line-height:1.6}
+.rustb{background:var(--rustt);border:1px solid rgba(206,66,43,.25);border-radius:8px;padding:9px 13px;font-size:11.5px;color:var(--rust);margin:9px 0;line-height:1.6}
+table{width:100%;border-collapse:collapse;margin:9px 0;font-size:11.5px}
+th{background:rgba(255,255,255,.04);padding:8px 11px;text-align:left;font-family:'JetBrains Mono',monospace;font-size:8.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--t3);border-bottom:1px solid var(--b2)}
+td{padding:8px 11px;border-bottom:1px solid rgba(255,255,255,.03);color:var(--t2);vertical-align:top}
+tr:last-child td{border:none}tr:hover td{background:rgba(255,255,255,.012)}td:first-child{color:var(--tx);font-weight:600}
+.newrow{background:rgba(255,107,157,.04)!important}
+.footer{text-align:center;padding:48px 0 20px;border-top:1px solid var(--bo);margin-top:20px}
+.fl{font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;background:linear-gradient(135deg,var(--g),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+.ft{font-size:11.5px;color:var(--t3)}
+@media(max-width:760px){.cover-grid,.g2,.g3,.g4{grid-template-columns:1fr}.wrap{padding:0 14px 60px}}
+</style>
+</head>
+<body>
+
+<!-- ═══ COVER ═══ -->
+<div class="cover">
+  <div class="ctag">Ohshn Intelligence — Nxance Engineering Division</div>
+  <div class="newtag">&#9889; Complete + Revised Edition — Includes 2026 Advanced Research</div>
+  <div class="ch">Nxance Complete<br><em>Engineering Blueprint</em></div>
+  <div class="csub">The single, complete technical foundation for Nxance — AI-powered investment intelligence platform. Every layer: frontend, backend, security, the Health Check Engine (11 sub-engines), the Construction Engine (14 sub-engines), NxanceLM (own AI with hybrid 2026 architecture), database, own cloud, every app feature, and the complete multi-department admin panel.</div>
+  <div class="badges">
+    <span class="bd bg">React Native + TypeScript</span>
+    <span class="bd brust">Rust Core Engines</span>
+    <span class="bd bb">Python ML/AI</span>
+    <span class="bd bp">C++ Quant Kernels</span>
+    <span class="bd bgold">CUDA GPU Compute</span>
+    <span class="bd bred">Hybrid Transformer-Mamba-MoE</span>
+    <span class="bd bc">Go Microservices</span>
+    <span class="bd bo2">Account Aggregator Data Layer</span>
+    <span class="bd bnew">11 HC Sub-Engines</span>
+    <span class="bd bnew">14 Construction Sub-Engines</span>
+  </div>
+  <div class="cover-grid">
+    <div class="cg"><span class="cg-icon">&#128241;</span><div class="cg-num">PART 01</div><div class="cg-name">Frontend + Mobile (2026)</div></div>
+    <div class="cg"><span class="cg-icon">&#9881;</span><div class="cg-num">PART 02</div><div class="cg-name">Backend + Microservices</div></div>
+    <div class="cg"><span class="cg-icon">&#128274;</span><div class="cg-num">PART 03</div><div class="cg-name">Security Architecture</div></div>
+    <div class="cg"><span class="cg-icon">&#128202;</span><div class="cg-num">PART 04</div><div class="cg-name">Health Check Engine (11 sub)</div></div>
+    <div class="cg"><span class="cg-icon">&#127959;</span><div class="cg-num">PART 05</div><div class="cg-name">Construction Engine (14 sub)</div></div>
+    <div class="cg"><span class="cg-icon">&#129504;</span><div class="cg-num">PART 06</div><div class="cg-name">NxanceLM — Hybrid AI 2026</div></div>
+    <div class="cg"><span class="cg-icon">&#128279;</span><div class="cg-num">PART 07</div><div class="cg-name">Database + Own Cloud + AA Layer</div></div>
+    <div class="cg"><span class="cg-icon">&#128279;</span><div class="cg-num">PART 08</div><div class="cg-name">App Features</div></div>
+    <div class="cg"><span class="cg-icon">&#128188;</span><div class="cg-num">PART 09</div><div class="cg-name">Admin Panel — All Depts</div></div>
+    <div class="cg"><span class="cg-icon">&#127760;</span><div class="cg-num">PART 10</div><div class="cg-name">APIs + Data Sources</div></div>
+    <div class="cg"><span class="cg-icon">&#128300;</span><div class="cg-num">PART 11</div><div class="cg-name">Architecture Patterns</div></div>
+    <div class="cg"><span class="cg-icon">&#128221;</span><div class="cg-num">PART 12</div><div class="cg-name">Complete Summary</div></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- ═══════════════════════════════════════
+     PART 1: FRONTEND + MOBILE (2026)
+═══════════════════════════════════════ -->
+<div class="sec">
+  <div class="slabel">Part 01 — Frontend + Mobile</div>
+  <div class="stitle">Frontend Architecture &mdash; <em>Languages, Frameworks, 2026 Advances</em></div>
+  <div class="ssub">One codebase serving Android, iOS, and Web. TypeScript everywhere for type safety on a finance product where bugs cost real money.</div>
+
+  <div class="ecard">
+    <div class="ehead">
+      <div class="eicon ic-g">&#128241;</div>
+      <div>
+        <div class="eid">MOBILE APP STACK</div>
+        <div class="ename">React Native + TypeScript — Cross-Platform Core</div>
+        <div class="etag">The Architecture (Fabric+TurboModules, default in 2026) + Nitro Modules</div>
+      </div>
+    </div>
+    <div class="ebody">
+      <div class="g2">
+        <div>
+          <span class="slbl">Core Framework</span>
+          <div class="params">
+            <div class="param"><span class="pn">React Native 0.81+</span><span class="pv">"The Architecture" (formerly New Architecture) is now default — legacy bridge fully deprecated and removed in 2026.</span></div>
+            <div class="param"><span class="pn">TypeScript (strict)</span><span class="pv">Every component, API call, calculation typed. Catches Rs./% errors at compile time.</span></div>
+            <div class="param"><span class="pn">Expo (bare workflow)</span><span class="pv">Dev tooling + OTA updates, full native module access for biometric auth, secure storage.</span></div>
+            <div class="param"><span class="pn">React Navigation 7</span><span class="pv">Stack+tab+drawer; deep linking from push notifications straight to relevant screen.</span></div>
+          </div>
+          <span class="slbl">State Management</span>
+          <div class="params">
+            <div class="param"><span class="pn">Redux Toolkit + RTK Query</span><span class="pv">Global state: session, portfolio, engine results. Auto cache/invalidation.</span></div>
+            <div class="param"><span class="pn">Zustand</span><span class="pv">Lightweight UI-only state (modals, form drafts).</span></div>
+          </div>
+        </div>
+        <div>
+          <span class="slbl">2026 New Capabilities <span class="bd bnew" style="font-size:8px">NEW</span></span>
+          <div class="params">
+            <div class="param"><span class="pn new">Nitro Modules</span><span class="pv">Successor to TurboModules — direct C++/Rust binding via JSI, near-zero overhead for heaviest data paths (portfolio recalc, chart transforms).</span></div>
+            <div class="param"><span class="pn new">Rust-Powered RN Modules</span><span class="pv">Performance-critical mobile logic in Rust via JSI — reuses the same Rust skillset as the backend Calc Engine.</span></div>
+            <div class="param"><span class="pn new">React Native Worklets</span><span class="pv">Isolated low-latency runtime for concurrent JS — live chart updates while scrolling, no UI blocking.</span></div>
+            <div class="param"><span class="pn new">Static Hermes</span><span class="pv">Pre-compiles JS to near-native machine code — closes gap with native for CPU-bound local XIRR pre-calc.</span></div>
+            <div class="param"><span class="pn new">WebGPU + Skia</span><span class="pv">GPU-accelerated rendering, standardised 2026 — genuine 3D/shader portfolio visualisations.</span></div>
+            <div class="param"><span class="pn new">On-Device AI</span><span class="pv">ONNX Runtime Mobile + TensorFlow Lite — distilled NxanceLM runs offline when network is poor (critical for Tier-2/3 India).</span></div>
+          </div>
+        </div>
+      </div>
+
+      <span class="slbl">Security + Native Modules</span>
+      <div class="params">
+        <div class="param"><span class="pn">react-native-keychain</span><span class="pv">Biometric-gated secure storage for auth tokens.</span></div>
+        <div class="param"><span class="pn">SSL Pinning + Root Detection</span><span class="pv">Prevents MITM attacks; flags compromised devices.</span></div>
+      </div>
+
+      <span class="slbl">Web Frontend (Companion + Admin Panel Base)</span>
+      <table>
+        <thead><tr><th>Layer</th><th>Technology</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>Framework</td><td>Next.js 14 (App Router)</td><td>Server components, fast load, shared React model with mobile.</td></tr>
+          <tr><td>Styling</td><td>Tailwind CSS + shadcn/ui</td><td>Consistent with mobile NativeWind; fast accessible components.</td></tr>
+          <tr><td>Charts</td><td>D3.js + Recharts</td><td>D3 for custom (correlation heatmaps), Recharts for standard.</td></tr>
+          <tr><td>Forms</td><td>React Hook Form + Zod</td><td>Schema validation shared between frontend and backend.</td></tr>
+        </tbody>
+      </table>
+      <div class="nb">Monorepo (Turborepo) houses mobile, web, and shared <code>packages/core</code> with TypeScript types, API client, business logic — single source of truth across platforms.</div>
+    </div>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══════════════════════════════════════
+     PART 2: BACKEND + MICROSERVICES
+═══════════════════════════════════════ -->
+<div class="sec">
+  <div class="slabel">Part 02 — Backend + Microservices</div>
+  <div class="stitle">Backend Architecture &mdash; <em>Polyglot Microservices by Workload</em></div>
+  <div class="ssub">No single language handles everything well. Python for ML/orchestration, Rust for performance-critical calculations, Go for high-throughput gateways, C++ for the heaviest quant kernels.</div>
+
+  <svg viewBox="0 0 860 500" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:860px;display:block;margin:0 auto 24px;border-radius:14px">
+    <defs><marker id="a1" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#222640"/></marker></defs>
+    <rect width="860" height="500" rx="14" fill="#0A0D1A" stroke="#151828" stroke-width="1.5"/>
+    <text x="430" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="#EAF0FF" font-family="Space Grotesk,sans-serif">Nxance Backend — Polyglot Microservices Architecture</text>
+
+    <rect x="280" y="42" width="300" height="42" rx="9" fill="rgba(0,212,177,.07)" stroke="#00D4B1" stroke-width="1.5"/>
+    <text x="430" y="61" text-anchor="middle" font-size="9" fill="#00D4B1" font-weight="700" font-family="JetBrains Mono,monospace">API GATEWAY — Go (Fiber) + Kong</text>
+    <text x="430" y="76" text-anchor="middle" font-size="9" fill="#586298">Auth, rate-limiting, routing — 50k req/sec</text>
+    <line x1="430" y1="84" x2="430" y2="100" stroke="#222640" stroke-width="1.5" marker-end="url(#a1)"/>
+
+    <rect x="22" y="102" width="194" height="112" rx="9" fill="rgba(74,143,255,.06)" stroke="#4A8FFF" stroke-width="1.2"/>
+    <text x="119" y="122" text-anchor="middle" font-size="9" fill="#4A8FFF" font-weight="700" font-family="JetBrains Mono,monospace">USER SERVICE</text>
+    <text x="119" y="138" text-anchor="middle" font-size="10" font-weight="700" fill="#EAF0FF">Python (FastAPI)</text>
+    <text x="38" y="156" font-size="8" fill="#586298">Auth, profile, KYC, sessions</text>
+    <text x="38" y="170" font-size="8" fill="#586298">JWT + refresh rotation</text>
+    <text x="38" y="184" font-size="8" fill="#586298">Account Aggregator FIU logic</text>
+    <text x="38" y="200" font-size="8" fill="#4A8FFF" font-weight="700">PostgreSQL + Redis session</text>
+
+    <rect x="226" y="102" width="194" height="112" rx="9" fill="rgba(206,66,43,.06)" stroke="#CE422B" stroke-width="1.5"/>
+    <text x="323" y="122" text-anchor="middle" font-size="9" fill="#CE422B" font-weight="700" font-family="JetBrains Mono,monospace">CALC ENGINE</text>
+    <text x="323" y="138" text-anchor="middle" font-size="10" font-weight="700" fill="#EAF0FF">Rust (Axum + Rayon)</text>
+    <text x="242" y="156" font-size="8" fill="#586298">XIRR, Sharpe, CVaR, correlation</text>
+    <text x="242" y="170" font-size="8" fill="#586298">Parallel computation (Rayon)</text>
+    <text x="242" y="184" font-size="8" fill="#586298">Also compiled to RN Nitro module</text>
+    <text x="242" y="200" font-size="8" fill="#CE422B" font-weight="700">10-50× faster than Python</text>
+
+    <rect x="430" y="102" width="194" height="112" rx="9" fill="rgba(155,109,255,.06)" stroke="#9B6DFF" stroke-width="1.5"/>
+    <text x="527" y="122" text-anchor="middle" font-size="9" fill="#9B6DFF" font-weight="700" font-family="JetBrains Mono,monospace">AI/ML SERVICE</text>
+    <text x="527" y="138" text-anchor="middle" font-size="10" font-weight="700" fill="#EAF0FF">Python (PyTorch+CUDA)</text>
+    <text x="446" y="156" font-size="8" fill="#586298">NxanceLM hybrid inference</text>
+    <text x="446" y="170" font-size="8" fill="#586298">Selection Engine ML scoring</text>
+    <text x="446" y="184" font-size="8" fill="#586298">QAOA quantum-classical hybrid</text>
+    <text x="446" y="200" font-size="8" fill="#9B6DFF" font-weight="700">Runs on OhshnCUDA GPU pool</text>
+
+    <rect x="634" y="102" width="204" height="112" rx="9" fill="rgba(255,184,48,.05)" stroke="#FFB830" stroke-width="1.2"/>
+    <text x="736" y="122" text-anchor="middle" font-size="9" fill="#FFB830" font-weight="700" font-family="JetBrains Mono,monospace">NOTIFICATION SVC</text>
+    <text x="736" y="138" text-anchor="middle" font-size="10" font-weight="700" fill="#EAF0FF">Go + NATS</text>
+    <text x="650" y="156" font-size="8" fill="#586298">Push, email, SMS dispatch</text>
+    <text x="650" y="170" font-size="8" fill="#586298">Event-driven via message queue</text>
+    <text x="650" y="184" font-size="8" fill="#586298">FCM + SendGrid + Twilio</text>
+    <text x="650" y="200" font-size="8" fill="#FFB830" font-weight="700">100k+ msgs/min throughput</text>
+
+    <rect x="22" y="222" width="194" height="112" rx="9" fill="rgba(30,200,150,.06)" stroke="#1EC896" stroke-width="1.5"/>
+    <text x="119" y="242" text-anchor="middle" font-size="9" fill="#1EC896" font-weight="700" font-family="JetBrains Mono,monospace">HC ENGINE SVC</text>
+    <text x="119" y="258" text-anchor="middle" font-size="10" font-weight="700" fill="#EAF0FF">Python + Rust hybrid</text>
+    <text x="38" y="276" font-size="8" fill="#586298">11 sub-engines orchestration</text>
+    <text x="38" y="290" font-size="8" fill="#586298">Python: orchestration logic</text>
+    <text x="38" y="304" font-size="8" fill="#586298">Rust: hot-path calculations</text>
+    <text x="38" y="320" font-size="8" fill="#1EC896" font-weight="700">Calls Calc Engine via gRPC</text>
+
+    <rect x="226" y="222" width="194" height="112" rx="9" fill="rgba(0,196,255,.06)" stroke="#00C4FF" stroke-width="1.5"/>
+    <text x="323" y="242" text-anchor="middle" font-size="9" fill="#00C4FF" font-weight="700" font-family="JetBrains Mono,monospace">CONSTRUCTION SVC</text>
+    <text x="323" y="258" text-anchor="middle" font-size="10" font-weight="700" fill="#EAF0FF">Python + C++ + CUDA</text>
+    <text x="242" y="276" font-size="8" fill="#586298">14 sub-engines orchestration</text>
+    <text x="242" y="290" font-size="8" fill="#586298">C++: MVO/QAOA optimisation core</text>
+    <text x="242" y="304" font-size="8" fill="#586298">Python: Selection Engine glue</text>
+    <text x="242" y="320" font-size="8" fill="#00C4FF" font-weight="700">GPU-accelerated via OhshnCUDA</text>
+
+    <rect x="430" y="222" width="194" height="112" rx="9" fill="rgba(255,107,157,.05)" stroke="#FF6B9D" stroke-width="1.2"/>
+    <text x="527" y="242" text-anchor="middle" font-size="9" fill="#FF6B9D" font-weight="700" font-family="JetBrains Mono,monospace">PAYMENTS SVC</text>
+    <text x="527" y="258" text-anchor="middle" font-size="10" font-weight="700" fill="#EAF0FF">Go (strict typing)</text>
+    <text x="446" y="276" font-size="8" fill="#586298">Razorpay/UPI integration</text>
+    <text x="446" y="290" font-size="8" fill="#586298">Subscription billing</text>
+    <text x="446" y="304" font-size="8" fill="#586298">Wallet ledger (double-entry)</text>
+    <text x="446" y="320" font-size="8" fill="#FF6B9D" font-weight="700">PCI-DSS scope isolated</text>
+
+    <rect x="634" y="222" width="204" height="112" rx="9" fill="rgba(255,122,53,.05)" stroke="#FF7A35" stroke-width="1.2"/>
+    <text x="736" y="242" text-anchor="middle" font-size="9" fill="#FF7A35" font-weight="700" font-family="JetBrains Mono,monospace">DATA INGESTION SVC</text>
+    <text x="736" y="258" text-anchor="middle" font-size="10" font-weight="700" fill="#EAF0FF">Go + Python</text>
+    <text x="650" y="276" font-size="8" fill="#586298">Account Aggregator + AMFI/NSE</text>
+    <text x="650" y="290" font-size="8" fill="#586298">Go: high-freq polling + AA sync</text>
+    <text x="650" y="304" font-size="8" fill="#586298">Python: CAS PDF fallback parsing</text>
+    <text x="650" y="320" font-size="8" fill="#FF7A35" font-weight="700">Scheduled via cron + Kafka</text>
+
+    <rect x="42" y="350" width="776" height="44" rx="9" fill="rgba(255,255,255,.03)" stroke="#191D35" stroke-width="1"/>
+    <text x="430" y="376" text-anchor="middle" font-size="10" fill="#586298" font-family="JetBrains Mono,monospace">EVENT BUS — Apache Kafka (high-throughput) + NATS (low-latency internal pub/sub)</text>
+    <line x1="430" y1="394" x2="430" y2="410" stroke="#222640" stroke-width="1.5" marker-end="url(#a1)"/>
+
+    <rect x="42" y="412" width="776" height="70" rx="9" fill="rgba(0,212,177,.04)" stroke="#00D4B1" stroke-width="1.2"/>
+    <text x="430" y="432" text-anchor="middle" font-size="10" fill="#00D4B1" font-weight="700" font-family="JetBrains Mono,monospace">DATA LAYER — PostgreSQL + TimescaleDB + Redis + ClickHouse + pgvector</text>
+    <text x="430" y="450" text-anchor="middle" font-size="9" fill="#586298">Phase 1: Supabase managed → Phase 2 (Month 3-4): self-hosted on Ohshn Cloud</text>
+    <text x="430" y="465" text-anchor="middle" font-size="9" fill="#586298">All services communicate via gRPC internally (Protocol Buffers) — type-safe, fast inter-service calls</text>
+
+    <text x="430" y="490" text-anchor="middle" font-size="9" fill="#222640" font-family="JetBrains Mono,monospace">Nxance Backend Architecture — Complete Revised — Ohshn Intelligence — 2026</text>
+  </svg>
+
+  <div class="ecard">
+    <div class="ehead">
+      <div class="eicon ic-rust">&#9881;</div>
+      <div>
+        <div class="eid">WHY POLYGLOT — LANGUAGE DECISION MATRIX</div>
+        <div class="ename">Right Tool Per Workload, Connected by gRPC</div>
+      </div>
+    </div>
+    <div class="ebody">
+      <table>
+        <thead><tr><th>Language</th><th>Used For</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td style="color:var(--blue)">Python 3.12+</td><td>ML/AI orchestration, business logic, data pipelines</td><td>Fastest to iterate; best ML ecosystem (PyTorch, scipy, pandas).</td></tr>
+          <tr><td style="color:var(--rust)">Rust</td><td>Calc Engine, real-time scoring, RN Nitro modules</td><td>Memory-safe, no GC pauses, 10-50× faster than Python.</td></tr>
+          <tr><td style="color:var(--purple)">C++ 20</td><td>MVO/QAOA core, correlation matrix, CUDA host code</td><td>Max control for GPU interop; industry standard in quant finance.</td></tr>
+          <tr><td style="color:var(--gold)">Go (Golang)</td><td>API gateway, payments, data ingestion, notifications</td><td>Best concurrency for high-throughput I/O-bound services.</td></tr>
+          <tr><td style="color:var(--cyan)">CUDA C++ / mamba-ssm</td><td>GPU kernels — correlation, QAOA sim, hybrid AI training</td><td>Direct GPU programming; mamba-ssm kernels needed for SSM layers.</td></tr>
+          <tr><td style="color:var(--grn)">TypeScript</td><td>Frontend (mobile+web), admin panel</td><td>Type safety across frontend; shared types via OpenAPI/Protobuf.</td></tr>
+        </tbody>
+      </table>
+      <div class="code">// Rust Calc Engine — XIRR, 10-50x faster than Python
+use rayon::prelude::*;
+
+pub fn calculate_xirr(flows: &[CashFlow]) -> Result<f64, XirrError> {
+    let base_date = flows[0].date;
+    let npv = |rate: f64| -> f64 {
+        flows.iter().map(|cf| {
+            let years = (cf.date - base_date).num_days() as f64 / 365.25;
+            cf.amount / (1.0 + rate).powf(years)
+        }).sum()
+    };
+    brent_solve(npv, -0.9999, 10.0, 1e-9)
+}
+
+// Parallel correlation matrix — 7,400×7,400 in ~800ms
+pub fn correlation_matrix(returns: &[Vec<f64>]) -> Vec<Vec<f64>> {
+    let n = returns.len();
+    (0..n).into_par_iter().map(|i| {
+        (0..n).map(|j| pearson_correlation(&returns[i], &returns[j])).collect()
+    }).collect()
+}</div>
+    </div>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══════════════════════════════════════
+     PART 3: SECURITY ARCHITECTURE
+═══════════════════════════════════════ -->
+<div class="sec">
+  <div class="slabel">Part 03 — Security Architecture</div>
+  <div class="stitle">Security &mdash; <em>Defense in Depth for a Finance App</em></div>
+  <div class="ssub">Nxance handles portfolio data, PAN/Aadhaar, Account Aggregator consent flows, and payments. Security is designed into every layer, not retrofitted.</div>
+
+  <div class="g2">
+    <div class="ecard" style="margin-bottom:0">
+      <div class="ehead"><div class="eicon ic-red">&#128274;</div><div><div class="eid">APPLICATION SECURITY</div><div class="ename">Client + API Layer</div></div></div>
+      <div class="ebody">
+        <div class="params">
+          <div class="param"><span class="pn">Auth</span><span class="pv">Supabase Auth → custom OAuth2/OIDC. JWT 15-min + refresh rotation. Biometric re-auth for sensitive actions.</span></div>
+          <div class="param"><span class="pn">MFA</span><span class="pv">SMS/Email OTP mandatory. TOTP optional for power users.</span></div>
+          <div class="param"><span class="pn">API Security</span><span class="pv">Rate limiting per user+IP. HMAC request signing for sensitive endpoints.</span></div>
+          <div class="param"><span class="pn">Input Validation</span><span class="pv">Zod (frontend) + Pydantic (Python) + serde (Rust) — every layer validates.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ecard" style="margin-bottom:0">
+      <div class="ehead"><div class="eicon ic-gold">&#128737;</div><div><div class="eid">DATA + AA CONSENT SECURITY</div><div class="ename">Encryption + Consent Management</div></div></div>
+      <div class="ebody">
+        <div class="params">
+          <div class="param"><span class="pn">Encryption at Rest</span><span class="pv">AES-256, Postgres TDE, KMS-managed keys (Ohshn Cloud KMS).</span></div>
+          <div class="param"><span class="pn">Encryption in Transit</span><span class="pv">TLS 1.3 everywhere. Cert pinning on mobile. mTLS between internal services.</span></div>
+          <div class="param"><span class="pn">PII Tokenization</span><span class="pv">PAN/Aadhaar never stored raw — tokenized, mapping in isolated vault service.</span></div>
+          <div class="param"><span class="pn new">AA Consent Audit</span><span class="pv">Every Account Aggregator data pull logged with exact consent scope, purpose, duration — RBI-mandated transparency.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="ecard" style="margin-bottom:0">
+      <div class="ehead" style="padding:14px 18px"><div class="eicon ic-b" style="width:44px;height:44px;font-size:20px">&#128737;</div><div><div class="eid">INFRASTRUCTURE</div><div class="ename" style="font-size:14px">Network + Compute</div></div></div>
+      <div class="ebody" style="padding:14px 18px">
+        <div class="params">
+          <div class="param"><span class="pn">Network Segmentation</span><span class="pv">VPC isolation per tier. DB never directly internet-accessible.</span></div>
+          <div class="param"><span class="pn">WAF + DDoS</span><span class="pv">Ohshn Shield — 1Tbps DDoS protection, OWASP WAF.</span></div>
+          <div class="param"><span class="pn">Secrets Management</span><span class="pv">HashiCorp Vault — no credentials in code, rotated every 90 days.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ecard" style="margin-bottom:0">
+      <div class="ehead" style="padding:14px 18px"><div class="eicon ic-p" style="width:44px;height:44px;font-size:20px">&#9889;</div><div><div class="eid">FRAUD DETECTION</div><div class="ename" style="font-size:14px">Real-Time Monitoring</div></div></div>
+      <div class="ebody" style="padding:14px 18px">
+        <div class="params">
+          <div class="param"><span class="pn">Login Anomaly</span><span class="pv">New device/location triggers step-up auth.</span></div>
+          <div class="param"><span class="pn">Transaction Monitoring</span><span class="pv">Unusual payment patterns flagged for review.</span></div>
+          <div class="param"><span class="pn">ML Detection</span><span class="pv">Isolation forest on behavior patterns catches account takeover.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ecard" style="margin-bottom:0">
+      <div class="ehead" style="padding:14px 18px"><div class="eicon ic-grn" style="width:44px;height:44px;font-size:20px">&#128203;</div><div><div class="eid">COMPLIANCE</div><div class="ename" style="font-size:14px">Regulatory + Logs</div></div></div>
+      <div class="ebody" style="padding:14px 18px">
+        <div class="params">
+          <div class="param"><span class="pn">CERT-In</span><span class="pv">180-day log retention, 6-hour breach reporting.</span></div>
+          <div class="param new"><span class="pn new">RBI FIU Registration</span><span class="pv">Required to participate in Account Aggregator network as data requester.</span></div>
+          <div class="param"><span class="pn">DPDP + SEBI</span><span class="pv">Privacy-by-design; automated data deletion pipeline.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══════════════════════════════════════
+     PART 4: HEALTH CHECK ENGINE — 11 SUB-ENGINES
+═══════════════════════════════════════ -->
+<div class="sec">
+  <div class="slabel">Part 04 — Health Check Engine</div>
+  <div class="stitle">Health Check Engine &mdash; <em>Complete 11 Sub-Engine Architecture</em></div>
+  <div class="ssub">Analyses an existing portfolio across 11 specialised sub-engines, each owning one type of analysis, orchestrated by a Python service calling Rust for hot-path calculations via PyO3 bindings. Every finding gets translated to plain English by NxanceLM.</div>
+
+  <svg viewBox="0 0 860 520" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:860px;display:block;margin:0 auto 22px;border-radius:12px">
+    <defs><marker id="hc1" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#222640"/></marker></defs>
+    <rect width="860" height="520" rx="12" fill="#0A0D1A" stroke="#151828" stroke-width="1.5"/>
+    <text x="430" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="#EAF0FF" font-family="Space Grotesk,sans-serif">Health Check Engine — 11 Sub-Engine Architecture</text>
+
+    <rect x="280" y="42" width="300" height="38" rx="8" fill="rgba(0,212,177,.07)" stroke="#00D4B1" stroke-width="1.5"/>
+    <text x="430" y="65" text-anchor="middle" font-size="10" fill="#00D4B1" font-weight="700" font-family="JetBrains Mono,monospace">HC ORCHESTRATOR (Python/FastAPI)</text>
+    <line x1="430" y1="80" x2="430" y2="96" stroke="#222640" stroke-width="1.5" marker-end="url(#hc1)"/>
+
+    <!-- 11 sub-engines: 4+4+3 grid -->
+    <rect x="22" y="98" width="200" height="70" rx="8" fill="rgba(74,143,255,.06)" stroke="#4A8FFF" stroke-width="1.2"/>
+    <text x="122" y="115" text-anchor="middle" font-size="8" fill="#4A8FFF" font-weight="700">SUB-01 · Performance</text>
+    <text x="32" y="130" font-size="7.5" fill="#586298">XIRR, Sharpe, Sortino,</text>
+    <text x="32" y="141" font-size="7.5" fill="#586298">vs benchmark — Rust core</text>
+    <text x="32" y="155" font-size="7.5" fill="#4A8FFF" font-weight="700">13% score weight</text>
+
+    <rect x="230" y="98" width="200" height="70" rx="8" fill="rgba(255,63,96,.06)" stroke="#FF3F60" stroke-width="1.2"/>
+    <text x="330" y="115" text-anchor="middle" font-size="8" fill="#FF3F60" font-weight="700">SUB-02 · Cost Leak</text>
+    <text x="240" y="130" font-size="7.5" fill="#586298">TER waste, overlap,</text>
+    <text x="240" y="141" font-size="7.5" fill="#586298">tax drag — Python+Rust</text>
+    <text x="240" y="155" font-size="7.5" fill="#FF3F60" font-weight="700">12% score weight</text>
+
+    <rect x="438" y="98" width="200" height="70" rx="8" fill="rgba(30,200,150,.06)" stroke="#1EC896" stroke-width="1.2"/>
+    <text x="538" y="115" text-anchor="middle" font-size="8" fill="#1EC896" font-weight="700">SUB-03 · Goal Alignment</text>
+    <text x="448" y="130" font-size="7.5" fill="#586298">FV projection, gap calc,</text>
+    <text x="448" y="141" font-size="7.5" fill="#586298">required SIP — Python</text>
+    <text x="448" y="155" font-size="7.5" fill="#1EC896" font-weight="700">13% score weight</text>
+
+    <rect x="646" y="98" width="192" height="70" rx="8" fill="rgba(255,63,96,.1)" stroke="#FF3F60" stroke-width="2"/>
+    <text x="742" y="115" text-anchor="middle" font-size="8" fill="#FF3F60" font-weight="700">SUB-04 · Fraud Gate</text>
+    <text x="656" y="130" font-size="7.5" fill="#FF3F60">7 hard checks, ML pattern</text>
+    <text x="656" y="141" font-size="7.5" fill="#FF3F60">match — Rust+Python ML</text>
+    <text x="656" y="155" font-size="7.5" fill="#FF3F60" font-weight="700">GATE: 1 fail = EXIT</text>
+
+    <rect x="22" y="176" width="200" height="70" rx="8" fill="rgba(255,184,48,.06)" stroke="#FFB830" stroke-width="1.2"/>
+    <text x="122" y="193" text-anchor="middle" font-size="8" fill="#FFB830" font-weight="700">SUB-05 · Structure</text>
+    <text x="32" y="208" font-size="7.5" fill="#586298">Concentration, D/E ratio,</text>
+    <text x="32" y="219" font-size="7.5" fill="#586298">macro fit — Python</text>
+    <text x="32" y="233" font-size="7.5" fill="#FFB830" font-weight="700">8% score weight</text>
+
+    <rect x="230" y="176" width="200" height="70" rx="8" fill="rgba(155,109,255,.06)" stroke="#9B6DFF" stroke-width="1.2"/>
+    <text x="330" y="193" text-anchor="middle" font-size="8" fill="#9B6DFF" font-weight="700">SUB-06 · Behaviour</text>
+    <text x="240" y="208" font-size="7.5" fill="#586298">Bias detection, FOMO/herd</text>
+    <text x="240" y="219" font-size="7.5" fill="#586298">pattern — Python ML</text>
+    <text x="240" y="233" font-size="7.5" fill="#9B6DFF" font-weight="700">4% score weight</text>
+
+    <rect x="438" y="176" width="200" height="70" rx="8" fill="rgba(0,196,255,.06)" stroke="#00C4FF" stroke-width="1.2"/>
+    <text x="538" y="193" text-anchor="middle" font-size="8" fill="#00C4FF" font-weight="700">SUB-07 · Tax Efficiency</text>
+    <text x="448" y="208" font-size="7.5" fill="#586298">LTCG/STCG, harvest timing,</text>
+    <text x="448" y="219" font-size="7.5" fill="#586298">80C — Python</text>
+    <text x="448" y="233" font-size="7.5" fill="#00C4FF" font-weight="700">4% score weight</text>
+
+    <rect x="646" y="176" width="192" height="70" rx="8" fill="rgba(0,212,177,.06)" stroke="#00D4B1" stroke-width="1.2"/>
+    <text x="742" y="193" text-anchor="middle" font-size="8" fill="#00D4B1" font-weight="700">SUB-08 · Forecasting</text>
+    <text x="656" y="208" font-size="7.5" fill="#586298">Monte Carlo 10k sims —</text>
+    <text x="656" y="219" font-size="7.5" fill="#586298">CUDA-accelerated</text>
+    <text x="656" y="233" font-size="7.5" fill="#00D4B1" font-weight="700">7% score weight</text>
+
+    <rect x="22" y="254" width="200" height="70" rx="8" fill="rgba(255,122,53,.06)" stroke="#FF7A35" stroke-width="1.2"/>
+    <text x="122" y="271" text-anchor="middle" font-size="8" fill="#FF7A35" font-weight="700">SUB-09 · Liquidity</text>
+    <text x="32" y="286" font-size="7.5" fill="#586298">Exit load, lock-in, redemption</text>
+    <text x="32" y="297" font-size="7.5" fill="#586298">timeline mismatch — Python</text>
+    <text x="32" y="311" font-size="7.5" fill="#FF7A35" font-weight="700">5% score weight</text>
+
+    <rect x="230" y="254" width="200" height="70" rx="8" fill="rgba(255,107,157,.06)" stroke="#FF6B9D" stroke-width="1.2"/>
+    <text x="330" y="271" text-anchor="middle" font-size="8" fill="#FF6B9D" font-weight="700">SUB-10 · ESG/Suitability</text>
+    <text x="240" y="286" font-size="7.5" fill="#586298">ESG mandate check, category</text>
+    <text x="240" y="297" font-size="7.5" fill="#586298">suitability vs risk profile</text>
+    <text x="240" y="311" font-size="7.5" fill="#FF6B9D" font-weight="700">4% score weight</text>
+
+    <rect x="438" y="254" width="200" height="70" rx="8" fill="rgba(0,196,255,.05)" stroke="#00C4FF" stroke-width="1.1"/>
+    <text x="538" y="271" text-anchor="middle" font-size="8" fill="#00C4FF" font-weight="700">SUB-11 · Peer Comparison <tspan fill="#FF6B9D">NEW</tspan></text>
+    <text x="448" y="286" font-size="7.5" fill="#586298">Benchmarks vs similar-age,</text>
+    <text x="448" y="297" font-size="7.5" fill="#586298">similar-goal user cohorts</text>
+    <text x="448" y="311" font-size="7.5" fill="#00C4FF" font-weight="700">4% score weight</text>
+
+    <rect x="646" y="254" width="192" height="70" rx="8" fill="rgba(30,200,150,.05)" stroke="#1EC896" stroke-width="1.1"/>
+    <text x="742" y="271" text-anchor="middle" font-size="8" fill="#1EC896" font-weight="700">Fraud Gate = Hard Veto</text>
+    <text x="656" y="286" font-size="7.5" fill="#586298">Weights sum to 96% (Fraud</text>
+    <text x="656" y="297" font-size="7.5" fill="#586298">Gate is pass/fail, not scored)</text>
+    <text x="656" y="311" font-size="7.5" fill="#1EC896" font-weight="700">+4% base = 100%</text>
+
+    <line x1="430" y1="324" x2="430" y2="340" stroke="#222640" stroke-width="1.5" marker-end="url(#hc1)"/>
+
+    <rect x="42" y="342" width="776" height="50" rx="8" fill="rgba(0,212,177,.04)" stroke="#00D4B1" stroke-width="1"/>
+    <text x="430" y="362" text-anchor="middle" font-size="9" fill="#00D4B1" font-weight="700" font-family="JetBrains Mono,monospace">SELECTION ENGINE — called by any sub-engine that finds a gap (12-layer scoring, QAOA final rank)</text>
+    <text x="430" y="378" text-anchor="middle" font-size="8" fill="#586298">Shared Python+C++ microservice — reused by both HC Engine and Construction Engine</text>
+    <line x1="430" y1="392" x2="430" y2="408" stroke="#222640" stroke-width="1.5" marker-end="url(#hc1)"/>
+
+    <rect x="42" y="410" width="776" height="60" rx="8" fill="rgba(155,109,255,.05)" stroke="#9B6DFF" stroke-width="1.2"/>
+    <text x="430" y="430" text-anchor="middle" font-size="9" fill="#9B6DFF" font-weight="700" font-family="JetBrains Mono,monospace">NxanceLM TRANSLATION — converts all 11 sub-engine outputs to plain English issue cards</text>
+    <text x="430" y="446" text-anchor="middle" font-size="8" fill="#586298">Health Score = weighted sum of 10 scored sub-engines, with Fraud Gate as hard veto</text>
+    <text x="430" y="460" text-anchor="middle" font-size="8" fill="#586298">Hybrid Mamba layers let NxanceLM reason across full historical data in one pass (see Part 6)</text>
+
+    <text x="430" y="502" text-anchor="middle" font-size="9" fill="#222640" font-family="JetBrains Mono,monospace">Health Check Engine — Rust hot-path + Python orchestration via PyO3 bindings</text>
+  </svg>
+
+  <table>
+    <thead><tr><th>Sub-Engine</th><th>Language</th><th>Key Algorithm</th><th>Data Source</th></tr></thead>
+    <tbody>
+      <tr><td style="color:var(--blue)">01. Performance</td><td>Rust (PyO3)</td><td>XIRR (Brent's method), Sharpe/Sortino, benchmark comparison</td><td>AMFI NAV, NSE indices</td></tr>
+      <tr><td style="color:var(--red)">02. Cost Leak</td><td>Python + Rust</td><td>TER differential, Jaccard overlap, tax-drag estimation</td><td>AMFI scheme master, holdings</td></tr>
+      <tr><td style="color:var(--grn)">03. Goal Alignment</td><td>Python</td><td>Future value projection, required-XIRR solver</td><td>User goal input, current XIRR</td></tr>
+      <tr><td style="color:var(--red)">04. Fraud Gate</td><td>Rust + Python ML</td><td>7 hard rule checks + isolation forest anomaly model</td><td>NSE filings, SEBI orders, Screener.in</td></tr>
+      <tr><td style="color:var(--gold)">05. Structure</td><td>Python</td><td>Herfindahl concentration index, D/E age-based ratio</td><td>Portfolio holdings, macro data</td></tr>
+      <tr><td style="color:var(--purple)">06. Behaviour</td><td>Python ML</td><td>Pattern classifier (recency bias, herd behaviour)</td><td>Transaction history, holding patterns</td></tr>
+      <tr><td style="color:var(--cyan)">07. Tax Efficiency</td><td>Python</td><td>FIFO lot tracking, LTCG/STCG threshold calculator</td><td>Purchase history, current date</td></tr>
+      <tr><td style="color:var(--teal)">08. Forecasting</td><td>CUDA C++/Python</td><td>Monte Carlo simulation (10,000 paths), GPU-parallelised</td><td>Historical volatility, correlation matrix</td></tr>
+      <tr><td style="color:var(--org)">09. Liquidity</td><td>Python</td><td>Exit load calendar, lock-in tracker, redemption-vs-goal timeline match</td><td>Fund T&C data, user goal dates</td></tr>
+      <tr><td style="color:var(--pink)">10. ESG/Suitability</td><td>Python</td><td>ESG mandate scoring, category-vs-risk-profile suitability check</td><td>Fund category data, user risk profile</td></tr>
+      <tr><td style="color:var(--cyan)">11. Peer Comparison <span class="bd bnew" style="font-size:7px">NEW</span></td><td>Python + ClickHouse</td><td>Cohort benchmarking — anonymised comparison vs similar-age, similar-goal users</td><td>Aggregated (anonymised) Nxance user data</td></tr>
+    </tbody>
+  </table>
+  <div class="nb">Sub-engines 09, 10, and 11 (Liquidity, ESG/Suitability, Peer Comparison) are additions beyond the original 8 — they round out the Health Score into a genuinely complete 360° portfolio diagnostic, and Peer Comparison specifically becomes possible only once Nxance has enough users to build meaningful anonymised cohorts (a Phase 1+ feature, not MVP).</div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══════════════════════════════════════
+     PART 5: CONSTRUCTION ENGINE — 14 SUB-ENGINES
+═══════════════════════════════════════ -->
+<div class="sec">
+  <div class="slabel">Part 05 — Construction Engine</div>
+  <div class="stitle">Construction Engine &mdash; <em>Complete 14 Sub-Engine Architecture</em></div>
+  <div class="ssub">Builds a portfolio from scratch across 14 sub-engines spanning profiling, allocation, selection, quantum-classical optimisation, and validation. The heaviest compute service in Nxance — primary justification for OhshnCUDA's GPU pool.</div>
+
+  <div class="ecard">
+    <div class="ehead">
+      <div class="eicon ic-cyan">&#127959;</div>
+      <div>
+        <div class="eid">CONSTRUCTION ENGINE — 14 SUB-ENGINES</div>
+        <div class="ename">Profile → Allocation → Selection → Optimisation → Simulation → Validation</div>
+        <div class="etag">C++ optimisation core + CUDA QAOA + Python orchestration glue</div>
+      </div>
+    </div>
+    <div class="ebody">
+      <div class="g3">
+        <div>
+          <span class="slbl">Stage 1: Input + Profiling (Sub 01-03)</span>
+          <div class="params">
+            <div class="param"><span class="pn">Sub-01: Profile Engine</span><span class="pv">Risk tolerance scoring from intake questionnaire. Python. Builds user risk vector for downstream sub-engines.</span></div>
+            <div class="param"><span class="pn">Sub-02: Goal Decomposer</span><span class="pv">Converts target Rs. + timeline into required return, monthly SIP need. Python — shared FV math library with HC Engine.</span></div>
+            <div class="param"><span class="pn">Sub-03: Constraint Builder</span><span class="pv">Encodes ESG preference, sector exclusions, liquidity needs into QUBO problem formulation. C++.</span></div>
+          </div>
+        </div>
+        <div>
+          <span class="slbl">Stage 2: Allocation + Selection (Sub 04-07)</span>
+          <div class="params">
+            <div class="param"><span class="pn">Sub-04: Asset Allocation</span><span class="pv">Equity/debt/gold/international split. C++ implementing Black-Litterman model.</span></div>
+            <div class="param"><span class="pn">Sub-05: Universe Filter</span><span class="pv">Pre-filters 7,400 instruments to viable candidates (Fraud Gate pass, constraint match). Rust.</span></div>
+            <div class="param"><span class="pn">Sub-06: Selection Bridge</span><span class="pv">Calls shared Selection Engine for FIT-scored candidates per slot. Python+gRPC.</span></div>
+            <div class="param"><span class="pn">Sub-07: Cross-Asset Correlation <span class="bd bnew" style="font-size:7px">NEW</span></span><span class="pv">Correlation not just within equity but across equity/debt/gold/international/crypto for genuine diversification. Rust+CUDA.</span></div>
+          </div>
+        </div>
+        <div>
+          <span class="slbl">Stage 3: Optimisation (Sub 08-10)</span>
+          <div class="params">
+            <div class="param"><span class="pn">Sub-08: MVO Engine</span><span class="pv">Classical Modern Portfolio Theory baseline. C++ (Eigen library).</span></div>
+            <div class="param"><span class="pn">Sub-09: QAOA Engine</span><span class="pv">Quantum-classical hybrid final optimisation — CUDA C++ simulation + Qiskit bridge (Phase 3 real QPU).</span></div>
+            <div class="param"><span class="pn">Sub-10: Tax-Aware Optimiser <span class="bd bnew" style="font-size:7px">NEW</span></span><span class="pv">Adjusts weights to minimise near-term tax drag on rebalancing — LTCG-aware weight nudging. C++.</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="g3" style="margin-top:14px">
+        <div>
+          <span class="slbl">Stage 4: Simulation + Stress-Testing (Sub 11-12)</span>
+          <div class="params">
+            <div class="param"><span class="pn">Sub-11: Backtesting Engine</span><span class="pv">Tests against 5 historical crashes (2008, 2013, 2018, 2020, 2022). Rust — fast across thousands of scenarios.</span></div>
+            <div class="param"><span class="pn">Sub-12: Regime Stress-Test <span class="bd bnew" style="font-size:7px">NEW</span></span><span class="pv">Forward-looking scenario simulation (rate hikes, currency shocks, sector rotation) beyond historical replay. CUDA Monte Carlo.</span></div>
+          </div>
+        </div>
+        <div>
+          <span class="slbl">Stage 5: Execution Design (Sub 13-14)</span>
+          <div class="params">
+            <div class="param"><span class="pn">Sub-13: SIP Designer</span><span class="pv">Converts final weights to exact Rs./instrument monthly SIP at live NAV. Python.</span></div>
+            <div class="param"><span class="pn">Sub-14: Rebalance Scheduler <span class="bd bnew" style="font-size:7px">NEW</span></span><span class="pv">Designs the ongoing rebalancing calendar and drift-threshold triggers for the constructed portfolio. Python.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <span class="slbl">C++ MVO/QAOA Core — Real Code Snippet</span>
+      <div class="code">#include <Eigen/Dense>
+#include "ohshncuda/qaoa.h"
+
+class ConstructionOptimizer {
+public:
+    PortfolioCandidate optimize(
+        const std::vector<Instrument>& universe,
+        const UserConstraints& constraints,
+        const Eigen::MatrixXd& correlation_matrix
+    ) {
+        // Step 1: Classical MVO baseline
+        auto mvo_result = mean_variance_optimize(
+            universe, correlation_matrix, constraints.risk_target);
+        
+        // Step 2: Build QUBO matrix from MVO + constraints
+        QUBOMatrix qubo = build_qubo(universe, constraints, correlation_matrix);
+        
+        // Step 3: Run QAOA on OhshnCUDA GPU (or real QPU Phase 3)
+        ohshncuda::QAOAResult quantum_result =
+            ohshncuda::qaoa::solve(qubo, /*depth=*/4);
+        
+        // Step 4: Tax-aware weight adjustment (Sub-10)
+        auto tax_adjusted = apply_tax_aware_nudge(
+            quantum_result, user_tax_lots);
+        
+        return quantum_result.sharpe > mvo_result.sharpe
+            ? quantum_to_candidate(tax_adjusted, universe)
+            : mvo_result;
+    }
+};</div>
+    </div>
+  </div>
+
+  <table>
+    <thead><tr><th>Sub-Engine</th><th>Language</th><th>Algorithm/Library</th></tr></thead>
+    <tbody>
+      <tr><td>01. Profile Engine</td><td>Python</td><td>Weighted scoring from intake questionnaire</td></tr>
+      <tr><td>02. Goal Decomposer</td><td>Python (shared lib)</td><td>Future value formula, required-XIRR solver</td></tr>
+      <tr><td>03. Constraint Builder</td><td>C++</td><td>QUBO constraint encoding</td></tr>
+      <tr><td>04. Asset Allocation</td><td>C++ (Eigen)</td><td>Black-Litterman model</td></tr>
+      <tr><td>05. Universe Filter</td><td>Rust</td><td>Parallel filtering across 7,400 instruments</td></tr>
+      <tr><td>06. Selection Bridge</td><td>Python + gRPC</td><td>Calls shared Selection Engine (12-layer scoring)</td></tr>
+      <tr><td>07. Cross-Asset Correlation</td><td>Rust + CUDA</td><td>Multi-asset-class correlation (equity/debt/gold/intl)</td></tr>
+      <tr><td>08. MVO Engine</td><td>C++ (Eigen)</td><td>Mean-variance optimisation</td></tr>
+      <tr><td>09. QAOA Engine</td><td>CUDA C++ + Qiskit bridge</td><td>Quantum-classical hybrid optimisation</td></tr>
+      <tr><td>10. Tax-Aware Optimiser</td><td>C++</td><td>LTCG-aware weight adjustment</td></tr>
+      <tr><td>11. Backtesting Engine</td><td>Rust</td><td>Historical crash scenario replay</td></tr>
+      <tr><td>12. Regime Stress-Test</td><td>CUDA C++</td><td>Forward-looking Monte Carlo scenario simulation</td></tr>
+      <tr><td>13. SIP Designer</td><td>Python</td><td>Weight-to-Rs. conversion at live NAV</td></tr>
+      <tr><td>14. Rebalance Scheduler</td><td>Python</td><td>Drift-threshold trigger + calendar design</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══════════════════════════════════════
+     PART 6: NXANCELM — OWN AI (HYBRID 2026 ARCHITECTURE)
+═══════════════════════════════════════ -->
+<div class="sec">
+  <div class="slabel new">Part 06 — NxanceLM (Own AI) &mdash; Hybrid 2026 Architecture</div>
+  <div class="stitle">NxanceLM &mdash; <em>The Third Engine, Woven Through the Other Two</em></div>
+  <div class="ssub">NxanceLM is not a separate, standalone feature — it is the intelligence layer that both the Health Check Engine and Construction Engine call throughout their execution, then also serves the user directly as a chat interface. Three distinct roles, one model.</div>
+
+  <div class="ecard">
+    <div class="ehead">
+      <div class="eicon ic-p">&#129504;</div>
+      <div>
+        <div class="eid">NXANCELM'S THREE ROLES</div>
+        <div class="ename">Not a Bolt-On — Woven Into Every Engine Call</div>
+      </div>
+    </div>
+    <div class="ebody">
+      <div class="g3">
+        <div>
+          <span class="slbl">Role 1: Inside Health Check</span>
+          <div class="params">
+            <div class="param"><span class="pn">Input</span><span class="pv">Raw structured output from all 11 sub-engines (numbers, flags, scores).</span></div>
+            <div class="param"><span class="pn">Job</span><span class="pv">Translates each finding into a plain-English issue card, prioritises which issues matter most for this specific user, drafts the "Fix This" recommendation text.</span></div>
+            <div class="param"><span class="pn">Result improvement</span><span class="pv">Doesn't just report — cross-references findings (e.g. connects Cost Leak + Tax Efficiency findings into one combined recommendation when they overlap).</span></div>
+          </div>
+        </div>
+        <div>
+          <span class="slbl">Role 2: Inside Construction</span>
+          <div class="params">
+            <div class="param"><span class="pn">Input</span><span class="pv">User's stated goals (often vague, conversational — "I want to buy a house in 7 years") plus all 14 sub-engines' candidate outputs.</span></div>
+            <div class="param"><span class="pn">Job</span><span class="pv">Converts vague goals into structured constraints Sub-02 (Goal Decomposer) can use; explains why the QAOA-optimised portfolio was chosen over alternatives.</span></div>
+            <div class="param"><span class="pn">Result improvement</span><span class="pv">Catches goal ambiguity early (asks clarifying questions) rather than letting Construction Engine silently guess and build a mismatched portfolio.</span></div>
+          </div>
+        </div>
+        <div>
+          <span class="slbl">Role 3: Standalone Chat</span>
+          <div class="params">
+            <div class="param"><span class="pn">Input</span><span class="pv">Any free-form question — "why did the market fall today", "should I invest in gold now", "explain XIRR".</span></div>
+            <div class="param"><span class="pn">Job</span><span class="pv">General financial Q&amp;A grounded in live market data, independent of any specific engine run.</span></div>
+            <div class="param"><span class="pn">Result improvement</span><span class="pv">Same model, same weights — the chat "knows" the user's actual portfolio context because it shares memory with the engine-triggered conversations.</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="nb">This is why NxanceLM's architecture decision (below) matters so much — it is the single model instance handling three very different jobs, so it needs both precision (for engine number-translation) and long-context reasoning (for full portfolio history) and conversational fluency (for chat) — exactly what a hybrid architecture is built for.</div>
+    </div>
+  </div>
+
+  <div class="ecard new">
+    <div class="ehead">
+      <div class="eicon ic-new">&#9889;</div>
+      <div>
+        <div class="eid new">ARCHITECTURE — HYBRID TRANSFORMER-MAMBA-MOE (2026)</div>
+        <div class="ename">Not "Decoder-Only vs MoE" — Both, Combined</div>
+        <div class="etag">Matches NVIDIA Nemotron 3, AI21 Jamba, Alibaba Qwen3.6 — the actual 2026 frontier pattern</div>
+      </div>
+    </div>
+    <div class="ebody">
+      <div class="g3">
+        <div>
+          <span class="slbl">Transformer Attention Layers</span>
+          <div class="params">
+            <div class="param"><span class="pn new">Strength</span><span class="pv">Precise token relationships — exact Rs. figures, XIRR values referenced mid-conversation.</span></div>
+            <div class="param"><span class="pn new">Nxance use</span><span class="pv">Short-context precision: issue-card generation, single-query Q&amp;A, exact number recall.</span></div>
+          </div>
+        </div>
+        <div>
+          <span class="slbl">Mamba / State Space Model (SSM)</span>
+          <div class="params">
+            <div class="param"><span class="pn new">Strength</span><span class="pv">Linear cost — memory constant regardless of context length.</span></div>
+            <div class="param"><span class="pn new">Nxance use</span><span class="pv">Long-context: full 10-year CAS history, multi-year goal-tracking conversations, entire fund prospectus reading.</span></div>
+          </div>
+        </div>
+        <div>
+          <span class="slbl">Mixture-of-Experts (MoE)</span>
+          <div class="params">
+            <div class="param"><span class="pn new">Strength</span><span class="pv">Massive total capacity at small-model inference cost — ~20% of experts activate per token.</span></div>
+            <div class="param"><span class="pn new">Nxance use</span><span class="pv">Domain specialisation: expert cluster for tax/SEBI law, one for portfolio math, one for Hinglish, one for general chat.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <span class="slbl">Revised NxanceLM Specification</span>
+      <table>
+        <thead><tr><th>Spec</th><th>Phase 1 (v1)</th><th>Full Final (v2)</th></tr></thead>
+        <tbody>
+          <tr><td>Architecture</td><td class="newrow">Hybrid: Attention + Mamba-2 SSM (alternating), dense</td><td class="newrow">Hybrid base + MoE sparsity (8 experts, top-2)</td></tr>
+          <tr><td>Total Parameters</td><td class="newrow">7B</td><td class="newrow">~40-70B total, ~10-14B active/token</td></tr>
+          <tr><td>Context Window</td><td class="newrow">32K tokens</td><td class="newrow">128K-256K tokens (SSM-enabled)</td></tr>
+          <tr><td>Reference Models</td><td colspan="2" class="newrow">NVIDIA Nemotron 3, AI21 Jamba, Qwen3.6 (Gated DeltaNet variant)</td></tr>
+        </tbody>
+      </table>
+
+      <span class="slbl">Hybrid Layer Pattern — Code Sketch</span>
+      <div class="code">class NxanceLMHybridBlock(nn.Module):
+    """Every 4th layer = attention (precision).
+    Other 3 = Mamba-2 SSM (long-context, cheap).
+    MoE routing on FFN sublayer throughout."""
+    def __init__(self, layer_idx, d_model=4096, n_experts=8):
+        self.is_attention_layer = (layer_idx % 4 == 0)
+        if self.is_attention_layer:
+            self.mixer = GroupedQueryAttention(
+                d_model, n_heads=32, n_kv_heads=8, rope_theta=500000)
+        else:
+            self.mixer = Mamba2Layer(d_model, d_state=128, expand_factor=2)
+        self.moe_ffn = MoELayer(d_model, n_experts=8, top_k=2)
+    
+    def forward(self, x, kv_cache=None):
+        x = x + self.mixer(self.norm1(x), kv_cache)
+        x = x + self.moe_ffn(self.norm2(x))
+        return x
+
+# 48 blocks total. Training: DeepSpeed/Megatron-LM +
+# mamba-ssm CUDA kernels for the SSM layers.
+# Tokenizer: custom Rust BPE, AMFI-code-preserving,
+# Hinglish-aware, Rs. formatter.</div>
+      <div class="newb"><b>Why this matters for Nxance specifically:</b> A user's full portfolio history (10 years of CAS statements) can be processed in a single context window instead of chunked/summarised — meaning NxanceLM reasons across the user's entire financial history at once. Directly improves Goal Alignment (HC Sub-03) and Behaviour Analysis (HC Sub-06) accuracy, and lets Construction Engine's Sub-02 (Goal Decomposer) understand multi-year conversational context.</div>
+    </div>
+  </div>
+
+  <span class="slbl">NxanceLM Technical Stack</span>
+  <table>
+    <thead><tr><th>Layer</th><th>Technology</th></tr></thead>
+    <tbody>
+      <tr><td>Training Framework</td><td>PyTorch 2.3+, torch.compile, FSDP (Fully Sharded Data Parallel)</td></tr>
+      <tr><td>GPU Layer</td><td>CUDA 12.x on OhshnCUDA compute stack</td></tr>
+      <tr><td>Custom Kernels</td><td>Triton (fused attention), mamba-ssm (SSM layer CUDA kernels)</td></tr>
+      <tr><td>Distributed Training</td><td>DeepSpeed / Megatron-LM (ZeRO-3 sharding)</td></tr>
+      <tr><td>Tokenizer</td><td>Custom Rust BPE (32k vocab, AMFI-code-preserving, Hinglish-aware)</td></tr>
+      <tr><td>Inference Serving</td><td>vLLM (PagedAttention), TensorRT-LLM (quantization), ONNX Runtime Mobile (on-device)</td></tr>
+      <tr><td>Orchestration</td><td>Ray Serve — autoscaling across GPU fleet</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══════════════════════════════════════
+     PART 7: DATABASE + OWN CLOUD + AA DATA LAYER
+═══════════════════════════════════════ -->
+<div class="sec">
+  <div class="slabel">Part 07 — Database + Own Cloud</div>
+  <div class="stitle">Database Strategy &mdash; <em>Managed Now, Own Cloud in 3-4 Months, Live Data via AA</em></div>
+  <div class="ssub">Start on Supabase to ship fast, migrate to self-hosted Ohshn Cloud within 3-4 months. Data ingestion now includes India's Account Aggregator framework for real-time consent-based sync, not just manual CAS upload.</div>
+
+  <div class="g2">
+    <div class="ecard" style="margin-bottom:0">
+      <div class="ehead"><div class="eicon ic-grn">&#128451;</div><div><div class="eid">DATABASE TECHNOLOGY CHOICES</div><div class="ename">Right Store Per Data Shape</div></div></div>
+      <div class="ebody">
+        <div class="params">
+          <div class="param"><span class="pn">PostgreSQL 16</span><span class="pv">Primary OLTP — users, portfolios, transactions, audit logs. Row-level security.</span></div>
+          <div class="param"><span class="pn">TimescaleDB</span><span class="pv">Time-series — AMFI NAV history (25+ years, 2,400+ funds), stock prices.</span></div>
+          <div class="param"><span class="pn">Redis</span><span class="pv">Caching — live NAV cache, session storage, rate-limit counters.</span></div>
+          <div class="param"><span class="pn">ClickHouse</span><span class="pv">Analytics — admin dashboards, business metrics, Peer Comparison cohort queries (HC Sub-11).</span></div>
+          <div class="param"><span class="pn">pgvector</span><span class="pv">Vector embeddings for NxanceLM's semantic search (RAG-style finance Q&amp;A grounding).</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ecard new" style="margin-bottom:0">
+      <div class="ehead"><div class="eicon ic-new">&#128279;</div><div><div class="eid new">ACCOUNT AGGREGATOR DATA LAYER</div><div class="ename">Live, Consent-Based, Replaces Manual PDF</div></div></div>
+      <div class="ebody">
+        <div class="params">
+          <div class="param"><span class="pn new">Nxance = FIU</span><span class="pv">Registers as Financial Information User with RBI; requests data via licensed AA (Setu, Anumati, Finvu).</span></div>
+          <div class="param"><span class="pn new">FIPs Connected</span><span class="pv">Banks (SBI, HDFC, ICICI), MF RTAs (CAMS, KFintech), Depositories (NSDL, CDSL) — 25 data categories available.</span></div>
+          <div class="param"><span class="pn new">Onboarding Flow</span><span class="pv">User taps "Connect accounts" once, approves consent screen, data flows automatically — under 15 seconds, refreshable daily.</span></div>
+          <div class="param"><span class="pn new">Conversion Impact</span><span class="pv">Up to 60% less drop-off vs PDF upload flow (industry data) — directly improves signup completion.</span></div>
+          <div class="param"><span class="pn new">Fallback</span><span class="pv">casparser CAS-PDF parsing kept as backup for institutions not yet AA-enabled.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <span class="slbl">Own Cloud Migration Plan</span>
+  <table>
+    <thead><tr><th>Month</th><th>Milestone</th></tr></thead>
+    <tbody>
+      <tr><td>Month 0-1</td><td>Ship on Supabase (managed Postgres+Auth+Storage). Validate product before investing in infra.</td></tr>
+      <tr><td>Month 1-2</td><td>Provision Ohshn Cloud infrastructure in parallel — 20 physical servers, Mumbai DC colocation.</td></tr>
+      <tr><td>Month 2-3</td><td>Self-hosted Postgres (Patroni HA), Redis, TimescaleDB on Ohshn Cloud — shadow mode against Supabase.</td></tr>
+      <tr><td>Month 3-4</td><td>Cutover migration — minimal downtime window, monitor 2 weeks before decommissioning Supabase.</td></tr>
+    </tbody>
+  </table>
+  <div class="nb">Eliminates Rs.40,000-80,000/month Supabase cost at scale. Full data-residency control (DPDP compliance). Proves Ohshn Cloud in production before selling it externally as a B2B product.</div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══════════════════════════════════════
+     PART 8: APP FEATURES
+═══════════════════════════════════════ -->
+<div class="sec">
+  <div class="slabel">Part 08 — App Features</div>
+  <div class="stitle">Complete App Feature Set &mdash; <em>Beyond the 3 Core Engines</em></div>
+  <div class="ssub">Every supporting feature that makes Nxance a complete product — navigation, account management, growth mechanics.</div>
+
+  <div class="g3">
+    <div class="ecard" style="margin-bottom:0">
+      <div class="ehead" style="padding:14px 18px"><div class="eicon ic-g" style="width:44px;height:44px;font-size:20px">&#127968;</div><div><div class="eid">CORE NAVIGATION</div><div class="ename" style="font-size:14px">Home, Portfolio, Explore</div></div></div>
+      <div class="ebody" style="padding:14px 18px">
+        <div class="params">
+          <div class="param"><span class="pn">Home</span><span class="pv">Health Score summary, top issue card, goal progress ring, NxanceLM daily insight.</span></div>
+          <div class="param"><span class="pn">My Portfolio</span><span class="pv">Holdings list, allocation donut, performance graph, per-fund drill-down.</span></div>
+          <div class="param"><span class="pn">Explore</span><span class="pv">Market intelligence feed, fund comparison, IPO calendar, NxanceLM-curated news.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ecard" style="margin-bottom:0">
+      <div class="ehead" style="padding:14px 18px"><div class="eicon ic-b" style="width:44px;height:44px;font-size:20px">&#128100;</div><div><div class="eid">ACCOUNT + IDENTITY</div><div class="ename" style="font-size:14px">Login, Profile, Settings</div></div></div>
+      <div class="ebody" style="padding:14px 18px">
+        <div class="params">
+          <div class="param"><span class="pn">Login/Signup</span><span class="pv">Phone OTP + Google OAuth. Biometric unlock. KYC via DigiLocker.</span></div>
+          <div class="param"><span class="pn">Profile</span><span class="pv">Personal details, risk profile, goals, Account Aggregator connected accounts management.</span></div>
+          <div class="param"><span class="pn">Settings</span><span class="pv">Notifications, language (Hindi/English/Hinglish), 2FA, AA consent revocation.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ecard" style="margin-bottom:0">
+      <div class="ehead" style="padding:14px 18px"><div class="eicon ic-gold" style="width:44px;height:44px;font-size:20px">&#128176;</div><div><div class="eid">MONEY + GROWTH</div><div class="ename" style="font-size:14px">Wallet, Referral, Subscription</div></div></div>
+      <div class="ebody" style="padding:14px 18px">
+        <div class="params">
+          <div class="param"><span class="pn">Wallet</span><span class="pv">Billing history, payment methods (UPI/cards), invoices, auto-renewal.</span></div>
+          <div class="param"><span class="pn">Referral</span><span class="pv">Unique code/link, both-sided reward, leaderboard, WhatsApp share deep link.</span></div>
+          <div class="param"><span class="pn">Subscription</span><span class="pv">Free vs Premium comparison, upgrade flow, NxanceLM-assisted retention offer on cancel.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <table>
+    <thead><tr><th>Feature</th><th>Free Tier</th><th>Premium Tier</th><th>Backend Service</th></tr></thead>
+    <tbody>
+      <tr><td>Health Check</td><td>1 issue revealed</td><td>Full 11 sub-engine report</td><td>HC Engine Service</td></tr>
+      <tr><td>Construction Engine</td><td>Preview only</td><td>Full portfolio build + execution</td><td>Construction Engine Service</td></tr>
+      <tr><td>NxanceLM Chat</td><td>5 queries/day</td><td>Unlimited</td><td>AI/ML Service</td></tr>
+      <tr><td>Account Aggregator Sync</td><td>Manual refresh</td><td>Daily auto-refresh</td><td>Data Ingestion Service</td></tr>
+      <tr><td>Peer Comparison</td><td>Not available</td><td>Full cohort benchmarking</td><td>HC Engine Sub-11 + ClickHouse</td></tr>
+      <tr><td>PDF Reports</td><td>Not available</td><td>Unlimited downloads</td><td>Report Generator</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══════════════════════════════════════
+     PART 9: ADMIN PANEL — ALL DEPARTMENTS
+═══════════════════════════════════════ -->
+<div class="sec">
+  <div class="slabel">Part 09 — Admin Panel</div>
+  <div class="stitle">Admin Panel &mdash; <em>Complete Multi-Department System</em></div>
+  <div class="ssub">One unified admin platform, role-based access per department. Next.js + TypeScript, sharing the same backend microservices as the consumer app via internal-only API endpoints.</div>
+
+  <svg viewBox="0 0 860 460" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:860px;display:block;margin:0 auto 22px;border-radius:12px">
+    <defs><marker id="ad1" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#222640"/></marker></defs>
+    <rect width="860" height="460" rx="12" fill="#0A0D1A" stroke="#151828" stroke-width="1.5"/>
+    <text x="430" y="26" text-anchor="middle" font-size="12" font-weight="700" fill="#EAF0FF" font-family="Space Grotesk,sans-serif">Nxance Admin Panel — Department Architecture</text>
+
+    <rect x="280" y="42" width="300" height="40" rx="8" fill="rgba(0,212,177,.07)" stroke="#00D4B1" stroke-width="1.5"/>
+    <text x="430" y="67" text-anchor="middle" font-size="10" fill="#00D4B1" font-weight="700" font-family="JetBrains Mono,monospace">ADMIN AUTH + RBAC</text>
+    <line x1="430" y1="82" x2="430" y2="98" stroke="#222640" stroke-width="1.5" marker-end="url(#ad1)"/>
+
+    <rect x="22" y="100" width="262" height="100" rx="9" fill="rgba(0,196,255,.06)" stroke="#00C4FF" stroke-width="1.5"/>
+    <text x="153" y="120" text-anchor="middle" font-size="9" fill="#00C4FF" font-weight="700" font-family="JetBrains Mono,monospace">CONSTRUCTION DEPT</text>
+    <text x="153" y="136" text-anchor="middle" font-size="10" font-weight="700" fill="#EAF0FF">Portfolio Performance Review</text>
+    <text x="36" y="154" font-size="8" fill="#586298">Low-performance portfolio flagging</text>
+    <text x="36" y="166" font-size="8" fill="#586298">Loophole identification dashboard</text>
+    <text x="36" y="178" font-size="8" fill="#586298">New strategy research workspace</text>
+    <text x="36" y="190" font-size="8" fill="#586298">Backtested strategy approval flow</text>
+
+    <rect x="298" y="100" width="262" height="100" rx="9" fill="rgba(255,184,48,.06)" stroke="#FFB830" stroke-width="1.5"/>
+    <text x="429" y="120" text-anchor="middle" font-size="9" fill="#FFB830" font-weight="700" font-family="JetBrains Mono,monospace">SALES DEPARTMENT</text>
+    <text x="429" y="136" text-anchor="middle" font-size="10" font-weight="700" fill="#EAF0FF">Conversion + Revenue</text>
+    <text x="312" y="154" font-size="8" fill="#586298">Lead pipeline + CRM view</text>
+    <text x="312" y="166" font-size="8" fill="#586298">Subscription conversion funnel</text>
+    <text x="312" y="178" font-size="8" fill="#586298">Churn prediction + win-back</text>
+    <text x="312" y="190" font-size="8" fill="#586298">Partner/affiliate management</text>
+
+    <rect x="574" y="100" width="264" height="100" rx="9" fill="rgba(155,109,255,.06)" stroke="#9B6DFF" stroke-width="1.5"/>
+    <text x="706" y="120" text-anchor="middle" font-size="9" fill="#9B6DFF" font-weight="700" font-family="JetBrains Mono,monospace">OPERATIONS DEPT</text>
+    <text x="706" y="136" text-anchor="middle" font-size="10" font-weight="700" fill="#EAF0FF">System Health + Compliance</text>
+    <text x="588" y="154" font-size="8" fill="#586298">Infra monitoring (Grafana embed)</text>
+    <text x="588" y="166" font-size="8" fill="#586298">KYC + AA consent queue review</text>
+    <text x="588" y="178" font-size="8" fill="#586298">Compliance report generation</text>
+    <text x="588" y="190" font-size="8" fill="#586298">Vendor/API cost tracking</text>
+
+    <rect x="22" y="212" width="262" height="100" rx="9" fill="rgba(255,63,96,.06)" stroke="#FF3F60" stroke-width="1.5"/>
+    <text x="153" y="232" text-anchor="middle" font-size="9" fill="#FF3F60" font-weight="700" font-family="JetBrains Mono,monospace">ISSUE RESOLUTION DEPT</text>
+    <text x="153" y="248" text-anchor="middle" font-size="10" font-weight="700" fill="#EAF0FF">Support + Escalation</text>
+    <text x="36" y="266" font-size="8" fill="#586298">Ticket queue with SLA timers</text>
+    <text x="36" y="278" font-size="8" fill="#586298">User issue triage + routing</text>
+    <text x="36" y="290" font-size="8" fill="#586298">Bug report → engineering link</text>
+    <text x="36" y="302" font-size="8" fill="#586298">Resolution time analytics</text>
+
+    <rect x="298" y="212" width="262" height="100" rx="9" fill="rgba(30,200,150,.06)" stroke="#1EC896" stroke-width="1.5"/>
+    <text x="429" y="232" text-anchor="middle" font-size="9" fill="#1EC896" font-weight="700" font-family="JetBrains Mono,monospace">INVESTMENT/R&amp;D DEPT</text>
+    <text x="429" y="248" text-anchor="middle" font-size="10" font-weight="700" fill="#EAF0FF">Engine Formula Management</text>
+    <text x="312" y="266" font-size="8" fill="#586298">Formula version control + A/B test</text>
+    <text x="312" y="278" font-size="8" fill="#586298">New module proposal workflow</text>
+    <text x="312" y="290" font-size="8" fill="#586298">Engine accuracy monitoring</text>
+    <text x="312" y="302" font-size="8" fill="#586298">Research paper/strategy library</text>
+
+    <rect x="574" y="212" width="264" height="100" rx="9" fill="rgba(255,107,157,.06)" stroke="#FF6B9D" stroke-width="1.5"/>
+    <text x="706" y="232" text-anchor="middle" font-size="9" fill="#FF6B9D" font-weight="700" font-family="JetBrains Mono,monospace">USER RELATIONS DEPT</text>
+    <text x="706" y="248" text-anchor="middle" font-size="10" font-weight="700" fill="#EAF0FF">Personal Touch + Retention</text>
+    <text x="588" y="266" font-size="8" fill="#586298">High-value user relationship CRM</text>
+    <text x="588" y="278" font-size="8" fill="#586298">Personalised outreach scheduler</text>
+    <text x="588" y="290" font-size="8" fill="#586298">Investment tracking per user</text>
+    <text x="588" y="302" font-size="8" fill="#586298">Feedback/NPS survey management</text>
+
+    <line x1="430" y1="312" x2="430" y2="328" stroke="#222640" stroke-width="1.5" marker-end="url(#ad1)"/>
+
+    <rect x="42" y="330" width="776" height="60" rx="9" fill="rgba(0,212,177,.04)" stroke="#00D4B1" stroke-width="1.2"/>
+    <text x="430" y="350" text-anchor="middle" font-size="10" fill="#00D4B1" font-weight="700" font-family="JetBrains Mono,monospace">SHARED ADMIN INFRASTRUCTURE</text>
+    <text x="430" y="368" text-anchor="middle" font-size="9" fill="#586298">Audit log (every admin action) · Internal API gateway · Same Postgres DB (read replicas) · Cross-dept notification service</text>
+    <text x="430" y="382" text-anchor="middle" font-size="9" fill="#586298">RBAC enforced at API layer (Go gateway) — each department sees only their scoped data + relevant cross-dept read access</text>
+
+    <text x="430" y="420" text-anchor="middle" font-size="9" fill="#222640" font-family="JetBrains Mono,monospace">Admin Panel — Next.js + TypeScript — Ohshn Intelligence — 2026</text>
+  </svg>
+
+  <div class="g2">
+    <div class="ecard" style="margin-bottom:0">
+      <div class="ehead" style="padding:14px 18px"><div class="eicon ic-cyan" style="width:44px;height:44px;font-size:20px">&#127959;</div><div><div class="eid">CONSTRUCTION DEPARTMENT — DETAIL</div><div class="ename" style="font-size:15px">Portfolio Quality Control</div></div></div>
+      <div class="ebody" style="padding:14px 18px">
+        <div class="params">
+          <div class="param"><span class="pn">Low-Performance Scanner</span><span class="pv">Automated daily scan flags portfolios with Health Score below 50 or Sharpe below 0.5.</span></div>
+          <div class="param"><span class="pn">Loophole Finder</span><span class="pv">Dashboard showing where Selection Engine's FIT scores diverge from actual user outcomes.</span></div>
+          <div class="param"><span class="pn">Strategy Research Workspace</span><span class="pv">Sandbox to backtest new allocation strategies (across all 14 sub-engines) before production proposal.</span></div>
+          <div class="param"><span class="pn">Review Queue</span><span class="pv">Peer review workflow — any formula change requires 2-analyst sign-off before deployment.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ecard" style="margin-bottom:0">
+      <div class="ehead" style="padding:14px 18px"><div class="eicon ic-grn" style="width:44px;height:44px;font-size:20px">&#128300;</div><div><div class="eid">INVESTMENT/R&amp;D DEPARTMENT — DETAIL</div><div class="ename" style="font-size:15px">Engine + Formula Lab</div></div></div>
+      <div class="ebody" style="padding:14px 18px">
+        <div class="params">
+          <div class="param"><span class="pn">Formula Version Control</span><span class="pv">Git-style versioning for every formula across all 25 sub-engines (11 HC + 14 Construction).</span></div>
+          <div class="param"><span class="pn">A/B Testing Framework</span><span class="pv">Run new formula variants on a % of users, compare outcomes statistically before rollout.</span></div>
+          <div class="param"><span class="pn">Engine Accuracy Dashboard</span><span class="pv">Tracks prediction accuracy (Monte Carlo forecasts vs actual) — flags model drift.</span></div>
+          <div class="param"><span class="pn">New Module Proposal</span><span class="pv">Structured workflow for proposing new sub-engines — research write-up, backtest, peer review, deployment.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══════════════════════════════════════
+     PART 10: APIs + DATA SOURCES
+═══════════════════════════════════════ -->
+<div class="sec">
+  <div class="slabel">Part 10 — APIs + Data Sources</div>
+  <div class="stitle">Complete API + Data Source Catalogue</div>
+  <div class="ssub">Every external data source Nxance depends on — now including India's Account Aggregator network alongside the original manual-fetch sources.</div>
+
+  <table>
+    <thead><tr><th>Source</th><th>Data Provided</th><th>Used By</th><th>Cost</th></tr></thead>
+    <tbody>
+      <tr><td style="color:var(--new)">Account Aggregator (Setu/Anumati/Finvu) <span class="bd bnew" style="font-size:7px">NEW</span></td><td>Live bank, MF, equity holdings via consent</td><td>Onboarding, HC + Construction data feed</td><td>Per-pull pricing</td></tr>
+      <tr><td style="color:var(--g)">mfapi.in / AMFI</td><td>Daily AMFI NAV, all 2,400+ mutual funds</td><td>HC Engine, Construction Engine</td><td>Free</td></tr>
+      <tr><td style="color:var(--g)">casparser (fallback)</td><td>CDSL/NSDL CAS PDF → structured JSON</td><td>Onboarding backup for non-AA institutions</td><td>Free (open source)</td></tr>
+      <tr><td style="color:var(--blue)">NSE / BSE</td><td>Stock prices, sector indices, company filings</td><td>Fraud Gate, fundamental analysis</td><td>Free</td></tr>
+      <tr><td style="color:var(--blue)">Screener.in (rate-limited)</td><td>Company fundamentals — ROE, D/E, FCF</td><td>Fraud Gate (Sub-04), Selection Engine</td><td>Free (rate-limited)</td></tr>
+      <tr><td style="color:var(--red)">RBI Official</td><td>Repo rate, monetary policy, banking data</td><td>NxanceLM market intelligence chat</td><td>Free (government)</td></tr>
+      <tr><td style="color:var(--red)">SEBI Official + DRHP</td><td>Regulatory notices, IPO documents</td><td>Fraud Gate, NxanceLM IPO analysis</td><td>Free (public)</td></tr>
+      <tr><td style="color:var(--new)">OCEN <span class="bd bnew" style="font-size:7px">NEW</span></td><td>Standardised lending API layer</td><td>Future: loan-funded SIP features</td><td>Free (India Stack)</td></tr>
+      <tr><td style="color:var(--new)">DEPA <span class="bd bnew" style="font-size:7px">NEW</span></td><td>Data Empowerment Protection Architecture</td><td>Underpins AA consent framework compliance</td><td>Free (India Stack)</td></tr>
+      <tr><td style="color:var(--gold)">MOSPI</td><td>GDP, CPI, WPI inflation data</td><td>NxanceLM economy questions</td><td>Free (government)</td></tr>
+      <tr><td style="color:var(--org)">Razorpay</td><td>Payment processing — UPI, cards, netbanking</td><td>Payments Service, subscription billing</td><td>2% per transaction</td></tr>
+      <tr><td style="color:var(--g)">DigiLocker API</td><td>PAN/Aadhaar verification, document fetch</td><td>KYC flow</td><td>Free (government)</td></tr>
+      <tr><td style="color:var(--purple)">IBM Quantum Network</td><td>Real QPU access for QAOA (Phase 2+)</td><td>Construction Engine Sub-09</td><td>Membership + per-job</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══════════════════════════════════════
+     PART 11: ARCHITECTURE PATTERNS
+═══════════════════════════════════════ -->
+<div class="sec">
+  <div class="slabel">Part 11 — Architecture Patterns</div>
+  <div class="stitle">System-Wide Patterns &mdash; <em>How It All Fits Together</em></div>
+
+  <div class="g2">
+    <div class="ecard" style="margin-bottom:0">
+      <div class="ehead"><div class="eicon ic-grn">&#128300;</div><div><div class="eid">DESIGN PATTERNS USED</div><div class="ename">Across the Stack</div></div></div>
+      <div class="ebody">
+        <div class="params">
+          <div class="param"><span class="pn">Microservices</span><span class="pv">Each capability independently deployable, independently scalable.</span></div>
+          <div class="param"><span class="pn">Event-Driven Architecture</span><span class="pv">Kafka/NATS pub-sub — e.g. "AA data refreshed" event triggers re-scoring.</span></div>
+          <div class="param"><span class="pn">CQRS</span><span class="pv">Write path (Postgres) separate from read path (ClickHouse) for admin analytics.</span></div>
+          <div class="param"><span class="pn">Circuit Breaker</span><span class="pv">If AA network or NxanceLM is slow/down, graceful degradation, not full outage.</span></div>
+          <div class="param"><span class="pn">Saga Pattern</span><span class="pv">Multi-step transactions (portfolio build → SIP → payment) without distributed locks.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ecard" style="margin-bottom:0">
+      <div class="ehead"><div class="eicon ic-cyan">&#9881;</div><div><div class="eid">DEVOPS + INFRASTRUCTURE</div><div class="ename">CI/CD + Deployment</div></div></div>
+      <div class="ebody">
+        <div class="params">
+          <div class="param"><span class="pn">CI/CD</span><span class="pv">GitHub Actions — polyglot-aware (cargo test, pytest, go test).</span></div>
+          <div class="param"><span class="pn">Containerization</span><span class="pv">Docker, multi-stage builds for Rust/C++ binaries.</span></div>
+          <div class="param"><span class="pn">Orchestration</span><span class="pv">Kubernetes (Ohshn Cloud managed) — auto-scaling, zero-downtime rolling deploys.</span></div>
+          <div class="param"><span class="pn">Observability</span><span class="pv">Prometheus + Grafana + Loki + Tempo — full microservice visibility.</span></div>
+          <div class="param"><span class="pn">Infrastructure as Code</span><span class="pv">Terraform for reproducible, version-controlled infra.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══════════════════════════════════════
+     PART 12: COMPLETE SUMMARY
+═══════════════════════════════════════ -->
+<div class="sec">
+  <div class="slabel">Part 12 — Complete Summary</div>
+  <div class="stitle">Nxance &mdash; <em>Full Technology Stack at a Glance</em></div>
+
+  <table>
+    <thead><tr><th>Category</th><th>Technology</th></tr></thead>
+    <tbody>
+      <tr><td>Mobile Frontend</td><td>React Native 0.81+ (The Architecture), Nitro Modules, Rust JSI modules, Reanimated, Skia, WebGPU</td></tr>
+      <tr><td>Web Frontend</td><td>Next.js 14, Tailwind CSS, shadcn/ui, D3.js, Recharts</td></tr>
+      <tr><td>Backend Frameworks</td><td>FastAPI (Python), Axum (Rust), Fiber (Go), gRPC + Protocol Buffers</td></tr>
+      <tr><td>AI Training</td><td>PyTorch 2.3+, DeepSpeed, Megatron-LM, mamba-ssm, Triton</td></tr>
+      <tr><td>AI Inference</td><td>vLLM, TensorRT-LLM, ONNX Runtime Mobile (on-device)</td></tr>
+      <tr><td>Quant Libraries</td><td>Eigen (C++), scipy/numpy (Python), Qiskit (quantum)</td></tr>
+      <tr><td>Databases</td><td>PostgreSQL 16, TimescaleDB, Redis, ClickHouse, pgvector</td></tr>
+      <tr><td>Data Layer</td><td>Account Aggregator (Setu/Anumati/Finvu), casparser fallback, AMFI, NSE, RBI, SEBI</td></tr>
+      <tr><td>Message Queue</td><td>Apache Kafka, NATS</td></tr>
+      <tr><td>Infrastructure</td><td>Kubernetes, Docker, Terraform, OpenStack, Ceph (Ohshn Cloud)</td></tr>
+      <tr><td>Security</td><td>HashiCorp Vault, Semgrep, OWASP ZAP, RBI FIU compliance</td></tr>
+    </tbody>
+  </table>
+
+  <span class="slbl">Architecture Pattern Inventory</span>
+  <table>
+    <thead><tr><th>Pattern</th><th>Applied To</th></tr></thead>
+    <tbody>
+      <tr><td>Hybrid Transformer-Mamba-MoE</td><td class="newrow">NxanceLM — attention+SSM+MoE combined, matches 2026 frontier (Nemotron 3, Jamba)</td></tr>
+      <tr><td>Account Aggregator Consent Flow</td><td class="newrow">Live data onboarding — replaces manual-only CAS PDF approach</td></tr>
+      <tr><td>RAG (Retrieval-Augmented Generation)</td><td>NxanceLM grounding — pgvector semantic search over AMFI/SEBI/RBI corpus</td></tr>
+      <tr><td>Microservices</td><td>Entire backend — independently deployable services</td></tr>
+      <tr><td>QUBO + QAOA (Quantum)</td><td>Construction Engine Sub-09 — quantum-classical hybrid optimisation</td></tr>
+      <tr><td>Event-Driven Architecture</td><td>Cross-service communication via Kafka/NATS</td></tr>
+      <tr><td>Saga Pattern</td><td>Multi-step transactions for consistency</td></tr>
+    </tbody>
+  </table>
+
+  <div class="g3" style="margin-top:16px">
+    <div class="nb"><strong>Frontend:</strong> One TypeScript codebase (React Native + Next.js) serving Android, iOS, Web — with 2026 Nitro Modules and on-device AI for offline resilience.</div>
+    <div class="ib"><strong>Backend:</strong> Polyglot — Python (ML/logic), Rust/C++ (speed/safety), Go (I/O throughput) — connected via gRPC.</div>
+    <div class="newb"><strong>AI + Data:</strong> Hybrid Transformer-Mamba-MoE architecture + Account Aggregator live data layer — the two genuinely new 2026 upgrades over a conventional fintech stack.</div>
+  </div>
+
+  <div class="pb" style="margin-top:14px"><strong>The Complete Picture:</strong> Nxance is a coordinated system of 8+ backend microservices, <b>25 specialised sub-engines</b> (11 in Health Check + 14 in Construction), one hybrid-architecture AI model (NxanceLM) that is woven through both engines and also serves as standalone chat, a 6-department admin platform, live consent-based data ingestion via India's Account Aggregator network, and infrastructure migrating from managed services to fully self-owned cloud within 4 months. Every language and framework choice traces back to one principle: the right tool for each specific job, connected by clean, typed interfaces — updated with the genuine 2026 architecture and data-layer advances that didn't exist when the first draft of this blueprint was written.</div>
+</div>
+
+<div class="footer">
+  <div class="fl">nxance</div>
+  <div class="ft">Ohshn Intelligence Pvt Ltd &nbsp;|&nbsp; Palampur, Himachal Pradesh &nbsp;|&nbsp; 2026<br>Nxance Complete Engineering Blueprint — Final Revised Edition &nbsp;|&nbsp; Confidential</div>
+</div>
+</div>
+</body>
+</html>

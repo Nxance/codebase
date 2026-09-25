@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nxance — Portfolio intelligence for India</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/navy.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <div class="brand" onclick="showMarketing()" style="cursor:pointer">
+        <div class="brand-mark">N</div> nxance
+      </div>
+      <div class="nav-links">
+        <a href="#product" onclick="showMarketing()">Product</a>
+        <a href="#stack" onclick="showMarketing()">Intelligence</a>
+        <button type="button" onclick="showApp('health')">Open app</button>
+        <button type="button" class="btn btn-primary" style="padding:8px 14px" onclick="showApp('health')">Get started</button>
+      </div>
+    </div>
+  </header>
+
+  <div id="view-marketing">
+    <div class="wrap">
+      <section class="hero">
+        <div>
+          <div class="eyebrow">BUILT FOR INDIA · NAVY PORTAL + FLUTTER</div>
+          <h1>Investment intelligence that <em>measures</em> before it speaks.</h1>
+          <p class="lead">Health Check, Construction, unlock, and chat — same navy system on web and Android. Quant · India metrics · ML · deep embeddings.</p>
+          <div class="cta-row">
+            <button class="btn btn-primary btn-lg" onclick="showApp('health')">Open web app</button>
+            <button class="btn btn-ghost btn-lg" onclick="showApp('demo')">Run sample demo</button>
+          </div>
+          <div class="trust">
+            <span>● No data → no personal loss</span>
+            <span>● L2 + L3 models live</span>
+            <span>● Flutter companion app</span>
+          </div>
+        </div>
+        <div class="panel-card">
+          <div class="mini">NAVY SYSTEM</div>
+          <h3>One palette. Mobile + web.</h3>
+          <p>Deep navy #0A1628 · cyan accent #3DDCFF — tokens shared with Flutter.</p>
+          <div class="grid-2">
+            <div class="metric"><b>Health</b><span>Diagnose + unlock</span></div>
+            <div class="metric"><b>Build</b><span>Goal-matched plan</span></div>
+            <div class="metric"><b>Ask</b><span>Number-guarded chat</span></div>
+            <div class="metric"><b>Models</b><span>Training status</span></div>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="product">
+        <h2>Product surfaces</h2>
+        <div class="features">
+          <article class="feature"><div class="ico">W</div><h3>Web portal</h3><p>Marketing + full app shell in navy.</p></article>
+          <article class="feature"><div class="ico">A</div><h3>Android (Flutter)</h3><p>Home, Health, Build, Ask, Settings.</p></article>
+          <article class="feature"><div class="ico">API</div><h3>MBP backend</h3><p>FastAPI intelligence on :8000.</p></article>
+        </div>
+      </section>
+      <section class="section" id="stack">
+        <h2>Intelligence stack</h2>
+        <div class="features">
+          <article class="feature"><div class="ico">L1</div><h3>Quant + India</h3><p>XIRR, TER, tax, sector, liquidity.</p></article>
+          <article class="feature"><div class="ico">L2</div><h3>ML trained</h3><p>India L2 bundle on synthetic data.</p></article>
+          <article class="feature"><div class="ico">L3</div><h3>Deep</h3><p>Fund embeddings + NAV sequence MLP.</p></article>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div id="view-app" class="hidden">
+    <div class="app-shell">
+      <aside class="side">
+        <button type="button" class="on" data-panel="health" onclick="panel('health')">Health Check</button>
+        <button type="button" data-panel="upload" onclick="panel('upload')">Upload docs</button>
+        <button type="button" data-panel="build" onclick="panel('build')">Construction</button>
+        <button type="button" data-panel="pay" onclick="panel('pay')">Pay · Unlock</button>
+        <button type="button" data-panel="login" onclick="panel('login')">Login</button>
+        <button type="button" data-panel="chat" onclick="panel('chat')">NxanceLM</button>
+        <button type="button" data-panel="models" onclick="panel('models')">Models</button>
+        <button type="button" onclick="showMarketing()">← Marketing</button>
+      </aside>
+      <div class="main">
+        <section class="card" id="panel-health">
+          <h1>Health Check</h1>
+          <p class="lead" style="margin-bottom:12px">API <code id="apiBaseLabel">http://127.0.0.1:8000</code></p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">
+            <button class="btn btn-primary" onclick="runDemo()">Sample demo</button>
+            <button class="btn btn-ghost" onclick="loadSampleJson()">Fill sample holdings JSON</button>
+            <button class="btn btn-ghost" onclick="analyseMine()">Analyse JSON holdings</button>
+          </div>
+          <div class="field"><label>Holdings JSON (array)</label>
+            <textarea id="holdingsJson" rows="6" style="width:100%;padding:12px;border-radius:12px;border:1px solid var(--border);background:var(--surface-2);color:var(--text);font-family:ui-monospace,monospace;font-size:12px" placeholder='[{"name":"...","current_value":100000,"invested_amount":80000,"plan_type":"regular","asset_class":"mutual_fund"}]'></textarea>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div class="field"><label>Goal</label><input id="hcGoal" value="Wealth Creation" /></div>
+            <div class="field"><label>Target ₹</label><input id="hcTarget" type="number" value="5000000" /></div>
+            <div class="field"><label>Years</label><input id="hcYears" type="number" value="10" /></div>
+            <div class="field"><label>SIP ₹</label><input id="hcSip" type="number" value="10000" /></div>
+            <div class="field"><label>Risk</label>
+              <select id="hcRisk"><option value="conservative">Conservative</option><option value="moderate" selected>Moderate</option><option value="aggressive">Aggressive</option></select>
+            </div>
+          </div>
+          <div id="healthOut" style="margin-top:16px"></div>
+        </section>
+
+        <section class="card hidden" id="panel-upload">
+          <h1>Upload CAS / statements</h1>
+          <p class="lead" style="margin-bottom:12px">PDF · XLSX · CSV · PNG/JPG screenshot · JSON · TXT. Zero-cost local parse.</p>
+          <div class="field">
+            <label>Choose file</label>
+            <input type="file" id="docFile" accept=".pdf,.xlsx,.xlsm,.xls,.csv,.tsv,.txt,.json,.png,.jpg,.jpeg,.webp" />
+          </div>
+          <button class="btn btn-primary" onclick="uploadDoc()">Parse document</button>
+          <button class="btn btn-ghost" style="margin-left:8px" onclick="analyseUpload()">Health Check on result</button>
+          <pre id="uploadOut" style="margin-top:14px;background:var(--surface-2);padding:14px;border-radius:12px;overflow:auto;font-size:12px;color:var(--text-2);max-height:360px"></pre>
+        </section>
+
+        <section class="card hidden" id="panel-pay">
+          <h1>Dummy payments</h1>
+          <p class="lead" style="margin-bottom:12px">₹99 unlock · no real UPI charge in this build.</p>
+          <button class="btn btn-primary" onclick="createPay()">Create dummy order</button>
+          <button class="btn btn-ghost" style="margin-left:8px" onclick="confirmPay()">Confirm paid</button>
+          <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+            <input id="unlockCodeWeb" placeholder="DEMO-UNLOCK" style="flex:1;min-width:140px;padding:10px 12px;border-radius:999px;border:1px solid var(--border);background:var(--surface-2);color:var(--text)" />
+            <button class="btn btn-primary" onclick="doUnlockCode()">Apply code</button>
+          </div>
+          <pre id="payOut" style="margin-top:14px;background:var(--surface-2);padding:14px;border-radius:12px;overflow:auto;font-size:12px;color:var(--text-2)"></pre>
+        </section>
+
+        <section class="card hidden" id="panel-login">
+          <h1>Login</h1>
+          <p class="lead" style="margin-bottom:12px">Demo auth — name + phone, no OTP (₹0).</p>
+          <div class="field"><label>Name</label><input id="loginName" placeholder="Priya Sharma" /></div>
+          <div class="field"><label>Phone</label><input id="loginPhone" placeholder="9876543210" /></div>
+          <button class="btn btn-primary" onclick="doLogin()">Sign in</button>
+          <pre id="loginOut" style="margin-top:14px;background:var(--surface-2);padding:14px;border-radius:12px;overflow:auto;font-size:12px;color:var(--text-2)"></pre>
+        </section>
+
+        <section class="card hidden" id="panel-build">
+          <h1>Construction</h1>
+          <div class="field"><label>Goal</label>
+            <select id="cGoal"><option>Wealth Creation</option><option>Retirement</option><option>Buy a House</option><option>Child Education</option></select>
+          </div>
+          <div class="field"><label>Monthly SIP</label><input id="cSip" type="number" value="15000" /></div>
+          <div class="field"><label>Years</label><input id="cYears" type="number" value="12" /></div>
+          <div class="field"><label>Lump sum</label><input id="cLump" type="number" value="100000" /></div>
+          <div class="field"><label>Target</label><input id="cTarget" type="number" value="5000000" /></div>
+          <div class="field"><label>Risk</label>
+            <select id="cRisk"><option value="conservative">Conservative</option><option value="moderate" selected>Moderate</option><option value="aggressive">Aggressive</option></select>
+          </div>
+          <button class="btn btn-primary" onclick="runBuild()">Design portfolio</button>
+          <div id="buildOut" style="margin-top:16px"></div>
+        </section>
+
+        <section class="card hidden" id="panel-chat">
+          <h1>NxanceLM</h1>
+          <p class="lead" style="margin-bottom:10px">Grounded on last report. Number Guard on.</p>
+          <div id="chatLog" style="max-height:320px;overflow:auto;margin-bottom:10px;padding:8px;background:var(--surface-2);border-radius:12px;border:1px solid var(--border)"></div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
+            <button class="btn btn-ghost" style="padding:8px 12px;font-size:12px" onclick="sendChat('What is my score?')">Score</button>
+            <button class="btn btn-ghost" style="padding:8px 12px;font-size:12px" onclick="sendChat('Explain TER')">TER</button>
+            <button class="btn btn-ghost" style="padding:8px 12px;font-size:12px" onclick="sendChat('What is my XIRR?')">XIRR</button>
+          </div>
+          <div style="display:flex;gap:8px">
+            <input id="chatIn" placeholder="Ask about your report…" style="flex:1;padding:12px;border-radius:999px;border:1px solid var(--border);background:var(--surface-2);color:var(--text)" onkeydown="if(event.key==='Enter')sendChat()" />
+            <button class="btn btn-primary" onclick="sendChat()">Send</button>
+          </div>
+        </section>
+
+        <section class="card hidden" id="panel-models">
+          <h1>Models status</h1>
+          <button class="btn btn-ghost" onclick="loadStatus()">Refresh</button>
+          <pre id="statusOut" style="margin-top:14px;background:var(--surface-2);padding:14px;border-radius:12px;overflow:auto;font-size:12px;color:var(--text-2)"></pre>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">Nxance · Ohshn Intelligence · Navy design · Suggestion only · Not SEBI advice</footer>
+  <script src="js/app.js"></script>
+</body>
+</html>

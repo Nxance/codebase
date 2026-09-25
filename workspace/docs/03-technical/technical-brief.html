@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Nxance — Technical Brief</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+:root{
+  --bg:#02030A;--c2:#0A0D1A;--bo:#151828;--b2:#191D35;
+  --tx:#EAF0FF;--t2:#586298;--t3:#222640;
+  --g:#00D4B1;--gt:rgba(0,212,177,.1);--gr:rgba(0,212,177,.22);
+  --gold:#FFB830;--goldt:rgba(255,184,48,.09);
+  --red:#FF3F60;--redt:rgba(255,63,96,.09);
+  --blue:#4A8FFF;--bluet:rgba(74,143,255,.09);
+  --purple:#9B6DFF;--purplet:rgba(155,109,255,.09);
+  --cyan:#00C4FF;--cyant:rgba(0,196,255,.09);
+  --pink:#FF6B9D;--pinkt:rgba(255,107,157,.09);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);line-height:1.72;font-size:14px}
+.cover{min-height:72vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 28px 36px;text-align:center;
+  background:radial-gradient(ellipse 80% 55% at 50% -8%,rgba(0,212,177,.1),transparent 58%),radial-gradient(ellipse 35% 25% at 92% 88%,rgba(74,143,255,.06),transparent 50%)}
+.ctag{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--g);background:var(--gt);border:1px solid var(--gr);padding:5px 20px;border-radius:20px;display:inline-block;margin-bottom:20px}
+.ch{font-family:'Space Grotesk',sans-serif;font-size:clamp(28px,5vw,50px);font-weight:700;line-height:1.1;letter-spacing:-.025em;margin-bottom:12px}
+.ch em{font-style:normal;color:var(--g)}
+.csub{font-size:14.5px;color:var(--t2);max-width:700px;margin:0 auto 24px;line-height:1.8}
+.readtime{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--t3);border:1px solid var(--bo);padding:6px 16px;border-radius:20px;display:inline-block}
+.wrap{max-width:900px;margin:0 auto;padding:0 28px 70px}
+.sec{margin-bottom:56px}
+.hr{height:1px;background:var(--bo);margin:48px 0}
+.slabel{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--g);background:var(--gt);border:1px solid var(--gr);padding:3px 13px;border-radius:20px;display:inline-block;margin-bottom:12px}
+.stitle{font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:700;letter-spacing:-.01em;margin-bottom:6px}
+.stitle em{font-style:normal;color:var(--g)}
+.ssub{font-size:13px;color:var(--t2);margin-bottom:18px;max-width:740px;line-height:1.75}
+.pitch-box{background:var(--c2);border:1.5px solid var(--gr);border-radius:16px;padding:24px 26px;margin-bottom:8px}
+.pitch-line{font-size:15px;color:var(--tx);line-height:1.85}
+.pitch-line b{color:var(--g)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.ecard{background:var(--c2);border:1.5px solid var(--bo);border-radius:14px;overflow:hidden;margin-bottom:14px}
+.ehead{padding:15px 18px;border-bottom:1px solid var(--bo);display:flex;align-items:center;gap:12px}
+.eicon{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0}
+.ic-g{background:var(--gt);border:1.5px solid var(--gr)}.ic-b{background:var(--bluet);border:1.5px solid rgba(74,143,255,.3)}
+.ic-p{background:var(--purplet);border:1.5px solid rgba(155,109,255,.3)}.ic-cyan{background:var(--cyant);border:1.5px solid rgba(0,196,255,.3)}
+.ic-gold{background:var(--goldt);border:1.5px solid rgba(255,184,48,.3)}
+.ename{font-size:15px;font-weight:700;color:var(--tx)}.etag{font-size:11px;color:var(--t2)}
+.ebody{padding:15px 18px}
+.params{display:flex;flex-direction:column;gap:5px}
+.param{display:flex;align-items:flex-start;gap:8px;padding:7px 10px;background:rgba(255,255,255,.02);border:1px solid var(--bo);border-radius:7px;font-size:11px}
+.pn{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--g);flex-shrink:0;min-width:100px}
+.pv{color:var(--t2);line-height:1.5}
+table{width:100%;border-collapse:collapse;margin:9px 0;font-size:11.5px}
+th{background:rgba(255,255,255,.04);padding:8px 10px;text-align:left;font-family:'JetBrains Mono',monospace;font-size:8.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--t3);border-bottom:1px solid var(--b2)}
+td{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.03);color:var(--t2);vertical-align:top}
+tr:last-child td{border:none}td:first-child{color:var(--tx);font-weight:600}
+.nb{background:var(--gt);border:1px solid var(--gr);border-radius:8px;padding:10px 14px;font-size:11.5px;color:var(--g);margin:10px 0;line-height:1.6}
+.goldb{background:var(--goldt);border:1px solid rgba(255,184,48,.25);border-radius:8px;padding:10px 14px;font-size:11.5px;color:var(--gold);margin:10px 0;line-height:1.6}
+.pb{background:var(--purplet);border:1px solid rgba(155,109,255,.25);border-radius:8px;padding:10px 14px;font-size:11.5px;color:var(--purple);margin:10px 0;line-height:1.6}
+.ask-box{background:linear-gradient(135deg,rgba(0,212,177,.08),rgba(74,143,255,.04));border:1.5px solid var(--gr);border-radius:14px;padding:20px 24px;margin-bottom:10px}
+.ask-title{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--g);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.footer{text-align:center;padding:44px 0 20px;border-top:1px solid var(--bo);margin-top:16px}
+.fl{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;background:linear-gradient(135deg,var(--g),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+.ft{font-size:11px;color:var(--t3)}
+@media(max-width:760px){.g2,.g3{grid-template-columns:1fr}.wrap{padding:0 16px 60px}}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="ctag">Ohshn Intelligence — Nxance</div>
+  <div class="ch">Nxance &mdash; <em>Technical Brief</em></div>
+  <div class="csub">What we're building, in plain engineering terms. Give this to any developer, CTO candidate, or technical advisor before the first conversation.</div>
+  <div class="readtime">&#9200; 10-minute read</div>
+</div>
+
+<div class="wrap">
+
+<!-- ═══ THE PITCH ═══ -->
+<div class="sec">
+  <div class="pitch-box">
+    <div class="pitch-line">Nxance is an <b>AI-powered investment intelligence app</b> for India. It has exactly three core systems: a <b>Health Check Engine</b> that analyses an existing portfolio across stocks, mutual funds, FDs, commodities, and currency to find hidden losses; a <b>Construction Engine</b> that builds a new optimised portfolio from scratch; and <b>NxanceLM</b>, our own AI model, which sits between both engines and the user — turning raw numbers into plain-language advice, and also working as a standalone chat assistant.</div>
+  </div>
+</div>
+
+<!-- ═══ WHERE WE ARE ═══ -->
+<div class="sec">
+  <div class="slabel">Status</div>
+  <div class="stitle">Where We Are <em>Today</em></div>
+  <table>
+    <thead><tr><th>Item</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Proof of Concept</td><td>Built and demoable — core engine logic validated end to end</td></tr>
+      <tr><td>Production Product</td><td>Not yet built — this is what we're hiring/raising for</td></tr>
+      <tr><td>Funding Stage</td><td>Pre-seed, raising our first institutional round</td></tr>
+      <tr><td>Team</td><td>Founder (product/business) + looking for technical co-founder/early engineers</td></tr>
+      <tr><td>Target for first milestone</td><td>Minimum Buyable Product — real users, real payment, within ~10 weeks of funding</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══ ARCHITECTURE AT A GLANCE ═══ -->
+<div class="sec">
+  <div class="slabel">The Whole System, One Look</div>
+  <div class="stitle">Architecture <em>at a Glance</em></div>
+  <div class="ssub">One mobile/web app, one API gateway, three engines, one shared database, one admin panel with different permissions on the same backend.</div>
+
+  <svg viewBox="0 0 820 440" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:820px;display:block;margin:0 auto 20px;border-radius:12px">
+    <defs><marker id="tb1" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#222640"/></marker></defs>
+    <rect width="820" height="440" rx="12" fill="#0A0D1A" stroke="#151828" stroke-width="1.5"/>
+
+    <rect x="40" y="20" width="330" height="38" rx="8" fill="rgba(0,212,177,.07)" stroke="#00D4B1" stroke-width="1.3"/>
+    <text x="205" y="44" text-anchor="middle" font-size="9.5" fill="#00D4B1" font-weight="700" font-family="JetBrains Mono,monospace">CONSUMER APP — React Native + Next.js</text>
+
+    <rect x="450" y="20" width="330" height="38" rx="8" fill="rgba(255,107,157,.06)" stroke="#FF6B9D" stroke-width="1.3"/>
+    <text x="615" y="44" text-anchor="middle" font-size="9.5" fill="#FF6B9D" font-weight="700" font-family="JetBrains Mono,monospace">ADMIN PANEL — Next.js, 6 departments</text>
+
+    <line x1="205" y1="58" x2="410" y2="80" stroke="#222640" stroke-width="1.3"/>
+    <line x1="615" y1="58" x2="410" y2="80" stroke="#222640" stroke-width="1.3"/>
+
+    <rect x="260" y="82" width="300" height="36" rx="8" fill="rgba(255,184,48,.06)" stroke="#FFB830" stroke-width="1.3"/>
+    <text x="410" y="105" text-anchor="middle" font-size="9.5" fill="#FFB830" font-weight="700" font-family="JetBrains Mono,monospace">API GATEWAY (Go) — one entry point, RBAC</text>
+    <line x1="410" y1="118" x2="410" y2="136" stroke="#222640" stroke-width="1.3" marker-end="url(#tb1)"/>
+
+    <rect x="40" y="138" width="230" height="72" rx="9" fill="rgba(30,200,150,.07)" stroke="#1EC896" stroke-width="1.5"/>
+    <text x="155" y="160" text-anchor="middle" font-size="10.5" fill="#1EC896" font-weight="700" font-family="JetBrains Mono,monospace">HEALTH CHECK ENGINE</text>
+    <text x="155" y="177" text-anchor="middle" font-size="9" fill="#586298">11 sub-engines · analyses existing</text>
+    <text x="155" y="190" text-anchor="middle" font-size="9" fill="#586298">portfolios, finds hidden losses</text>
+    <text x="155" y="202" text-anchor="middle" font-size="8" fill="#1EC896" font-weight="700">Python + Rust</text>
+
+    <rect x="295" y="138" width="230" height="72" rx="9" fill="rgba(0,196,255,.07)" stroke="#00C4FF" stroke-width="1.5"/>
+    <text x="410" y="160" text-anchor="middle" font-size="10.5" fill="#00C4FF" font-weight="700" font-family="JetBrains Mono,monospace">CONSTRUCTION ENGINE</text>
+    <text x="410" y="177" text-anchor="middle" font-size="9" fill="#586298">14 sub-engines · builds new</text>
+    <text x="410" y="190" text-anchor="middle" font-size="9" fill="#586298">optimised portfolios from scratch</text>
+    <text x="410" y="202" text-anchor="middle" font-size="8" fill="#00C4FF" font-weight="700">Python + C++ + CUDA</text>
+
+    <rect x="550" y="138" width="230" height="72" rx="9" fill="rgba(155,109,255,.08)" stroke="#9B6DFF" stroke-width="1.8"/>
+    <text x="665" y="160" text-anchor="middle" font-size="10.5" fill="#9B6DFF" font-weight="700" font-family="JetBrains Mono,monospace">NXANCELM (OWN AI)</text>
+    <text x="665" y="177" text-anchor="middle" font-size="9" fill="#586298">Inside both engines + standalone</text>
+    <text x="665" y="190" text-anchor="middle" font-size="9" fill="#586298">chat · translates numbers → advice</text>
+    <text x="665" y="202" text-anchor="middle" font-size="8" fill="#9B6DFF" font-weight="700">Hybrid Transformer+Mamba+MoE</text>
+
+    <line x1="155" y1="210" x2="410" y2="230" stroke="#222640" stroke-width="1.2"/>
+    <line x1="410" y1="210" x2="410" y2="230" stroke="#222640" stroke-width="1.2"/>
+    <line x1="665" y1="210" x2="410" y2="230" stroke="#222640" stroke-width="1.2"/>
+
+    <rect x="40" y="232" width="740" height="32" rx="7" fill="rgba(255,255,255,.02)" stroke="#191D35" stroke-width="1"/>
+    <text x="410" y="252" text-anchor="middle" font-size="9" fill="#586298" font-family="JetBrains Mono,monospace">gRPC — every engine talks to every other engine through here, type-safe</text>
+    <line x1="410" y1="264" x2="410" y2="282" stroke="#222640" stroke-width="1.3" marker-end="url(#tb1)"/>
+
+    <rect x="40" y="284" width="740" height="56" rx="9" fill="rgba(0,212,177,.04)" stroke="#00D4B1" stroke-width="1.3"/>
+    <text x="410" y="304" text-anchor="middle" font-size="10" fill="#00D4B1" font-weight="700" font-family="JetBrains Mono,monospace">SHARED DATABASE — Postgres + TimescaleDB + Redis + ClickHouse</text>
+    <text x="410" y="322" text-anchor="middle" font-size="9" fill="#586298">Consumer app writes here. Admin panel reads the SAME data. One source of truth.</text>
+
+    <line x1="410" y1="340" x2="410" y2="358" stroke="#222640" stroke-width="1.3" marker-end="url(#tb1)"/>
+
+    <rect x="40" y="360" width="740" height="52" rx="9" fill="rgba(255,107,157,.05)" stroke="#FF6B9D" stroke-width="1.2"/>
+    <text x="410" y="380" text-anchor="middle" font-size="10" fill="#FF6B9D" font-weight="700" font-family="JetBrains Mono,monospace">LIVE DATA IN — Account Aggregator (banks/MFs/stocks), AMFI, NSE, RBI</text>
+    <text x="410" y="398" text-anchor="middle" font-size="9" fill="#586298">User connects accounts once (consent-based) — data flows in automatically, no manual PDF upload needed</text>
+
+    <text x="410" y="428" text-anchor="middle" font-size="9" fill="#222640" font-family="JetBrains Mono,monospace">Nxance — Architecture at a Glance — Ohshn Intelligence 2026</text>
+  </svg>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══ THE 3 ENGINES ═══ -->
+<div class="sec">
+  <div class="slabel">The Core Product</div>
+  <div class="stitle">The Three Engines &mdash; <em>What Each One Actually Does</em></div>
+
+  <div class="ecard">
+    <div class="ehead"><div class="eicon ic-g">&#128202;</div><div><div class="ename">1. Health Check Engine — 11 Sub-Engines</div><div class="etag">Analyses an existing portfolio, finds what's costing the user money</div></div></div>
+    <div class="ebody">
+      <div class="params">
+        <div class="param"><span class="pn">What it does</span><span class="pv">User connects/uploads their portfolio → 11 specialised checks run (Performance, Cost Leak, Goal Alignment, Fraud Gate, Structure, Behaviour, Tax Efficiency, Forecasting, Liquidity, ESG/Suitability, Peer Comparison) → outputs a Health Score + prioritised issue list.</span></div>
+        <div class="param"><span class="pn">Hardest part</span><span class="pv">Fraud Gate (7 hard rule checks + ML anomaly detection) and Forecasting (GPU-accelerated Monte Carlo, 10,000 simulations).</span></div>
+        <div class="param"><span class="pn">Stack</span><span class="pv">Python orchestrates, Rust does the heavy math (XIRR/Sharpe/correlation, 10-50× faster than Python), CUDA runs the Monte Carlo.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ecard">
+    <div class="ehead"><div class="eicon ic-cyan">&#127959;</div><div><div class="eid" style="display:none"></div><div><div class="ename">2. Construction Engine — 14 Sub-Engines</div><div class="etag">Builds a new, optimised portfolio from the user's goal</div></div></div>
+    <div class="ebody">
+      <div class="params">
+        <div class="param"><span class="pn">What it does</span><span class="pv">User states a goal ("Rs.50L in 10 years") → engine profiles risk, allocates across asset classes, filters 7,400+ instruments, runs both classical (MVO) and quantum-inspired (QAOA) optimisation, stress-tests against 5 historical crashes, and outputs an exact SIP plan.</span></div>
+        <div class="param"><span class="pn">Hardest part</span><span class="pv">QAOA quantum-classical hybrid optimisation — runs on GPU-simulated quantum circuits today, with a path to real quantum hardware later.</span></div>
+        <div class="param"><span class="pn">Stack</span><span class="pv">C++ (Eigen) for the optimisation math, CUDA for QAOA, Rust for fast filtering/backtesting across the full instrument universe.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ecard">
+    <div class="ehead"><div class="eicon ic-p">&#129504;</div><div><div class="ename">3. NxanceLM — Our Own AI</div><div class="etag">Not a separate feature — woven through both engines, plus standalone chat</div></div></div>
+    <div class="ebody">
+      <div class="params">
+        <div class="param"><span class="pn">Role 1</span><span class="pv">Inside Health Check — translates 11 sub-engines' raw numbers into plain-English issue cards, cross-references overlapping findings.</span></div>
+        <div class="param"><span class="pn">Role 2</span><span class="pv">Inside Construction — turns vague user goals into structured inputs, asks clarifying questions, explains why a portfolio was chosen.</span></div>
+        <div class="param"><span class="pn">Role 3</span><span class="pv">Standalone chat — general finance Q&amp;A, grounded in live market data and the user's own portfolio context.</span></div>
+        <div class="param"><span class="pn">Architecture</span><span class="pv">Hybrid Transformer + Mamba (State Space Model) + Mixture-of-Experts — same pattern as NVIDIA Nemotron 3 and AI21 Jamba. Attention layers for precision, Mamba layers for long-context (full portfolio history), MoE for domain specialisation without inference cost blowup.</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="nb">One model, three jobs. This is why the architecture decision (hybrid, not plain decoder-only) matters — it needs precision AND long-context AND conversational fluency all at once.</div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══ TECH STACK QUICK REFERENCE ═══ -->
+<div class="sec">
+  <div class="slabel">For the Engineer</div>
+  <div class="stitle">Tech Stack &mdash; <em>Quick Reference</em></div>
+  <div class="ssub">Polyglot by design — the right language for each job, not one framework doing everything.</div>
+
+  <table>
+    <thead><tr><th>Layer</th><th>Technology</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Mobile App</td><td>React Native + TypeScript (Nitro Modules, Rust JSI)</td><td>One codebase, Android+iOS, near-native performance</td></tr>
+      <tr><td>Web App</td><td>Next.js 14 + TypeScript</td><td>Shared types with mobile via monorepo</td></tr>
+      <tr><td>API Gateway</td><td>Go (Fiber) + Kong</td><td>High-throughput, single entry point</td></tr>
+      <tr><td>Business Logic</td><td>Python (FastAPI)</td><td>Fastest to iterate, best ML ecosystem</td></tr>
+      <tr><td>Heavy Math</td><td>Rust (Axum + Rayon)</td><td>10-50× faster than Python, memory-safe</td></tr>
+      <tr><td>Optimisation Core</td><td>C++ 20 (Eigen)</td><td>Industry-standard for quant finance</td></tr>
+      <tr><td>GPU Compute</td><td>CUDA C++, mamba-ssm kernels</td><td>Monte Carlo, QAOA, AI training</td></tr>
+      <tr><td>AI Training</td><td>PyTorch, DeepSpeed, Triton</td><td>Standard frontier-lab training stack</td></tr>
+      <tr><td>Databases</td><td>PostgreSQL, TimescaleDB, Redis, ClickHouse</td><td>Right store per data shape</td></tr>
+      <tr><td>Data In</td><td>Account Aggregator (RBI-regulated), AMFI, NSE, RBI, SEBI</td><td>Live consent-based + public market data</td></tr>
+      <tr><td>Infra</td><td>Kubernetes, Terraform, own cloud (Month 3-4)</td><td>Starts managed (Supabase), migrates in-house</td></tr>
+      <tr><td>Comms</td><td>gRPC + Protobuf (internal), Kafka+NATS (events)</td><td>Type-safe, decoupled microservices</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══ ADMIN PANEL BRIEF ═══ -->
+<div class="sec">
+  <div class="slabel">The Business Side</div>
+  <div class="stitle">Admin Panel &mdash; <em>Not an Afterthought</em></div>
+  <div class="ssub">6 departments run the business on the same backend the app uses — this isn't a separate build, it's a different permission layer on the same system.</div>
+  <div class="g3">
+    <div class="ecard" style="margin-bottom:0"><div class="ebody" style="padding:12px 14px">
+      <div style="font-size:11.5px;font-weight:700;color:var(--g);margin-bottom:4px">Construction Dept</div>
+      <div style="font-size:10px;color:var(--t2)">Flags low-performing portfolios, tests new strategies</div>
+    </div></div>
+    <div class="ecard" style="margin-bottom:0"><div class="ebody" style="padding:12px 14px">
+      <div style="font-size:11.5px;font-weight:700;color:var(--gold);margin-bottom:4px">Sales</div>
+      <div style="font-size:10px;color:var(--t2)">Conversion funnel, churn prediction</div>
+    </div></div>
+    <div class="ecard" style="margin-bottom:0"><div class="ebody" style="padding:12px 14px">
+      <div style="font-size:11.5px;font-weight:700;color:var(--purple);margin-bottom:4px">Operations</div>
+      <div style="font-size:10px;color:var(--t2)">Infra health, KYC + AA consent review</div>
+    </div></div>
+    <div class="ecard" style="margin-bottom:0"><div class="ebody" style="padding:12px 14px">
+      <div style="font-size:11.5px;font-weight:700;color:var(--red);margin-bottom:4px">Issue Resolution</div>
+      <div style="font-size:10px;color:var(--t2)">Support tickets, SLA tracking</div>
+    </div></div>
+    <div class="ecard" style="margin-bottom:0"><div class="ebody" style="padding:12px 14px">
+      <div style="font-size:11.5px;font-weight:700;color:var(--cyan);margin-bottom:4px">Investment/R&amp;D</div>
+      <div style="font-size:10px;color:var(--t2)">Owns all 25 sub-engine formulas, A/B tests</div>
+    </div></div>
+    <div class="ecard" style="margin-bottom:0"><div class="ebody" style="padding:12px 14px">
+      <div style="font-size:11.5px;font-weight:700;color:var(--pink);margin-bottom:4px">User Relations</div>
+      <div style="font-size:10px;color:var(--t2)">Personal outreach for high-value users</div>
+    </div></div>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══ BUILD PHASES SUMMARY ═══ -->
+<div class="sec">
+  <div class="slabel">The Plan</div>
+  <div class="stitle">How We Build It &mdash; <em>4 Phases, Not All at Once</em></div>
+  <table>
+    <thead><tr><th>Phase</th><th>What Ships</th><th>Team</th></tr></thead>
+    <tbody>
+      <tr><td>MVP</td><td>4 of 11 HC sub-engines, TinyLlama AI, web only</td><td>2-3 people</td></tr>
+      <tr><td>Beta</td><td>Full HC Engine, first half of Construction, mobile app ships</td><td>4-5 people</td></tr>
+      <tr><td>Phase 1</td><td>Full Construction Engine, own-trained NxanceLM v1, own cloud live</td><td>8-10 people</td></tr>
+      <tr><td>Full Final</td><td>Hybrid MoE NxanceLM v2, real quantum (QAOA on QPU), B2B products</td><td>15-20 people</td></tr>
+    </tbody>
+  </table>
+  <div class="goldb">Nothing here gets built out of order — each phase earns the right to build the next by hitting real user/revenue metrics first.</div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══ WHAT WE NEED ═══ -->
+<div class="sec">
+  <div class="ask-box">
+    <div class="ask-title">What We're Looking For</div>
+    <div class="params">
+      <div class="param"><span class="pn">Right now</span><span class="pv">A technical co-founder or lead engineer comfortable across Python/backend architecture, who can grow the team into the polyglot stack above as we scale.</span></div>
+      <div class="param"><span class="pn">Not required day 1</span><span class="pv">Deep quantum computing or frontier AI training experience — Rust/C++/CUDA specialists and the hybrid AI architecture are Phase 1+ hires, not MVP requirements.</span></div>
+      <div class="param"><span class="pn">What excites technical people about this</span><span class="pv">A genuine polyglot systems problem — 25 real sub-engines, a custom hybrid-architecture AI model, quantum optimisation, and a from-scratch cloud build — not another CRUD app.</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="fl">nxance</div>
+  <div class="ft">Ohshn Intelligence Pvt Ltd &nbsp;|&nbsp; Palampur, Himachal Pradesh &nbsp;|&nbsp; 2026<br>Technical Brief &nbsp;|&nbsp; Confidential &nbsp;|&nbsp; Full engineering blueprint available on request</div>
+</div>
+</div>
+</body>
+</html>

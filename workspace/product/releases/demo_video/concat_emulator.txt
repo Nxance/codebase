@@ -1,0 +1,6 @@
+file '/Users/bhaskar_pandey/Documents/Nxance/product/releases/demo_video/emulator_parts/02_after_taps.mp4'
+file '/Users/bhaskar_pandey/Documents/Nxance/product/releases/demo_video/emulator_parts/04_health.mp4'
+file '/Users/bhaskar_pandey/Documents/Nxance/product/releases/demo_video/emulator_parts/05_upload.mp4'
+file '/Users/bhaskar_pandey/Documents/Nxance/product/releases/demo_video/emulator_parts/06_build.mp4'
+file '/Users/bhaskar_pandey/Documents/Nxance/product/releases/demo_video/emulator_parts/07_pay.mp4'
+file '/Users/bhaskar_pandey/Documents/Nxance/product/releases/demo_video/emulator_parts/08_more.mp4'

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Nxance — Phase-Wise Technical Build Plan</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+:root{
+  --bg:#02030A;--c2:#0A0D1A;--bo:#151828;--b2:#191D35;
+  --tx:#EAF0FF;--t2:#586298;--t3:#222640;
+  --g:#00D4B1;--gt:rgba(0,212,177,.1);--gr:rgba(0,212,177,.22);
+  --gold:#FFB830;--goldt:rgba(255,184,48,.09);
+  --red:#FF3F60;--redt:rgba(255,63,96,.09);
+  --blue:#4A8FFF;--bluet:rgba(74,143,255,.09);
+  --purple:#9B6DFF;--purplet:rgba(155,109,255,.09);
+  --cyan:#00C4FF;--cyant:rgba(0,196,255,.09);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);line-height:1.72;font-size:14px}
+.cover{min-height:70vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 28px 36px;text-align:center;
+  background:radial-gradient(ellipse 80% 55% at 50% -8%,rgba(0,212,177,.1),transparent 58%),radial-gradient(ellipse 35% 25% at 92% 88%,rgba(74,143,255,.06),transparent 50%)}
+.ctag{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--g);background:var(--gt);border:1px solid var(--gr);padding:5px 20px;border-radius:20px;display:inline-block;margin-bottom:20px}
+.ch{font-family:'Space Grotesk',sans-serif;font-size:clamp(28px,5vw,50px);font-weight:700;line-height:1.1;letter-spacing:-.025em;margin-bottom:12px}
+.ch em{font-style:normal;color:var(--g)}
+.csub{font-size:14.5px;color:var(--t2);max-width:700px;margin:0 auto 24px;line-height:1.8}
+.readtime{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--t3);border:1px solid var(--bo);padding:6px 16px;border-radius:20px;display:inline-block}
+.wrap{max-width:920px;margin:0 auto;padding:0 28px 70px}
+.sec{margin-bottom:56px}
+.hr{height:1px;background:var(--bo);margin:44px 0}
+.slabel{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--g);background:var(--gt);border:1px solid var(--gr);padding:3px 13px;border-radius:20px;display:inline-block;margin-bottom:12px}
+.stitle{font-family:'Space Grotesk',sans-serif;font-size:23px;font-weight:700;letter-spacing:-.01em;margin-bottom:6px}
+.stitle em{font-style:normal;color:var(--g)}
+.ssub{font-size:13px;color:var(--t2);margin-bottom:16px;max-width:740px;line-height:1.75}
+.phase-block{border-radius:16px;border:1.5px solid;margin-bottom:16px;overflow:hidden}
+.pb-mvp{border-color:rgba(0,212,177,.35)}.pb-beta{border-color:rgba(74,143,255,.35)}
+.pb-p1{border-color:rgba(255,184,48,.35)}.pb-final{border-color:rgba(155,109,255,.4)}
+.pb-head{padding:16px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.pb-head.mvp{background:rgba(0,212,177,.06)}.pb-head.beta{background:rgba(74,143,255,.06)}
+.pb-head.p1{background:rgba(255,184,48,.06)}.pb-head.final{background:rgba(155,109,255,.07)}
+.pb-badge{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;padding:3px 12px;border-radius:20px}
+.pb-title{font-size:17px;font-weight:700;font-family:'Space Grotesk',sans-serif}
+.pb-meta{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--t2);margin-left:auto}
+.pb-body{padding:16px 20px;background:var(--c2)}
+.pb-goal{font-size:12px;color:var(--t2);line-height:1.7;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--bo)}
+.pb-goal b{color:var(--tx)}
+.build-list{display:flex;flex-direction:column;gap:6px}
+.build-item{display:flex;gap:10px;padding:7px 10px;background:rgba(255,255,255,.02);border:1px solid var(--bo);border-radius:7px;font-size:11px;align-items:flex-start}
+.bi-check{color:var(--g);font-family:'JetBrains Mono',monospace;flex-shrink:0;margin-top:1px}
+.bi-text{color:var(--t2);line-height:1.55}
+.bi-text b{color:var(--tx)}
+.dod-box{background:var(--gt);border:1px solid var(--gr);border-radius:8px;padding:10px 14px;font-size:11px;color:var(--g);margin-top:12px;line-height:1.6}
+.dod-box.beta{background:var(--bluet);border-color:rgba(74,143,255,.25);color:var(--blue)}
+.dod-box.p1{background:var(--goldt);border-color:rgba(255,184,48,.25);color:var(--gold)}
+.dod-box.final{background:var(--purplet);border-color:rgba(155,109,255,.25);color:var(--purple)}
+table{width:100%;border-collapse:collapse;margin:9px 0;font-size:11.5px}
+th{background:rgba(255,255,255,.04);padding:8px 10px;text-align:left;font-family:'JetBrains Mono',monospace;font-size:8.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--t3);border-bottom:1px solid var(--b2)}
+td{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.03);color:var(--t2);vertical-align:top}
+tr:last-child td{border:none}td:first-child{color:var(--tx);font-weight:600}
+.nb{background:var(--gt);border:1px solid var(--gr);border-radius:8px;padding:10px 14px;font-size:11.5px;color:var(--g);margin:10px 0;line-height:1.6}
+.goldb{background:var(--goldt);border:1px solid rgba(255,184,48,.25);border-radius:8px;padding:10px 14px;font-size:11.5px;color:var(--gold);margin:10px 0;line-height:1.6}
+.footer{text-align:center;padding:44px 0 20px;border-top:1px solid var(--bo);margin-top:16px}
+.fl{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;background:linear-gradient(135deg,var(--g),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+.ft{font-size:11px;color:var(--t3)}
+@media(max-width:760px){.wrap{padding:0 16px 60px}}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="ctag">Ohshn Intelligence — Nxance</div>
+  <div class="ch">Building Nxance &mdash; <em>Phase by Phase</em></div>
+  <div class="csub">A technical walkthrough of exactly what gets built in each of the 4 phases, in engineering terms. Hand this to any developer to explain what we're building and when.</div>
+  <div class="readtime">&#9200; 12-minute read</div>
+</div>
+
+<div class="wrap">
+
+<!-- ═══ QUICK MAP ═══ -->
+<div class="sec">
+  <div class="slabel">The Map</div>
+  <div class="stitle">4 Phases, <em>One Sentence Each</em></div>
+  <table>
+    <thead><tr><th>Phase</th><th>In One Sentence</th><th>Timeline</th></tr></thead>
+    <tbody>
+      <tr><td>MVP</td><td>4 of 11 Health Check sub-engines + basic AI, prove someone will pay</td><td>0-2.5 months</td></tr>
+      <tr><td>Beta</td><td>All 11 Health Check sub-engines + half of Construction + mobile app</td><td>3-6 months</td></tr>
+      <tr><td>Phase 1</td><td>Full Construction Engine (14) + real AI model + own cloud + admin panel</td><td>7-12 months</td></tr>
+      <tr><td>Full Final</td><td>MoE AI upgrade + real quantum hardware + B2B products</td><td>13-24 months</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══ MVP ═══ -->
+<div class="sec">
+  <div class="phase-block pb-mvp">
+    <div class="pb-head mvp">
+      <span class="pb-badge" style="color:var(--g);background:var(--gt)">PHASE 1</span>
+      <span class="pb-title">MVP — Minimum Buyable Product</span>
+      <span class="pb-meta">0-2.5 months · 2-3 engineers</span>
+    </div>
+    <div class="pb-body">
+      <div class="pb-goal"><b>What you're building:</b> The smallest slice of Nxance that a real user will pay real money for. Not a demo — a thing someone pulls out their card for.</div>
+
+      <div class="build-list">
+        <div class="build-item"><span class="bi-check">[ ]</span><div class="bi-text"><b>Auth</b> — Phone OTP login via Supabase Auth. That's it, no MFA, no biometric yet.</div></div>
+        <div class="build-item"><span class="bi-check">[ ]</span><div class="bi-text"><b>Portfolio input</b> — CAS PDF upload, parsed with the open-source <code>casparser</code> library. No live data sync yet.</div></div>
+        <div class="build-item"><span class="bi-check">[ ]</span><div class="bi-text"><b>4 Health Check sub-engines</b> — Performance (XIRR/Sharpe), Cost Leak (TER waste), Goal Alignment (future value gap), Structure (concentration risk). Plain Python, no Rust yet.</div></div>
+        <div class="build-item"><span class="bi-check">[ ]</span><div class="bi-text"><b>AI translation layer</b> — Self-hosted TinyLlama 1.1B on a rented GPU, turns the 4 sub-engines' raw output into plain-English issue cards.</div></div>
+        <div class="build-item"><span class="bi-check">[ ]</span><div class="bi-text"><b>Payment</b> — Razorpay one-time payment link, Rs.49-99, to unlock the full report. This is the actual test, so it can't be skipped or deferred.</div></div>
+        <div class="build-item"><span class="bi-check">[ ]</span><div class="bi-text"><b>Frontend</b> — Next.js web app only. No mobile app at this stage.</div></div>
+      </div>
+
+      <span class="slbl" style="margin-top:14px">What You're NOT Building Yet</span>
+      <div class="build-list">
+        <div class="build-item"><span class="bi-check" style="color:var(--t3)">&mdash;</span><div class="bi-text">Construction Engine (any of it), the other 7 Health Check sub-engines, mobile app, admin panel, Rust/C++/CUDA, Account Aggregator, own cloud, real NxanceLM model</div></div>
+      </div>
+
+      <div class="dod-box"><b>Definition of Done:</b> 50+ real users uploaded a real portfolio. 15%+ paid for the full report with their own money. AI-generated text checked for accuracy on 30+ samples, zero hallucinated Rs. figures.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ BETA ═══ -->
+<div class="sec">
+  <div class="phase-block pb-beta">
+    <div class="pb-head beta">
+      <span class="pb-badge" style="color:var(--blue);background:var(--bluet)">PHASE 2</span>
+      <span class="pb-title">Beta — Full Diagnostic + Construction Begins</span>
+      <span class="pb-meta">3-6 months · 4-5 engineers</span>
+    </div>
+    <div class="pb-body">
+      <div class="pb-goal"><b>What you're building:</b> The complete diagnostic engine (all 11 sub-engines), live consent-based data instead of manual upload, the first half of the portfolio-builder engine, and a real mobile app.</div>
+
+      <div class="build-list">
+        <div class="build-item"><span class="bi-check">[ ]</span><div class="bi-text"><b>Remaining 7 Health Check sub-engines</b> — Fraud Gate (7 hard rules + ML anomaly model), Behaviour, Tax Efficiency, Forecasting (Monte Carlo), Liquidity, ESG/Suitability, Peer Comparison. All 11 now live.</div></div>
+        <div class="build-item"><span class="bi-check">[ ]</span><div class="bi-text"><b>Account Aggregator integration</b> — Register as FIU with RBI, integrate an AA gateway (Setu/Anumati), replace manual CAS upload as the primary onboarding path.</div></div>
+        <div class="build-item"><span class="bi-check">[ ]</span><div class="bi-text"><b>Selection Engine (basic)</b> — 4-6 of its eventual 12 scoring layers. Suggests alternative funds, no QAOA yet.</div></div>
+        <div class="build-item"><span class="bi-check">[ ]</span><div class="bi-text"><b>Construction Engine — first 6 sub-engines</b> — Profile Engine, Goal Decomposer, Constraint Builder, Asset Allocation, Universe Filter, Selection Bridge. Classical portfolio-building logic, no quantum yet.</div></div>
+        <div class="build-item"><span class="bi-check">[ ]</span><div class="bi-text"><b>Mobile app</b> — React Native + TypeScript. Home, Portfolio, Settings, Profile screens.</div></div>
+        <div class="build-item"><span class="bi-check">[ ]</span><div class="bi-text"><b>Subscription billing</b> — Rs.199/month recurring via Razorpay, not just the MVP's one-time payment.</div></div>
+        <div class="build-item"><span class="bi-check">[ ]</span><div class="bi-text"><b>Backend split begins</b> — Monolith splits into User Service + HC Engine Service + Construction Engine Service (still all Python).</div></div>
+      </div>
+
+      <span class="slbl" style="margin-top:14px">What You're NOT Building Yet</span>
+      <div class="build-list">
+        <div class="build-item"><span class="bi-check" style="color:var(--t3)">&mdash;</span><div class="bi-text">Construction sub-engines 7-14 (correlation, QAOA, tax optimiser, stress-test), real trained AI model, Rust/C++/CUDA rewrite, full admin panel, own cloud live</div></div>
+      </div>
+
+      <div class="dod-box beta"><b>Definition of Done:</b> 1,000 users, all 11 HC sub-engines validated against 50+ manually-checked portfolios. 100+ paying subscribers. AA onboarding shows measurably lower drop-off than manual PDF upload.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PHASE 1 ═══ -->
+<div class="sec">
+  <div class="phase-block pb-p1">
+    <div class="pb-head p1">
+      <span class="pb-badge" style="color:var(--gold);background:var(--goldt)">PHASE 3</span>
+      <span class="pb-title">Phase 1 — Production Platform</span>
+      <span class="pb-meta">7-12 months · 8-10 engineers</span>
+    </div>
+    <div class="pb-body">
+      <div class="pb-goal"><b>What you're building:</b> Every engine complete to full scope, real AI (not TinyLlama), self-hosted infrastructure, and the operational software your business team runs on.</div>
+
+      <div class="build-list">
+        <div class="build-item"><span class="bi-check">[ ]</span><div class="bi-text"><b>Remaining 8 Construction sub-engines</b> — Cross-Asset Correlation, MVO, QAOA (GPU-simulated quantum optimisation), Tax-Aware Optimiser, Backtesting (5 historical crashes), Regime Stress-Test, SIP Designer, Rebalance Scheduler. All 14 now live.</div></div>
+        <div class="build-item"><span class="bi-check">[ ]</span><div class="bi-text"><b>NxanceLM v1 — real hybrid AI</b> — Train from scratch: Transformer attention + Mamba (State Space Model) layers, 7B params, 32K context. Replaces TinyLlama entirely. PyTorch + DeepSpeed + mamba-ssm CUDA kernels.</div></div>
+        <div class="build-item"><span class="bi-check">[ ]</span><div class="bi-text"><b>Rust Calc Engine</b> — XIRR/Sharpe/CVaR/correlation rewritten in Rust (Axum+Rayon), called from Python via PyO3. 10-50× faster.</div></div>
+        <div class="build-item"><span class="bi-check">[ ]</span><div class="bi-text"><b>C++ optimisation core</b> — MVO (Eigen library) handles the full 7,400-instrument universe in production.</div></div>
+        <div class="build-item"><span class="bi-check">[ ]</span><div class="bi-text"><b>Own cloud goes live</b> — Self-hosted Postgres (Patroni HA) on Ohshn Cloud (OpenStack+Ceph), full cutover from Supabase.</div></div>
+        <div class="build-item"><span class="bi-check">[ ]</span><div class="bi-text"><b>Admin panel — all 6 departments</b> — Construction, Sales, Operations, Issue Resolution, Investment/R&D, User Relations. Full RBAC + audit logging.</div></div>
+        <div class="build-item"><span class="bi-check">[ ]</span><div class="bi-text"><b>Formula version control</b> — Git-style versioning for all 25 sub-engine formulas, A/B testing framework for the R&D team.</div></div>
+      </div>
+
+      <span class="slbl" style="margin-top:14px">What You're NOT Building Yet</span>
+      <div class="build-list">
+        <div class="build-item"><span class="bi-check" style="color:var(--t3)">&mdash;</span><div class="bi-text">MoE sparsity layer for NxanceLM, real quantum hardware (still GPU-simulated), multi-city cloud, B2B API products, on-device AI</div></div>
+      </div>
+
+      <div class="dod-box p1"><b>Definition of Done:</b> 10,000 users, Rs.20L+ MRR. All 25 sub-engines live. NxanceLM v1 matches/beats TinyLlama quality at a fraction of per-query cost. Own cloud at 99.9% uptime for 60+ consecutive days.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FULL FINAL ═══ -->
+<div class="sec">
+  <div class="phase-block pb-final">
+    <div class="pb-head final">
+      <span class="pb-badge" style="color:var(--purple);background:var(--purplet)">PHASE 4</span>
+      <span class="pb-title">Full Final — Scale + Frontier Tech</span>
+      <span class="pb-meta">13-24 months · 15-20 engineers</span>
+    </div>
+    <div class="pb-body">
+      <div class="pb-goal"><b>What you're building:</b> The frontier upgrades — smarter AI at scale, real quantum hardware, offline capability, and turning internal infrastructure into products you sell to other companies.</div>
+
+      <div class="build-list">
+        <div class="build-item"><span class="bi-check">[ ]</span><div class="bi-text"><b>NxanceLM v2 — add MoE</b> — 8-expert Mixture-of-Experts sparsity on top of the hybrid base. ~40-70B total params, ~10-14B active per token, 128K-256K context window.</div></div>
+        <div class="build-item"><span class="bi-check">[ ]</span><div class="bi-text"><b>QAOA on real quantum hardware</b> — Move Construction Sub-09 from GPU simulation to actual QPU access via IBM Quantum Network.</div></div>
+        <div class="build-item"><span class="bi-check">[ ]</span><div class="bi-text"><b>On-device AI</b> — Distilled NxanceLM via ONNX Runtime Mobile / TensorFlow Lite, runs offline for poor-connectivity users.</div></div>
+        <div class="build-item"><span class="bi-check">[ ]</span><div class="bi-text"><b>Multi-DC cloud</b> — Ohshn Cloud expands Mumbai → Delhi NCR + Chennai, active-active replication.</div></div>
+        <div class="build-item"><span class="bi-check">[ ]</span><div class="bi-text"><b>B2B products</b> — Ohshn Cloud (VM/storage/DB/AI APIs), OhshnQuantum API (QAOA/Grover/VQE), NxanceLM API — all sold externally to other companies.</div></div>
+      </div>
+
+      <div class="dod-box final"><b>Definition of Done:</b> 1,00,000+ users, Rs.2Cr+/month combined B2C+B2B MRR. NxanceLM v2 outperforms v1. QAOA on real QPU demonstrably beats classical MVO in production. 5+ paying B2B enterprise customers.</div>
+    </div>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══ THE ONE RULE ═══ -->
+<div class="sec">
+  <div class="slabel">The One Rule</div>
+  <div class="stitle">Never Build Ahead of the Metric</div>
+  <div class="ssub">This is the single most important thing for a technical team to internalise about this roadmap.</div>
+  <div class="goldb" style="font-size:12.5px;padding:16px 18px">Every phase exists to prove one specific thing before the next phase's spend is justified. Building Rust/C++/CUDA before MVP proves anyone will pay wastes engineering time optimising a product nobody wants. Building real quantum hardware access before Phase 1's 10,000 users wastes crores on precision nobody will notice at small scale. If an engineer on the team suggests "let's just build it properly from the start" — that instinct is usually wrong here. Each phase earns the right to build the next by hitting its number first.</div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══ SUB-ENGINE COUNT REFERENCE ═══ -->
+<div class="sec">
+  <div class="slabel">Quick Reference</div>
+  <div class="stitle">Sub-Engine Rollout <em>by Phase</em></div>
+  <table>
+    <thead><tr><th>Engine</th><th>MVP</th><th>Beta</th><th>Phase 1</th><th>Full Final</th></tr></thead>
+    <tbody>
+      <tr><td>Health Check (of 11)</td><td>4</td><td>11</td><td>11</td><td>11</td></tr>
+      <tr><td>Construction (of 14)</td><td>0</td><td>6</td><td>14</td><td>14</td></tr>
+      <tr><td>NxanceLM</td><td>TinyLlama</td><td>TinyLlama</td><td>Hybrid v1 (7B)</td><td>Hybrid+MoE v2 (~40-70B)</td></tr>
+      <tr><td>Quantum (QAOA)</td><td>—</td><td>—</td><td>GPU-simulated</td><td>Real QPU</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="footer">
+  <div class="fl">nxance</div>
+  <div class="ft">Ohshn Intelligence Pvt Ltd &nbsp;|&nbsp; Palampur, Himachal Pradesh &nbsp;|&nbsp; 2026<br>Phase-Wise Technical Build Plan &nbsp;|&nbsp; Confidential &nbsp;|&nbsp; Full engineering blueprint available on request</div>
+</div>
+</div>
+</body>
+</html>

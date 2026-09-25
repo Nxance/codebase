@@ -1,0 +1,12 @@
+{
+  "SBI FD 1yr": {"rate": 6.8, "tenure_years": 1, "bank": "SBI"},
+  "SBI FD 3yr": {"rate": 6.75, "tenure_years": 3, "bank": "SBI"},
+  "SBI FD 5yr": {"rate": 6.5, "tenure_years": 5, "bank": "SBI"},
+  "HDFC FD 1yr": {"rate": 6.6, "tenure_years": 1, "bank": "HDFC"},
+  "HDFC FD 3yr": {"rate": 7.0, "tenure_years": 3, "bank": "HDFC"},
+  "HDFC FD 5yr": {"rate": 7.0, "tenure_years": 5, "bank": "HDFC"},
+  "ICICI FD 1yr": {"rate": 6.7, "tenure_years": 1, "bank": "ICICI"},
+  "ICICI FD 3yr": {"rate": 7.0, "tenure_years": 3, "bank": "ICICI"},
+  "Post Office TD 5yr": {"rate": 7.5, "tenure_years": 5, "bank": "India Post"},
+  "default": {"rate": 6.8, "tenure_years": 3, "bank": "Generic"}
+}

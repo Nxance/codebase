@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Nxance — MVP Company Profile</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+:root{
+  --bk:#08090F;--vb:#1A6BFF;--vb2:#0047CC;--vb3:#E6EEFF;
+  --cy:#00D4FF;--cy3:#E0F9FF;--g:#00C896;--gl:#E0FAF4;
+  --r:#FF3B5C;--rl:#FFF0F3;--a:#FF9500;--al:#FFF5E0;
+  --pu:#8B5CF6;--pul:#F3EEFF;
+  --bd:#E2E8F5;--bd2:#C8D3EB;--tx:#08090F;--tx2:#3D4663;--tx3:#7B87A8;
+  --w:#fff;--w2:#F6F8FF;--w3:#EEF2FA;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth}
+body{font-family:"Plus Jakarta Sans",sans-serif;background:var(--w2);color:var(--tx);line-height:1.65;font-size:14px}
+.bar{background:var(--bk);padding:0;display:flex;align-items:stretch;position:sticky;top:0;z-index:999;border-bottom:1px solid rgba(255,255,255,.07);min-height:48px}
+.bar-brand{padding:0 18px;display:flex;align-items:center;gap:8px;border-right:1px solid rgba(255,255,255,.07)}
+.bar-logo{font-size:15px;font-weight:800;color:var(--cy);letter-spacing:-.01em}
+.bar-ver{background:rgba(0,200,150,.15);color:var(--g);border:1px solid rgba(0,200,150,.25);padding:2px 9px;border-radius:5px;font-size:9px;font-weight:700;letter-spacing:.06em}
+.bar-nav{display:flex;align-items:stretch;overflow-x:auto;flex:1;-ms-overflow-style:none;scrollbar-width:none}
+.bar-nav::-webkit-scrollbar{display:none}
+.bni{padding:0 13px;display:flex;align-items:center;font-size:11px;font-weight:500;color:rgba(255,255,255,.4);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:.12s;text-decoration:none}
+.bni:hover{color:var(--cy);border-color:rgba(0,212,255,.4)}
+.bni.active{color:var(--cy);border-color:var(--cy)}
+.bar-btns{padding:8px 14px;display:flex;align-items:center;gap:7px;border-left:1px solid rgba(255,255,255,.07)}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:7px;font-size:11px;font-weight:600;cursor:pointer;border:none;font-family:inherit;transition:.14s;white-space:nowrap}
+.btn:hover{transform:translateY(-1px)}
+.b1{background:var(--g);color:#fff}
+.b2{background:rgba(255,255,255,.07);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.1)}
+.doc{max-width:980px;margin:0 auto;padding:40px 22px 80px}
+
+/* COVER */
+.cover{background:var(--bk);border-radius:18px;padding:38px 36px;margin-bottom:36px;position:relative;overflow:hidden}
+.cover::before{content:"";position:absolute;top:-60px;right:-60px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(0,200,150,.2) 0%,transparent 70%);pointer-events:none}
+.cover::after{content:"";position:absolute;bottom:-50px;left:-30px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(26,107,255,.15) 0%,transparent 70%);pointer-events:none}
+.ci{position:relative;z-index:1}
+.ver-chip{display:inline-flex;align-items:center;gap:6px;background:rgba(0,200,150,.12);border:1px solid rgba(0,200,150,.25);color:var(--g);padding:4px 13px;border-radius:20px;font-size:9px;font-weight:700;letter-spacing:.07em;margin-bottom:14px}
+.co-name{font-size:32px;font-weight:800;color:#fff;letter-spacing:-.025em;line-height:1.1;margin-bottom:5px}
+.co-tag{font-size:14px;color:rgba(255,255,255,.45);margin-bottom:24px;line-height:1.5}
+.co-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.07);border-radius:10px;overflow:hidden;margin-bottom:22px}
+.cs{background:rgba(255,255,255,.04);padding:12px 14px}
+.cs-n{font-size:16px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.01em}
+.cs-l{font-size:8.5px;color:rgba(255,255,255,.28);margin-top:3px;text-transform:uppercase;letter-spacing:.07em}
+.co-tags{display:flex;gap:6px;flex-wrap:wrap}
+.ctag{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.6);padding:3px 11px;border-radius:20px;font-size:10.5px;font-weight:500}
+.ctag.g{background:rgba(0,200,150,.1);border-color:rgba(0,200,150,.2);color:var(--g)}
+
+/* SECTIONS */
+.sec{margin-bottom:44px;scroll-margin-top:58px}
+.sh{display:flex;align-items:center;gap:11px;margin-bottom:18px;padding-bottom:11px;border-bottom:2px solid var(--bk)}
+.sh-ic{width:34px;height:34px;border-radius:9px;background:var(--bk);color:var(--cy);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.sh-t{font-size:16px;font-weight:700;color:var(--tx);letter-spacing:-.01em}
+.sh-s{font-size:11.5px;color:var(--tx3);margin-top:1px}
+
+/* CARDS */
+.ic{background:var(--w);border:1.5px solid var(--bd);border-radius:13px;overflow:hidden;margin-bottom:11px}
+.ich{background:var(--bk);padding:9px 16px;display:flex;align-items:center;justify-content:space-between}
+.ich-t{font-size:10.5px;font-weight:700;color:rgba(255,255,255,.65);text-transform:uppercase;letter-spacing:.1em}
+.ich-b{font-size:9.5px;padding:2px 8px;border-radius:5px;font-weight:600}
+.ib-c{background:rgba(0,200,150,.15);color:var(--g)}
+.ib-u{background:rgba(0,212,255,.15);color:var(--cy)}
+.icb{padding:14px 16px}
+.fg{display:grid;gap:9px}
+.fg2{grid-template-columns:1fr 1fr}
+.fg3{grid-template-columns:1fr 1fr 1fr}
+.f{border:.5px solid var(--bd2);border-radius:9px;overflow:hidden}
+.fl{background:var(--w3);padding:5px 11px;font-size:9.5px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.08em;border-bottom:.5px solid var(--bd2)}
+.fv{padding:8px 11px;font-size:12.5px;font-weight:500;color:var(--tx);line-height:1.5}
+.fv.lrg{font-size:14px;font-weight:700;color:var(--vb)}
+.fv.sm{font-size:12px;color:var(--tx2);line-height:1.65}
+.fv.mono{font-family:monospace;font-size:12px}
+
+/* COPY BLOCKS */
+.cb{background:var(--w);border:1.5px solid var(--bd);border-radius:13px;overflow:hidden;margin-bottom:12px}
+.cbh{background:var(--bk);padding:9px 16px;display:flex;align-items:center;justify-content:space-between}
+.cbt{font-size:10.5px;font-weight:700;color:rgba(255,255,255,.65);text-transform:uppercase;letter-spacing:.1em}
+.cbn{font-size:10px;color:rgba(0,200,150,.8);font-weight:500}
+.cbb{padding:14px 16px}
+.cbl{font-size:9.5px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.09em;margin-bottom:6px}
+.cbt2{font-size:12.5px;color:var(--tx);line-height:1.75;padding:11px 13px;background:var(--w3);border-radius:8px;border-left:3px solid var(--vb)}
+.cbt2.g{border-left-color:var(--g)}
+.cbt2.a{border-left-color:var(--a)}
+.cdiv{height:1px;background:var(--bd);margin:12px 0}
+
+/* TABLE */
+.dt{width:100%;border-collapse:collapse;font-size:12.5px;background:var(--w);border-radius:11px;overflow:hidden;border:1.5px solid var(--bd)}
+.dt th{background:var(--bk);color:rgba(255,255,255,.65);padding:9px 13px;text-align:left;font-size:10.5px;font-weight:600;letter-spacing:.04em}
+.dt td{padding:9px 13px;border-bottom:1px solid var(--bd);vertical-align:top;line-height:1.5}
+.dt tr:last-child td{border-bottom:none}
+.dt tr:nth-child(even) td{background:var(--w3)}
+.dt td:first-child{font-weight:600;color:var(--tx);width:35%}
+.dt td:last-child{color:var(--tx2)}
+
+/* ALERT */
+.al{border-radius:11px;padding:11px 15px;margin:12px 0;display:flex;gap:9px;align-items:flex-start;font-size:12px;line-height:1.6}
+.al i{flex-shrink:0;font-size:15px;margin-top:1px}
+.al-g{background:var(--gl);border:.5px solid rgba(0,200,150,.2);color:#00785A}
+.al-b{background:var(--vb3);border:.5px solid rgba(26,107,255,.2);color:var(--vb2)}
+.al-r{background:var(--rl);border:.5px solid rgba(255,59,92,.2);color:var(--r)}
+.al-a{background:var(--al);border:.5px solid rgba(255,149,0,.2);color:#A06400}
+
+/* METRICS */
+.mg{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:9px;margin-bottom:12px}
+.mc{background:var(--w);border:1.5px solid var(--bd);border-radius:11px;padding:13px 14px;text-align:center}
+.mc-n{font-size:19px;font-weight:800;color:var(--vb);line-height:1;letter-spacing:-.01em}
+.mc-l{font-size:9.5px;color:var(--tx3);margin-top:4px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+
+/* TEAM */
+.tg{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.tc{background:var(--w);border:1.5px solid var(--bd);border-radius:13px;padding:14px 16px}
+.tc-top{display:flex;align-items:center;gap:11px;margin-bottom:11px}
+.tav{width:42px;height:42px;border-radius:11px;background:var(--bk);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--cy);flex-shrink:0}
+.tn{font-size:13px;font-weight:700;color:var(--tx)}
+.tr{font-size:10.5px;color:var(--vb);font-weight:600;margin-top:1px}
+.td2{font-size:11.5px;color:var(--tx2);line-height:1.6;margin-bottom:7px}
+.tsk{display:flex;flex-wrap:wrap;gap:4px}
+.sk{background:var(--w3);border:1px solid var(--bd);padding:2px 7px;border-radius:4px;font-size:10px;font-weight:600;color:var(--tx2)}
+
+/* ROADMAP */
+.rm{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.rmc{background:var(--w);border:1.5px solid var(--bd);border-radius:11px;padding:13px;border-left:3px solid}
+.rmc.r1{border-left-color:var(--r)}
+.rmc.r2{border-left-color:var(--a)}
+.rmc.r3{border-left-color:var(--g)}
+.rmc.r4{border-left-color:var(--vb)}
+.rm-t{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:2px}
+.rmc.r1 .rm-t{color:var(--r)} .rmc.r2 .rm-t{color:#A06400}
+.rmc.r3 .rm-t{color:var(--g)} .rmc.r4 .rm-t{color:var(--vb)}
+.rm-p{font-size:10px;color:var(--tx3);margin-bottom:7px}
+.rm-i{font-size:11.5px;color:var(--tx2);margin-bottom:5px;padding-left:11px;position:relative;line-height:1.4}
+.rm-i::before{content:"→";position:absolute;left:0;font-size:10px;color:var(--tx3)}
+.rm-m{font-size:12px;font-weight:700;color:var(--tx);margin-top:7px;padding-top:7px;border-top:1px solid var(--bd)}
+
+/* GRANT ROWS */
+.gr{display:flex;align-items:center;gap:12px;padding:11px 14px;background:var(--w);border:1.5px solid var(--bd);border-radius:10px;margin-bottom:7px}
+.gr-n{font-size:12px;font-weight:800;color:var(--vb);width:20px;flex-shrink:0}
+.gr-i{flex:1;min-width:0}
+.gr-name{font-size:12.5px;font-weight:600;color:var(--tx)}
+.gr-org{font-size:10.5px;color:var(--tx3);margin-top:1px}
+.gr-amt{font-size:13px;font-weight:800;color:var(--vb);flex-shrink:0;text-align:right}
+.gr-sub{font-size:9.5px;color:var(--tx3);text-align:right;margin-top:1px}
+.gr-pct{font-size:10px;font-weight:700;padding:2px 7px;border-radius:5px;flex-shrink:0}
+.ph{background:var(--gl);color:var(--g)} .pm{background:var(--al);color:#A06400}
+
+/* FIN TABLE */
+.ft{width:100%;border-collapse:collapse;font-size:12px;background:var(--w);border:1.5px solid var(--bd);border-radius:11px;overflow:hidden}
+.ft th{background:var(--bk);color:rgba(255,255,255,.65);padding:8px 12px;text-align:left;font-size:10.5px;font-weight:600;letter-spacing:.04em}
+.ft th:not(:first-child){text-align:right}
+.ft td{padding:8px 12px;border-bottom:1px solid var(--bd);color:var(--tx2)}
+.ft td:not(:first-child){text-align:right;font-weight:600}
+.ft tr:last-child td{border-bottom:none}
+.ft tr.tot td{background:var(--bk);color:#fff;font-weight:700}
+.ft tr.tot td:not(:first-child){color:var(--cy)}
+.ft tr:nth-child(even) td{background:var(--w3)}
+
+/* FOOTER */
+.foot{margin-top:44px;padding-top:18px;border-top:1px solid var(--bd);display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+.foot span{font-size:10.5px;color:var(--tx3)}
+
+@media print{.bar,.bar-btns{display:none!important}body{background:#fff}}
+@media(max-width:680px){.co-grid{grid-template-columns:1fr 1fr}.fg2,.fg3,.tg,.rm{grid-template-columns:1fr}.doc{padding:18px 12px 60px}}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-brand">
+    <span class="bar-logo">Nxance</span>
+    <span class="bar-ver">MVP VERSION</span>
+  </div>
+  <nav class="bar-nav">
+    <a class="bni active" href="#company">Company</a>
+    <a class="bni" href="#founder">Founder</a>
+    <a class="bni" href="#product">Product</a>
+    <a class="bni" href="#market">Market</a>
+    <a class="bni" href="#tech">Technology</a>
+    <a class="bni" href="#financials">Financials</a>
+    <a class="bni" href="#roadmap">Roadmap</a>
+    <a class="bni" href="#forms">Form Answers</a>
+    <a class="bni" href="#grants">Grants</a>
+    <a class="bni" href="#pitches">Pitches</a>
+  </nav>
+  <div class="bar-btns">
+    <button class="btn b1" onclick="window.print()"><i class="ti ti-file-pdf"></i>Save PDF</button>
+    <button class="btn b2" onclick="(function(){var a=document.createElement('a');a.href='data:text/html;charset=utf-8,'+encodeURIComponent(document.documentElement.outerHTML);a.download='Nxance_MVP_Profile.html';a.click()})()"><i class="ti ti-download"></i>Download</button>
+  </div>
+</div>
+
+<div class="doc">
+
+<div class="cover">
+<div class="ci">
+  <div class="ver-chip"><i class="ti ti-rocket" style="font-size:10px"></i>MVP VERSION — 8-WEEK BUILD</div>
+  <div class="co-name">Nxance Technologies<br>Private Limited</div>
+  <div class="co-tag">AI-powered portfolio health analytics · Rs 99/month · Launch in 8 weeks<br>Palampur, Himachal Pradesh · Pre-seed · Pre-revenue</div>
+  <div class="co-grid">
+    <div class="cs"><div class="cs-n">8 weeks</div><div class="cs-l">To launch</div></div>
+    <div class="cs"><div class="cs-n">Rs 15K</div><div class="cs-l">Build cost</div></div>
+    <div class="cs"><div class="cs-n">Rs 99</div><div class="cs-l">Monthly price</div></div>
+    <div class="cs"><div class="cs-n">80 users</div><div class="cs-l">Break-even</div></div>
+  </div>
+  <div class="co-tags">
+    <span class="ctag g">Pre-seed · Pre-revenue</span>
+    <span class="ctag">Fintech · AI/ML · SaaS</span>
+    <span class="ctag">Palampur, HP</span>
+    <span class="ctag">DPIIT eligible</span>
+    <span class="ctag">Financial inclusion</span>
+    <span class="ctag">Himachal Pradesh</span>
+  </div>
+</div>
+</div>
+
+<!-- SECTION 1: COMPANY -->
+<div class="sec" id="company">
+<div class="sh"><div class="sh-ic"><i class="ti ti-building"></i></div><div><div class="sh-t">Company Details</div><div class="sh-s">For SPICe+ registration, DPIIT, Udyam, all government forms</div></div></div>
+
+<div class="ic">
+<div class="ich"><span class="ich-t">Core company information</span><span class="ich-b ib-c">Copy exact — use in all forms</span></div>
+<div class="icb">
+<div class="fg fg2">
+<div class="f"><div class="fl">Company full legal name</div><div class="fv lrg">Nxance Technologies Private Limited</div></div>
+<div class="f"><div class="fl">Brand / Short name</div><div class="fv lrg">Nxance</div></div>
+<div class="f"><div class="fl">Entity type</div><div class="fv">Private Limited Company (Companies Act 2013, Section 2(68))</div></div>
+<div class="f"><div class="fl">Registered state</div><div class="fv">Himachal Pradesh</div></div>
+<div class="f"><div class="fl">Registered office / HQ</div><div class="fv">Palampur, Himachal Pradesh, India — 176 061</div></div>
+<div class="f"><div class="fl">Operations city (currently)</div><div class="fv">Palampur, HP (remote-first — digital product)</div></div>
+<div class="f"><div class="fl">Authorised capital</div><div class="fv">Rs 10,00,000 — 1,00,000 equity shares × Rs 10 face value</div></div>
+<div class="f"><div class="fl">Paid-up capital</div><div class="fv">Rs 1,00,000 — 10,000 equity shares × Rs 10 face value</div></div>
+<div class="f"><div class="fl">NIC / Industry code</div><div class="fv">62099 — Other Information Technology Service Activities NEC</div></div>
+<div class="f"><div class="fl">Financial year</div><div class="fv">1 April to 31 March</div></div>
+<div class="f"><div class="fl">Company category</div><div class="fv">Company Limited by Shares / Non-Government Company</div></div>
+<div class="f"><div class="fl">Stage (current)</div><div class="fv">Pre-product / MVP build (Week 1 of 8)</div></div>
+</div>
+</div>
+</div>
+
+<div class="ic">
+<div class="ich"><span class="ich-t">Business description — ready to copy</span><span class="ich-b ib-c">Use in all registration forms</span></div>
+<div class="icb">
+<div class="fg">
+<div class="f"><div class="fl">One line (60 chars) — Twitter / short field</div><div class="fv">AI portfolio health analytics for India's MF investors — exact ₹ impact in 60s.</div></div>
+<div class="f"><div class="fl">Two lines — DPIIT / Udyam / MCA forms</div><div class="fv">Nxance is an AI-powered mutual fund and stock portfolio health analytics SaaS platform. Our proprietary NxanceLM model detects fund overlap, TER wastage, and goal shortfalls — delivering exact rupee impact and actionable fixes at Rs 99/month for India's 150M+ retail investors.</div></div>
+<div class="f"><div class="fl">Main business activity (SPICe+ / ROC forms)</div><div class="fv">Development and operation of AI-powered financial analytics software (SaaS) for retail mutual fund and equity portfolio analysis — using proprietary machine learning models, real-time AMFI/NSE data, and subscription-based access model.</div></div>
+</div>
+</div>
+</div>
+
+<div class="ic">
+<div class="ich"><span class="ich-t">Digital presence</span><span class="ich-b ib-u">Fill as domains go live</span></div>
+<div class="icb">
+<div class="fg fg3">
+<div class="f"><div class="fl">Website</div><div class="fv mono">nxance.in (or nxance.app)</div></div>
+<div class="f"><div class="fl">Company email</div><div class="fv mono">hello@nxance.in</div></div>
+<div class="f"><div class="fl">LinkedIn</div><div class="fv mono">linkedin.com/company/nxance</div></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- SECTION 2: FOUNDER -->
+<div class="sec" id="founder">
+<div class="sh"><div class="sh-ic"><i class="ti ti-user"></i></div><div><div class="sh-t">Founder & Team</div><div class="sh-s">Director KYC, team section, all application forms</div></div></div>
+
+<div class="tg">
+<div class="tc">
+  <div class="tc-top"><div class="tav">AR</div><div><div class="tn">Abhishek Rajpoot</div><div class="tr">Founder & CEO — Director</div></div></div>
+  <div class="td2">Entrepreneurial founder building Nxance to democratise intelligent portfolio analytics for India's Tier II/III retail investors. Deep interest in wealth creation, fintech, and startup ecosystems. Based in Palampur, Himachal Pradesh. Non-technical background — product vision, business strategy, and fundraising.</div>
+  <div class="tsk"><span class="sk">Product strategy</span><span class="sk">Business development</span><span class="sk">Investor relations</span><span class="sk">Financial markets</span></div>
+</div>
+<div class="tc">
+  <div class="tc-top"><div class="tav" style="background:rgba(0,212,255,.1);color:var(--cy)">TH</div><div><div class="tn">Technical Lead (Hiring)</div><div class="tr">Python · FastAPI · ML Engineer</div></div></div>
+  <div class="td2">Seeking technical co-founder / CTO. Interim: Fiverr quant developer (XIRR, Sharpe, CVaR — Rs 8,000) + Claude AI for backend scaffolding + Lovable.dev for UI. NxanceLM trained on free Google Colab T4 GPU.</div>
+  <div class="tsk"><span class="sk">Python / FastAPI</span><span class="sk">TinyLlama + LoRA</span><span class="sk">Financial quant</span><span class="sk">React / Next.js</span></div>
+</div>
+</div>
+
+<div class="ic" style="margin-top:11px">
+<div class="ich"><span class="ich-t">Director details — for MCA / DPIIT / KYC forms</span><span class="ich-b ib-c">Exact answers</span></div>
+<div class="icb">
+<div class="fg fg3">
+<div class="f"><div class="fl">Full name (as per PAN/Aadhaar)</div><div class="fv">Abhishek Rajpoot</div></div>
+<div class="f"><div class="fl">Designation</div><div class="fv">CEO / Managing Director / Whole-time Director</div></div>
+<div class="f"><div class="fl">DIN</div><div class="fv">[Assigned via SPICe+ — fill after COI]</div></div>
+<div class="f"><div class="fl">Location / City</div><div class="fv">Palampur, Himachal Pradesh — 176 061</div></div>
+<div class="f"><div class="fl">Nationality</div><div class="fv">Indian</div></div>
+<div class="f"><div class="fl">Shareholding %</div><div class="fv">100% (10,000 shares pre-investment)</div></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- SECTION 3: PRODUCT -->
+<div class="sec" id="product">
+<div class="sh"><div class="sh-ic"><i class="ti ti-device-mobile"></i></div><div><div class="sh-t">Product — MVP Scope</div><div class="sh-s">Exactly what will be built in 8 weeks — for DPIIT, SISFS, grants</div></div></div>
+
+<div class="al al-g"><i class="ti ti-info-circle"></i><strong>MVP scope is deliberately focused:</strong> 7 screens, one analysis flow, Rs 99/month paywall. No SEBI RIA needed. No stock trading. Pure analytics — "portfolio health score + issues + fix plans." Legal positioning: educational analytics, not investment advice.</div>
+
+<div class="cb">
+<div class="cbh"><span class="cbt">Problem statement</span><span class="cbn">Copy for DPIIT / grant forms</span></div>
+<div class="cbb">
+<div class="cbl">Short (50 words)</div>
+<div class="cbt2">India's 150M+ mutual fund investors lose Rs 13,300/year on average to fund overlap, high-expense-ratio plans, and goal misalignment. Yet 98% have zero access to intelligent portfolio analysis. Brokerages are not analytics tools. SEBI advisors charge Rs 5,000–50,000/year — unaffordable for Tier II/III retail investors like those in Palampur, Himachal Pradesh.</div>
+<div class="cdiv"></div>
+<div class="cbl">Long (100 words — for detailed grant applications)</div>
+<div class="cbt2 a">India has 150M+ active mutual fund investors yet the average retail investor loses Rs 13,300 per year to three invisible problems: (1) Fund overlap — duplicate stocks across multiple MFs unknowingly; (2) Regular plan TER — paying 1.2–2.5% extra expense ratio vs Direct plans for identical funds; (3) Goal misalignment — products mismatched to retirement, education, or wealth goals. Groww, Zerodha, and Paytm Money are transaction platforms — they profit from trades, not from optimising portfolios. SEBI-registered Investment Advisers charge Rs 5,000–50,000+/year — unaffordable for Tier II/III city investors (65% of India's MF investor base). Nxance solves this at Rs 99/month.</div>
+</div>
+</div>
+
+<div class="cb">
+<div class="cbh"><span class="cbt">Solution / MVP description</span><span class="cbn">Use in all applications</span></div>
+<div class="cbb">
+<div class="cbl">Short (60 words)</div>
+<div class="cbt2 g">Nxance is an AI-powered portfolio health analytics platform. Users add MF + stock holdings once. Our proprietary NxanceLM (TinyLlama 1.1B + LoRA, trained on 150M+ AMFI/NSE data, Rs 0 inference cost) computes XIRR, Sharpe ratio, fund overlap, and rupee impact in 60 seconds. Free health score + 1 issue. Rs 99/month unlocks all 3 ranked issues with exact, actionable fix plans.</div>
+<div class="cdiv"></div>
+<div class="cbl">MVP feature list (for forms asking "what will you build")</div>
+<div class="cbt2">
+MVP includes 7 screens: (1) Home/landing with trust signals; (2) OTP + Google/Apple sign-in; (3) Add holdings — MF with SIP date/amount + Stocks with qty/buy price; (4) Goal questions — 5 MCQ; (5) Analysis progress — real-time step tracker; (6) Results + paywall — free Issue #1, blur Issues #2+3, Rs 99 UPI unlock; (7) Full analysis report — bar chart, 4 metric cards, issue cards with scheme codes, AI summary, PDF download. Backend: FastAPI quant engine (XIRR, Sharpe, Jaccard, CVaR) + Supabase DB + NxanceLM. Payment: Razorpay UPI subscription.
+</div>
+</div>
+</div>
+
+<div class="ic">
+<div class="ich"><span class="ich-t">Product stage answers — for all forms</span><span class="ich-b ib-u">Fill in stage/status fields</span></div>
+<div class="icb">
+<div class="fg fg2">
+<div class="f"><div class="fl">Current stage</div><div class="fv">Pre-product / MVP development — Week 1 of 8-week build</div></div>
+<div class="f"><div class="fl">Expected MVP launch</div><div class="fv">8 weeks from today — Month 2, 2026</div></div>
+<div class="f"><div class="fl">PoC / prototype status</div><div class="fv">Concept validated — wireframes complete, tech stack defined, quant engine specifications ready</div></div>
+<div class="f"><div class="fl">Innovation / IP</div><div class="fv">NxanceLM (fine-tuned LLM on Indian financial data) + XIRR engine + Jaccard overlap algorithm — patent filing planned post-DPIIT recognition</div></div>
+<div class="f"><div class="fl">Platform (MVP)</div><div class="fv">Web app (PWA — mobile-first, works without app store download)</div></div>
+<div class="f"><div class="fl">Revenue stage</div><div class="fv">Pre-revenue — first paying user targeted at Week 8</div></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- SECTION 4: MARKET -->
+<div class="sec" id="market">
+<div class="sh"><div class="sh-ic"><i class="ti ti-chart-bar"></i></div><div><div class="sh-t">Market — MVP Focus</div><div class="sh-s">India-first, Tier II/III priority, MF + stocks retail segment</div></div></div>
+
+<div class="mg">
+<div class="mc"><div class="mc-n">150M+</div><div class="mc-l">MF investors India</div></div>
+<div class="mc"><div class="mc-n">Rs 63L Cr</div><div class="mc-l">Total MF AUM</div></div>
+<div class="mc"><div class="mc-n">Rs 45K Cr</div><div class="mc-l">Analytics TAM</div></div>
+<div class="mc"><div class="mc-n">Rs 4,500 Cr</div><div class="mc-l">Digital SAM</div></div>
+<div class="mc"><div class="mc-n">Rs 14.3 Cr</div><div class="mc-l">SOM (1L users)</div></div>
+<div class="mc"><div class="mc-n">65%</div><div class="mc-l">Tier II/III investors</div></div>
+</div>
+
+<div class="cb">
+<div class="cbh"><span class="cbt">Market opportunity — for grant / VC applications</span><span class="cbn">Copy-paste in market section</span></div>
+<div class="cbb">
+<div class="cbt2">India's mutual fund industry crossed Rs 63 Lakh Crore AUM with 150M+ registered investors as of 2025. The portfolio analytics market (TAM: Rs 45,000 Crore) is severely underserved — dominated by Rs 5,000–50,000/year SEBI advisors. Nxance addresses the Rs 4,500 Crore SAM of digitally-active investors. At Rs 99/month (Rs 1,188/year), capturing just 1% of 50M digitally-active MF investors = Rs 594 Crore ARR. SOM target of 1 lakh subscribers by Year 3 = Rs 14.3 Crore ARR.</div>
+</div>
+</div>
+</div>
+
+<!-- SECTION 5: TECHNOLOGY -->
+<div class="sec" id="tech">
+<div class="sh"><div class="sh-ic"><i class="ti ti-cpu"></i></div><div><div class="sh-t">Technology — MVP Stack</div><div class="sh-s">What we're building with and why — for IndiaAI, MeitY, deep tech grants</div></div></div>
+
+<div class="cb">
+<div class="cbh"><span class="cbt">NxanceLM — key innovation description</span><span class="cbn">Lead with this in every tech application</span></div>
+<div class="cbb">
+<div class="cbl">For IndiaAI Mission / MeitY forms</div>
+<div class="cbt2 g">Nxance's core technical innovation is NxanceLM — a proprietary financial language model trained entirely in India on Indian financial data. Base: TinyLlama 1.1B (open source). Method: LoRA (Low-Rank Adaptation) — reduces trainable parameters from 1.1B to 4.2M (99.6% reduction). Training: 200+ curated Q&amp;A examples from AMFI scheme data, NSE market data, SEBI circulars, and real portfolio scenarios. Training infrastructure: Free Google Colab T4 GPU — 2 hours, Rs 0 cost. Model size: 12MB adapter file. Inference cost: Rs 0 per query (no external API). This makes Nxance the only Indian fintech running its own trained LLM — vs competitors paying Rs 5–50 per query to OpenAI/Gemini. At 1 lakh queries/day, this saves Rs 50,000–5,00,000/day in API costs.</div>
+</div>
+</div>
+
+<div class="ic">
+<div class="ich"><span class="ich-t">MVP tech stack — for technology sections</span><span class="ich-b ib-u">Quick reference</span></div>
+<div class="icb">
+<div class="fg fg3">
+<div class="f"><div class="fl">Frontend (UI)</div><div class="fv">React · TypeScript · Tailwind CSS · Lovable.dev — PWA, mobile-first</div></div>
+<div class="f"><div class="fl">Backend / API</div><div class="fv">Python 3.11 · FastAPI · Uvicorn — REST endpoints</div></div>
+<div class="f"><div class="fl">Database + Auth</div><div class="fv">Supabase (PostgreSQL) · Row-level security · OTP auth</div></div>
+<div class="f"><div class="fl">AI / ML model</div><div class="fv">TinyLlama 1.1B · LoRA (PEFT) · HuggingFace · PyTorch — NxanceLM</div></div>
+<div class="f"><div class="fl">Quant engine</div><div class="fv">Python · NumPy · Pandas · SciPy — XIRR, Sharpe, Jaccard, CVaR</div></div>
+<div class="f"><div class="fl">MF data source</div><div class="fv">mfapi.in — free AMFI NAV API, 45,000+ schemes, no key needed</div></div>
+<div class="f"><div class="fl">Cloud hosting</div><div class="fv">AWS ap-south-1 Mumbai (credits via AWS Activate) + Railway.app free tier</div></div>
+<div class="f"><div class="fl">Payments</div><div class="fv">Razorpay UPI subscription — 0% fee, Rs 99/month</div></div>
+<div class="f"><div class="fl">Data compliance</div><div class="fv">India-only servers · DPDPA 2023 consent framework · AES-256-GCM encryption</div></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- SECTION 6: FINANCIALS -->
+<div class="sec" id="financials">
+<div class="sh"><div class="sh-ic"><i class="ti ti-currency-rupee"></i></div><div><div class="sh-t">Financials — MVP to Year 3</div><div class="sh-s">Revenue model, projections, funding ask</div></div></div>
+
+<div class="ic">
+<div class="ich"><span class="ich-t">Revenue model</span><span class="ich-b ib-c">For all investor / grant applications</span></div>
+<div class="icb">
+<div class="fg fg2">
+<div class="f"><div class="fl">Primary (MVP — Month 2)</div><div class="fv"><strong>SaaS subscription: Rs 99/month</strong> — Free tier: score + 1 issue. Paid: all 3 issues + fix plans + PDF report.</div></div>
+<div class="f"><div class="fl">Secondary (Phase 2 — Month 6)</div><div class="fv"><strong>AMFI ARN trail commission:</strong> 0.5–1% of AUM/year. At Rs 500 Cr AUM = Rs 2.5–5 Cr/year passive income.</div></div>
+<div class="f"><div class="fl">Unit economics</div><div class="fv">CAC: Rs 150 (organic/referral) · LTV: Rs 1,188/year · LTV:CAC = 7.9x · Gross margin: ~85%</div></div>
+<div class="f"><div class="fl">Break-even point</div><div class="fv">80 paying users = Rs 7,920 MRR = covers Rs 4,500/month infra cost. Achievable Week 8.</div></div>
+</div>
+</div>
+</div>
+
+<div style="border-radius:11px;overflow:hidden;border:1.5px solid var(--bd);margin-bottom:11px">
+<table class="ft">
+<thead><tr><th>Metric</th><th>MVP (Week 8)</th><th>Month 6</th><th>Year 1</th><th>Year 2</th><th>Year 3</th></tr></thead>
+<tbody>
+<tr><td>Paying users</td><td>100</td><td>500</td><td>2,000</td><td>10,000</td><td>50,000</td></tr>
+<tr><td>MRR</td><td>Rs 9,900</td><td>Rs 49,500</td><td>Rs 1.98L</td><td>Rs 9.9L</td><td>Rs 49.5L</td></tr>
+<tr><td>ARR</td><td>Rs 1.19L</td><td>Rs 5.94L</td><td>Rs 23.8L</td><td>Rs 1.19 Cr</td><td>Rs 5.94 Cr</td></tr>
+<tr class="tot"><td>Total revenue (incl. trail)</td><td>Rs 0</td><td>Rs 6L</td><td>Rs 25L</td><td>Rs 1.7 Cr</td><td>Rs 9.4 Cr</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="ic">
+<div class="ich"><span class="ich-t">Funding ask — MVP stage</span><span class="ich-b ib-c">For pre-seed investors and grant committees</span></div>
+<div class="icb">
+<div class="fg fg2">
+<div class="f"><div class="fl">Current ask (pre-seed)</div><div class="fv lrg">Rs 25–50 Lakh</div></div>
+<div class="f"><div class="fl">Use of funds</div><div class="fv">Product dev Rs 8L · AI/data Rs 5L · Team Rs 8L · Marketing Rs 4L · Legal Rs 2L · Working capital Rs 3L</div></div>
+<div class="f"><div class="fl">Equity offered</div><div class="fv">10–15% pre-seed (DVR structure — founder retains voting control regardless)</div></div>
+<div class="f"><div class="fl">Pre-money valuation</div><div class="fv">Rs 2–3 Crore (Scorecard method — AI fintech, own LLM, Tier II founder, India-first)</div></div>
+<div class="f"><div class="fl">Non-dilutive grants (parallel)</div><div class="fv">Rs 44L–1.42 Cr target — SISFS + MeitY + IndiaAI + state schemes + cloud credits</div></div>
+<div class="f"><div class="fl">Next round (seed)</div><div class="fv">Rs 1–3 Crore at Rs 15–25 Cr valuation — after 1,000 paying users milestone</div></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- SECTION 7: ROADMAP -->
+<div class="sec" id="roadmap">
+<div class="sh"><div class="sh-ic"><i class="ti ti-map"></i></div><div><div class="sh-t">Roadmap — 8 Weeks to Launch</div><div class="sh-s">Milestone-based — for SISFS tranches and investor tracking</div></div></div>
+
+<div class="rm">
+<div class="rmc r1"><div class="rm-t">Week 1–2</div><div class="rm-p">Accounts + UI build</div><div class="rm-i">Lovable, Supabase, Razorpay, Railway accounts</div><div class="rm-i">7 screens in Lovable (liquid glass design)</div><div class="rm-i">Supabase DB 5 tables + OTP auth</div><div class="rm-i">Fiverr quant developer hired</div><div class="rm-m">Deliverable: Full UI live on domain</div></div>
+<div class="rmc r2"><div class="rm-t">Week 3–4</div><div class="rm-p">Data + quant engine</div><div class="rm-i">mfapi.in AMFI data pipeline connected</div><div class="rm-i">Quant engine delivery — XIRR, Sharpe, Jaccard, CVaR</div><div class="rm-i">FastAPI endpoints deployed on Railway</div><div class="rm-i">Fund search typeahead working</div><div class="rm-m">Deliverable: Analysis computes correctly</div></div>
+<div class="rmc r3"><div class="rm-t">Week 5–6</div><div class="rm-p">Integration + payments</div><div class="rm-i">Lovable UI → Supabase → Quant engine — end-to-end</div><div class="rm-i">Health score 0–100 displaying correctly</div><div class="rm-i">Razorpay Rs 99 UPI subscription live</div><div class="rm-i">Blur paywall functional</div><div class="rm-m">Deliverable: First payment can be collected</div></div>
+<div class="rmc r4"><div class="rm-t">Week 7–8</div><div class="rm-p">AI + launch</div><div class="rm-i">NxanceLM trained on Google Colab (2 hrs, Rs 0)</div><div class="rm-i">AI summary integrated in analysis report</div><div class="rm-i">End-to-end testing — 20 beta users</div><div class="rm-i">Launch: WhatsApp + LinkedIn + finance groups</div><div class="rm-m">Target: 100 paying users, Rs 9,900 MRR</div></div>
+</div>
+</div>
+
+<!-- SECTION 8: FORM ANSWERS -->
+<div class="sec" id="forms">
+<div class="sh"><div class="sh-ic"><i class="ti ti-forms"></i></div><div><div class="sh-t">Exact Form Fill Answers</div><div class="sh-s">Copy-paste for SPICe+, DPIIT, Udyam — no guesswork needed</div></div></div>
+
+<div class="al al-b"><i class="ti ti-info-circle"></i>Jab bhi koi form fill karo — yahan se exact answer copy karo. COI milne ke baad [brackets] wali jagah actual values fill karo.</div>
+
+<div class="ic">
+<div class="ich"><span class="ich-t">SPICe+ / MCA — Company registration form</span><span class="ich-b ib-c">Exact answers</span></div>
+<div class="icb">
+<table class="dt">
+<thead><tr><th>SPICe+ field</th><th>Nxance answer</th></tr></thead>
+<tbody>
+<tr><td>Proposed name 1</td><td>Nxance Technologies Private Limited</td></tr>
+<tr><td>Proposed name 2</td><td>Nxance Fintech Private Limited</td></tr>
+<tr><td>Proposed name 3</td><td>Nxance AI Private Limited</td></tr>
+<tr><td>Type of company</td><td>Private Limited Company</td></tr>
+<tr><td>Category</td><td>Company Limited by Shares</td></tr>
+<tr><td>Sub-category</td><td>Non-Government Company</td></tr>
+<tr><td>Main industrial activity (NIC)</td><td>62 — Computer Programming, Consultancy and Related Activities</td></tr>
+<tr><td>Activity description</td><td>Other Information Technology Service Activities (NIC Code: 62099)</td></tr>
+<tr><td>Registered office state</td><td>Himachal Pradesh</td></tr>
+<tr><td>Registered office city / district</td><td>Palampur, Kangra District, Himachal Pradesh — 176 061</td></tr>
+<tr><td>Authorised capital</td><td>Rs 10,00,000 (Ten Lakh)</td></tr>
+<tr><td>Paid-up capital</td><td>Rs 1,00,000 (One Lakh)</td></tr>
+<tr><td>Number of equity shares</td><td>10,000 equity shares of Rs 10 each</td></tr>
+<tr><td>Main objects of company</td><td>To develop, operate, and commercialise artificial intelligence-powered financial analytics software platforms for retail investors — providing portfolio health analysis, fund overlap detection, XIRR computation, and investment goal alignment via SaaS subscription model.</td></tr>
+<tr><td>Director 1 — full name</td><td>Abhishek Rajpoot</td></tr>
+<tr><td>Director 1 — designation</td><td>CEO / Managing Director</td></tr>
+<tr><td>Director 1 — address</td><td>Palampur, Kangra, Himachal Pradesh — 176 061</td></tr>
+<tr><td>Subscriber (shareholder)</td><td>Abhishek Rajpoot — 10,000 shares — Rs 1,00,000</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="ic">
+<div class="ich"><span class="ich-t">DPIIT Startup India — recognition form answers</span><span class="ich-b ib-c">startupindia.gov.in exact fields</span></div>
+<div class="icb">
+<table class="dt">
+<thead><tr><th>DPIIT field</th><th>Answer</th></tr></thead>
+<tbody>
+<tr><td>Entity name</td><td>Nxance Technologies Private Limited</td></tr>
+<tr><td>Entity type</td><td>Private Limited Company</td></tr>
+<tr><td>Date of incorporation</td><td>[From COI — fill actual date]</td></tr>
+<tr><td>CIN</td><td>[From COI — fill actual CIN]</td></tr>
+<tr><td>Company PAN</td><td>[Auto-issued with COI — fill actual]</td></tr>
+<tr><td>State</td><td>Himachal Pradesh</td></tr>
+<tr><td>City</td><td>Palampur</td></tr>
+<tr><td>Sector</td><td>Fintech</td></tr>
+<tr><td>Industry</td><td>Financial Services / Software Products</td></tr>
+<tr><td>Technology used</td><td>Artificial Intelligence / Machine Learning</td></tr>
+<tr><td>Stage</td><td>Ideation / Pre-product</td></tr>
+<tr><td>Employees</td><td>1 (founder only)</td></tr>
+<tr><td>Annual turnover</td><td>0 (pre-revenue)</td></tr>
+<tr><td>Brief description</td><td>Nxance is an AI-powered portfolio health analytics platform for India's 150M+ MF and stock investors. Our NxanceLM model (TinyLlama + LoRA, Rs 0 inference cost, trained on 150M+ AMFI/NSE data) delivers exact XIRR, fund overlap analysis, and rupee impact in 60 seconds at Rs 99/month. We democratise intelligent portfolio analytics for Tier II/III investors — including those in Palampur, Himachal Pradesh — without SEBI RIA consultation fees.</td></tr>
+<tr><td>What problem does it solve?</td><td>Retail investors in India lose Rs 13,300/year average to three invisible problems: fund overlap (duplicate stocks in multiple MFs), Regular plan TER wastage (paying 1.2–2.5% extra vs Direct), and goal misalignment. Nxance identifies these with exact rupee impact and provides specific, actionable fixes.</td></tr>
+<tr><td>How is it innovative?</td><td>Nxance is the only Indian fintech with a proprietary trained LLM (NxanceLM) at Rs 0 inference cost. We trained TinyLlama 1.1B with LoRA on Indian financial data — vs competitors paying Rs 5–50 per query to OpenAI/Gemini APIs. Additionally, Newton-Raphson XIRR engine and Jaccard overlap detection deliver institutional-grade analytics to retail users at Rs 99/month for the first time.</td></tr>
+<tr><td>Is it scalable?</td><td>Yes. Pure SaaS — marginal cost per new user is near Rs 0. No human advisor needed. Same codebase can serve 1 crore users. Revenue scales linearly; costs sub-linearly. Gross margin: ~85%.</td></tr>
+<tr><td>Employment potential</td><td>5 employees Year 1; 50 by Year 3; 500+ by Year 5.</td></tr>
+<tr><td>Social impact</td><td>Financial inclusion for Tier II/III city investors (65% of India's MF investor base) in cities like Palampur, HP who cannot afford SEBI RIA fees. Nxance saves Rs 13,300/year per user — 1 month's salary for many target customers.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="ic">
+<div class="ich"><span class="ich-t">Udyam Registration — exact field answers</span><span class="ich-b ib-c">udyamregistration.gov.in</span></div>
+<div class="icb">
+<table class="dt">
+<thead><tr><th>Udyam field</th><th>Answer</th></tr></thead>
+<tbody>
+<tr><td>Aadhaar number</td><td>[Abhishek's Aadhaar — 12 digits]</td></tr>
+<tr><td>Name of entrepreneur</td><td>Abhishek Rajpoot (exactly as on Aadhaar)</td></tr>
+<tr><td>Type of organisation</td><td>Private Limited Company</td></tr>
+<tr><td>Company PAN</td><td>[Company PAN from COI]</td></tr>
+<tr><td>Filed ITR last year?</td><td>No (new company)</td></tr>
+<tr><td>GSTIN?</td><td>No initially → update once GST registered</td></tr>
+<tr><td>Name of enterprise</td><td>Nxance Technologies Private Limited</td></tr>
+<tr><td>Official address — state</td><td>Himachal Pradesh</td></tr>
+<tr><td>Official address — district</td><td>Kangra</td></tr>
+<tr><td>Official address — city/town</td><td>Palampur</td></tr>
+<tr><td>PIN code</td><td>176 061</td></tr>
+<tr><td>Date of commencement</td><td>[Incorporation date from COI]</td></tr>
+<tr><td>Main activity type</td><td>Services (NOT Manufacturing)</td></tr>
+<tr><td>NIC 2-digit</td><td>62 — Computer Programming</td></tr>
+<tr><td>NIC 5-digit</td><td>62099 — Other IT Service Activities NEC</td></tr>
+<tr><td>Persons employed</td><td>1 (founder)</td></tr>
+<tr><td>Investment in plant/equipment</td><td>Rs 0 (software company — no physical equipment)</td></tr>
+<tr><td>Turnover</td><td>Rs 0 (pre-revenue)</td></tr>
+<tr><td>MSME classification</td><td>MICRO Enterprise (auto-selected)</td></tr>
+<tr><td>Bank account</td><td>[Company current account — HDFC/SBI branch Palampur or nearest city]</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<!-- SECTION 9: GRANTS -->
+<div class="sec" id="grants">
+<div class="sh"><div class="sh-ic"><i class="ti ti-award"></i></div><div><div class="sh-t">Grants — MVP Priority List</div><div class="sh-s">Sorted by urgency — apply in this exact order</div></div></div>
+
+<div class="al al-r"><i class="ti ti-alarm"></i><strong>SISFS deadline 31 May 2026 — apply this week after COI. seedfund.startupindia.gov.in</strong></div>
+
+<div class="gr"><span class="gr-n">1</span><div class="gr-i"><div class="gr-name">DPIIT Startup India Recognition</div><div class="gr-org">startupindia.gov.in — Day 1 after COI. Free, 1–3 days.</div></div><div><div class="gr-amt">Rs 0</div><div class="gr-sub">Unlocks all grants</div></div><span class="gr-pct ph">99%</span></div>
+<div class="gr"><span class="gr-n">2</span><div class="gr-i"><div class="gr-name">Udyam / MSME Registration</div><div class="gr-org">udyamregistration.gov.in — Day 1. 5 minutes. Free.</div></div><div><div class="gr-amt">Rs 0</div><div class="gr-sub">CGTMSE loan access</div></div><span class="gr-pct ph">99%</span></div>
+<div class="gr"><span class="gr-n">3</span><div class="gr-i"><div class="gr-name">AWS Activate — $5,000 credits</div><div class="gr-org">aws.amazon.com/activate — Day 10 (after DPIIT Org ID)</div></div><div><div class="gr-amt">$5,000</div><div class="gr-sub">= Rs 4.15L free cloud</div></div><span class="gr-pct ph">95%</span></div>
+<div class="gr"><span class="gr-n">4</span><div class="gr-i"><div class="gr-name">Google for Startups + Microsoft Founders Hub</div><div class="gr-org">cloud.google.com/startup + foundershub.startups.microsoft.com</div></div><div><div class="gr-amt">$3,500+</div><div class="gr-sub">Cloud + AI credits</div></div><span class="gr-pct ph">90%</span></div>
+<div class="gr" style="border-color:var(--r)"><span class="gr-n" style="color:var(--r)">5</span><div class="gr-i"><div class="gr-name">SISFS — Startup India Seed Fund</div><div class="gr-org">seedfund.startupindia.gov.in — <strong style="color:var(--r)">DEADLINE 31 MAY 2026</strong> · IIT Ropar / Chitkara University</div></div><div><div class="gr-amt">Rs 20L</div><div class="gr-sub">Non-dilutive grant</div></div><span class="gr-pct pm">72%</span></div>
+<div class="gr"><span class="gr-n">6</span><div class="gr-i"><div class="gr-name">HP Startup Yojana</div><div class="gr-org">himachal.nic.in/startup — Month 1. Palampur/HP registration = strong advantage.</div></div><div><div class="gr-amt">Rs 2–5L</div><div class="gr-sub">State grant</div></div><span class="gr-pct pm">75%</span></div>
+<div class="gr"><span class="gr-n">7</span><div class="gr-i"><div class="gr-name">MeitY TIDE 2.0 — Chitkara University, Punjab</div><div class="gr-org">tidescheme.in — Month 1–2</div></div><div><div class="gr-amt">Rs 7L</div><div class="gr-sub">MVP grant</div></div><span class="gr-pct pm">68%</span></div>
+<div class="gr"><span class="gr-n">8</span><div class="gr-i"><div class="gr-name">IndiaAI Mission — Startup Fund</div><div class="gr-org">indiaai.gov.in — Month 1–3. NxanceLM = own LLM = top priority.</div></div><div><div class="gr-amt">Rs 5L–1Cr</div><div class="gr-sub">AI grant + GPU</div></div><span class="gr-pct pm">70%</span></div>
+
+<div class="al al-g" style="margin-top:14px"><i class="ti ti-trophy"></i><strong>Total if all go through:</strong> Rs 44 Lakh–1.42 Crore non-dilutive funding before first investor. All stackable.</div>
+</div>
+
+<!-- SECTION 10: PITCHES -->
+<div class="sec" id="pitches">
+<div class="sh"><div class="sh-ic"><i class="ti ti-microphone"></i></div><div><div class="sh-t">Pitch Scripts — MVP Stage</div><div class="sh-s">Copy-paste for investor calls, grant forms, accelerator applications</div></div></div>
+
+<div class="cb">
+<div class="cbh"><span class="cbt">30-second elevator pitch</span><span class="cbn">For investor intro calls</span></div>
+<div class="cbb">
+<div class="cbt2">"India has 150 million mutual fund investors losing Rs 13,300 a year — from fund overlap, wrong expense-ratio plans, and goal misalignment. They have no affordable way to detect this. Nxance fixes this — AI-powered portfolio health analytics in 60 seconds. Add your holdings, answer 5 questions, get a score with exact rupee impact and a step-by-step fix plan. Free for the first issue, Rs 99 a month for the full report. Our AI runs on NxanceLM — our own trained model, zero API cost. We're building from Palampur, Himachal Pradesh — for India's 150 million retail investors who can't afford a SEBI advisor."</div>
+</div>
+</div>
+
+<div class="cb">
+<div class="cbh"><span class="cbt">Cold email to angel investor / VC</span><span class="cbn">Subject: Nxance — AI portfolio analytics, Rs 0 inference, 150M TAM</span></div>
+<div class="cbb">
+<div class="cbt2 g">Hi [Name],
+
+I'm Abhishek, CEO of Nxance (Palampur, HP) — AI-powered portfolio health analytics for India's 150M+ MF investors.
+
+Problem: Average retail investor loses Rs 13,300/year to fund overlap, wrong TER plans, and goal misalignment. SEBI advisors cost Rs 5,000–50,000/year — unaffordable.
+
+Solution: Nxance delivers exact ₹ impact in 60 seconds at Rs 99/month. Key moat: NxanceLM — our own trained LLM (TinyLlama + LoRA on Indian financial data), Rs 0 inference cost. No OpenAI/Gemini API dependency.
+
+Numbers: 150M+ MF investors · Rs 63L Cr AUM · Rs 45,000 Cr TAM · 85% gross margin · Break-even at 80 users.
+
+Raising Rs 25–50 Lakh pre-seed. MVP launching in 8 weeks. Can we get 15 minutes?
+
+Abhishek Rajpoot | CEO, Nxance Technologies Pvt Ltd
+Palampur, Himachal Pradesh | nxance.in</div>
+</div>
+</div>
+
+<div class="cb">
+<div class="cbh"><span class="cbt">SISFS grant application pitch</span><span class="cbn">For incubator interview (IIT Ropar / Chitkara)</span></div>
+<div class="cbb">
+<div class="cbt2 a">Nxance is solving Rs 15,000 crore annual wealth destruction for India's 150M+ retail MF investors — from Palampur, Himachal Pradesh.
+
+The problem is silent: most investors don't know they're losing money. Existing platforms are brokerages — they profit from trades, not from optimising portfolios.
+
+Our innovation: NxanceLM — TinyLlama 1.1B fine-tuned with LoRA on Indian financial data. Rs 0 inference cost. Trained in 2 hours on free Google Colab. India building its own AI for its own investors.
+
+Business model: Rs 99/month SaaS. Free score acquires. Paid subscription retains. Phase 2: AMFI trail commission — Rs 3.5 Crore/year passive income at modest scale.
+
+We are from Palampur — exactly the Tier II city this scheme aims to serve. SISFS Rs 20L will take us from PoC to 1,000 paying users in 4 months.
+
+Use of funds: Product dev Rs 8L · AI/data Rs 5L · Team Rs 5L · Marketing Rs 2L.</div>
+</div>
+</div>
+</div>
+
+<div class="foot">
+<span>Nxance Technologies Private Limited — MVP Company Profile</span>
+<span>Abhishek Rajpoot, CEO · Palampur, Himachal Pradesh</span>
+<span>Prepared June 2026 · Update [brackets] after COI received</span>
+</div>
+</div>
+
+<script>
+const items=document.querySelectorAll(".bni");
+const sections=document.querySelectorAll(".sec");
+window.addEventListener("scroll",()=>{
+  let cur="";
+  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-70)cur=s.id;});
+  items.forEach(i=>{i.classList.toggle("active",i.getAttribute("href")==="#"+cur);});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,2534 @@
+[
+  {
+    "schemeCode": 151435,
+    "schemeName": "AXIS CRISIL IBX 50:50 Gilt Plus SDL September 2027 Index Fund- DIRECT PLAN-GROWTH"
+  },
+  {
+    "schemeCode": 132185,
+    "schemeName": "Aditya Birla Sun Life Aggressive Hybrid Omni FOF- Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 153736,
+    "schemeName": "Aditya Birla Sun Life BSE 500 Momentum 50 Index Fund-Direct Growth"
+  },
+  {
+    "schemeCode": 153740,
+    "schemeName": "Aditya Birla Sun Life BSE 500 Quality 50 Index Fund - Direct Growth"
+  },
+  {
+    "schemeCode": 153081,
+    "schemeName": "Aditya Birla Sun Life BSE India Infrastructure Index Fund-Direct Growth"
+  },
+  {
+    "schemeCode": 120533,
+    "schemeName": "Aditya Birla Sun Life Banking & PSU Debt Fund - Growth - Direct Plan"
+  },
+  {
+    "schemeCode": 119550,
+    "schemeName": "Aditya Birla Sun Life Banking & PSU Debt Fund- Direct Plan-Growth"
+  },
+  {
+    "schemeCode": 151427,
+    "schemeName": "Aditya Birla Sun Life CRISIL IBX SDL Jun 2032 INDEX FUND - Direct Growth"
+  },
+  {
+    "schemeCode": 132183,
+    "schemeName": "Aditya Birla Sun Life Conservative Hybrid Active FOF- Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 150702,
+    "schemeName": "Aditya Birla Sun Life Crisil IBX 50:50 Gilt Plus SDL Apr 2028 Index Fund-Direct Growth"
+  },
+  {
+    "schemeCode": 150938,
+    "schemeName": "Aditya Birla Sun Life Crisil IBX 60:40 SDL + AAA PSU APR 2026 Index Fund-Direct Growth"
+  },
+  {
+    "schemeCode": 150357,
+    "schemeName": "Aditya Birla Sun Life Crisil IBX 60:40 SDL+AAA PSU-APR 2025 Index Fund-Direct Growth"
+  },
+  {
+    "schemeCode": 150353,
+    "schemeName": "Aditya Birla Sun Life Crisil IBX 60:40 SDL+AAA PSU-Apr 2027 Index Fund-Direct Growth"
+  },
+  {
+    "schemeCode": 151396,
+    "schemeName": "Aditya Birla Sun Life Crisil IBX AAA Mar 2024 Index Fund-Direct Growth"
+  },
+  {
+    "schemeCode": 151577,
+    "schemeName": "Aditya Birla Sun Life Crisil IBX Gilt Apr 2028 Index Fund-Direct Growth"
+  },
+  {
+    "schemeCode": 152267,
+    "schemeName": "Aditya Birla Sun Life Crisil IBX Gilt Apr 2033 Index Fund-Direct Growth"
+  },
+  {
+    "schemeCode": 152659,
+    "schemeName": "Aditya Birla Sun Life Crisil IBX Gilt June 2027 Index Fund-Direct Growth"
+  },
+  {
+    "schemeCode": 150778,
+    "schemeName": "Aditya Birla Sun Life Crisil IBX Gilt-Apr-2029 Index Fund-Direct Growth"
+  },
+  {
+    "schemeCode": 150698,
+    "schemeName": "Aditya Birla Sun Life Crisil IBX Gilt-April 2026 Index Fund-Direct Growth"
+  },
+  {
+    "schemeCode": 153030,
+    "schemeName": "Aditya Birla Sun Life Crisil-IBX AAA Financial Services Index-Sep 2027 Fund-Direct Growth"
+  },
+  {
+    "schemeCode": 152958,
+    "schemeName": "Aditya Birla Sun Life Crisil-IBX AAA NBFC-HFC Index-Dec 2025 Fund-Direct Growth"
+  },
+  {
+    "schemeCode": 152947,
+    "schemeName": "Aditya Birla Sun Life Crisil-IBX AAA NBFC-HFC Index-Sep 2026 Fund-Direct Growth"
+  },
+  {
+    "schemeCode": 153443,
+    "schemeName": "Aditya Birla Sun Life Crisil-IBX Financial Services 9-12 Months Debt Index Fund-Direct Growth"
+  },
+  {
+    "schemeCode": 153179,
+    "schemeName": "Aditya Birla Sun Life Crisil-IBX financial Services 3 to 6 months Debt Index Fund-Direct Growth"
+  },
+  {
+    "schemeCode": 119544,
+    "schemeName": "Aditya Birla Sun Life ELSS Tax Saver Fund - Growth - Direct Plan"
+  },
+  {
+    "schemeCode": 120517,
+    "schemeName": "Aditya Birla Sun Life Equity Hybrid'95 Fund - Direct Plan-Growth"
+  },
+  {
+    "schemeCode": 120564,
+    "schemeName": "Aditya Birla Sun Life Flexi Cap Fund - Growth - Direct Plan"
+  },
+  {
+    "schemeCode": 126639,
+    "schemeName": "Aditya Birla Sun Life Focused Equity Fund - Series 1 - Direct Plan-Growth"
+  },
+  {
+    "schemeCode": 127919,
+    "schemeName": "Aditya Birla Sun Life Focused Equity Fund - Series 2 - Direct Plan-Growth"
+  },
+  {
+    "schemeCode": 131526,
+    "schemeName": "Aditya Birla Sun Life Focused Equity Fund - Series 3 - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 133105,
+    "schemeName": "Aditya Birla Sun Life Focused Equity Fund - Series 4 - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 133897,
+    "schemeName": "Aditya Birla Sun Life Focused Equity Fund - Series 5 - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 135351,
+    "schemeName": "Aditya Birla Sun Life Focused Equity Fund - Series 6-Direct Plan-Growth"
+  },
+  {
+    "schemeCode": 119564,
+    "schemeName": "Aditya Birla Sun Life Focused Fund - Growth - Direct Plan"
+  },
+  {
+    "schemeCode": 119612,
+    "schemeName": "Aditya Birla Sun Life Gilt Plus - Liquid Plan - Growth - Direct Plan"
+  },
+  {
+    "schemeCode": 119436,
+    "schemeName": "Aditya Birla Sun Life Large & Mid Cap Fund - Growth - Direct Plan"
+  },
+  {
+    "schemeCode": 119528,
+    "schemeName": "Aditya Birla Sun Life Large Cap Fund - Growth - Direct Plan"
+  },
+  {
+    "schemeCode": 119568,
+    "schemeName": "Aditya Birla Sun Life Liquid Fund - Growth - Direct Plan"
+  },
+  {
+    "schemeCode": 119620,
+    "schemeName": "Aditya Birla Sun Life Midcap Fund - Growth - Direct Plan"
+  },
+  {
+    "schemeCode": 148962,
+    "schemeName": "Aditya Birla Sun Life Nifty 50 Equal Weight Index Fund-Direct Growth"
+  },
+  {
+    "schemeCode": 119648,
+    "schemeName": "Aditya Birla Sun Life Nifty 50 Index Fund - Growth - Direct Plan"
+  },
+  {
+    "schemeCode": 152798,
+    "schemeName": "Aditya Birla Sun Life Nifty India Defence Index Fund-Direct Growth"
+  },
+  {
+    "schemeCode": 148807,
+    "schemeName": "Aditya Birla Sun Life Nifty Midcap 150 Index Fund-Direct Growth"
+  },
+  {
+    "schemeCode": 149838,
+    "schemeName": "Aditya Birla Sun Life Nifty Next 50 Index Fund-Direct Growth"
+  },
+  {
+    "schemeCode": 149794,
+    "schemeName": "Aditya Birla Sun Life Nifty SDL Apr 2027 Index Fund-Direct Growth"
+  },
+  {
+    "schemeCode": 149199,
+    "schemeName": "Aditya Birla Sun Life Nifty SDL Plus PSU Bond SEP 2026 60:40 Index Fund-Direct Growth"
+  },
+  {
+    "schemeCode": 151562,
+    "schemeName": "Aditya Birla Sun Life Nifty SDL SEP 2027 Index Fund-Direct Growth"
+  },
+  {
+    "schemeCode": 150663,
+    "schemeName": "Aditya Birla Sun Life Nifty SDL Sep 2025 Index Fund-Direct Growth"
+  },
+  {
+    "schemeCode": 148815,
+    "schemeName": "Aditya Birla Sun Life Nifty Smallcap 50 Index Fund-Direct Growth"
+  },
+  {
+    "schemeCode": 146943,
+    "schemeName": "Aditya Birla Sun Life Retirement Fund-The 50s Plus-Debt Plan-Direct Plan-Growth"
+  },
+  {
+    "schemeCode": 119556,
+    "schemeName": "Aditya Birla Sun Life Small Cap Fund - Growth - Direct Plan"
+  },
+  {
+    "schemeCode": 119659,
+    "schemeName": "Aditya Birla Sun Life Value Fund - Growth - Direct Plan"
+  },
+  {
+    "schemeCode": 144394,
+    "schemeName": "Axis Aggressive Hybrid Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 154171,
+    "schemeName": "Axis BSE India Sectors Leaders Index Fund- Direct Plan- Growth Option"
+  },
+  {
+    "schemeCode": 152422,
+    "schemeName": "Axis BSE Sensex Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 120438,
+    "schemeName": "Axis Banking & PSU Debt Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 151300,
+    "schemeName": "Axis CRISIL IBX 50:50 Gilt Plus SDL June 2028 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 149753,
+    "schemeName": "Axis CRISIL IBX 70:30 CPSE Plus SDL April 2025 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 152515,
+    "schemeName": "Axis CRISIL IBX SDL June 2034 Debt Index Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 149873,
+    "schemeName": "Axis CRISIL IBX SDL May 2027 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 153051,
+    "schemeName": "Axis CRISIL-IBX AAA Bond Financial Services - Sep 2027 Index Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 152887,
+    "schemeName": "Axis CRISIL-IBX AAA Bond NBFC - Jun 2027 Index Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 153172,
+    "schemeName": "Axis CRISIL-IBX AAA Bond NBFC-HFC - Jun 2027 Index Fund - Direct Plan - Growth option"
+  },
+  {
+    "schemeCode": 153879,
+    "schemeName": "Axis CRISIL-IBX Financial Services 3-6 Months Debt Index Fund - Direct Plan - Growth option"
+  },
+  {
+    "schemeCode": 120480,
+    "schemeName": "Axis Conservative Hybrid Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 120503,
+    "schemeName": "Axis ELSS Tax Saver Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 141925,
+    "schemeName": "Axis Flexi Cap Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 120468,
+    "schemeName": "Axis Focused Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 129389,
+    "schemeName": "Axis Hybrid Fund - Series 11 - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 129755,
+    "schemeName": "Axis Hybrid Fund - Series 12 - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 130059,
+    "schemeName": "Axis Hybrid Fund - Series 13 - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 130886,
+    "schemeName": "Axis Hybrid Fund - Series 14 - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 131083,
+    "schemeName": "Axis Hybrid Fund - Series 15 - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 133429,
+    "schemeName": "Axis Hybrid Fund - Series 18 - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 133563,
+    "schemeName": "Axis Hybrid Fund - Series 19 -Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 134535,
+    "schemeName": "Axis Hybrid Fund - Series 22 - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 134621,
+    "schemeName": "Axis Hybrid Fund - Series 23 - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 134741,
+    "schemeName": "Axis Hybrid Fund - Series 24 - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 135233,
+    "schemeName": "Axis Hybrid Fund - Series 25 - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 135282,
+    "schemeName": "Axis Hybrid Fund - Series 26 - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 135528,
+    "schemeName": "Axis Hybrid Fund - Series 27 - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 135618,
+    "schemeName": "Axis Hybrid Fund - Series 28 - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 140112,
+    "schemeName": "Axis Hybrid Fund - Series 35 (1359 Days) - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 122951,
+    "schemeName": "Axis Hybrid Fund - Series 5 (1346 Days) - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 123980,
+    "schemeName": "Axis Hybrid Fund - Series 7 (1305 Day) - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 136033,
+    "schemeName": "Axis Hybrid Fund Series - 29 (1275 Days) Direct Growth"
+  },
+  {
+    "schemeCode": 139524,
+    "schemeName": "Axis Hybrid Fund Series - 31 (1381) Direct Growth"
+  },
+  {
+    "schemeCode": 139613,
+    "schemeName": "Axis Hybrid Fund Series - 32 (1367 Days) Direct Growth"
+  },
+  {
+    "schemeCode": 123065,
+    "schemeName": "Axis Hybrid Fund Series 6 (1324 Days) - Direct - Growth"
+  },
+  {
+    "schemeCode": 126356,
+    "schemeName": "Axis Hybrid Fund Series 8 (1279 days) - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 126956,
+    "schemeName": "Axis Hybrid Fund Series 9 (1282 days) -  Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 136131,
+    "schemeName": "Axis Hybrid Fund Series-30 (1297 Days) Direct Growth"
+  },
+  {
+    "schemeCode": 139775,
+    "schemeName": "Axis Hybrid fund Series - 33 (1358 Days) - Direct Growth"
+  },
+  {
+    "schemeCode": 145110,
+    "schemeName": "Axis Large & Mid Cap Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 120465,
+    "schemeName": "Axis Large Cap Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 120389,
+    "schemeName": "Axis Liquid Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 120505,
+    "schemeName": "Axis Midcap Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 149383,
+    "schemeName": "Axis Multicap Fund - Direct Growth"
+  },
+  {
+    "schemeCode": 150751,
+    "schemeName": "Axis NASDAQ 100 US Specific Equity Passive FOF - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 147666,
+    "schemeName": "Axis Nifty 100 Index Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 149373,
+    "schemeName": "Axis Nifty 50 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 152731,
+    "schemeName": "Axis Nifty 500 Index Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 149243,
+    "schemeName": "Axis Nifty AAA Bond Plus SDL Apr 2026 50:50 ETF FOF - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 152629,
+    "schemeName": "Axis Nifty Bank Index Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 151785,
+    "schemeName": "Axis Nifty IT Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 154326,
+    "schemeName": "Axis Nifty India Defence Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 149936,
+    "schemeName": "Axis Nifty Midcap 50 Index Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 149466,
+    "schemeName": "Axis Nifty Next 50 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 150854,
+    "schemeName": "Axis Nifty SDL September 2026 Debt Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 149894,
+    "schemeName": "Axis Nifty Smallcap 50 Index Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 153244,
+    "schemeName": "Axis Nifty500 Momentum 50 Index Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 153829,
+    "schemeName": "Axis Nifty500 Quality 50 Index Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 152949,
+    "schemeName": "Axis Nifty500 Value 50 Index Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 125354,
+    "schemeName": "Axis Small Cap Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 152240,
+    "schemeName": "Axis US Specific Treasury Dynamic Debt Passive FOF - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 149166,
+    "schemeName": "Axis Value Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 150868,
+    "schemeName": "BANDHAN CRISIL IBX 90:10 SDL PLUS GILT - NOV 2026 INDEX FUND - DIRECT GROWTH"
+  },
+  {
+    "schemeCode": 150888,
+    "schemeName": "BANDHAN CRISIL IBX 90:10 SDL PLUS GILT - SEP27 INDEX FUND - DIRECT GROWTH"
+  },
+  {
+    "schemeCode": 150871,
+    "schemeName": "BANDHAN CRISIL IBX 90:10 SDL PLUS GILT APRIL 2032 INDEX FUND - DIRECT GROWTH"
+  },
+  {
+    "schemeCode": 150746,
+    "schemeName": "BANDHAN CRISIL IBX GILT APRIL 2026 INDEX FUND - DIRECT PLAN - GROWTH"
+  },
+  {
+    "schemeCode": 151408,
+    "schemeName": "BANDHAN CRISIL IBX GILT APRIL 2032 INDEX FUND - DIRECT GROWTH"
+  },
+  {
+    "schemeCode": 148792,
+    "schemeName": "BANDHAN CRISIL IBX Gilt April 2028 Index Fund Direct Plan-Growth"
+  },
+  {
+    "schemeCode": 148789,
+    "schemeName": "BANDHAN CRISIL IBX Gilt June 2027 Index Fund Direct Plan-Growth"
+  },
+  {
+    "schemeCode": 118491,
+    "schemeName": "BANDHAN Conservative Hybrid Fund-Direct Plan-Growth"
+  },
+  {
+    "schemeCode": 118473,
+    "schemeName": "BANDHAN ELSS Tax Saver Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 118424,
+    "schemeName": "BANDHAN Flexi Cap Fund-Direct Plan-Growth"
+  },
+  {
+    "schemeCode": 118364,
+    "schemeName": "BANDHAN LIQUID Fund -Direct Plan-Growth"
+  },
+  {
+    "schemeCode": 118479,
+    "schemeName": "BANDHAN Large Cap Fund-Direct Plan-Growth"
+  },
+  {
+    "schemeCode": 150404,
+    "schemeName": "BANDHAN MIDCAP FUND - GROWTH - DIRECT PLAN"
+  },
+  {
+    "schemeCode": 149303,
+    "schemeName": "BANDHAN MULTI CAP FUND - GROWTH - DIRECT PLAN"
+  },
+  {
+    "schemeCode": 149832,
+    "schemeName": "BANDHAN NIFTY 100 INDEX FUND - DIRECT PLAN - GROWTH"
+  },
+  {
+    "schemeCode": 150636,
+    "schemeName": "BANDHAN NIFTY100 LOW VOLATILITY 30 INDEX FUND - GROWTH - DIRECT PLAN"
+  },
+  {
+    "schemeCode": 150591,
+    "schemeName": "BANDHAN NIFTY200 MOMENTUM 30 INDEX FUND - GROWTH - DIRECT PLAN"
+  },
+  {
+    "schemeCode": 118482,
+    "schemeName": "BANDHAN Nifty 50 Index Fund-Direct Plan-Growth"
+  },
+  {
+    "schemeCode": 152264,
+    "schemeName": "BANDHAN Nifty Smallcap 250 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 147946,
+    "schemeName": "BANDHAN SMALL CAP FUND - DIRECT PLAN GROWTH"
+  },
+  {
+    "schemeCode": 140382,
+    "schemeName": "Bandhan Aggressive Hybrid Fund-Direct Plan Growth"
+  },
+  {
+    "schemeCode": 118485,
+    "schemeName": "Bandhan Aggressive Hybrid Passive FOF - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 152844,
+    "schemeName": "Bandhan BSE Healthcare Index Fund Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 153838,
+    "schemeName": "Bandhan BSE India Sector Leaders Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 153389,
+    "schemeName": "Bandhan CRISIL-IBX 10:90 Gilt Plus SDL Index - Dec 2029 Fund-Direct Plan-Growth"
+  },
+  {
+    "schemeCode": 153407,
+    "schemeName": "Bandhan CRISIL-IBX Financial Services 3-6 Months Debt Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 118486,
+    "schemeName": "Bandhan Conservative Hybrid Passive FOF - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 118421,
+    "schemeName": "Bandhan Focused Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 118419,
+    "schemeName": "Bandhan Large & Mid Cap Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 153114,
+    "schemeName": "Bandhan Nifty 200 Quality 30 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 153003,
+    "schemeName": "Bandhan Nifty 500 Momentum 50 Index Fund Direct Plan-Growth"
+  },
+  {
+    "schemeCode": 152990,
+    "schemeName": "Bandhan Nifty 500 Value 50 Index Fund Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 152177,
+    "schemeName": "Bandhan Nifty Alpha 50 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 153213,
+    "schemeName": "Bandhan Nifty Alpha Low Volatility 30 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 152793,
+    "schemeName": "Bandhan Nifty Bank Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 152041,
+    "schemeName": "Bandhan Nifty IT Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 152855,
+    "schemeName": "Bandhan Nifty Midcap 150 Index Fund-Direct Plan-Growth"
+  },
+  {
+    "schemeCode": 153350,
+    "schemeName": "Bandhan Nifty Next 50 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 152716,
+    "schemeName": "Bandhan Nifty Total Market Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 151548,
+    "schemeName": "Bandhan US Treasury Bond 0-1 year specific Debt Passive FOF - DIRECT PLAN - GROWTH"
+  },
+  {
+    "schemeCode": 118481,
+    "schemeName": "Bandhan Value Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 118309,
+    "schemeName": "CANARA ROBECO CONSERVATIVE HYBRID FUND - DIRECT PLAN - GROWTH OPTION"
+  },
+  {
+    "schemeCode": 118285,
+    "schemeName": "CANARA ROBECO ELSS TAX SAVER - DIRECT PLAN - GROWTH OPTION"
+  },
+  {
+    "schemeCode": 118272,
+    "schemeName": "CANARA ROBECO EQUITY HYBRID FUND - DIRECT PLAN - GROWTH OPTION"
+  },
+  {
+    "schemeCode": 118278,
+    "schemeName": "CANARA ROBECO LARGE AND MID CAP FUND - DIRECT PLAN - GROWTH OPTION"
+  },
+  {
+    "schemeCode": 118269,
+    "schemeName": "CANARA ROBECO LARGE CAP FUND - DIRECT PLAN - GROWTH OPTION"
+  },
+  {
+    "schemeCode": 118305,
+    "schemeName": "CANARA ROBECO LIQUID FUND - DIRECT PLAN - GROWTH OPTION"
+  },
+  {
+    "schemeCode": 146130,
+    "schemeName": "CANARA ROBECO SMALL CAP FUND - DIRECT PLAN - GROWTH OPTION"
+  },
+  {
+    "schemeCode": 150505,
+    "schemeName": "Canara Robeco Banking and PSU Debt Fund- Direct Plan- Growth Option"
+  },
+  {
+    "schemeCode": 148883,
+    "schemeName": "Canara Robeco Focused Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 150817,
+    "schemeName": "Canara Robeco Mid Cap Fund- Direct Plan- Growth Option"
+  },
+  {
+    "schemeCode": 151824,
+    "schemeName": "Canara Robeco Multi Cap Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 118266,
+    "schemeName": "Canara Robeco Nifty Index-Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 149085,
+    "schemeName": "Canara Robeco Value Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 119019,
+    "schemeName": "DSP Aggressive Hybrid Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 153219,
+    "schemeName": "DSP BSE SENSEX Next 30 Index Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 124175,
+    "schemeName": "DSP Banking & PSU Debt Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 151329,
+    "schemeName": "DSP CRISIL-IBX 50:50 Gilt Plus SDL - April 2033 Index Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 119242,
+    "schemeName": "DSP ELSS Tax Saver Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 119076,
+    "schemeName": "DSP Flexi Cap Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 119096,
+    "schemeName": "DSP Focused Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 119218,
+    "schemeName": "DSP Large & Mid Cap Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 119250,
+    "schemeName": "DSP Large Cap Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 119071,
+    "schemeName": "DSP Midcap Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 152310,
+    "schemeName": "DSP Multicap Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 141877,
+    "schemeName": "DSP Nifty 50 Equal Weight Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 146376,
+    "schemeName": "DSP Nifty 50 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 154088,
+    "schemeName": "DSP Nifty 500 Index Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 152654,
+    "schemeName": "DSP Nifty Bank Index Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 153594,
+    "schemeName": "DSP Nifty Healthcare Index Fund - Direct- Growth"
+  },
+  {
+    "schemeCode": 153590,
+    "schemeName": "DSP Nifty IT Index Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 154014,
+    "schemeName": "DSP Nifty Midcap 150 Index Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 150428,
+    "schemeName": "DSP Nifty Midcap 150 Quality 50 Index Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 146381,
+    "schemeName": "DSP Nifty Next 50 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 153348,
+    "schemeName": "DSP Nifty Private Bank Index Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 149970,
+    "schemeName": "DSP Nifty SDL Plus G-Sec Jun 2028 30:70 Index Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 151373,
+    "schemeName": "DSP Nifty SDL Plus G-Sec Sep 2027 50:50 Index Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 154018,
+    "schemeName": "DSP Nifty Smallcap 250 Index Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 152243,
+    "schemeName": "DSP Nifty Smallcap250 Quality 50 Index Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 152814,
+    "schemeName": "DSP Nifty Top 10 Equal Weight Index Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 153801,
+    "schemeName": "DSP Nifty500 Flexicap Quality 30 Index Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 119212,
+    "schemeName": "DSP Small Cap Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 152528,
+    "schemeName": "DSP US Specific Debt Passive FoF - Direct - Growth"
+  },
+  {
+    "schemeCode": 148595,
+    "schemeName": "DSP Value Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 118624,
+    "schemeName": "Edelweiss Aggressive Hybrid Fund-Direct Plan-Growth Option"
+  },
+  {
+    "schemeCode": 153497,
+    "schemeName": "Edelweiss BSE Internet Economy Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 140286,
+    "schemeName": "Edelweiss Banking and PSU Debt Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 150671,
+    "schemeName": "Edelweiss CRISIL IBX 50:50 Gilt Plus SDL April 2037 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 150727,
+    "schemeName": "Edelweiss CRISIL IBX 50:50 Gilt Plus SDL June 2027 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 150807,
+    "schemeName": "Edelweiss CRISIL IBX 50:50 Gilt Plus SDL Sep 2028 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 151365,
+    "schemeName": "Edelweiss CRISIL IBX 50:50 Gilt Plus SDL Short Duration Index fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 153335,
+    "schemeName": "Edelweiss CRISIL IBX AAA Bond NBFC HFC Jun 2027 Index Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 153115,
+    "schemeName": "Edelweiss CRISIL IBX AAA Financial Services - Jan 2028 Index Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 149950,
+    "schemeName": "Edelweiss CRISIL PSU Plus SDL 50:50 Oct 2025 Index Fund - Direct Plan Growth"
+  },
+  {
+    "schemeCode": 118620,
+    "schemeName": "Edelweiss ELSS Tax Saver Fund - Direct Plan-Growth Option"
+  },
+  {
+    "schemeCode": 140353,
+    "schemeName": "Edelweiss Flexi Cap Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 150376,
+    "schemeName": "Edelweiss Focused Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 140175,
+    "schemeName": "Edelweiss Large & Mid Cap Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 118617,
+    "schemeName": "Edelweiss Large Cap Fund - Direct Plan-Growth option"
+  },
+  {
+    "schemeCode": 140196,
+    "schemeName": "Edelweiss Liquid Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 118636,
+    "schemeName": "Edelweiss Liquid Fund-Direct Plan-Growth Option"
+  },
+  {
+    "schemeCode": 148555,
+    "schemeName": "Edelweiss MSCI India Domestic & World Healthcare 45 Index Fund Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 140228,
+    "schemeName": "Edelweiss Mid Cap Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 152094,
+    "schemeName": "Edelweiss Multi Cap Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 149343,
+    "schemeName": "Edelweiss NIFTY Large Midcap 250 Index Fund - Direct Plan Growth"
+  },
+  {
+    "schemeCode": 148795,
+    "schemeName": "Edelweiss NIFTY PSU Bond Plus SDL Apr 2026 50:50 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 149247,
+    "schemeName": "Edelweiss NIFTY PSU Bond Plus SDL Apr 2027 50:50 Index Fund - Direct Plan Growth"
+  },
+  {
+    "schemeCode": 149254,
+    "schemeName": "Edelweiss Nifty 100 Quality 30 Index Fund Direct Plan Growth"
+  },
+  {
+    "schemeCode": 149250,
+    "schemeName": "Edelweiss Nifty 50 Index Fund Direct Plan Growth"
+  },
+  {
+    "schemeCode": 152616,
+    "schemeName": "Edelweiss Nifty Alpha Low Volatility 30 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 154310,
+    "schemeName": "Edelweiss Nifty LargeMidcap 250 Plus 8-13 yr G-Sec 70-30 Index Fund Direct Plan Growth"
+  },
+  {
+    "schemeCode": 150902,
+    "schemeName": "Edelweiss Nifty Midcap150 Momentum 50 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 150899,
+    "schemeName": "Edelweiss Nifty Next 50 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 150892,
+    "schemeName": "Edelweiss Nifty Smallcap 250 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 152985,
+    "schemeName": "Edelweiss Nifty500 Multicap Momentum Quality 50 Index Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 146196,
+    "schemeName": "Edelweiss Small Cap Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 140274,
+    "schemeName": "Edelweiss US Value Equity Offshore Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 118546,
+    "schemeName": "Franklin India Aggressive Hybrid Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 129008,
+    "schemeName": "Franklin India Banking & PSU Debt Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 118574,
+    "schemeName": "Franklin India Conservative Hybrid Fund - Direct - GROWTH"
+  },
+  {
+    "schemeCode": 118569,
+    "schemeName": "Franklin India Corporate Debt Fund - Direct - GROWTH"
+  },
+  {
+    "schemeCode": 148302,
+    "schemeName": "Franklin India Debt Hybrid Fund - Segregated Portfolio 1 (10.25% Yes Bank ltd CO 05Mar20) - Direct Growth Plan"
+  },
+  {
+    "schemeCode": 118540,
+    "schemeName": "Franklin India ELSS Tax Saver Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 118535,
+    "schemeName": "Franklin India Flexi Cap Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 118564,
+    "schemeName": "Franklin India Focused Equity Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 118545,
+    "schemeName": "Franklin India INDEX FUND BSE PLAN - Direct - Growth"
+  },
+  {
+    "schemeCode": 118581,
+    "schemeName": "Franklin India INDEX FUND- NSE NIFTY 50 INDEX FUND- Direct - Growth"
+  },
+  {
+    "schemeCode": 118510,
+    "schemeName": "Franklin India Large & Mid Cap Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 118531,
+    "schemeName": "Franklin India Large Cap Fund- Direct - Growth"
+  },
+  {
+    "schemeCode": 118577,
+    "schemeName": "Franklin India Liquid Fund - Super Institutional - Direct - Growth"
+  },
+  {
+    "schemeCode": 118533,
+    "schemeName": "Franklin India Mid Cap Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 152739,
+    "schemeName": "Franklin India Multi Cap Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 118525,
+    "schemeName": "Franklin India Small Cap Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 145599,
+    "schemeName": "Groww Aggressive Hybrid Fund (formerly known as Indiabulls Equity Hybrid Fund) - Direct Plan - Growth option"
+  },
+  {
+    "schemeCode": 141808,
+    "schemeName": "Groww ELSS Tax Saver Fund (formerly known as Indiabulls Tax Savings Fund)- Direct Plan- Growth Option"
+  },
+  {
+    "schemeCode": 119133,
+    "schemeName": "Groww Largecap Fund (formerly known as Indiabulls Blue Chip Fund) - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 119135,
+    "schemeName": "Groww Liquid Fund ( formerly known as Indiabulls Liquid )Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 153034,
+    "schemeName": "Groww Multicap Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 153328,
+    "schemeName": "Groww Nifty 200 ETF FOF - Direct - Growth"
+  },
+  {
+    "schemeCode": 153704,
+    "schemeName": "Groww Nifty 50 Index Fund Direct Growth"
+  },
+  {
+    "schemeCode": 153453,
+    "schemeName": "Groww Nifty 500 Momentum 50 ETF FOF - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 153908,
+    "schemeName": "Groww Nifty Capital Markets ETF FOF Direct Growth"
+  },
+  {
+    "schemeCode": 152770,
+    "schemeName": "Groww Nifty EV & New Age Automotive ETF FOF- Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 152925,
+    "schemeName": "Groww Nifty India Defence ETF FOF - Direct Growth"
+  },
+  {
+    "schemeCode": 153626,
+    "schemeName": "Groww Nifty India Internet ETF FOF - Direct - Growth"
+  },
+  {
+    "schemeCode": 153230,
+    "schemeName": "Groww Nifty India Railways PSU Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 153939,
+    "schemeName": "Groww Nifty Midcap 150 Index Fund Direct Growth"
+  },
+  {
+    "schemeCode": 153786,
+    "schemeName": "Groww Nifty Next 50 Index Fund Direct Growth"
+  },
+  {
+    "schemeCode": 152637,
+    "schemeName": "Groww Nifty Non-Cyclical Consumer Index Fund - Direct Plan Growth"
+  },
+  {
+    "schemeCode": 154164,
+    "schemeName": "Groww Nifty PSE ETF FOF Direct Growth"
+  },
+  {
+    "schemeCode": 154278,
+    "schemeName": "Groww Nifty PSU Bank Index Fund Direct Growth"
+  },
+  {
+    "schemeCode": 154346,
+    "schemeName": "Groww Nifty Private Bank Index Fund Direct Growth"
+  },
+  {
+    "schemeCode": 152431,
+    "schemeName": "Groww Nifty Smallcap 250 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 154383,
+    "schemeName": "Groww Nifty Smallcap 250 Momentum Quality 100 Index Fund Direct Growth"
+  },
+  {
+    "schemeCode": 152092,
+    "schemeName": "Groww Nifty Total Market Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 154063,
+    "schemeName": "Groww Small Cap Fund-Direct-Growth"
+  },
+  {
+    "schemeCode": 135341,
+    "schemeName": "Groww Value Fund (formerly known as Indiabulls Value Fund) - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 151728,
+    "schemeName": "HDFC BSE 500 Index Fund - Growth Option - Direct Plan"
+  },
+  {
+    "schemeCode": 128629,
+    "schemeName": "HDFC Banking and PSU Debt Fund - Growth Option - Direct Plan"
+  },
+  {
+    "schemeCode": 153517,
+    "schemeName": "HDFC CRISIL-IBX Financial Services 3-6 Months Debt Index Fund - Direct Growth Plan"
+  },
+  {
+    "schemeCode": 154308,
+    "schemeName": "HDFC CRISIL-IBX Financial Services 9-12 Months Debt Index Fund - Direct Growth Plan"
+  },
+  {
+    "schemeCode": 128051,
+    "schemeName": "HDFC Credit Risk Debt Fund - Growth Option - Direct Plan"
+  },
+  {
+    "schemeCode": 119075,
+    "schemeName": "HDFC Dynamic Debt Fund - Growth Option - Direct Plan"
+  },
+  {
+    "schemeCode": 119060,
+    "schemeName": "HDFC ELSS Tax saver - Growth Option - Direct Plan"
+  },
+  {
+    "schemeCode": 133529,
+    "schemeName": "HDFC FOCUSED EQUITY FUND - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 118955,
+    "schemeName": "HDFC Flexi Cap Fund - Growth Option - Direct Plan"
+  },
+  {
+    "schemeCode": 118961,
+    "schemeName": "HDFC Floating Rate Debt Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 134334,
+    "schemeName": "HDFC Focused Equity Fund - Plan B - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 118950,
+    "schemeName": "HDFC Focused Fund - Growth Option - Direct Plan"
+  },
+  {
+    "schemeCode": 118927,
+    "schemeName": "HDFC Focused Large-Cap Fund -Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 119118,
+    "schemeName": "HDFC Hybrid Debt Fund - Growth Option - Direct Plan"
+  },
+  {
+    "schemeCode": 119062,
+    "schemeName": "HDFC Hybrid Equity Fund - Growth Option - Direct Plan"
+  },
+  {
+    "schemeCode": 119018,
+    "schemeName": "HDFC Large Cap Fund - Growth Option - Direct Plan"
+  },
+  {
+    "schemeCode": 130498,
+    "schemeName": "HDFC Large and Mid Cap Fund - Growth Option - Direct Plan"
+  },
+  {
+    "schemeCode": 119091,
+    "schemeName": "HDFC Liquid Fund - Growth Option - Direct Plan"
+  },
+  {
+    "schemeCode": 151313,
+    "schemeName": "HDFC Long Duration Debt Fund - Growth Option - Direct Plan"
+  },
+  {
+    "schemeCode": 119081,
+    "schemeName": "HDFC Medium Term Debt Fund - Growth Option - Direct Plan"
+  },
+  {
+    "schemeCode": 118989,
+    "schemeName": "HDFC Mid Cap Fund - Growth Option - Direct Plan"
+  },
+  {
+    "schemeCode": 149368,
+    "schemeName": "HDFC Multi Cap Fund - Growth Option - Direct Plan"
+  },
+  {
+    "schemeCode": 149868,
+    "schemeName": "HDFC NIFTY 100 Index Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 152889,
+    "schemeName": "HDFC NIFTY LargeMidcap 250 Index Fund - Growth Option - Direct"
+  },
+  {
+    "schemeCode": 151724,
+    "schemeName": "HDFC NIFTY Midcap 150 Index Fund - Growth Option - Direct Plan"
+  },
+  {
+    "schemeCode": 149288,
+    "schemeName": "HDFC NIFTY Next 50 Index Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 151570,
+    "schemeName": "HDFC NIFTY SDL Plus G-Sec Jun 2027 40:60 Index Fund - Growth Option - Direct Plan"
+  },
+  {
+    "schemeCode": 151727,
+    "schemeName": "HDFC NIFTY Smallcap 250 Index Fund - Growth Option - Direct Plan"
+  },
+  {
+    "schemeCode": 149107,
+    "schemeName": "HDFC NIFTY50 Equal weight Index Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 149870,
+    "schemeName": "HDFC Nifty 100 Equal Weight Index Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 154427,
+    "schemeName": "HDFC Nifty Auto Index Fund- Direct Plan- Growth Option"
+  },
+  {
+    "schemeCode": 151495,
+    "schemeName": "HDFC Nifty G-Sec Apr 2029 Index Fund - Growth Option - Direct Plan"
+  },
+  {
+    "schemeCode": 150845,
+    "schemeName": "HDFC Nifty G-Sec Dec 2026 Index Fund - Growth Option - Direct Plan"
+  },
+  {
+    "schemeCode": 150847,
+    "schemeName": "HDFC Nifty G-Sec July 2031 Index Fund - Growth Option - Direct Plan"
+  },
+  {
+    "schemeCode": 151181,
+    "schemeName": "HDFC Nifty G-Sec Jun 2027 Index Fund - Growth Option - Direct Plan"
+  },
+  {
+    "schemeCode": 151489,
+    "schemeName": "HDFC Nifty G-Sec Jun 2036 Index Fund - Growth Option - Direct Plan"
+  },
+  {
+    "schemeCode": 151183,
+    "schemeName": "HDFC Nifty G-Sec Sep 2032 Index Fund - Growth Option - Direct Plan"
+  },
+  {
+    "schemeCode": 154179,
+    "schemeName": "HDFC Nifty India Consumption Index Fund - Direct Growth Plan"
+  },
+  {
+    "schemeCode": 153097,
+    "schemeName": "HDFC Nifty India Digital Index Fund - Growth Option - Direct"
+  },
+  {
+    "schemeCode": 151456,
+    "schemeName": "HDFC Nifty SDL Oct 2026 Index Fund - Growth Option - Direct Plan"
+  },
+  {
+    "schemeCode": 136465,
+    "schemeName": "HDFC Retirement Savings Fund - Hybrid-Debt Plan - Growth Option - Direct Plan"
+  },
+  {
+    "schemeCode": 136464,
+    "schemeName": "HDFC Retirement Savings Fund - Hybrid-Equity Plan - Growth Option - Direct Plan"
+  },
+  {
+    "schemeCode": 119016,
+    "schemeName": "HDFC Short Term  Debt Fund - Growth Option - Direct Plan"
+  },
+  {
+    "schemeCode": 130503,
+    "schemeName": "HDFC Small Cap Fund - Growth Option - Direct Plan"
+  },
+  {
+    "schemeCode": 118935,
+    "schemeName": "HDFC Value Fund - Growth Option - Direct Plan"
+  },
+  {
+    "schemeCode": 120077,
+    "schemeName": "HSBC - Small Cap Fund - Growth Direct"
+  },
+  {
+    "schemeCode": 129200,
+    "schemeName": "HSBC Aggressive Hybrid Active FOF - Growth Direct"
+  },
+  {
+    "schemeCode": 151122,
+    "schemeName": "HSBC Aggressive Hybrid Fund - Direct Growth"
+  },
+  {
+    "schemeCode": 151107,
+    "schemeName": "HSBC Banking and PSU Debt Fund - Direct Growth"
+  },
+  {
+    "schemeCode": 149966,
+    "schemeName": "HSBC CRISIL IBX 50:50 Gilt Plus SDL Apr 2028 Index Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 151479,
+    "schemeName": "HSBC CRISIL IBX Gilt June 2027 Index Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 120073,
+    "schemeName": "HSBC Conservative Hybrid Fund - Direct Growth"
+  },
+  {
+    "schemeCode": 151078,
+    "schemeName": "HSBC ELSS Tax saver Fund - Direct Growth"
+  },
+  {
+    "schemeCode": 145228,
+    "schemeName": "HSBC Equity Hybrid Fund - Growth Direct"
+  },
+  {
+    "schemeCode": 120046,
+    "schemeName": "HSBC Flexi Cap Fund - Direct Growth"
+  },
+  {
+    "schemeCode": 120048,
+    "schemeName": "HSBC Flexi Debt Fund - Growth Direct"
+  },
+  {
+    "schemeCode": 148411,
+    "schemeName": "HSBC Focused Fund - Direct Growth"
+  },
+  {
+    "schemeCode": 146772,
+    "schemeName": "HSBC Large & Mid Cap Fund - Direct Growth"
+  },
+  {
+    "schemeCode": 120030,
+    "schemeName": "HSBC Large Cap Fund - Direct Growth"
+  },
+  {
+    "schemeCode": 120038,
+    "schemeName": "HSBC Liquid Fund -  Growth Direct"
+  },
+  {
+    "schemeCode": 149154,
+    "schemeName": "HSBC Mid Cap Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 151036,
+    "schemeName": "HSBC Midcap Fund - Direct Growth"
+  },
+  {
+    "schemeCode": 151290,
+    "schemeName": "HSBC Multi Cap Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 151157,
+    "schemeName": "HSBC NIFTY 50 INDEX FUND - Direct Growth"
+  },
+  {
+    "schemeCode": 151160,
+    "schemeName": "HSBC NIFTY NEXT 50 INDEX FUND - Direct Growth"
+  },
+  {
+    "schemeCode": 120069,
+    "schemeName": "HSBC Small Cap Equity Fund - Growth Direct"
+  },
+  {
+    "schemeCode": 151130,
+    "schemeName": "HSBC Small Cap Fund - Direct Growth"
+  },
+  {
+    "schemeCode": 151113,
+    "schemeName": "HSBC Value Fund - Direct Growth"
+  },
+  {
+    "schemeCode": 120700,
+    "schemeName": "ICICI Prudential Aggressive Hybrid Active FOF - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 120256,
+    "schemeName": "ICICI Prudential Banking and PSU Debt Fund - Direct Plan -  Growth"
+  },
+  {
+    "schemeCode": 153236,
+    "schemeName": "ICICI Prudential CRISIL-IBX AAA Bond Financial Services Index -Dec 2026 Fund- Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 153411,
+    "schemeName": "ICICI Prudential CRISIL-IBX Financial Services 3-6 Months Debt Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 120702,
+    "schemeName": "ICICI Prudential Diversified Debt Strategy Active FOF  - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 120592,
+    "schemeName": "ICICI Prudential ELSS Tax Saver Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 120251,
+    "schemeName": "ICICI Prudential Equity & Debt Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 120722,
+    "schemeName": "ICICI Prudential Focused Equity Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 120596,
+    "schemeName": "ICICI Prudential Large & Mid Cap Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 120586,
+    "schemeName": "ICICI Prudential Large Cap Fund (erstwhile Bluechip Fund) - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 120197,
+    "schemeName": "ICICI Prudential Liquid Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 120381,
+    "schemeName": "ICICI Prudential MidCap Fund - Direct Plan -  Growth"
+  },
+  {
+    "schemeCode": 120599,
+    "schemeName": "ICICI Prudential Multicap Fund - Direct Plan -  Growth"
+  },
+  {
+    "schemeCode": 149219,
+    "schemeName": "ICICI Prudential NASDAQ 100 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 148822,
+    "schemeName": "ICICI Prudential Nifty 100 Low Volatility 30 ETF FOF - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 150452,
+    "schemeName": "ICICI Prudential Nifty 200 Momentum 30 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 153161,
+    "schemeName": "ICICI Prudential Nifty 500 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 149158,
+    "schemeName": "ICICI Prudential Nifty Alpha Low - Volatility 30 ETF FOF - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 150643,
+    "schemeName": "ICICI Prudential Nifty Auto Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 149858,
+    "schemeName": "ICICI Prudential Nifty Bank Index Fund - Direct Plan Growth"
+  },
+  {
+    "schemeCode": 153394,
+    "schemeName": "ICICI Prudential Nifty EV & New Age Automotive ETF FOF - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 150733,
+    "schemeName": "ICICI Prudential Nifty G-Sec Dec 2030 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 150468,
+    "schemeName": "ICICI Prudential Nifty IT Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 152482,
+    "schemeName": "ICICI Prudential Nifty LargeMidcap 250 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 149389,
+    "schemeName": "ICICI Prudential Nifty Midcap 150 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 120684,
+    "schemeName": "ICICI Prudential Nifty Next 50 Index Fund - Direct Plan -  Growth"
+  },
+  {
+    "schemeCode": 149210,
+    "schemeName": "ICICI Prudential Nifty PSU Bond Plus SDL Sep 2027 40:60 Index Fund - Direct Plan Growth"
+  },
+  {
+    "schemeCode": 150930,
+    "schemeName": "ICICI Prudential Nifty Pharma Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 153679,
+    "schemeName": "ICICI Prudential Nifty Private Bank Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 150729,
+    "schemeName": "ICICI Prudential Nifty SDL Dec 2028 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 151211,
+    "schemeName": "ICICI Prudential Nifty SDL Sep 2026 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 149999,
+    "schemeName": "ICICI Prudential Nifty SDL Sep 2027 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 149283,
+    "schemeName": "ICICI Prudential Nifty Smallcap 250 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 153614,
+    "schemeName": "ICICI Prudential Nifty Top 15 Equal Weight Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 153546,
+    "schemeName": "ICICI Prudential Nifty200 Quality 30 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 152936,
+    "schemeName": "ICICI Prudential Nifty200 Value 30 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 150639,
+    "schemeName": "ICICI Prudential Nifty50 Equal Weight Index Fund- Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 152365,
+    "schemeName": "ICICI Prudential Nifty50 Value 20 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 146721,
+    "schemeName": "ICICI Prudential Retirement Fund - Hybrid Aggressive - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 146716,
+    "schemeName": "ICICI Prudential Retirement Fund - Hybrid Conservative - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 146727,
+    "schemeName": "ICICI Prudential Retirement Fund - Pure Debt - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 120591,
+    "schemeName": "ICICI Prudential Smallcap Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 120186,
+    "schemeName": "ICICI Prudential US Bluechip Equity Fund - Direct Plan -  Growth"
+  },
+  {
+    "schemeCode": 120323,
+    "schemeName": "ICICI Prudential Value Fund (erstwhile Value Discovery Fund) - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 149961,
+    "schemeName": "Invesco India - Invesco EQQQ Nasdaq-100 ETF Fund of Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 143537,
+    "schemeName": "Invesco India Aggressive Hybrid Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 154340,
+    "schemeName": "Invesco India BSE Sensex Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 120416,
+    "schemeName": "Invesco India ELSS Tax Saver Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 149763,
+    "schemeName": "Invesco India Flexi Cap Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 148481,
+    "schemeName": "Invesco India Focused Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 120357,
+    "schemeName": "Invesco India Large & Mid Cap Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 120392,
+    "schemeName": "Invesco India Largecap Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 120537,
+    "schemeName": "Invesco India Liquid Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 120403,
+    "schemeName": "Invesco India Midcap Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 120413,
+    "schemeName": "Invesco India Multicap Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 154343,
+    "schemeName": "Invesco India Nifty Bank Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 151593,
+    "schemeName": "Invesco India Nifty G-sec Jul 2027 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 151597,
+    "schemeName": "Invesco India Nifty G-sec Sep 2032 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 145137,
+    "schemeName": "Invesco India Smallcap Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 153660,
+    "schemeName": "KOTAK NIFTY 200 QUALITY 30 INDEX FUND - DIRECT PLAN - GROWTH"
+  },
+  {
+    "schemeCode": 153401,
+    "schemeName": "KOTAK NIFTY MIDCAP 150 INDEX FUND-DIRECT PLAN-GROWTH"
+  },
+  {
+    "schemeCode": 152767,
+    "schemeName": "KOTAK NIFTY MIDCAP 50 INDEX FUND-DIRECT PLAN- GROWTH"
+  },
+  {
+    "schemeCode": 133035,
+    "schemeName": "Kotak Aggressive Hybrid Fund - Direct Plan -Growth"
+  },
+  {
+    "schemeCode": 152039,
+    "schemeName": "Kotak BSE Housing Index Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 152755,
+    "schemeName": "Kotak BSE PSU Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 153286,
+    "schemeName": "Kotak BSE Sensex Index Fund- Direct - Growth"
+  },
+  {
+    "schemeCode": 123693,
+    "schemeName": "Kotak Banking and PSU Debt Direct - Growth"
+  },
+  {
+    "schemeCode": 153313,
+    "schemeName": "Kotak CRISIL - IBX AAA Bond Financial Services Index Dec 2026 Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 152869,
+    "schemeName": "Kotak CRISIL -IBX AAA Financial Services Index Sep-2027 Fund-DIRECT PLAN-GROWTH Option"
+  },
+  {
+    "schemeCode": 153372,
+    "schemeName": "Kotak CRISIL-IBX Financial Services 3-6 Months Debt Index Fund-Direct-Growth"
+  },
+  {
+    "schemeCode": 153875,
+    "schemeName": "Kotak CRISIL-IBX Financial Services 9 to 12 Months Debt Index Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 120154,
+    "schemeName": "Kotak Debt Hybrid - Growth - Direct"
+  },
+  {
+    "schemeCode": 119773,
+    "schemeName": "Kotak ELSS Tax Saver Fund-Growth - Direct"
+  },
+  {
+    "schemeCode": 147473,
+    "schemeName": "Kotak Focused Fund- Direct Plan- Growth option"
+  },
+  {
+    "schemeCode": 126497,
+    "schemeName": "Kotak Hybrid Fixed Term Plan Series 2 - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 120158,
+    "schemeName": "Kotak Large & Midcap Fund - Direct- Growth"
+  },
+  {
+    "schemeCode": 120152,
+    "schemeName": "Kotak Large Cap  Fund - Growth - Direct"
+  },
+  {
+    "schemeCode": 119766,
+    "schemeName": "Kotak Liquid Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 119775,
+    "schemeName": "Kotak Midcap Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 149185,
+    "schemeName": "Kotak Multicap Fund-Direct Plan-Growth"
+  },
+  {
+    "schemeCode": 152663,
+    "schemeName": "Kotak NIFTY 100 Low Volatility 30 Index Fund - Direct plan - Growth option"
+  },
+  {
+    "schemeCode": 153146,
+    "schemeName": "Kotak Nifty 100 Equal Weight Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 151781,
+    "schemeName": "Kotak Nifty 200 Momentum 30 Index Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 153150,
+    "schemeName": "Kotak Nifty 50 Equal Weight Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 148978,
+    "schemeName": "Kotak Nifty 50 Index Fund - Direct Plan-Growth"
+  },
+  {
+    "schemeCode": 153680,
+    "schemeName": "Kotak Nifty AAA Bond Financial Services Mar 2028 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 152549,
+    "schemeName": "Kotak Nifty AAA Bond Jun 2025 HTM Index Fund - Direct Plan - Growth option"
+  },
+  {
+    "schemeCode": 153781,
+    "schemeName": "Kotak Nifty Alpha 50 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 154388,
+    "schemeName": "Kotak Nifty Alpha Low Volatility 30 Index Fund - Direct- Growth"
+  },
+  {
+    "schemeCode": 153353,
+    "schemeName": "Kotak Nifty Commodities Index Fund-Direct Growth"
+  },
+  {
+    "schemeCode": 151911,
+    "schemeName": "Kotak Nifty Financial Services Ex-Bank Index Fund - Direct Plan - Growth option"
+  },
+  {
+    "schemeCode": 152098,
+    "schemeName": "Kotak Nifty G-Sec July 2033 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 152870,
+    "schemeName": "Kotak Nifty India Tourism Index Fund-Direct-Growth Option"
+  },
+  {
+    "schemeCode": 152916,
+    "schemeName": "Kotak Nifty Midcap 150 Momentum 50 Index Fund-Direct Plan-Growth"
+  },
+  {
+    "schemeCode": 148745,
+    "schemeName": "Kotak Nifty Next 50 Index Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 149855,
+    "schemeName": "Kotak Nifty SDL Apr  2027 Top 12 Equal Weight Index Fund-Direct Plan-Growth"
+  },
+  {
+    "schemeCode": 149865,
+    "schemeName": "Kotak Nifty SDL Apr 2032 Top 12 Equal Weight Index Fund-Direct Plan- Growth"
+  },
+  {
+    "schemeCode": 151218,
+    "schemeName": "Kotak Nifty SDL Jul 2026 Index Fund Direct Plan Growth"
+  },
+  {
+    "schemeCode": 151608,
+    "schemeName": "Kotak Nifty SDL Jul 2028 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 151420,
+    "schemeName": "Kotak Nifty SDL Jul 2033 Index Fund Direct Plan Growth Option"
+  },
+  {
+    "schemeCode": 150725,
+    "schemeName": "Kotak Nifty SDL Plus AAA PSU Bond Jul 2028 60:40 Index Fund Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 153223,
+    "schemeName": "Kotak Nifty SmallCap 250 Index Fund- Direct - Growth"
+  },
+  {
+    "schemeCode": 151649,
+    "schemeName": "Kotak Nifty Smallcap 50 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 153461,
+    "schemeName": "Kotak Nifty Top 10 Equal Weight Index Fund-Direct Plan-Growth"
+  },
+  {
+    "schemeCode": 154145,
+    "schemeName": "Kotak Nifty200 Value 30 Index Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 154032,
+    "schemeName": "Kotak Nifty500 Momentum 50 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 120164,
+    "schemeName": "Kotak-Small Cap Fund - Growth - Direct"
+  },
+  {
+    "schemeCode": 147446,
+    "schemeName": "Mahindra Manulife Aggressive Hybrid Fund - Direct Plan -Growth"
+  },
+  {
+    "schemeCode": 139781,
+    "schemeName": "Mahindra Manulife ELSS Tax Saver Fund - Direct Plan -Growth"
+  },
+  {
+    "schemeCode": 149104,
+    "schemeName": "Mahindra Manulife Flexi Cap Fund - Direct Plan -Growth"
+  },
+  {
+    "schemeCode": 148567,
+    "schemeName": "Mahindra Manulife Focused Fund - Direct Plan -Growth"
+  },
+  {
+    "schemeCode": 147840,
+    "schemeName": "Mahindra Manulife Large & Mid Cap Fund - Direct Plan -Growth"
+  },
+  {
+    "schemeCode": 146549,
+    "schemeName": "Mahindra Manulife Large Cap Fund - Direct Plan -Growth"
+  },
+  {
+    "schemeCode": 139538,
+    "schemeName": "Mahindra Manulife Liquid Fund - Direct Plan -Growth"
+  },
+  {
+    "schemeCode": 142110,
+    "schemeName": "Mahindra Manulife Mid Cap Fund - Direct Plan -Growth"
+  },
+  {
+    "schemeCode": 141226,
+    "schemeName": "Mahindra Manulife Multi Cap Fund - Direct Plan -Growth"
+  },
+  {
+    "schemeCode": 150915,
+    "schemeName": "Mahindra Manulife Small Cap Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 153303,
+    "schemeName": "Mahindra Manulife Value Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 134813,
+    "schemeName": "Mirae Asset Aggressive Hybrid Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 150792,
+    "schemeName": "Mirae Asset CRISIL IBX Gilt Index - April 2033 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 153634,
+    "schemeName": "Mirae Asset CRISIL-IBX Financial Services 9-12 Months Debt Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 135781,
+    "schemeName": "Mirae Asset ELSS Tax Saver Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 151412,
+    "schemeName": "Mirae Asset Flexi Cap Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 147206,
+    "schemeName": "Mirae Asset Focused Fund Direct Plan Growth"
+  },
+  {
+    "schemeCode": 118834,
+    "schemeName": "Mirae Asset Large & Midcap Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 118825,
+    "schemeName": "Mirae Asset Large Cap Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 118857,
+    "schemeName": "Mirae Asset Liquid Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 118859,
+    "schemeName": "Mirae Asset Liquid Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 147445,
+    "schemeName": "Mirae Asset Midcap Fund- Direct Growth Option"
+  },
+  {
+    "schemeCode": 151810,
+    "schemeName": "Mirae Asset Multicap Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 148574,
+    "schemeName": "Mirae Asset Nifty 100 ESG Sector Leaders Fund of Fund Direct Growth"
+  },
+  {
+    "schemeCode": 152972,
+    "schemeName": "Mirae Asset Nifty 50 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 150788,
+    "schemeName": "Mirae Asset Nifty AAA PSU Bond Plus SDL Apr 2026 50:50 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 149790,
+    "schemeName": "Mirae Asset Nifty India Manufacturing ETF FOF - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 153192,
+    "schemeName": "Mirae Asset Nifty India New Age Consumption ETF Fund of Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 152976,
+    "schemeName": "Mirae Asset Nifty LargeMidcap 250 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 154216,
+    "schemeName": "Mirae Asset Nifty Metal ETF FOF - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 152645,
+    "schemeName": "Mirae Asset Nifty MidSmallcap400 Momentum Quality 100 ETF Fund of Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 150358,
+    "schemeName": "Mirae Asset Nifty SDL Jun 2027 Index Fund -Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 151691,
+    "schemeName": "Mirae Asset Nifty SDL June 2028 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 152459,
+    "schemeName": "Mirae Asset Nifty Smallcap 250 Momentum Quality 100 ETF Fund of Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 152968,
+    "schemeName": "Mirae Asset Nifty Total Market Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 153196,
+    "schemeName": "Mirae Asset Small Cap Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 153596,
+    "schemeName": "Motilal Oswal BSE 1000 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 150443,
+    "schemeName": "Motilal Oswal BSE Financials ex Bank 30 Index Fund Direct Growth"
+  },
+  {
+    "schemeCode": 133386,
+    "schemeName": "Motilal Oswal ELSS Tax Saver Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 144681,
+    "schemeName": "Motilal Oswal Equity Hybrid Fund (MOFEH) - Direct Plan Growth Option"
+  },
+  {
+    "schemeCode": 129046,
+    "schemeName": "Motilal Oswal Flexi cap Fund Direct Plan-Growth Option"
+  },
+  {
+    "schemeCode": 122389,
+    "schemeName": "Motilal Oswal Focused Fund - Direct Plan Growth Option"
+  },
+  {
+    "schemeCode": 152354,
+    "schemeName": "Motilal Oswal Large Cap Direct Plan Growth"
+  },
+  {
+    "schemeCode": 147704,
+    "schemeName": "Motilal Oswal Large and Midcap Fund - Direct Plan Growth"
+  },
+  {
+    "schemeCode": 145834,
+    "schemeName": "Motilal Oswal Liquid Fund - Direct Growth"
+  },
+  {
+    "schemeCode": 149349,
+    "schemeName": "Motilal Oswal MSCI EAFE Top 100 Select Index Fund - Direct Plan Growth"
+  },
+  {
+    "schemeCode": 127042,
+    "schemeName": "Motilal Oswal Midcap Fund-Direct Plan-Growth Option"
+  },
+  {
+    "schemeCode": 152651,
+    "schemeName": "Motilal Oswal Multi Cap Fund-Direct Plan Growth"
+  },
+  {
+    "schemeCode": 145552,
+    "schemeName": "Motilal Oswal Nasdaq 100 Fund of Fund- Direct Plan Growth"
+  },
+  {
+    "schemeCode": 147794,
+    "schemeName": "Motilal Oswal Nifty 50 Index Fund - Direct plan - Growth"
+  },
+  {
+    "schemeCode": 152875,
+    "schemeName": "Motilal Oswal Nifty 500 Momentum 50 Index Fund-Direct Plan-Growth"
+  },
+  {
+    "schemeCode": 153138,
+    "schemeName": "Motilal Oswal Nifty Capital Market Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 151551,
+    "schemeName": "Motilal Oswal Nifty G-sec May 2029 Index Fund- Direct Plan Growth Option"
+  },
+  {
+    "schemeCode": 152712,
+    "schemeName": "Motilal Oswal Nifty India Defence Index Fund Direct Plan Growth"
+  },
+  {
+    "schemeCode": 151814,
+    "schemeName": "Motilal Oswal Nifty Microcap 250 Index Fund- Direct- Growth Option"
+  },
+  {
+    "schemeCode": 153027,
+    "schemeName": "Motilal Oswal Nifty MidSmall Financial Services Index Fund - Direct Plan- Growth"
+  },
+  {
+    "schemeCode": 153023,
+    "schemeName": "Motilal Oswal Nifty MidSmall Healthcare Index Fund- Direct Plan-Growth"
+  },
+  {
+    "schemeCode": 153029,
+    "schemeName": "Motilal Oswal Nifty MidSmall IT and Telecom Index Fund - Direct Plan- Growth"
+  },
+  {
+    "schemeCode": 153025,
+    "schemeName": "Motilal Oswal Nifty MidSmall India Consumption Index Fund - Direct Plan- Growth"
+  },
+  {
+    "schemeCode": 147796,
+    "schemeName": "Motilal Oswal Nifty Next 50 Index Fund - Direct plan - Growth"
+  },
+  {
+    "schemeCode": 148381,
+    "schemeName": "Motilal Oswal S&P 500 Index Fund - Direct Plan Growth"
+  },
+  {
+    "schemeCode": 152237,
+    "schemeName": "Motilal Oswal Small Cap Fund - Direct - Growth"
+  },
+  {
+    "schemeCode": 152062,
+    "schemeName": "NAVI BSE SENSEX INDEX FUND - DIRECT PLAN - GROWTH"
+  },
+  {
+    "schemeCode": 151471,
+    "schemeName": "NAVI ELSS TAX SAVER NIFTY 50 INDEX FUND - DIRECT PLAN GROWTH"
+  },
+  {
+    "schemeCode": 143163,
+    "schemeName": "Navi Aggressive Hybrid Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 119156,
+    "schemeName": "Navi Conservative Hybrid Fund-Direct Plan-Growth Option"
+  },
+  {
+    "schemeCode": 135654,
+    "schemeName": "Navi ELSS Tax Saver Fund- Direct Plan- Growth Option"
+  },
+  {
+    "schemeCode": 143793,
+    "schemeName": "Navi Flexi Cap Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 135677,
+    "schemeName": "Navi Large & Midcap Fund- Direct Plan- Growth Option"
+  },
+  {
+    "schemeCode": 119148,
+    "schemeName": "Navi Large Cap Equity Fund-Direct Plan-Growth Option"
+  },
+  {
+    "schemeCode": 119164,
+    "schemeName": "Navi Liquid Fund-Direct Plan-Growth Option"
+  },
+  {
+    "schemeCode": 149039,
+    "schemeName": "Navi Nifty 50 Index Fund-Direct Plan-Growth"
+  },
+  {
+    "schemeCode": 149804,
+    "schemeName": "Navi Nifty Bank Index Fund- Direct Plan- Growth"
+  },
+  {
+    "schemeCode": 150515,
+    "schemeName": "Navi Nifty India Manufacturing Index Fund- Direct Plan- Growth"
+  },
+  {
+    "schemeCode": 149892,
+    "schemeName": "Navi Nifty Midcap 150 Index Fund Direct Plan- Growth"
+  },
+  {
+    "schemeCode": 149447,
+    "schemeName": "Navi Nifty Next 50 Index Fund- Direct Plan- Growth"
+  },
+  {
+    "schemeCode": 154027,
+    "schemeName": "Navi Nifty midsmallcap 400 Index Fund- Direct - Growth"
+  },
+  {
+    "schemeCode": 152535,
+    "schemeName": "Navi NiftyIT Index Fund - Direct Plan- Growth"
+  },
+  {
+    "schemeCode": 148265,
+    "schemeName": "Nippon India Aggressive  Hybrid Fund - Segregated Portfolio 2 - Direct Plan - Growth Plan"
+  },
+  {
+    "schemeCode": 118794,
+    "schemeName": "Nippon India Aggressive Hybrid Fund  - Direct Plan Growth Plan"
+  },
+  {
+    "schemeCode": 153567,
+    "schemeName": "Nippon India BSE Sensex Next 30 Index Fund- Direct Plan- Growth Option"
+  },
+  {
+    "schemeCode": 152992,
+    "schemeName": "Nippon India CRISIL - IBX AAA Financial Services - Dec 2026 Index Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 152996,
+    "schemeName": "Nippon India CRISIL - IBX AAA Financial Services - Jan 2028 Index Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 154271,
+    "schemeName": "Nippon India CRISIL-IBX Financial Services 3-6 Months Debt Index Fund- Direct Plan- Growth Option"
+  },
+  {
+    "schemeCode": 154252,
+    "schemeName": "Nippon India CRISIL-IBX Financial Services 9-12 Months Debt Index Fund -Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 118726,
+    "schemeName": "Nippon India Conservative Hybrid  Fund - Direct Plan Growth Plan - Growth Option"
+  },
+  {
+    "schemeCode": 148296,
+    "schemeName": "Nippon India Conservative Hybrid  Fund - Segregated Portfolio 2 - Direct Plan - Growth Plan - Growth Option"
+  },
+  {
+    "schemeCode": 118803,
+    "schemeName": "Nippon India ELSS Tax Saver Fund - Direct Plan Growth Plan - Growth Option"
+  },
+  {
+    "schemeCode": 147689,
+    "schemeName": "Nippon India Equity Hybrid Fund - Segregated Portfolio 1 - Direct Plan - Growth Plan"
+  },
+  {
+    "schemeCode": 149094,
+    "schemeName": "Nippon India Flexi Cap Fund - Direct Plan - Growth Plan - Growth Option"
+  },
+  {
+    "schemeCode": 118692,
+    "schemeName": "Nippon India Focused Fund - Direct Plan Growth Plan - Growth Option"
+  },
+  {
+    "schemeCode": 118665,
+    "schemeName": "Nippon India Growth Mid Cap Fund - Direct Plan Growth Plan - Bonus Option"
+  },
+  {
+    "schemeCode": 118668,
+    "schemeName": "Nippon India Growth Mid Cap Fund - Direct Plan Growth Plan - Growth Option"
+  },
+  {
+    "schemeCode": 148143,
+    "schemeName": "Nippon India Hybrid Bond Fund - Segregated Portfolio 1 - Direct Plan Growth Plan - Growth Option"
+  },
+  {
+    "schemeCode": 118785,
+    "schemeName": "Nippon India Index Fund - BSE Sensex Plan - Direct Plan Growth Plan - Bonus Option"
+  },
+  {
+    "schemeCode": 118791,
+    "schemeName": "Nippon India Index Fund - BSE Sensex Plan - Direct Plan Growth Plan - Growth Option"
+  },
+  {
+    "schemeCode": 118742,
+    "schemeName": "Nippon India Index Fund - Nifty 50 Plan - Direct Plan Growth Plan - Bonus Option"
+  },
+  {
+    "schemeCode": 118741,
+    "schemeName": "Nippon India Index Fund - Nifty 50 Plan - Direct Plan Growth Plan - Growth Option"
+  },
+  {
+    "schemeCode": 118633,
+    "schemeName": "Nippon India Large Cap Fund - Direct Plan Growth Plan - Bonus Option"
+  },
+  {
+    "schemeCode": 118632,
+    "schemeName": "Nippon India Large Cap Fund - Direct Plan Growth Plan - Growth Option"
+  },
+  {
+    "schemeCode": 118701,
+    "schemeName": "Nippon India Liquid Fund - Direct Plan Growth Plan - Growth Option"
+  },
+  {
+    "schemeCode": 118651,
+    "schemeName": "Nippon India Multi Cap Fund - Direct Plan Growth Plan - Bonus Option"
+  },
+  {
+    "schemeCode": 118650,
+    "schemeName": "Nippon India Multi Cap Fund - Direct Plan Growth Plan - Growth Option"
+  },
+  {
+    "schemeCode": 148721,
+    "schemeName": "Nippon India Nifty 50 Value 20 Index Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 152842,
+    "schemeName": "Nippon India Nifty 500 Equal Weight Index Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 153474,
+    "schemeName": "Nippon India Nifty 500 Low Volatility 50 Index Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 152881,
+    "schemeName": "Nippon India Nifty 500 Momentum 50 Index Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 153470,
+    "schemeName": "Nippon India Nifty 500 Quality 50 Index Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 150012,
+    "schemeName": "Nippon India Nifty AAA CPSE Bond Plus SDL - Apr 2027 Maturity 60:40 Index Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 150754,
+    "schemeName": "Nippon India Nifty AAA PSU Bond Plus SDL - Sep 2026 Maturity 50:50 Index Fund-Direct Plan-Growth Option"
+  },
+  {
+    "schemeCode": 150487,
+    "schemeName": "Nippon India Nifty Alpha Low Volatility 30 Index Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 153064,
+    "schemeName": "Nippon India Nifty Auto Index Fund - Direct Plan- Growth Option"
+  },
+  {
+    "schemeCode": 152389,
+    "schemeName": "Nippon India Nifty Bank Index Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 150920,
+    "schemeName": "Nippon India Nifty G-Sec Jun 2036 Maturity Index Fund-Direct Plan-Growth Option"
+  },
+  {
+    "schemeCode": 151440,
+    "schemeName": "Nippon India Nifty G-Sec Oct 2028 Maturity Index Fund-Direct Plan-Growth Option"
+  },
+  {
+    "schemeCode": 150906,
+    "schemeName": "Nippon India Nifty G-Sec Sep 2027 Maturity Index Fund-Direct Plan-Growth Option"
+  },
+  {
+    "schemeCode": 152392,
+    "schemeName": "Nippon India Nifty IT Index Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 153806,
+    "schemeName": "Nippon India Nifty India Manufacturing Index Fund- Direct Plan- Growth Option"
+  },
+  {
+    "schemeCode": 148726,
+    "schemeName": "Nippon India Nifty Midcap 150 Index Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 146513,
+    "schemeName": "Nippon India Nifty Next 50 Junior BeES FoF - Direct Plan - Growth Plan - Growth Option"
+  },
+  {
+    "schemeCode": 153060,
+    "schemeName": "Nippon India Nifty Realty Index Fund-Direct Plan- Growth Option"
+  },
+  {
+    "schemeCode": 150824,
+    "schemeName": "Nippon India Nifty SDL Plus G-Sec - Jun 2028 Maturity 70:30 Index Fund-Direct Plan-Growth Option"
+  },
+  {
+    "schemeCode": 151390,
+    "schemeName": "Nippon India Nifty SDL Plus G-Sec-Jun 2029 Maturity 70:30 Index Fund-Direct Plan-Growth Option"
+  },
+  {
+    "schemeCode": 148519,
+    "schemeName": "Nippon India Nifty Smallcap 250 Index Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 118777,
+    "schemeName": "Nippon India Small Cap Fund - Direct Plan Growth Plan - Bonus Option"
+  },
+  {
+    "schemeCode": 118778,
+    "schemeName": "Nippon India Small Cap Fund - Direct Plan Growth Plan - Growth Option"
+  },
+  {
+    "schemeCode": 148080,
+    "schemeName": "Nippon India Strategic Debt Fund - Segregated Portfolio 1 - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 118784,
+    "schemeName": "Nippon India Value Fund - Direct Plan Growth Plan"
+  },
+  {
+    "schemeCode": 118675,
+    "schemeName": "Nippon India Vision Large & Mid Cap Fund - Direct Plan Growth Plan - Bonus Option"
+  },
+  {
+    "schemeCode": 118678,
+    "schemeName": "Nippon India Vision Large & Mid Cap Fund - Direct Plan Growth Plan - Growth Option"
+  },
+  {
+    "schemeCode": 138386,
+    "schemeName": "PGIM India Aggressive Hybrid Equity Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 138564,
+    "schemeName": "PGIM India Banking and PSU Debt fund- Direct Plan-Growth"
+  },
+  {
+    "schemeCode": 151407,
+    "schemeName": "PGIM India CRISIL IBX Gilt Index - Apr 2028 Fund - Direct Plan, Growth Option"
+  },
+  {
+    "schemeCode": 135601,
+    "schemeName": "PGIM India ELSS Tax Saver Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 133839,
+    "schemeName": "PGIM India Flexi Cap Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 138583,
+    "schemeName": "PGIM India Hybrid Fixed Term Fund - Series 12 - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 138312,
+    "schemeName": "PGIM India Large Cap Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 138991,
+    "schemeName": "PGIM India Large Cap Fund - Series 2 - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 152382,
+    "schemeName": "PGIM India Large and Midcap Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 138299,
+    "schemeName": "PGIM India Liquid Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 125307,
+    "schemeName": "PGIM India Midcap Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 152815,
+    "schemeName": "PGIM India Multi Cap Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 149019,
+    "schemeName": "PGIM India Small Cap Fund - Direct Plan- Growth Option"
+  },
+  {
+    "schemeCode": 148958,
+    "schemeName": "Parag Parikh Conservative Hybrid Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 147481,
+    "schemeName": "Parag Parikh ELSS Tax Saver Fund- Direct Growth"
+  },
+  {
+    "schemeCode": 122639,
+    "schemeName": "Parag Parikh Flexi Cap Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 154155,
+    "schemeName": "Parag Parikh Large Cap Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 143269,
+    "schemeName": "Parag Parikh Liquid Fund- Direct Plan- Growth"
+  },
+  {
+    "schemeCode": 149335,
+    "schemeName": "Quant Value Fund - Growth Option  - Direct Plan"
+  },
+  {
+    "schemeCode": 153432,
+    "schemeName": "SBI BSE PSU BANK INDEX FUND- Direct Plan- Growth"
+  },
+  {
+    "schemeCode": 151769,
+    "schemeName": "SBI BSE Sensex Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 149474,
+    "schemeName": "SBI CPSE Bond Plus SDL Sep 2026 50:50 Index Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 148173,
+    "schemeName": "UTI Nifty Bank ETF"
+  },
+  {
+    "schemeCode": 135320,
+    "schemeName": "UTI Nifty 50 ETF"
+  },
+  {
+    "schemeCode": 143341,
+    "schemeName": "UTI Nifty Next 50 Index Fund - Direct Plan - Growth Option"
+  },
+  {
+    "schemeCode": 143340,
+    "schemeName": "UTI Nifty Next 50 Index Fund - Regular Plan - Growth Option"
+  },
+  {
+    "schemeCode": 141665,
+    "schemeName": "UTI Nifty Next 50 Exchange Traded Fund"
+  },
+  {
+    "schemeCode": 122640,
+    "schemeName": "Parag Parikh Flexi Cap Fund - Regular Plan - Growth"
+  },
+  {
+    "schemeCode": 153964,
+    "schemeName": "Parag Parikh Flexi Cap Fund - Direct Plan - IDCW"
+  },
+  {
+    "schemeCode": 153965,
+    "schemeName": "Parag Parikh Flexi Cap Fund - Regular Plan - IDCW"
+  },
+  {
+    "schemeCode": 117991,
+    "schemeName": "HDFC FMP 371D October 2012 (1)-Flexi Option"
+  },
+  {
+    "schemeCode": 118002,
+    "schemeName": "HDFC FMP 371D November 2012 (1)-Flexi Option"
+  },
+  {
+    "schemeCode": 118018,
+    "schemeName": "HDFC FMP 371D November 2012 (2)-Flexi Option"
+  },
+  {
+    "schemeCode": 118185,
+    "schemeName": "HDFC FMP 566D December 2012 (1)-Flexi Option"
+  },
+  {
+    "schemeCode": 118215,
+    "schemeName": "HDFC FMP 370D December 2012 (1)-Flexi Option"
+  },
+  {
+    "schemeCode": 125497,
+    "schemeName": "SBI Small Cap Fund - Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 125496,
+    "schemeName": "SBI Small Cap Fund - Direct Plan - Income Distribution cum Capital Withdrawal Option (IDCW)"
+  },
+  {
+    "schemeCode": 125495,
+    "schemeName": "SBI Small Cap Fund - Regular Plan - Income Distribution cum Capital Withdrawal Option (IDCW)"
+  },
+  {
+    "schemeCode": 125494,
+    "schemeName": "SBI Small Cap Fund - Regular Plan - Growth"
+  },
+  {
+    "schemeCode": 120504,
+    "schemeName": "Axis Midcap Fund - Direct Plan - IDCW"
+  },
+  {
+    "schemeCode": 114565,
+    "schemeName": "Axis Midcap Fund - Regular Plan - IDCW"
+  },
+  {
+    "schemeCode": 114564,
+    "schemeName": "Axis Midcap Fund - Regular Plan - Growth"
+  },
+  {
+    "schemeCode": 149935,
+    "schemeName": "Axis Nifty Midcap 50 Index Fund - Direct Plan - IDCW Option"
+  },
+  {
+    "schemeCode": 118835,
+    "schemeName": "Mirae Asset Large & Midcap Fund - Direct Plan - IDCW"
+  },
+  {
+    "schemeCode": 118826,
+    "schemeName": "Mirae Asset Large Cap Fund Direct IDCW"
+  },
+  {
+    "schemeCode": 112932,
+    "schemeName": "Mirae Asset Large & Midcap Fund - Regular Plan - Growth"
+  },
+  {
+    "schemeCode": 120185,
+    "schemeName": "ICICI Prudential US Bluechip Equity Fund - Direct Plan -  IDCW"
+  },
+  {
+    "schemeCode": 117620,
+    "schemeName": "ICICI Prudential US Bluechip Equity Fund - Growth"
+  },
+  {
+    "schemeCode": 117619,
+    "schemeName": "ICICI Prudential US Bluechip Equity Fund - IDCW"
+  },
+  {
+    "schemeCode": 108467,
+    "schemeName": "ICICI Prudential Bluechip Fund - Institutional Option - I - Growth"
+  },
+  {
+    "schemeCode": 103223,
+    "schemeName": "Kotak Cash Plus---Dividend (Upto 17/06/07) renamed as Kotak Equity Arbitrage Fund"
+  },
+  {
+    "schemeCode": 103224,
+    "schemeName": "Kotak Cash Plus---Growth (Upto 17/06/07) renamed as Kotak Equity Arbitrage Fund"
+  },
+  {
+    "schemeCode": 148662,
+    "schemeName": "Kotak US Specific Equity Passive FOF- Direct Plan - Growth"
+  },
+  {
+    "schemeCode": 148661,
+    "schemeName": "Kotak US Specific Equity Passive FOF - Regular Plan - Growth"
+  },
+  {
+    "schemeCode": 148649,
+    "schemeName": "Kotak International REIT Overseas Equity Omni FOF - Direct Plan - Payout of Income Distribution cum capital withdrawal option"
+  }
+]

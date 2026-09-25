@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "nxance://schemas/india_portfolio_v1",
+  "title": "Nxance India Canonical Portfolio (v1)",
+  "description": "Unified holding lot model covering CAS (CDSL/NSDL), MF CAS (CAMS/KFin), broker exports (Zerodha/Groww/Upstox), FD/PPF statements, and OCR extractions.",
+  "type": "object",
+  "required": ["schema_version", "source", "as_of", "holder", "lots"],
+  "properties": {
+    "schema_version": { "const": "india_portfolio_v1" },
+    "source": {
+      "type": "object",
+      "required": ["channel", "format"],
+      "properties": {
+        "channel": {
+          "enum": [
+            "manual",
+            "csv_upload",
+            "excel_upload",
+            "cas_cdsl",
+            "cas_nsdl",
+            "cas_cams",
+            "cas_kfin",
+            "broker_zerodha",
+            "broker_groww",
+            "broker_upstox",
+            "broker_angel",
+            "broker_other",
+            "ocr_screenshot",
+            "ocr_pdf",
+            "web_scrape_user_consented",
+            "account_aggregator",
+            "synthetic_training"
+          ]
+        },
+        "format": {
+          "enum": [
+            "json",
+            "csv",
+            "xlsx",
+            "pdf_cas",
+            "pdf_statement",
+            "image_png",
+            "image_jpg",
+            "html",
+            "api"
+          ]
+        },
+        "provider": { "type": "string" },
+        "raw_file_hash": { "type": "string" },
+        "parse_confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "as_of": { "type": "string", "format": "date" },
+    "currency": { "const": "INR" },
+    "holder": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "pan_masked": { "type": "string" },
+        "phone_masked": { "type": "string" },
+        "email_masked": { "type": "string" },
+        "demat_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "lots": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/lot" }
+    },
+    "cashflows": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/cashflow" },
+      "description": "Optional SIP/redemption events for true XIRR"
+    },
+    "goals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "target_amount": { "type": "number" },
+          "target_date": { "type": "string" },
+          "priority": { "type": "integer" }
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "tax_residency": { "enum": ["IN", "NRI", "unknown"] },
+        "risk_self": { "enum": ["conservative", "moderate", "aggressive", "unknown"] },
+        "notes": { "type": "string" }
+      }
+    }
+  },
+  "$defs": {
+    "lot": {
+      "type": "object",
+      "required": ["lot_id", "asset_class", "name", "quantity", "avg_cost", "current_value"],
+      "properties": {
+        "lot_id": { "type": "string" },
+        "asset_class": {
+          "enum": [
+            "equity_stock",
+            "mutual_fund_equity",
+            "mutual_fund_debt",
+            "mutual_fund_hybrid",
+            "mutual_fund_index",
+            "mutual_fund_elss",
+            "etf",
+            "sgb",
+            "fd",
+            "ppf",
+            "epf",
+            "nps",
+            "bond",
+            "reit",
+            "invit",
+            "other"
+          ]
+        },
+        "name": { "type": "string" },
+        "isin": { "type": ["string", "null"] },
+        "amfi_code": { "type": ["string", "null"] },
+        "symbol": { "type": ["string", "null"] },
+        "exchange": { "enum": ["NSE", "BSE", "MCX", "none", null] },
+        "folio": { "type": ["string", "null"] },
+        "plan_type": { "enum": ["direct", "regular", "na", null] },
+        "option": { "enum": ["growth", "idcw", "dividend", "na", null] },
+        "quantity": { "type": "number" },
+        "avg_cost": { "type": "number", "description": "Per unit average buy price / NAV" },
+        "invested_amount": { "type": "number" },
+        "current_nav_or_price": { "type": ["number", "null"] },
+        "current_value": { "type": "number" },
+        "purchase_date": { "type": ["string", "null"] },
+        "maturity_date": { "type": ["string", "null"] },
+        "coupon_or_rate": { "type": ["number", "null"], "description": "FD/bond rate %" },
+        "sector": { "type": ["string", "null"] },
+        "market_cap_bucket": { "enum": ["large", "mid", "small", "multi", "na", null] },
+        "tax_bucket": {
+          "enum": ["equity_ltcg", "equity_stcg", "debt", "elss_lockin", "exempt", "unknown", null]
+        },
+        "lock_in_until": { "type": ["string", "null"] },
+        "nominee": { "type": ["string", "null"] },
+        "source_row": { "type": "object" }
+      }
+    },
+    "cashflow": {
+      "type": "object",
+      "required": ["date", "amount", "type"],
+      "properties": {
+        "date": { "type": "string" },
+        "amount": { "type": "number", "description": "Negative = invest, positive = redeem" },
+        "type": { "enum": ["sip", "lumpsum", "redeem", "dividend", "switch_in", "switch_out", "interest"] },
+        "lot_id": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

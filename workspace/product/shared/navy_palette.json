@@ -1,0 +1,58 @@
+{
+  "name": "Nxance Navy",
+  "version": "1.0.0",
+  "description": "Shared navy design tokens for Flutter mobile + web portal",
+  "colors": {
+    "navy950": "#050B14",
+    "navy900": "#0A1628",
+    "navy800": "#0F2744",
+    "navy700": "#163A5F",
+    "navy600": "#1E4D7B",
+    "navy500": "#2A6AA8",
+    "navy400": "#4A8BC7",
+    "navy300": "#7AADD9",
+    "navy200": "#B3D0EB",
+    "navy100": "#E3EEF8",
+    "surface": "#0C1A2E",
+    "surfaceElevated": "#132741",
+    "card": "#152C48",
+    "border": "rgba(122, 173, 217, 0.18)",
+    "textPrimary": "#F4F8FC",
+    "textSecondary": "#9BB4CC",
+    "textMuted": "#6B849C",
+    "accent": "#3DDCFF",
+    "accentSoft": "rgba(61, 220, 255, 0.12)",
+    "accentAlt": "#5B8DEF",
+    "success": "#3DDC97",
+    "warning": "#F5B942",
+    "danger": "#FF6B7A",
+    "white": "#FFFFFF",
+    "black": "#000000"
+  },
+  "gradients": {
+    "hero": ["#0A1628", "#0F2744", "#163A5F"],
+    "cta": ["#1E4D7B", "#3DDCFF"],
+    "card": ["#132741", "#0F2744"]
+  },
+  "typography": {
+    "fontFamilyWeb": "\"DM Sans\", system-ui, sans-serif",
+    "fontFamilyDisplay": "\"Instrument Serif\", Georgia, serif",
+    "fontFamilyFlutter": "Inter"
+  },
+  "radius": {
+    "sm": 8,
+    "md": 12,
+    "lg": 16,
+    "xl": 24,
+    "pill": 999
+  },
+  "usage": {
+    "background": "navy900",
+    "appBar": "navy950",
+    "primaryButton": "accent",
+    "primaryButtonText": "navy950",
+    "secondaryButton": "navy700",
+    "danger": "danger",
+    "success": "success"
+  }
+}

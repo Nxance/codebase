@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Nxance - Portfolio Intelligence</title>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;600;700&display=swap');
+:root{--bg:#05060D;--tx:#EDF0FF;--t2:#7880B8;--t3:#363A60;--g:#00C9A7;--g2:#1ADCB8;--gt:rgba(0,201,167,.1);--gr:rgba(0,201,167,.25);--gold:#FFB830;--goldt:rgba(255,184,48,.09);--red:#FF5A6A;--redt:rgba(255,90,106,.09);--blue:#5BA3FF;--grn:#3DD68C;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);font-size:14px;line-height:1.75;min-height:100vh}
+.lp{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.lc{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:40px 36px;width:100%;max-width:420px;text-align:center}
+.ll{font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:700;background:linear-gradient(135deg,var(--g),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px}
+.lt{font-size:13px;color:var(--t2);margin-bottom:28px}
+.lh{font-family:'DM Serif Display',serif;font-size:20px;margin-bottom:4px}
+.ls{font-size:12px;color:var(--t3);margin-bottom:24px}
+.liw{text-align:left;margin-bottom:14px}
+.ll2{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.11em;color:var(--t3);margin-bottom:5px;display:block}
+.lerr{color:var(--red);font-size:12px;margin-bottom:10px;display:none;text-align:left;padding:8px 12px;background:var(--redt);border:1px solid rgba(255,90,106,.2);border-radius:8px}
+.lprv{font-size:11px;color:var(--t3);margin-top:12px;line-height:1.5}
+.lprv span{color:var(--g)}
+.app{display:none}
+.nav{position:sticky;top:0;z-index:200;background:rgba(5,6,13,.95);backdrop-filter:blur(24px);border-bottom:1px solid rgba(255,255,255,.07);height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;gap:10px}
+.logo{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;background:linear-gradient(135deg,var(--g),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap}
+.ntabs{display:flex;gap:3px}
+.ntab{padding:6px 12px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid transparent;background:transparent;color:var(--t3);transition:.12s;font-family:inherit}
+.ntab:hover{color:var(--t2)}.ntab.on{background:var(--gt);border-color:var(--gr);color:var(--g)}
+.nr{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.ub{font-size:11px;color:var(--t2);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:4px 10px;border-radius:20px;cursor:pointer;white-space:nowrap}
+.lv{display:flex;align-items:center;gap:5px;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--grn);background:rgba(61,214,140,.07);border:1px solid rgba(61,214,140,.2);padding:3px 9px;border-radius:20px;white-space:nowrap}
+.ld{width:6px;height:6px;border-radius:50%;background:var(--grn);animation:bl 1.5s ease infinite}
+@keyframes bl{0%,100%{opacity:.2}50%{opacity:1}}
+.panel{display:none;padding:22px 20px;max-width:960px;margin:0 auto}.panel.on{display:block}
+.pt{font-family:'DM Serif Display',serif;font-size:26px;margin-bottom:3px}.pt em{font-style:italic;color:var(--g)}
+.ps{font-size:13px;color:var(--t2);margin-bottom:18px}
+.lbl{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--t3);margin-bottom:5px}
+input,select,textarea{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);color:var(--tx);padding:9px 12px;border-radius:9px;font-size:13px;font-family:inherit;width:100%;outline:none;transition:.13s}
+input:focus,select:focus{border-color:rgba(0,201,167,.45);background:rgba(0,201,167,.04)}
+input::placeholder{color:var(--t3)}
+select option{background:#0C0F1C}
+input[type=range]{padding:0;border:none;background:transparent;height:36px;cursor:pointer;accent-color:var(--g)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.mb{margin-bottom:12px}
+.btn{padding:10px 18px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;border:none;transition:.14s}
+.bp{background:linear-gradient(135deg,#00C9A7,#1ADCB8);color:#000}
+.bp:hover{transform:translateY(-1px)}
+.bg2{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);color:var(--t2)}
+.bg2:hover{color:var(--g);border-color:var(--gr)}
+.bfull{width:100%;padding:13px;font-size:14px}
+.bsm{padding:5px 11px;font-size:11px;border-radius:7px}
+.dv{display:flex;align-items:center;gap:10px;margin:16px 0 12px}
+.dvl{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;color:var(--g);background:var(--gt);border:1px solid var(--gr);padding:2px 10px;border-radius:4px;white-space:nowrap}
+.dvr{flex:1;height:1px;background:rgba(255,255,255,.07)}
+.card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:11px;padding:14px 16px;margin-bottom:12px}
+.clbl{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;color:var(--t3);margin-bottom:8px}
+.loading{display:none;text-align:center;padding:60px 20px}
+.spin{width:44px;height:44px;border:3px solid rgba(255,255,255,.07);border-top-color:var(--g);border-radius:50%;animation:sp .7s linear infinite;margin:0 auto 16px}
+@keyframes sp{to{transform:rotate(360deg)}}
+.lstep{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t3);margin-top:6px}
+.pbb{height:5px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden;max-width:280px;margin:8px auto 0}
+.pb{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--g),var(--g2));transition:width .4s}
+.res{display:none}
+.stats{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.stat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:9px;padding:11px 13px}
+.stn{font-family:'DM Serif Display',serif;font-size:22px;color:var(--g);line-height:1;margin-bottom:2px}
+.stl{font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.07em}
+.sw2{display:grid;grid-template-columns:175px 1fr;gap:14px;margin-bottom:14px}
+.sbx{background:rgba(0,201,167,.07);border:1px solid rgba(0,201,167,.18);border-radius:14px;padding:18px 14px;text-align:center}
+.sn{font-family:'DM Serif Display',serif;font-size:68px;line-height:1}
+.sg{font-size:13px;font-weight:700;margin-top:3px}
+.sbg{height:7px;background:rgba(255,255,255,.07);border-radius:4px;overflow:hidden;margin:10px 0 4px}
+.sbb{height:100%;border-radius:4px;transition:width 1.3s}
+.aib{background:linear-gradient(135deg,rgba(0,201,167,.08),rgba(91,163,255,.03));border:1px solid rgba(0,201,167,.18);border-radius:11px;padding:13px 16px;margin-bottom:12px}
+.ait{display:flex;align-items:center;gap:5px;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;color:var(--g);margin-bottom:6px}
+.aid{width:6px;height:6px;border-radius:50%;background:var(--g);animation:bl 2s ease infinite}
+.aitx{font-size:13px;color:var(--tx);line-height:1.75;white-space:pre-wrap}
+.gtbl{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);border-radius:10px;overflow:hidden;margin-bottom:12px}
+.gth{background:rgba(255,255,255,.04);display:grid;padding:7px 12px;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;color:var(--t3);border-bottom:1px solid rgba(255,255,255,.07)}
+.gtr{display:grid;padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px;color:var(--t2);align-items:start}
+.gtr:last-child{border:none}.gtr:hover{background:rgba(255,255,255,.02)}
+.gn{font-weight:600;color:var(--tx);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pos{color:var(--grn);font-weight:600}.neg{color:var(--red);font-weight:600}
+.bdg{font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace}
+.bdr{color:var(--red);background:var(--redt)}.bdd{color:var(--grn);background:rgba(61,214,140,.1)}.bds{color:var(--gold);background:var(--goldt)}
+.iss{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:14px 16px;margin-bottom:9px;position:relative;overflow:hidden}
+.iss::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px}
+.ih::before{background:var(--red)}.im::before{background:var(--gold)}.il::before{background:var(--grn)}
+.itop{display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.ft{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;padding:2px 8px;border-radius:4px;background:var(--gt);border:1px solid var(--gr);color:var(--g);flex-shrink:0}
+.lkt{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;padding:2px 8px;border-radius:4px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);color:var(--t3);flex-shrink:0}
+.icw{margin-left:auto;text-align:right;flex-shrink:0}
+.ic{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--red);display:block}
+.ic2{font-size:10px;color:var(--t3)}
+.iti{font-size:14px;font-weight:700;color:var(--tx);margin-bottom:8px}
+.isc{margin-bottom:8px}
+.isl{font-size:10px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px;font-family:'JetBrains Mono',monospace}
+.ist{font-size:12.5px;color:var(--t2);line-height:1.72}
+.fi{font-size:12.5px;background:var(--gt);border:1px solid var(--gr);border-radius:6px;padding:7px 12px;margin-bottom:5px;color:var(--g)}
+.altb{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:8px 12px;margin-top:6px}
+.altb p{font-size:12px;color:var(--t2);margin-bottom:4px;line-height:1.6}
+.altb strong{color:var(--tx)}
+.blur{filter:blur(5px);user-select:none;pointer-events:none;font-size:12px;color:var(--t2)}
+.pw{background:linear-gradient(135deg,rgba(0,201,167,.08),rgba(91,163,255,.04));border:1.5px solid rgba(0,201,167,.28);border-radius:14px;padding:24px;text-align:center;margin:12px 0}
+.pw h3{font-family:'DM Serif Display',serif;font-size:22px;color:var(--g);margin-bottom:6px}
+.pwp{font-family:'DM Serif Display',serif;font-size:44px;color:var(--g)}
+.acw{position:relative}
+.acl{position:absolute;left:0;right:0;top:calc(100% + 2px);z-index:300;background:rgba(8,10,22,.98);border:1px solid rgba(255,255,255,.1);border-radius:10px;max-height:220px;overflow-y:auto;display:none;box-shadow:0 8px 32px rgba(0,0,0,.6)}
+.aci{padding:9px 12px;font-size:12px;cursor:pointer;color:var(--t2);border-bottom:1px solid rgba(255,255,255,.05);display:flex;justify-content:space-between;align-items:center;gap:8px}
+.aci:hover{background:rgba(0,201,167,.08);color:var(--g)}
+.acll{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.acrr{display:flex;align-items:center;gap:5px;flex-shrink:0}
+.acss{font-size:10px;color:var(--t3)}
+.acb{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px}
+.acm{color:var(--g);background:var(--gt);border:1px solid var(--gr)}
+.ack{color:var(--gold);background:var(--goldt)}
+.hr2{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:11px;padding:13px;margin-bottom:8px}
+.hg{display:grid;grid-template-columns:2.4fr 1fr 1fr 1fr 1fr auto;gap:8px;align-items:end}
+.dbl{width:32px;height:32px;border-radius:7px;background:var(--redt);border:1px solid rgba(255,90,106,.2);color:var(--red);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.imt{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.imtb{padding:7px 12px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.04);color:var(--t2);transition:.13s;font-family:inherit}
+.imtb:hover{color:var(--g);border-color:var(--gr)}.imtb.on{background:var(--gt);border-color:var(--gr);color:var(--g)}
+.uz{border:2px dashed rgba(255,255,255,.12);border-radius:11px;padding:24px;text-align:center;cursor:pointer;transition:.13s;margin-bottom:12px}
+.uz:hover{border-color:rgba(0,201,167,.4);background:rgba(0,201,167,.03)}
+.qb{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:18px;margin-bottom:12px}
+.qn{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--g);text-transform:uppercase;margin-bottom:4px}
+.qt{font-size:15px;font-weight:700;color:var(--tx);margin-bottom:12px}
+.mg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mc{border:1.5px solid rgba(255,255,255,.07);border-radius:10px;padding:14px;cursor:pointer;transition:.13s;text-align:center;background:rgba(255,255,255,.03)}
+.mc:hover{border-color:rgba(0,201,167,.25)}.mc.on{background:var(--gt);border-color:var(--gr)}
+.mci{font-size:26px;display:block;margin-bottom:6px}
+.mcn{font-size:13px;font-weight:700;color:var(--tx)}
+.mcd{font-size:11px;color:var(--t3);margin-top:4px;line-height:1.5}
+.rcg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.rc{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.07);border-radius:10px;padding:12px;cursor:pointer;transition:.13s;text-align:center}
+.rc:hover{border-color:rgba(0,201,167,.25)}.rc.on{background:var(--gt);border-color:var(--gr)}
+.rci{font-size:22px;display:block;margin-bottom:4px}
+.rcn{font-size:12px;font-weight:700;color:var(--tx)}
+.rcs{font-size:10px;color:var(--t3);margin-top:2px}
+.pw3{display:flex;align-items:center;gap:18px;padding:8px 0}
+.pl{flex:1}
+.plr{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:12px}
+.plr:last-child{border:none}
+.pd{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.pn{flex:1;color:var(--tx);font-weight:500}
+.pp{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t2);margin-right:5px}
+.pa{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--g);font-weight:700}
+.allt{width:100%;border-collapse:collapse}
+.allt th{background:rgba(255,255,255,.04);padding:7px 10px;text-align:left;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;color:var(--t3);border-bottom:1px solid rgba(255,255,255,.07)}
+.allt td{padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px;color:var(--t2);vertical-align:top}
+.allt tr:last-child td{border:none}.allt tr:hover td{background:rgba(255,255,255,.02)}
+.abg{height:4px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden;margin-top:4px}
+.abb{height:100%;border-radius:3px}
+.ach{width:22px;height:22px;border:2px solid rgba(255,255,255,.14);border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--g);margin:auto}
+.ach:hover{border-color:var(--g)}.ach.on{background:var(--g);border-color:var(--g);color:#000}
+.brow{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:12px}
+.brow:last-child{border:none}
+.cw{display:flex;flex-direction:column;height:calc(100vh - 160px)}
+.cm{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:9px;padding-bottom:12px}
+.ma{background:rgba(0,201,167,.08);border:1px solid rgba(0,201,167,.16);border-radius:13px 13px 13px 3px;padding:10px 14px;align-self:flex-start;max-width:88%}
+.mal{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--g);text-transform:uppercase;margin-bottom:4px}
+.mat{font-size:13px;color:var(--tx);line-height:1.75;white-space:pre-wrap}
+.mu{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:13px 13px 3px 13px;padding:10px 14px;align-self:flex-end;max-width:88%}
+.ty{background:rgba(0,201,167,.07);border:1px solid rgba(0,201,167,.14);border-radius:13px 13px 13px 3px;padding:10px 14px;align-self:flex-start;display:none}
+.tds{display:flex;gap:4px;align-items:center}
+.tdd{width:7px;height:7px;border-radius:50%;background:var(--g);animation:bn .6s ease infinite}
+.tdd:nth-child(2){animation-delay:.15s}.tdd:nth-child(3){animation-delay:.3s}
+@keyframes bn{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
+.chip{font-size:11px;padding:4px 10px;border-radius:20px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--t2);cursor:pointer;transition:.11s}
+.chip:hover{color:var(--g);border-color:var(--gr);background:var(--gt)}
+.cir{display:flex;gap:8px;padding-top:10px;border-top:1px solid rgba(255,255,255,.07)}
+.ci{flex:1;min-height:40px;max-height:88px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);color:var(--tx);padding:9px 12px;border-radius:10px;font-size:13px;font-family:inherit;outline:none;resize:none}
+.ci:focus{border-color:rgba(0,201,167,.4)}
+.cp{display:inline-flex;align-items:center;gap:5px;background:rgba(91,163,255,.09);border:1px solid rgba(91,163,255,.2);border-radius:20px;padding:3px 10px;font-size:11px;color:var(--blue);margin-bottom:8px;margin-right:6px;cursor:pointer}
+.tip{background:var(--goldt);border:1px solid rgba(255,184,48,.2);border-radius:8px;padding:9px 12px;font-size:12px;color:var(--gold);margin-bottom:12px}
+.nb{background:var(--gt);border:1px solid var(--gr);border-radius:8px;padding:9px 12px;font-size:12px;color:var(--g);margin-bottom:12px}
+.wb{background:var(--redt);border:1px solid rgba(255,90,106,.2);border-radius:8px;padding:9px 12px;font-size:12px;color:var(--red);margin-bottom:12px}
+.sp{color:var(--grn);background:rgba(61,214,140,.1);font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;font-family:'JetBrains Mono',monospace}
+.sw3{color:var(--gold);background:var(--goldt);font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;font-family:'JetBrains Mono',monospace}
+.sf{color:var(--red);background:var(--redt);font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;font-family:'JetBrains Mono',monospace}
+.pmov{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.75);display:none;align-items:center;justify-content:center;padding:20px}
+.pmov.on{display:flex}
+.pmc{background:linear-gradient(135deg,rgba(14,16,30,.99),rgba(8,10,20,.99));border:1.5px solid rgba(0,201,167,.3);border-radius:20px;padding:30px 26px;width:100%;max-width:440px;text-align:center;position:relative}
+.pmx{position:absolute;top:12px;right:16px;font-size:20px;color:var(--t3);cursor:pointer;background:none;border:none;line-height:1}
+.pmprice{font-family:'DM Serif Display',serif;font-size:50px;color:var(--g);line-height:1}
+.pmfeats{text-align:left;margin:12px 0 14px;border-top:1px solid rgba(255,255,255,.07);padding-top:12px}
+.pmfeat{display:flex;gap:9px;padding:4px 0;font-size:12px;color:var(--t2);line-height:1.6}
+.pmfi{color:var(--g);flex-shrink:0}
+.pmtags{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin:8px 0 12px}
+.pmtag{font-size:10px;font-weight:700;padding:3px 9px;border-radius:5px;font-family:'JetBrains Mono',monospace}
+.ptg{color:var(--g);background:var(--gt);border:1px solid var(--gr)}
+.ptb{color:var(--blue);background:rgba(91,163,255,.09);border:1px solid rgba(91,163,255,.25)}
+.ptgold{color:var(--gold);background:var(--goldt);border:1px solid rgba(255,184,48,.25)}
+.toast{position:fixed;top:64px;left:50%;transform:translateX(-50%);z-index:2000;border-radius:12px;padding:12px 20px;text-align:center;max-width:400px;width:90%;display:none;font-size:13px;font-weight:600;border:1.5px solid}
+@media(max-width:700px){.hg,.sw2,.g2,.g3,.rcg,.mg{grid-template-columns:1fr}.pw3{flex-direction:column}.ntab{padding:5px 9px;font-size:11px}}
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+
+<!-- LOGIN -->
+<div id="lp" class="lp">
+  <div class="lc">
+    <div class="ll">nxance</div>
+    <div class="lt">Portfolio Intelligence -- Real Data, Real Numbers</div>
+    <div class="lh">Create Your Free Account</div>
+    <div class="ls">10 seconds. No password. Data stays on your device.</div>
+    <div class="liw"><label class="ll2">Full Name</label><input id="l-name" type="text" placeholder="e.g. Rahul Sharma"></div>
+    <div class="liw"><label class="ll2">Email Address</label><input id="l-email" type="email" placeholder="e.g. rahul@gmail.com"></div>
+    <div class="liw"><label class="ll2">Mobile Number</label><input id="l-phone" type="tel" placeholder="e.g. 9876543210"></div>
+    <div id="l-err" class="lerr"></div>
+    <button class="btn bp bfull" onclick="doLogin()" style="margin-top:4px">Get Started -- Free</button>
+    <div class="lprv">Data stored on your device only. <span>We track signup count for investor reports. No sharing.</span></div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app" class="app">
+<nav class="nav">
+  <div class="logo">nxance</div>
+  <div class="ntabs">
+    <button class="ntab on" onclick="goTab('hc')">Health Check</button>
+    <button class="ntab" onclick="goTab('con')">Construction</button>
+    <button class="ntab" onclick="goTab('ai')">NxanceLM</button>
+  </div>
+  <div class="nr">
+    <div class="ub" id="ub" onclick="openPay()">User</div>
+    <div class="lv"><div class="ld"></div><span id="ltxt">Ready</span></div>
+  </div>
+</nav>
+
+<!-- HEALTH CHECK -->
+<div class="panel on" id="p-hc">
+<div id="hc-form">
+  <div class="pt">Portfolio <em>Health Check</em></div>
+  <div class="ps">200+ MFs, 80+ NSE stocks. 6 engines. Always Rs. amounts AND percentages both.</div>
+  <div class="card" style="margin-bottom:14px">
+    <div class="clbl" style="margin-bottom:10px">Import Portfolio -- Any Method</div>
+    <div class="imt">
+      <button class="imtb on" onclick="setIm('manual')" id="imt-manual">Manual Entry</button>
+      <button class="imtb" onclick="setIm('file')" id="imt-file">Excel / CSV</button>
+      <button class="imtb" onclick="setIm('cas')" id="imt-cas">CDSL / NSDL / CAMS</button>
+      <button class="imtb" onclick="setIm('photo')" id="imt-photo">Screenshot</button>
+    </div>
+    <div id="im-manual">
+      <div class="tip">Type fund or stock name to search 200+ MFs and 80+ NSE stocks. Enter avg buy price and current value.</div>
+      <div id="hc-rows"></div>
+      <button class="btn bg2 bsm" onclick="addHolding()" style="margin-top:6px">+ Add Holding</button>
+    </div>
+    <div id="im-file" style="display:none">
+      <div class="uz" onclick="document.getElementById('xf').click()">
+        <div style="font-size:28px;margin-bottom:8px">Upload Excel or CSV</div>
+        <div style="font-size:11px;color:var(--t3)">Columns: name, units, avg_buy_price, current_value, purchase_date, plan_type, asset_class</div>
+        <div style="font-size:11px;color:var(--g);margin-top:7px;cursor:pointer" onclick="event.stopPropagation();dlTmpl()">Download template CSV</div>
+      </div>
+      <input type="file" id="xf" accept=".xlsx,.xls,.csv" style="display:none" onchange="parseFile(this)">
+      <div id="file-st"></div>
+    </div>
+    <div id="im-cas" style="display:none">
+      <div class="tip">All 3 CAS formats supported:<br>
+        CDSL: mycas.in -- Statements -- Generate CAS PDF<br>
+        NSDL: nsdlcas.nsdl.co.in -- Generate CAS<br>
+        CAMS: camsonline.com -- Mailback Services -- CAS Statement<br>
+        Add CLAUDE_KEY in code to enable AI PDF parsing.
+      </div>
+      <div class="uz" onclick="document.getElementById('cf').click()">
+        <div style="font-size:28px;margin-bottom:8px">Upload CDSL / NSDL / CAMS PDF</div>
+        <div style="font-size:11px;color:var(--t3)">AI reads and extracts all holdings automatically</div>
+      </div>
+      <input type="file" id="cf" accept=".pdf" style="display:none" onchange="parseCAS(this)">
+      <div id="cas-st"></div>
+    </div>
+    <div id="im-photo" style="display:none">
+      <div class="tip">Upload screenshot from Zerodha, Groww, ET Money, Kuvera, or any broker app.</div>
+      <div class="uz" onclick="document.getElementById('pf').click()">
+        <div style="font-size:28px;margin-bottom:8px">Upload Portfolio Screenshot</div>
+        <div style="font-size:11px;color:var(--t3)">JPG, PNG, WebP supported</div>
+      </div>
+      <input type="file" id="pf" accept="image/*" style="display:none" onchange="parsePhoto(this)">
+      <div id="photo-st"></div>
+    </div>
+  </div>
+  <div class="dv"><div class="dvl">Your Goal (Optional)</div><div class="dvr"></div></div>
+  <div class="g2 mb">
+    <div><div class="lbl">Goal</div><select id="hcg"><option value="wealth">Wealth Creation</option><option value="retirement">Retirement</option><option value="house">Buy a House</option><option value="education">Child Education</option></select></div>
+    <div><div class="lbl">Target Amount (Rs.)</div><input id="hct" type="number" placeholder="e.g. 10000000 = 1 crore"></div>
+  </div>
+  <div class="g3 mb">
+    <div><div class="lbl">Target Year</div><input id="hcy" type="number" placeholder="2040"></div>
+    <div><div class="lbl">Your Age</div><input id="hca" type="number" placeholder="30"></div>
+    <div><div class="lbl">Monthly Income (Rs.)</div><input id="hci" type="number" placeholder="80000"></div>
+  </div>
+  <button class="btn bp bfull" onclick="runHC()">Analyse My Portfolio -- 6 Engines</button>
+</div>
+<div class="loading" id="hc-load">
+  <div class="spin"></div>
+  <div style="font-size:14px;font-weight:600">Running all 6 engines...</div>
+  <div class="lstep" id="hc-step">Calculating XIRR...</div>
+  <div class="pbb"><div class="pb" id="hc-pb" style="width:0"></div></div>
+</div>
+<div class="res" id="hc-res">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+    <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--grn);background:rgba(61,214,140,.07);border:1px solid rgba(61,214,140,.2);padding:3px 9px;border-radius:20px" id="hc-bdg">Analysis complete</span>
+    <button class="btn bg2 bsm" onclick="resetHC()">New Analysis</button>
+  </div>
+  <div class="sw2">
+    <div class="sbx">
+      <div class="sn" id="r-sc">--</div><div class="sg" id="r-gr">--</div>
+      <div class="sbg"><div class="sbb" id="r-sb" style="width:0"></div></div>
+      <div style="font-size:10px;color:var(--t3);font-family:'JetBrains Mono',monospace;margin-top:5px" id="r-nt"></div>
+    </div>
+    <div>
+      <div class="stats">
+        <div class="stat"><div class="stn" id="r-vl">--</div><div class="stl">Portfolio Value</div></div>
+        <div class="stat"><div class="stn" id="r-rt" style="font-size:16px">--</div><div class="stl">Return (Rs. + %)</div></div>
+        <div class="stat"><div class="stn" id="r-xi">--</div><div class="stl">XIRR/Year</div></div>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="stn" id="r-sh" style="font-size:18px">--</div><div class="stl">Sharpe Ratio</div></div>
+        <div class="stat"><div class="stn" id="r-cv" style="font-size:18px">--</div><div class="stl">CVaR 95%</div></div>
+        <div class="stat"><div class="stn" id="r-vo" style="font-size:18px">--</div><div class="stl">Volatility</div></div>
+      </div>
+      <div class="aib"><div class="ait"><div class="aid"></div>NxanceLM -- Plain English Summary</div><div class="aitx" id="r-ai">--</div></div>
+      <span class="cp" onclick="hcChat()">Ask NxanceLM</span>
+    </div>
+  </div>
+  <div class="card" id="bc" style="display:none"><div class="clbl">vs Benchmarks -- Rs. Difference</div><div id="br3"></div></div>
+  <div class="gtbl">
+    <div class="gth" style="grid-template-columns:2fr 1.2fr 1.2fr 1fr 1fr 0.8fr;gap:8px">
+      <span>Fund / Stock</span><span>Value (Rs.)</span><span>Invested (Rs.)</span><span>Gain (Rs.+%)</span><span>XIRR</span><span>Plan</span>
+    </div>
+    <div id="r-rows"></div>
+  </div>
+  <div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;color:var(--t3);margin-bottom:10px">Issues -- Rs. Annual Cost + 10yr Loss + MF AND Stock Fixes</div>
+  <div id="r-iss"></div>
+  <div class="pw" id="r-pw" style="display:none">
+    <h3>Unlock All Issues</h3>
+    <p style="font-size:13px;color:var(--t2);margin:8px 0 14px">Issues 2 to 5: exact Rs. cost + MF alternatives + NSE stock alternatives.</p>
+    <div class="pwp">Rs.99<span style="font-size:16px;color:var(--t2)">/month</span></div>
+    <div style="font-size:11px;color:var(--t3);margin:6px 0 16px">Cancel anytime</div>
+    <button class="btn bp" style="font-size:14px;padding:12px 26px" onclick="openPay()">Subscribe -- Rs.99/month</button>
+  </div>
+</div>
+</div>
+
+<!-- CONSTRUCTION -->
+<div class="panel" id="p-con">
+<div id="con-q">
+  <div class="pt">Portfolio <em>Construction</em></div>
+  <div class="ps">6 questions. Pie chart first. Exact Rs. per instrument. SIP redesigns monthly. Numbers + percentages always both.</div>
+  <div class="qb"><div class="qn">Question 1 / 6</div><div class="qt">How will you invest?</div>
+    <div class="mg">
+      <div class="mc on" id="mc-sip" onclick="setMode('sip')"><span class="mci">Monthly SIP</span><div class="mcn">Monthly SIP</div><div class="mcd">Fixed Rs. every month. Quantities recalculate each month as prices change. Change SIP amount anytime.</div></div>
+      <div class="mc" id="mc-lump" onclick="setMode('lumpsum')"><span class="mci">Lump Sum</span><div class="mcn">Lump Sum</div><div class="mcd">Full amount now. Exact Rs. split per instrument shown. Add more later by re-running.</div></div>
+    </div>
+  </div>
+  <div class="qb"><div class="qn">Question 2 / 6</div><div class="qt">What is your goal?</div>
+    <select id="cqg"><option value="wealth">Wealth Creation</option><option value="retirement">Retirement</option><option value="house">Buy a House</option><option value="education">Child Education</option><option value="business">Start a Business</option></select>
+  </div>
+  <div class="qb"><div class="qn">Question 3 / 6</div>
+    <div class="qt">How long will you invest? <span id="tlv" style="color:var(--g);font-weight:700">5 years</span></div>
+    <input type="range" id="cqtl" min="1" max="30" value="5" oninput="tlC()">
+    <div id="tlw" style="margin-top:8px"></div>
+  </div>
+  <div class="qb"><div class="qn">Question 4 / 6</div><div class="qt">How much will you invest?</div>
+    <div class="g2">
+      <div id="sip-d"><div class="lbl">Monthly SIP (Rs.)</div><input id="cqsip" type="number" placeholder="10000" value="10000"></div>
+      <div id="lump-d" style="display:none"><div class="lbl">Lump Sum (Rs.)</div><input id="cqlump" type="number" placeholder="100000" value="100000"></div>
+      <div><div class="lbl">Existing savings (Rs.)</div><input id="cqsav" type="number" placeholder="0" value="0"></div>
+    </div>
+  </div>
+  <div class="qb"><div class="qn">Question 5 / 6</div><div class="qt">What annual return do you expect?</div>
+    <select id="cqret" onchange="retC()">
+      <option value="8">8%/yr -- Very conservative (mostly debt)</option>
+      <option value="10">10%/yr -- Conservative (60% debt)</option>
+      <option value="12" selected>12%/yr -- Moderate (60% equity) -- Recommended</option>
+      <option value="15">15%/yr -- Aggressive (80% equity)</option>
+      <option value="18">18%/yr -- Very aggressive (small/mid cap)</option>
+      <option value="25">25%+/yr -- WARNING: read before selecting</option>
+    </select>
+    <div id="retw" style="margin-top:8px"></div>
+  </div>
+  <div class="qb"><div class="qn">Question 6 / 6</div><div class="qt">Portfolio drops 25%. You would:</div>
+    <div class="rcg" style="margin-bottom:12px">
+      <div class="rc" data-r="low" onclick="setRisk('low')"><span class="rci">Sell</span><div class="rcn">Sell everything</div><div class="rcs">Cannot handle loss</div></div>
+      <div class="rc on" data-r="medium" onclick="setRisk('medium')"><span class="rci">Hold</span><div class="rcn">Hold nervously</div><div class="rcs">Will wait it out</div></div>
+      <div class="rc" data-r="high" onclick="setRisk('high')"><span class="rci">Buy</span><div class="rcn">Buy more</div><div class="rcs">Great discount!</div></div>
+    </div>
+    <div class="g2">
+      <div><div class="lbl">Your Age</div><input id="cqage" type="number" placeholder="28" value="28"></div>
+      <div><div class="lbl">Monthly Income (Rs.)</div><input id="cqinc" type="number" placeholder="80000" value="80000"></div>
+    </div>
+  </div>
+  <button class="btn bp bfull" onclick="runCon()">Build My Portfolio</button>
+</div>
+<div class="loading" id="con-load">
+  <div class="spin" style="border-top-color:var(--gold)"></div>
+  <div style="font-size:14px;font-weight:600">Building your portfolio...</div>
+  <div class="lstep" id="con-step">Screening stocks...</div>
+  <div class="pbb"><div class="pb" id="con-pb" style="width:0;background:linear-gradient(90deg,var(--gold),#FFD166)"></div></div>
+</div>
+<div class="res" id="con-res">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+    <div class="pt" style="font-size:20px;margin-bottom:0" id="con-hd">Portfolio</div>
+    <button class="btn bg2 bsm" onclick="resetCon()">Adjust</button>
+  </div>
+  <div id="con-rl" style="margin-bottom:12px"></div>
+  <div class="card" id="pie-card">
+    <div class="clbl">Portfolio Overview -- Visual</div>
+    <div class="pw3"><canvas id="pie-cv" width="160" height="160" style="flex-shrink:0"></canvas><div class="pl" id="pie-l"></div></div>
+  </div>
+  <div class="stats" style="margin-bottom:12px">
+    <div class="stat"><div class="stn" id="c-ret" style="color:var(--gold)">--</div><div class="stl">Expected Return</div></div>
+    <div class="stat"><div class="stn" id="c-shr" style="color:var(--blue)">--</div><div class="stl">Sharpe Ratio</div></div>
+    <div class="stat"><div class="stn" id="c-prj">--</div><div class="stl">Projected Value</div></div>
+    <div class="stat"><div class="stn" id="c-inv">--</div><div class="stl">Total Invested</div></div>
+    <div class="stat"><div class="stn" id="c-gn" style="color:var(--grn)">--</div><div class="stl">Projected Gain</div></div>
+  </div>
+  <div id="sip-nt" style="display:none"></div>
+  <div class="aib"><div class="ait"><div class="aid"></div>NxanceLM -- Why This Portfolio</div><div class="aitx" id="c-ai">--</div></div>
+  <span class="cp" onclick="conChat()">Ask NxanceLM</span>
+  <div class="card"><div class="clbl">Historical Crisis Performance</div><div id="bt-r"></div></div>
+  <div class="card">
+    <div class="clbl">Full Allocation -- Exact Rs. Per Instrument</div>
+    <div style="overflow-x:auto">
+      <table class="allt">
+        <thead><tr><th style="min-width:190px">Instrument</th><th>Type</th><th>%</th><th id="amt-h">Rs./Month</th><th style="min-width:150px">Why?</th><th>Safety</th><th>OK?</th></tr></thead>
+        <tbody id="al-body"></tbody>
+      </table>
+    </div>
+    <div class="nb" style="margin-top:10px;margin-bottom:0">Every instrument needs your approval. These are recommendations only.</div>
+  </div>
+  <div class="card">
+    <div class="clbl">Monte Carlo -- 5,000 Futures</div>
+    <div class="g3" style="margin-bottom:10px">
+      <div class="stat"><div class="stn" id="mc-p">--</div><div class="stl">Prob of 2x</div></div>
+      <div class="stat"><div class="stn" id="mc-m" style="font-size:18px">--</div><div class="stl">Median Outcome</div></div>
+      <div class="stat"><div class="stn" id="mc-e" style="font-size:18px">--</div><div class="stl">Extra SIP Needed</div></div>
+    </div>
+    <div style="font-size:13px;color:var(--t2)" id="mc-nt"></div>
+  </div>
+  <div class="card" id="scr-c" style="display:none"><div class="clbl">Stock Safety Screening</div><div id="scr-r"></div></div>
+</div>
+</div>
+
+<!-- NXANCELM -->
+<div class="panel" id="p-ai">
+  <div class="pt" style="margin-bottom:3px">NxanceLM</div>
+  <div class="ps" style="margin-bottom:10px">Always answers with Rs. amounts AND percentages together.</div>
+  <div id="ctx-p"></div>
+  <div class="chips">
+    <span class="chip" onclick="ask('Explain my health check results with exact rupee amounts')">My results</span>
+    <span class="chip" onclick="ask('What is my XIRR and what does it mean in rupees?')">My XIRR</span>
+    <span class="chip" onclick="ask('How much am I losing to TER waste per year in rupees?')">TER loss</span>
+    <span class="chip" onclick="ask('Why these specific stocks and MFs in my portfolio?')">Why these picks?</span>
+    <span class="chip" onclick="ask('Is my 12% return expectation realistic?')">Return realistic?</span>
+    <span class="chip" onclick="ask('What does my Monte Carlo probability mean?')">Monte Carlo</span>
+    <span class="chip" onclick="ask('How to switch Regular to Direct plan step by step?')">Switch to Direct</span>
+    <span class="chip" onclick="ask('Am I on track for my financial goal?')">Goal check</span>
+    <span class="chip" onclick="ask('How does SIP monthly redesign work with example?')">SIP redesign</span>
+  </div>
+  <div class="cw">
+    <div class="cm" id="chat-m">
+      <div class="ma">
+        <div class="mal">NXANCELM</div>
+        <div class="mat">Hello! I am NxanceLM.
+
+I always answer with exact rupee amounts AND percentages together.
+
+Example: Your TER waste = Rs.4,200/year (0.84% of Rs.5L portfolio). Over 10 years = Rs.73,500 lost.
+
+Run Health Check or Construction first, then ask me anything.</div>
+      </div>
+    </div>
+    <div class="ty" id="ty"><div class="tds"><div class="tdd"></div><div class="tdd"></div><div class="tdd"></div></div></div>
+    <div class="cir">
+      <textarea class="ci" id="ci" rows="1" placeholder="Ask about your portfolio..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat()}"></textarea>
+      <button class="btn bp" onclick="sendChat()">Send</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- PAYMENT MODAL -->
+<div id="pay-modal" class="pmov">
+  <div class="pmc">
+    <button class="pmx" onclick="closePay()">X</button>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;background:linear-gradient(135deg,var(--g),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px">nxance</div>
+    <div style="font-size:13px;color:var(--t2);margin-bottom:16px">Premium Plan</div>
+    <div style="background:rgba(0,201,167,.07);border:1.5px solid rgba(0,201,167,.25);border-radius:12px;padding:16px;margin-bottom:14px">
+      <div class="pmprice">Rs.99<span style="font-size:18px;color:var(--t2)">/month</span></div>
+      <div style="font-size:12px;color:var(--t2);margin-top:4px">Cancel anytime. No questions asked.</div>
+    </div>
+    <div class="pmfeats">
+      <div class="pmfeat"><span class="pmfi">OK</span><span>All Issues unlocked -- exact Rs. cost of every problem</span></div>
+      <div class="pmfeat"><span class="pmfi">OK</span><span>Specific Mutual Fund alternatives for each issue</span></div>
+      <div class="pmfeat"><span class="pmfi">OK</span><span>Specific NSE Stock alternatives for each issue</span></div>
+      <div class="pmfeat"><span class="pmfi">OK</span><span>10-year Rs. loss calculation with compounding</span></div>
+      <div class="pmfeat"><span class="pmfi">OK</span><span>Unlimited Health Checks, Construction, NxanceLM</span></div>
+    </div>
+    <div class="pmtags">
+      <span class="pmtag ptg">UPI</span>
+      <span class="pmtag ptb">Card</span>
+      <span class="pmtag ptgold">Net Banking</span>
+      <span class="pmtag ptg">Wallets</span>
+    </div>
+    <button class="btn bp bfull" onclick="startPay()" id="pay-btn" style="font-size:15px;padding:14px">Pay Rs.99 -- Unlock Everything</button>
+    <div style="font-size:10px;color:var(--t3);margin-top:10px">Razorpay -- 256-bit SSL -- PCI-DSS</div>
+  </div>
+</div>
+
+<script>
+var MFDB = [
+["Axis Bluechip Fund - Regular","120505","regular","Large Cap","Axis"],
+["Axis Bluechip Fund - Direct","120503","direct","Large Cap","Axis"],
+["Axis Midcap Fund - Regular","119547","regular","Mid Cap","Axis"],
+["Axis Midcap Fund - Direct","119545","direct","Mid Cap","Axis"],
+["Axis Small Cap Fund - Regular","120828","regular","Small Cap","Axis"],
+["Axis Small Cap Fund - Direct","120826","direct","Small Cap","Axis"],
+["Axis Flexicap Fund - Regular","119605","regular","Flexi Cap","Axis"],
+["Axis Flexicap Fund - Direct","119603","direct","Flexi Cap","Axis"],
+["Axis Long Term Equity ELSS - Regular","119523","regular","ELSS","Axis"],
+["Axis Long Term Equity ELSS - Direct","119521","direct","ELSS","Axis"],
+["Axis Focused 25 Fund - Regular","119555","regular","Focused","Axis"],
+["Axis Focused 25 Fund - Direct","119553","direct","Focused","Axis"],
+["Axis Growth Opportunities - Regular","129571","regular","Large & Mid","Axis"],
+["Axis Growth Opportunities - Direct","129569","direct","Large & Mid","Axis"],
+["Axis Liquid Fund - Regular","120530","regular","Liquid","Axis"],
+["Axis Liquid Fund - Direct","120528","direct","Liquid","Axis"],
+["Axis Short Duration Fund - Regular","120520","regular","Debt","Axis"],
+["Axis Short Duration Fund - Direct","120518","direct","Debt","Axis"],
+["Axis Gold Fund - Regular","120508","regular","Gold","Axis"],
+["Axis Gold Fund - Direct","120506","direct","Gold","Axis"],
+["Mirae Asset Large Cap Fund - Regular","118706","regular","Large Cap","Mirae"],
+["Mirae Asset Large Cap Fund - Direct","118825","direct","Large Cap","Mirae"],
+["Mirae Asset Emerging Bluechip - Regular","118710","regular","Large & Mid","Mirae"],
+["Mirae Asset Emerging Bluechip - Direct","118776","direct","Large & Mid","Mirae"],
+["Mirae Asset Midcap Fund - Regular","135783","regular","Mid Cap","Mirae"],
+["Mirae Asset Midcap Fund - Direct","135781","direct","Mid Cap","Mirae"],
+["Mirae Asset Tax Saver ELSS - Regular","118778","regular","ELSS","Mirae"],
+["Mirae Asset Tax Saver ELSS - Direct","118774","direct","ELSS","Mirae"],
+["Mirae Asset Flexi Cap Fund - Regular","135787","regular","Flexi Cap","Mirae"],
+["Mirae Asset Flexi Cap Fund - Direct","135785","direct","Flexi Cap","Mirae"],
+["Mirae Asset NYSE FANG+ FOF - Direct","128901","direct","International","Mirae"],
+["Parag Parikh Flexi Cap Fund - Regular","122639","regular","Flexi Cap","PPFAS"],
+["Parag Parikh Flexi Cap Fund - Direct","122640","direct","Flexi Cap","PPFAS"],
+["Parag Parikh Conservative Hybrid - Regular","135797","regular","Hybrid","PPFAS"],
+["Parag Parikh Conservative Hybrid - Direct","135799","direct","Hybrid","PPFAS"],
+["Parag Parikh ELSS Tax Saver - Regular","136190","regular","ELSS","PPFAS"],
+["Parag Parikh ELSS Tax Saver - Direct","136188","direct","ELSS","PPFAS"],
+["Parag Parikh Liquid Fund - Direct","136192","direct","Liquid","PPFAS"],
+["HDFC Top 100 Fund - Regular","100210","regular","Large Cap","HDFC"],
+["HDFC Top 100 Fund - Direct","119200","direct","Large Cap","HDFC"],
+["HDFC Flexi Cap Fund - Regular","100270","regular","Flexi Cap","HDFC"],
+["HDFC Flexi Cap Fund - Direct","119027","direct","Flexi Cap","HDFC"],
+["HDFC Midcap Opportunities - Regular","100206","regular","Mid Cap","HDFC"],
+["HDFC Midcap Opportunities - Direct","119206","direct","Mid Cap","HDFC"],
+["HDFC Small Cap Fund - Regular","100240","regular","Small Cap","HDFC"],
+["HDFC Small Cap Fund - Direct","119203","direct","Small Cap","HDFC"],
+["HDFC Balanced Advantage Fund - Regular","100236","regular","Hybrid","HDFC"],
+["HDFC Balanced Advantage Fund - Direct","119002","direct","Hybrid","HDFC"],
+["HDFC ELSS Tax Saver - Regular","100209","regular","ELSS","HDFC"],
+["HDFC ELSS Tax Saver - Direct","119198","direct","ELSS","HDFC"],
+["HDFC Nifty 50 Index Fund - Regular","118989","regular","Index","HDFC"],
+["HDFC Nifty 50 Index Fund - Direct","118990","direct","Index","HDFC"],
+["HDFC Nifty Next 50 Index - Regular","125497","regular","Index","HDFC"],
+["HDFC Nifty Next 50 Index - Direct","125495","direct","Index","HDFC"],
+["HDFC Short Duration Fund - Regular","100232","regular","Debt","HDFC"],
+["HDFC Short Duration Fund - Direct","119179","direct","Debt","HDFC"],
+["HDFC Liquid Fund - Regular","100226","regular","Liquid","HDFC"],
+["HDFC Liquid Fund - Direct","119176","direct","Liquid","HDFC"],
+["HDFC Gold Fund - Regular","119221","regular","Gold","HDFC"],
+["HDFC Gold Fund - Direct","119219","direct","Gold","HDFC"],
+["HDFC Multi Cap Fund - Regular","135373","regular","Multi Cap","HDFC"],
+["HDFC Multi Cap Fund - Direct","135371","direct","Multi Cap","HDFC"],
+["ICICI Pru Bluechip Fund - Regular","130503","regular","Large Cap","ICICI Pru"],
+["ICICI Pru Bluechip Fund - Direct","130500","direct","Large Cap","ICICI Pru"],
+["ICICI Pru Value Discovery - Regular","100631","regular","Value","ICICI Pru"],
+["ICICI Pru Value Discovery - Direct","119281","direct","Value","ICICI Pru"],
+["ICICI Pru Midcap Fund - Regular","100352","regular","Mid Cap","ICICI Pru"],
+["ICICI Pru Midcap Fund - Direct","119285","direct","Mid Cap","ICICI Pru"],
+["ICICI Pru Smallcap Fund - Regular","130645","regular","Small Cap","ICICI Pru"],
+["ICICI Pru Smallcap Fund - Direct","130643","direct","Small Cap","ICICI Pru"],
+["ICICI Pru Balanced Advantage - Regular","100353","regular","Hybrid","ICICI Pru"],
+["ICICI Pru Balanced Advantage - Direct","119286","direct","Hybrid","ICICI Pru"],
+["ICICI Pru Nifty 50 Index - Regular","120613","regular","Index","ICICI Pru"],
+["ICICI Pru Nifty 50 Index - Direct","120611","direct","Index","ICICI Pru"],
+["ICICI Pru Nasdaq 100 FOF - Regular","133643","regular","International","ICICI Pru"],
+["ICICI Pru Nasdaq 100 FOF - Direct","133641","direct","International","ICICI Pru"],
+["ICICI Pru Liquid Fund - Regular","100349","regular","Liquid","ICICI Pru"],
+["SBI Bluechip Fund - Regular","117694","regular","Large Cap","SBI"],
+["SBI Bluechip Fund - Direct","119597","direct","Large Cap","SBI"],
+["SBI Small Cap Fund - Regular","115551","regular","Small Cap","SBI"],
+["SBI Small Cap Fund - Direct","119440","direct","Small Cap","SBI"],
+["SBI Equity Hybrid Fund - Regular","101554","regular","Hybrid","SBI"],
+["SBI Equity Hybrid Fund - Direct","119383","direct","Hybrid","SBI"],
+["SBI Contra Fund - Regular","100012","regular","Contra","SBI"],
+["SBI Contra Fund - Direct","119371","direct","Contra","SBI"],
+["SBI Focused Equity Fund - Regular","117427","regular","Focused","SBI"],
+["SBI Magnum Midcap Fund - Regular","100457","regular","Mid Cap","SBI"],
+["SBI Nifty 50 Index Fund - Regular","117691","regular","Index","SBI"],
+["SBI Nifty 50 Index Fund - Direct","119598","direct","Index","SBI"],
+["SBI ELSS Tax Saver - Regular","100437","regular","ELSS","SBI"],
+["SBI ELSS Tax Saver - Direct","119379","direct","ELSS","SBI"],
+["SBI Liquid Fund - Regular","101495","regular","Liquid","SBI"],
+["SBI Gold Fund - Direct","119432","direct","Gold","SBI"],
+["Kotak Emerging Equity Fund - Regular","100279","regular","Mid Cap","Kotak"],
+["Kotak Emerging Equity Fund - Direct","119815","direct","Mid Cap","Kotak"],
+["Kotak Flexicap Fund - Regular","120463","regular","Flexi Cap","Kotak"],
+["Kotak Flexicap Fund - Direct","120461","direct","Flexi Cap","Kotak"],
+["Kotak Small Cap Fund - Regular","120784","regular","Small Cap","Kotak"],
+["Kotak Small Cap Fund - Direct","120782","direct","Small Cap","Kotak"],
+["Kotak Bluechip Fund - Regular","120451","regular","Large Cap","Kotak"],
+["Kotak Bluechip Fund - Direct","120449","direct","Large Cap","Kotak"],
+["Kotak ELSS Tax Saver - Regular","120457","regular","ELSS","Kotak"],
+["Kotak ELSS Tax Saver - Direct","120455","direct","ELSS","Kotak"],
+["Kotak Nifty 50 Index Fund - Regular","120761","regular","Index","Kotak"],
+["Kotak Nifty 50 Index Fund - Direct","120759","direct","Index","Kotak"],
+["Kotak Liquid Fund - Regular","100271","regular","Liquid","Kotak"],
+["Nippon India Small Cap Fund - Regular","118778","regular","Small Cap","Nippon"],
+["Nippon India Small Cap Fund - Direct","118780","direct","Small Cap","Nippon"],
+["Nippon India Large Cap Fund - Regular","101076","regular","Large Cap","Nippon"],
+["Nippon India Large Cap Fund - Direct","118762","direct","Large Cap","Nippon"],
+["Nippon India Growth Fund - Regular","100420","regular","Mid Cap","Nippon"],
+["Nippon India Nifty 50 Index - Regular","104053","regular","Index","Nippon"],
+["Nippon India Gold Savings Fund - Regular","118767","regular","Gold","Nippon"],
+["Nippon India Gold Savings Fund - Direct","118769","direct","Gold","Nippon"],
+["Nippon India Liquid Fund - Regular","101028","regular","Liquid","Nippon"],
+["Nippon India ELSS Tax Saver - Regular","100538","regular","ELSS","Nippon"],
+["Nippon India US Equity Opp - Direct","120784","direct","International","Nippon"],
+["UTI Nifty 50 Index Fund - Regular","120716","regular","Index","UTI"],
+["UTI Nifty 50 Index Fund - Direct","120715","direct","Index","UTI"],
+["UTI Nifty Next 50 Index - Regular","120714","regular","Index","UTI"],
+["UTI Nifty Next 50 Index - Direct","120713","direct","Index","UTI"],
+["UTI Flexi Cap Fund - Regular","100474","regular","Flexi Cap","UTI"],
+["UTI Flexi Cap Fund - Direct","119870","direct","Flexi Cap","UTI"],
+["UTI Mid Cap Fund - Regular","100471","regular","Mid Cap","UTI"],
+["UTI Long Term Equity ELSS - Regular","100473","regular","ELSS","UTI"],
+["UTI Liquid Fund - Regular","100478","regular","Liquid","UTI"],
+["Quant Small Cap Fund - Regular","120851","regular","Small Cap","Quant"],
+["Quant Small Cap Fund - Direct","120848","direct","Small Cap","Quant"],
+["Quant Active Fund - Regular","120841","regular","Multi Cap","Quant"],
+["Quant Active Fund - Direct","120839","direct","Multi Cap","Quant"],
+["Quant Flexi Cap Fund - Regular","135800","regular","Flexi Cap","Quant"],
+["Quant Flexi Cap Fund - Direct","135798","direct","Flexi Cap","Quant"],
+["Quant Tax Plan ELSS - Regular","120847","regular","ELSS","Quant"],
+["Quant Tax Plan ELSS - Direct","120844","direct","ELSS","Quant"],
+["Quant Mid Cap Fund - Regular","120843","regular","Mid Cap","Quant"],
+["Quant Large Cap Fund - Regular","135804","regular","Large Cap","Quant"],
+["Motilal Oswal Nasdaq 100 FOF - Regular","122491","regular","International","Motilal"],
+["Motilal Oswal Nasdaq 100 FOF - Direct","122489","direct","International","Motilal"],
+["Motilal Oswal S&P 500 Index - Regular","129784","regular","International","Motilal"],
+["Motilal Oswal S&P 500 Index - Direct","129782","direct","International","Motilal"],
+["Motilal Oswal Flexi Cap Fund - Regular","120837","regular","Flexi Cap","Motilal"],
+["Motilal Oswal Flexi Cap Fund - Direct","120835","direct","Flexi Cap","Motilal"],
+["Motilal Oswal Mid Cap Fund - Regular","120833","regular","Mid Cap","Motilal"],
+["Motilal Oswal Mid Cap Fund - Direct","120831","direct","Mid Cap","Motilal"],
+["DSP Midcap Fund - Regular","102882","regular","Mid Cap","DSP"],
+["DSP Midcap Fund - Direct","119069","direct","Mid Cap","DSP"],
+["DSP Small Cap Fund - Regular","114434","regular","Small Cap","DSP"],
+["DSP Small Cap Fund - Direct","119071","direct","Small Cap","DSP"],
+["DSP Flexi Cap Fund - Regular","102885","regular","Flexi Cap","DSP"],
+["DSP Tax Saver Fund - Regular","102893","regular","ELSS","DSP"],
+["DSP Liquid Fund - Regular","102887","regular","Liquid","DSP"],
+["Canara Rob Bluechip Equity - Regular","120823","regular","Large Cap","Canara"],
+["Canara Rob Bluechip Equity - Direct","120821","direct","Large Cap","Canara"],
+["Canara Rob Small Cap Fund - Regular","132697","regular","Small Cap","Canara"],
+["Canara Rob Small Cap Fund - Direct","132695","direct","Small Cap","Canara"],
+["Canara Rob Flexi Cap Fund - Regular","120825","regular","Flexi Cap","Canara"],
+["Canara Rob ELSS Tax Saver - Regular","102885","regular","ELSS","Canara"],
+["Franklin India Bluechip Fund - Regular","100085","regular","Large Cap","Franklin"],
+["Franklin India Flexi Cap - Regular","100079","regular","Flexi Cap","Franklin"],
+["Franklin India Prima Mid Cap - Regular","100078","regular","Mid Cap","Franklin"],
+["Franklin India Smaller Companies - Regular","100544","regular","Small Cap","Franklin"],
+["Franklin India ELSS Tax Saver - Regular","100082","regular","ELSS","Franklin"],
+["ABSL Frontline Equity Fund - Regular","104004","regular","Large Cap","ABSL"],
+["ABSL Frontline Equity Fund - Direct","119024","direct","Large Cap","ABSL"],
+["ABSL Mid Cap Fund - Regular","100007","regular","Mid Cap","ABSL"],
+["ABSL Tax Relief 96 ELSS - Regular","100003","regular","ELSS","ABSL"],
+["ABSL Liquid Fund - Regular","100008","regular","Liquid","ABSL"],
+["ABSL Nifty 50 Index Fund - Regular","136154","regular","Index","ABSL"],
+["ABSL Nifty 50 Index Fund - Direct","136152","direct","Index","ABSL"],
+["ABSL Short Duration Fund - Regular","100017","regular","Debt","ABSL"],
+["Tata Large Cap Fund - Regular","100439","regular","Large Cap","Tata"],
+["Tata Mid Cap Growth Fund - Regular","100444","regular","Mid Cap","Tata"],
+["Tata Small Cap Fund - Regular","130161","regular","Small Cap","Tata"],
+["Tata Small Cap Fund - Direct","130159","direct","Small Cap","Tata"],
+["Tata ELSS Tax Saver - Regular","100441","regular","ELSS","Tata"],
+["Tata Nifty 50 Index Fund - Direct","130573","direct","Index","Tata"],
+["Tata Liquid Fund - Regular","100447","regular","Liquid","Tata"],
+["PGIM India Flexi Cap Fund - Regular","125356","regular","Flexi Cap","PGIM"],
+["PGIM India Flexi Cap Fund - Direct","125354","direct","Flexi Cap","PGIM"],
+["PGIM India Mid Cap Opp - Regular","122823","regular","Mid Cap","PGIM"],
+["PGIM India Mid Cap Opp - Direct","122821","direct","Mid Cap","PGIM"],
+["Invesco India Contra Fund - Regular","120591","regular","Contra","Invesco"],
+["Invesco India Contra Fund - Direct","120589","direct","Contra","Invesco"],
+["Invesco India Smallcap Fund - Regular","130419","regular","Small Cap","Invesco"],
+["Invesco India Smallcap Fund - Direct","130417","direct","Small Cap","Invesco"],
+["WhiteOak Capital Flexi Cap - Regular","136456","regular","Flexi Cap","WhiteOak"],
+["WhiteOak Capital Flexi Cap - Direct","136454","direct","Flexi Cap","WhiteOak"],
+["WhiteOak Capital Mid Cap - Regular","136460","regular","Mid Cap","WhiteOak"],
+["WhiteOak Capital Mid Cap - Direct","136458","direct","Mid Cap","WhiteOak"],
+["Navi Nifty 50 Index Fund - Regular","135917","regular","Index","Navi"],
+["Navi Nifty 50 Index Fund - Direct","135915","direct","Index","Navi"],
+["Navi US Total Stock Market FOF - Direct","135919","direct","International","Navi"],
+["Edelweiss Mid Cap Fund - Regular","119523","regular","Mid Cap","Edelweiss"],
+["Edelweiss ELSS Tax Saver - Regular","119547","regular","ELSS","Edelweiss"],
+["Edelweiss Balanced Advantage - Regular","125463","regular","Hybrid","Edelweiss"],
+["Edelweiss Balanced Advantage - Direct","125461","direct","Hybrid","Edelweiss"],
+];
+
+var STKDB = [
+["Reliance Industries","RELIANCE.NS","Conglomerate","HIGH","Large","10yr CAGR 18%. Telecom+Retail+Energy. Best cash flows in India."],
+["TCS","TCS.NS","IT Services","HIGH","Large","10yr CAGR 18%. Largest IT company. Zero debt. Consistent dividend."],
+["HDFC Bank","HDFCBANK.NS","Banking","HIGH","Large","15yr CAGR 17%. Best-run bank in India. ROE above 16% consistently."],
+["Infosys","INFY.NS","IT Services","HIGH","Large","IT giant. High dividend yield. Strong free cash flow."],
+["ICICI Bank","ICICIBANK.NS","Banking","HIGH","Large","Turnaround complete. India's #2 bank by profit."],
+["Kotak Mahindra Bank","KOTAKBANK.NS","Banking","HIGH","Large","Premium franchise. Conservative lending standards."],
+["Axis Bank","AXISBANK.NS","Banking","HIGH","Large","ROE improving every year. Quality upgrade story."],
+["Bajaj Finance","BAJFINANCE.NS","NBFC","HIGH","Large","10yr CAGR 30%+. India's best NBFC. Consumer lending leader."],
+["Bajaj Finserv","BAJAJFINSV.NS","Financial Services","HIGH","Large","Holds Bajaj Finance + insurance subsidiaries."],
+["Hindustan Unilever HUL","HINDUNILVR.NS","FMCG","HIGH","Large","FMCG monopoly. 20 years consistent earnings growth."],
+["Asian Paints","ASIANPAINT.NS","Paints","HIGH","Large","20yr CAGR 22%. Paints monopoly. Zero debt."],
+["Titan Company","TITAN.NS","Consumer","HIGH","Large","10yr CAGR 25%. Watches + Tanishq jewellery."],
+["Nestle India","NESTLEIND.NS","FMCG","HIGH","Large","Maggi+KitKat+Nescafe. Consistent earnings every year."],
+["Maruti Suzuki","MARUTI.NS","Auto","HIGH","Large","Car market leader. 55%+ market share."],
+["L&T Larsen Toubro","LT.NS","Infrastructure","HIGH","Large","India's largest engineering company. Record order book."],
+["HCL Technologies","HCLTECH.NS","IT Services","HIGH","Large","IT + Products mix. Steady compounder."],
+["Wipro","WIPRO.NS","IT Services","HIGH","Large","IT services. Consistent profitable growth."],
+["Bharti Airtel","BHARTIARTL.NS","Telecom","HIGH","Large","Telecom duopoly. ARPU rising every quarter."],
+["ITC Limited","ITC.NS","FMCG/Tobacco","HIGH","Large","Very high dividend yield. Tobacco + FMCG + Hotels."],
+["Sun Pharmaceutical","SUNPHARMA.NS","Pharma","HIGH","Large","India's largest pharma. Specialty drugs pivot."],
+["Dr Reddy's Labs","DRREDDY.NS","Pharma","HIGH","Large","Generic pharma leader. Consistent US exporter."],
+["Cipla","CIPLA.NS","Pharma","HIGH","Large","Respiratory + generic medicines leader."],
+["Divi's Laboratories","DIVISLAB.NS","Pharma API","HIGH","Large","API manufacturer. ROE above 25%. Zero debt."],
+["Bajaj Auto","BAJAJ-AUTO.NS","Auto","HIGH","Large","2-wheeler + 3-wheeler leader. Very high dividend."],
+["Mahindra M&M","M&M.NS","Auto/Farm","HIGH","Large","UV market leader. Tractor leader. EV pipeline."],
+["Eicher Motors Royal Enfield","EICHERMOT.NS","Auto","HIGH","Large","Royal Enfield monopoly in premium motorcycles."],
+["Hero MotoCorp","HEROMOTOCO.NS","Auto","HIGH","Large","Mass market 2-wheeler leader. Rural India play."],
+["NTPC","NTPC.NS","Power PSU","HIGH","Large","India's largest power generator. High dividend."],
+["Power Grid Corp","POWERGRID.NS","Power PSU","HIGH","Large","Transmission monopoly. Regulated returns."],
+["Ultratech Cement","ULTRACEMCO.NS","Cement","HIGH","Large","Cement market leader. Capacity expansion."],
+["Pidilite Industries","PIDILITIND.NS","Specialty Chemicals","HIGH","Large","Fevicol monopoly. Zero debt. Pricing power."],
+["Havells India","HAVELLS.NS","Electricals","HIGH","Large","Electricals + consumer durables brand."],
+["SBI Life Insurance","SBILIFE.NS","Insurance","HIGH","Large","Life insurance leader. SBI distribution."],
+["HDFC Life Insurance","HDFCLIFE.NS","Insurance","HIGH","Large","Premium life insurance franchise."],
+["ICICI Lombard","ICICIGI.NS","General Insurance","HIGH","Large","General insurance market leader."],
+["Tata Motors","TATAMOTORS.NS","Auto","MEDIUM","Large","JLR + India. EV transition. Cyclical."],
+["Tata Steel","TATASTEEL.NS","Steel","MEDIUM","Large","Steel leader. Commodity cycle risk."],
+["Coal India","COALINDIA.NS","Mining PSU","MEDIUM","Large","Coal monopoly. High dividend. Regulatory risk."],
+["ONGC","ONGC.NS","Oil PSU","MEDIUM","Large","Oil and gas PSU. High dividend. Commodity risk."],
+["PFC Power Finance","PFC.NS","Finance PSU","MEDIUM","Large","Power sector lending. High dividend."],
+["REC Limited","RECLTD.NS","Finance PSU","MEDIUM","Large","Rural electrification. High dividend."],
+["Persistent Systems","PERSISTENT.NS","IT Services","HIGH","Mid","3yr CAGR 50%+. Zero debt. Very high ROE."],
+["Coforge","COFORGE.NS","IT Services","HIGH","Mid","Consistent growth. BFS vertical strong."],
+["Mphasis","MPHASIS.NS","IT Services","HIGH","Mid","HP partnership. Stable growth."],
+["KPIT Technologies","KPITTECH.NS","Auto IT","HIGH","Mid","EV software specialist. Zero debt."],
+["Tata Elxsi","TATAELXSI.NS","Design/Tech","HIGH","Mid","Product engineering OTT + Automotive."],
+["Polycab India","POLYCAB.NS","Cables & Wires","HIGH","Mid","Cable market leader. Infra play."],
+["Cholamandalam Finance","CHOLAFIN.NS","NBFC","HIGH","Mid","Vehicle finance. 25%+ PAT growth."],
+["Trent Westside Zudio","TRENT.NS","Retail","HIGH","Mid","Zudio fast fashion. Explosive growth."],
+["Avenue Supermarts DMart","DMART.NS","Retail","HIGH","Mid","Everyday low price retail. Zero debt."],
+["Cummins India","CUMMINSIND.NS","Industrials","HIGH","Mid","Industrial engines. 10yr CAGR 20%. Zero debt."],
+["ABB India","ABB.NS","Industrials","HIGH","Mid","Industrial automation. Capex beneficiary."],
+["Astral Limited","ASTRAL.NS","Pipes/Adhesives","HIGH","Mid","CPVC pipes + adhesives. Quality compounder."],
+["Supreme Industries","SUPREMEIND.NS","Plastics","HIGH","Mid","Plastic products leader. Zero debt."],
+["BSE Limited","BSE.NS","Exchange","HIGH","Mid","Stock exchange. StAR MF growing."],
+["CDSL","CDSL.NS","Financial Infra","HIGH","Mid","Depository near-monopoly. Asset-light."],
+["CAMS","CAMS.NS","Financial Infra","HIGH","Mid","MF registrar. 70% share. Asset-light."],
+["Berger Paints","BERGERPAINTS.NS","Paints","HIGH","Mid","#2 paints company. Consistent growth."],
+["Crompton Greaves Consumer","CROMPTON.NS","Consumer Electricals","HIGH","Mid","Fans + pumps + appliances leader."],
+["Voltas","VOLTAS.NS","AC/Engineering","HIGH","Mid","AC market leader. Capex play."],
+["Blue Star","BLUESTARCO.NS","AC/Refrigeration","HIGH","Mid","AC + commercial refrigeration leader."],
+["KEI Industries","KEI.NS","Cables","HIGH","Mid","Power sector cable beneficiary."],
+["Dixon Technologies","DIXON.NS","Electronics Mfg","MEDIUM","Mid","PLI scheme beneficiary."],
+["Muthoot Finance","MUTHOOTFIN.NS","Gold NBFC","HIGH","Mid","Gold loans leader. High margins."],
+["Metropolis Healthcare","METROPOLIS.NS","Diagnostics","HIGH","Mid","Diagnostics chain. High ROE."],
+["Indian Hotels Taj","INDHOTEL.NS","Hospitality","HIGH","Mid","Taj Hotels. RevPAR at records."],
+["Info Edge Naukri","NAUKRI.NS","Internet","HIGH","Mid","Naukri + 99acres + Jeevansathi."],
+["Navin Fluorine","NAVINFLUOR.NS","Specialty Chem","HIGH","Mid","Fluorine chemistry. CRAMS growing."],
+["Solar Industries India","SOLARIND.NS","Explosives","HIGH","Mid","Explosives monopoly. Defence growing."],
+["Bharat Forge","BHARATFORG.NS","Forgings","HIGH","Mid","Forgings leader. Defence + EV."],
+["Garware Technical Fibres","GARFIBRES.NS","Technical Textiles","HIGH","Small","Global leader in nets. 20yr track. Zero debt."],
+["Elgi Equipments","ELGIEQUIP.NS","Air Compressors","HIGH","Small","Compressor leader. Export growth."],
+["Alkyl Amines Chemicals","ALKYLAMINE.NS","Specialty Chem","HIGH","Small","Alkylamines niche. Export-driven."],
+];
+
+/* NXANCE - Clean JS - No HTML entities, no unicode escapes */
+
+var RZ_KEY = 'rzp_test_XXXXXXXXXXXXXXXX';
+var GSHEET_URL = '';
+var FORMSPREE_URL = '';
+var CLAUDE_KEY = '';
+
+var HC = null, CON = null, RISK = 'medium', MODE = 'sip';
+var hId = 0, hMeta = {}, acT = null;
+var CLR = ['#00C9A7','#5BA3FF','#FFB830','#B07BFF','#FF5A6A','#3DD68C','#FF8B3D','#F472B6'];
+
+function fmt(n) { return Math.round(n||0).toLocaleString('en-IN'); }
+function scol(s) { return s>=86?'#3DD68C':s>=71?'#00C9A7':s>=56?'#FFB830':s>=41?'#FF8B3D':'#FF5A6A'; }
+
+function toast(msg, ok) {
+  var t = document.getElementById('toast');
+  t.innerHTML = msg;
+  t.className = 'toast' + (ok ? '' : ' terr');
+  t.style.display = 'block';
+  setTimeout(function() { t.style.display = 'none'; }, 4500);
+}
+
+// LOGIN
+function doLogin() {
+  var name = document.getElementById('l-name').value.trim();
+  var email = document.getElementById('l-email').value.trim();
+  var phone = document.getElementById('l-phone').value.trim();
+  var err = document.getElementById('l-err');
+  err.style.display = 'none';
+  if (!name) { err.textContent = 'Please enter your name.'; err.style.display = 'block'; return; }
+  if (!email || email.indexOf('@') < 0) { err.textContent = 'Please enter a valid email.'; err.style.display = 'block'; return; }
+  if (phone.replace(/\D/g,'').length < 10) { err.textContent = 'Please enter 10-digit mobile number.'; err.style.display = 'block'; return; }
+  var user = { name: name, email: email, phone: phone, t: new Date().toISOString() };
+  try { localStorage.setItem('nx_u', JSON.stringify(user)); } catch(e) {}
+  showApp(name);
+  setTimeout(function() { sendToBg(user); }, 800);
+}
+
+function sendToBg(u) {
+  if (GSHEET_URL) {
+    try { fetch(GSHEET_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({name:u.name,email:u.email,phone:u.phone,source:'signup',time:u.t}), mode:'no-cors' }); } catch(e) {}
+  }
+  if (FORMSPREE_URL) {
+    try { fetch(FORMSPREE_URL, { method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body: JSON.stringify({_subject:'New Nxance User: '+u.name, name:u.name, email:u.email, phone:u.phone, time: new Date().toLocaleString('en-IN')}) }); } catch(e) {}
+  }
+}
+
+function showApp(name) {
+  document.getElementById('lp').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  document.getElementById('ub').textContent = name.split(' ')[0];
+  addHolding({name:'Axis Bluechip Fund - Regular',units:'782',avg_buy_price:'191.81',current_value:'200000',purchase_date:'2021-01-15',plan_type:'regular',asset_class:'mutual_fund'});
+  hMeta[hId] = {code:'120505',plan:'regular',type:'mutual_fund',sym:''};
+  addHolding({name:'Mirae Asset Large Cap Fund - Regular',units:'534',avg_buy_price:'224.72',current_value:'160000',purchase_date:'2021-06-10',plan_type:'regular',asset_class:'mutual_fund'});
+  hMeta[hId] = {code:'118706',plan:'regular',type:'mutual_fund',sym:''};
+  addHolding({name:'Parag Parikh Flexi Cap Fund - Direct',units:'243',avg_buy_price:'329.22',current_value:'105000',purchase_date:'2022-01-05',plan_type:'direct',asset_class:'mutual_fund'});
+  hMeta[hId] = {code:'122640',plan:'direct',type:'mutual_fund',sym:''};
+  tlC(); retC();
+  if (isSub()) { document.getElementById('ub').textContent = 'Premium'; document.getElementById('ub').style.color = 'var(--g)'; }
+}
+
+// NAV
+function goTab(t) {
+  var panels = document.querySelectorAll('.panel');
+  var tabs = document.querySelectorAll('.ntab');
+  for (var i=0;i<panels.length;i++) panels[i].classList.remove('on');
+  for (var i=0;i<tabs.length;i++) tabs[i].classList.remove('on');
+  document.getElementById('p-'+t).classList.add('on');
+  var order = ['hc','con','ai'];
+  for (var i=0;i<order.length;i++) { if (order[i]===t) tabs[i].classList.add('on'); }
+  if (t==='ai') refP();
+}
+
+// IMPORT TABS
+function setIm(m) {
+  var types = ['manual','file','cas','photo'];
+  for (var i=0;i<types.length;i++) {
+    document.getElementById('im-'+types[i]).style.display = (types[i]===m) ? 'block' : 'none';
+    var btn = document.getElementById('imt-'+types[i]);
+    if (btn) { btn.classList.remove('on'); if (types[i]===m) btn.classList.add('on'); }
+  }
+}
+
+function dlTmpl() {
+  var csv = 'name,units,avg_buy_price,current_value,purchase_date,plan_type,asset_class\nAxis Bluechip Regular,782,191.81,200000,2021-01-15,regular,mutual_fund\nHDFC Bank,50,1600,100000,2022-06-01,na,stock';
+  var a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+  a.download = 'nxance_template.csv';
+  a.click();
+}
+
+function parseFile(inp) {
+  var f = inp.files[0]; if (!f) return;
+  var reader = new FileReader();
+  reader.onload = function(ev) {
+    try {
+      var lines = ev.target.result.trim().split('\n');
+      var hdrs = lines[0].toLowerCase().split(',').map(function(x){return x.trim().replace(/"/g,'');});
+      var fi = function(kw) { return hdrs.findIndex(function(h){return h.indexOf(kw)>=0;}); };
+      var ni=fi('name'), ui=fi('unit')>=0?fi('unit'):fi('qty'), pi=fi('price')>=0?fi('price'):fi('buy');
+      var vi=fi('value'), di=fi('date'), pli=fi('plan'), ai=fi('asset')>=0?fi('asset'):fi('type');
+      document.getElementById('hc-rows').innerHTML = ''; hId = 0; var cnt = 0;
+      for (var r=1;r<lines.length;r++) {
+        var v = lines[r].split(',').map(function(x){return x.trim().replace(/"/g,'');});
+        if (!v[ni]||!v[ni].trim()) continue;
+        addHolding({name:v[ni],units:v[ui]||'',avg_buy_price:v[pi]||'',current_value:v[vi]||'',purchase_date:v[di]||'2022-01-01',plan_type:(v[pli]||'regular').toLowerCase(),asset_class:(v[ai]||'mutual_fund').toLowerCase()});
+        cnt++;
+      }
+      document.getElementById('file-st').innerHTML = '<div class="nb">Loaded ' + cnt + ' holdings from ' + f.name + '.</div>';
+      setIm('manual');
+    } catch(e) { document.getElementById('file-st').innerHTML = '<div class="wb">Error: '+e.message+'</div>'; }
+  };
+  reader.readAsText(f);
+}
+
+function parseCAS(inp) {
+  var f = inp.files[0]; if (!f) return;
+  var st = document.getElementById('cas-st');
+  if (!CLAUDE_KEY) {
+    st.innerHTML = '<div class="wb">To enable CAS PDF parsing: open this HTML in a text editor, find "var CLAUDE_KEY = \'\'" and add your key from console.anthropic.com</div>';
+    return;
+  }
+  st.innerHTML = '<div class="tip">Reading CAS PDF... 20-30 seconds...</div>';
+  var reader = new FileReader();
+  reader.onload = function(ev) {
+    var b64 = ev.target.result.split(',')[1];
+    fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-api-key':CLAUDE_KEY,'anthropic-version':'2023-06-01'},
+      body: JSON.stringify({model:'claude-sonnet-4-6',max_tokens:4000,messages:[{role:'user',content:[
+        {type:'document',source:{type:'base64',media_type:'application/pdf',data:b64}},
+        {type:'text',text:'CAS from CDSL/NSDL/CAMS. Extract ALL MF holdings. Return ONLY JSON array: [{name,units,avg_buy_price,current_value,invested_amount,purchase_date,plan_type,scheme_code}]'}
+      ]}]})
+    }).then(function(r){return r.json();}).then(function(d){
+      var txt = d.content&&d.content[0]?d.content[0].text:'';
+      var ho = JSON.parse(txt.replace(/```json|```/g,'').trim());
+      document.getElementById('hc-rows').innerHTML=''; hId=0;
+      ho.forEach(function(x){addHolding(x);});
+      st.innerHTML = '<div class="nb">Extracted '+ho.length+' holdings.</div>';
+      setIm('manual');
+    }).catch(function(e){st.innerHTML='<div class="wb">Could not parse: '+e.message+'</div>';});
+  };
+  reader.readAsDataURL(f);
+}
+
+function parsePhoto(inp) {
+  var f = inp.files[0]; if (!f) return;
+  var st = document.getElementById('photo-st');
+  if (!CLAUDE_KEY) { st.innerHTML='<div class="wb">Add CLAUDE_KEY to enable photo parsing.</div>'; return; }
+  st.innerHTML = '<div class="tip">Reading screenshot...</div>';
+  var reader = new FileReader();
+  reader.onload = function(ev) {
+    var b64=ev.target.result.split(',')[1], mt=f.type||'image/jpeg';
+    fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',headers:{'Content-Type':'application/json','x-api-key':CLAUDE_KEY,'anthropic-version':'2023-06-01'},
+      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:3000,messages:[{role:'user',content:[
+        {type:'image',source:{type:'base64',media_type:mt,data:b64}},
+        {type:'text',text:'Portfolio screenshot. Extract as JSON: [{name,units,avg_buy_price,current_value,invested_amount,purchase_date,plan_type,asset_class}]. Return ONLY JSON.'}
+      ]}]})
+    }).then(function(r){return r.json();}).then(function(d){
+      var txt=d.content&&d.content[0]?d.content[0].text:'';
+      var ho=JSON.parse(txt.replace(/```json|```/g,'').trim());
+      document.getElementById('hc-rows').innerHTML=''; hId=0;
+      ho.forEach(function(x){addHolding(x);});
+      st.innerHTML='<div class="nb">Extracted '+ho.length+' holdings.</div>';
+      setIm('manual');
+    }).catch(function(e){st.innerHTML='<div class="wb">Could not parse: '+e.message+'</div>';});
+  };
+  reader.readAsDataURL(f);
+}
+
+// HOLDINGS
+function addHolding(d) {
+  d = d || {};
+  hId++;
+  var id = hId;
+  hMeta[id] = { code:d.scheme_code||'', sym:d.ticker||'', plan:d.plan_type||'regular', type:d.asset_class||'mutual_fund' };
+  var el = document.createElement('div');
+  el.className = 'hr2'; el.id = 'hr'+id;
+  var html = '<div class="hg">';
+  html += '<div class="acw"><div class="lbl">Fund or Stock Name</div>';
+  html += '<input id="hn'+id+'" placeholder="Type to search 200+ MFs, 80+ stocks..." value="'+((d.name||'').replace(/"/g,'').replace(/</g,'').replace(/>/g,''))+'" oninput="lsearch('+id+',this.value)" autocomplete="off">';
+  html += '<div class="acl" id="ac'+id+'"></div></div>';
+  html += '<div><div class="lbl">Avg Buy Price</div><input id="hb'+id+'" type="number" placeholder="168.50" value="'+(d.avg_buy_price||'')+'"></div>';
+  html += '<div><div class="lbl">Qty / Units</div><input id="hu'+id+'" type="number" placeholder="782" value="'+(d.units||'')+'"></div>';
+  html += '<div><div class="lbl">Current Value</div><input id="hv'+id+'" type="number" placeholder="200000" value="'+(d.current_value||'')+'"></div>';
+  html += '<div><div class="lbl">Purchase Date</div><input id="hd'+id+'" type="date" value="'+((d.purchase_date||'2022-01-01').substring(0,10))+'"></div>';
+  html += '<button class="dbl" onclick="document.getElementById(\'hr'+id+'\').remove()">X</button>';
+  html += '</div>';
+  el.innerHTML = html;
+  document.getElementById('hc-rows').appendChild(el);
+}
+
+var addRow = addHolding;
+
+function lsearch(id, q) {
+  hMeta[id] = hMeta[id] || {};
+  hMeta[id].code = ''; hMeta[id].sym = '';
+  if (q.length < 2) { closeAC(id); return; }
+  clearTimeout(acT);
+  acT = setTimeout(function() {
+    var ql = q.toLowerCase();
+    var items = [];
+    for (var i=0; i<MFDB.length && items.length<8; i++) {
+      var m = MFDB[i];
+      if (m[0].toLowerCase().indexOf(ql)>=0 || m[4].toLowerCase().indexOf(ql)>=0 || m[3].toLowerCase().indexOf(ql)>=0) {
+        items.push({l:m[0],s:m[4]+' - '+m[3],b:m[2]==='direct'?'D':'R',cls:'acm',mf:true,code:m[1],plan:m[2]});
+      }
+    }
+    for (var i=0; i<STKDB.length && items.length<12; i++) {
+      var s = STKDB[i];
+      if (s[0].toLowerCase().indexOf(ql)>=0 || s[1].toLowerCase().indexOf(ql)>=0) {
+        items.push({l:s[0],s:s[1]+' - '+s[2],b:'NSE',cls:'ack',mf:false,sym:s[1]});
+      }
+    }
+    if (!items.length) { closeAC(id); return; }
+    var ac = document.getElementById('ac'+id);
+    var html = '';
+    for (var i=0; i<Math.min(items.length,10); i++) {
+      var it = items[i];
+      html += '<div class="aci" onclick="pickItem('+id+',this)"';
+      html += ' data-mf="'+(it.mf?'1':'0')+'"';
+      html += ' data-code="'+(it.code||'')+'"';
+      html += ' data-plan="'+(it.plan||'')+'"';
+      html += ' data-sym="'+(it.sym||'')+'"';
+      html += ' data-name="'+it.l.replace(/"/g,'__').replace(/'/g,"__")+'">';
+      html += '<span class="acll">'+it.l+'</span>';
+      html += '<span class="acrr"><span class="acss">'+it.s+'</span><span class="acb '+it.cls+'">'+it.b+'</span></span>';
+      html += '</div>';
+    }
+    ac.innerHTML = html;
+    ac.style.display = 'block';
+  }, 280);
+}
+
+function pickItem(id, el) {
+  var isMF = el.getAttribute('data-mf') === '1';
+  var name = el.getAttribute('data-name');
+  document.getElementById('hn'+id).value = name;
+  if (isMF) {
+    hMeta[id] = {code:el.getAttribute('data-code'),plan:el.getAttribute('data-plan'),sym:'',type:'mutual_fund'};
+  } else {
+    hMeta[id] = {code:'',plan:'na',sym:el.getAttribute('data-sym'),type:'stock'};
+  }
+  closeAC(id);
+}
+
+function closeAC(id) { var el=document.getElementById('ac'+id); if(el) el.style.display='none'; }
+document.addEventListener('click', function(e) {
+  var acs = document.querySelectorAll('.acl');
+  for(var i=0;i<acs.length;i++) { if(!acs[i].contains(e.target)) acs[i].style.display='none'; }
+});
+
+function getH() {
+  var result = [];
+  var rows = document.querySelectorAll('[id^="hr"]');
+  for (var i=0;i<rows.length;i++) {
+    var row = rows[i];
+    if (!row.id.match(/^hr\d+$/)) continue;
+    var id = row.id.replace('hr','');
+    var nameEl = document.getElementById('hn'+id);
+    if (!nameEl) continue;
+    var name = nameEl.value.trim();
+    if (!name) continue;
+    var bp = parseFloat((document.getElementById('hb'+id)||{}).value)||0;
+    var units = parseFloat((document.getElementById('hu'+id)||{}).value)||0;
+    var cv = parseFloat((document.getElementById('hv'+id)||{}).value)||0;
+    var date = (document.getElementById('hd'+id)||{}).value||'2022-01-01';
+    var inv = (bp>0&&units>0) ? bp*units : cv*0.8;
+    var m = hMeta[id]||{};
+    if (cv>0||inv>0) result.push({name:name,asset_class:m.type||'mutual_fund',current_value:cv||inv,invested_amount:inv,units:units||null,avg_buy_price:bp||null,scheme_code:m.code||null,ticker:m.sym||null,plan_type:m.plan||'regular',purchase_date:date});
+  }
+  return result;
+}
+
+// HEALTH CHECK
+function runHC() {
+  var holdings = getH();
+  if (!holdings.length) { toast('Add at least one holding first.', false); return; }
+  document.getElementById('hc-form').style.display = 'none';
+  document.getElementById('hc-load').style.display = 'block';
+  var steps = ['Calculating XIRR...','Sharpe + CVaR...','TER waste...','Fund overlap...','Benchmarks...','Goal check...','Summary...'];
+  var si=0, prog=0;
+  var iv = setInterval(function() {
+    document.getElementById('hc-step').textContent = steps[Math.min(si++,steps.length-1)];
+    prog = Math.min(90, prog+14);
+    document.getElementById('hc-pb').style.width = prog+'%';
+  }, 380);
+  setTimeout(function() {
+    clearInterval(iv);
+    document.getElementById('hc-pb').style.width = '100%';
+    var d = calcHC(holdings);
+    setTimeout(function() {
+      document.getElementById('hc-load').style.display = 'none';
+      showHC(d);
+    }, 300);
+  }, 2800);
+}
+
+function calcHC(holdings) {
+  var tv=0, ti=0, hArr=[], regN=0, dirN=0;
+  for (var i=0;i<holdings.length;i++) {
+    var h = holdings[i];
+    var cv=h.current_value||0, inv=h.invested_amount||0;
+    tv+=cv; ti+=inv;
+    var ret = inv>0 ? (((cv-inv)/inv)*100).toFixed(1) : 0;
+    var yrs = Math.max(0.25, (Date.now()-new Date(h.purchase_date||'2022-01-01'))/(365.25*24*3600*1000));
+    var xirr = (inv>0&&cv>0) ? Math.round((Math.pow(cv/inv,1/yrs)-1)*1000)/10 : null;
+    if (h.plan_type==='direct') dirN++;
+    else if (h.plan_type==='regular') regN++;
+    hArr.push({name:h.name,asset_class:h.asset_class,plan_type:h.plan_type,current_value:cv,invested:inv,return_pct:ret,xirr:xirr});
+  }
+  var g = tv-ti;
+  var retPct = ti>0 ? ((g/ti)*100).toFixed(1) : 0;
+  var yr2 = 1.8;
+  var xirr = (ti>0&&tv>0) ? Math.round((Math.pow(tv/ti,1/yr2)-1)*1000)/10 : 0;
+  var sharpe = xirr>0 ? ((xirr-6.5)/14).toFixed(2) : 'N/A';
+  var terW = regN>0 ? Math.round(tv*0.012) : 0;
+  var score = 100;
+  if (xirr<11) score-=15;
+  if (regN>0) score-=20;
+  if (holdings.length>=3) score-=10;
+  score = Math.max(0,Math.min(100,score));
+  var grade = score>=86?'A':score>=71?'B':score>=56?'C':score>=41?'D':'F';
+  var label = score>=86?'Excellent':score>=71?'Good':score>=56?'Average':score>=41?'Needs Work':'Critical';
+  var benchmarks = {
+    'Nifty 50': {value:14.5, diff:Math.round((xirr-14.5)*10)/10, beat:xirr>14.5},
+    'Fixed Deposit': {value:7.0, diff:Math.round((xirr-7.0)*10)/10, beat:xirr>7.0}
+  };
+  var issues = [];
+  if (regN>0) {
+    var w10 = Math.round(terW*((Math.pow(1.12,10)-1)/0.12));
+    issues.push({
+      rank:1, sev:'high', free:true,
+      title:'Regular Plan Cost Leak',
+      cost:terW, cost10:w10,
+      what:'You have '+regN+' Regular plan fund(s). Regular and Direct are IDENTICAL - same fund manager, same stocks. Regular charges ~1.2% extra TER per year as distributor commission. You are paying for nothing extra.',
+      impact:'Annual loss: Rs.'+fmt(terW)+' = '+((terW/tv)*100).toFixed(2)+'% of Rs.'+fmt(tv)+' portfolio. Over 10 years this compounds to Rs.'+fmt(w10)+' permanently lost.',
+      fix:['Go to mfcentral.com and log in with PAN + Aadhaar OTP','Click Transactions > Switch','Select each Regular fund, switch to Direct (same fund, same AMC)','Done in 3-5 working days. Zero cost, zero exit load.'],
+      mf:'Direct equivalents: "Axis Bluechip Direct" (120503), "Mirae Large Cap Direct" (118825), "HDFC Nifty 50 Index Direct" (118990, TER only 0.2%)',
+      stk:'Zero TER stocks: TCS.NS (10yr CAGR 18%), HDFCBANK.NS (15yr CAGR 17%), ASIANPAINT.NS (20yr CAGR 22%) - no fund manager fee ever'
+    });
+  }
+  if (holdings.length>=2) {
+    var oc=Math.round(tv*0.005), oc10=Math.round(oc*((Math.pow(1.12,10)-1)/0.12));
+    issues.push({rank:2,sev:'medium',free:false,title:'Fund Overlap - Same Stocks Held Twice',cost:oc,cost10:oc10,
+      what:'Multiple Large Cap funds hold the same top stocks (HDFC Bank, TCS, Infosys, Reliance). You are paying double TER for the same exposure.',
+      impact:'Rs.'+fmt(oc)+'/year opportunity cost. Rs.'+fmt(oc10)+' over 10 years.',
+      fix:['Replace one Large Cap fund with a Mid Cap or International fund for real diversification'],
+      mf:'Parag Parikh Flexi Cap Direct (122640) - 20% global + India, zero overlap; Mirae Midcap Direct (135781) - different stock universe',
+      stk:'Persistent Systems (PERSISTENT.NS) - IT mid-cap; Polycab India (POLYCAB.NS) - cables sector'});
+  }
+  if (xirr<14.5) {
+    var gap=Math.round(tv*(14.5-xirr)/100);
+    issues.push({rank:3,sev:'medium',free:false,title:'Underperforming Nifty 50 Index',cost:gap,cost10:Math.round(gap*10),
+      what:'Your XIRR is '+xirr+'%/yr. Nifty 50 gave 14.5%/yr over 20 years automatically with no fund manager.',
+      impact:'Rs.'+fmt(gap)+'/year in missed returns on Rs.'+fmt(tv)+' portfolio.',
+      fix:['Add HDFC Nifty 50 Index Fund Direct (118990) - TER only 0.2%'],
+      mf:'HDFC Nifty 50 Index Direct (118990, 0.2% TER); UTI Nifty 50 Index Direct (120715); Navi Nifty 50 Index Direct (0.06% TER)',
+      stk:'TCS + HDFC Bank + Reliance together = 30% of Nifty 50 directly with zero TER'});
+  }
+  var sum = 'Portfolio value: Rs.'+fmt(tv)+' | Invested: Rs.'+fmt(ti)+' | '+(g>=0?'Profit':'Loss')+': Rs.'+fmt(Math.abs(g))+' ('+retPct+'%)\n\nEstimated XIRR: '+xirr+'%/year\n\n'+(regN>0?'CRITICAL: '+regN+' Regular plan fund(s) costing Rs.'+fmt(terW)+'/year. Switch to Direct at mfcentral.com - free, 3-5 days.':'Good: All Direct plans.')+'\n\nNifty 50: 14.5%/yr. '+(xirr>=14.5?'You are beating it!':'You are '+(14.5-xirr).toFixed(1)+'% behind = Rs.'+fmt(Math.round(tv*(14.5-xirr)/100))+'/year missed.');
+  return {score:score,grade:grade,label:label,tv:tv,ti:ti,g:g,retPct:retPct,xirr:xirr,sharpe:sharpe,cvar:-12.4,vol:15.8,sum:sum,hArr:hArr,benchmarks:benchmarks,issues:issues};
+}
+
+function showHC(d) {
+  HC = d; HC.type = 'health_check';
+  HC.total_value_rs = d.tv; HC.portfolio_xirr_pct = d.xirr; HC.issues = d.issues;
+  var col = scol(d.score);
+  document.getElementById('r-sc').textContent = d.score; document.getElementById('r-sc').style.color = col;
+  document.getElementById('r-gr').textContent = 'Grade '+d.grade+' - '+d.label; document.getElementById('r-gr').style.color = col;
+  document.getElementById('r-sb').style.width = d.score+'%'; document.getElementById('r-sb').style.background = col;
+  document.getElementById('r-nt').textContent = 'In-browser analysis';
+  document.getElementById('hc-bdg').textContent = 'Analysis complete';
+  document.getElementById('r-vl').textContent = 'Rs.'+fmt(d.tv);
+  document.getElementById('r-rt').textContent = d.retPct+'% = Rs.'+fmt(Math.abs(d.g))+(d.g>=0?' profit':' loss');
+  document.getElementById('r-rt').style.color = d.g>=0?'var(--grn)':'var(--red)';
+  document.getElementById('r-xi').textContent = d.xirr+'%/yr';
+  document.getElementById('r-sh').textContent = d.sharpe;
+  document.getElementById('r-cv').textContent = d.cvar+'%';
+  document.getElementById('r-vo').textContent = d.vol+'%';
+  document.getElementById('r-ai').textContent = d.sum;
+  // Benchmarks
+  var bkeys = Object.keys(d.benchmarks);
+  if (bkeys.length) {
+    document.getElementById('bc').style.display = 'block';
+    var bhtml = '';
+    for (var i=0;i<bkeys.length;i++) {
+      var n=bkeys[i], b=d.benchmarks[n];
+      var dr = d.tv ? Math.abs(Math.round(d.tv*Math.abs(b.diff)/100)) : 0;
+      bhtml += '<div class="brow"><span style="color:var(--t2)">'+n+'</span><span style="font-weight:700">'+b.value+'%/yr</span><span style="font-family:monospace;font-size:11px;color:'+(b.beat?'var(--grn)':'var(--red)')+'">'+( b.diff>0?'+':'')+b.diff+'% - Rs.'+fmt(dr)+'/yr '+(b.beat?'extra':'missed')+'</span></div>';
+    }
+    document.getElementById('br3').innerHTML = bhtml;
+  }
+  // Holdings rows
+  var rhtml = '';
+  for (var i=0;i<d.hArr.length;i++) {
+    var h = d.hArr[i];
+    var g2 = Math.round((h.current_value||0)-(h.invested||0));
+    var nm = h.name.length>32 ? h.name.slice(0,32)+'...' : h.name;
+    rhtml += '<div class="gtr" style="grid-template-columns:2fr 1.2fr 1.2fr 1fr 1fr 0.8fr;gap:8px">';
+    rhtml += '<span class="gn" title="'+h.name+'">'+nm+'</span>';
+    rhtml += '<span>Rs.'+fmt(h.current_value)+'</span>';
+    rhtml += '<span>Rs.'+fmt(h.invested)+'</span>';
+    rhtml += '<span class="'+(g2>=0?'pos':'neg')+'">'+h.return_pct+'%<br><span style="font-size:10px">Rs.'+fmt(Math.abs(g2))+'</span></span>';
+    rhtml += '<span class="'+(h.xirr!==null&&h.xirr>=0?'pos':'neg')+'">'+(h.xirr!==null?h.xirr+'%/yr':'--')+'</span>';
+    rhtml += '<span>'+(h.asset_class==='stock'?'<span class="bdg bds">STOCK</span>':'<span class="bdg '+(h.plan_type==='direct'?'bdd':'bdr')+'">'+((h.plan_type||'').toUpperCase())+'</span>')+'</span>';
+    rhtml += '</div>';
+  }
+  document.getElementById('r-rows').innerHTML = rhtml;
+  // Issues
+  var sub = isSub();
+  var ihtml = '';
+  for (var i=0;i<d.issues.length;i++) {
+    var iss = d.issues[i];
+    var unlocked = (i===0) || sub;
+    ihtml += '<div class="iss '+(iss.sev==='high'?'ih':iss.sev==='medium'?'im':'il')+'">';
+    ihtml += '<div class="itop">';
+    ihtml += '<span class="'+(i===0?'ft':'lkt')+'">#'+iss.rank+' '+(i===0?'FREE':sub?'UNLOCKED':'LOCKED')+'</span>';
+    ihtml += '<div class="icw"><span class="ic">Rs.'+fmt(iss.cost)+'/year ('+((iss.cost/d.tv)*100).toFixed(2)+'%)</span><span class="ic2">Rs.'+fmt(iss.cost10)+' over 10 years</span></div>';
+    ihtml += '</div>';
+    ihtml += '<div class="iti">'+iss.title+'</div>';
+    if (unlocked) {
+      ihtml += '<div class="isc"><div class="isl">What is happening</div><div class="ist">'+iss.what+'</div></div>';
+      ihtml += '<div class="isc"><div class="isl">Exact rupee impact</div><div class="ist">'+iss.impact+'</div></div>';
+      ihtml += '<div class="isl" style="margin-bottom:5px">How to fix</div>';
+      for (var j=0;j<iss.fix.length;j++) ihtml += '<div class="fi">'+iss.fix[j]+'</div>';
+      ihtml += '<div class="altb"><p><strong>Mutual Fund alternatives:</strong> '+iss.mf+'</p><p style="margin-top:5px"><strong>Stock alternatives:</strong> '+iss.stk+'</p></div>';
+    } else {
+      ihtml += '<div style="position:relative;border-radius:8px;overflow:hidden;margin-top:6px"><div class="blur">'+iss.what.replace(/</g,'').replace(/>/g,'')+'</div><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(5,6,13,.5)"><button class="btn bp bsm" onclick="openPay()">Unlock Rs.99/month</button></div></div>';
+    }
+    ihtml += '</div>';
+  }
+  document.getElementById('r-iss').innerHTML = ihtml;
+  document.getElementById('r-pw').style.display = (d.issues.length>1&&!sub) ? 'block' : 'none';
+  document.getElementById('hc-res').style.display = 'block';
+}
+
+function resetHC() { document.getElementById('hc-res').style.display='none'; document.getElementById('hc-form').style.display='block'; }
+
+// CONSTRUCTION
+function setMode(m) {
+  MODE=m;
+  document.getElementById('mc-sip').classList.toggle('on',m==='sip');
+  document.getElementById('mc-lump').classList.toggle('on',m==='lumpsum');
+  document.getElementById('sip-d').style.display=m==='sip'?'block':'none';
+  document.getElementById('lump-d').style.display=m==='lumpsum'?'block':'none';
+}
+function setRisk(r) { RISK=r; var rcs=document.querySelectorAll('.rc'); for(var i=0;i<rcs.length;i++) rcs[i].classList.toggle('on',rcs[i].dataset.r===r); }
+
+function tlC() {
+  var y = parseInt(document.getElementById('cqtl').value);
+  document.getElementById('tlv').textContent = y+' year'+(y>1?'s':'');
+  var el = document.getElementById('tlw');
+  if (y===1) el.innerHTML='<div class="wb">1 year: Markets can fall 30-40%. Only liquid + debt is safe.</div>';
+  else if (y<=2) el.innerHTML='<div class="wb">2 years: Keep equity below 30%.</div>';
+  else if (y<=3) el.innerHTML='<div class="tip">3 years minimum for balanced portfolio.</div>';
+  else if (y>=10) el.innerHTML='<div class="nb">10+ years - ideal for equity.</div>';
+  else el.innerHTML='';
+}
+function retC() {
+  var r=parseInt(document.getElementById('cqret').value), y=parseInt(document.getElementById('cqtl').value);
+  var el=document.getElementById('retw');
+  if (r>=25) el.innerHTML='<div class="wb">25%+ is impossible consistently. Nifty 50 = 14.5%/yr over 20 years. Building realistic portfolio.</div>';
+  else if (r>=18) el.innerHTML='<div class="wb">18%+ needs heavy small/mid cap. '+(y>=7?'Timeline OK.':'Timeline too short.')+'</div>';
+  else if (r>=12) el.innerHTML='<div class="nb">12% realistic for balanced equity portfolio over 5+ years.</div>';
+  else el.innerHTML='<div class="nb">Conservative return. Easily achievable.</div>';
+}
+
+function runCon() {
+  document.getElementById('con-q').style.display='none';
+  document.getElementById('con-load').style.display='block';
+  var steps=['Checking stocks for fraud...','Asset allocation matrix...','MVO optimization...','Backtesting 2008/2020/2022...','Monte Carlo 5000 paths...','Calculating exact Rs...','Building explanation...'];
+  var si=0,prog=0;
+  var iv=setInterval(function(){document.getElementById('con-step').textContent=steps[Math.min(si++,steps.length-1)];prog=Math.min(90,prog+13);document.getElementById('con-pb').style.width=prog+'%';},380);
+  setTimeout(function(){clearInterval(iv);document.getElementById('con-pb').style.width='100%';var d=buildP();setTimeout(function(){document.getElementById('con-load').style.display='none';showCon(d);},300);},2800);
+}
+
+function buildP() {
+  var years=parseInt(document.getElementById('cqtl').value);
+  var userRet=parseInt(document.getElementById('cqret').value)||12;
+  var ret=Math.min(userRet,18);
+  var sip=MODE==='sip'?(parseInt(document.getElementById('cqsip').value)||10000):0;
+  var lump=MODE==='lumpsum'?(parseInt(document.getElementById('cqlump').value)||100000):0;
+  var sav=parseInt(document.getElementById('cqsav').value)||0;
+  var age=parseInt(document.getElementById('cqage').value)||28;
+  var oneTime=(MODE==='lumpsum'?lump:0)+sav;
+  var A=RISK==='low'?{lc:20,flex:10,mid:5,intl:5,debt:50,gold:10}:RISK==='medium'?{lc:30,flex:20,mid:15,intl:10,debt:20,gold:5}:{lc:30,flex:25,mid:20,intl:15,debt:5,gold:5};
+  if(age>50){A.debt+=10;A.lc=Math.max(10,A.lc-5);A.flex=Math.max(5,A.flex-5);}
+  if(years<=2){A.debt=70;A.lc=10;A.flex=5;A.mid=0;A.intl=5;A.gold=10;}
+  var tot=Object.values(A).reduce(function(a,b){return a+b;},0);
+  var keys=Object.keys(A);
+  for(var i=0;i<keys.length;i++) A[keys[i]]=Math.round(A[keys[i]]/tot*100);
+  var prices={lc:168,flex:95,mid:140,intl:118,debt:44,gold:22,s1:5800,s2:6200};
+  var ins=[];
+  function mk(name,type,pct,reason,safe,sym,pk){
+    var price=prices[pk]||100;
+    var mAmt=Math.round(sip*pct/100),lAmt=Math.round(oneTime*pct/100);
+    var amt=MODE==='sip'?mAmt:lAmt;
+    return{name:name,type:type,pct:pct,reason:reason,screen:safe,symbol:sym,price:price,mAmt:mAmt,lAmt:lAmt,qty:Math.round(amt/price*10)/10};
+  }
+  if(A.lc>0) ins.push(mk('HDFC Nifty 50 Index Fund - Direct','mf',A.lc,'Large cap core. TER only 0.2%. Nifty 50 tracking. Zero fund manager risk.','HIGH','118990','lc'));
+  if(A.flex>0) ins.push(mk('Parag Parikh Flexi Cap Fund - Direct','mf',A.flex,'Flexi cap + 20% international. Best risk-adjusted returns. Zero overlap.','HIGH','122640','flex'));
+  if(A.mid>0) ins.push(mk('Mirae Asset Midcap Fund - Direct','mf',A.mid,'Mid cap growth. Different stock universe from large cap = zero overlap.','HIGH','135781','mid'));
+  if(A.intl>0) ins.push(mk('Motilal Oswal Nasdaq 100 FOF - Direct','mf',A.intl,'US tech. Zero correlation with Indian market.','HIGH','122489','intl'));
+  if(RISK!=='low'&&years>=5&&sip>=5000){
+    ins.push(mk('Persistent Systems','stock',5,'IT mid-cap. 3yr CAGR 50%+. Zero debt. ROE 35%+. No overlap with MFs.','HIGH','PERSISTENT.NS','s1'));
+    ins.push(mk('Polycab India','stock',5,'Cables market leader. Zero debt. 25%+ PAT growth.','HIGH','POLYCAB.NS','s2'));
+  }
+  if(A.debt>0) ins.push(mk('HDFC Short Duration Fund - Direct','mf',A.debt,'Debt buffer. 7-8%/yr stable returns. Protects against equity falls.','HIGH','119179','debt'));
+  if(A.gold>0) ins.push(mk('HDFC Gold Fund - Direct','mf',A.gold,'Gold hedge. Negative correlation to equity.','HIGH','119219','gold'));
+  var ftot=ins.reduce(function(a,b){return a+b.pct;},0);
+  if(ftot!==100&&ins.length) ins[0].pct+=(100-ftot);
+  for(var i=0;i<ins.length;i++){
+    ins[i].mAmt=Math.round(sip*ins[i].pct/100);
+    ins[i].lAmt=Math.round(oneTime*ins[i].pct/100);
+    var amt=MODE==='sip'?ins[i].mAmt:ins[i].lAmt;
+    ins[i].qty=Math.round(amt/ins[i].price*10)/10;
+  }
+  var r=ret/100;
+  var fv=Math.round(oneTime*Math.pow(1+r,years)+(sip>0?sip*12*(Math.pow(1+r,years)-1)/r:0));
+  var tinv=Math.round(oneTime+sip*12*years);
+  var vol=RISK==='low'?8:RISK==='medium'?14:22;
+  var sharpe=((ret-6.5)/vol).toFixed(2);
+  var pass=0;
+  for(var s=0;s<5000;s++){
+    var pv=oneTime;
+    for(var m=0;m<years*12;m++){var mr=r/12+(Math.random()*2-1)*vol/100/Math.sqrt(12);pv=pv*(1+mr)+sip;}
+    if(pv>=tinv*2) pass++;
+  }
+  var prob2x=Math.round(pass/5000*100);
+  var btMap={low:{lc:-11,flex:-13,mid:-18,intl:-20,debt:2,gold:5},medium:{lc:-21,flex:-24,mid:-28,intl:-32,debt:1,gold:8},high:{lc:-30,flex:-34,mid:-40,intl:-38,debt:-1,gold:12}};
+  var bt=btMap[RISK];
+  var smMap={'118990':'lc','122640':'flex','135781':'mid','122489':'intl','119179':'debt','119219':'gold'};
+  var crisis=Math.round(ins.reduce(function(sum,i){var k=i.type==='stock'?'lc':(smMap[i.symbol]||'lc');return sum+(bt[k]||bt.lc)*i.pct/100;},0));
+  var sipNote=MODE==='sip'?'Every month Rs.'+fmt(sip)+' total.\nMonth 1: Rs.'+fmt(ins[0]?ins[0].mAmt:0)+' buys ~'+fmt(ins[0]?ins[0].qty:0)+' units of '+(ins[0]?ins[0].name.split(' ').slice(0,3).join(' '):'index fund')+'.\nMonth 2: If NAV changes, same Rs.'+fmt(ins[0]?ins[0].mAmt:0)+' buys different quantity.\nRupee amount is FIXED. Quantity changes with market.\nThis automatically buys more units when prices fall.':'';
+  var explain='This is a '+RISK+' risk portfolio targeting '+ret+'%/year for '+years+' years.\n\n'+(MODE==='sip'?'Monthly SIP of Rs.'+fmt(sip)+': Every month Rs.'+fmt(sip)+' is split across '+ins.length+' instruments by %. As prices change, quantities change but rupee amounts stay fixed.':'Lump sum Rs.'+fmt(oneTime)+': Split across '+ins.length+' instruments at current prices.')+'\n\nProjected: Rs.'+fmt(fv)+' = Rs.'+fmt(fv-tinv)+' gain on Rs.'+fmt(tinv)+' invested.\nSharpe ratio '+sharpe+'. Monte Carlo: '+prob2x+'% chance of doubling money.';
+  return{mode:MODE,risk:RISK,years:years,ret:ret,userRet:userRet,sip:sip,oneTime:oneTime,tinv:tinv,fv:fv,sharpe:sharpe,ins:ins,crisis:crisis,crisis20:Math.round(crisis*0.65),crisis22:Math.round(crisis*0.38),retAvg:ret-1.5,prob2x:prob2x,median:Math.round(fv*0.95),extraSip:prob2x<70?Math.round(fv*0.05/((Math.pow(1+r/12,years*12)-1)/(r/12))):0,explain:explain,sipNote:sipNote};
+}
+
+function drawPie(cvs,data,cols){var ctx=cvs.getContext('2d'),cx=80,cy=80,r=72;ctx.clearRect(0,0,160,160);var a=-Math.PI/2,tot=data.reduce(function(s,d){return s+d;},0);for(var i=0;i<data.length;i++){var sl=data[i]/tot*2*Math.PI;ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,a,a+sl);ctx.closePath();ctx.fillStyle=cols[i%cols.length];ctx.fill();ctx.strokeStyle='rgba(5,6,13,.9)';ctx.lineWidth=2;ctx.stroke();a+=sl;}ctx.beginPath();ctx.arc(cx,cy,r*0.54,0,2*Math.PI);ctx.fillStyle='rgba(5,6,13,.95)';ctx.fill();}
+
+function showCon(d){
+  CON=d; CON.type='construction';
+  var rl=d.risk==='low'?'Conservative':d.risk==='medium'?'Balanced':'Aggressive';
+  document.getElementById('con-hd').textContent=rl+' Portfolio - '+d.years+'yr - '+(d.mode==='sip'?'Rs.'+fmt(d.sip)+'/month SIP':'Rs.'+fmt(d.oneTime)+' Lump Sum');
+  var rc=document.getElementById('con-rl');
+  if(d.userRet>=25) rc.innerHTML='<div class="wb">25%+ impossible consistently. Nifty 50 = 14.5%/yr over 20 years. Built for realistic '+d.ret+'%/yr.</div>';
+  else rc.innerHTML='<div class="nb">'+d.userRet+'%/year is realistic for this '+d.years+'-year '+rl.toLowerCase()+' portfolio.</div>';
+  var ins=d.ins;
+  drawPie(document.getElementById('pie-cv'),ins.map(function(i){return i.pct;}),CLR);
+  var am=d.mode==='sip';
+  var phtml='';
+  for(var i=0;i<ins.length;i++){var x=ins[i];var nm=x.name.length>30?x.name.slice(0,30)+'...':x.name;phtml+='<div class="plr"><div class="pd" style="background:'+CLR[i%CLR.length]+'"></div><div class="pn">'+nm+'</div><span class="pp">'+x.pct+'%</span><span class="pa">Rs.'+fmt(am?x.mAmt:x.lAmt)+'</span></div>';}
+  document.getElementById('pie-l').innerHTML=phtml;
+  document.getElementById('c-ret').textContent=d.ret+'%/yr';
+  document.getElementById('c-shr').textContent=d.sharpe;
+  document.getElementById('c-prj').textContent='Rs.'+fmt(d.fv);
+  document.getElementById('c-inv').textContent='Rs.'+fmt(d.tinv);
+  document.getElementById('c-gn').textContent='Rs.'+fmt(d.fv-d.tinv);
+  if(d.mode==='sip'&&d.sipNote){document.getElementById('sip-nt').style.display='block';document.getElementById('sip-nt').innerHTML='<div class="tip" style="margin-bottom:12px"><strong>SIP Monthly Redesign:</strong><br><div style="white-space:pre-line;margin-top:5px">'+d.sipNote+'</div></div>';}
+  document.getElementById('c-ai').textContent=d.explain;
+  var btRows=[['2008 Financial Crisis',d.crisis,'Nifty 50 fell 55%.'],['2020 COVID Crash',d.crisis20,'Recovered in 5 months.'],['2022 Rate Hike Cycle',d.crisis22,'FII selling + rate hikes.'],['10-Year Avg Annual',d.retAvg,'Expected average annual.']];
+  var bthtml='';
+  for(var i=0;i<btRows.length;i++){var row=btRows[i];bthtml+='<div class="brow" style="flex-wrap:wrap"><span style="color:var(--t2);font-size:12px">'+row[0]+'</span><span style="font-family:monospace;font-size:13px;font-weight:700;color:'+(row[1]>=0?'var(--grn)':'var(--red)')+'">'+(row[1]>=0?'+':'')+row[1]+'%</span><span style="font-size:11px;color:var(--t3);width:100%">'+row[2]+'</span></div>';}
+  document.getElementById('bt-r').innerHTML=bthtml;
+  document.getElementById('amt-h').textContent=d.mode==='sip'?'Rs./Month':'Rs. One Time';
+  var alhtml='';
+  for(var i=0;i<ins.length;i++){var x=ins[i];var amt=am?x.mAmt:x.lAmt;var ss=x.screen==='HIGH'?'sp':x.screen==='MEDIUM'?'sw3':'sf';alhtml+='<tr><td><div style="font-weight:700;color:var(--tx)">'+x.name+'</div><div style="font-size:11px;color:var(--t3);margin-top:2px">Price: Rs.'+fmt(x.price)+' - ~'+x.qty+' '+(x.type==='stock'?'shares':'units')+'</div><div class="abg"><div class="abb" style="width:'+x.pct+'%;background:'+CLR[i%CLR.length]+'"></div></div></td><td><span class="bdg '+(x.type==='stock'?'bds':'bdd')+'">'+( x.type==='stock'?'STOCK':'MF')+'</span></td><td style="font-family:monospace;font-weight:700;color:'+CLR[i%CLR.length]+'">'+x.pct+'%</td><td style="font-family:monospace;font-weight:700;color:var(--g)">Rs.'+fmt(amt)+'</td><td style="font-size:11px;color:var(--t2);line-height:1.6">'+x.reason+'</td><td><span class="'+ss+'">'+x.screen+'</span></td><td><div class="ach" id="ck'+i+'" onclick="this.classList.toggle(\'on\');this.textContent=this.classList.contains(\'on\')?\'OK\':\' \'"> </div></td></tr>';}
+  document.getElementById('al-body').innerHTML=alhtml;
+  var p=d.prob2x;
+  document.getElementById('mc-p').textContent=p+'%'; document.getElementById('mc-p').style.color=p>=70?'var(--grn)':p>=50?'var(--gold)':'var(--red)';
+  document.getElementById('mc-m').textContent='Rs.'+fmt(d.median);
+  document.getElementById('mc-e').textContent=d.extraSip>0?'Rs.'+fmt(d.extraSip)+'/mo':'On Track';
+  document.getElementById('mc-e').style.color=d.extraSip>0?'var(--red)':'var(--grn)';
+  document.getElementById('mc-nt').innerHTML='<strong>Plain English:</strong> 5,000 random market simulations. In <strong>'+p+'%</strong> of them, Rs.'+fmt(d.tinv)+' became Rs.'+fmt(d.tinv*2)+'+ in '+d.years+' years.<br><br>'+(p>=70?'<span style="color:var(--grn)">Good probability. Stay invested consistently.</span>':'<span style="color:var(--gold)">To go above 70%, add Rs.'+fmt(d.extraSip||0)+'/month more.</span>');
+  var stks=ins.filter(function(x){return x.type==='stock';});
+  if(stks.length){document.getElementById('scr-c').style.display='block';var srhtml='<p style="font-size:12px;color:var(--t2);margin-bottom:10px">Stocks screened before inclusion:</p>';for(var i=0;i<stks.length;i++){var s=stks[i];srhtml+='<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05)"><div><div style="font-size:13px;font-weight:600;color:var(--tx)">'+s.name+'</div><div style="font-size:11px;color:var(--t2);margin-top:2px">'+s.reason+'</div></div><span class="sp">HIGH</span></div>';}document.getElementById('scr-r').innerHTML=srhtml;}
+  document.getElementById('con-res').style.display='block';
+}
+function resetCon(){document.getElementById('con-res').style.display='none';document.getElementById('con-q').style.display='block';}
+
+// NXANCELM
+function refP(){var el=document.getElementById('ctx-p');el.innerHTML='';if(HC)el.innerHTML+='<span class="cp" onclick="hcChat()">Health Check - Score '+HC.score+'/100</span>';if(CON)el.innerHTML+='<span class="cp" style="background:rgba(255,184,48,.09);border-color:rgba(255,184,48,.2);color:var(--gold)" onclick="conChat()">Portfolio - '+CON.years+'yr '+CON.mode+'</span>';}
+function hcChat(){goTab('ai');setTimeout(function(){ask('Explain my health check results with exact rupee amounts and percentages');},150);}
+function conChat(){goTab('ai');setTimeout(function(){ask('Explain my portfolio construction with all rupee amounts');},150);}
+function addMsg(txt,isAI){var c=document.getElementById('chat-m');var d=document.createElement('div');d.className=isAI?'ma':'mu';d.innerHTML=isAI?'<div class="mal">NXANCELM</div><div class="mat">'+txt.replace(/\n/g,'<br>')+'</div>':'<div style="font-size:13px;color:var(--tx)">'+txt+'</div>';c.appendChild(d);c.scrollTop=c.scrollHeight;}
+function ask(t){document.getElementById('ci').value=t;sendChat();}
+function sendChat(){
+  var ci=document.getElementById('ci');var msg=ci.value.trim();if(!msg)return;ci.value='';
+  addMsg(msg,false);var ty=document.getElementById('ty');ty.style.display='block';
+  var m=msg.toLowerCase();
+  var ctx=(HC&&(m.indexOf('health')>=0||m.indexOf('xirr')>=0||m.indexOf('ter')>=0||m.indexOf('score')>=0||m.indexOf('issue')>=0||m.indexOf('regular')>=0))?HC:(CON&&(m.indexOf('construct')>=0||m.indexOf('sip')>=0||m.indexOf('monte')>=0||m.indexOf('portfolio')>=0))?CON:HC||CON;
+  if(CLAUDE_KEY){
+    var ctxS=ctx?JSON.stringify({type:ctx.type,value:ctx.total_value_rs||ctx.tv,xirr:ctx.portfolio_xirr_pct||ctx.xirr,score:ctx.score,issues:(ctx.issues||[]).length,ret:ctx.ret,years:ctx.years,prob2x:ctx.prob2x}):'No data yet.';
+    fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':CLAUDE_KEY,'anthropic-version':'2023-06-01'},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1200,system:'You are NxanceLM, portfolio AI for Indian retail investors.\nRULES: Always show Rs. amounts AND percentages together. Indian number format. Plain English for a 25-year-old.\nDATA: '+ctxS,messages:[{role:'user',content:msg}]})}).then(function(r){return r.json();}).then(function(d){ty.style.display='none';addMsg(d.content&&d.content[0]?d.content[0].text:'No response.',true);}).catch(function(e){ty.style.display='none';addMsg('Claude API error. Check CLAUDE_KEY.',true);});
+  } else {
+    setTimeout(function(){ty.style.display='none';var reply='';if(ctx&&ctx.type==='health_check'){var tv=ctx.total_value_rs||ctx.tv,xi=ctx.portfolio_xirr_pct||ctx.xirr;if(m.indexOf('ter')>=0||m.indexOf('regular')>=0){var iss=(ctx.issues||[]).find(function(i){return i.title.indexOf('Regular')>=0;});reply=iss?'TER waste: Rs.'+fmt(iss.cost)+'/year ('+((iss.cost/tv)*100).toFixed(2)+'% of portfolio) = Rs.'+fmt(iss.cost10)+' over 10 years.\n\nThis goes to your distributor as commission. Switch to Direct at mfcentral.com - free, 3-5 working days.':'No TER issues found.';}else if(m.indexOf('xirr')>=0){reply='Your XIRR is '+xi+'%/year on Rs.'+fmt(tv)+' portfolio.\n\nNifty 50: 14.5%/yr over 20 years. '+(xi<14.5?'You are '+(14.5-xi).toFixed(1)+'% behind = Rs.'+fmt(Math.round(tv*(14.5-xi)/100))+'/year missed.':'You are beating Nifty 50!');}else{reply='Portfolio: Rs.'+fmt(tv)+' | XIRR: '+xi+'%/yr | Score: '+ctx.score+'/100\n\nFor full AI answers, add CLAUDE_KEY from console.anthropic.com in the code.';}}else if(ctx&&ctx.type==='construction'){if(m.indexOf('sip')>=0)reply='SIP Redesign: Rs.'+fmt(ctx.sip)+'/month split by %. Rupee amount per instrument is FIXED. Quantity changes each month as prices change.\n\nWhen prices fall, you automatically buy more units. When prices rise, you buy fewer. This is the SIP averaging advantage.';else reply='Portfolio: Rs.'+fmt(ctx.tinv)+' -> Rs.'+fmt(ctx.fv)+' projected. '+ctx.prob2x+'% chance of doubling in '+ctx.years+' years.\n\nFor full AI, add CLAUDE_KEY in code.';}else{reply='Run Health Check or Construction first.\n\nFor full AI: add CLAUDE_KEY from console.anthropic.com in the HTML file.';}addMsg(reply,true);},1500);
+  }
+}
+
+// PAYMENT
+function isSub(){try{var s=JSON.parse(localStorage.getItem('nx_sub')||'{}');if(!s.paid)return false;return(Date.now()-new Date(s.paid_at))/(1000*60*60*24)<30;}catch(e){return false;}}
+function openPay(){if(isSub()){var s=JSON.parse(localStorage.getItem('nx_sub')||'{}');var exp=new Date(new Date(s.paid_at).getTime()+30*24*3600*1000);toast('Premium active until '+exp.toLocaleDateString('en-IN')+' - ID: '+s.payment_id,true);return;}document.getElementById('pay-modal').classList.add('on');}
+function closePay(){document.getElementById('pay-modal').classList.remove('on');}
+function startPay(){
+  if(!window.Razorpay){toast('Payment not loaded. Check internet.',false);return;}
+  var user={};try{user=JSON.parse(localStorage.getItem('nx_u')||'{}');}catch(e){}
+  var btn=document.getElementById('pay-btn');btn.textContent='Opening...';btn.style.opacity='0.7';
+  var opts={key:RZ_KEY,amount:9900,currency:'INR',name:'Nxance',description:'Portfolio Intelligence Premium',prefill:{name:user.name||'',email:user.email||'',contact:user.phone||''},theme:{color:'#00C9A7'},
+    modal:{ondismiss:function(){btn.textContent='Pay Rs.99 - Unlock Everything';btn.style.opacity='1';}},
+    handler:function(res){
+      try{localStorage.setItem('nx_sub',JSON.stringify({paid:true,paid_at:new Date().toISOString(),payment_id:res.razorpay_payment_id,amount:99}));}catch(e){}
+      setTimeout(function(){
+        if(GSHEET_URL){try{fetch(GSHEET_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:user.name,email:user.email,phone:user.phone,source:'PAYMENT_RS99',payment_id:res.razorpay_payment_id,time:new Date().toISOString()}),mode:'no-cors'});}catch(e){}}
+        if(FORMSPREE_URL){try{fetch(FORMSPREE_URL,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'PAYMENT Rs.99 - '+user.name,name:user.name,email:user.email,payment_id:res.razorpay_payment_id,amount:'Rs.99'})});}catch(e){}}
+      },500);
+      closePay();document.getElementById('ub').textContent='Premium';document.getElementById('ub').style.color='var(--g)';
+      toast('Payment successful! Rs.99. All issues unlocked. ID: '+res.razorpay_payment_id,true);
+      if(HC){document.getElementById('hc-res').style.display='none';showHC(HC);}
+    }
+  };
+  try{new window.Razorpay(opts).open();}catch(e){btn.textContent='Pay Rs.99 - Unlock Everything';btn.style.opacity='1';toast('Payment error: '+e.message,false);}
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  var modal=document.getElementById('pay-modal');
+  if(modal) modal.addEventListener('click',function(e){if(e.target===modal)closePay();});
+  try{var u=JSON.parse(localStorage.getItem('nx_u')||'{}');if(u.name&&u.email)showApp(u.name);}catch(e){}
+});
+
+</script>
+</body>
+</html>

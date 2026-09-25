@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Nxance — Complete Construction Engine Architecture v3</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+:root{
+  --bg:#03040C;--card:#09000D;--card2:#10141F;
+  --bord:#181C36;--bord2:#20253C;
+  --tx:#EAF0FF;--t2:#6875B2;--t3:#30375A;
+  --g:#00D4B1;--gt:rgba(0,212,177,.1);--gr:rgba(0,212,177,.22);
+  --gold:#FFB830;--goldt:rgba(255,184,48,.09);
+  --red:#FF4060;--redt:rgba(255,64,96,.09);
+  --blue:#4A90FF;--bluet:rgba(74,144,255,.09);
+  --purple:#9B6DFF;--purplet:rgba(155,109,255,.09);
+  --grn:#20D0A0;--grnt:rgba(32,208,160,.09);
+  --pink:#FF6B9D;--pinkt:rgba(255,107,157,.09);
+  --cyan:#00C8FF;--cyant:rgba(0,200,255,.09);
+  --orange:#FF7A35;--oranget:rgba(255,122,53,.09);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);line-height:1.7;font-size:14px}
+
+/* ── COVER ─────────────────────────────────── */
+.cover{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 32px;text-align:center;
+  background:radial-gradient(ellipse 80% 55% at 50% -5%,rgba(0,212,177,.09),transparent 60%),
+             radial-gradient(ellipse 40% 30% at 90% 85%,rgba(155,109,255,.06),transparent 50%)}
+.ctag{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--g);background:var(--gt);border:1px solid var(--gr);padding:5px 20px;border-radius:20px;display:inline-block;margin-bottom:30px}
+.ch{font-family:'DM Serif Display',serif;font-size:clamp(34px,6vw,62px);line-height:1.08;letter-spacing:-.025em;margin-bottom:12px}
+.ch em{font-style:italic;color:var(--g)}
+.cs{font-size:15px;color:var(--t2);max-width:620px;margin:0 auto 40px;line-height:1.8}
+.badges{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:52px}
+.bd{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;padding:4px 14px;border-radius:20px;letter-spacing:.04em}
+.bd-g{color:var(--g);background:var(--gt);border:1px solid var(--gr)}
+.bd-b{color:var(--blue);background:var(--bluet);border:1px solid rgba(74,144,255,.3)}
+.bd-gold{color:var(--gold);background:var(--goldt);border:1px solid rgba(255,184,48,.3)}
+.bd-p{color:var(--purple);background:var(--purplet);border:1px solid rgba(155,109,255,.3)}
+.bd-pink{color:var(--pink);background:var(--pinkt);border:1px solid rgba(255,107,157,.3)}
+.bd-cyan{color:var(--cyan);background:var(--cyant);border:1px solid rgba(0,200,255,.3)}
+.bd-org{color:var(--orange);background:var(--oranget);border:1px solid rgba(255,122,53,.3)}
+
+/* Engine row cover */
+.eng-row{display:grid;grid-template-columns:repeat(8,1fr);gap:8px;max-width:960px;width:100%}
+.ec{background:var(--card2);border:1.5px solid var(--bord2);border-radius:10px;padding:14px 8px;text-align:center}
+.ec-icon{font-size:20px;margin-bottom:6px;display:block}
+.ec-num{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--t3);margin-bottom:3px}
+.ec-name{font-size:10px;font-weight:700;color:var(--tx);line-height:1.3}
+
+/* ── WRAP ─────────────────────────────────── */
+.wrap{max-width:1080px;margin:0 auto;padding:0 32px 80px}
+.sec{margin-bottom:80px}
+.sec-label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--g);background:var(--gt);border:1px solid var(--gr);padding:3px 13px;border-radius:20px;display:inline-block;margin-bottom:14px}
+.sec-title{font-family:'DM Serif Display',serif;font-size:32px;letter-spacing:-.015em;margin-bottom:6px}
+.sec-title em{font-style:italic;color:var(--g)}
+.sec-sub{font-size:14px;color:var(--t2);margin-bottom:28px;max-width:720px;line-height:1.8}
+.hr{height:1px;background:var(--bord);margin:72px 0}
+
+/* ── MASTER FLOW DIAGRAM ─────────────────── */
+.mflow{display:flex;flex-direction:column;gap:0;position:relative}
+.mf-step{background:var(--card2);border:1.5px solid var(--bord2);border-radius:13px;padding:18px 22px;display:flex;align-items:center;gap:16px;position:relative}
+.mf-conn{height:28px;display:flex;align-items:center;padding-left:40px;color:var(--t3);font-size:22px;font-weight:300}
+.mf-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.mf-content{flex:1}
+.mf-num{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--t3);margin-bottom:2px}
+.mf-name{font-size:15px;font-weight:700;color:var(--tx);margin-bottom:2px}
+.mf-desc{font-size:12px;color:var(--t2);line-height:1.6}
+.mf-tag{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;padding:3px 10px;border-radius:5px;flex-shrink:0}
+
+/* icon colors */
+.ic-g{background:var(--gt);border:1.5px solid var(--gr)}
+.ic-b{background:var(--bluet);border:1.5px solid rgba(74,144,255,.3)}
+.ic-gold{background:var(--goldt);border:1.5px solid rgba(255,184,48,.3)}
+.ic-red{background:var(--redt);border:1.5px solid rgba(255,64,96,.3)}
+.ic-p{background:var(--purplet);border:1.5px solid rgba(155,109,255,.3)}
+.ic-grn{background:var(--grnt);border:1.5px solid rgba(32,208,160,.3)}
+.ic-pink{background:var(--pinkt);border:1.5px solid rgba(255,107,157,.3)}
+.ic-cyan{background:var(--cyant);border:1.5px solid rgba(0,200,255,.3)}
+.ic-org{background:var(--oranget);border:1.5px solid rgba(255,122,53,.3)}
+
+/* ── ENGINE DEEP DIVE ─────────────────────── */
+.eng{background:var(--card2);border:1.5px solid var(--bord);border-radius:16px;overflow:hidden;margin-bottom:20px}
+.eng-head{padding:20px 24px;border-bottom:1px solid var(--bord);display:flex;align-items:center;gap:16px}
+.eng-icon{width:54px;height:54px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
+.eng-meta{}
+.eng-id{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--g);margin-bottom:3px}
+.eng-name{font-size:20px;font-weight:700;color:var(--tx);margin-bottom:2px}
+.eng-tagline{font-size:12px;color:var(--t2)}
+.eng-body{padding:22px 24px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+
+/* ── LABELS ─────────────────────────────────── */
+.slbl{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--t3);margin-bottom:8px;margin-top:16px;display:block}
+.slbl:first-child{margin-top:0}
+
+/* ── PARAM LIST ─────────────────────────────── */
+.params{display:flex;flex-direction:column;gap:5px}
+.param{display:flex;align-items:flex-start;gap:10px;padding:8px 11px;background:rgba(255,255,255,.02);border:1px solid var(--bord);border-radius:7px;font-size:12px}
+.pn{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--g);flex-shrink:0;min-width:140px}
+.pv{color:var(--t2);line-height:1.55}
+
+/* ── CODE ────────────────────────────────────── */
+.code{background:rgba(0,0,0,.55);border:1px solid var(--bord2);border-radius:9px;padding:14px 16px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#7A8FCC;line-height:1.72;overflow-x:auto;white-space:pre;margin:10px 0}
+
+/* ── FORMULA ─────────────────────────────────── */
+.formula{background:linear-gradient(135deg,rgba(0,212,177,.07),rgba(74,144,255,.04));border:1.5px solid rgba(0,212,177,.18);border-radius:10px;padding:14px 18px;margin:10px 0;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--tx);text-align:center;line-height:1.8}
+
+/* ── CALLOUTS ─────────────────────────────────── */
+.nb{background:var(--gt);border:1px solid var(--gr);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--g);margin:10px 0;line-height:1.65}
+.wb{background:var(--redt);border:1px solid rgba(255,64,96,.25);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--red);margin:10px 0;line-height:1.65}
+.ib{background:var(--bluet);border:1px solid rgba(74,144,255,.25);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--blue);margin:10px 0;line-height:1.65}
+.goldb{background:var(--goldt);border:1px solid rgba(255,184,48,.25);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--gold);margin:10px 0;line-height:1.65}
+.pb{background:var(--purplet);border:1px solid rgba(155,109,255,.25);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--purple);margin:10px 0;line-height:1.65}
+
+/* ── TABLE ─────────────────────────────────────── */
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:12.5px}
+th{background:rgba(255,255,255,.04);padding:9px 12px;text-align:left;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--t3);border-bottom:1px solid var(--bord2)}
+td{padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.03);color:var(--t2);vertical-align:top}
+tr:last-child td{border:none}
+tr:hover td{background:rgba(255,255,255,.015)}
+td:first-child{color:var(--tx);font-weight:600}
+
+/* ── SELECTION LAYERS ─────────────────────────── */
+.sel-layer{border:1.5px solid var(--bord2);border-radius:11px;overflow:hidden;margin-bottom:10px}
+.sl-head{padding:11px 16px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--bord)}
+.sl-num{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;padding:2px 10px;border-radius:4px}
+.sl-name{font-size:13px;font-weight:700;color:var(--tx)}
+.sl-w{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;flex-shrink:0}
+.sl-body{padding:12px 16px;background:rgba(255,255,255,.01)}
+
+/* ── VERDICT GRID ─────────────────────────────── */
+.verdict-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0}
+.verd{border-radius:12px;padding:20px;text-align:center;border:2px solid}
+.v-buy{background:rgba(32,208,160,.07);border-color:rgba(32,208,160,.3)}
+.v-cond{background:rgba(255,184,48,.07);border-color:rgba(255,184,48,.3)}
+.v-avoid{background:rgba(255,64,96,.07);border-color:rgba(255,64,96,.3)}
+.vi{font-size:30px;margin-bottom:8px;display:block}
+.vt{font-size:16px;font-weight:700;margin-bottom:4px}
+.vr{font-family:'JetBrains Mono',monospace;font-size:13px;margin-bottom:7px}
+.vd{font-size:11.5px;color:var(--t2);line-height:1.6}
+
+/* ── QUANTUM BOX ─────────────────────────────── */
+.quantum{background:linear-gradient(135deg,rgba(155,109,255,.08),rgba(74,144,255,.04));border:2px solid rgba(155,109,255,.28);border-radius:16px;padding:26px;margin:18px 0}
+.qt-title{font-family:'DM Serif Display',serif;font-size:22px;color:var(--purple);margin-bottom:8px}
+.qt-sub{font-size:13px;color:var(--t2);margin-bottom:18px;line-height:1.75}
+
+/* ── FOOTER ─────────────────────────────────── */
+.footer{text-align:center;padding:48px 0 20px;border-top:1px solid var(--bord);margin-top:20px}
+.fl{font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;background:linear-gradient(135deg,var(--g),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+.ft{font-size:11.5px;color:var(--t3)}
+
+@media(max-width:760px){.eng-row{grid-template-columns:repeat(4,1fr)}.g2,.g3,.verdict-row{grid-template-columns:1fr}.wrap{padding:0 16px 60px}}
+</style>
+</head>
+<body>
+
+<!-- ═══ COVER ═══ -->
+<div class="cover">
+  <div class="ctag">Nxance &mdash; Ohshn Intelligence</div>
+  <div class="ch">Portfolio Construction<br><em>Engine Architecture v3</em></div>
+  <div class="cs">Complete workflow of all 8 engines that build, analyse, select, validate, manage, and redesign a user portfolio &mdash; from Question 1 to daily intelligent monitoring</div>
+  <div class="badges">
+    <span class="bd bd-g">E-01 Construction</span>
+    <span class="bd bd-cyan">E-02 Selection (12 Layers)</span>
+    <span class="bd bd-gold">E-03 Backtesting</span>
+    <span class="bd bd-b">E-04 Risk Analysis</span>
+    <span class="bd bd-pink">E-05 Daily Analysis</span>
+    <span class="bd bd-p">E-06 Rebalancing</span>
+    <span class="bd bd-org">E-07 SIP Redesign</span>
+    <span class="bd bd-g">Quantum QAOA</span>
+  </div>
+  <div class="eng-row">
+    <div class="ec"><span class="ec-icon">&#127959;</span><div class="ec-num">E-01</div><div class="ec-name">Construction</div></div>
+    <div class="ec"><span class="ec-icon">&#128301;</span><div class="ec-num">E-02</div><div class="ec-name">Selection</div></div>
+    <div class="ec"><span class="ec-icon">&#128202;</span><div class="ec-num">E-03</div><div class="ec-name">Backtesting</div></div>
+    <div class="ec"><span class="ec-icon">&#128737;</span><div class="ec-num">E-04</div><div class="ec-name">Risk Analysis</div></div>
+    <div class="ec"><span class="ec-icon">&#128269;</span><div class="ec-num">E-05</div><div class="ec-name">Daily Analysis</div></div>
+    <div class="ec"><span class="ec-icon">&#9878;</span><div class="ec-num">E-06</div><div class="ec-name">Rebalancing</div></div>
+    <div class="ec"><span class="ec-icon">&#128260;</span><div class="ec-num">E-07</div><div class="ec-name">SIP Redesign</div></div>
+    <div class="ec"><span class="ec-icon">&#9881;</span><div class="ec-num">QC</div><div class="ec-name">Quantum QAOA</div></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- ═══ MASTER WORKFLOW ═══ -->
+<div class="sec">
+  <div class="sec-label">Master Workflow</div>
+  <div class="sec-title">All 8 Engines &mdash; <em>Complete Flow</em></div>
+  <div class="sec-sub">From user answering the first question to daily intelligent management. Every engine fires in sequence or on trigger. Selection Engine (E-02) is called inside E-01 for every instrument candidate.</div>
+
+  <div class="mflow">
+    <div class="mf-step">
+      <div class="mf-icon ic-g">&#128100;</div>
+      <div class="mf-content">
+        <div class="mf-num">STEP 1 &mdash; USER INPUT</div>
+        <div class="mf-name">User Answers 6 Questions</div>
+        <div class="mf-desc">Mode (SIP / Lumpsum) &bull; Goal &bull; Timeline (1-30 years) &bull; Investment amount &bull; Expected return % &bull; Risk tolerance &bull; Age &bull; Monthly income</div>
+      </div>
+      <span class="mf-tag bd-g">INPUT</span>
+    </div>
+    <div class="mf-conn">&#8595;</div>
+
+    <div class="mf-step">
+      <div class="mf-icon ic-g">&#127959;</div>
+      <div class="mf-content">
+        <div class="mf-num">STEP 2 &mdash; E-01</div>
+        <div class="mf-name">Portfolio Construction Engine</div>
+        <div class="mf-desc">Asset allocation matrix (risk + age + timeline) &rarr; MVO optimization (scipy SLSQP) &rarr; Generate candidate instrument list &rarr; Call E-02 for each candidate &rarr; Shortlist approved instruments &rarr; Calculate exact Rs. per instrument</div>
+      </div>
+      <span class="mf-tag bd-g">BUILDS</span>
+    </div>
+    <div class="mf-conn">&#8595;</div>
+
+    <div class="mf-step" style="background:linear-gradient(135deg,rgba(0,200,255,.04),rgba(155,109,255,.03));border-color:rgba(0,200,255,.25)">
+      <div class="mf-icon ic-cyan">&#128301;</div>
+      <div class="mf-content">
+        <div class="mf-num">STEP 3 &mdash; E-02 (Called inside E-01 for every candidate)</div>
+        <div class="mf-name">Selection Engine &mdash; 12 Analysis Layers</div>
+        <div class="mf-desc">Market Data &bull; Fundamental &bull; Technical &bull; Risk &bull; <strong style="color:var(--red)">Fraud Gate</strong> &bull; Quant Finance &bull; News Sentiment &bull; User Behaviour &bull; Macro &bull; Forecasting &bull; Instrument-Specific &bull; Final Score. Outputs FIT SCORE 0-100. Only 75+ enters portfolio.</div>
+      </div>
+      <span class="mf-tag bd-cyan">SELECTS</span>
+    </div>
+    <div class="mf-conn">&#8595;</div>
+
+    <div class="mf-step">
+      <div class="mf-icon ic-gold">&#128202;</div>
+      <div class="mf-content">
+        <div class="mf-num">STEP 4 &mdash; E-03</div>
+        <div class="mf-name">Backtesting Engine</div>
+        <div class="mf-desc">Tests the complete selected portfolio against 5 historical crashes (2008, 2013, 2018, 2020, 2022). If portfolio drop exceeds user risk tolerance &rarr; sends back to E-01 for rebuild. Max 3 rebuild loops.</div>
+      </div>
+      <span class="mf-tag bd-gold">VALIDATES</span>
+    </div>
+    <div class="mf-conn">&#8595;</div>
+
+    <div class="mf-step">
+      <div class="mf-icon ic-red">&#128737;</div>
+      <div class="mf-content">
+        <div class="mf-num">STEP 5 &mdash; E-04</div>
+        <div class="mf-name">Risk Analysis Engine</div>
+        <div class="mf-desc">Checks 7 risk metrics &mdash; Sharpe, CVaR, VaR, Max Drawdown, Goal Probability, Concentration, Correlation. Main job: reach target with LEAST possible risk. Approves or sends back to E-01.</div>
+      </div>
+      <span class="mf-tag" style="color:var(--red);background:var(--redt);border:1px solid rgba(255,64,96,.3)">APPROVES</span>
+    </div>
+    <div class="mf-conn">&#8595;</div>
+
+    <div class="mf-step">
+      <div class="mf-icon ic-p">&#9989;</div>
+      <div class="mf-content">
+        <div class="mf-num">STEP 6 &mdash; USER CONTROL</div>
+        <div class="mf-name">User Approves Each Instrument Individually</div>
+        <div class="mf-desc">User sees every instrument with FIT SCORE, Rs. allocation, exact units, reason, safety rating. Can approve or remove any instrument. System automatically redistributes allocation for removed instruments.</div>
+      </div>
+      <span class="mf-tag bd-p">USER DECIDES</span>
+    </div>
+    <div class="mf-conn">&#8595;</div>
+
+    <div class="mf-step">
+      <div class="mf-icon ic-pink">&#128269;</div>
+      <div class="mf-content">
+        <div class="mf-num">STEP 7 &mdash; E-05 (Daily)</div>
+        <div class="mf-name">Daily Analysis and Managing Engine</div>
+        <div class="mf-desc">Runs every trading day at 4:30pm IST. Fetches live AMFI NAV and NSE prices. Recalculates all metrics. Calls E-04 risk check. Silent on normal days. Triggers E-06 or E-07 when needed.</div>
+      </div>
+      <span class="mf-tag bd-pink">DAILY 4:30PM</span>
+    </div>
+    <div class="mf-conn">&#8595;</div>
+
+    <div class="mf-step">
+      <div class="mf-icon ic-p">&#9878;</div>
+      <div class="mf-content">
+        <div class="mf-num">STEP 8 &mdash; E-06 (On Trigger)</div>
+        <div class="mf-name">Rebalancing Engine</div>
+        <div class="mf-desc">Fires when: drift &gt;5% from target allocation, risk metric breach, or annual schedule. Restores optimal weights. Tax-optimized sell order. Maximum once per 90 days under normal conditions.</div>
+      </div>
+      <span class="mf-tag bd-p">ON DRIFT</span>
+    </div>
+    <div class="mf-conn">&#8595;</div>
+
+    <div class="mf-step">
+      <div class="mf-icon ic-org">&#128260;</div>
+      <div class="mf-content">
+        <div class="mf-num">STEP 9 &mdash; E-07 (Monthly + On Change)</div>
+        <div class="mf-name">SIP Redesign Engine</div>
+        <div class="mf-desc">Fires every SIP date: recalculates exact units at live prices. Also fires when user changes SIP amount. Rupee amount fixed, quantity flexes with market. E-02 re-runs for any new instrument candidates.</div>
+      </div>
+      <span class="mf-tag bd-org">MONTHLY</span>
+    </div>
+    <div class="mf-conn">&#8595;</div>
+
+    <div class="mf-step" style="background:linear-gradient(135deg,rgba(0,212,177,.05),rgba(74,144,255,.03));border-color:rgba(0,212,177,.2)">
+      <div class="mf-icon ic-g">&#129504;</div>
+      <div class="mf-content">
+        <div class="mf-num">STEP 10 &mdash; NXANCELM</div>
+        <div class="mf-name">Plain English Explanation After Every Action</div>
+        <div class="mf-desc">Every engine action is explained to the user in simple language with exact Rs. amounts and percentages both. User always knows what happened, why, and what it means for their goal.</div>
+      </div>
+      <span class="mf-tag bd-g">EXPLAINS</span>
+    </div>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══ E-01 CONSTRUCTION ═══ -->
+<div class="sec">
+  <div class="sec-label">Engine 01</div>
+  <div class="sec-title">Portfolio <em>Construction</em> Engine</div>
+  <div class="sec-sub">Builds the optimal portfolio from user inputs. Uses 4 sub-algorithms. Calls E-02 for every candidate instrument before including it.</div>
+
+  <div class="eng">
+    <div class="eng-head">
+      <div class="eng-icon ic-g">&#127959;</div>
+      <div class="eng-meta">
+        <div class="eng-id">E-01 &mdash; PORTFOLIO CONSTRUCTION ENGINE</div>
+        <div class="eng-name">Build. Call E-02. Allocate. Optimize.</div>
+        <div class="eng-tagline">Runs at creation + re-runs on any major change to goal, timeline, risk, or amount</div>
+      </div>
+    </div>
+    <div class="eng-body">
+      <div class="g2">
+        <div>
+          <span class="slbl">Input Parameters</span>
+          <div class="params">
+            <div class="param"><span class="pn">mode</span><span class="pv">SIP or Lumpsum</span></div>
+            <div class="param"><span class="pn">goal</span><span class="pv">wealth / retirement / house / education / business</span></div>
+            <div class="param"><span class="pn">timeline_years</span><span class="pv">1 to 30 years</span></div>
+            <div class="param"><span class="pn">monthly_sip</span><span class="pv">Rs.500 to Rs.1,00,000+</span></div>
+            <div class="param"><span class="pn">lumpsum_amount</span><span class="pv">Rs.10,000 to Rs.1Cr+</span></div>
+            <div class="param"><span class="pn">expected_return_pct</span><span class="pv">8% to 18% (capped at 18%)</span></div>
+            <div class="param"><span class="pn">risk_tolerance</span><span class="pv">low / medium / high</span></div>
+            <div class="param"><span class="pn">age</span><span class="pv">18 to 70 (affects equity %)</span></div>
+            <div class="param"><span class="pn">existing_savings</span><span class="pv">Already saved amount</span></div>
+          </div>
+        </div>
+        <div>
+          <span class="slbl">4 Sub-Algorithms Inside E-01</span>
+          <div class="params">
+            <div class="param"><span class="pn">1. Asset Allocation</span><span class="pv">Risk matrix x age x timeline = % per asset class</span></div>
+            <div class="param"><span class="pn">2. E-02 Selection Call</span><span class="pv">For every candidate instrument: runs all 12 analysis layers</span></div>
+            <div class="param"><span class="pn">3. MVO (scipy SLSQP)</span><span class="pv">Maximize Sharpe ratio on approved instruments only</span></div>
+            <div class="param"><span class="pn">4. Rs. Allocation</span><span class="pv">% x SIP / Lumpsum = exact Rs. + exact units per instrument</span></div>
+          </div>
+          <span class="slbl">Asset Allocation Matrix</span>
+          <table style="font-size:12px">
+            <thead><tr><th>Asset Class</th><th>Low Risk</th><th>Med Risk</th><th>High Risk</th></tr></thead>
+            <tbody>
+              <tr><td>Large Cap / Index MF</td><td>20%</td><td>30%</td><td>25%</td></tr>
+              <tr><td>Flexi Cap MF</td><td>10%</td><td>20%</td><td>20%</td></tr>
+              <tr><td>Mid Cap MF</td><td>5%</td><td>15%</td><td>20%</td></tr>
+              <tr><td>International MF</td><td>5%</td><td>10%</td><td>15%</td></tr>
+              <tr><td>Individual Stocks</td><td>0%</td><td>10%</td><td>15%</td></tr>
+              <tr><td>Short Duration Debt</td><td>50%</td><td>10%</td><td>0%</td></tr>
+              <tr><td>Gold Fund</td><td>10%</td><td>5%</td><td>5%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <span class="slbl">How E-01 Calls E-02 for Every Candidate</span>
+      <div class="code">def build_portfolio(user_inputs):
+    # Step 1: Determine asset class targets
+    allocation_targets = asset_allocation_matrix(
+        risk=user_inputs.risk, age=user_inputs.age, years=user_inputs.timeline
+    )
+    
+    # Step 2: For each asset class, get candidate instruments
+    approved_instruments = []
+    for asset_class, target_pct in allocation_targets.items():
+        candidates = get_candidates(asset_class)  # e.g. top 20 Large Cap MFs
+        
+        for candidate in candidates:
+            # E-02 Selection Engine called here for EVERY candidate
+            selection_result = E02.analyse(candidate, user_profile=user_inputs)
+            
+            if selection_result.fit_score >= 75:      # STRONG BUY
+                approved_instruments.append((candidate, selection_result))
+            elif selection_result.fit_score >= 50:    # CONDITIONAL
+                approved_instruments.append((candidate, selection_result))
+            # Below 50 = AVOID, never added
+    
+    # Step 3: MVO on approved instruments only
+    optimal_weights = quantum_mvo(approved_instruments, user_inputs)
+    
+    # Step 4: Calculate exact Rs. and units
+    return calculate_allocations(optimal_weights, user_inputs.sip_amount)</div>
+      <div class="nb">Key insight: E-01 never selects instruments on its own. It always defers to E-02 for selection. E-01 only handles the allocation percentages and optimization weights.</div>
+    </div>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══ E-02 SELECTION ═══ -->
+<div class="sec">
+  <div class="sec-label">Engine 02 &mdash; Most Complex Engine</div>
+  <div class="sec-title">Selection <em>Engine</em> &mdash; 12 Analysis Layers</div>
+  <div class="sec-sub">Called by E-01 for every candidate instrument. Also re-runs daily (E-05 calls it) to check if any existing holding needs to be replaced. 12 layers. 80+ individual checks. Quantum QAOA for final optimization.</div>
+
+  <!-- Verdict guide -->
+  <div class="verdict-row">
+    <div class="verd v-buy">
+      <span class="vi">&#10003;</span>
+      <div class="vt" style="color:var(--grn)">STRONG BUY</div>
+      <div class="vr" style="color:var(--grn)">Score 75 &ndash; 100</div>
+      <div class="vd">All critical layers pass. High confidence. Full allocation.</div>
+    </div>
+    <div class="verd v-cond">
+      <span class="vi">&#9888;</span>
+      <div class="vt" style="color:var(--gold)">CONDITIONAL</div>
+      <div class="vr" style="color:var(--gold)">Score 50 &ndash; 74</div>
+      <div class="vd">Most layers pass. Small allocation only. Quarterly review.</div>
+    </div>
+    <div class="verd v-avoid">
+      <span class="vi">&#10005;</span>
+      <div class="vt" style="color:var(--red)">AVOID</div>
+      <div class="vr" style="color:var(--red)">Score 0 &ndash; 49 or Fraud Gate</div>
+      <div class="vd">Critical layer failed or fraud detected. Never enters portfolio.</div>
+    </div>
+  </div>
+
+  <!-- 12 Layers -->
+  <div class="sel-layer">
+    <div class="sl-head">
+      <span class="sl-num" style="color:var(--g);background:var(--gt);border:1px solid var(--gr)">L-01</span>
+      <span class="sl-name">Market Data &amp; Historical Performance</span>
+      <span class="sl-w" style="color:var(--g);background:var(--gt);border:1px solid var(--gr)">12%</span>
+    </div>
+    <div class="sl-body">
+      <div class="g3">
+        <div>Live price, volume, 52-week range, market cap, P/E vs sector. Today vs 30-day avg volume ratio.</div>
+        <div>1yr / 3yr / 5yr / 10yr CAGR vs Nifty 50 benchmark. Rolling returns (every 1yr window). Worst year return. Consistency: % of years beating inflation.</div>
+        <div>Crisis performance database: 2008 GFC, 2013 Taper, 2018 NBFC, 2020 COVID, 2022 Rate Hike. Recovery months for each.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sel-layer">
+    <div class="sl-head">
+      <span class="sl-num" style="color:var(--blue);background:var(--bluet);border:1px solid rgba(74,144,255,.3)">L-02</span>
+      <span class="sl-name">Fundamental Analysis</span>
+      <span class="sl-w" style="color:var(--blue);background:var(--bluet);border:1px solid rgba(74,144,255,.3)">18%</span>
+    </div>
+    <div class="sl-body">
+      <div class="g2">
+        <div>
+          <strong style="font-size:11px;color:var(--t3)">Profitability:</strong> ROE above 15% for 10yr, ROCE, Net Profit Margin trend, EPS CAGR above 15%/yr<br><br>
+          <strong style="font-size:11px;color:var(--t3)">Balance Sheet:</strong> D/E below 0.5x, Current Ratio above 1.5x, Free Cash Flow positive 7 of 10 years, Interest Coverage above 5x
+        </div>
+        <div>
+          <strong style="font-size:11px;color:var(--t3)">Valuation:</strong> P/E vs 5yr own avg, P/B, EV/EBITDA, PEG ratio, dividend yield<br><br>
+          <strong style="font-size:11px;color:var(--t3)">Business Quality:</strong> Moat type (brand/network/cost/switch/IP), market share position, revenue concentration risk, management capital allocation quality (10yr track record)
+        </div>
+      </div>
+      <div class="wb" style="font-size:11px;margin-top:10px">Hard FAIL: D/E above 4x, ROE below 5% for 5+ years, EPS declining 3+ years, negative FCF 3+ years &rarr; AVOID immediately</div>
+    </div>
+  </div>
+
+  <div class="sel-layer">
+    <div class="sl-head">
+      <span class="sl-num" style="color:var(--gold);background:var(--goldt);border:1px solid rgba(255,184,48,.3)">L-03</span>
+      <span class="sl-name">Technical Analysis (Timing + Sizing only)</span>
+      <span class="sl-w" style="color:var(--gold);background:var(--goldt);border:1px solid rgba(255,184,48,.3)">10%</span>
+    </div>
+    <div class="sl-body">
+      <div class="g2">
+        <div><strong style="font-size:11px;color:var(--t3)">Trend:</strong> 200-DMA (long-term trend), Golden Cross (50 crosses 200), EMA 20/50/200, MACD signal line, ADX strength above 25<br><br>
+        <strong style="font-size:11px;color:var(--t3)">Momentum:</strong> RSI 14-day (above 70 = overbought, below 30 = oversold), Stochastic %K and %D, Rate of Change 10/20/60 days</div>
+        <div><strong style="font-size:11px;color:var(--t3)">Volume:</strong> OBV (volume confirms price), daily volume vs 30-day avg, Bollinger Band position<br><br>
+        <strong style="font-size:11px;color:var(--t3)">Support/Resistance:</strong> 52-week highs and lows, previous swing levels, breakout detection with volume confirmation</div>
+      </div>
+      <div class="ib" style="font-size:11px;margin-top:10px">Technical is used for TIMING and SIZING, not selection. A fundamentally strong instrument with poor technicals gets smaller initial allocation but still enters portfolio.</div>
+    </div>
+  </div>
+
+  <div class="sel-layer">
+    <div class="sl-head">
+      <span class="sl-num" style="color:var(--red);background:var(--redt);border:1px solid rgba(255,64,96,.3)">L-04</span>
+      <span class="sl-name">Individual Risk Analysis</span>
+      <span class="sl-w" style="color:var(--red);background:var(--redt);border:1px solid rgba(255,64,96,.3)">15%</span>
+    </div>
+    <div class="sl-body">
+      <div class="g3">
+        <div><strong style="font-size:11px;color:var(--t3)">Volatility:</strong> Annualized StdDev, Beta vs Nifty 50, Downside Deviation, Max Drawdown ever</div>
+        <div><strong style="font-size:11px;color:var(--t3)">Risk-Adjusted:</strong> Sharpe Ratio (target 0.8+), Sortino Ratio (downside only), Calmar Ratio, CVaR 95%</div>
+        <div><strong style="font-size:11px;color:var(--t3)">Liquidity Risk:</strong> Avg daily volume (below Rs.50L = flag), Bid-Ask spread, Circuit limit history, FII holding % (sudden exit risk)</div>
+      </div>
+      <div class="wb" style="font-size:11px;margin-top:10px">Hard FAIL: Beta above 2x for low/medium risk user. Max Drawdown above 70% ever. CVaR below -30%/year. Avg volume below Rs.50L.</div>
+    </div>
+  </div>
+
+  <div class="sel-layer" style="border-color:rgba(255,64,96,.4)">
+    <div class="sl-head" style="background:rgba(255,64,96,.04)">
+      <span class="sl-num" style="color:var(--red);background:var(--redt);border:1px solid rgba(255,64,96,.3)">L-05</span>
+      <span class="sl-name" style="color:var(--red)">&#128721; FRAUD DETECTION GATE &mdash; ONE FAIL = AVOID FOREVER</span>
+      <span class="sl-w" style="color:var(--red);background:var(--redt);border:1px solid rgba(255,64,96,.3)">GATE</span>
+    </div>
+    <div class="sl-body">
+      <div class="g2">
+        <div>
+          <span class="slbl" style="color:var(--red)">7 Hard FAIL Checks</span>
+          <div class="params">
+            <div class="param"><span class="pn" style="color:var(--red)">Promoter Pledge</span><span class="pv">Above 50% &rarr; AVOID forever</span></div>
+            <div class="param"><span class="pn" style="color:var(--red)">Audit Report</span><span class="pv">Qualified opinion in last 5 years &rarr; AVOID</span></div>
+            <div class="param"><span class="pn" style="color:var(--red)">Consecutive Losses</span><span class="pv">Net loss 3+ consecutive years &rarr; AVOID</span></div>
+            <div class="param"><span class="pn" style="color:var(--red)">Circuit History</span><span class="pv">15+ upper/lower circuit hits &rarr; AVOID</span></div>
+            <div class="param"><span class="pn" style="color:var(--red)">High D/E</span><span class="pv">Above 4x non-finance &rarr; AVOID</span></div>
+            <div class="param"><span class="pn" style="color:var(--red)">Low ROE</span><span class="pv">Below 5% for 5+ years &rarr; AVOID</span></div>
+            <div class="param"><span class="pn" style="color:var(--red)">Known Fraud</span><span class="pv">SEBI/ED/CBI case &rarr; AVOID permanently</span></div>
+          </div>
+        </div>
+        <div>
+          <span class="slbl" style="color:var(--red)">Advanced Fraud Signals</span>
+          <div class="params">
+            <div class="param"><span class="pn" style="color:var(--red)">Revenue-CF Gap</span><span class="pv">Revenue growing, cash flow flat = accounting manipulation</span></div>
+            <div class="param"><span class="pn" style="color:var(--red)">Receivables Spike</span><span class="pv">Growing faster than revenue = fake revenue booking</span></div>
+            <div class="param"><span class="pn" style="color:var(--red)">Related Party Txns</span><span class="pv">Above 20% revenue with promoter entities = siphoning</span></div>
+            <div class="param"><span class="pn" style="color:var(--red)">Auditor Change</span><span class="pv">Frequent changes = hiding something from auditors</span></div>
+            <div class="param"><span class="pn" style="color:var(--red)">Promoter Selling</span><span class="pv">Heavy selling while recommending buy = insider exit</span></div>
+            <div class="param"><span class="pn" style="color:var(--red)">Insider Trading</span><span class="pv">SEBI real-time alerts monitored continuously</span></div>
+          </div>
+          <div class="wb" style="font-size:11px;margin-top:10px">Permanent AVOID list: SUZLON, RCOM, YESBANK (pre-2020), DHFL, SPICEJET, IL&amp;FS, all penny stocks below Rs.10, all stocks under SEBI PAN ban</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sel-layer">
+    <div class="sl-head">
+      <span class="sl-num" style="color:var(--purple);background:var(--purplet);border:1px solid rgba(155,109,255,.3)">L-06</span>
+      <span class="sl-name">Quantitative Finance &amp; Factor Models</span>
+      <span class="sl-w" style="color:var(--purple);background:var(--purplet);border:1px solid rgba(155,109,255,.3)">12%</span>
+    </div>
+    <div class="sl-body">
+      <div class="g2">
+        <div><strong style="font-size:11px;color:var(--t3)">5-Factor Model (Fama-French):</strong> Market factor, Size (SMB), Value (HML), Profitability (RMW), Investment (CMA)<br><br>
+        <strong style="font-size:11px;color:var(--t3)">Alpha:</strong> Jensen's Alpha (excess return after risk adjustment), Information Ratio (Alpha / Tracking Error), Rolling Alpha (consistent or one-year wonder?)</div>
+        <div><strong style="font-size:11px;color:var(--t3)">Statistics:</strong> Return distribution shape (normal vs fat-tailed), Skewness (negative = more large losses), Kurtosis (above 3 = extreme events likely), Autocorrelation (momentum vs mean-reversion)<br><br>
+        <strong style="font-size:11px;color:var(--t3)">Portfolio Fit:</strong> +10 bonus points if correlation to existing holdings below 0.3 (genuine diversification)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sel-layer">
+    <div class="sl-head">
+      <span class="sl-num" style="color:var(--gold);background:var(--goldt);border:1px solid rgba(255,184,48,.3)">L-07</span>
+      <span class="sl-name">News, Articles &amp; Market Sentiment</span>
+      <span class="sl-w" style="color:var(--gold);background:var(--goldt);border:1px solid rgba(255,184,48,.3)">8%</span>
+    </div>
+    <div class="sl-body">
+      <div class="g2">
+        <div><strong style="font-size:11px;color:var(--t3)">NLP Sentiment:</strong> FinBERT model scores every headline -1 to +1. 30-day trend. Source quality weighting (ET, Mint, Bloomberg = high; unknown blogs = low).<br><br>
+        <strong style="font-size:11px;color:var(--t3)">Analyst Reports:</strong> Consensus Buy/Hold/Sell count, median price target vs current, earnings estimate revision direction.</div>
+        <div><strong style="font-size:11px;color:var(--t3)">Event Detection:</strong> SEBI notices, ED raids, IT surveys, sudden CEO/CFO exits, major contract wins/losses, legal cases.<br><br>
+        <strong style="font-size:11px;color:var(--t3)">Market Sentiment:</strong> India VIX (fear index), FII/DII flow patterns, Put-Call Ratio, sector rotation signals.</div>
+      </div>
+      <div class="goldb" style="font-size:11px;margin-top:10px">Sentiment alone never overrides fundamentals. Bad news + good company = opportunity to consider. Good news + bad fundamentals = still AVOID.</div>
+    </div>
+  </div>
+
+  <div class="sel-layer">
+    <div class="sl-head">
+      <span class="sl-num" style="color:var(--pink);background:var(--pinkt);border:1px solid rgba(255,107,157,.3)">L-08</span>
+      <span class="sl-name">User Behaviour Analysis (Personalisation)</span>
+      <span class="sl-w" style="color:var(--pink);background:var(--pinkt);border:1px solid rgba(255,107,157,.3)">15%</span>
+    </div>
+    <div class="sl-body">
+      <div class="g2">
+        <div><strong style="font-size:11px;color:var(--t3)">Profile Match:</strong> Instrument volatility vs user risk tolerance. Timeline fit (short-term user gets debt; long-term gets equity). Goal alignment (does this instrument reach Rs. target by year X?). Income stability check (salaried = more equity OK; variable income = more debt buffer).</div>
+        <div><strong style="font-size:11px;color:var(--t3)">Bias Detection:</strong> Recency bias (wants what just rose 100% = show historical). Overconfidence (high risk + short timeline = recalibrate). FOMO (buying after 50% rally = add valuation check). Herd behaviour (everyone on social media buying = flag risk). Loss aversion (avoiding equity after losses = show 15yr data).</div>
+      </div>
+      <div class="pb" style="font-size:11px;margin-top:10px">Same instrument scores differently per user. Mid-cap = STRONG BUY for 25yr/15yr horizon. Same mid-cap = AVOID for 58yr/3yr horizon. This is the personalisation that matters most.</div>
+    </div>
+  </div>
+
+  <div class="sel-layer">
+    <div class="sl-head">
+      <span class="sl-num" style="color:var(--cyan);background:var(--cyant);border:1px solid rgba(0,200,255,.3)">L-09</span>
+      <span class="sl-name">Macro &amp; Sector Analysis</span>
+      <span class="sl-w" style="color:var(--cyan);background:var(--cyant);border:1px solid rgba(0,200,255,.3)">10%</span>
+    </div>
+    <div class="sl-body">
+      RBI rate cycle (cut = debt good, hike = reduce duration) &bull; GDP growth trend (accelerating = cyclicals, slowing = defensives) &bull; Inflation level (above 6% = RBI tightening risk) &bull; INR trend (weakening = export stocks benefit: IT, pharma) &bull; Global risk events &bull; Sector P/E vs 10-year avg (cheap or expensive?) &bull; Policy tailwinds (PLI scheme, budget allocations) &bull; Supply-demand dynamics (especially commodities)
+    </div>
+  </div>
+
+  <div class="sel-layer">
+    <div class="sl-head">
+      <span class="sl-num" style="color:var(--grn);background:var(--grnt);border:1px solid rgba(32,208,160,.3)">L-10</span>
+      <span class="sl-name">Data Forecasting (ML Models)</span>
+      <span class="sl-w" style="color:var(--grn);background:var(--grnt);border:1px solid rgba(32,208,160,.3)">10%</span>
+    </div>
+    <div class="sl-body">
+      <div class="g2">
+        <div><strong style="font-size:11px;color:var(--t3)">Time Series Models:</strong> ARIMA (price patterns), GARCH (volatility forecasting), Prophet (revenue seasonality), LSTM Neural Network (sequential price patterns)<br><br>
+        <strong style="font-size:11px;color:var(--t3)">Earnings Forecast:</strong> 3-year revenue projection (sector growth + market share), margin expansion analysis, forward EPS estimate</div>
+        <div><strong style="font-size:11px;color:var(--t3)">Scenario Analysis:</strong>
+          <div class="formula" style="font-size:11px;padding:10px;margin-top:6px">Weighted Target = 0.25 x Bull + 0.50 x Base + 0.25 x Bear<br>Buy if Upside above 15% from current price</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sel-layer">
+    <div class="sl-head">
+      <span class="sl-num" style="color:var(--blue);background:var(--bluet);border:1px solid rgba(74,144,255,.3)">L-11</span>
+      <span class="sl-name">Instrument-Specific Deep Dive</span>
+      <span class="sl-w" style="color:var(--blue);background:var(--bluet);border:1px solid rgba(74,144,255,.3)">10%</span>
+    </div>
+    <div class="sl-body">
+      <div class="g2">
+        <div><strong style="font-size:11px;color:var(--t3)">NSE Stocks:</strong> Shareholding pattern trend, MF institutional buying direction, earnings call tone, capex cycle, insider transactions<br><br>
+        <strong style="font-size:11px;color:var(--t3)">Mutual Funds:</strong> Fund manager alpha specifically (not the fund), TER vs category avg, AUM size vs strategy feasibility, Jaccard overlap with other selected funds</div>
+        <div><strong style="font-size:11px;color:var(--t3)">Fixed Deposits:</strong> Bank CRAR above 12%, Gross NPA below 5%, Net NPA below 2%, CRISIL/ICRA credit rating (only AAA/AA), DICGC Rs.5L coverage split<br><br>
+        <strong style="font-size:11px;color:var(--t3)">Commodities:</strong> USD/DXY correlation, real interest rates, central bank buying, seasonal demand<br><br>
+        <strong style="font-size:11px;color:var(--t3)">Bonds/ETFs:</strong> Modified duration, yield to maturity, credit spread, tracking error</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sel-layer" style="border-color:rgba(0,212,177,.3)">
+    <div class="sl-head" style="background:rgba(0,212,177,.04)">
+      <span class="sl-num" style="color:var(--g);background:var(--gt);border:1px solid var(--gr)">L-12</span>
+      <span class="sl-name">Final Scoring + Quantum QAOA Optimization</span>
+      <span class="sl-w" style="color:var(--g);background:var(--gt);border:1px solid var(--gr)">OUTPUT</span>
+    </div>
+    <div class="sl-body">
+      <div class="formula">FIT_SCORE = &sum;( layer_score_i &times; weight_i &times; user_risk_multiplier_i )</div>
+      <div class="code">def final_selection_score(instrument, user_profile):
+    scores = {
+        'market_data':    L01.score(instrument),                   # 12%
+        'fundamental':    L02.score(instrument),                   # 18%
+        'technical':      L03.score(instrument),                   # 10%
+        'risk':           L04.score(instrument, user_profile),     # 15%
+        # L05 FRAUD = GATE. Hard FAIL = AVOID immediately.
+        'quant_finance':  L06.score(instrument),                   # 12%
+        'sentiment':      L07.score(instrument),                   # 8%
+        'user_fit':       L08.score(instrument, user_profile),     # 15% (personalised)
+        'macro_sector':   L09.score(instrument),                   # 10%
+        'forecasting':    L10.score(instrument),                   # 10%
+        'instrument':     L11.score(instrument),                   # 10%
+    }
+    
+    # Risk-based weight adjustments
+    if user_profile.risk == 'low':
+        scores['fundamental'] *= 1.3
+        scores['risk']        *= 1.4
+    elif user_profile.risk == 'high':
+        scores['technical']   *= 1.5
+        scores['forecasting'] *= 1.4
+    
+    total_score = sum(scores[k] * WEIGHTS[k] for k in scores)
+    
+    # Quantum QAOA optimization for portfolio-level weight
+    quantum_weight = QAOA.optimize(instrument, total_score, existing_portfolio)
+    
+    return {
+        'fit_score':      total_score,
+        'quantum_weight': quantum_weight,
+        'verdict':        'STRONG_BUY' if total_score >= 75 else 'CONDITIONAL' if total_score >= 50 else 'AVOID',
+        'reason':         generate_plain_english_reason(scores)
+    }</div>
+    </div>
+  </div>
+
+  <!-- Quantum section -->
+  <div class="quantum">
+    <div class="qt-title">&#9881; Quantum Computing &mdash; QAOA for Portfolio Optimization</div>
+    <div class="qt-sub">Classical MVO (scipy) finds a good portfolio. QAOA finds the near-global optimum. The advantage grows with number of instruments. For 30+ candidates, classical gets trapped in local minima. QAOA explores the full solution space simultaneously via quantum superposition.</div>
+    <div class="g2">
+      <div>
+        <span class="slbl">What QAOA Solves</span>
+        <div class="params">
+          <div class="param"><span class="pn">Problem Type</span><span class="pv">QUBO: Quadratic Unconstrained Binary Optimization</span></div>
+          <div class="param"><span class="pn">Portfolio Size</span><span class="pv">Classical optimal: 10-20 assets. QAOA: 50-100 efficiently.</span></div>
+          <div class="param"><span class="pn">Sharpe Improvement</span><span class="pv">5-15% higher Sharpe vs classical on same instruments</span></div>
+          <div class="param"><span class="pn">Constraint Handling</span><span class="pv">Risk limits, sector limits, user preferences all simultaneously</span></div>
+        </div>
+      </div>
+      <div>
+        <span class="slbl">Classical vs Quantum</span>
+        <table style="font-size:11.5px">
+          <thead><tr><th>Parameter</th><th>Classical</th><th>Quantum</th></tr></thead>
+          <tbody>
+            <tr><td>Solution</td><td>Local optimum</td><td style="color:var(--grn)">Near-global optimum</td></tr>
+            <tr><td>Assets</td><td>10-20 well</td><td style="color:var(--grn)">50-100 well</td></tr>
+            <tr><td>Sharpe</td><td>Baseline</td><td style="color:var(--grn)">5-15% higher</td></tr>
+            <tr><td>Phase 1</td><td colspan="2">Qiskit simulation (now)</td></tr>
+            <tr><td>Phase 2</td><td colspan="2">IBM 127-qubit cloud (2027)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══ E-03 BACKTESTING ═══ -->
+<div class="sec">
+  <div class="sec-label">Engine 03</div>
+  <div class="sec-title">Backtesting <em>Engine</em></div>
+  <div class="sec-sub">Every new portfolio is battle-tested against 5 historical crashes before the user sees it. Too risky? E-03 rejects and E-01 rebuilds. Maximum 3 rebuild loops.</div>
+
+  <div class="eng">
+    <div class="eng-head">
+      <div class="eng-icon ic-gold">&#128202;</div>
+      <div class="eng-meta">
+        <div class="eng-id">E-03 &mdash; BACKTESTING ENGINE</div>
+        <div class="eng-name">Battle-Test Before Deploy</div>
+        <div class="eng-tagline">Runs automatically after every E-01 build. Loops back max 3 times if risk too high.</div>
+      </div>
+    </div>
+    <div class="eng-body">
+      <table>
+        <thead><tr><th>Crisis</th><th>Large Cap</th><th>Mid Cap</th><th>Small Cap</th><th>Debt</th><th>Gold</th><th>Intl</th><th>Recovery</th></tr></thead>
+        <tbody>
+          <tr><td>2008 GFC</td><td style="color:var(--red)">-55%</td><td style="color:var(--red)">-67%</td><td style="color:var(--red)">-73%</td><td style="color:var(--grn)">+8%</td><td style="color:var(--grn)">+25%</td><td style="color:var(--red)">-50%</td><td>18 months</td></tr>
+          <tr><td>2013 Taper</td><td style="color:var(--red)">-20%</td><td style="color:var(--red)">-30%</td><td style="color:var(--red)">-40%</td><td style="color:var(--red)">-5%</td><td style="color:var(--grn)">+3%</td><td style="color:var(--red)">-15%</td><td>9 months</td></tr>
+          <tr><td>2018 NBFC</td><td style="color:var(--red)">-15%</td><td style="color:var(--red)">-35%</td><td style="color:var(--red)">-50%</td><td style="color:var(--red)">-3%</td><td style="color:var(--grn)">+4%</td><td style="color:var(--red)">-10%</td><td>12 months</td></tr>
+          <tr><td>2020 COVID</td><td style="color:var(--red)">-38%</td><td style="color:var(--red)">-41%</td><td style="color:var(--red)">-50%</td><td style="color:var(--grn)">+6%</td><td style="color:var(--grn)">+18%</td><td style="color:var(--red)">-30%</td><td>5 months</td></tr>
+          <tr><td>2022 Rate Hike</td><td style="color:var(--red)">-17%</td><td style="color:var(--red)">-22%</td><td style="color:var(--red)">-30%</td><td style="color:var(--red)">-4%</td><td style="color:var(--grn)">+12%</td><td style="color:var(--red)">-25%</td><td>12 months</td></tr>
+        </tbody>
+      </table>
+      <div class="g2" style="margin-top:14px">
+        <div>
+          <span class="slbl">Risk Tolerance Limits</span>
+          <div class="params">
+            <div class="param"><span class="pn">Low Risk User</span><span class="pv">Max allowed portfolio drop: -15%</span></div>
+            <div class="param"><span class="pn">Medium Risk User</span><span class="pv">Max allowed portfolio drop: -30%</span></div>
+            <div class="param"><span class="pn">High Risk User</span><span class="pv">Max allowed portfolio drop: -50%</span></div>
+          </div>
+        </div>
+        <div>
+          <span class="slbl">Algorithm</span>
+          <div class="code">def backtest(portfolio, user):
+    for crisis, data in CRISIS_DB.items():
+        portfolio_drop = sum(
+            weight * data[asset_class(instr)]
+            for instr, weight in portfolio.items()
+        )
+        if abs(portfolio_drop) > user.tolerance:
+            return {
+                'approved': False,
+                'action': 'E01.rebuild(reduce_equity=True)',
+                'rebuild_count': rebuild_count + 1
+            }
+    return {'approved': True}</div>
+        </div>
+      </div>
+      <div class="nb">Output: "In 2020 COVID crash, your portfolio would have fallen Rs.47,000 (23%) on Rs.2L. It recovered in 5 months. Your tolerance allows -30% -- this portfolio is APPROVED."</div>
+    </div>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══ E-04 RISK ═══ -->
+<div class="sec">
+  <div class="sec-label">Engine 04</div>
+  <div class="sec-title">Risk Analysis <em>Engine</em></div>
+  <div class="sec-sub">Main job: reach the target amount with the LEAST possible risk. Not just minimum risk &mdash; minimum risk FOR the given return target. Runs after construction AND daily via E-05.</div>
+
+  <div class="eng">
+    <div class="eng-head">
+      <div class="eng-icon ic-red">&#128737;</div>
+      <div class="eng-meta">
+        <div class="eng-id">E-04 &mdash; RISK ANALYSIS ENGINE</div>
+        <div class="eng-name">Same Target. Less Risk.</div>
+        <div class="eng-tagline">7 risk metrics. 3-level decision tree. Approves, rebalances, or rebuilds.</div>
+      </div>
+    </div>
+    <div class="eng-body">
+      <div class="g2">
+        <div>
+          <span class="slbl">7 Risk Metrics Tracked</span>
+          <div class="params">
+            <div class="param"><span class="pn">Sharpe Ratio</span><span class="pv">Target above 0.8. Formula: (Return - 6.5%) / Volatility</span></div>
+            <div class="param"><span class="pn">CVaR 95%</span><span class="pv">Avg loss in worst 5% scenarios. Target above -12%/yr</span></div>
+            <div class="param"><span class="pn">Max Drawdown</span><span class="pv">Peak-to-trough. Must stay within user risk limit.</span></div>
+            <div class="param"><span class="pn">VaR 95%</span><span class="pv">Worst single day with 95% confidence</span></div>
+            <div class="param"><span class="pn">Goal Probability</span><span class="pv">Monte Carlo % of hitting target. Must stay above 65%.</span></div>
+            <div class="param"><span class="pn">Concentration Risk</span><span class="pv">No single instrument above 40% of portfolio</span></div>
+            <div class="param"><span class="pn">Correlation Risk</span><span class="pv">All instruments moving together? Systemic risk flag.</span></div>
+          </div>
+        </div>
+        <div>
+          <span class="slbl">3-Level Decision Tree</span>
+          <div class="code">def risk_decision(metrics, user):
+    
+    # LEVEL 1: CRITICAL -- Full Rebuild
+    if metrics.sharpe < 0.3:
+        return trigger(E01.rebuild)
+    if metrics.goal_probability < 50:
+        return trigger(E01.rebuild)
+    if metrics.concentration > 0.60:
+        return trigger(E01.rebuild)
+    
+    # LEVEL 2: WARNING -- Rebalance
+    if metrics.max_drawdown > user.tolerance:
+        return trigger(E06.rebalance)
+    if metrics.concentration > 0.40:
+        return trigger(E06.rebalance)
+    if drift_detected():
+        return trigger(E06.rebalance)
+    
+    # LEVEL 3: ALERT -- Notify Only
+    if metrics.goal_probability < 65:
+        notify(user, 'goal_probability_low')
+    
+    return 'APPROVED'</div>
+          <div class="nb" style="font-size:11px">Core principle: If Rs.50L target reachable with 60% equity (Sharpe 0.9) AND 65% equity (Sharpe 0.9) &mdash; always recommend 60%. Same destination, lower risk.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══ E-05 DAILY ═══ -->
+<div class="sec">
+  <div class="sec-label">Engine 05</div>
+  <div class="sec-title">Daily Analysis <em>&amp; Managing</em> Engine</div>
+  <div class="sec-sub">Runs every trading day at 4:30pm IST after AMFI NAV update. Silent on normal days. Does NOT overreact. Acts like a professional fund manager, not a nervous retail investor.</div>
+
+  <div class="eng">
+    <div class="eng-head">
+      <div class="eng-icon ic-pink">&#128269;</div>
+      <div class="eng-meta">
+        <div class="eng-id">E-05 &mdash; DAILY ANALYSIS AND MANAGING ENGINE</div>
+        <div class="eng-name">Watch. Calculate. Decide. Report.</div>
+        <div class="eng-tagline">4:30pm IST every trading day. Also re-runs E-02 monthly for quality checks on existing holdings.</div>
+      </div>
+    </div>
+    <div class="eng-body">
+      <div class="g2">
+        <div>
+          <span class="slbl">Daily 5-Step Routine</span>
+          <div class="params">
+            <div class="param"><span class="pn">1. Fetch Live Data</span><span class="pv">AMFI NAV for all MFs + Yahoo Finance NSE prices</span></div>
+            <div class="param"><span class="pn">2. Recalculate</span><span class="pv">Portfolio value, XIRR, Sharpe, CVaR, goal probability, allocation drift</span></div>
+            <div class="param"><span class="pn">3. E-04 Risk Check</span><span class="pv">All 7 metrics against thresholds</span></div>
+            <div class="param"><span class="pn">4. Monthly E-02 Re-run</span><span class="pv">Once a month: re-run Selection Engine on existing holdings. If any falls below 50 score, flag for review.</span></div>
+            <div class="param"><span class="pn">5. NxanceLM Report</span><span class="pv">Portfolio value, daily change in Rs., goal track, any alerts</span></div>
+          </div>
+        </div>
+        <div>
+          <span class="slbl">Professional vs Beginner Behaviour</span>
+          <table style="font-size:11.5px">
+            <thead><tr><th>Situation</th><th>Beginner</th><th>E-05 (Professional)</th></tr></thead>
+            <tbody>
+              <tr><td>Market falls 5% today</td><td style="color:var(--red)">Sell everything</td><td style="color:var(--grn)">Do nothing. Single-day event.</td></tr>
+              <tr><td>Market falls 15% over 2 weeks</td><td style="color:var(--red)">Panic sell</td><td style="color:var(--grn)">Check goal prob. Still above 65%? Hold. SIP month? Buy more at discount.</td></tr>
+              <tr><td>Market falls 30%+ sustained</td><td style="color:var(--red)">Portfolio feels ruined</td><td style="color:var(--grn)">Check recovery probability. Target still reachable? Hold. If not, trigger E-06.</td></tr>
+              <tr><td>Market rises 20%</td><td style="color:var(--red)">Buy more at peak</td><td style="color:var(--grn)">Check if equity drifted above 5%. If yes, rebalance to lock gains.</td></tr>
+              <tr><td>One stock falls 40%</td><td style="color:var(--red)">Average down blindly</td><td style="color:var(--grn)">Re-run E-02 on this stock. Still passes? Hold. Fraud signal? Exit.</td></tr>
+            </tbody>
+          </table>
+          <div class="nb" style="font-size:11px;margin-top:8px"><strong>Single question asked every day:</strong> Does this portfolio still reach user's target in their timeline at acceptable risk? If YES &mdash; stay calm. Only act when answer becomes NO.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══ E-06 REBALANCING ═══ -->
+<div class="sec">
+  <div class="sec-label">Engine 06</div>
+  <div class="sec-title">Rebalancing <em>Engine</em></div>
+  <div class="sec-sub">Fires when portfolio drifts from target or risk metrics breach. Restores optimal weights with minimum transactions. Tax-optimized sell order always.</div>
+
+  <div class="eng">
+    <div class="eng-head">
+      <div class="eng-icon ic-p">&#9878;</div>
+      <div class="eng-meta">
+        <div class="eng-id">E-06 &mdash; REBALANCING ENGINE</div>
+        <div class="eng-name">Drift Detected. Restore Balance.</div>
+        <div class="eng-tagline">3 triggers. Tax-optimized. Max once per 90 days normally.</div>
+      </div>
+    </div>
+    <div class="eng-body">
+      <div class="g2">
+        <div>
+          <span class="slbl">3 Triggers</span>
+          <div class="params">
+            <div class="param"><span class="pn">Allocation Drift</span><span class="pv">Any asset class drifts more than 5% from target. Example: Large Cap target 30%, now at 38% after bull run.</span></div>
+            <div class="param"><span class="pn">Risk Metric Breach</span><span class="pv">Max drawdown exceeds user limit. Concentration above 40%. Goal probability drops below 50%.</span></div>
+            <div class="param"><span class="pn">Annual Rebalancing</span><span class="pv">Scheduled once per year. Age adjustment (1 year older = reduce equity 1-2%). Goal progress review.</span></div>
+          </div>
+          <span class="slbl">What E-06 Will NOT Do</span>
+          <div class="wb" style="font-size:11px">Will NOT rebalance on 2-3% drift (too many transactions). Will NOT rebalance more than once per 90 days. Will NOT sell winners unless risk metrics demand it.</div>
+        </div>
+        <div>
+          <span class="slbl">Tax-Optimized Algorithm</span>
+          <div class="code">def rebalance(portfolio, targets):
+    trades = []
+    for asset in portfolio:
+        drift = current_weight - target_weight
+        if abs(drift) > 0.05:
+            trades.append({
+                'action': 'SELL' if drift > 0 else 'BUY',
+                'rs': abs(drift) * portfolio.total_value,
+                'unrealized_gain': asset.unrealized_gain
+            })
+    
+    # Tax optimization:
+    # Sell assets at LOSS first (tax-loss harvesting)
+    # This offsets capital gains tax on profitable sells
+    sells = [t for t in trades if t['action']=='SELL']
+    sells.sort(key=lambda x: x['unrealized_gain'])  # Losses first
+    
+    return sells + [t for t in trades if t['action']=='BUY']</div>
+          <div class="goldb" style="font-size:11px">Tax-loss harvesting can save Rs.10,000-40,000/year in capital gains tax on a Rs.10L portfolio by selling losers first to offset the gains from selling winners.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══ E-07 SIP REDESIGN ═══ -->
+<div class="sec">
+  <div class="sec-label">Engine 07</div>
+  <div class="sec-title">SIP Redesign <em>Engine</em></div>
+  <div class="sec-sub">Runs every SIP date. Also fires when user changes amount. Rupee amount is always fixed. Quantity flexes with live price. E-02 re-runs for any new instrument candidates.</div>
+
+  <div class="eng">
+    <div class="eng-head">
+      <div class="eng-icon ic-org">&#128260;</div>
+      <div class="eng-meta">
+        <div class="eng-id">E-07 &mdash; SIP REDESIGN ENGINE</div>
+        <div class="eng-name">Every Month. Live Prices. Exact Rs.</div>
+        <div class="eng-tagline">Monthly redesign. Amount change triggers scale or full rebuild. E-02 re-runs for new candidates.</div>
+      </div>
+    </div>
+    <div class="eng-body">
+      <div class="g2">
+        <div>
+          <span class="slbl">4 Triggers</span>
+          <div class="params">
+            <div class="param"><span class="pn">Monthly SIP Date</span><span class="pv">Recalculate all quantities at current live NAV/prices</span></div>
+            <div class="param"><span class="pn">SIP Increase (less than 20%)</span><span class="pv">Scale all allocations proportionally</span></div>
+            <div class="param"><span class="pn">SIP Increase (above 20%)</span><span class="pv">Full E-01 rebuild. E-02 re-runs for new candidates. May add new instruments.</span></div>
+            <div class="param"><span class="pn">SIP Decrease (above 30%)</span><span class="pv">E-01 rebuild. Some instruments dropped if SIP too small to split.</span></div>
+          </div>
+          <span class="slbl">Month-by-Month Example</span>
+          <table style="font-size:11.5px">
+            <thead><tr><th>Month</th><th>NAV</th><th>Rs. Amount</th><th>Units</th><th>Insight</th></tr></thead>
+            <tbody>
+              <tr><td>Month 1</td><td>Rs.168</td><td>Rs.3,000</td><td>17.86</td><td>Standard</td></tr>
+              <tr><td>Month 2 (market up)</td><td>Rs.178</td><td>Rs.3,000</td><td>16.85</td><td>Buy fewer, expensive</td></tr>
+              <tr><td>Month 3 (market down)</td><td>Rs.152</td><td>Rs.3,000</td><td style="color:var(--grn)">19.74</td><td style="color:var(--grn)">Buy MORE -- on sale! SIP advantage.</td></tr>
+              <tr><td>Month 4 (SIP raised to 12k)</td><td>Rs.160</td><td>Rs.3,600</td><td>22.50</td><td>E-07 scales proportionally</td></tr>
+              <tr><td>Month 5 (SIP cut to 3k)</td><td>Rs.165</td><td>Rs.900</td><td>5.45</td><td>E-01 rebuild triggered</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <span class="slbl">Algorithm</span>
+          <div class="code">def redesign_monthly(sip_amount, allocation, live_prices):
+    plan = []
+    for instrument, target_pct in allocation.items():
+        invest_rs  = sip_amount * target_pct / 100  # Fixed
+        live_price = fetch_live_price(instrument)
+        buy_qty    = invest_rs / live_price          # Flexes
+        plan.append({
+            'instrument': instrument,
+            'invest_rs':  invest_rs,
+            'live_price': live_price,
+            'buy_qty':    round(buy_qty, 3)
+        })
+    return plan
+
+# Amount change handling:
+def handle_change(old_sip, new_sip, user_profile):
+    ratio = new_sip / old_sip
+    if 0.70 <= ratio <= 1.20:
+        return scale_allocations(new_sip)  # Simple scale
+    else:
+        # Big change: full rebuild with E-02 re-running
+        return E01.rebuild(sip_amount=new_sip, user=user_profile)</div>
+          <div class="nb" style="font-size:11px">Core principle: Rupee amount per instrument FIXED by allocation %. Quantity FLEXES with price. Market falls = more units for same Rs. = SIP averaging working automatically.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══ ENGINE INTERACTION MAP ═══ -->
+<div class="sec">
+  <div class="sec-label">Engine Interactions</div>
+  <div class="sec-title">How All 7 Engines <em>Talk to Each Other</em></div>
+  <div class="sec-sub">No engine works alone. E-02 is the most-called engine &mdash; it is used inside E-01, E-05, and E-07. Complete trigger and dependency map.</div>
+
+  <table>
+    <thead><tr><th>Engine</th><th>Triggers These Engines</th><th>When It Runs</th><th>Receives Calls From</th></tr></thead>
+    <tbody>
+      <tr><td style="color:var(--g)">E-01 Construction</td><td>E-02 (for every candidate), E-03, E-04</td><td>Initial build + any major change</td><td>User input, E-03 reject, E-04 reject, E-07 major change</td></tr>
+      <tr><td style="color:var(--cyan)">E-02 Selection</td><td>Returns score to calling engine</td><td>Called by E-01, E-05 monthly, E-07 on change</td><td>E-01 (for candidates), E-05 (quality check), E-07 (new candidates)</td></tr>
+      <tr><td style="color:var(--gold)">E-03 Backtesting</td><td>E-01 rebuild (if too risky) or E-04 (if approved)</td><td>After every E-01 build</td><td>E-01 new portfolio output</td></tr>
+      <tr><td style="color:var(--red)">E-04 Risk Analysis</td><td>E-06 rebalance, E-01 rebuild, or user alert</td><td>After construction + daily via E-05</td><td>E-05 daily trigger, E-03, E-01</td></tr>
+      <tr><td style="color:var(--pink)">E-05 Daily Analysis</td><td>E-02 monthly re-run, E-04 daily, E-06 if drift, E-07 if SIP date</td><td>4:30pm IST every trading day</td><td>AMFI NAV + Yahoo Finance live data</td></tr>
+      <tr><td style="color:var(--purple)">E-06 Rebalancing</td><td>E-04 recheck after trades complete</td><td>Drift, risk breach, or annual</td><td>E-05 drift alert, E-04 breach signal</td></tr>
+      <tr><td style="color:var(--orange)">E-07 SIP Redesign</td><td>E-02 (new candidates), E-04 recheck, E-01 if major</td><td>Monthly SIP date + user amount change</td><td>E-05 SIP trigger, user input</td></tr>
+    </tbody>
+  </table>
+
+  <div class="nb" style="margin-top:14px"><strong>E-02 is the backbone:</strong> Selection Engine is called inside E-01 for initial selection, inside E-05 monthly for quality review of existing holdings, and inside E-07 when SIP amount increases enough to consider new instruments. It is not a standalone step &mdash; it powers all other engines.</div>
+  <div class="ib"><strong>Loop prevention:</strong> E-01 rebuild maximum 3 times in 24 hours. E-06 rebalancing maximum once per 90 days normally. Prevents infinite loops during extreme market volatility.</div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══ PHASE 2 ═══ -->
+<div class="sec">
+  <div class="sec-label">Phase 2 Additions</div>
+  <div class="sec-title">4 More Engines for <em>Institutional Grade</em></div>
+  <div class="sec-sub">These additions take Nxance to the level of professional wealth management. Based on what top fund houses and robo-advisors globally actually do.</div>
+
+  <div class="g2">
+    <div class="eng" style="margin-bottom:0">
+      <div class="eng-head">
+        <div class="eng-icon ic-gold">&#127919;</div>
+        <div class="eng-meta">
+          <div class="eng-id">E-08 &mdash; TAX OPTIMIZATION ENGINE</div>
+          <div class="eng-name">Minimize Tax. Maximize Post-Tax Returns.</div>
+        </div>
+      </div>
+      <div class="eng-body">
+        <div class="params">
+          <div class="param"><span class="pn">LTCG Tracking</span><span class="pv">1-year holding for equity (10% tax above Rs.1L/yr). Track every purchase lot separately.</span></div>
+          <div class="param"><span class="pn">Tax-Loss Harvest</span><span class="pv">Sell losers before March 31 to offset gainers. Save Rs.10k-50k/yr on Rs.10L portfolio.</span></div>
+          <div class="param"><span class="pn">ELSS Reminder</span><span class="pv">Ensure Rs.1.5L in ELSS before April 1 for Section 80C benefit.</span></div>
+          <div class="param"><span class="pn">Dividend vs Growth</span><span class="pv">Always recommend Growth plan. Dividend plans create unnecessary annual tax event.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="eng" style="margin-bottom:0">
+      <div class="eng-head">
+        <div class="eng-icon ic-b">&#128200;</div>
+        <div class="eng-meta">
+          <div class="eng-id">E-09 &mdash; GOAL TRACKING ENGINE</div>
+          <div class="eng-name">Real-Time Milestones. Course Correction.</div>
+        </div>
+      </div>
+      <div class="eng-body">
+        <div class="params">
+          <div class="param"><span class="pn">Monthly Milestones</span><span class="pv">Expected vs actual portfolio value every month in Rs.</span></div>
+          <div class="param"><span class="pn">Early Warning</span><span class="pv">Alert if 3 months behind expected milestone schedule.</span></div>
+          <div class="param"><span class="pn">Course Correction</span><span class="pv">Calculate exact extra Rs./month SIP needed to get back on track.</span></div>
+          <div class="param"><span class="pn">Scenario Paths</span><span class="pv">Show best/median/worst case portfolio value paths in Rs. chart.</span></div>
+        </div>
+        <div class="ib" style="font-size:11px;margin-top:8px">Example: "You are Rs.23,000 behind June milestone. Add Rs.2,100/month for 3 months to fully recover."</div>
+      </div>
+    </div>
+
+    <div class="eng" style="margin-bottom:0">
+      <div class="eng-head">
+        <div class="eng-icon ic-p">&#128196;</div>
+        <div class="eng-meta">
+          <div class="eng-id">E-10 &mdash; MARKET INTELLIGENCE ENGINE</div>
+          <div class="eng-name">Macro Signals. Not Noise Trading.</div>
+        </div>
+      </div>
+      <div class="eng-body">
+        <div class="params">
+          <div class="param"><span class="pn">Nifty P/E Signal</span><span class="pv">P/E above 25 = reduce equity 5%. P/E below 14 = increase equity 5%.</span></div>
+          <div class="param"><span class="pn">RBI Rate Cycle</span><span class="pv">Rate hike cycle detected = reduce long-duration debt exposure.</span></div>
+          <div class="param"><span class="pn">FII/DII Flows</span><span class="pv">Sustained FII selling for 3+ months = caution signal for overall equity.</span></div>
+          <div class="param"><span class="pn">GDP Trend</span><span class="pv">Slowdown signal = tilt toward defensive sectors (FMCG, pharma, utilities).</span></div>
+        </div>
+        <div class="goldb" style="font-size:11px;margin-top:8px">Strict rule: Only acts on sustained signals (3+ months). Never reacts to single-day events or news headlines.</div>
+      </div>
+    </div>
+
+    <div class="eng" style="margin-bottom:0">
+      <div class="eng-head">
+        <div class="eng-icon ic-grn">&#127919;</div>
+        <div class="eng-meta">
+          <div class="eng-id">E-11 &mdash; EMERGENCY FUND GUARD</div>
+          <div class="eng-name">Financial Health Before Portfolio.</div>
+        </div>
+      </div>
+      <div class="eng-body">
+        <div class="params">
+          <div class="param"><span class="pn">Emergency Check</span><span class="pv">Monthly income x 6 = minimum liquid emergency fund required before investing.</span></div>
+          <div class="param"><span class="pn">Debt Priority</span><span class="pv">Credit card debt at 36%+ interest rate = pay that first. Better guaranteed return.</span></div>
+          <div class="param"><span class="pn">Insurance Check</span><span class="pv">Term + health insurance adequate before heavy equity allocation.</span></div>
+          <div class="param"><span class="pn">Investable Surplus</span><span class="pv">Only invest what is truly above emergency fund and debt obligations.</span></div>
+        </div>
+        <div class="nb" style="font-size:11px;margin-top:8px">E-11 runs before E-01 can start. Financial health first, portfolio optimization second.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ═══ COMPLETE SUMMARY ═══ -->
+<div class="sec">
+  <div class="sec-label">Complete Reference</div>
+  <div class="sec-title">All 11 Engines &mdash; <em>Summary Table</em></div>
+  <table>
+    <thead><tr><th>Engine</th><th>What It Does</th><th>When Runs</th><th>Key Algorithm</th><th>Output</th></tr></thead>
+    <tbody>
+      <tr><td style="color:var(--g)">E-01 Construction</td><td>Builds optimal portfolio. Calls E-02 for all candidates.</td><td>Creation + major changes</td><td>MVO scipy SLSQP</td><td>Exact Rs. per instrument</td></tr>
+      <tr><td style="color:var(--cyan)">E-02 Selection</td><td>12 analysis layers. Fraud gate. FIT SCORE 0-100.</td><td>Inside E-01, E-05, E-07</td><td>Quantum QAOA + 80+ checks</td><td>STRONG BUY / CONDITIONAL / AVOID</td></tr>
+      <tr><td style="color:var(--gold)">E-03 Backtesting</td><td>Tests portfolio against 5 historical crashes.</td><td>After every E-01 build</td><td>Historical crisis database</td><td>Approved or E-01 rebuild</td></tr>
+      <tr><td style="color:var(--red)">E-04 Risk Analysis</td><td>7 risk metrics. Same target, less risk.</td><td>After construction + daily</td><td>Sharpe, CVaR, Drawdown, Monte Carlo</td><td>Approved / Rebalance / Rebuild</td></tr>
+      <tr><td style="color:var(--pink)">E-05 Daily Analysis</td><td>Monitor all metrics. Calls E-02 monthly on holdings.</td><td>4:30pm IST every trading day</td><td>Live AMFI + Yahoo Finance</td><td>Silent or trigger others</td></tr>
+      <tr><td style="color:var(--purple)">E-06 Rebalancing</td><td>Restore target allocation on drift or breach.</td><td>Drift, risk breach, annual</td><td>Tax-optimized trade sorting</td><td>Buy/Sell orders with exact Rs.</td></tr>
+      <tr><td style="color:var(--orange)">E-07 SIP Redesign</td><td>Monthly quantity recalculation at live prices.</td><td>Monthly SIP date + amount change</td><td>Rs. fixed, qty flexes with price</td><td>Monthly investment plan</td></tr>
+      <tr><td style="color:var(--gold)">E-08 Tax Optimization</td><td>Minimize annual tax through smart sell sequencing.</td><td>Monthly + pre-March 31</td><td>LTCG tracking + loss harvesting</td><td>Tax saving in Rs./year</td></tr>
+      <tr><td style="color:var(--blue)">E-09 Goal Tracking</td><td>Monthly milestone vs actual. Course correction.</td><td>Daily + monthly report</td><td>Expected vs actual comparison</td><td>Rs. gap + extra SIP needed</td></tr>
+      <tr><td style="color:var(--purple)">E-10 Market Intelligence</td><td>Macro signals for tactical allocation tilts.</td><td>Monthly signal review</td><td>P/E, FII flows, GDP, RBI rates</td><td>Allocation tilt suggestion</td></tr>
+      <tr><td style="color:var(--grn)">E-11 Emergency Guard</td><td>Financial health pre-check before any investment.</td><td>Before any portfolio build</td><td>Income x 6 liquid floor rule</td><td>Investable surplus Rs. amount</td></tr>
+    </tbody>
+  </table>
+  <div class="nb" style="margin-top:16px"><strong>The key design principle:</strong> E-02 Selection Engine is not a one-time step. It is a continuous quality engine embedded in E-01, E-05, and E-07. Every candidate instrument is scored before entering. Every existing holding is re-scored monthly. This ensures the portfolio is always made of the best instruments for the specific user.</div>
+</div>
+
+<div class="footer">
+  <div class="fl">nxance</div>
+  <div class="ft">Ohshn Intelligence Pvt Ltd &nbsp;|&nbsp; Palampur, Himachal Pradesh &nbsp;|&nbsp; 2026<br>Portfolio Construction Engine Architecture v3.0 &nbsp;|&nbsp; Confidential</div>
+</div>
+</div>
+</body>
+</html>

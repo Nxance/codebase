@@ -1,0 +1,29 @@
+{
+  "mutual_funds": [
+    {"name": "UTI Nifty 50 Index Direct", "scheme_code": "120716", "category": "index", "ter_direct": 0.10, "ter_regular": 0.20, "expected_return": 12.5, "risk": "moderate"},
+    {"name": "Parag Parikh Flexi Cap Direct", "scheme_code": "122639", "category": "flexi", "ter_direct": 0.66, "ter_regular": 1.71, "expected_return": 14.0, "risk": "moderate"},
+    {"name": "Mirae Asset Large Cap Direct", "scheme_code": "118834", "category": "large", "ter_direct": 0.52, "ter_regular": 1.52, "expected_return": 13.0, "risk": "moderate"},
+    {"name": "HDFC Flexi Cap Direct", "scheme_code": "118989", "category": "flexi", "ter_direct": 0.98, "ter_regular": 1.68, "expected_return": 14.5, "risk": "moderate"},
+    {"name": "Axis Midcap Direct", "scheme_code": "120505", "category": "mid", "ter_direct": 0.55, "ter_regular": 1.88, "expected_return": 15.5, "risk": "aggressive"},
+    {"name": "SBI Small Cap Direct", "scheme_code": "125497", "category": "small", "ter_direct": 0.70, "ter_regular": 1.73, "expected_return": 16.0, "risk": "aggressive"},
+    {"name": "ICICI Pru Bluechip Direct", "scheme_code": "120586", "category": "large", "ter_direct": 0.98, "ter_regular": 1.56, "expected_return": 12.8, "risk": "moderate"},
+    {"name": "Kotak Equity Hybrid Direct", "scheme_code": "119775", "category": "hybrid", "ter_direct": 0.48, "ter_regular": 1.80, "expected_return": 11.0, "risk": "conservative"},
+    {"name": "HDFC Short Term Debt Direct", "scheme_code": "119062", "category": "debt", "ter_direct": 0.30, "ter_regular": 0.80, "expected_return": 7.2, "risk": "conservative"},
+    {"name": "SBI Magnum Gilt Direct", "scheme_code": "119598", "category": "debt", "ter_direct": 0.46, "ter_regular": 1.10, "expected_return": 7.0, "risk": "conservative"}
+  ],
+  "stocks": [
+    {"name": "Reliance Industries", "symbol": "RELIANCE", "sector": "Energy", "expected_return": 12.0, "risk": "moderate"},
+    {"name": "HDFC Bank", "symbol": "HDFCBANK", "sector": "Financials", "expected_return": 11.5, "risk": "moderate"},
+    {"name": "Infosys", "symbol": "INFY", "sector": "IT", "expected_return": 11.0, "risk": "moderate"},
+    {"name": "TCS", "symbol": "TCS", "sector": "IT", "expected_return": 10.5, "risk": "moderate"},
+    {"name": "ICICI Bank", "symbol": "ICICIBANK", "sector": "Financials", "expected_return": 12.5, "risk": "moderate"},
+    {"name": "Bharti Airtel", "symbol": "BHARTIARTL", "sector": "Telecom", "expected_return": 13.0, "risk": "moderate"},
+    {"name": "Asian Paints", "symbol": "ASIANPAINT", "sector": "Consumer", "expected_return": 10.0, "risk": "moderate"},
+    {"name": "Titan", "symbol": "TITAN", "sector": "Consumer", "expected_return": 14.0, "risk": "aggressive"}
+  ],
+  "fds": [
+    {"name": "SBI FD 3yr", "rate": 6.75, "tenure_years": 3},
+    {"name": "HDFC FD 3yr", "rate": 7.0, "tenure_years": 3},
+    {"name": "Post Office TD 5yr", "rate": 7.5, "tenure_years": 5}
+  ]
+}

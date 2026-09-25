@@ -1,0 +1,43 @@
+{
+  "n_train": 1500,
+  "n_val": 350,
+  "schema": "india_portfolio_v1",
+  "feature_columns": [
+    "portfolio_xirr",
+    "ter_waste_pct_aum",
+    "overlap_waste_pct_aum",
+    "hhi",
+    "equity_pct",
+    "regular_aum_pct",
+    "top_sector_pct",
+    "smallcap_pct",
+    "liquid_pct",
+    "est_tax_drag_pct_aum",
+    "n_lots",
+    "sip_regularity",
+    "elss_locked_pct",
+    "fd_pct",
+    "mean_holding_years"
+  ],
+  "label_columns": [
+    "label_health_score",
+    "label_grade",
+    "label_has_ter_leak",
+    "label_has_overlap",
+    "label_high_concentration",
+    "label_tax_heavy",
+    "label_low_liquidity",
+    "label_port_xirr"
+  ],
+  "archetypes": [
+    "aggressive_smallcap",
+    "concentrated_stock",
+    "conservative_fd_debt",
+    "direct_index_clean",
+    "mixed_tax_messy",
+    "regular_overlap_heavy"
+  ],
+  "amfi_seeds": 39,
+  "generated_on": "2026-07-13",
+  "notes": "Multivariate synthetic India portfolios for L2 training; replace with real anonymised CAS over time."
+}

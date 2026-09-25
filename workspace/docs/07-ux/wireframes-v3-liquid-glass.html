@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Nxance — Liquid Glass</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+:root{
+  /* EXACT PALETTE FROM REFERENCE */
+  --bg:#08071E;
+  --bg2:#0D0B2E;
+  --bg3:#13104A;
+  --bg4:#1A1760;
+  /* Vibrant blue */
+  --vb:#2A5BFF;
+  --vb2:#4070FF;
+  --vb3:#6090FF;
+  /* Cyan */
+  --cy:#00C8FF;
+  --cy2:#00A0DD;
+  /* Purple */
+  --pu:#7B5FFF;
+  --pu2:#9B82FF;
+  /* Glass */
+  --g1:rgba(255,255,255,.055);
+  --g2:rgba(255,255,255,.09);
+  --g3:rgba(255,255,255,.13);
+  --gb:rgba(42,91,255,.3);
+  --gp:rgba(123,95,255,.2);
+  /* Text */
+  --t1:#FFFFFF;
+  --t2:rgba(255,255,255,.65);
+  --t3:rgba(255,255,255,.38);
+  --t4:rgba(255,255,255,.18);
+  /* Status */
+  --green:#00E5A0;
+  --red:#FF4060;
+  --amber:#FFB020;
+  --border:rgba(255,255,255,.1);
+  --border2:rgba(255,255,255,.06);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:#04031A}
+
+.page{max-width:1600px;margin:0 auto;padding:44px 32px 80px}
+.pgtit{font-size:20px;font-weight:700;color:rgba(255,255,255,.7);margin-bottom:4px}
+.pgsub{font-size:11.5px;color:rgba(255,255,255,.22);margin-bottom:14px}
+.palrow{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px}
+.pal{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:7px;padding:5px 12px;font-size:11px;font-weight:500;color:rgba(255,255,255,.28)}
+.paldot{width:12px;height:12px;border-radius:50%}
+.tbar{display:flex;gap:8px;margin-bottom:0}
+.tbtn{padding:9px 20px;border-radius:9px;font-size:12px;font-weight:600;cursor:pointer;border:none;font-family:inherit;display:inline-flex;align-items:center;gap:6px;transition:.15s}
+.tbtn:hover{transform:translateY(-1px)}
+.tb1{background:var(--vb);color:#fff;box-shadow:0 6px 20px rgba(42,91,255,.4)}
+.tb2{background:rgba(255,255,255,.06);color:rgba(255,255,255,.35);border:1px solid var(--border2)}
+.slbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:rgba(255,255,255,.15);margin:56px 0 22px;display:flex;align-items:center;gap:12px}
+.slbl:first-of-type{margin-top:0}
+.slbl::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.04)}
+.scrow{display:flex;gap:28px;flex-wrap:wrap;align-items:flex-start}
+.dv{flex-shrink:0;width:252px}
+
+/* ─── DEVICE SHELL ─── */
+.shell{
+  background:#02011A;
+  border-radius:52px;
+  padding:13px;
+  border:1.5px solid rgba(255,255,255,.12);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.025),
+    0 50px 100px rgba(0,0,16,.85),
+    0 0 80px rgba(42,91,255,.1),
+    inset 0 1px 0 rgba(255,255,255,.05);
+  position:relative;
+}
+.shell::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:88px;height:29px;background:#02011A;border-radius:0 0 22px 22px;z-index:4}
+.sbar{height:42px;display:flex;align-items:flex-end;justify-content:space-between;padding:0 22px 9px;position:relative;z-index:3}
+.sbt{font-size:12px;font-weight:600;color:#fff;letter-spacing:.01em}
+.scr{border-radius:38px;overflow:hidden;min-height:520px;position:relative}
+.dl{font-size:9.5px;font-weight:600;color:rgba(255,255,255,.18);text-align:center;margin-top:10px;letter-spacing:.04em}
+.dn{font-size:8.5px;color:rgba(255,255,255,.1);text-align:center;margin-top:2px}
+
+/* ─── SCREEN BACKGROUND (exact reference gradient) ─── */
+.bg{
+  min-height:520px;
+  background:linear-gradient(160deg,#08071E 0%,#0D0B30 35%,#130F50 65%,#0A0828 100%);
+  position:relative;overflow:hidden;
+}
+/* Large radial glow — blue top-right */
+.bg::before{
+  content:'';position:absolute;top:-100px;right:-80px;
+  width:320px;height:320px;border-radius:50%;
+  background:radial-gradient(circle,rgba(42,91,255,.4) 0%,rgba(42,91,255,.15) 40%,transparent 70%);
+  pointer-events:none;
+}
+/* Cyan glow bottom-left */
+.bg::after{
+  content:'';position:absolute;bottom:-80px;left:-60px;
+  width:240px;height:240px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,200,255,.25) 0%,rgba(0,200,255,.08) 40%,transparent 70%);
+  pointer-events:none;
+}
+/* Purple mid */
+.bgm{position:absolute;top:38%;left:25%;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(123,95,255,.18) 0%,transparent 70%);pointer-events:none}
+
+/* ─── TOP NAV ─── */
+.tn{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:11px 18px;min-height:52px;
+  background:rgba(8,7,30,.55);
+  border-bottom:1px solid var(--border2);
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  position:relative;z-index:5;
+}
+.logo{font-size:18px;font-weight:800;color:var(--cy);letter-spacing:-.02em}
+.badge-beta{background:rgba(0,200,255,.1);border:1px solid rgba(0,200,255,.22);color:var(--cy);padding:3px 10px;border-radius:20px;font-size:8.5px;font-weight:700;letter-spacing:.05em}
+.nicon{width:34px;height:34px;background:var(--g1);border:1px solid var(--border);border-radius:11px;display:flex;align-items:center;justify-content:center;color:var(--t3);font-size:16px;cursor:pointer}
+.nbk{width:34px;height:34px;background:var(--g1);border:1px solid var(--border);border-radius:11px;display:flex;align-items:center;justify-content:center;color:var(--t2);font-size:17px;cursor:pointer;border:none}
+.ntit{font-size:13px;font-weight:600;color:var(--t1);letter-spacing:.01em}
+
+/* ─── BOTTOM NAV ─── */
+.bn{display:flex;padding:11px 0 14px;background:rgba(8,7,30,.7);border-top:1px solid var(--border2);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);position:relative;z-index:5}
+.bni{display:flex;align-items:center;justify-content:center;flex:1;position:relative;cursor:pointer}
+.bnic{font-size:24px;color:rgba(255,255,255,.2);transition:.15s}
+.bnic.a{color:var(--cy);filter:drop-shadow(0 0 10px rgba(0,200,255,.75))}
+.adot{width:4px;height:4px;border-radius:50%;background:var(--cy);box-shadow:0 0 8px var(--cy);position:absolute;bottom:-5px;left:50%;transform:translateX(-50%)}
+
+/* ─── GLASS CARD ─── */
+.gc{
+  background:var(--g1);
+  border:1px solid var(--border);
+  border-radius:18px;
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+}
+.gc-blue{
+  background:rgba(42,91,255,.18);
+  border:1px solid rgba(42,91,255,.4);
+  border-radius:18px;
+  backdrop-filter:blur(24px);
+  box-shadow:0 8px 32px rgba(42,91,255,.25);
+}
+.gc-cy{
+  background:rgba(0,200,255,.1);
+  border:1px solid rgba(0,200,255,.22);
+  border-radius:18px;
+  backdrop-filter:blur(24px);
+}
+
+/* ═══════════════════════════════════
+   SCREEN 1 — HOME
+═══════════════════════════════════ */
+.s1pad{padding:18px 18px 22px;position:relative;z-index:2}
+.s1chip{display:inline-flex;align-items:center;gap:6px;background:rgba(0,200,255,.1);border:1px solid rgba(0,200,255,.22);color:var(--cy);padding:4px 13px;border-radius:20px;font-size:9px;font-weight:700;letter-spacing:.06em;margin-bottom:14px}
+.s1h{font-size:23px;font-weight:800;color:#fff;line-height:1.18;margin-bottom:9px;letter-spacing:-.025em}
+.s1h em{color:var(--cy);font-style:normal}
+.s1sub{font-size:10.5px;color:var(--t3);line-height:1.7;margin-bottom:20px}
+.s1btn{width:100%;background:linear-gradient(135deg,#1E50FF 0%,#2A5BFF 50%,#3070FF 100%);color:#fff;border:none;border-radius:16px;padding:14px;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;box-shadow:0 12px 32px rgba(42,91,255,.5),0 0 0 1px rgba(255,255,255,.1);letter-spacing:.01em}
+.s1stats{display:flex;border-top:1px solid rgba(255,255,255,.08);margin-top:16px;padding-top:14px}
+.s1si{flex:1;text-align:center;border-right:1px solid rgba(255,255,255,.07)}
+.s1si:last-child{border-right:none}
+.s1sn{font-size:15px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.01em}
+.s1sl{font-size:8.5px;color:var(--t4);margin-top:3px;letter-spacing:.04em;text-transform:uppercase}
+
+.s1how{padding:14px 18px 13px;background:rgba(255,255,255,.025);border-top:1px solid var(--border2);position:relative;z-index:2}
+.sey{font-size:8.5px;font-weight:700;text-transform:uppercase;letter-spacing:.15em;color:var(--t4);margin-bottom:12px}
+.hw{display:flex;gap:12px;align-items:flex-start;margin-bottom:11px}
+.hw:last-child{margin-bottom:0}
+.hwn{width:27px;height:27px;border-radius:9px;background:rgba(0,200,255,.1);border:1px solid rgba(0,200,255,.22);color:var(--cy);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.hwt h6{font-size:12px;font-weight:700;color:rgba(255,255,255,.85);margin-bottom:2px}
+.hwt p{font-size:10px;color:var(--t3);line-height:1.45}
+
+.s1trust{padding:9px 18px;display:flex;align-items:center;justify-content:space-around;background:rgba(0,200,255,.04);border-top:1px solid rgba(0,200,255,.09);position:relative;z-index:2}
+.tri{display:flex;align-items:center;gap:5px;font-size:9.5px;color:var(--cy2);font-weight:600}
+
+.s1why{padding:13px 18px 10px;position:relative;z-index:2}
+.why-g{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:9px}
+.wyc{background:var(--g1);border:1px solid var(--border);border-radius:16px;padding:13px 14px;position:relative;overflow:hidden;backdrop-filter:blur(20px)}
+.wyc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--vb),var(--vb3));border-radius:16px 16px 0 0}
+.wyc.tl::before{background:linear-gradient(90deg,var(--cy2),var(--cy))}
+.wy-ic{font-size:19px;color:var(--vb2);margin-bottom:7px}
+.wyc.tl .wy-ic{color:var(--cy)}
+.wy-t{font-size:11.5px;font-weight:700;color:rgba(255,255,255,.85);margin-bottom:3px}
+.wy-s{font-size:9.5px;color:var(--t3);line-height:1.45}
+
+/* ═══════════════════════════════════
+   SCREEN 2 — SIGN IN
+═══════════════════════════════════ */
+.s2pad{padding:22px 18px 18px;position:relative;z-index:2}
+.s2greet{font-size:26px;font-weight:800;color:#fff;letter-spacing:-.025em;margin-bottom:4px}
+.s2sub{font-size:11px;color:var(--t3);margin-bottom:22px;line-height:1.55}
+.inp-f{background:var(--g1);border:1px solid var(--border);border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:11px;margin-bottom:11px;backdrop-filter:blur(20px)}
+.inp-f input{background:transparent;border:none;outline:none;font-size:13px;color:#fff;font-family:inherit;flex:1}
+.inp-f input::placeholder{color:var(--t4)}
+.inp-ic{font-size:17px;color:var(--t4);flex-shrink:0}
+.flag-t{font-size:12px;color:var(--t3);flex-shrink:0}
+.s2cta{width:100%;background:linear-gradient(135deg,#1E50FF,#2A5BFF);color:#fff;border:none;border-radius:16px;padding:14px;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;margin-bottom:14px;box-shadow:0 10px 28px rgba(42,91,255,.45)}
+.or-r{display:flex;align-items:center;gap:10px;margin:6px 0 14px}
+.orl{flex:1;height:1px;background:rgba(255,255,255,.08)}
+.ort{font-size:10px;color:var(--t4)}
+.soc-row{display:flex;gap:10px}
+.soc{flex:1;background:var(--g1);border:1px solid var(--border);border-radius:16px;padding:13px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;backdrop-filter:blur(20px)}
+.soci{font-size:18px;color:#fff}
+.soct{font-size:12px;font-weight:600;color:var(--t2)}
+
+.otp-block{background:var(--g1);border:1px solid var(--border);border-radius:20px;padding:17px 16px;margin-top:14px;backdrop-filter:blur(20px)}
+.otp-h{font-size:13px;font-weight:700;color:#fff;margin-bottom:3px}
+.otp-s{font-size:10px;color:var(--t3);margin-bottom:14px}
+.otp-row{display:flex;gap:9px;justify-content:center;margin-bottom:12px}
+.oc{width:42px;height:50px;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:#fff}
+.oc.f{background:rgba(42,91,255,.2);border-color:rgba(42,91,255,.55);color:var(--cy)}
+.oc.a{border-color:var(--cy);box-shadow:0 0 0 3px rgba(0,200,255,.2)}
+.rsnd{font-size:10px;color:var(--t3);text-align:center;margin-bottom:13px}
+.rsnd span{color:var(--cy);font-weight:700;cursor:pointer}
+.vbtn{width:100%;background:rgba(42,91,255,.25);border:1px solid rgba(42,91,255,.45);color:rgba(255,255,255,.45);border-radius:14px;padding:13px;font-size:12.5px;font-weight:700;font-family:inherit;cursor:pointer}
+
+.prof-block{background:var(--g1);border:1px solid var(--border);border-radius:20px;padding:15px 16px;margin-top:12px}
+.prof-h{font-size:13px;font-weight:700;color:#fff;margin-bottom:12px}
+.prow{display:flex;gap:8px;margin-bottom:9px}
+.pinp{flex:1;background:rgba(255,255,255,.07);border:1px solid var(--border);border-radius:13px;padding:11px 13px;font-size:12px;color:#fff;font-family:inherit;outline:none}
+.pinp::placeholder{color:var(--t4)}
+.go-btn{width:100%;background:linear-gradient(135deg,#1E50FF,#2A5BFF);color:#fff;border:none;border-radius:14px;padding:13px;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;box-shadow:0 8px 24px rgba(42,91,255,.4)}
+
+/* ═══════════════════════════════════
+   SCREEN 3 — HOLDINGS
+═══════════════════════════════════ */
+.seg{display:flex;background:rgba(255,255,255,.04);border-bottom:1px solid var(--border2);padding:10px 18px;gap:8px;position:relative;z-index:2}
+.sg{flex:1;padding:9px 8px;border-radius:13px;font-size:11px;font-weight:600;text-align:center;color:var(--t3);cursor:pointer;border:none;background:transparent;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:5px;transition:.14s}
+.sg i{font-size:15px}
+.sg.on{background:rgba(42,91,255,.3);border:1px solid rgba(42,91,255,.5);color:#fff;box-shadow:0 4px 16px rgba(42,91,255,.3)}
+
+.pb{padding:13px 18px 14px;position:relative;z-index:2}
+.pbh{font-size:14px;font-weight:700;color:var(--t1);margin-bottom:3px}
+.pbs{font-size:10px;color:var(--t3);margin-bottom:12px}
+.srch{position:relative;margin-bottom:12px}
+.srch i{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:16px;color:var(--t4)}
+.srch input{width:100%;background:var(--g1);border:1px solid var(--border);border-radius:14px;padding:11px 14px 11px 40px;font-size:12px;font-family:inherit;outline:none;color:#fff;backdrop-filter:blur(20px)}
+.srch input::placeholder{color:var(--t4)}
+.srch input:focus{border-color:rgba(0,200,255,.45)}
+
+.flist{background:var(--g1);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:11px;backdrop-filter:blur(24px)}
+.fi{padding:11px 14px;border-bottom:1px solid var(--border2);display:flex;align-items:center;gap:11px}
+.fi:last-child{border-bottom:none}
+.fav{width:36px;height:36px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:800;flex-shrink:0;backdrop-filter:blur(10px)}
+.fn{font-size:12px;font-weight:600;color:rgba(255,255,255,.9)}
+.fm{font-size:9.5px;color:var(--t3);margin-top:2px;display:flex;align-items:center;gap:5px}
+.ftag{font-size:8px;padding:2px 7px;border-radius:6px;font-weight:700;letter-spacing:.02em}
+.td{background:rgba(0,200,255,.15);color:var(--cy)}
+.ts{background:rgba(255,176,32,.15);color:var(--amber)}
+.tr{background:rgba(255,64,96,.15);color:var(--red)}
+.fv{font-size:12.5px;font-weight:700;color:#fff;text-align:right;letter-spacing:-.01em}
+.fx{font-size:9.5px;margin-top:2px;font-weight:600;text-align:right}
+.pos{color:var(--green)}.neg{color:var(--red)}
+.addr{padding:11px 14px;display:flex;align-items:center;gap:9px;cursor:pointer}
+.addc{width:24px;height:24px;border-radius:50%;border:1.5px dashed rgba(42,91,255,.6);display:flex;align-items:center;justify-content:center;color:var(--vb2);font-size:14px}
+
+.totbar{background:rgba(42,91,255,.2);border:1px solid rgba(42,91,255,.4);border-radius:16px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;margin-bottom:11px;backdrop-filter:blur(20px);box-shadow:0 6px 24px rgba(42,91,255,.2)}
+.totl .tl{font-size:8.5px;color:rgba(255,255,255,.35);letter-spacing:.07em;text-transform:uppercase}
+.totl .tv{font-size:16px;font-weight:800;color:#fff;letter-spacing:-.01em;margin-top:2px}
+.totr{text-align:right}
+.totr .tl{font-size:8.5px;color:rgba(255,255,255,.35);letter-spacing:.07em;text-transform:uppercase}
+.totr .txirr{font-size:15px;font-weight:800;color:var(--cy);margin-top:2px;letter-spacing:-.01em}
+.anbtn{width:100%;background:linear-gradient(135deg,#1E50FF,#2A5BFF);color:#fff;border:none;border-radius:16px;padding:14px;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;box-shadow:0 10px 28px rgba(42,91,255,.45)}
+
+/* ═══════════════════════════════════
+   SCREEN 4 — GOALS
+═══════════════════════════════════ */
+.qtabs{display:flex;background:rgba(255,255,255,.03);border-bottom:1px solid var(--border2);padding:0 18px;position:relative;z-index:2}
+.qt{flex:1;padding:10px 0;text-align:center;font-size:9.5px;font-weight:600;color:var(--t4);border-bottom:2px solid transparent;letter-spacing:.02em}
+.qt.dn{color:var(--green);border-color:var(--green)}
+.qt.ac{color:var(--cy);border-color:var(--cy)}
+.gbody{padding:15px 18px;position:relative;z-index:2}
+.pbar{height:3px;background:rgba(255,255,255,.08);border-radius:50px;margin-bottom:15px;overflow:hidden}
+.pf{height:100%;width:40%;background:linear-gradient(90deg,var(--vb),var(--cy));border-radius:50px}
+.qcard{background:rgba(42,91,255,.18);border:1px solid rgba(42,91,255,.35);border-radius:18px;padding:16px 18px;margin-bottom:14px;backdrop-filter:blur(20px)}
+.qst{font-size:8.5px;color:rgba(255,255,255,.3);font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.qtxt{font-size:15px;font-weight:700;color:#fff;line-height:1.35}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.opt{background:var(--g1);border:1px solid var(--border);border-radius:14px;padding:11px;cursor:pointer;display:flex;align-items:center;gap:8px;backdrop-filter:blur(20px)}
+.opt.sel{background:rgba(42,91,255,.22);border-color:rgba(42,91,255,.55);box-shadow:0 4px 16px rgba(42,91,255,.25)}
+.oic{width:30px;height:30px;border-radius:10px;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.opt.sel .oic{background:rgba(42,91,255,.4)}
+.olb{font-size:11px;font-weight:600;color:var(--t2)}
+.opt.sel .olb{color:#fff}
+.tipcard{background:rgba(0,200,255,.08);border:1px solid rgba(0,200,255,.18);border-left:2px solid var(--cy);border-radius:13px;padding:10px 13px;margin-bottom:14px}
+.tipt{font-size:10px;color:rgba(0,200,255,.9);line-height:1.55}
+.gftr{display:flex;align-items:center;justify-content:space-between}
+.sdots{display:flex;gap:5px}
+.dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.15)}
+.dot.on{background:var(--cy);width:15px;border-radius:3px;box-shadow:0 0 8px rgba(0,200,255,.7)}
+.dot.dn{background:var(--green)}
+.nxtbtn{background:linear-gradient(135deg,#1E50FF,#2A5BFF);color:#fff;border:none;border-radius:12px;padding:10px 22px;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer;display:flex;align-items:center;gap:5px;box-shadow:0 6px 18px rgba(42,91,255,.4)}
+
+/* ═══════════════════════════════════
+   SCREEN 5 — ANALYSIS PROGRESS
+═══════════════════════════════════ */
+.pgbody{padding:30px 18px;text-align:center;position:relative;z-index:2}
+.ringw{width:92px;height:92px;margin:0 auto 17px;position:relative}
+.ringw svg{width:92px;height:92px}
+.ringi{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.rp{font-size:19px;font-weight:800;color:var(--cy);line-height:1;letter-spacing:-.02em}
+.rl{font-size:8.5px;color:var(--t4);margin-top:2px;letter-spacing:.04em}
+.pgh{font-size:18px;font-weight:800;color:#fff;margin-bottom:5px;letter-spacing:-.02em}
+.pgs{font-size:10.5px;color:var(--t3);line-height:1.65;margin-bottom:18px}
+.slist{background:var(--g1);border:1px solid var(--border);border-radius:18px;overflow:hidden;text-align:left;backdrop-filter:blur(24px)}
+.si{padding:10px 15px;display:flex;align-items:center;gap:11px;border-bottom:1px solid var(--border2)}
+.si:last-child{border-bottom:none}
+.sdot{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.sdn{background:rgba(0,229,160,.15);color:var(--green)}
+.sac{background:rgba(0,200,255,.15);color:var(--cy)}
+.swt{background:rgba(255,255,255,.05);color:var(--t4)}
+.slb{font-size:11.5px;flex:1}
+.sv{font-size:10px;font-weight:700;color:var(--green)}
+
+/* ═══════════════════════════════════
+   SCREEN 6 — RESULTS + PAYWALL
+═══════════════════════════════════ */
+.rh{padding:15px 18px 17px;text-align:center;position:relative;z-index:2;border-bottom:1px solid var(--border2)}
+.rhey{font-size:8.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--t4);margin-bottom:9px}
+.srng{width:84px;height:84px;margin:0 auto 9px;position:relative}
+.srng svg{width:84px;height:84px}
+.srni{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.srvn{font-size:28px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.025em}
+.srd{font-size:10.5px;color:var(--t4)}
+.sbdg{display:inline-block;background:rgba(255,176,32,.12);border:1px solid rgba(255,176,32,.28);color:var(--amber);padding:4px 16px;border-radius:20px;font-size:9.5px;font-weight:700;margin-bottom:11px;letter-spacing:.02em}
+.mrow{display:flex;border-top:1px solid var(--border2);padding-top:11px}
+.mi{flex:1;text-align:center;border-right:1px solid var(--border2)}
+.mi:last-child{border-right:none}
+.miv{font-size:14px;font-weight:800;color:#fff;letter-spacing:-.01em}
+.miv.neg{color:#FF6B7A}
+.mil{font-size:8.5px;color:var(--t4);margin-top:2px;letter-spacing:.03em;text-transform:uppercase}
+
+.albsec{padding:12px 18px;position:relative;z-index:2;border-bottom:1px solid var(--border2)}
+.alh{font-size:11.5px;font-weight:700;color:var(--t2);margin-bottom:11px}
+.abr{display:flex;align-items:center;gap:9px;margin-bottom:8px}
+.abl{font-size:9px;color:var(--t3);width:60px;flex-shrink:0;text-align:right;font-weight:500}
+.abt{flex:1;height:7px;background:rgba(255,255,255,.07);border-radius:50px;overflow:hidden}
+.abf{height:100%;border-radius:50px}
+.abv{font-size:9.5px;font-weight:700;color:var(--t2);width:34px;flex-shrink:0}
+
+.isssec{padding:12px 18px 6px;position:relative;z-index:2}
+.issh2{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px}
+.iss-tit{font-size:12.5px;font-weight:700;color:var(--t2)}
+.ipill{background:rgba(255,64,96,.15);color:var(--red);border:1px solid rgba(255,64,96,.25);padding:3px 11px;border-radius:7px;font-size:9.5px;font-weight:700}
+.icard{background:var(--g1);border:1px solid var(--border);border-radius:16px;padding:12px 14px;margin-bottom:9px;border-left:3px solid;backdrop-filter:blur(20px)}
+.icf{border-left-color:var(--green)}
+.ihd{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px}
+.isev{font-size:8.5px;font-weight:700;padding:3px 9px;border-radius:6px;letter-spacing:.03em}
+.sevh{background:rgba(255,64,96,.15);color:var(--red)}
+.sevm{background:rgba(255,176,32,.15);color:var(--amber)}
+.iftag{background:rgba(0,229,160,.12);color:var(--green);font-size:8.5px;font-weight:700;padding:3px 9px;border-radius:6px}
+.it{font-size:12.5px;font-weight:700;color:rgba(255,255,255,.9);margin-bottom:4px}
+.ib{font-size:10px;color:var(--t3);line-height:1.5}
+.imp{font-size:11.5px;font-weight:800;color:var(--red);margin-top:7px;letter-spacing:-.01em}
+.mchart{margin-top:8px;display:flex;align-items:flex-end;gap:3px;height:26px}
+.mcb{border-radius:3px 3px 0 0;flex:1}
+
+.lkw{position:relative;margin-bottom:9px}
+.lkblur{filter:blur(4.5px);pointer-events:none;user-select:none;background:var(--g1);border:1px solid var(--border);border-radius:16px;padding:12px 14px;border-left:3px solid rgba(255,255,255,.15)}
+.lkov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border-radius:16px;background:rgba(8,7,30,.68);backdrop-filter:blur(3px)}
+.lkamt{font-size:18px;font-weight:800;color:var(--red);letter-spacing:-.01em}
+.lkct{font-size:10px;font-weight:600;color:var(--t3)}
+
+.pwcard{margin:6px 18px 12px;background:rgba(42,91,255,.16);border:1px solid rgba(42,91,255,.38);border-radius:20px;padding:18px;position:relative;overflow:hidden;backdrop-filter:blur(30px)}
+.pwcard::before{content:'';position:absolute;top:-50px;right:-50px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(0,200,255,.2),transparent 70%)}
+.pwcard::after{content:'';position:absolute;bottom:-40px;left:-30px;width:130px;height:130px;border-radius:50%;background:radial-gradient(circle,rgba(42,91,255,.25),transparent 70%)}
+.pwh{font-size:16px;font-weight:800;color:#fff;margin-bottom:5px;letter-spacing:-.01em;position:relative;z-index:1}
+.pws{font-size:9.5px;color:var(--t3);margin-bottom:13px;line-height:1.55;position:relative;z-index:1}
+.pwpr{display:flex;align-items:baseline;gap:7px;margin-bottom:13px;position:relative;z-index:1}
+.pwrs{font-size:34px;font-weight:800;color:var(--cy);line-height:1;letter-spacing:-.03em}
+.pwmo{font-size:10px;color:var(--t3)}
+.pwbtn{width:100%;background:linear-gradient(135deg,#1E50FF,#2A5BFF);color:#fff;border:none;border-radius:15px;padding:13px;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;margin-bottom:11px;position:relative;z-index:1;box-shadow:0 10px 28px rgba(42,91,255,.5)}
+.pwtrust{display:flex;gap:16px;position:relative;z-index:1}
+.pwti{font-size:8.5px;color:var(--t4);display:flex;align-items:center;gap:4px}
+
+/* ═══════════════════════════════════
+   SCREEN 7 — FULL REPORT
+═══════════════════════════════════ */
+.rphero{padding:14px 18px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:2;border-bottom:1px solid var(--border2)}
+.rphl h3{font-size:16px;font-weight:800;color:#fff;line-height:1.2;margin-bottom:3px;letter-spacing:-.01em}
+.rphl p{font-size:9px;color:var(--t4)}
+.rpsc{font-size:34px;font-weight:800;color:var(--cy);line-height:1;letter-spacing:-.025em}
+.rpsl{font-size:8.5px;color:var(--t4);text-align:center;margin-top:2px}
+.ubr{padding:9px 18px;display:flex;align-items:center;gap:8px;background:rgba(0,229,160,.07);border-bottom:1px solid rgba(0,229,160,.12);position:relative;z-index:2}
+.ubt{font-size:11px;font-weight:700;color:var(--green)}
+.cs{padding:13px 18px;position:relative;z-index:2;border-bottom:1px solid var(--border2)}
+.csh{font-size:11.5px;font-weight:700;color:var(--t2);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
+.cbdg{font-size:8.5px;padding:3px 9px;border-radius:6px;background:rgba(42,91,255,.2);border:1px solid rgba(42,91,255,.38);color:var(--cy);font-weight:700}
+.cbars{display:flex;align-items:flex-end;gap:5px;height:62px}
+.cb{border-radius:5px 5px 0 0;flex:1}
+.cxls{display:flex;gap:5px;margin-top:5px}
+.cxl{flex:1;text-align:center;font-size:8px;color:var(--t4)}
+.m4g{padding:5px 18px 10px;display:grid;grid-template-columns:1fr 1fr;gap:8px;position:relative;z-index:2;border-bottom:1px solid var(--border2)}
+.mcard{border-radius:14px;padding:12px 14px;background:var(--g1);border:1px solid var(--border);backdrop-filter:blur(20px)}
+.mcn{font-size:17px;font-weight:800;line-height:1;letter-spacing:-.01em}
+.mclb{font-size:9px;margin-top:3px;letter-spacing:.03em;text-transform:uppercase;font-weight:600}
+.issfull{padding:12px 18px 6px;position:relative;z-index:2}
+.isf{background:var(--g1);border:1px solid var(--border);border-radius:16px;padding:12px 14px;margin-bottom:9px;border-left:3px solid;backdrop-filter:blur(20px)}
+.ifg{border-left-color:var(--green)}
+.ifa{border-left-color:var(--amber)}
+.ifb{border-left-color:var(--cy)}
+.iact{display:flex;align-items:flex-start;gap:8px;margin-top:8px;padding-top:8px;border-top:1px solid var(--border2)}
+.iatx{font-size:11px;font-weight:700;color:var(--cy);letter-spacing:.01em}
+.iasc{font-size:8.5px;color:var(--t3);margin-top:2px;font-family:monospace}
+.nlmcard{background:rgba(0,200,255,.07);border:1px solid rgba(0,200,255,.16);border-radius:16px;padding:13px 15px;margin:7px 18px 10px;position:relative;z-index:2;backdrop-filter:blur(20px)}
+.nlmt{display:flex;align-items:center;gap:9px;margin-bottom:8px}
+.nlmav{width:26px;height:26px;border-radius:9px;background:rgba(0,200,255,.14);border:1px solid rgba(0,200,255,.24);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--cy)}
+.nlmlb{font-size:10.5px;font-weight:600;color:var(--t3)}
+.nlmbd{font-size:10.5px;color:var(--t3);line-height:1.65}
+.nlmch{display:inline-block;background:rgba(0,200,255,.12);border:1px solid rgba(0,200,255,.2);color:var(--cy);font-size:9px;padding:2px 8px;border-radius:5px;font-weight:700;margin:0 1.5px}
+.fixlink{color:var(--cy);font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 18px 9px;letter-spacing:.01em;position:relative;z-index:2;text-shadow:0 0 20px rgba(0,200,255,.5)}
+
+@media print{.tbar{display:none!important}body{background:#04031A}}
+@media(max-width:680px){.scrow{flex-direction:column;align-items:center}.page{padding:20px 14px 60px}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div style="margin-bottom:44px">
+  <div class="pgtit">Nxance — Liquid Glass Wireframes</div>
+  <div class="pgsub">Exact palette from reference · Deep navy/purple · Glassmorphism · Vibrant blue glow · Cyan accent</div>
+  <div class="palrow">
+    <div class="pal"><div class="paldot" style="background:#08071E"></div>Deep Navy #08071E</div>
+    <div class="pal"><div class="paldot" style="background:#2A5BFF"></div>Vibrant Blue #2A5BFF</div>
+    <div class="pal"><div class="paldot" style="background:#00C8FF"></div>Cyan #00C8FF</div>
+    <div class="pal"><div class="paldot" style="background:#7B5FFF"></div>Purple #7B5FFF</div>
+    <div class="pal"><div class="paldot" style="background:#fff;border:1px solid #333"></div>White</div>
+  </div>
+  <div class="tbar">
+    <button class="tbtn tb1" onclick="window.print()"><i class="ti ti-file-pdf"></i>Save PDF</button>
+    <button class="tbtn tb2" onclick="(function(){var a=document.createElement('a');a.href='data:text/html;charset=utf-8,'+encodeURIComponent(document.documentElement.outerHTML);a.download='Nxance_LiquidGlass_Final.html';a.click()})()"><i class="ti ti-download"></i>Download</button>
+  </div>
+</div>
+
+<!-- S1 HOME -->
+<div class="slbl">Screen 1 — Home</div>
+<div class="scrow"><div class="dv">
+<div class="shell">
+<div class="sbar"><span class="sbt">9:41</span><div style="display:flex;align-items:center;gap:5px"><i class="ti ti-wifi" style="font-size:13px;color:rgba(255,255,255,.7)"></i><i class="ti ti-battery" style="font-size:13px;color:rgba(255,255,255,.7)"></i></div></div>
+<div class="scr"><div class="bg"><div class="bgm"></div>
+  <div class="tn"><span class="logo">Nxance</span><span class="badge-beta">FREE BETA</span><div class="nicon"><i class="ti ti-bell" style="font-size:16px"></i></div></div>
+  <div class="s1pad">
+    <div class="s1chip"><i class="ti ti-shield-check" style="font-size:10px"></i>SEBI · Own AI · DPDPA 2023</div>
+    <div class="s1h">Is your portfolio<br>truly <em>healthy?</em></div>
+    <div class="s1sub">Exact rupee impact in 60 seconds. Mutual funds + stocks. 150M+ real data points.</div>
+    <div class="s1btn">Check my portfolio — Free&nbsp;<i class="ti ti-arrow-right" style="font-size:13px"></i></div>
+    <div class="s1stats">
+      <div class="s1si"><div class="s1sn">150M+</div><div class="s1sl">Data pts</div></div>
+      <div class="s1si"><div class="s1sn">₹0</div><div class="s1sl">Free score</div></div>
+      <div class="s1si"><div class="s1sn">60s</div><div class="s1sl">Analysis</div></div>
+    </div>
+  </div>
+  <div class="s1how">
+    <div class="sey">How it works</div>
+    <div class="hw"><div class="hwn">1</div><div class="hwt"><h6>Add MF &amp; stocks</h6><p>Photo · Manual · Broker sync</p></div></div>
+    <div class="hw"><div class="hwn">2</div><div class="hwt"><h6>5 quick questions</h6><p>Goals, risk, investment horizon</p></div></div>
+    <div class="hw"><div class="hwn">3</div><div class="hwt"><h6>Get exact ₹ impact</h6><p>Score + ranked issues + fix plan</p></div></div>
+  </div>
+  <div class="s1trust">
+    <div class="tri"><i class="ti ti-lock" style="font-size:13px"></i>256-bit</div>
+    <div class="tri"><i class="ti ti-shield-check" style="font-size:13px"></i>DPDPA</div>
+    <div class="tri"><i class="ti ti-certificate" style="font-size:13px"></i>Bank-grade</div>
+  </div>
+  <div class="s1why">
+    <div class="sey">Why Nxance?</div>
+    <div class="why-g">
+      <div class="wyc tl"><div class="wy-ic"><i class="ti ti-chart-bar"></i></div><div class="wy-t">Exact math</div><div class="wy-s">Newton-Raphson XIRR</div></div>
+      <div class="wyc"><div class="wy-ic"><i class="ti ti-brain"></i></div><div class="wy-t">Own AI</div><div class="wy-s">Zero API cost</div></div>
+      <div class="wyc"><div class="wy-ic"><i class="ti ti-map-pin"></i></div><div class="wy-t">India-first</div><div class="wy-s">Data stays in India</div></div>
+      <div class="wyc tl"><div class="wy-ic"><i class="ti ti-currency-rupee"></i></div><div class="wy-t">₹99/month</div><div class="wy-s">Payback in 4 days</div></div>
+    </div>
+  </div>
+  <div class="bn">
+    <div class="bni"><i class="ti ti-home-2 bnic a"></i><div class="adot"></div></div>
+    <div class="bni"><i class="ti ti-chart-donut bnic"></i></div>
+    <div class="bni"><i class="ti ti-report-analytics bnic"></i></div>
+    <div class="bni"><i class="ti ti-user-circle bnic"></i></div>
+  </div>
+</div></div></div>
+<div class="dl">Home</div><div class="dn">01 / 07</div>
+</div></div>
+
+<!-- S2 SIGN IN -->
+<div class="slbl">Screen 2 — Sign in</div>
+<div class="scrow"><div class="dv">
+<div class="shell">
+<div class="sbar"><span class="sbt">9:41</span><div style="display:flex;align-items:center;gap:5px"><i class="ti ti-wifi" style="font-size:13px;color:rgba(255,255,255,.7)"></i></div></div>
+<div class="scr"><div class="bg"><div class="bgm"></div>
+  <div class="tn"><span class="logo">Nxance</span></div>
+  <div class="s2pad">
+    <div class="s2greet">Welcome</div>
+    <div class="s2sub">Sign in to continue. No password — ever.</div>
+    <div class="inp-f"><i class="ti ti-device-mobile inp-ic"></i><span class="flag-t">🇮🇳 +91</span><input type="text" placeholder="Phone or email address"></div>
+    <button class="s2cta">Continue</button>
+    <div class="or-r"><div class="orl"></div><span class="ort">or continue with</span><div class="orl"></div></div>
+    <div class="soc-row">
+      <div class="soc"><i class="ti ti-brand-google soci" style="color:#EA4335"></i><span class="soct">Google</span></div>
+      <div class="soc"><i class="ti ti-brand-apple soci"></i><span class="soct">Apple</span></div>
+    </div>
+    <div class="otp-block">
+      <div class="otp-h">Enter OTP</div>
+      <div class="otp-s">Sent to +91 98765 43210</div>
+      <div class="otp-row"><div class="oc f">4</div><div class="oc f">7</div><div class="oc f">2</div><div class="oc a"></div><div class="oc"></div><div class="oc"></div></div>
+      <div class="rsnd">Didn't receive? <span>Resend</span> (28s)</div>
+      <button class="vbtn">Verify</button>
+    </div>
+    <div class="prof-block">
+      <div class="prof-h">Set up profile</div>
+      <div class="prow"><input class="pinp" placeholder="First name"><input class="pinp" placeholder="Last name"></div>
+      <input class="pinp" placeholder="Age" style="width:100%;margin-bottom:10px">
+      <button class="go-btn">Go to app&nbsp;<i class="ti ti-arrow-right" style="font-size:13px"></i></button>
+    </div>
+  </div>
+  <div class="bn">
+    <div class="bni"><i class="ti ti-home-2 bnic"></i></div>
+    <div class="bni"><i class="ti ti-chart-donut bnic"></i></div>
+    <div class="bni"><i class="ti ti-report-analytics bnic"></i></div>
+    <div class="bni"><i class="ti ti-user-circle bnic a"></i><div class="adot"></div></div>
+  </div>
+</div></div></div>
+<div class="dl">Sign in</div><div class="dn">02 / 07</div>
+</div></div>
+
+<!-- S3 HOLDINGS -->
+<div class="slbl">Screen 3 — Add holdings</div>
+<div class="scrow"><div class="dv">
+<div class="shell">
+<div class="sbar"><span class="sbt">9:41</span><div style="display:flex;align-items:center;gap:5px"><i class="ti ti-wifi" style="font-size:13px;color:rgba(255,255,255,.7)"></i></div></div>
+<div class="scr"><div class="bg"><div class="bgm"></div>
+  <div class="tn"><button class="nbk"><i class="ti ti-arrow-left"></i></button><span class="ntit">Add holdings</span><div class="nicon"><i class="ti ti-help-circle" style="font-size:16px"></i></div></div>
+  <div class="seg">
+    <button class="sg on"><i class="ti ti-pencil"></i>Manual</button>
+    <button class="sg"><i class="ti ti-camera-selfie"></i>Photo</button>
+    <button class="sg"><i class="ti ti-plug-connected"></i>Broker</button>
+  </div>
+  <div class="pb">
+    <div class="pbh">MF &amp; Stocks</div>
+    <div class="pbs">SIP details for MF · Buy price &amp; qty for stocks</div>
+    <div class="srch"><i class="ti ti-search"></i><input placeholder="Search fund or stock..."></div>
+    <div class="flist">
+      <div class="fi"><div class="fav" style="background:rgba(42,91,255,.25);color:#7BAOFF">HD</div><div style="flex:1;min-width:0"><div class="fn">HDFC Top 100</div><div class="fm"><span class="ftag td">MF Direct</span>SIP ₹3K · Jan '22</div></div><div><div class="fv">₹45,200</div><div class="fx pos">+12.4% XIRR</div></div></div>
+      <div class="fi"><div class="fav" style="background:rgba(0,200,255,.18);color:var(--cy)">PP</div><div style="flex:1;min-width:0"><div class="fn">Parag Parikh Flexi</div><div class="fm"><span class="ftag td">MF Direct</span>Lumpsum</div></div><div><div class="fv">₹32,800</div><div class="fx pos">+18.2%</div></div></div>
+      <div class="fi"><div class="fav" style="background:rgba(255,176,32,.2);color:var(--amber)">REL</div><div style="flex:1;min-width:0"><div class="fn">Reliance Industries</div><div class="fm"><span class="ftag ts">Stock</span>42 qty · ₹2,180 avg</div></div><div><div class="fv">₹95,800</div><div class="fx pos">+8.7%</div></div></div>
+      <div class="fi"><div class="fav" style="background:rgba(255,64,96,.2);color:var(--red)">MA</div><div style="flex:1;min-width:0"><div class="fn">Mirae ELSS</div><div class="fm"><span class="ftag tr">Regular</span>SIP ₹2K · Mar '21</div></div><div><div class="fv">₹18,500</div><div class="fx neg">−2.1% α</div></div></div>
+      <div class="addr"><div class="addc"><i class="ti ti-plus" style="font-size:14px"></i></div><span style="font-size:12px;font-weight:600;color:var(--vb2)">Add holding</span></div>
+    </div>
+    <div class="totbar"><div class="totl"><div class="tl">TOTAL VALUE</div><div class="tv">₹1,92,300</div></div><div class="totr"><div class="tl">PORTFOLIO XIRR</div><div class="txirr">11.2%</div></div></div>
+    <div class="anbtn">Analyze portfolio&nbsp;<i class="ti ti-arrow-right" style="font-size:13px"></i></div>
+  </div>
+  <div class="bn">
+    <div class="bni"><i class="ti ti-home-2 bnic"></i></div>
+    <div class="bni"><i class="ti ti-chart-donut bnic a"></i><div class="adot"></div></div>
+    <div class="bni"><i class="ti ti-report-analytics bnic"></i></div>
+    <div class="bni"><i class="ti ti-user-circle bnic"></i></div>
+  </div>
+</div></div></div>
+<div class="dl">Add holdings</div><div class="dn">03 / 07</div>
+</div></div>
+
+<!-- S4 GOALS -->
+<div class="slbl">Screen 4 — Goal questions</div>
+<div class="scrow"><div class="dv">
+<div class="shell">
+<div class="sbar"><span class="sbt">9:41</span><div style="display:flex;align-items:center;gap:5px"><i class="ti ti-wifi" style="font-size:13px;color:rgba(255,255,255,.7)"></i></div></div>
+<div class="scr"><div class="bg"><div class="bgm"></div>
+  <div class="tn"><button class="nbk"><i class="ti ti-arrow-left"></i></button><span class="ntit">Your profile</span><span style="font-size:10px;color:var(--t4);font-weight:600">2 / 5</span></div>
+  <div class="qtabs"><div class="qt dn">Goal</div><div class="qt ac">Risk</div><div class="qt">Return</div><div class="qt">Time</div><div class="qt">SIP</div></div>
+  <div class="gbody">
+    <div class="pbar"><div class="pf"></div></div>
+    <div class="qcard"><div class="qst">Question 2 of 5</div><div class="qtxt">What is your risk tolerance?</div></div>
+    <div class="opts">
+      <div class="opt"><div class="oic"><i class="ti ti-shield" style="font-size:15px;color:var(--t3)"></i></div><div class="olb">Conservative</div></div>
+      <div class="opt sel"><div class="oic"><i class="ti ti-trending-up" style="font-size:15px;color:var(--cy)"></i></div><div class="olb">Moderate</div></div>
+      <div class="opt"><div class="oic"><i class="ti ti-rocket" style="font-size:15px;color:var(--t3)"></i></div><div class="olb">Aggressive</div></div>
+      <div class="opt"><div class="oic"><i class="ti ti-bolt" style="font-size:15px;color:var(--t3)"></i></div><div class="olb">Very aggressive</div></div>
+    </div>
+    <div class="tipcard"><div class="tipt"><b>Moderate:</b> Handles −10% drawdown. CVaR 10%. Long-term wealth focus.</div></div>
+    <div class="gftr">
+      <div class="sdots"><div class="dot dn"></div><div class="dot on"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+      <button class="nxtbtn">Next&nbsp;<i class="ti ti-arrow-right" style="font-size:12px"></i></button>
+    </div>
+  </div>
+  <div class="bn">
+    <div class="bni"><i class="ti ti-home-2 bnic"></i></div>
+    <div class="bni"><i class="ti ti-chart-donut bnic"></i></div>
+    <div class="bni"><i class="ti ti-report-analytics bnic"></i></div>
+    <div class="bni"><i class="ti ti-user-circle bnic"></i></div>
+  </div>
+</div></div></div>
+<div class="dl">Goal questions</div><div class="dn">04 / 07</div>
+</div></div>
+
+<!-- S5 ANALYSIS -->
+<div class="slbl">Screen 5 — Analysis progress</div>
+<div class="scrow"><div class="dv">
+<div class="shell">
+<div class="sbar"><span class="sbt">9:41</span><div style="display:flex;align-items:center;gap:5px"><i class="ti ti-wifi" style="font-size:13px;color:rgba(255,255,255,.7)"></i></div></div>
+<div class="scr"><div class="bg"><div class="bgm"></div>
+  <div class="tn"><span class="logo">Nxance</span></div>
+  <div class="pgbody">
+    <div class="ringw">
+      <svg viewBox="0 0 92 92">
+        <circle cx="46" cy="46" r="39" fill="none" stroke="rgba(42,91,255,.15)" stroke-width="6"/>
+        <circle cx="46" cy="46" r="39" fill="none" stroke="url(#rg)" stroke-width="6" stroke-dasharray="245.1" stroke-dashoffset="85.8" stroke-linecap="round" transform="rotate(-90 46 46)"/>
+        <defs><linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2A5BFF"/><stop offset="100%" stop-color="#00C8FF"/></linearGradient></defs>
+      </svg>
+      <div class="ringi"><span class="rp">65%</span><span class="rl">done</span></div>
+    </div>
+    <div class="pgh">Analyzing portfolio</div>
+    <div class="pgs">Scanning 150M+ real data points.<br>Ready in 2–3 seconds.</div>
+    <div class="slist">
+      <div class="si"><div class="sdot sdn"><i class="ti ti-check" style="font-size:12px"></i></div><span class="slb" style="color:var(--t2)">NAV data loaded</span><span class="sv">✓</span></div>
+      <div class="si"><div class="sdot sdn"><i class="ti ti-check" style="font-size:12px"></i></div><span class="slb" style="color:var(--t2)">XIRR computed</span><span class="sv">11.2%</span></div>
+      <div class="si"><div class="sdot sac"><i class="ti ti-loader" style="font-size:12px"></i></div><span class="slb" style="color:var(--cy);font-weight:600">Overlap analysis...</span></div>
+      <div class="si"><div class="sdot swt"></div><span class="slb" style="color:var(--t4)">Risk metrics</span></div>
+      <div class="si"><div class="sdot swt"></div><span class="slb" style="color:var(--t4)">AI explanation</span></div>
+    </div>
+  </div>
+  <div class="bn">
+    <div class="bni"><i class="ti ti-home-2 bnic"></i></div>
+    <div class="bni"><i class="ti ti-chart-donut bnic"></i></div>
+    <div class="bni"><i class="ti ti-report-analytics bnic"></i></div>
+    <div class="bni"><i class="ti ti-user-circle bnic"></i></div>
+  </div>
+</div></div></div>
+<div class="dl">Analysis</div><div class="dn">05 / 07</div>
+</div></div>
+
+<!-- S6 RESULTS -->
+<div class="slbl">Screen 6 — Results + paywall</div>
+<div class="scrow"><div class="dv">
+<div class="shell">
+<div class="sbar"><span class="sbt">9:41</span><div style="display:flex;align-items:center;gap:5px"><i class="ti ti-wifi" style="font-size:13px;color:rgba(255,255,255,.7)"></i></div></div>
+<div class="scr"><div class="bg"><div class="bgm"></div>
+  <div class="tn"><button class="nbk"><i class="ti ti-arrow-left"></i></button><span class="ntit">Health report</span><div class="nicon"><i class="ti ti-share" style="font-size:16px"></i></div></div>
+  <div class="rh">
+    <div class="rhey">Portfolio health score</div>
+    <div class="srng">
+      <svg viewBox="0 0 84 84">
+        <circle cx="42" cy="42" r="35" fill="none" stroke="rgba(255,176,32,.12)" stroke-width="6"/>
+        <circle cx="42" cy="42" r="35" fill="none" stroke="#FFB020" stroke-width="6" stroke-dasharray="219.9" stroke-dashoffset="83.6" stroke-linecap="round" transform="rotate(-90 42 42)"/>
+      </svg>
+      <div class="srni"><span class="srvn">62</span><span class="srd">/100</span></div>
+    </div>
+    <div class="sbdg">Needs attention</div>
+    <div class="mrow">
+      <div class="mi"><div class="miv">11.2%</div><div class="mil">XIRR</div></div>
+      <div class="mi"><div class="miv">0.84</div><div class="mil">Sharpe</div></div>
+      <div class="mi"><div class="miv neg">−1.2%</div><div class="mil">Alpha</div></div>
+      <div class="mi"><div class="miv">72%</div><div class="mil">Overlap</div></div>
+    </div>
+  </div>
+  <div class="albsec">
+    <div class="alh">Allocation</div>
+    <div class="abr"><span class="abl">Equity MF</span><div class="abt"><div class="abf" style="width:58%;background:linear-gradient(90deg,#2A5BFF,#6090FF)"></div></div><span class="abv">58%</span></div>
+    <div class="abr"><span class="abl">Stocks</span><div class="abt"><div class="abf" style="width:30%;background:linear-gradient(90deg,#00A0DD,#00C8FF)"></div></div><span class="abv">30%</span></div>
+    <div class="abr"><span class="abl">Debt MF</span><div class="abt"><div class="abf" style="width:12%;background:rgba(255,255,255,.25)"></div></div><span class="abv">12%</span></div>
+  </div>
+  <div class="isssec">
+    <div class="issh2"><span class="iss-tit">3 issues found</span><span class="ipill">₹13,300/yr</span></div>
+    <div class="icard icf">
+      <div class="ihd"><span class="isev sevh">High</span><span class="iftag">Free</span></div>
+      <div class="it">Fund overlap — 72% duplicate</div>
+      <div class="ib">HDFC &amp; Mirae share 7 identical holdings.</div>
+      <div class="mchart">
+        <div class="mcb" style="height:36%;background:rgba(42,91,255,.3)"></div>
+        <div class="mcb" style="height:52%;background:rgba(42,91,255,.3)"></div>
+        <div class="mcb" style="height:45%;background:rgba(42,91,255,.3)"></div>
+        <div class="mcb" style="height:70%;background:rgba(42,91,255,.3)"></div>
+        <div class="mcb" style="height:100%;background:rgba(255,64,96,.65)"></div>
+        <div class="mcb" style="height:84%;background:rgba(255,64,96,.65)"></div>
+      </div>
+      <div class="imp">₹4,800/yr wasted</div>
+    </div>
+    <div class="lkw">
+      <div class="lkblur"><div class="ihd"><span class="isev sevh">High</span></div><div class="it">Regular plan vs Direct</div><div class="ib">Extra 1.2% TER paid annually...</div><div class="imp">₹3,200/yr</div></div>
+      <div class="lkov"><div class="lkamt">₹3,200/yr</div><div class="lkct">Unlock to reveal</div></div>
+    </div>
+    <div class="lkw">
+      <div class="lkblur"><div class="ihd"><span class="isev sevm">Medium</span></div><div class="it">Goal shortfall detected</div><div class="ib">₹18L retirement gap...</div><div class="imp">₹5,300/yr</div></div>
+      <div class="lkov"><div class="lkamt">₹5,300/yr</div><div class="lkct">Unlock to reveal</div></div>
+    </div>
+  </div>
+  <div class="pwcard">
+    <div class="pwh">Unlock full analysis</div>
+    <div class="pws">Issues 2+3 save ₹8,500/yr · Pays back in 4 days</div>
+    <div class="pwpr"><span class="pwrs">₹99</span><span class="pwmo">/ month · cancel anytime</span></div>
+    <button class="pwbtn"><i class="ti ti-brand-gpay" style="font-size:16px"></i>Pay via UPI · Unlock now</button>
+    <div class="pwtrust">
+      <div class="pwti"><i class="ti ti-lock" style="font-size:10px"></i>Secure</div>
+      <div class="pwti"><i class="ti ti-shield-check" style="font-size:10px"></i>DPDPA</div>
+      <div class="pwti"><i class="ti ti-x" style="font-size:10px"></i>Cancel anytime</div>
+    </div>
+  </div>
+  <div class="bn">
+    <div class="bni"><i class="ti ti-home-2 bnic"></i></div>
+    <div class="bni"><i class="ti ti-chart-donut bnic a"></i><div class="adot"></div></div>
+    <div class="bni"><i class="ti ti-report-analytics bnic"></i></div>
+    <div class="bni"><i class="ti ti-user-circle bnic"></i></div>
+  </div>
+</div></div></div>
+<div class="dl">Results + Paywall</div><div class="dn">06 / 07</div>
+</div></div>
+
+<!-- S7 FULL REPORT -->
+<div class="slbl">Screen 7 — Full analysis report</div>
+<div class="scrow"><div class="dv">
+<div class="shell">
+<div class="sbar"><span class="sbt">9:41</span><div style="display:flex;align-items:center;gap:5px"><i class="ti ti-wifi" style="font-size:13px;color:rgba(255,255,255,.7)"></i></div></div>
+<div class="scr"><div class="bg"><div class="bgm"></div>
+  <div class="tn"><button class="nbk"><i class="ti ti-arrow-left"></i></button><span class="ntit">Analysis report</span><div class="nicon"><i class="ti ti-file-download" style="font-size:16px"></i></div></div>
+  <div class="rphero"><div class="rphl"><h3>Portfolio<br>Analysis</h3><p>Jun 3, 2026 · 4 holdings</p></div><div><div class="rpsc">62</div><div class="rpsl">/100 score</div></div></div>
+  <div class="ubr"><i class="ti ti-check" style="color:var(--green);font-size:15px"></i><span class="ubt">Premium · All issues unlocked</span></div>
+  <div class="cs">
+    <div class="csh"><span>XIRR vs Nifty 50</span><span class="cbdg">+11.2%</span></div>
+    <div class="cbars">
+      <div class="cb" style="height:36%;background:rgba(42,91,255,.25)"></div>
+      <div class="cb" style="height:50%;background:rgba(42,91,255,.25)"></div>
+      <div class="cb" style="height:43%;background:rgba(42,91,255,.25)"></div>
+      <div class="cb" style="height:60%;background:rgba(42,91,255,.25)"></div>
+      <div class="cb" style="height:66%;background:rgba(42,91,255,.25)"></div>
+      <div class="cb" style="height:80%;background:linear-gradient(180deg,#00C8FF,#2A5BFF);box-shadow:0 4px 16px rgba(0,200,255,.35)"></div>
+    </div>
+    <div class="cxls"><span class="cxl">Jan</span><span class="cxl">Feb</span><span class="cxl">Mar</span><span class="cxl">Apr</span><span class="cxl">May</span><span class="cxl">Jun</span></div>
+  </div>
+  <div class="m4g">
+    <div class="mcard" style="background:rgba(42,91,255,.18);border-color:rgba(42,91,255,.35)"><div class="mcn" style="color:var(--cy)">11.2%</div><div class="mclb" style="color:rgba(0,200,255,.55)">XIRR</div></div>
+    <div class="mcard" style="background:rgba(0,229,160,.1);border-color:rgba(0,229,160,.22)"><div class="mcn" style="color:var(--green)">0.84</div><div class="mclb" style="color:rgba(0,229,160,.55)">Sharpe</div></div>
+    <div class="mcard" style="background:rgba(255,64,96,.1);border-color:rgba(255,64,96,.22)"><div class="mcn" style="color:var(--red)">72%</div><div class="mclb" style="color:rgba(255,64,96,.55)">Overlap</div></div>
+    <div class="mcard" style="background:rgba(255,64,96,.1);border-color:rgba(255,64,96,.22)"><div class="mcn" style="color:var(--red)">−1.2%</div><div class="mclb" style="color:rgba(255,64,96,.55)">Alpha</div></div>
+  </div>
+  <div class="issfull">
+    <div class="issh2"><span class="iss-tit">Ranked fixes — save ₹13,300/yr</span></div>
+    <div class="isf ifg"><div class="ihd"><span class="isev sevh">High · ₹4,800/yr</span></div><div class="it">Fund overlap — 72%</div><div class="ib">HDFC &amp; Mirae share 7 stocks. One switch fixes it.</div><div class="iact"><i class="ti ti-arrow-right" style="font-size:14px;color:var(--cy);margin-top:1px"></i><div><div class="iatx">Switch to Mirae Flexicap Direct</div><div class="iasc">Scheme 118989 · Groww / Zerodha</div></div></div></div>
+    <div class="isf ifa"><div class="ihd"><span class="isev sevh">High · ₹3,200/yr</span></div><div class="it">Regular plan — 1.2% extra TER</div><div class="ib">Same fund, Direct saves ₹3,200/yr.</div><div class="iact"><i class="ti ti-arrow-right" style="font-size:14px;color:var(--cy);margin-top:1px"></i><div><div class="iatx">Switch via MF Central — free</div><div class="iasc">Scheme 119062 · mfcentral.com</div></div></div></div>
+    <div class="isf ifb"><div class="ihd"><span class="isev sevm">Medium · ₹5,300/yr</span></div><div class="it">Retirement shortfall</div><div class="ib">SIP +₹1,500/mo closes ₹18L gap in 15 yrs.</div><div class="iact"><i class="ti ti-arrow-right" style="font-size:14px;color:var(--cy);margin-top:1px"></i><div><div class="iatx">Start UTI Nifty 50 SIP</div><div class="iasc">Scheme 120716 · index fund</div></div></div></div>
+  </div>
+  <div class="nlmcard">
+    <div class="nlmt"><div class="nlmav">AI</div><span class="nlmlb">Nxance AI · Summary</span></div>
+    <div class="nlmbd">Portfolio earns <span class="nlmch">11.2% XIRR</span> — solid. But 3 fixes save <span class="nlmch">₹13,300/yr</span>. Start with overlap — <span class="nlmch">₹4,800</span> back in 1 day.</div>
+  </div>
+  <div class="fixlink">Start fixing issues&nbsp;<i class="ti ti-arrow-right" style="font-size:13px"></i></div>
+  <div class="bn">
+    <div class="bni"><i class="ti ti-home-2 bnic"></i></div>
+    <div class="bni"><i class="ti ti-chart-donut bnic"></i></div>
+    <div class="bni"><i class="ti ti-report-analytics bnic a"></i><div class="adot"></div></div>
+    <div class="bni"><i class="ti ti-user-circle bnic"></i></div>
+  </div>
+</div></div></div>
+<div class="dl">Full Analysis Report</div><div class="dn">07 / 07</div>
+</div></div>
+
+</div>
+</body>
+</html>

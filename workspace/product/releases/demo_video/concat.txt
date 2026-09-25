@@ -1,0 +1,8 @@
+file '/Users/bhaskar_pandey/Documents/Nxance/product/releases/demo_video/assemble_parts/00_title.mp4'
+file '/Users/bhaskar_pandey/Documents/Nxance/product/releases/demo_video/assemble_parts/01_login.mp4'
+file '/Users/bhaskar_pandey/Documents/Nxance/product/releases/demo_video/assemble_parts/02_sample.mp4'
+file '/Users/bhaskar_pandey/Documents/Nxance/product/releases/demo_video/assemble_parts/03_models.mp4'
+file '/Users/bhaskar_pandey/Documents/Nxance/product/releases/demo_video/assemble_parts/04_upload.mp4'
+file '/Users/bhaskar_pandey/Documents/Nxance/product/releases/demo_video/assemble_parts/05_pay.mp4'
+file '/Users/bhaskar_pandey/Documents/Nxance/product/releases/demo_video/assemble_parts/06_stack.mp4'
+file '/Users/bhaskar_pandey/Documents/Nxance/product/releases/demo_video/assemble_parts/07_close.mp4'
