@@ -61,13 +61,3 @@ The tests use an isolated in-memory SQLite database. They cover owner binding, m
 | `lib/app-user.ts` | User registration, owner binding, roles and status |
 | `db/`, `drizzle/` | Database helpers, schema and migrations |
 | `tests/access.test.mjs` | Access-control and database regression tests |
-
-## Continuing in Codex
-
-Open the cloned repository folder in Codex on your laptop. Start with: “Read README.md and AGENTS.md, set up the local development environment, run the access tests, and help me continue Nxance.”
-
-Changes pushed to GitHub do not automatically deploy the existing ChatGPT Site. `.openai/hosting.json` preserves the existing Site identity for a later authorized Sites deployment. Local data and hosted data remain separate.
-
-Current scope: entered portfolio values and assumed returns only. No live market feed, proprietary AI model, regulated advice or financial transactions.
-
-Additional framework details are retained in `STARTER_NOTES.md`.
